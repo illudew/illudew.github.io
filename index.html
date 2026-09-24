@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="物理学知识体系：从数学基础到现代物理与统一理论问题">
+<title>物理学知识体系</title>
+<style>
+  :root{
+    --bg:#f4f7fb;
+    --card:#ffffff;
+    --ink:#152033;
+    --muted:#607089;
+    --line:#b8c5d6;
+    --blue:#2563eb;
+    --blue2:#dbeafe;
+    --green:#0f766e;
+    --green2:#ccfbf1;
+    --purple:#7c3aed;
+    --purple2:#ede9fe;
+    --orange:#c2410c;
+    --orange2:#ffedd5;
+    --red:#b91c1c;
+    --red2:#fee2e2;
+    --shadow:0 12px 32px rgba(20,36,60,.09);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    color:var(--ink);
+    background:
+      radial-gradient(circle at 10% 10%,rgba(37,99,235,.08),transparent 28%),
+      radial-gradient(circle at 90% 10%,rgba(124,58,237,.08),transparent 28%),
+      var(--bg);
+  }
+  a{color:inherit}
+  .wrap{width:min(1500px,94vw);margin:auto}
+  header{padding:52px 0 28px;text-align:center}
+  .eyebrow{font-size:13px;letter-spacing:.22em;color:var(--muted);font-weight:700;text-transform:uppercase}
+  h1{margin:10px 0 8px;font-size:clamp(34px,5vw,64px);line-height:1.08;letter-spacing:-.03em}
+  .subtitle{margin:0 auto;color:var(--muted);font-size:16px;max-width:820px;line-height:1.8}
+  .toolbar{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:24px 0 8px}
+  button,.tool-link{
+    border:1px solid #d5deea;background:#fff;color:var(--ink);border-radius:999px;
+    padding:9px 14px;font:inherit;cursor:pointer;text-decoration:none;transition:.2s ease;
+  }
+  button:hover,.tool-link:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(20,36,60,.08)}
+  .hero{
+    margin:28px 0 40px;background:rgba(255,255,255,.74);border:1px solid rgba(189,201,218,.7);
+    box-shadow:var(--shadow);border-radius:28px;padding:28px;backdrop-filter:blur(8px)
+  }
+  .hero-title{
+    display:inline-flex;align-items:center;gap:10px;padding:10px 18px;border-radius:16px;
+    background:linear-gradient(135deg,#0f172a,#243b64);color:white;font-size:26px;font-weight:800;
+    box-shadow:0 12px 28px rgba(15,23,42,.2);cursor:pointer
+  }
+  .hero-note{margin:14px 0 0;color:var(--muted);font-size:14px}
+
+  .map{overflow:auto;padding:10px 4px 30px}
+  .map-inner{min-width:1120px;padding-bottom:12px}
+
+  .top-level{display:grid;grid-template-columns:1fr 2fr 1fr;gap:22px;align-items:start;margin-top:26px}
+  .cluster{
+    position:relative;background:rgba(255,255,255,.86);border:1px solid #d7e0eb;border-radius:22px;
+    padding:18px;box-shadow:0 10px 24px rgba(20,36,60,.06)
+  }
+  .cluster::before{content:"";position:absolute;left:50%;top:-28px;width:2px;height:28px;background:var(--line)}
+  .cluster::after{content:"";position:absolute;left:25%;right:25%;top:-28px;height:2px;background:var(--line)}
+  .cluster-title{display:flex;align-items:center;gap:9px;font-weight:800;font-size:17px;margin-bottom:14px}
+  .dot{width:10px;height:10px;border-radius:50%;background:var(--blue);box-shadow:0 0 0 5px var(--blue2)}
+  .cluster.center .dot{background:var(--purple);box-shadow:0 0 0 5px var(--purple2)}
+  .cluster.right .dot{background:var(--green);box-shadow:0 0 0 5px var(--green2)}
+
+  .mini-grid{display:grid;gap:10px}
+  .node{
+    background:var(--card);border:1px solid #dbe3ee;border-radius:15px;padding:12px 14px;cursor:pointer;
+    transition:.2s ease;line-height:1.45;box-shadow:0 4px 12px rgba(25,44,75,.04)
+  }
+  .node:hover{transform:translateY(-2px);border-color:#aabbd0;box-shadow:0 12px 22px rgba(25,44,75,.08)}
+  .node strong{display:block;font-size:14px}
+  .node small{display:block;color:var(--muted);font-size:12px;margin-top:4px}
+
+  .theory{margin-top:30px;position:relative}
+  .section-label{display:flex;align-items:center;justify-content:center;gap:10px;font-size:15px;font-weight:800;color:#334155;margin:24px 0 16px}
+  .section-label::before,.section-label::after{content:"";height:1px;background:#cbd5e1;flex:1;max-width:300px}
+  .theory-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .theory-card{position:relative;background:#fff;border:1px solid #d9e2ec;border-radius:20px;padding:18px;box-shadow:0 8px 18px rgba(20,36,60,.05)}
+  .theory-card h3{margin:0 0 12px;font-size:18px}
+  .pills{display:flex;flex-wrap:wrap;gap:8px}
+  .pill{padding:7px 10px;border-radius:999px;background:#f8fafc;border:1px solid #e2e8f0;color:#334155;font-size:12px;cursor:pointer}
+  .pill:hover{background:#eef4fb}
+
+  .middle-grid{display:grid;grid-template-columns:1.05fr 1fr 1fr 1fr;gap:16px;align-items:start}
+  .branch{background:#fff;border:1px solid #d9e2ec;border-radius:20px;padding:18px;box-shadow:0 8px 18px rgba(20,36,60,.05);position:relative}
+  .branch h3{margin:0 0 14px;font-size:18px}
+  .branch p{margin:0;color:var(--muted);font-size:13px;line-height:1.7}
+  .branch ul{margin:12px 0 0;padding-left:18px;color:#475569;line-height:1.8;font-size:13px}
+  .branch.classic{border-top:4px solid #3b82f6}
+  .branch.quantum{border-top:4px solid #8b5cf6}
+  .branch.rel{border-top:4px solid #f97316}
+  .branch.experiment{border-top:4px solid #10b981}
+
+  .flow{margin-top:18px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .flow-item{position:relative;text-align:center;background:#f8fafc;border:1px solid #e2e8f0;border-radius:15px;padding:11px 9px;font-size:13px;font-weight:700}
+  .flow-item:not(:last-child)::after{content:"→";position:absolute;right:-17px;top:50%;transform:translateY(-50%);color:#94a3b8;font-size:18px;z-index:2}
+
+  .domains{margin-top:28px;display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .domain{background:#fff;border:1px solid #d9e2ec;border-radius:20px;padding:18px;min-height:220px;box-shadow:0 8px 18px rgba(20,36,60,.05)}
+  .domain h3{margin:0 0 12px;font-size:18px}
+  .domain .node{margin-top:8px}
+
+  .frontier{margin-top:30px;background:linear-gradient(135deg,#111827,#1e293b);color:white;border-radius:26px;padding:24px;box-shadow:0 18px 40px rgba(15,23,42,.18)}
+  .frontier h2{text-align:center;margin:0 0 18px;font-size:24px}
+  .frontier-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
+  .frontier .node{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.15);color:white;box-shadow:none}
+  .frontier .node small{color:#cbd5e1}
+  .unify{margin-top:18px;padding-top:18px;border-top:1px solid rgba(255,255,255,.16)}
+  .unify-title{text-align:center;font-weight:800;margin-bottom:12px}
+  .unify-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  .unify .node{text-align:center;background:rgba(255,255,255,.06)}
+
+  .scale{margin-top:30px;background:#fff;border:1px solid #d9e2ec;border-radius:22px;padding:20px;box-shadow:0 8px 18px rgba(20,36,60,.05)}
+  .scale h2{font-size:20px;margin:0 0 14px;text-align:center}
+  .scale-line{display:grid;grid-template-columns:repeat(7,1fr);gap:8px}
+  .scale-step{text-align:center;padding:12px 6px;background:#f8fafc;border-radius:14px;border:1px solid #e2e8f0;font-size:12px}
+  .scale-step b{display:block;font-size:13px;margin-bottom:4px}
+
+  body.compact .hero{padding:18px}
+  body.compact .node{padding:9px 11px}
+  body.compact .theory-card, body.compact .branch, body.compact .domain{padding:13px}
+  body.compact .top-level{gap:12px}
+  body.compact .middle-grid, body.compact .domains{gap:10px}
+  body.compact .frontier{padding:18px}
+
+  footer{padding:34px 0 50px;color:var(--muted);text-align:center;font-size:13px}
+  footer a{color:var(--blue);text-decoration:none}
+
+  .overlay{position:fixed;inset:0;background:rgba(15,23,42,.46);display:none;align-items:center;justify-content:center;padding:18px;z-index:50}
+  .overlay.show{display:flex}
+  .modal{width:min(620px,96vw);background:white;border-radius:24px;padding:24px;box-shadow:0 24px 80px rgba(0,0,0,.25)}
+  .modal h2{margin:0 0 10px;font-size:24px}
+  .modal p{color:#475569;line-height:1.8;margin:0}
+  .modal-close{margin-top:18px;background:#0f172a;color:white;border-color:#0f172a}
+
+  @media(max-width:900px){
+    .wrap{width:min(94vw,720px)}
+    .hero{padding:20px}
+    .map{overflow:visible}
+    .map-inner{min-width:0}
+    .top-level,.theory-grid,.middle-grid,.domains{grid-template-columns:1fr}
+    .frontier-grid{grid-template-columns:repeat(2,1fr)}
+    .unify-grid{grid-template-columns:1fr}
+    .scale-line{grid-template-columns:repeat(2,1fr)}
+    .flow{grid-template-columns:1fr}
+    .flow-item:not(:last-child)::after{content:"↓";right:auto;left:50%;top:auto;bottom:-18px;transform:translateX(-50%)}
+    .cluster::before,.cluster::after{display:none}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">PHYSICS KNOWLEDGE MAP</div>
+    <h1>物理学知识体系</h1>
+    <p class="subtitle">从数学基础出发，经经典理论、量子理论与相对论，延伸至凝聚态、材料、半导体、光电、核粒子、宇宙学以及统一理论问题。</p>
+    <div class="toolbar">
+      <button onclick="window.scrollTo({top:0,behavior:'smooth'})">回到顶部</button>
+      <button onclick="document.body.classList.toggle('compact')">切换紧凑视图</button>
+      <a class="tool-link" href="#frontier">跳到前沿领域</a>
+    </div>
+  </header>
+
+  <main class="hero">
+    <div style="text-align:center">
+      <div class="hero-title" onclick="showInfo('物理学','研究物质、能量、运动、相互作用以及时空规律的自然科学。')">【物理学】</div>
+      <p class="hero-note">知识组织原则：数学语言 → 基本理论 → 物理对象与尺度 → 专业领域 → 交叉应用 → 前沿问题</p>
+    </div>
+
+    <div class="map">
+      <div class="map-inner">
+        <section class="top-level">
+          <div class="cluster">
+            <div class="cluster-title"><span class="dot"></span>数学基础</div>
+            <div class="mini-grid">
+              <div class="node" onclick="showInfo('数学分析','极限、微分、积分、多元函数、级数、向量分析。')"><strong>数学分析</strong><small>微积分与连续变化</small></div>
+              <div class="node" onclick="showInfo('线性代数','向量空间、线性变换、特征值、内积空间、张量。')"><strong>线性代数</strong><small>状态、空间与变换</small></div>
+              <div class="node" onclick="showInfo('微分方程','常微分方程、偏微分方程、波动方程、热方程、Poisson/Laplace、Schrödinger。')"><strong>微分方程</strong><small>动力学与场方程</small></div>
+              <div class="node" onclick="showInfo('高级数学','复变函数、Fourier分析、概率统计、群论、微分几何、拓扑。')"><strong>高级数学</strong><small>现代理论物理的语言</small></div>
+              <div class="node" onclick="showInfo('数值计算','数值积分、线性系统、Monte Carlo、有限元、分子动力学。')"><strong>计算数学</strong><small>模拟与数据分析</small></div>
+            </div>
+          </div>
+
+          <div class="cluster center">
+            <div class="cluster-title"><span class="dot"></span>基本理论</div>
+            <div class="theory-grid">
+              <div class="theory-card">
+                <h3>经典理论</h3>
+                <div class="pills">
+                  <span class="pill" onclick="showInfo('经典力学','牛顿力学、分析力学、刚体、振动、连续介质、非线性动力学。')">力学</span>
+                  <span class="pill" onclick="showInfo('电磁学','静电、静磁、电动力学、Maxwell方程、电磁波。')">电磁学</span>
+                  <span class="pill" onclick="showInfo('热力学与统计物理','热力学定律、熵、自由能、系综、统计分布、非平衡过程。')">热统</span>
+                </div>
+              </div>
+              <div class="theory-card">
+                <h3>量子理论</h3>
+                <div class="pills">
+                  <span class="pill" onclick="showInfo('量子力学','Hilbert空间、算符、测量、叠加、自旋、微扰、散射、密度矩阵。')">量子力学</span>
+                  <span class="pill" onclick="showInfo('原子与分子物理','原子结构、光谱、分子轨道、振转能级、光与物质相互作用。')">原子</span>
+                  <span class="pill" onclick="showInfo('凝聚态物理','多体量子系统、晶体、能带、磁性、超导、低维与拓扑物态。')">凝聚态</span>
+                  <span class="pill" onclick="showInfo('核与粒子','原子核结构、基本粒子、量子场论、Standard Model。')">核粒子</span>
+                </div>
+              </div>
+              <div class="theory-card">
+                <h3>相对论</h3>
+                <div class="pills">
+                  <span class="pill" onclick="showInfo('狭义相对论','Lorentz变换、时空、四维形式、相对论动力学。')">狭义相对论</span>
+                  <span class="pill" onclick="showInfo('广义相对论','等效原理、弯曲时空、Einstein场方程、黑洞、引力波。')">引力</span>
+                  <span class="pill" onclick="showInfo('宇宙学','宇宙膨胀、CMB、暗物质、暗能量、早期宇宙。')">宇宙学</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="cluster right">
+            <div class="cluster-title"><span class="dot"></span>实验 / 计算</div>
+            <div class="mini-grid">
+              <div class="node" onclick="showInfo('实验物理','光谱、显微、磁共振、输运、电学、光学、散射等测量体系。')"><strong>实验方法</strong><small>测量、表征与误差</small></div>
+              <div class="node" onclick="showInfo('计算物理','数值模拟、拟合、动力学、第一性原理、多体与统计计算。')"><strong>计算物理</strong><small>模型与数值实验</small></div>
+              <div class="node" onclick="showInfo('数据科学','信号处理、统计分析、机器学习、可视化。')"><strong>数据与信息</strong><small>从数据反演物理规律</small></div>
+            </div>
+          </div>
+        </section>
+
+        <div class="section-label">基础理论向具体研究领域展开</div>
+        <section class="middle-grid">
+          <div class="branch classic">
+            <h3>经典物理</h3>
+            <p>描述宏观物体、场、热过程与连续介质，是现代物理的重要基础极限。</p>
+            <ul>
+              <li>经典力学</li><li>振动与波</li><li>电磁学</li><li>热力学</li><li>统计物理</li><li>流体与连续介质</li><li>非线性动力学</li>
+            </ul>
+          </div>
+          <div class="branch quantum">
+            <h3>量子物理</h3>
+            <p>研究微观系统与量子态，并成为原子、分子、凝聚态、半导体、量子信息的共同基础。</p>
+            <ul>
+              <li>量子态与测量</li><li>自旋与角动量</li><li>量子统计</li><li>多体理论</li><li>量子场论</li><li>量子信息</li>
+            </ul>
+          </div>
+          <div class="branch rel">
+            <h3>相对论与引力</h3>
+            <p>从时空结构与引力出发，连接黑洞、引力波、宇宙学以及高能物理。</p>
+            <ul>
+              <li>狭义相对论</li><li>广义相对论</li><li>弯曲时空</li><li>黑洞</li><li>引力波</li><li>宇宙学</li>
+            </ul>
+          </div>
+          <div class="branch experiment">
+            <h3>实验与计算支撑</h3>
+            <p>所有理论都需要实验检验、数值模拟或数据分析形成闭环。</p>
+            <ul>
+              <li>光谱与显微</li><li>电学与输运</li><li>磁共振</li><li>超快光谱</li><li>第一性原理</li><li>机器学习与数据分析</li>
+            </ul>
+          </div>
+        </section>
+
+        <div class="section-label">物质、器件与光电方向</div>
+        <section class="domains">
+          <div class="domain">
+            <h3>光学</h3>
+            <div class="node" onclick="showInfo('几何光学','成像、透镜、光阑、像差、光学系统。')"><strong>几何光学</strong><small>成像与光学系统</small></div>
+            <div class="node" onclick="showInfo('物理光学','干涉、衍射、偏振、相干性。')"><strong>物理光学</strong><small>波动与相干</small></div>
+            <div class="node" onclick="showInfo('现代光学','激光、非线性光学、超快光学、量子光学、纳米光子学、集成光子学。')"><strong>现代光学</strong><small>光与物质相互作用</small></div>
+          </div>
+          <div class="domain">
+            <h3>凝聚态 / 材料</h3>
+            <div class="node" onclick="showInfo('固体物理','晶体结构、倒易空间、能带、声子、磁性、缺陷。')"><strong>固体物理</strong><small>晶体与电子结构</small></div>
+            <div class="node" onclick="showInfo('材料物理','金属、半导体、陶瓷、聚合物、二维材料、纳米材料、复合材料。')"><strong>材料物理</strong><small>结构 → 性质 → 功能</small></div>
+            <div class="node" onclick="showInfo('低维与量子材料','二维材料、量子阱、量子线、量子点、拓扑物态。')"><strong>低维/量子材料</strong><small>介观与量子效应</small></div>
+          </div>
+          <div class="domain">
+            <h3>半导体 / 器件</h3>
+            <div class="node" onclick="showInfo('半导体物理','能带、载流子、掺杂、输运、复合、异质结。')"><strong>半导体物理</strong><small>电子、空穴与能带</small></div>
+            <div class="node" onclick="showInfo('半导体器件','p-n结、LED、激光二极管、探测器、太阳能电池、FET、CMOS。')"><strong>器件物理</strong><small>物理规律 → 器件功能</small></div>
+            <div class="node" onclick="showInfo('光电物理','光吸收、激子、光致发光、电致发光、光电转换。')"><strong>光电</strong><small>光 ↔ 电 ↔ 材料</small></div>
+          </div>
+          <div class="domain">
+            <h3>核 / 粒子 / 宇宙</h3>
+            <div class="node" onclick="showInfo('核物理','核结构、核力、放射性、核反应、裂变、聚变。')"><strong>核物理</strong><small>原子核尺度</small></div>
+            <div class="node" onclick="showInfo('粒子物理','夸克、轻子、规范玻色子、Higgs机制、QCD、电弱理论。')"><strong>粒子物理</strong><small>基本粒子与相互作用</small></div>
+            <div class="node" onclick="showInfo('宇宙学','早期宇宙、宇宙膨胀、CMB、暗物质、暗能量、大尺度结构。')"><strong>宇宙学</strong><small>最大尺度</small></div>
+          </div>
+        </section>
+
+        <div class="section-label">从物理基础走向现代技术与交叉科学</div>
+        <div class="flow">
+          <div class="flow-item">凝聚态 / 材料</div>
+          <div class="flow-item">半导体物理</div>
+          <div class="flow-item">器件 / 光电 / 信息</div>
+          <div class="flow-item">现代技术</div>
+        </div>
+
+        <section id="frontier" class="frontier">
+          <h2>交叉与前沿领域</h2>
+          <div class="frontier-grid">
+            <div class="node" onclick="showInfo('量子信息','量子计算、量子通信、量子测量、量子纠错与量子网络。')"><strong>量子信息</strong><small>量子态 × 信息</small></div>
+            <div class="node" onclick="showInfo('纳米科学','纳米尺度结构、界面、量子限域与纳米器件。')"><strong>纳米科学</strong><small>尺度效应</small></div>
+            <div class="node" onclick="showInfo('生物物理','分子机制、膜、蛋白质、细胞、生命系统中的物理规律。')"><strong>生物物理</strong><small>生命 × 物理</small></div>
+            <div class="node" onclick="showInfo('复杂系统','非线性、网络、涌现、临界性与集体现象。')"><strong>复杂系统</strong><small>多尺度与涌现</small></div>
+            <div class="node" onclick="showInfo('软物质','高分子、胶体、液晶、颗粒物质与活性物质。')"><strong>软物质</strong><small>介观材料</small></div>
+            <div class="node" onclick="showInfo('AI / 计算物理','机器学习辅助模拟、逆问题、科学计算与自动化实验。')"><strong>AI / 计算物理</strong><small>计算 × 实验 × 理论</small></div>
+          </div>
+          <div class="unify">
+            <div class="unify-title">统一理论问题</div>
+            <div class="unify-grid">
+              <div class="node" onclick="showInfo('量子引力','探索量子理论与引力的统一描述。')"><strong>量子引力</strong></div>
+              <div class="node" onclick="showInfo('统一理论','研究基本相互作用之间更深层的统一结构。')"><strong>统一理论</strong></div>
+              <div class="node" onclick="showInfo('宇宙起源','研究早期宇宙、基本规律与宇宙结构的起源问题。')"><strong>宇宙起源</strong></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="scale">
+          <h2>物理对象尺度轴</h2>
+          <div class="scale-line">
+            <div class="scale-step"><b>基本粒子</b>极微观</div>
+            <div class="scale-step"><b>原子核</b>核尺度</div>
+            <div class="scale-step"><b>原子 / 分子</b>微观</div>
+            <div class="scale-step"><b>纳米结构</b>低维 / 介观</div>
+            <div class="scale-step"><b>宏观材料</b>连续介质</div>
+            <div class="scale-step"><b>天体</b>天体物理</div>
+            <div class="scale-step"><b>宇宙</b>最大尺度</div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div>Physics Knowledge Map · 单文件静态网站 · 适用于 GitHub Pages</div>
+    <div style="margin-top:8px">把本文件命名为 <b>index.html</b> 后直接上传到仓库即可。</div>
+  </footer>
+</div>
+
+<div class="overlay" id="overlay" onclick="closeInfo(event)">
+  <div class="modal" onclick="event.stopPropagation()">
+    <h2 id="modalTitle">物理学</h2>
+    <p id="modalText"></p>
+    <button class="modal-close" onclick="hideInfo()">关闭</button>
+  </div>
+</div>
+
+<script>
+function showInfo(title,text){
+  document.getElementById('modalTitle').textContent=title;
+  document.getElementById('modalText').textContent=text;
+  document.getElementById('overlay').classList.add('show');
+}
+function hideInfo(){document.getElementById('overlay').classList.remove('show')}
+function closeInfo(e){if(e.target.id==='overlay')hideInfo()}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')hideInfo()});
+</script>
+</body>
+</html>
