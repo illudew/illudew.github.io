@@ -48,7 +48,7 @@
   }
   button:hover,.tool-link:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(20,36,60,.08)}
   
-  /* 路线图布局 */
+  /* 路线图主容器 */
   .roadmap {
     margin-top: 30px;
     background: rgba(255,255,255,.74);
@@ -57,101 +57,179 @@
     border-radius: 28px;
     padding: 30px;
   }
+  
+  /* 阶段标题 */
   .phase-title {
-    font-size: 20px;
+    font-size: 22px;
     font-weight: 800;
-    margin: 40px 0 20px;
+    margin: 50px 0 8px;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     color: #1e293b;
   }
+  .phase-title:first-child { margin-top: 0; }
   .phase-title::before {
     content: "";
     display: block;
     width: 6px;
-    height: 24px;
+    height: 28px;
     border-radius: 4px;
     background: var(--blue);
+    flex-shrink: 0;
   }
-  .phase-title:nth-of-type(2)::before { background: var(--green); }
-  .phase-title:nth-of-type(3)::before { background: var(--purple); }
-  .phase-title:nth-of-type(4)::before { background: var(--orange); }
-
-  .grid-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 18px;
+  .phase-title.classic::before { background: var(--green); }
+  .phase-title.quantum::before { background: var(--purple); }
+  .phase-title.tools::before { background: var(--orange); }
+  
+  .phase-desc {
+    color: var(--muted);
+    font-size: 14px;
+    margin: 0 0 24px 18px;
+    line-height: 1.7;
   }
+  
+  /* 知识路径（依赖链） */
+  .track {
+    margin-bottom: 20px;
+  }
+  .track-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #475569;
+    background: #f1f5f9;
+    padding: 5px 12px;
+    border-radius: 999px;
+    margin-bottom: 10px;
+    letter-spacing: .03em;
+  }
+  
+  .path {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    gap: 10px;
+    padding: 14px;
+    background: #fff;
+    border-radius: 18px;
+    border: 1px solid #e5ebf2;
+    box-shadow: 0 4px 12px rgba(25,44,75,.03);
+    overflow-x: auto;
+  }
+  
+  /* 卡片 */
   .course-card {
+    flex: 1 1 0;
+    min-width: 170px;
     background: #fff;
     border: 1px solid #dbe3ee;
-    border-radius: 16px;
-    padding: 18px;
+    border-radius: 14px;
+    padding: 14px;
     cursor: pointer;
-    transition: .2s ease;
-    box-shadow: 0 4px 12px rgba(25,44,75,.04);
+    transition: .25s ease;
     position: relative;
     overflow: hidden;
   }
   .course-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 24px rgba(25,44,75,.1);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(25,44,75,.1);
     border-color: #aabbd0;
   }
   .course-card h3 {
-    margin: 0 0 8px;
-    font-size: 17px;
+    margin: 0 0 6px;
+    font-size: 15px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 4px;
+    line-height: 1.3;
   }
   .course-card p {
     margin: 0;
-    font-size: 13px;
+    font-size: 11.5px;
     color: var(--muted);
-    line-height: 1.6;
+    line-height: 1.55;
   }
   .stars {
     color: #f59e0b;
-    font-size: 14px;
-    letter-spacing: 1px;
+    font-size: 12px;
+    letter-spacing: 0;
+    flex-shrink: 0;
   }
   .tag {
     display: inline-block;
-    font-size: 11px;
+    font-size: 10px;
     padding: 3px 8px;
-    border-radius: 6px;
+    border-radius: 5px;
     background: #f1f5f9;
     color: #475569;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
     font-weight: 600;
   }
-  .special-card {
-    border: 2px dashed #e2e8f0;
-    background: #f8fafc;
+  
+  /* 特殊/硬核卡片 */
+  .special-card { background: #f8fafc; border-style: dashed; }
+  .special-card:hover { border-color: #94a3b8; }
+  .hard-card { border-color: #fecaca; background: #fff5f5; }
+  .hard-card:hover { border-color: #f87171; }
+  .final-card { border-color: #ddd6fe; background: #faf5ff; }
+  .final-card:hover { border-color: #a78bfa; }
+  
+  /* 箭头 */
+  .arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #f1f5f9;
+    color: #64748b;
+    font-size: 16px;
+    font-weight: bold;
+    flex-shrink: 0;
+    transition: all 0.25s;
+    align-self: center;
   }
-  .special-card:hover {
-    border-color: #94a3b8;
+  .path:hover .arrow {
+    background: #dbeafe;
+    color: #2563eb;
+    transform: scale(1.1);
   }
-
-  /* 全局样式与弹窗 */
+  
+  /* 弹窗 */
   .overlay{position:fixed;inset:0;background:rgba(15,23,42,.46);display:none;align-items:center;justify-content:center;padding:18px;z-index:50}
   .overlay.show{display:flex}
   .modal{width:min(620px,96vw);background:white;border-radius:24px;padding:28px;box-shadow:0 24px 80px rgba(0,0,0,.25);animation:popIn .3s cubic-bezier(0.175, 0.885, 0.32, 1.275)}
   @keyframes popIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
   .modal h2{margin:0 0 12px;font-size:24px; color:#1e293b;}
   .modal p{color:#475569;line-height:1.8;margin:0;white-space:pre-wrap; font-size: 15px;}
-  .modal .quote { margin-top: 16px; padding: 12px; background: #f8fafc; border-left: 4px solid var(--blue); border-radius: 6px; font-style: italic; color: #334155;}
+  .modal .quote { margin-top: 16px; padding: 14px; background: #f8fafc; border-left: 4px solid var(--blue); border-radius: 6px; font-style: italic; color: #334155;}
   .modal-close{margin-top:20px;background:#0f172a;color:white;border-color:#0f172a; padding: 10px 20px; font-weight: bold;}
   .modal-close:hover { background: #1e293b; }
 
   footer{padding:34px 0 50px;color:var(--muted);text-align:center;font-size:13px}
   footer a{color:var(--blue);text-decoration:none}
 
-  @media(max-width:768px){
+  /* 响应式 */
+  @media(max-width:900px){
     .wrap{width:min(94vw,720px)}
-    .grid-cards { grid-template-columns: 1fr; }
+    .roadmap { padding: 20px; }
+    .phase-title { font-size: 18px; }
+    .path {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .path .course-card { min-width: auto; }
+    .arrow {
+      transform: rotate(90deg);
+      align-self: center;
+      margin: 4px 0;
+    }
+    .path:hover .arrow { transform: rotate(90deg) scale(1.1); }
   }
 </style>
 </head>
@@ -160,107 +238,245 @@
   <header>
     <div class="eyebrow">MY PHYSICS JOURNEY</div>
     <h1>物理学知识体系</h1>
-    <p class="subtitle">基于个人学习路线（PPT）的物理知识网络。从数学基础到最终魔王（量子力学）的奇幻之旅。</p>
+    <p class="subtitle">一张由箭头串联的知识网络。从数学地基出发，经经典物理、近代物理，最终抵达量子世界的尽头。</p>
     <div class="toolbar">
       <button onclick="window.scrollTo({top:0,behavior:'smooth'})">回到顶部</button>
-      <button onclick="toggleCompact()">切换紧凑视图</button>
     </div>
   </header>
 
-  <main class="roadmap" id="roadmap-content">
-    
-    <!-- 阶段一：前置基础 -->
-    <div class="phase-title">第一阶段：新手村与前置准备（数学基础）</div>
-    <div class="grid-cards">
-      <div class="course-card" onclick="showCourse('第0章：数学基础（小初高）','小初高的知识你忘完了没有？\n\n什么？反三角是什么？极坐标是什么？向量叉乘又是什么？？？\n\n跟着此章节回顾小初高数学基础与高数前的准备吧。','★','数学准备')">
-        <div class="tag">第0章</div>
-        <h3>第0章：数学基础 <span class="stars">★</span></h3>
-        <p>小初高知识回顾，高数前准备。反三角、极坐标、向量叉乘，地基打牢。</p>
-      </div>
-      <div class="course-card" onclick="showCourse('前传第1章：高等数学','大学理科的第一步，你将学习基本微积分的定理以及常微分方程的求解。\n\n后续的多元微积分与无穷级数将把你的数学层次更高一个台阶。\n\n理工科的万恶之源，高考只是决定你在哪里看宋浩高数。','★★','数学基础')">
-        <div class="tag">前传第1章</div>
-        <h3>前传第1章：高等数学 <span class="stars">★★</span></h3>
-        <p>微积分定理与常微分方程。理工科的万恶之源，决定你在哪里看宋浩。</p>
-      </div>
-      <div class="course-card" onclick="showCourse('前传第2章：线性代数','大学基础数学的另一个科目，你将会认识到行列式与矩阵等新伙伴加入。\n\n以及求解多元一次线性方程组的方法，对矩阵的性质深入探索。\n\n新手村的困难章节之一。','★★','数学基础')">
-        <div class="tag">前传第2章</div>
-        <h3>前传第2章：线性代数 <span class="stars">★★</span></h3>
-        <p>行列式与矩阵，求解线性方程组。新手村的困难章节之一。</p>
-      </div>
-      <div class="course-card special-card" onclick="showCourse('前传第3章：数学物理方法','这是物理学的数学工具箱，将为你提供解决物理问题的强大数学武器。\n\n从复变函数到积分变换，从数学物理方程到特殊函数。\n\n噩梦、第二卷的初焉，此章节，面如死灰。','★★★★★','进阶数学工具')">
-        <div class="tag" style="background:#fee2e2; color:#b91c1c;">前传第3章·噩梦</div>
-        <h3>前传第3章：数理方法 <span class="stars">★★★★★</span></h3>
-        <p>复变函数、积分变换、特殊函数。物理学的工具箱，二卷初焉，面如死灰。</p>
+  <main class="roadmap">
+
+    <!-- ============ 阶段一：数学地基 ============ -->
+    <h2 class="phase-title">🧮 第一阶段：数学地基</h2>
+    <p class="phase-desc">一切物理理论的数学语言。没有这些工具，后面的物理寸步难行。</p>
+
+    <div class="track">
+      <div class="track-label">📐 核心分析工具链</div>
+      <div class="path">
+        <div class="course-card" onclick="showCourse('第0章：数学基础（小初高）','小初高的知识你忘完了没有？\n\n什么？反三角是什么？极坐标是什么？向量叉乘又是什么？？？\n\n跟着此章节回顾小初高数学基础与高数前的准备吧。','★','数学准备')">
+          <div class="tag">第0章</div>
+          <h3>小初高数学 <span class="stars">★</span></h3>
+          <p>反三角、极坐标、向量叉乘，地基打牢。</p>
+        </div>
+        <div class="arrow">→</div>
+        <div class="course-card" onclick="showCourse('前传第1章：高等数学','大学理科的第一步，你将学习基本微积分的定理以及常微分方程的求解。\n\n后续的多元微积分与无穷级数将把你的数学层次更高一个台阶。\n\n理工科的万恶之源，高考只是决定你在哪里看宋浩高数。','★★','数学基础')">
+          <div class="tag">前传第1章</div>
+          <h3>高等数学 <span class="stars">★★</span></h3>
+          <p>微积分定理与常微分方程。万恶之源。</p>
+        </div>
+        <div class="arrow">→</div>
+        <div class="course-card special-card" onclick="showCourse('前传第3章：数学物理方法','这是物理学的数学工具箱，将为你提供解决物理问题的强大数学武器。\n\n从复变函数到积分变换，从数学物理方程到特殊函数。\n\n噩梦、第二卷的初焉，此章节，面如死灰。','★★★★★','进阶数学工具')">
+          <div class="tag" style="background:#fee2e2; color:#b91c1c;">前传第3章</div>
+          <h3>数学物理方法 <span class="stars">★★★★★</span></h3>
+          <p>复变函数、积分变换、偏微分方程。面如死灰。</p>
+        </div>
+        <div class="arrow">→</div>
+        <div class="course-card hard-card" onclick="showCourse('隐藏支线：特殊函数','你以为考完数理方法就结束了吗？不！贝塞尔、勒让德、球谐函数，它们在你的电动力学、量子力学、甚至固体物理里无处不在，阴魂不散！\n\n它们是你推导公式时的噩梦，也是物理世界的通用语言。','★★★★★','数学物理延伸')">
+          <div class="tag" style="background:#fee2e2; color:#b91c1c;">隐藏支线</div>
+          <h3>特殊函数 <span class="stars">★★★★★</span></h3>
+          <p>贝塞尔、勒让德、球谐函数。阴魂不散。</p>
+        </div>
       </div>
     </div>
 
-    <!-- 阶段二：普通物理 -->
-    <div class="phase-title">第二阶段：物理梦开始的地方（普通物理）</div>
-    <div class="grid-cards">
-      <div class="course-card" onclick="showCourse('第1章：力学','这是物理学的基石，是探索物理世界奥秘的起点。\n\n你将从牛顿三大定律出发，深入理解物体的运动规律。\n\n让你对宏观世界的机械运动有全面且深入的认识。\n\n物理梦开始的地方。','★','普通物理')">
-        <div class="tag">第1章</div>
-        <h3>第1章：力学 <span class="stars">★</span></h3>
-        <p>牛顿三大定律，宏观机械运动。物理梦开始的地方。</p>
-      </div>
-      <div class="course-card" onclick="showCourse('第2章：电磁学','当电与磁交织在一起，就构成了电磁学这一神奇的领域。\n\n你将学习到电场与磁场的性质，其中电磁感应现象与电磁波更是将电与磁的联系推向高潮。\n\n左手磁，右手电，雷公助我！以雷霆击碎黑暗！！！','★★★','普通物理')">
-        <div class="tag">第2章</div>
-        <h3>第2章：电磁学 <span class="stars">★★★</span></h3>
-        <p>电场与磁场，电磁感应与电磁波。左手磁，右手电，雷公助我！</p>
-      </div>
-      <div class="course-card special-card" onclick="showCourse('支线第1章：电路','这是电气工程的基础，也是物理学在电磁学领域的应用实践。\n\n从电路的基本定律到复杂电路的分析方法，你将学习到如何设计、分析和优化电路。\n\n老师你看，我的电阻会发光哦，嘣！（电阻炸了）','★★★','支线任务')">
-        <div class="tag" style="background:#e0e7ff; color:#3730a3;">支线第1章</div>
-        <h3>支线第1章：电路 <span class="stars">★★★</span></h3>
-        <p>电路定律与分析方法。老师你看，我的电阻会发光哦，嘣！（电阻炸了）</p>
-      </div>
-      <div class="course-card" onclick="showCourse('第3章：热学','热学是研究热现象的学科，它将带你走进温度、热量、热力学定律的世界。\n\n从理想气体的性质到热力学第一定律、第二定律，你将逐步理解能量的转化与守恒在热学中的体现。\n\n燃起来了！物理人！物理魂！','★★','普通物理')">
-        <div class="tag">第3章</div>
-        <h3>第3章：热学 <span class="stars">★★</span></h3>
-        <p>温度、热量、热力学定律。燃起来了！物理人！物理魂！</p>
-      </div>
-      <div class="course-card" onclick="showCourse('第4章：光学','光学是研究光的产生、传播、接收和应用的学科。\n\n从几何光学到物理光学，你将学习到光的反射、折射、干涉、衍射等现象。\n\n光的波动性与粒子性的双重性质将被深入探讨，让你对光的本质有更全面的认识。\n\n光的威力无穷无尽，小心有的光会让你骨折！','★★★','普通物理')">
-        <div class="tag">第4章</div>
-        <h3>第4章：光学 <span class="stars">★★★</span></h3>
-        <p>反射、折射、干涉、衍射。光的威力无穷无尽，小心有的光会让你骨折！</p>
-      </div>
-      <div class="course-card" onclick="showCourse('第5章：原子物理学','走进微观世界的大门，原子物理学将带你探索原子的结构与性质。\n\n从原子的核式结构模型出发，你将了解电子的跃迁、原子的能级等概念，揭开原子发光、化学反应等现象背后的物理本质。\n\n终于，看到了最终魔王的影子，但你还不是他……','★★★★','近代物理')">
-        <div class="tag">第5章</div>
-        <h3>第5章：原子物理学 <span class="stars">★★★★</span></h3>
-        <p>核式结构、电子跃迁、能级。终于，看到了最终魔王的影子，但你还不是他……</p>
+    <div class="track">
+      <div class="track-label">🔢 代数与计算分支</div>
+      <div class="path">
+        <div class="course-card" onclick="showCourse('前传第2章：线性代数','大学基础数学的另一个科目，你将会认识到行列式与矩阵等新伙伴加入。\n\n以及求解多元一次线性方程组的方法，对矩阵的性质深入探索。\n\n新手村的困难章节之一。','★★','数学基础')">
+          <div class="tag">前传第2章</div>
+          <h3>线性代数 <span class="stars">★★</span></h3>
+          <p>行列式、矩阵、线性方程组。新手村困难章节。</p>
+        </div>
+        <div class="arrow">→</div>
+        <div class="course-card" onclick="showCourse('工具课：计算物理','自从学了计算物理，我就成了调包侠。Matlab和Python就是我的再生父母。\n\n代码跑通靠玄学，数据全靠P图（划掉）美化。遇事不决，先写个循环！\n\n把物理模型转化为数值算法，你的另一个数值实验室。','★★★','计算科学')">
+          <div class="tag">工具课</div>
+          <h3>计算物理 <span class="stars">★★★</span></h3>
+          <p>调包侠的起点，代码跑通靠玄学。</p>
+        </div>
       </div>
     </div>
 
-    <!-- 阶段三：理论物理核心 -->
-    <div class="phase-title">第三阶段：真正的物理才刚刚开始（理论物理）</div>
-    <div class="grid-cards">
-      <div class="course-card" onclick="showCourse('理论物理 第1章：理论力学','这是力学的深化与拓展，是对力学规律的更高层次的抽象与总结。\n\n从拉格朗日方程到哈密顿原理，你将看到力学体系在数学形式上的优美与简洁。\n\n欢迎来到物理，真正的物理才刚刚开始！！！','★★★★','理论核心')">
-        <div class="tag">理论物理 第1章</div>
-        <h3>理论力学 <span class="stars">★★★★</span></h3>
-        <p>拉格朗日方程与哈密顿原理。欢迎来到物理，真正的物理才刚刚开始！</p>
-      </div>
-      <div class="course-card special-card" onclick="showCourse('理论物理 第2章：电动力学','电磁学的进一步深化，将带你走进电磁场的微观世界。\n\n麦克斯韦方程组作为电动力学的核心，将让你看到电场与磁场在微观层面的紧密联系与相互作用。同时，电动力学还将带你探索相对论与电磁学的结合。\n\n移动变换，电磁相对，物理梦还在交织……','★★★★★','理论核心')">
-        <div class="tag" style="background:#fee2e2; color:#b91c1c;">理论物理 第2章·硬核</div>
-        <h3>电动力学 <span class="stars">★★★★★</span></h3>
-        <p>麦克斯韦方程组，微观电磁场与相对论结合。移动变换，电磁相对，物理梦还在交织……</p>
-      </div>
-      <div class="course-card special-card" onclick="showCourse('理论物理 第3章：热力学与统计物理','这是热学的理论升华，将宏观的热现象与微观的粒子运动紧密联系起来。\n\n通过对气体分子运动论的学习，让你从宏观与微观两个角度全面理解热现象，提升你的物理思维的深度与广度。\n\n躁动吧！物理人的小宇宙！！！','★★★★★★','理论核心·终极')">
-        <div class="tag" style="background:#fee2e2; color:#b91c1c;">理论物理 第3章·终极大魔王</div>
-        <h3>热力学与统计物理 <span class="stars">★★★★★★</span></h3>
-        <p>宏观热现象与微观粒子运动的桥梁。躁动吧！物理人的小宇宙！！！</p>
+    <!-- ============ 阶段二：经典物理主干 ============ -->
+    <h2 class="phase-title classic">⚛️ 第二阶段：经典物理主干</h2>
+    <p class="phase-desc">物理梦开始的地方。四条主干分别通向理论物理的四大支柱。</p>
+
+    <div class="track">
+      <div class="track-label">🚀 力学线</div>
+      <div class="path">
+        <div class="course-card" onclick="showCourse('第1章：力学','这是物理学的基石，是探索物理世界奥秘的起点。\n\n你将从牛顿三大定律出发，深入理解物体的运动规律。\n\n物理梦开始的地方。','★','普通物理')">
+          <div class="tag">第1章</div>
+          <h3>力学 <span class="stars">★</span></h3>
+          <p>牛顿三大定律。物理梦开始的地方。</p>
+        </div>
+        <div class="arrow">→</div>
+        <div class="course-card" onclick="showCourse('理论物理 第1章：理论力学','这是力学的深化与拓展，是对力学规律的更高层次的抽象与总结。\n\n从拉格朗日方程到哈密顿原理，你将看到力学体系在数学形式上的优美与简洁。\n\n欢迎来到物理，真正的物理才刚刚开始！！！','★★★★','理论核心')">
+          <div class="tag">理论物理 第1章</div>
+          <h3>理论力学 <span class="stars">★★★★</span></h3>
+          <p>拉格朗日、哈密顿。真正的物理才刚刚开始！</p>
+        </div>
       </div>
     </div>
 
-    <!-- 阶段四：终章 -->
-    <div class="phase-title">第四阶段：物理学的尽头，或许不是？</div>
-    <div class="grid-cards">
-      <div class="course-card special-card" style="border-color: #ea580c; background: #fff7ed;" onclick="showCourse('固体物理','从晶体结构、倒易空间、声子和能带理论出发，研究固体中的电子、晶格与磁性。\n\n它是半导体、材料、二维材料、超导和许多光电材料研究的理论基础。\n\n微观量子世界在宏观材料中的终极体现，物理人的必经之路。','★★★★★★','凝聚态终极')">
-        <div class="tag" style="background:#ffedd5; color:#c2410c;">最终魔王级·材料基石</div>
-        <h3 style="color: #c2410c;">固体物理 <span class="stars">★★★★★★</span></h3>
-        <p style="color: #9a3412;">晶体结构、能带理论。微观量子世界在宏观材料中的终极体现，物理人的必经之路。</p>
+    <div class="track">
+      <div class="track-label">⚡ 电磁线</div>
+      <div class="path">
+        <div class="course-card" onclick="showCourse('第2章：电磁学','当电与磁交织在一起，就构成了电磁学这一神奇的领域。\n\n你将学习到电场与磁场的性质，其中电磁感应现象与电磁波更是将电与磁的联系推向高潮。\n\n左手磁，右手电，雷公助我！以雷霆击碎黑暗！！！','★★★','普通物理')">
+          <div class="tag">第2章</div>
+          <h3>电磁学 <span class="stars">★★★</span></h3>
+          <p>电场磁场、电磁感应。雷公助我！</p>
+        </div>
+        <div class="arrow">→</div>
+        <div class="course-card hard-card" onclick="showCourse('理论物理 第2章：电动力学','电磁学的进一步深化，将带你走进电磁场的微观世界。\n\n麦克斯韦方程组作为电动力学的核心，将让你看到电场与磁场在微观层面的紧密联系与相互作用。同时，还会探索相对论与电磁学的结合。\n\n移动变换，电磁相对，物理梦还在交织……','★★★★★','理论核心')">
+          <div class="tag" style="background:#fee2e2; color:#b91c1c;">理论物理 第2章</div>
+          <h3>电动力学 <span class="stars">★★★★★</span></h3>
+          <p>麦克斯韦方程组、相对论电磁场。物理梦还在交织……</p>
+        </div>
       </div>
-      <div class="course-card special-card" style="border-color: #7c3aed; background: #faf5ff;" onclick="showCourse('终章：量子力学','物理学的尽头，或许不是？\n\n这是微观世界的全新理论体系，将彻底颠覆你对经典物理学的认识。\n\n你将会为人类研究出新的高度，或许会研究出不可触摸的神明。\n\n遇事不决，量子力学。','★★★★★★','终章·最终魔王')">
-        <div class="tag" style="background:#ede9fe; color:#6d28d9;">终章·最终魔王</div>
-        <h3 style="color: #6d28d9;">终章：量子力学 <span class="stars">★★★★★★</span></h3>
-        <p style="color: #6b21a8;">微观世界的全新理论体系。你将会为人类研究出新的高度，或许会研究出不可触摸的神明。遇事不决，量子力学。</p>
+    </div>
+
+    <div class="track">
+      <div class="track-label">🔥 热学线</div>
+      <div class="path">
+        <div class="course-card" onclick="showCourse('第3章：热学','热学是研究热现象的学科，它将带你走进温度、热量、热力学定律的世界。\n\n从理想气体的性质到热力学第一定律、第二定律，你将逐步理解能量的转化与守恒在热学中的体现。\n\n燃起来了！物理人！物理魂！','★★','普通物理')">
+          <div class="tag">第3章</div>
+          <h3>热学 <span class="stars">★★</span></h3>
+          <p>温度、热量、热力学定律。燃起来了！</p>
+        </div>
+        <div class="arrow">→</div>
+        <div class="course-card final-card" onclick="showCourse('理论物理 第3章：热力学与统计物理','这是热学的理论升华，将宏观的热现象与微观的粒子运动紧密联系起来。\n\n通过对气体分子运动论的学习，让你从宏观与微观两个角度全面理解热现象。\n\n躁动吧！物理人的小宇宙！！！','★★★★★★','理论核心·终极')">
+          <div class="tag" style="background:#ede9fe; color:#6d28d9;">理论物理 第3章·终极大魔王</div>
+          <h3>热力学与统计物理 <span class="stars">★★★★★★</span></h3>
+          <p>宏观热现象与微观粒子的桥梁。躁动吧！小宇宙！</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="track">
+      <div class="track-label">🌈 光学线</div>
+      <div class="path">
+        <div class="course-card" onclick="showCourse('第4章：光学','光学是研究光的产生、传播、接收和应用的学科。\n\n从几何光学到物理光学，你将学习到光的反射、折射、干涉、衍射等现象。\n\n光的威力无穷无尽，小心有的光会让你骨折！','★★★','普通物理')">
+          <div class="tag">第4章</div>
+          <h3>光学 <span class="stars">★★★</span></h3>
+          <p>干涉、衍射、偏振。小心光会让你骨折！</p>
+        </div>
+        <div class="arrow">→</div>
+        <div class="course-card hard-card" onclick="showCourse('光电分支：激光原理','受激辐射、粒子数反转、光放大。想当个激光器？你得先让电子们“卷”起来，达到粒子数反转，才能让光子如脱缰的野马般放大。\n\n激光一开，谁与争锋！从光纤通信到激光武器，这是光的终极形态。','★★★★★','光电方向·硬核')">
+          <div class="tag" style="background:#fef3c7; color:#b45309;">光电分支·硬核</div>
+          <h3>激光原理 <span class="stars">★★★★★</span></h3>
+          <p>受激辐射、光放大。让电子们“卷”起来！</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="track">
+      <div class="track-label">🔌 电路分支</div>
+      <div class="path">
+        <div class="course-card" onclick="showCourse('支线第1章：电路','这是电气工程的基础，也是物理学在电磁学领域的应用实践。\n\n从电路的基本定律到复杂电路的分析方法，你将学习到如何设计、分析和优化电路。\n\n老师你看，我的电阻会发光哦，嘣！（电阻炸了）','★★★','支线任务')">
+          <div class="tag" style="background:#e0e7ff; color:#3730a3;">支线第1章</div>
+          <h3>电路 <span class="stars">★★★</span></h3>
+          <p>电路定律与分析方法。电阻炸了！</p>
+        </div>
+        <div class="arrow">→</div>
+        <div class="course-card" onclick="showCourse('支线第2章：数电与模电','模电玄学，玄之又玄，众妙之门；数电零一，逻辑清楚，但合在一起就让你怀疑人生。\n\n从二极管到三极管，从运放到逻辑门，你的电路不仅要会发光，还要会冒烟！\n\n硬件工程师的必经之路，物理人的跨界尝试。','★★★★','电子技术')">
+          <div class="tag" style="background:#fef3c7; color:#b45309;">支线第2章</div>
+          <h3>数电与模电 <span class="stars">★★★★</span></h3>
+          <p>模电玄学，数电逻辑。不仅要发光还要冒烟！</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ 阶段三：量子与近代物理 ============ -->
+    <h2 class="phase-title quantum">🌀 第三阶段：量子与近代物理</h2>
+    <p class="phase-desc">走进微观世界的大门。原子物理是入口，量子力学是核心，向四方辐射到固体、核物理与量子信息。</p>
+
+    <div class="track">
+      <div class="track-label">🔬 微观入口</div>
+      <div class="path">
+        <div class="course-card" onclick="showCourse('第5章：原子物理学','走进微观世界的大门，原子物理学将带你探索原子的结构与性质。\n\n从原子的核式结构模型出发，你将了解电子的跃迁、原子的能级等概念。\n\n终于，看到了最终魔王的影子，但你还不是他……','★★★★','近代物理')">
+          <div class="tag">第5章</div>
+          <h3>原子物理学 <span class="stars">★★★★</span></h3>
+          <p>核式结构、电子跃迁。看到最终魔王的影子……</p>
+        </div>
+        <div class="arrow">→</div>
+        <div class="course-card final-card" onclick="showCourse('终章：量子力学','物理学的尽头，或许不是？\n\n这是微观世界的全新理论体系，将彻底颠覆你对经典物理学的认识。\n\n你将会为人类研究出新的高度，或许会研究出不可触摸的神明。\n\n遇事不决，量子力学。','★★★★★★','终章·最终魔王')">
+          <div class="tag" style="background:#ede9fe; color:#6d28d9;">终章·最终魔王</div>
+          <h3>量子力学 <span class="stars">★★★★★★</span></h3>
+          <p>微观世界的全新理论。遇事不决，量子力学。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="track">
+      <div class="track-label">☢️ 核物理分支（由原子物理延伸）</div>
+      <div class="path">
+        <div class="course-card" onclick="showCourse('第5章：原子物理学','走进微观世界的大门……','★★★★','近代物理')">
+          <div class="tag">第5章</div>
+          <h3>原子物理学 <span class="stars">★★★★</span></h3>
+          <p>原子结构、能级。</p>
+        </div>
+        <div class="arrow">→</div>
+        <div class="course-card" onclick="showCourse('核物理分支：原子核物理','夸克、轻子、强子。质子中子抱团取暖，动不动就裂变聚变，动辄释放出毁天灭地的能量。\n\n这是核物理，不是核平物理！从核结构到核能，微观世界的暴力美学。','★★★★','高能核物理')">
+          <div class="tag">核物理分支</div>
+          <h3>原子核物理 <span class="stars">★★★★</span></h3>
+          <p>裂变聚变释放能量。微观世界的暴力美学。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="track">
+      <div class="track-label">💎 凝聚态分支（量子力学的最大应用）</div>
+      <div class="path">
+        <div class="course-card final-card" onclick="showCourse('终章：量子力学','物理学的尽头，或许不是？……遇事不决，量子力学。','★★★★★★','终章')">
+          <div class="tag" style="background:#ede9fe; color:#6d28d9;">终章</div>
+          <h3>量子力学 <span class="stars">★★★★★★</span></h3>
+          <p>微观世界的全新理论。</p>
+        </div>
+        <div class="arrow">→</div>
+        <div class="course-card final-card" onclick="showCourse('固体物理','从晶体结构、倒易空间、声子和能带理论出发，研究固体中的电子、晶格与磁性。\n\n它是半导体、材料、二维材料、超导和许多光电材料研究的理论基础。\n\n微观量子世界在宏观材料中的终极体现。','★★★★★★','凝聚态终极')">
+          <div class="tag" style="background:#ffedd5; color:#c2410c;">最终魔王级·材料基石</div>
+          <h3>固体物理 <span class="stars">★★★★★★</span></h3>
+          <p>晶体结构、能带理论。微观量子的宏观体现。</p>
+        </div>
+        <div class="arrow">→</div>
+        <div class="course-card hard-card" onclick="showCourse('半导体物理','能带、载流子、PN结。这是物理与微电子工业的完美结合。\n\n从手机芯片到太阳能电池，从LED到激光器，没有它，现代科技直接瘫痪。\n\n这是你未来主攻的方向，也是物理人改变世界的利器！','★★★★★','专业方向·核心')">
+          <div class="tag" style="background:#ffedd5; color:#c2410c;">专业方向·核心</div>
+          <h3>半导体物理 <span class="stars">★★★★★</span></h3>
+          <p>能带、载流子、PN结。没有它现代科技瘫痪！</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="track">
+      <div class="track-label">💡 发光物理（由固体物理延伸）</div>
+      <div class="path">
+        <div class="course-card final-card" onclick="showCourse('固体物理','从晶体结构、倒易空间、声子和能带理论出发……微观量子世界在宏观材料中的终极体现。','★★★★★★','凝聚态终极')">
+          <div class="tag" style="background:#ffedd5; color:#c2410c;">固体物理</div>
+          <h3>固体物理 <span class="stars">★★★★★★</span></h3>
+          <p>能带理论的发源地。</p>
+        </div>
+        <div class="arrow">→</div>
+        <div class="course-card" onclick="showCourse('光电分支：发光物理','电子从高能级跃迁到低能级，释放出绚烂的光子。\n\n这不仅是物理，更是光电、半导体和未来的光刻机光源！你不发光，怎么照亮全人类？\n\n探索光与物质相互作用的终极奥秘。','★★★★','光电方向')">
+          <div class="tag">光电分支</div>
+          <h3>发光物理 <span class="stars">★★★★</span></h3>
+          <p>电子跃迁，释放光子。你不发光怎么照亮全人类？</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="track">
+      <div class="track-label">🔐 量子信息分支（量子力学的信息革命）</div>
+      <div class="path">
+        <div class="course-card final-card" onclick="showCourse('终章：量子力学','物理学的尽头，或许不是？……遇事不决，量子力学。','★★★★★★','终章')">
+          <div class="tag" style="background:#ede9fe; color:#6d28d9;">终章</div>
+          <h3>量子力学 <span class="stars">★★★★★★</span></h3>
+          <p>微观世界的全新理论。</p>
+        </div>
+        <div class="arrow">→</div>
+        <div class="course-card hard-card" onclick="showCourse('前沿交叉：量子信息','比特变成了量子比特，0和1的叠加态。量子纠缠、量子计算、量子通信。\n\n薛定谔的猫不仅又死又活，还能给你发送加密信息。\n\n遇事不决，量子力学；量子加密，绝对安全！这是量子力学的终极应用。','★★★★★','前沿科技')">
+          <div class="tag" style="background:#ede9fe; color:#6d28d9;">前沿交叉·量子科技</div>
+          <h3>量子信息 <span class="stars">★★★★★</span></h3>
+          <p>量子比特、量子纠缠。量子加密，绝对安全！</p>
+        </div>
       </div>
     </div>
 
@@ -268,7 +484,7 @@
 
   <footer>
     <div>Physics Knowledge Map · 单文件静态网站 · 适用于 GitHub Pages</div>
-    <div style="margin-top:8px">整理自个人学习路线 PPT</div>
+    <div style="margin-top:8px">整理自个人学习路线 PPT · 用箭头串联的物理知识网络</div>
   </footer>
 </div>
 
@@ -286,7 +502,6 @@
 function showCourse(name, desc, diff, tag) {
   document.getElementById('modalTitle').textContent = name + '  ' + diff;
   
-  // 提取介绍中的语录部分（假设最后一段是语录，换行分割）
   let parts = desc.split('\n\n');
   let mainDesc = parts.slice(0, -1).join('\n\n');
   let quote = parts[parts.length - 1];
@@ -310,10 +525,6 @@ function hideInfo(){
 
 function closeInfo(e){
   if(e.target.id === 'overlay') hideInfo();
-}
-
-function toggleCompact() {
-  document.body.classList.toggle('compact');
 }
 
 document.addEventListener('keydown', e => {
