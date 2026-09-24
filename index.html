@@ -73,6 +73,7 @@
   .phase-title.classic::before { background: #0f766e; }
   .phase-title.quantum::before { background: #7c3aed; }
   .phase-title.apps::before { background: #c2410c; }
+  .phase-title.cosmos::before { background: #4338ca; }
   
   .phase-desc { color: var(--muted); font-size: 14px; margin: 0 0 24px 18px; line-height: 1.7; }
   
@@ -149,15 +150,78 @@
   .chip-card:hover { border-color: #fb923c; }
   .legendary-card { border: 2px solid #f59e0b; background: linear-gradient(135deg, #fffbeb, #fef3c7); box-shadow: 0 0 20px rgba(245,158,11,.25); }
   .legendary-card:hover { border-color: #d97706; box-shadow: 0 0 30px rgba(245,158,11,.45); }
+  .cosmos-card { border-color: #c7d2fe; background: linear-gradient(135deg, #eef2ff, #e0e7ff); }
+  .cosmos-card:hover { border-color: #818cf8; }
   
   /* 弹窗 */
   .overlay{position:fixed;inset:0;background:rgba(15,23,42,.46);display:none;align-items:center;justify-content:center;padding:18px;z-index:50}
   .overlay.show{display:flex}
-  .modal{width:min(640px,96vw);background:white;border-radius:24px;padding:28px;box-shadow:0 24px 80px rgba(0,0,0,.25);animation:popIn .3s cubic-bezier(0.175, 0.885, 0.32, 1.275); max-height: 86vh; overflow-y: auto;}
+  .modal{width:min(660px,96vw);background:white;border-radius:24px;padding:28px;box-shadow:0 24px 80px rgba(0,0,0,.25);animation:popIn .3s cubic-bezier(0.175, 0.885, 0.32, 1.275); max-height: 86vh; overflow-y: auto;}
   @keyframes popIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
   .modal h2{margin:0 0 12px;font-size:24px; color:#1e293b;}
   .modal p{color:#475569;line-height:1.8;margin:0;white-space:pre-wrap; font-size: 15px;}
   .modal .quote { margin-top: 16px; padding: 14px; background: #f8fafc; border-left: 4px solid #2563eb; border-radius: 6px; font-style: italic; color: #334155;}
+  
+  /* 资源板块 */
+  .resource-section {
+    margin-top: 18px;
+    padding-top: 16px;
+    border-top: 1px dashed #e2e8f0;
+  }
+  .resource-label {
+    font-size: 13px;
+    font-weight: 800;
+    color: #334155;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .resource-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .resource-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border-radius: 10px;
+    font-size: 13px;
+    color: #334155;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    transition: .2s;
+    text-decoration: none;
+    line-height: 1.5;
+  }
+  .resource-item:hover {
+    background: #eef4fb;
+    border-color: #bfdbfe;
+  }
+  .video-item {
+    background: #fef2f2;
+    border-color: #fecaca;
+    color: #991b1b;
+    font-weight: 600;
+  }
+  .video-item:hover {
+    background: #fee2e2;
+    border-color: #fca5a5;
+  }
+  .resource-icon {
+    flex-shrink: 0;
+    font-size: 14px;
+  }
+  .resource-arrow {
+    margin-left: auto;
+    color: #94a3b8;
+    font-weight: bold;
+  }
+  .video-item .resource-arrow {
+    color: #f87171;
+  }
   
   /* 弹窗中的前置/后续学科 */
   .relations {
@@ -170,27 +234,16 @@
   }
   .relation-group { display: flex; flex-direction: column; gap: 8px; }
   .relation-label {
-    font-size: 12px;
-    font-weight: 800;
-    letter-spacing: .05em;
-    color: #64748b;
-    display: flex;
-    align-items: center;
-    gap: 5px;
+    font-size: 12px; font-weight: 800; letter-spacing: .05em;
+    color: #64748b; display: flex; align-items: center; gap: 5px;
   }
   .relation-label.prereq { color: #2563eb; }
   .relation-label.next { color: #059669; }
   .relation-list { display: flex; flex-wrap: wrap; gap: 6px; }
   .relation-chip {
-    font-size: 12px;
-    padding: 5px 10px;
-    border-radius: 8px;
-    background: #eff6ff;
-    color: #1e40af;
-    cursor: pointer;
-    transition: .2s;
-    border: 1px solid #dbeafe;
-    font-weight: 600;
+    font-size: 12px; padding: 5px 10px; border-radius: 8px;
+    background: #eff6ff; color: #1e40af; cursor: pointer;
+    transition: .2s; border: 1px solid #dbeafe; font-weight: 600;
   }
   .relation-chip:hover { background: #dbeafe; transform: translateY(-1px); }
   .relation-chip.next-chip { background: #ecfdf5; color: #047857; border-color: #d1fae5; }
@@ -217,7 +270,7 @@
   <header>
     <div class="eyebrow">MY PHYSICS JOURNEY</div>
     <h1>物理学知识体系</h1>
-    <p class="subtitle">以领域分类的物理知识网络。点开任意卡片，可以看到这门学科的“前置学科”和“后续学科”，像游戏技能树一样清晰。</p>
+    <p class="subtitle">以领域分类的物理知识网络。点开任意卡片，可以看到这门学科的“前置学科”、“后续学科”，以及推荐教材与 B 站网课资源。</p>
     <div class="toolbar">
       <button onclick="window.scrollTo({top:0,behavior:'smooth'})">回到顶部</button>
     </div>
@@ -404,8 +457,8 @@
     <div class="domain" style="--domain-color: #7c3aed;">
       <div class="domain-header">
         <h3>🌈 光学领域</h3>
-        <span class="domain-count">4门</span>
-        <span class="domain-desc">从波动光学到非线性光学</span>
+        <span class="domain-count">5门</span>
+        <span class="domain-desc">从波动光学到系统设计</span>
       </div>
       <div class="domain-grid">
         <div class="course-card" onclick="showCourse('光学')">
@@ -417,6 +470,11 @@
           <div class="tag">工程方向</div>
           <h4>工程光学 <span class="stars">★★★+</span></h4>
           <p>透镜设计、光路计算、像差分析。把光学搬进工厂！</p>
+        </div>
+        <div class="course-card" onclick="showCourse('光学系统设计')">
+          <div class="tag">工程设计</div>
+          <h4>光学系统设计 <span class="stars">★★★★</span></h4>
+          <p>从单透镜到复杂镜头组。Zemax一开，头发掉一半。</p>
         </div>
         <div class="course-card hard-card" onclick="showCourse('激光原理')">
           <div class="tag" style="background:#fef3c7; color:#b45309;">光电·硬核</div>
@@ -579,11 +637,55 @@
       </div>
     </div>
 
+    <!-- ============ 第五阶段：宇宙的尽头 ============ -->
+    <h2 class="phase-title cosmos">🌌 第五阶段：宇宙的尽头</h2>
+    <p class="phase-desc">物理学的最前沿。从弯曲时空到大尺度宇宙结构，从基本粒子到规范场论的终极统一。</p>
+
+    <div class="domain" style="--domain-color: #4338ca;">
+      <div class="domain-header">
+        <h3>🌠 引力与宇宙</h3>
+        <span class="domain-count">2门</span>
+        <span class="domain-desc">时空、引力、宇宙演化</span>
+      </div>
+      <div class="domain-grid">
+        <div class="course-card cosmos-card" onclick="showCourse('相对论')">
+          <div class="tag" style="background:#e0e7ff; color:#3730a3;">时空理论</div>
+          <h4>相对论 <span class="stars">★★★★★+</span></h4>
+          <p>狭义与广义相对论，弯曲时空，引力波。时空不是舞台，而是演员。</p>
+        </div>
+        <div class="course-card cosmos-card" onclick="showCourse('宇宙学')">
+          <div class="tag" style="background:#e0e7ff; color:#3730a3;">最大尺度</div>
+          <h4>宇宙学 <span class="stars">★★★★★</span></h4>
+          <p>大爆炸、CMB、暗物质、暗能量。宇宙的起源与命运。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="domain" style="--domain-color: #6d28d9;">
+      <div class="domain-header">
+        <h3>⚛️ 粒子与场论</h3>
+        <span class="domain-count">2门</span>
+        <span class="domain-desc">基本粒子与相互作用的终极理论</span>
+      </div>
+      <div class="domain-grid">
+        <div class="course-card cosmos-card" onclick="showCourse('粒子物理')">
+          <div class="tag" style="background:#ede9fe; color:#6d28d9;">标准模型</div>
+          <h4>粒子物理 <span class="stars">★★★★★+</span></h4>
+          <p>夸克、轻子、Higgs。标准模型是20世纪物理最伟大的成就之一。</p>
+        </div>
+        <div class="course-card final-card" onclick="showCourse('规范场论')">
+          <div class="tag" style="background:#ede9fe; color:#6d28d9;">终极理论</div>
+          <h4>规范场论 <span class="stars">★★★★★★</span></h4>
+          <p>Yang-Mills理论、量子场论、重整化。用对称性书写宇宙的法则。</p>
+        </div>
+      </div>
+    </div>
+
   </main>
 
   <footer>
     <div>Physics Knowledge Map · 单文件静态网站 · 适用于 GitHub Pages</div>
-    <div style="margin-top:8px">整理自个人学习路线 PPT · 点击卡片查看前置/后续学科</div>
+    <div style="margin-top:8px">整理自个人学习路线 PPT · 点击卡片查看资源</div>
   </footer>
 </div>
 
@@ -594,7 +696,18 @@
     <p id="modalText"></p>
     <div class="quote" id="modalQuote" style="display: none;"></div>
     
-    <!-- 前置/后续学科 -->
+    <!-- 教材推荐 -->
+    <div class="resource-section" id="bookSection" style="display: none;">
+      <div class="resource-label">📖 推荐教材</div>
+      <div class="resource-list" id="bookList"></div>
+    </div>
+    
+    <!-- 网课资源 -->
+    <div class="resource-section" id="videoSection" style="display: none;">
+      <div class="resource-label">▶️ B站网课资源</div>
+      <div class="resource-list" id="videoList"></div>
+    </div>
+    
     <div class="relations" id="relations">
       <div class="relation-group">
         <div class="relation-label prereq">📚 前置学科</div>
@@ -617,237 +730,466 @@ const COURSES = {
     desc: '小初高的知识你忘完了没有？\n\n什么？反三角是什么？极坐标是什么？向量叉乘又是什么？？？\n\n跟着此章节回顾小初高数学基础与高数前的准备吧。',
     diff: '★', tag: '数学准备',
     quote: '小初高的知识你忘完了没有？反三角、极坐标、向量叉乘……',
-    prereq: [], next: ['高等数学', '线性代数']
+    prereq: [], next: ['高等数学', '线性代数'],
+    books: ['高中数学（人教版/苏教版等）', '《初等数学》'],
+    videos: [
+      { name: '宋浩《高等数学0基础一遍过》极限篇（含衔接内容）', url: 'https://www.bilibili.com/video/BV1Mh4y1p7Dk' }
+    ]
   },
   '高等数学': {
     desc: '大学理科的第一步，你将学习基本微积分的定理以及常微分方程的求解。\n\n后续的多元微积分与无穷级数将把你的数学层次更高一个台阶。',
     diff: '★★', tag: '数学基础',
     quote: '理工科的万恶之源，高考只是决定你在哪里看宋浩高数。',
-    prereq: ['小初高数学'], next: ['数学物理方法', '概率论与数理统计', '计算物理']
+    prereq: ['小初高数学'], next: ['数学物理方法', '概率论与数理统计', '计算物理'],
+    books: ['同济大学《高等数学》（第七版）', '《托马斯微积分》', '《普林斯顿微积分读本》'],
+    videos: [
+      { name: '宋浩《高等数学》全程教学视频 2.0版（1.2亿播放）', url: 'https://www.bilibili.com/video/BV1CA411E7Hd' },
+      { name: '宋浩《微积分》全程教学视频', url: 'https://www.bilibili.com/video/BV1Ts411H7Fz' }
+    ]
   },
   '线性代数': {
     desc: '大学基础数学的另一个科目，你将会认识到行列式与矩阵等新伙伴加入。\n\n以及求解多元一次线性方程组的方法，对矩阵的性质深入探索。',
     diff: '★★+', tag: '数学基础',
     quote: '新手村的困难章节之一。',
-    prereq: ['小初高数学'], next: ['数学物理方法', '量子力学', '群论', '计算物理']
+    prereq: ['小初高数学'], next: ['数学物理方法', '量子力学', '群论', '计算物理'],
+    books: ['同济大学《线性代数》（第六版）', '《线性代数应该这样学》', 'Gilbert Strang《Introduction to Linear Algebra》'],
+    videos: [
+      { name: '宋浩《线性代数》全程教学视频', url: 'https://www.bilibili.com/video/BV1aE411o7Fb' },
+      { name: '3Blue1Brown《线性代数的本质》', url: 'https://www.bilibili.com/video/BV1ys411472E' }
+    ]
   },
   '概率论与数理统计': {
     desc: '建立随机变量、分布、期望、方差和统计推断框架。\n\n连接热统、实验误差与数据科学，处理不确定性的数学语言。',
     diff: '★★★', tag: '数学基础',
     quote: '不会统计，等于白做实验。',
-    prereq: ['高等数学'], next: ['热力学与统计物理', '量子力学']
+    prereq: ['高等数学'], next: ['热力学与统计物理', '量子力学'],
+    books: ['浙大版《概率论与数理统计》（第四版）', '《概率论与数理统计》茆诗松'],
+    videos: [
+      { name: '宋浩《概率论与数理统计》全程教学视频', url: 'https://www.bilibili.com/video/BV1ot411y7mU' },
+      { name: '浙江大学《概率论与数理统计》', url: 'https://www.bilibili.com/video/BV1vW41147Uw' }
+    ]
   },
   '群论': {
     desc: '抽象代数的核心分支，研究对称性的数学结构。\n\n群、环、域、表示论，物理学家用来描述晶体对称性、粒子物理和量子态的“魔法”工具。\n\n你会发现自然界的许多规律都可以用对称性来表达。',
     diff: '★★★★', tag: '数学进阶',
     quote: '物理学家最爱的“魔法”工具——对称性即美。',
-    prereq: ['线性代数'], next: ['量子力学', '固体物理']
+    prereq: ['线性代数'], next: ['量子力学', '固体物理', '粒子物理'],
+    books: ['《群论》李新征', '《物理学中的群论》马中骐', '《Group Theory in a Nutshell for Physicists》'],
+    videos: [
+      { name: '〖筱说物理〗全网最友好的群论入门课程（10h已完结）', url: 'https://www.bilibili.com/video/BV1km42137wN' },
+      { name: '南开大学《近世代数/抽象代数》国家级精品课', url: 'https://www.bilibili.com/video/BV1rs411J7mZ' }
+    ]
   },
   '数学物理方法': {
     desc: '这是物理学的数学工具箱，将为你提供解决物理问题的强大数学武器。\n\n从复变函数到积分变换，从数学物理方程到特殊函数。',
     diff: '★★★★★+', tag: '进阶数学工具',
     quote: '噩梦、第二卷的初焉，此章节，面如死灰。',
-    prereq: ['高等数学', '线性代数'], next: ['电动力学', '量子力学', '特殊函数']
+    prereq: ['高等数学', '线性代数'], next: ['电动力学', '量子力学', '特殊函数'],
+    books: ['梁昆淼《数学物理方法》（第五版）', '吴崇试《数学物理方法》（第三版）', '顾樵《数学物理方法》'],
+    videos: [
+      { name: '北京大学《数学物理方法》吴崇试 全108讲', url: 'https://www.bilibili.com/video/BV1qt411u7cG' },
+      { name: '周国全《数学物理方法》全82集（B站点击破百万）', url: 'https://www.bilibili.com/video/BV1sW411e7um' }
+    ]
   },
   '特殊函数': {
     desc: '你以为考完数理方法就结束了吗？不！\n\n贝塞尔、勒让德、球谐函数，它们在你的电动力学、量子力学、甚至固体物理里无处不在，阴魂不散！\n\n它们是你推导公式时的噩梦，也是物理世界的通用语言。',
     diff: '★★★★★', tag: '数学物理延伸',
     quote: '阴魂不散的贝塞尔和勒让德。',
-    prereq: ['数学物理方法'], next: ['电动力学', '量子力学', '固体物理']
+    prereq: ['数学物理方法'], next: ['电动力学', '量子力学', '固体物理'],
+    books: ['王竹溪《特殊函数概论》', '《特殊函数》刘式适', 'Arfken《Mathematical Methods for Physicists》'],
+    videos: [
+      { name: 'B站搜索：特殊函数 贝塞尔 勒让德', url: 'https://search.bilibili.com/all?keyword=%E7%89%B9%E6%AE%8A%E5%87%BD%E6%95%B0%E8%B4%9D%E5%A1%9E%E5%B0%94' }
+    ]
   },
   '计算物理': {
-    desc: '自从学了计算物理，我就成了调包侠。Matlab和Python就是我的再生父母。\n\n代码跑通靠玄学，数据全靠P图（划掉）美化。遇事不决，先写个循环！\n\n把物理模型转化为数值算法，你的另一个数值实验室。',
+    desc: '自从学了计算物理，我就成了调包侠。Matlab和Python就是我的再生父母。\n\n代码跑通靠玄学，数据全靠P图（划掉）美化。遇事不决，先写个循环！',
     diff: '★★★', tag: '计算科学',
     quote: '调包侠的起点，代码跑通靠玄学。遇事不决，先写个循环！',
-    prereq: ['高等数学', '线性代数'], next: ['材料物理']
+    prereq: ['高等数学', '线性代数'], next: ['材料物理'],
+    books: ['《计算物理》彭芳麟', '《Numerical Recipes》', '《Python科学计算》'],
+    videos: [
+      { name: '德国科隆大学《计算物理全系列》数值模拟×Julia编程', url: 'https://www.bilibili.com/video/BV1fx4y1W7cE' },
+      { name: '东南大学《数值分析》课程精讲', url: 'https://www.bilibili.com/video/BV1Gh4y1t7kH' }
+    ]
   },
 
   '力学': {
     desc: '这是物理学的基石，是探索物理世界奥秘的起点。\n\n你将从牛顿三大定律出发，深入理解物体的运动规律。',
     diff: '★', tag: '普通物理',
     quote: '物理梦开始的地方。',
-    prereq: ['高等数学'], next: ['理论力学', '流体力学', '固体力学']
+    prereq: ['高等数学'], next: ['理论力学', '流体力学', '固体力学'],
+    books: ['舒幼生《力学》（北大）', '漆安慎《力学》', '《Fundamentals of Physics》Halliday'],
+    videos: [
+      { name: 'B站搜索：B站物院 力学', url: 'https://search.bilibili.com/all?keyword=B站物院+力学' },
+      { name: '舒幼生《力学》习题讲解', url: 'https://search.bilibili.com/all?keyword=舒幼生力学' }
+    ]
   },
   '理论力学': {
     desc: '这是力学的深化与拓展，是对力学规律的更高层次的抽象与总结。\n\n从拉格朗日方程到哈密顿原理，你将看到力学体系在数学形式上的优美与简洁。',
     diff: '★★★★+', tag: '理论核心',
     quote: '欢迎来到物理，真正的物理才刚刚开始！！！',
-    prereq: ['力学', '高等数学'], next: ['电动力学', '量子力学']
+    prereq: ['力学', '高等数学'], next: ['电动力学', '量子力学', '相对论'],
+    books: ['周衍柏《理论力学教程》', '梁昆淼《力学》', 'Goldstein《Classical Mechanics》'],
+    videos: [
+      { name: '哈尔滨工业大学《理论力学（物理类）》任延宇', url: 'https://www.bilibili.com/video/BV1ft411Z7kF' },
+      { name: '《理论力学》5小时速通期末速成课', url: 'https://www.bilibili.com/video/BV1Kx4y1a7q3' }
+    ]
   },
   '流体力学': {
     desc: 'Navier-Stokes 方程、湍流、边界层。天气预报、飞机设计、血液流动都靠它。\n\n流体力学的难点在于：你永远无法精确求解 NS 方程，但你可以假装自己解出来了。',
     diff: '★★★★+', tag: '工程力学',
     quote: '湍流是经典物理最后的难题之一。',
-    prereq: ['力学'], next: ['材料制备技术']
+    prereq: ['力学'], next: ['材料制备技术'],
+    books: ['吴望一《流体力学》', '《Fluid Mechanics》Landau', '张兆顺《流体力学》'],
+    videos: [
+      { name: 'B站搜索：流体力学 网课 推荐', url: 'https://search.bilibili.com/all?keyword=流体力学+网课' }
+    ]
   },
   '固体力学': {
     desc: '应力、应变、弹性模量、本构关系、有限元分析。\n\n桥梁为什么不塌？飞机翅膀为什么不断？材料在受力下的变形与破坏，是土木、机械、航空的必修课。',
     diff: '★★★★', tag: '工程力学',
     quote: '让物理变成桥梁和高楼。',
-    prereq: ['力学'], next: ['材料物理']
+    prereq: ['力学'], next: ['材料物理'],
+    books: ['徐芝纶《弹性力学》', '《材料力学》孙训方', 'Timoshenko《Theory of Elasticity》'],
+    videos: [
+      { name: 'B站搜索：弹性力学 固体力学 网课', url: 'https://search.bilibili.com/all?keyword=弹性力学+网课' }
+    ]
   },
-
   '电磁学': {
     desc: '当电与磁交织在一起，就构成了电磁学这一神奇的领域。\n\n你将学习到电场与磁场的性质，其中电磁感应现象与电磁波更是将电与磁的联系推向高潮。',
     diff: '★★★+', tag: '普通物理',
     quote: '左手磁，右手电，雷公助我！以雷霆击碎黑暗！！！',
-    prereq: ['力学', '高等数学'], next: ['电动力学', '电路', '光学']
+    prereq: ['力学', '高等数学'], next: ['电动力学', '电路', '光学'],
+    books: ['赵凯华《电磁学》', '贾起民《电磁学》', 'Griffiths《Introduction to Electrodynamics》'],
+    videos: [
+      { name: '〖B站物院〗电磁学（Bro姐主讲）', url: 'https://www.bilibili.com/video/BV1yJ411p7tZ' },
+      { name: '北京大学《电磁学》国家精品课', url: 'https://www.bilibili.com/video/BV1sW41177oU' }
+    ]
   },
   '电动力学': {
     desc: '电磁学的进一步深化，将带你走进电磁场的微观世界。\n\n麦克斯韦方程组作为电动力学的核心，将让你看到电场与磁场在微观层面的紧密联系与相互作用。',
     diff: '★★★★★+', tag: '理论核心',
     quote: '移动变换，电磁相对，物理梦还在交织……',
-    prereq: ['电磁学', '数学物理方法'], next: ['量子力学', '激光原理']
+    prereq: ['电磁学', '数学物理方法'], next: ['量子力学', '激光原理', '相对论', '粒子物理'],
+    books: ['郭硕鸿《电动力学》（第三版）', 'Jackson《Classical Electrodynamics》', 'Griffiths《电动力学导论》'],
+    videos: [
+      { name: '北京大学《电动力学》田光善（高清完整版）', url: 'https://www.bilibili.com/video/BV1cW411K7w2' },
+      { name: '〖B站物院〗电动力学（Bro姐主讲）', url: 'https://www.bilibili.com/video/BV1yJ411p7VQ' },
+      { name: '《电动力学》零基础速成/期末救急', url: 'https://www.bilibili.com/video/BV1Ks4y1M7sM' }
+    ]
   },
   '电路': {
     desc: '这是电气工程的基础，也是物理学在电磁学领域的应用实践。\n\n从电路的基本定律到复杂电路的分析方法，你将学习到如何设计、分析和优化电路。',
     diff: '★★★', tag: '电子工程',
     quote: '老师你看，我的电阻会发光哦，嘣！（电阻炸了）',
-    prereq: ['电磁学'], next: ['模拟电子技术', '数字电子技术']
+    prereq: ['电磁学'], next: ['模拟电子技术', '数字电子技术'],
+    books: ['邱关源《电路》（第五版）', '《电路分析基础》李瀚荪'],
+    videos: [
+      { name: 'B站搜索：电路 邱关源 网课', url: 'https://search.bilibili.com/all?keyword=电路+邱关源' }
+    ]
   },
   '模拟电子技术': {
     desc: '模电玄学，玄之又玄，众妙之门。\n\n三极管放大器、运放、滤波器，调参调到怀疑人生。\n\n老师说：“这个电路你按我说的改，不要问为什么。”',
     diff: '★★★★', tag: '电子工程',
     quote: '模拟电路的世界里，每个元件都不听话，但你却要让它听话。',
-    prereq: ['电路'], next: ['集成电路']
+    prereq: ['电路'], next: ['集成电路'],
+    books: ['童诗白《模拟电子技术基础》（第五版）', '康华光《电子技术基础》'],
+    videos: [
+      { name: 'B站搜索：模拟电子技术 童诗白 网课', url: 'https://search.bilibili.com/all?keyword=模拟电子技术+童诗白' },
+      { name: 'B站搜索：模电 速成 不挂科', url: 'https://search.bilibili.com/all?keyword=模电+速成' }
+    ]
   },
   '数字电子技术': {
     desc: '0和1的世界，逻辑清晰。\n\n但是，当你遇到时序逻辑、触发器、状态机，你就知道什么叫“数电不难，难的是老师觉得你不难”。',
     diff: '★★★', tag: '电子工程',
     quote: '布尔代数、卡诺图、Verilog，这是数字世界的地基。',
-    prereq: ['电路'], next: ['集成电路']
+    prereq: ['电路'], next: ['集成电路'],
+    books: ['阎石《数字电子技术基础》（第六版）', '《Digital Design》Wakerly'],
+    videos: [
+      { name: 'B站搜索：数字电子技术 阎石 网课', url: 'https://search.bilibili.com/all?keyword=数字电子技术+阎石' }
+    ]
   },
   '集成电路': {
     desc: '把整个计算机缩小到指甲盖大小。从晶体管到芯片，从版图到流片，这是现代科技的巅峰。\n\n摩尔定律快到头了，接下来看你们的了！',
     diff: '★★★★★', tag: '芯片·硬核',
     quote: '一颗芯片，承载一个时代的算力。',
-    prereq: ['模拟电子技术', '数字电子技术', '半导体器件'], next: []
+    prereq: ['模拟电子技术', '数字电子技术', '半导体器件'], next: [],
+    books: ['Rabaey《Digital Integrated Circuits》', '《CMOS超大规模集成电路设计》Weste', '《集成电路设计》王志华'],
+    videos: [
+      { name: 'B站搜索：集成电路设计 网课', url: 'https://search.bilibili.com/all?keyword=集成电路设计+网课' }
+    ]
   },
-
   '热学': {
     desc: '热学是研究热现象的学科，它将带你走进温度、热量、热力学定律的世界。\n\n从理想气体的性质到热力学第一定律、第二定律，你将逐步理解能量的转化与守恒在热学中的体现。',
     diff: '★★+', tag: '普通物理',
     quote: '燃起来了！物理人！物理魂！',
-    prereq: ['力学'], next: ['热力学与统计物理']
+    prereq: ['力学'], next: ['热力学与统计物理'],
+    books: ['李椿《热学》', '秦允豪《热学》', '《Thermodynamics》Fermi'],
+    videos: [
+      { name: 'B站搜索：热学 李椿 网课', url: 'https://search.bilibili.com/all?keyword=热学+李椿+网课' }
+    ]
   },
   '热力学与统计物理': {
     desc: '这是热学的理论升华，将宏观的热现象与微观的粒子运动紧密联系起来。\n\n通过对气体分子运动论的学习，让你从宏观与微观两个角度全面理解热现象。',
     diff: '★★★★★★', tag: '理论核心·终极',
     quote: '躁动吧！物理人的小宇宙！！！',
-    prereq: ['热学', '概率论与数理统计', '量子力学'], next: ['固体物理', '材料物理']
+    prereq: ['热学', '概率论与数理统计', '量子力学'], next: ['固体物理', '材料物理', '宇宙学'],
+    books: ['汪志诚《热力学·统计物理》（第五版）', '林宗涵《热力学与统计物理学》', 'Pathria《Statistical Mechanics》'],
+    videos: [
+      { name: '〖复旦〗热力学与统计物理全解！附讲义、课件、习题讲解', url: 'https://www.bilibili.com/video/BV1kh411k7kZ' },
+      { name: '热力学与统计物理考研复习/自学收藏', url: 'https://www.bilibili.com/video/BV1Gm4y1M7eF' },
+      { name: '物理期末人不挂科必看！热力学与统计物理速成课丨6H速通', url: 'https://www.bilibili.com/video/BV1mN4y1k7hG' }
+    ]
   },
-
   '光学': {
     desc: '光学是研究光的产生、传播、接收和应用的学科。\n\n从几何光学到物理光学，你将学习到光的反射、折射、干涉、衍射等现象。',
     diff: '★★★+', tag: '普通物理',
     quote: '光的威力无穷无尽，小心有的光会让你骨折！',
-    prereq: ['电磁学'], next: ['工程光学', '激光原理']
+    prereq: ['电磁学'], next: ['工程光学', '激光原理'],
+    books: ['赵凯华《光学》', '姚启钧《光学教程》', 'Hecht《Optics》'],
+    videos: [
+      { name: '华科《物理光学》', url: 'https://www.bilibili.com/video/BV1XC411L7QE' },
+      { name: '崔宏滨《光学》教学视频', url: 'https://www.bilibili.com/video/BV1Fx41147uX' }
+    ]
   },
   '工程光学': {
     desc: '物理光学是理论，工程光学是实干。\n\n透镜设计、光路计算、像差分析、光学系统集成。画光路图能画到你手抽筋，Zemax 一开就是一整天。',
     diff: '★★★+', tag: '光学工程',
     quote: '把光学从黑板搬进实验室和工厂，这才是真正的“光”工！',
-    prereq: ['光学'], next: ['激光原理']
+    prereq: ['光学'], next: ['光学系统设计'],
+    books: ['郁道银《工程光学》（第四版）', '李湘宁《工程光学》', '《Modern Optical Engineering》Smith'],
+    videos: [
+      { name: '《工程光学》考研课程 小蓝书习题讲解', url: 'https://www.bilibili.com/video/BV1mH4y1P7nD' },
+      { name: '《工程光学 几何光学 应用光学 现代光学》知识点梳理', url: 'https://www.bilibili.com/video/BV1Xf421Q7kM' },
+      { name: '〖865工程光学〗27上海理工大学考研强化冲刺课程', url: 'https://www.bilibili.com/video/BV1Ns421M7vC' }
+    ]
+  },
+  '光学系统设计': {
+    desc: '从单透镜到复杂镜头组，从望远镜到光刻机物镜。\n\n优化函数、公差分析、杂散光抑制、热分析。Zemax 一开，头发掉一半。',
+    diff: '★★★★', tag: '工程设计',
+    quote: '光刻机的镜头，是人类制造的最精密的光学系统。',
+    prereq: ['工程光学'], next: ['激光原理'],
+    books: ['《光学系统设计》Milton Laikin', '《Zemax光学设计超级学习手册》', '《现代光学设计方法》李林'],
+    videos: [
+      { name: 'B站搜索：Zemax 光学系统设计 教程', url: 'https://search.bilibili.com/all?keyword=Zemax+光学设计' }
+    ]
   },
   '激光原理': {
     desc: '受激辐射、粒子数反转、光放大。\n\n想当个激光器？你得先让电子们“卷”起来，达到粒子数反转，才能让光子如脱缰的野马般放大。',
     diff: '★★★★★', tag: '光电方向·硬核',
     quote: '激光一开，谁与争锋！',
-    prereq: ['光学', '原子物理学'], next: ['非线性光学']
+    prereq: ['光学', '原子物理学', '光学系统设计'], next: ['非线性光学'],
+    books: ['周炳琨《激光原理》（第六版）', '《Principles of Lasers》Svelto'],
+    videos: [
+      { name: 'B站搜索：激光原理 周炳琨 网课', url: 'https://search.bilibili.com/all?keyword=激光原理+周炳琨' }
+    ]
   },
   '非线性光学': {
     desc: '强光下的光学。倍频、和频、差频、四波混频、光孤子。\n\n当光强足够大，光学就不线性了。激光出现后，非线性光学才成为可能。',
     diff: '★★★★★', tag: '前沿光学',
     quote: '从此光不仅会直线传播，还会跟光自己打架。光速不变？介质里也能变慢！',
-    prereq: ['激光原理'], next: []
+    prereq: ['激光原理'], next: [],
+    books: ['石顺祥《非线性光学》', 'Boyd《Nonlinear Optics》'],
+    videos: [
+      { name: 'B站搜索：非线性光学 网课', url: 'https://search.bilibili.com/all?keyword=非线性光学+网课' }
+    ]
   },
-
   '原子物理学': {
     desc: '走进微观世界的大门，原子物理学将带你探索原子的结构与性质。\n\n从原子的核式结构模型出发，你将了解电子的跃迁、原子的能级等概念。',
     diff: '★★★★+', tag: '近代物理',
     quote: '终于，看到了最终魔王的影子，但你还不是他……',
-    prereq: ['电磁学'], next: ['量子力学', '原子核物理']
+    prereq: ['电磁学'], next: ['量子力学', '原子核物理'],
+    books: ['褚圣麟《原子物理学》', '杨福家《原子物理学》', 'Foot《Atomic Physics》'],
+    videos: [
+      { name: 'B站搜索：B站物院 原子物理', url: 'https://search.bilibili.com/all?keyword=B站物院+原子物理' },
+      { name: '原子物理2026 全系列课程', url: 'https://search.bilibili.com/all?keyword=原子物理2026' },
+      { name: '《原子物理学》褚圣麟 课程讲解', url: 'https://www.bilibili.com/video/BV1Kc411i7K7' }
+    ]
   },
   '量子力学': {
     desc: '物理学的尽头，或许不是？\n\n这是微观世界的全新理论体系，将彻底颠覆你对经典物理学的认识。\n\n你将会为人类研究出新的高度，或许会研究出不可触摸的神明。',
     diff: '★★★★★★+', tag: '终章·最终魔王',
     quote: '遇事不决，量子力学。',
-    prereq: ['理论力学', '数学物理方法', '原子物理学', '线性代数', '群论'], 
-    next: ['固体物理', '量子信息', '量子计算', '原子核物理']
+    prereq: ['理论力学', '数学物理方法', '原子物理学', '线性代数', '群论'],
+    next: ['固体物理', '量子信息', '量子计算', '原子核物理', '粒子物理', '规范场论'],
+    books: ['周世勋《量子力学教程》', '曾谨言《量子力学》', 'Griffiths《量子力学概论》', 'Sakurai《Modern Quantum Mechanics》'],
+    videos: [
+      { name: '北京大学《量子力学》田光善 国家精品课程 全58讲', url: 'https://www.bilibili.com/video/BV1gW411K7uW' },
+      { name: '中南大学《追着你喂饭的量子力学》牛冬梅教授（量子入门神器）', url: 'https://www.bilibili.com/video/BV1cN4y1k7hG' },
+      { name: '斯坦福大学《量子力学》平行宇宙入场券', url: 'https://www.bilibili.com/video/BV1Rk4y1N7jH' }
+    ]
   },
   '量子信息': {
     desc: '比特变成了量子比特，0和1的叠加态。量子纠缠、量子计算、量子通信。\n\n薛定谔的猫不仅又死又活，还能给你发送加密信息。',
     diff: '★★★★★', tag: '前沿科技',
     quote: '遇事不决，量子力学；量子加密，绝对安全！',
-    prereq: ['量子力学'], next: []
+    prereq: ['量子力学'], next: [],
+    books: ['《量子信息论》Nielsen & Chuang', '《量子信息与量子计算》李承祖'],
+    videos: [
+      { name: 'B站搜索：量子信息 量子计算 网课', url: 'https://search.bilibili.com/all?keyword=量子信息+网课' }
+    ]
   },
   '量子计算': {
-    desc: 'Shor 算法、Grover 算法、量子门、量子线路、量子纠错。\n\n经典计算机要算一万年的，量子计算机几分钟就搞定。\n\n超导量子比特、离子阱、光量子计算，多条技术路线并进。',
+    desc: 'Shor 算法、Grover 算法、量子门、量子线路、量子纠错。\n\n经典计算机要算一万年的，量子计算机几分钟就搞定。',
     diff: '★★★★★+', tag: '前沿科技',
     quote: '量子霸权，谁能问鼎？',
-    prereq: ['量子力学', '线性代数'], next: []
+    prereq: ['量子力学', '线性代数'], next: [],
+    books: ['Nielsen & Chuang《量子计算与量子信息》', '《Quantum Computing》Loeffler'],
+    videos: [
+      { name: 'B站搜索：量子计算 网课 推荐', url: 'https://search.bilibili.com/all?keyword=量子计算+网课' }
+    ]
   },
   '原子核物理': {
     desc: '夸克、轻子、强子。质子中子抱团取暖，动不动就裂变聚变，动辄释放出毁天灭地的能量。\n\n这是核物理，不是核平物理！',
     diff: '★★★★+', tag: '高能核物理',
     quote: '从核结构到核能，微观世界的暴力美学。',
-    prereq: ['原子物理学', '量子力学'], next: []
+    prereq: ['原子物理学', '量子力学'], next: ['粒子物理'],
+    books: ['卢希庭《原子核物理》', 'Krane《Introductory Nuclear Physics》'],
+    videos: [
+      { name: 'B站搜索：原子核物理 网课', url: 'https://search.bilibili.com/all?keyword=原子核物理+网课' }
+    ]
   },
-
   '固体物理': {
     desc: '从晶体结构、倒易空间、声子和能带理论出发，研究固体中的电子、晶格与磁性。\n\n它是半导体、材料、二维材料、超导和许多光电材料研究的理论基础。',
     diff: '★★★★★★', tag: '凝聚态终极',
     quote: '微观量子世界在宏观材料中的终极体现。',
-    prereq: ['量子力学', '热力学与统计物理', '群论'], 
-    next: ['半导体物理', '材料物理', '发光物理']
+    prereq: ['量子力学', '热力学与统计物理', '群论'], next: ['半导体物理', '材料物理', '发光物理'],
+    books: ['黄昆《固体物理学》', 'Kittel《固体物理导论》', 'Ashcroft & Mermin《Solid State Physics》'],
+    videos: [
+      { name: '电子科技大学《固体物理学》课程精讲', url: 'https://www.bilibili.com/video/BV1Gh4y1t7kH' },
+      { name: '河南工业大学《固体物理》基础课程 期末考试复习精讲', url: 'https://www.bilibili.com/video/BV1Cx4y1Q7mD' },
+      { name: 'B站搜索：B站物院 固体物理', url: 'https://search.bilibili.com/all?keyword=B站物院+固体物理' }
+    ]
   },
   '材料物理': {
     desc: '结构决定性质，性质决定功能。从原子排列到宏观性能，从金属到陶瓷到高分子。\n\n你们做材料的，不就是烧炉子吗？不，我们是在原子尺度上盖房子！',
     diff: '★★★★★+', tag: '材料科学',
     quote: '物理、化学、工程的完美交叉，新材料是科技革命的先导。',
-    prereq: ['固体物理'], next: ['半导体材料', '材料制备技术', '材料测试技术']
+    prereq: ['固体物理'], next: ['半导体材料', '材料制备技术', '材料测试技术'],
+    books: ['《材料科学基础》胡赓祥', '《材料物理》石德珂', 'Callister《Materials Science and Engineering》'],
+    videos: [
+      { name: '枣子学长《材料科学基础》0基础24讲', url: 'https://www.bilibili.com/video/BV1Nm4y1H7sF' },
+      { name: '中科大《802材料科学基础》系列课程', url: 'https://www.bilibili.com/video/BV1Gm4y1M7eF' }
+    ]
   },
   '材料制备技术': {
     desc: '烧炉子、镀膜、拉单晶、外延生长、CVD、PVD、分子束外延。\n\n今天你烧炉子了吗？实验室里不是在制备样品，就是在去制备样品的路上。',
     diff: '★★★★', tag: '材料制备',
     quote: '好的材料是制备出来的，手上的功夫比脑子里的公式更重要。',
-    prereq: ['材料物理'], next: ['半导体工艺']
+    prereq: ['材料物理'], next: ['半导体工艺'],
+    books: ['《材料制备科学与技术》', '《薄膜材料与薄膜技术》郑伟涛', '《晶体生长》'],
+    videos: [
+      { name: 'B站搜索：材料制备技术 薄膜制备 晶体生长', url: 'https://search.bilibili.com/all?keyword=材料制备+薄膜+晶体生长' }
+    ]
   },
   '材料测试技术': {
     desc: 'XRD、SEM、TEM、AFM、XPS、Raman。不管什么材料，先测一下。\n\n样品制备一小时，测试五分钟，分析数据一整天。',
     diff: '★★★★', tag: '材料表征',
     quote: '你们做测试的，就是材料的法医！——每个谱峰背后都藏着一个秘密。',
-    prereq: ['材料物理'], next: ['半导体材料']
+    prereq: ['材料物理'], next: ['半导体材料'],
+    books: ['《材料现代分析测试方法》周玉', '《材料表征》Leng', '《X射线衍射学》'],
+    videos: [
+      { name: 'B站搜索：XRD SEM TEM 材料测试 教程', url: 'https://search.bilibili.com/all?keyword=XRD+SEM+TEM+教程' }
+    ]
   },
   '半导体物理': {
     desc: '能带、载流子、掺杂、输运、复合、异质结。这是物理与微电子工业的完美结合。\n\n从手机芯片到太阳能电池，从LED到激光器，没有它，现代科技直接瘫痪。',
     diff: '★★★★★+', tag: '专业核心',
     quote: '这是你未来主攻的方向，也是物理人改变世界的利器！',
-    prereq: ['固体物理', '量子力学'], next: ['半导体材料', '半导体器件']
+    prereq: ['固体物理', '量子力学'], next: ['半导体材料', '半导体器件'],
+    books: ['刘恩科《半导体物理学》（第七版）', '施敏《半导体器件物理》', 'Neamen《Semiconductor Physics and Devices》'],
+    videos: [
+      { name: '西安电子科技大学《半导体物理》国家级精品课程', url: 'https://www.bilibili.com/video/BV1Uh4y1Y7kD' },
+      { name: '2027西电801考研《半导体物理》全程班 刘恩科版', url: 'https://www.bilibili.com/video/BV1Xs4y1X7mN' },
+      { name: '《半导体物理学》带字幕 4.5小时期末速成课', url: 'https://www.bilibili.com/video/BV1Nh4y1m7sD' }
+    ]
   },
   '半导体材料': {
     desc: '硅、锗、砷化镓、氮化镓、碳化硅。第一代、第二代、第三代半导体。\n\n没有材料，你们设计再好的芯片也造不出来！从直拉到区熔，从衬底到外延。',
     diff: '★★★★★', tag: '半导体材料',
     quote: '材料是半导体产业的根基，一代材料，一代器件。',
-    prereq: ['材料物理', '半导体物理'], next: ['半导体器件']
+    prereq: ['材料物理', '半导体物理'], next: ['半导体器件'],
+    books: ['《半导体材料》杨树人', '《硅材料科学与技术》'],
+    videos: [
+      { name: 'B站搜索：半导体材料 网课', url: 'https://search.bilibili.com/all?keyword=半导体材料+网课' }
+    ]
   },
   '半导体器件': {
     desc: 'PN结、二极管、三极管、MOSFET、HEMT、激光二极管、探测器。\n\n一个PN结就够你学一学期。从器件物理到电路模型，这是连接物理和工程的桥梁。',
     diff: '★★★★★', tag: '半导体器件',
     quote: '器件是芯片的细胞，每个器件都是一段物理故事。',
-    prereq: ['半导体物理'], next: ['集成电路', '半导体工艺']
+    prereq: ['半导体物理'], next: ['集成电路', '半导体工艺'],
+    books: ['施敏《半导体器件物理》（第三版）', 'Neamen《半导体物理与器件》', 'Sze《Physics of Semiconductor Devices》'],
+    videos: [
+      { name: '〖半导体物理与器件〗25考研全程班 尼曼版', url: 'https://www.bilibili.com/video/BV1Xs4y1X7mN' },
+      { name: 'B站搜索：半导体器件物理 施敏 网课', url: 'https://search.bilibili.com/all?keyword=半导体器件物理+施敏' }
+    ]
   },
   '半导体工艺': {
     desc: '光刻、刻蚀、离子注入、薄膜沉积、CMP、封装。纳米尺度的加工技术，芯片制造的核心。\n\n光刻机为什么这么难？学完这本你就知道了。',
     diff: '★★★★★+', tag: '半导体工艺·卡脖子',
     quote: '从沙子到芯片，这是一场纳米级别的魔术。',
-    prereq: ['半导体器件', '材料制备技术'], next: ['集成电路']
+    prereq: ['半导体器件', '材料制备技术'], next: ['集成电路'],
+    books: ['《半导体制造技术》Quirk', '《芯片制造》Peter Van Zant', '《集成电路制造工艺》'],
+    videos: [
+      { name: 'B站搜索：半导体工艺 光刻 刻蚀 教程', url: 'https://search.bilibili.com/all?keyword=半导体工艺+光刻' }
+    ]
   },
   '发光物理': {
     desc: '电子从高能级跃迁到低能级，释放出绚烂的光子。\n\n这不仅是物理，更是光电、半导体和未来的光刻机光源！你不发光，怎么照亮全人类？',
     diff: '★★★★', tag: '光电方向',
     quote: '探索光与物质相互作用的终极奥秘。LED、激光器、荧光粉，都从这里开始。',
-    prereq: ['固体物理', '半导体物理'], next: []
+    prereq: ['固体物理', '半导体物理'], next: [],
+    books: ['《发光物理》徐叙瑢', '《发光学与发光材料》', '《LED原理与应用》'],
+    videos: [
+      { name: 'B站搜索：发光物理 LED 荧光 教程', url: 'https://search.bilibili.com/all?keyword=发光物理+LED' }
+    ]
+  },
+  '相对论': {
+    desc: '狭义相对论颠覆了绝对时空，广义相对论把引力解释为时空弯曲。\n\n时间会变慢，空间会收缩，光线会拐弯，黑洞会吞噬一切。\n\nE=mc² 只是开始，爱因斯坦场方程才是终极。',
+    diff: '★★★★★+', tag: '时空理论',
+    quote: '时空不是舞台，而是演员。——引力波都探测到了，你还不学相对论？',
+    prereq: ['电动力学', '理论力学'], next: ['宇宙学', '粒子物理'],
+    books: ['梁灿彬《微分几何入门与广义相对论》', 'Schutz《A First Course in General Relativity》', 'Landau《The Classical Theory of Fields》'],
+    videos: [
+      { name: '北京师范大学《从爱因斯坦到霍金的宇宙》赵峥教授', url: 'https://www.bilibili.com/video/BV1WK4y1t72y' },
+      { name: '张朝阳的物理课（相对论、微分几何、天体物理合集）', url: 'https://www.bilibili.com/video/BV1pL411U7mN' }
+    ]
+  },
+  '宇宙学': {
+    desc: '大爆炸、宇宙微波背景辐射、暗物质、暗能量、宇宙加速膨胀。\n\n宇宙起源于138亿年前的一次大爆炸，而它至今仍在加速膨胀。\n\n我们看得见的物质只占宇宙的5%，剩下95%是什么？没人知道。',
+    diff: '★★★★★', tag: '最大尺度',
+    quote: '宇宙的最不可理解之处，在于它居然是可以被理解的。——爱因斯坦',
+    prereq: ['相对论', '热力学与统计物理'], next: [],
+    books: ['《宇宙学》Ryden', '《宇宙学导论》赵峥', '《The Early Universe》Kolb & Turner'],
+    videos: [
+      { name: '赵峥教授《宇宙学16讲》从大爆炸到现代宇宙探索', url: 'https://www.bilibili.com/video/BV1Wk4y1B7xH' },
+      { name: '理论宇宙学入门 第一课', url: 'https://www.bilibili.com/video/BV1nw411J7mC' },
+      { name: 'Waterloo研究生课《宇宙学广义相对论》全24讲', url: 'https://www.bilibili.com/video/BV1mN4y1k7hG' }
+    ]
+  },
+  '粒子物理': {
+    desc: '夸克、轻子、规范玻色子、Higgs 粒子。标准模型是20世纪物理最伟大的成就之一。\n\n但是中微子有质量、暗物质找不到、引力无法量子化……标准模型之上还有什么？',
+    diff: '★★★★★+', tag: '标准模型',
+    quote: '标准模型就像一个美丽的谎言——它几乎解释了一切，但总有解释不了的。',
+    prereq: ['量子力学', '电动力学', '相对论', '群论'], next: ['规范场论'],
+    books: ['格里菲斯《粒子物理导论》', '章乃森《粒子物理学》', '肖振军《粒子物理导论》', 'Halzen & Martin《Quarks and Leptons》'],
+    videos: [
+      { name: 'B站搜索：复旦大学 粒子物理', url: 'https://search.bilibili.com/all?keyword=复旦大学+粒子物理' },
+      { name: '粒子物理2025 全系列课程', url: 'https://www.bilibili.com/video/BV1Xs4y1X7mN' },
+      { name: '量子场论的物理动机——量子场论第一讲', url: 'https://www.bilibili.com/video/BV1Jm4y1K7hD' }
+    ]
+  },
+  '规范场论': {
+    desc: 'Yang-Mills 理论、量子场论、路径积分、重整化、对称性自发破缺。\n\n从电磁力到弱力到强力，所有基本相互作用都可以用规范场论来描述。\n\n这是理论物理的巅峰，也是通往终极统一理论的必经之路。',
+    diff: '★★★★★★', tag: '终极理论',
+    quote: '用对称性书写宇宙的法则。——如果上帝有语言，那一定是群论。',
+    prereq: ['量子力学', '粒子物理', '群论'], next: [],
+    books: ['Peskin & Schroeder《An Introduction to Quantum Field Theory》', 'Weinberg《The Quantum Theory of Fields》', 'Srednicki《Quantum Field Theory》'],
+    videos: [
+      { name: 'B站搜索：量子场论 规范场论 网课', url: 'https://search.bilibili.com/all?keyword=量子场论+规范场论' },
+      { name: 'B站搜索：Yang-Mills 理论 教学', url: 'https://search.bilibili.com/all?keyword=Yang-Mills+理论' }
+    ]
   }
 };
 
@@ -873,7 +1215,7 @@ function showCourse(name) {
     quoteDiv.style.display = 'none';
   }
   
-  // 渲染前置学科
+  // 前置学科
   const prereqList = document.getElementById('prereqList');
   prereqList.innerHTML = '';
   if (course.prereq && course.prereq.length > 0) {
@@ -881,17 +1223,14 @@ function showCourse(name) {
       const chip = document.createElement('span');
       chip.className = 'relation-chip';
       chip.textContent = p;
-      chip.onclick = (e) => {
-        e.stopPropagation();
-        showCourse(p);
-      };
+      chip.onclick = (e) => { e.stopPropagation(); showCourse(p); };
       prereqList.appendChild(chip);
     });
   } else {
     prereqList.innerHTML = '<span class="relation-empty">无（起点学科）</span>';
   }
   
-  // 渲染后续学科
+  // 后续学科
   const nextList = document.getElementById('nextList');
   nextList.innerHTML = '';
   if (course.next && course.next.length > 0) {
@@ -899,14 +1238,46 @@ function showCourse(name) {
       const chip = document.createElement('span');
       chip.className = 'relation-chip next-chip';
       chip.textContent = n;
-      chip.onclick = (e) => {
-        e.stopPropagation();
-        showCourse(n);
-      };
+      chip.onclick = (e) => { e.stopPropagation(); showCourse(n); };
       nextList.appendChild(chip);
     });
   } else {
     nextList.innerHTML = '<span class="relation-empty">无（终端学科）</span>';
+  }
+  
+  // 教材
+  const bookSection = document.getElementById('bookSection');
+  const bookList = document.getElementById('bookList');
+  if (course.books && course.books.length > 0) {
+    bookSection.style.display = 'block';
+    bookList.innerHTML = '';
+    course.books.forEach(b => {
+      const item = document.createElement('div');
+      item.className = 'resource-item';
+      item.innerHTML = `<span class="resource-icon">📖</span><span>${b}</span>`;
+      bookList.appendChild(item);
+    });
+  } else {
+    bookSection.style.display = 'none';
+  }
+  
+  // 网课
+  const videoSection = document.getElementById('videoSection');
+  const videoList = document.getElementById('videoList');
+  if (course.videos && course.videos.length > 0) {
+    videoSection.style.display = 'block';
+    videoList.innerHTML = '';
+    course.videos.forEach(v => {
+      const item = document.createElement('a');
+      item.className = 'resource-item video-item';
+      item.href = v.url;
+      item.target = '_blank';
+      item.rel = 'noopener';
+      item.innerHTML = `<span class="resource-icon">▶️</span><span>${v.name}</span><span class="resource-arrow">→</span>`;
+      videoList.appendChild(item);
+    });
+  } else {
+    videoSection.style.display = 'none';
   }
   
   document.getElementById('overlay').classList.add('show');
