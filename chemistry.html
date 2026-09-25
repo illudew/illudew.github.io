@@ -2,27 +2,23 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>化学知识体系 - 我的化学之旅</title>
 <style>
   :root{--bg:#f4f7fb;--card:#fff;--ink:#152033;--muted:#607089;--shadow:0 12px 32px rgba(20,36,60,.09);}
   *{box-sizing:border-box}html{scroll-behavior:smooth}
-  body{margin:0;font-family:system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;color:var(--ink);
-    background:radial-gradient(circle at 10% 10%,rgba(16,185,129,.08),transparent 28%),
-    radial-gradient(circle at 90% 10%,rgba(59,130,246,.08),transparent 28%),var(--bg)}
+  body{margin:0;font-family:system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;color:var(--ink);background:radial-gradient(circle at 10% 10%,rgba(16,185,129,.08),transparent 28%),radial-gradient(circle at 90% 10%,rgba(59,130,246,.08),transparent 28%),var(--bg)}
   .wrap{width:min(1400px,94vw);margin:auto}
   header{padding:52px 0 20px;text-align:center}
   .eyebrow{font-size:13px;letter-spacing:.22em;color:var(--muted);font-weight:700;text-transform:uppercase}
-  h1{margin:10px 0 8px;font-size:clamp(34px,5vw,64px);line-height:1.08;letter-spacing:-.03em}
+  h1{margin:10px 0 8px;font-size:clamp(34px,5vw,64px);line-height:1.08}
   .subtitle{margin:0 auto;color:var(--muted);font-size:16px;max-width:820px;line-height:1.8}
   .nav-tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:26px 0 8px}
   .nav-tab{padding:8px 20px;border-radius:999px;text-decoration:none;font-weight:700;font-size:14px;border:1px solid #d5deea;background:#fff;transition:.25s}
   .nav-tab:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(20,36,60,.1)}
   .nav-tab.active{background:linear-gradient(135deg,#065f46,#3b82f6);color:#fff;border-color:transparent;box-shadow:0 8px 20px rgba(16,185,129,.35)}
-  .nav-tab.math{color:#1e40af;border-color:#bfdbfe}
-  .nav-tab.chem{color:#065f46;border-color:#bbf7d0}
-  .nav-tab.bio{color:#9a3412;border-color:#fed7aa}
-  .nav-tab.phys{color:#5b21b6;border-color:#ddd6fe}
+  .nav-tab.math{color:#1e40af;border-color:#bfdbfe}.nav-tab.chem{color:#065f46;border-color:#bbf7d0}
+  .nav-tab.bio{color:#9a3412;border-color:#fed7aa}.nav-tab.phys{color:#5b21b6;border-color:#ddd6fe}
   .toolbar{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:16px 0 8px}
   button{border:1px solid #d5deea;background:#fff;color:var(--ink);border-radius:999px;padding:9px 14px;font:inherit;cursor:pointer;transition:.2s}
   button:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(20,36,60,.08)}
@@ -110,125 +106,130 @@
     <h2 class="phase-title">⚗️ 第一章 · 原子序曲</h2>
     <div class="phase-en">ATOMIC OVERTURE</div>
     <p class="phase-desc">一切化学从原子开始。电子排布、化学键、周期律——化学的三块基石。</p>
+
     <div class="domain" style="--domain-color:#059669;">
-      <div class="domain-header"><h3>🔬 基础化学</h3><span class="domain-count">4门</span><span class="domain-desc">化学的入门基石</span></div>
+      <div class="domain-header"><h3>🔬 基础化学</h3><span class="domain-count">5门</span><span class="domain-desc">化学的入门基石</span></div>
       <div class="domain-grid">
-        <div class="course-card" onclick="showCourse('普通化学')"><div class="tag">入门</div><h4>普通化学</h4>
-          <div class="arc-badges"><span class="arc-badge arc-pst">PST 1</span><span class="arc-badge arc-prs">PRS 3</span><span class="arc-badge arc-ftr">FTR 5</span></div>
-          <p>化学平衡、酸碱、氧化还原、热力学。化学世界的入口。</p></div>
-        <div class="course-card" onclick="showCourse('无机化学')"><div class="tag">核心</div><h4>无机化学</h4>
-          <div class="arc-badges"><span class="arc-badge arc-pst">PST 3</span><span class="arc-badge arc-prs">PRS 5</span><span class="arc-badge arc-ftr">FTR 7</span><span class="arc-badge arc-etr">ETR 9</span></div>
-          <p>元素化学、配位化学、晶体场理论。元素周期表的故事。</p></div>
-        <div class="course-card" onclick="showCourse('原子结构')"><div class="tag">基础</div><h4>原子结构</h4>
-          <div class="arc-badges"><span class="arc-badge arc-pst">PST 2</span><span class="arc-badge arc-prs">PRS 4</span><span class="arc-badge arc-ftr">FTR 6</span></div>
-          <p>波尔模型、量子数、电子云、原子轨道。</p></div>
-        <div class="course-card" onclick="showCourse('化学键理论')"><div class="tag">基础</div><h4>化学键理论</h4>
-          <div class="arc-badges"><span class="arc-badge arc-pst">PST 2</span><span class="arc-badge arc-prs">PRS 4</span><span class="arc-badge arc-ftr">FTR 6</span></div>
-          <p>离子键、共价键、VSEPR、分子轨道。原子如何牵手。</p></div>
+        <div class="course-card" onclick="showCourse('普通化学')"><div class="tag">入门</div><h4>普通化学</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 1</span><span class="arc-badge arc-prs">PRS 3</span><span class="arc-badge arc-ftr">FTR 5</span></div><p>化学平衡、酸碱、氧化还原、热力学。化学世界的入口。</p></div>
+        <div class="course-card" onclick="showCourse('无机化学')"><div class="tag">核心</div><h4>无机化学</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 3</span><span class="arc-badge arc-prs">PRS 5</span><span class="arc-badge arc-ftr">FTR 7</span><span class="arc-badge arc-etr">ETR 9</span></div><p>元素化学、配位化学、晶体场理论。</p></div>
+        <div class="course-card" onclick="showCourse('原子结构')"><div class="tag">基础</div><h4>原子结构</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 2</span><span class="arc-badge arc-prs">PRS 4</span><span class="arc-badge arc-ftr">FTR 6</span></div><p>波尔模型、量子数、电子云、原子轨道。</p></div>
+        <div class="course-card" onclick="showCourse('化学键理论')"><div class="tag">基础</div><h4>化学键理论</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 2</span><span class="arc-badge arc-prs">PRS 4</span><span class="arc-badge arc-ftr">FTR 6</span></div><p>离子键、共价键、VSEPR、分子轨道。</p></div>
+        <div class="course-card" onclick="showCourse('溶液化学')"><div class="tag">基础</div><h4>溶液化学</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 2</span><span class="arc-badge arc-prs">PRS 4</span><span class="arc-badge arc-ftr">FTR 6</span></div><p>溶解度、依数性、胶体、表面活性剂。</p></div>
       </div>
     </div>
 
     <h2 class="phase-title classic">🧬 第二章 · 分子华尔兹</h2>
     <div class="phase-en">MOLECULAR WALTZ</div>
     <p class="phase-desc">碳的化学是生命的基础，有机化学是化学最壮丽的乐章。</p>
+
     <div class="domain" style="--domain-color:#3b82f6;">
-      <div class="domain-header"><h3>🌿 有机化学</h3><span class="domain-count">4门</span><span class="domain-desc">碳的化学王国</span></div>
+      <div class="domain-header"><h3>🌿 有机化学</h3><span class="domain-count">6门</span><span class="domain-desc">碳的化学王国</span></div>
       <div class="domain-grid">
-        <div class="course-card" onclick="showCourse('有机化学')"><div class="tag">核心</div><h4>有机化学</h4>
-          <div class="arc-badges"><span class="arc-badge arc-pst">PST 3</span><span class="arc-badge arc-prs">PRS 5</span><span class="arc-badge arc-ftr">FTR 7</span><span class="arc-badge arc-byd">BYD 10</span></div>
-          <p>烷烃、烯烃、芳香烃、卤代烃、醇、醛、酮、羧酸、胺。有机世界的基础地图。</p></div>
-        <div class="course-card" onclick="showCourse('分析化学')"><div class="tag">核心</div><h4>分析化学</h4>
-          <div class="arc-badges"><span class="arc-badge arc-pst">PST 3</span><span class="arc-badge arc-prs">PRS 5</span><span class="arc-badge arc-ftr">FTR 7</span><span class="arc-badge arc-etr">ETR 9</span></div>
-          <p>滴定、光谱、色谱、质谱。化学家的眼睛。</p></div>
-        <div class="course-card" onclick="showCourse('高分子化学')"><div class="tag">方向</div><h4>高分子化学</h4>
-          <div class="arc-badges"><span class="arc-badge arc-pst">PST 3</span><span class="arc-badge arc-prs">PRS 5</span><span class="arc-badge arc-ftr">FTR 7</span></div>
-          <p>聚合反应、链结构、塑料、橡胶、纤维。</p></div>
-        <div class="course-card hard-card" onclick="showCourse('有机合成')"><div class="tag" style="background:#fee2e2;color:#b91c1c;">进阶</div><h4>有机合成</h4>
-          <div class="arc-badges"><span class="arc-badge arc-pst">PST 5</span><span class="arc-badge arc-prs">PRS 7</span><span class="arc-badge arc-ftr">FTR 9+</span><span class="arc-badge arc-byd">BYD 11</span></div>
-          <p>逆合成分析、保护基、立体选择性。像搭积木一样构建分子。</p></div>
+        <div class="course-card" onclick="showCourse('有机化学')"><div class="tag">核心</div><h4>有机化学</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 3</span><span class="arc-badge arc-prs">PRS 5</span><span class="arc-badge arc-ftr">FTR 7</span><span class="arc-badge arc-byd">BYD 10</span></div><p>烷烃、烯烃、芳香烃、卤代烃、醇、醛、酮、羧酸、胺。</p></div>
+        <div class="course-card" onclick="showCourse('有机反应机理')"><div class="tag">进阶</div><h4>有机反应机理</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 10</span></div><p>亲核取代、消除、加成、自由基反应。理解反应为什么发生。</p></div>
+        <div class="course-card" onclick="showCourse('立体化学')"><div class="tag">核心</div><h4>立体化学</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 3</span><span class="arc-badge arc-prs">PRS 5</span><span class="arc-badge arc-ftr">FTR 7</span></div><p>手性、对映异构、非对映异构、构象分析。</p></div>
+        <div class="course-card" onclick="showCourse('有机波谱')"><div class="tag">核心</div><h4>有机波谱</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 3</span><span class="arc-badge arc-prs">PRS 5</span><span class="arc-badge arc-ftr">FTR 7</span><span class="arc-badge arc-etr">ETR 9</span></div><p>NMR、IR、MS、UV。化学家的眼睛。</p></div>
+        <div class="course-card hard-card" onclick="showCourse('有机合成')"><div class="tag" style="background:#fee2e2;color:#b91c1c;">进阶</div><h4>有机合成</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 5</span><span class="arc-badge arc-prs">PRS 7</span><span class="arc-badge arc-ftr">FTR 9+</span><span class="arc-badge arc-byd">BYD 11</span></div><p>逆合成分析、保护基、立体选择性。</p></div>
+        <div class="course-card" onclick="showCourse('天然产物化学')"><div class="tag">方向</div><h4>天然产物化学</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span></div><p>生物碱、萜类、黄酮、多糖。大自然的化学合成。</p></div>
+      </div>
+    </div>
+
+    <div class="domain" style="--domain-color:#8b5cf6;">
+      <div class="domain-header"><h3>🔬 分析化学</h3><span class="domain-count">3门</span><span class="domain-desc">化学家的眼睛</span></div>
+      <div class="domain-grid">
+        <div class="course-card" onclick="showCourse('分析化学')"><div class="tag">核心</div><h4>分析化学</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 3</span><span class="arc-badge arc-prs">PRS 5</span><span class="arc-badge arc-ftr">FTR 7</span><span class="arc-badge arc-etr">ETR 9</span></div><p>滴定、光谱、色谱、质谱。</p></div>
+        <div class="course-card" onclick="showCourse('仪器分析')"><div class="tag">核心</div><h4>仪器分析</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span></div><p>光谱仪、色谱仪、电化学分析。用仪器"看"分子。</p></div>
+        <div class="course-card" onclick="showCourse('电分析化学')"><div class="tag">方向</div><h4>电分析化学</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 3</span><span class="arc-badge arc-prs">PRS 5</span><span class="arc-badge arc-ftr">FTR 7</span></div><p>电位法、伏安法、电导法。</p></div>
+      </div>
+    </div>
+
+    <div class="domain" style="--domain-color:#10b981;">
+      <div class="domain-header"><h3>🧱 高分子化学</h3><span class="domain-count">2门</span><span class="domain-desc">巨型分子的世界</span></div>
+      <div class="domain-grid">
+        <div class="course-card" onclick="showCourse('高分子化学')"><div class="tag">核心</div><h4>高分子化学</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 3</span><span class="arc-badge arc-prs">PRS 5</span><span class="arc-badge arc-ftr">FTR 7</span></div><p>聚合反应、链结构、塑料、橡胶、纤维、涂料。</p></div>
+        <div class="course-card" onclick="showCourse('高分子物理')"><div class="tag">进阶</div><h4>高分子物理</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span></div><p>链构象、玻璃化转变、粘弹性。高分子为什么这么柔软？</p></div>
       </div>
     </div>
 
     <h2 class="phase-title quantum">⚡ 第三章 · 反应深渊</h2>
     <div class="phase-en">REACTION ABYSS</div>
     <p class="phase-desc">用物理定律理解化学反应，物理化学是化学的数学灵魂。</p>
+
     <div class="domain" style="--domain-color:#7c3aed;">
-      <div class="domain-header"><h3>🔥 物理化学</h3><span class="domain-count">4门</span><span class="domain-desc">化学的物理基础</span></div>
+      <div class="domain-header"><h3>🔥 物理化学</h3><span class="domain-count">6门</span><span class="domain-desc">化学的物理基础</span></div>
       <div class="domain-grid">
-        <div class="course-card" onclick="showCourse('物理化学')"><div class="tag">核心</div><h4>物理化学</h4>
-          <div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 11</span></div>
-          <p>热力学、动力学、电化学、表面化学。用物理定律描述化学。</p></div>
-        <div class="course-card hard-card" onclick="showCourse('量子化学')"><div class="tag" style="background:#fee2e2;color:#b91c1c;">进阶</div><h4>量子化学</h4>
-          <div class="arc-badges"><span class="arc-badge arc-pst">PST 5</span><span class="arc-badge arc-prs">PRS 7</span><span class="arc-badge arc-ftr">FTR 9+</span><span class="arc-badge arc-ins">INS 12</span></div>
-          <p>Schrödinger方程、分子轨道、DFT。化学的量子本质。</p></div>
-        <div class="course-card" onclick="showCourse('催化化学')"><div class="tag">方向</div><h4>催化化学</h4>
-          <div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 10</span></div>
-          <p>均相催化、多相催化、酶催化。化学工业的核心。</p></div>
-        <div class="course-card" onclick="showCourse('电化学')"><div class="tag">方向</div><h4>电化学</h4>
-          <div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 10</span></div>
-          <p>电池、电解、腐蚀、燃料电池。化学能与电能的转换。</p></div>
+        <div class="course-card" onclick="showCourse('物理化学')"><div class="tag">核心</div><h4>物理化学</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 11</span></div><p>热力学、动力学、电化学、表面化学。</p></div>
+        <div class="course-card" onclick="showCourse('化学热力学')"><div class="tag">核心</div><h4>化学热力学</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 3</span><span class="arc-badge arc-prs">PRS 5</span><span class="arc-badge arc-ftr">FTR 7</span><span class="arc-badge arc-etr">ETR 9</span></div><p>焓、熵、自由能、化学平衡。反应能否发生？</p></div>
+        <div class="course-card" onclick="showCourse('化学动力学')"><div class="tag">核心</div><h4>化学动力学</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 3</span><span class="arc-badge arc-prs">PRS 5</span><span class="arc-badge arc-ftr">FTR 7</span><span class="arc-badge arc-byd">BYD 10</span></div><p>反应速率、活化能、反应机理。反应有多快？</p></div>
+        <div class="course-card hard-card" onclick="showCourse('量子化学')"><div class="tag" style="background:#fee2e2;color:#b91c1c;">进阶</div><h4>量子化学</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 5</span><span class="arc-badge arc-prs">PRS 7</span><span class="arc-badge arc-ftr">FTR 9+</span><span class="arc-badge arc-ins">INS 12</span></div><p>Schrödinger方程、分子轨道、DFT。化学的量子本质。</p></div>
+        <div class="course-card" onclick="showCourse('催化化学')"><div class="tag">方向</div><h4>催化化学</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 10</span></div><p>均相催化、多相催化、酶催化。</p></div>
+        <div class="course-card" onclick="showCourse('电化学')"><div class="tag">方向</div><h4>电化学</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 10</span></div><p>电池、电解、腐蚀、燃料电池。</p></div>
+      </div>
+    </div>
+
+    <div class="domain" style="--domain-color:#6366f1;">
+      <div class="domain-header"><h3>🌈 光化学与表面</h3><span class="domain-count">3门</span><span class="domain-desc">化学的另一维度</span></div>
+      <div class="domain-grid">
+        <div class="course-card" onclick="showCourse('光化学')"><div class="tag">方向</div><h4>光化学</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span></div><p>光激发、光化学反应、光催化。光如何驱动化学反应。</p></div>
+        <div class="course-card" onclick="showCourse('表面化学')"><div class="tag">方向</div><h4>表面化学</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span></div><p>吸附、催化、表面分析。界面上的化学。</p></div>
+        <div class="course-card" onclick="showCourse('胶体与界面化学')"><div class="tag">方向</div><h4>胶体与界面化学</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 3</span><span class="arc-badge arc-prs">PRS 5</span><span class="arc-badge arc-ftr">FTR 7</span></div><p>胶体、乳液、表面活性剂、自组装。</p></div>
       </div>
     </div>
 
     <h2 class="phase-title apps">💎 第四章 · 材料炼金</h2>
     <div class="phase-en">MATERIALS ALCHEMY</div>
     <p class="phase-desc">从传统炼丹术到现代材料科学，化学家是新时代的炼金术士。</p>
+
     <div class="domain" style="--domain-color:#c2410c;">
-      <div class="domain-header"><h3>🧱 材料化学</h3><span class="domain-count">4门</span><span class="domain-desc">从分子到材料</span></div>
+      <div class="domain-header"><h3>🧱 材料化学</h3><span class="domain-count">5门</span><span class="domain-desc">从分子到材料</span></div>
       <div class="domain-grid">
-        <div class="course-card" onclick="showCourse('材料化学')"><div class="tag">核心</div><h4>材料化学</h4>
-          <div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 10</span></div>
-          <p>无机材料、有机材料、复合材料、纳米材料。现代材料的化学基础。</p></div>
-        <div class="course-card" onclick="showCourse('纳米化学')"><div class="tag">前沿</div><h4>纳米化学</h4>
-          <div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 10</span></div>
-          <p>纳米颗粒、量子点、碳纳米管。物质在纳米尺度的化学。</p></div>
-        <div class="course-card" onclick="showCourse('能源化学')"><div class="tag">方向</div><h4>能源化学</h4>
-          <div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span></div>
-          <p>太阳能电池、锂离子电池、氢能。新能源的化学基础。</p></div>
-        <div class="course-card" onclick="showCourse('环境化学')"><div class="tag">方向</div><h4>环境化学</h4>
-          <div class="arc-badges"><span class="arc-badge arc-pst">PST 3</span><span class="arc-badge arc-prs">PRS 5</span><span class="arc-badge arc-ftr">FTR 7</span></div>
-          <p>大气化学、水化学、土壤化学。用化学理解地球。</p></div>
+        <div class="course-card" onclick="showCourse('材料化学')"><div class="tag">核心</div><h4>材料化学</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 10</span></div><p>无机材料、有机材料、复合材料、纳米材料。</p></div>
+        <div class="course-card" onclick="showCourse('固体化学')"><div class="tag">核心</div><h4>固体化学</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span></div><p>晶体结构、缺陷、固相反应、离子导体。</p></div>
+        <div class="course-card" onclick="showCourse('纳米化学')"><div class="tag">前沿</div><h4>纳米化学</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 10</span></div><p>纳米颗粒、量子点、碳纳米管。</p></div>
+        <div class="course-card" onclick="showCourse('能源化学')"><div class="tag">方向</div><h4>能源化学</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span></div><p>太阳能电池、锂离子电池、氢能。</p></div>
+        <div class="course-card" onclick="showCourse('环境化学')"><div class="tag">方向</div><h4>环境化学</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 3</span><span class="arc-badge arc-prs">PRS 5</span><span class="arc-badge arc-ftr">FTR 7</span></div><p>大气化学、水化学、土壤化学。</p></div>
+      </div>
+    </div>
+
+    <div class="domain" style="--domain-color:#0891b2;">
+      <div class="domain-header"><h3>⚗️ 金属有机与催化</h3><span class="domain-count">3门</span><span class="domain-desc">金属与有机的联姻</span></div>
+      <div class="domain-grid">
+        <div class="course-card" onclick="showCourse('配位化学')"><div class="tag">核心</div><h4>配位化学</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-etr">ETR 9</span></div><p>配合物、晶体场理论、配体场理论、磁化学。</p></div>
+        <div class="course-card hard-card" onclick="showCourse('金属有机化学')"><div class="tag" style="background:#fee2e2;color:#b91c1c;">进阶</div><h4>金属有机化学</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 5</span><span class="arc-badge arc-prs">PRS 7</span><span class="arc-badge arc-ftr">FTR 9+</span><span class="arc-badge arc-byd">BYD 11</span></div><p>金属-碳键、催化循环、Grignard试剂、Suzuki偶联。</p></div>
+        <div class="course-card" onclick="showCourse('生物无机化学')"><div class="tag">交叉</div><h4>生物无机化学</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 5</span><span class="arc-badge arc-prs">PRS 7</span><span class="arc-badge arc-ftr">FTR 9+</span></div><p>金属酶、金属蛋白、生物矿化。</p></div>
       </div>
     </div>
 
     <h2 class="phase-title cosmos">🏛️ 第五章 · 化学尽头</h2>
     <div class="phase-en">CHEMICAL HORIZON</div>
     <p class="phase-desc">超分子、化学生物学、计算化学——化学正在向其他学科渗透与融合。</p>
+
     <div class="domain" style="--domain-color:#4338ca;">
-      <div class="domain-header"><h3>🌌 化学前沿</h3><span class="domain-count">3门</span><span class="domain-desc">化学的终极探索</span></div>
+      <div class="domain-header"><h3>🌌 化学前沿</h3><span class="domain-count">4门</span><span class="domain-desc">化学的终极探索</span></div>
       <div class="domain-grid">
-        <div class="course-card cosmos-card" onclick="showCourse('超分子化学')"><div class="tag">前沿</div><h4>超分子化学</h4>
-          <div class="arc-badges"><span class="arc-badge arc-pst">PST 5</span><span class="arc-badge arc-prs">PRS 7</span><span class="arc-badge arc-ftr">FTR 9+</span><span class="arc-badge arc-byd">BYD 11</span></div>
-          <p>分子识别、自组装、主客体化学。分子以上的化学。</p></div>
-        <div class="course-card cosmos-card" onclick="showCourse('化学生物学')"><div class="tag">交叉</div><h4>化学生物学</h4>
-          <div class="arc-badges"><span class="arc-badge arc-pst">PST 5</span><span class="arc-badge arc-prs">PRS 7</span><span class="arc-badge arc-ftr">FTR 9+</span><span class="arc-badge arc-ins">INS 12</span></div>
-          <p>用化学工具研究生命。蛋白质、DNA、糖类的化学。</p></div>
-        <div class="course-card ultimate-card" onclick="showCourse('计算化学')"><div class="tag" style="background:#ede9fe;color:#4c1d95;">终极</div><h4 style="color:#4c1d95;">计算化学</h4>
-          <div class="arc-badges"><span class="arc-badge arc-pst">PST 6</span><span class="arc-badge arc-prs">PRS 8</span><span class="arc-badge arc-ftr">FTR 10+</span><span class="arc-badge arc-ins">INS 12</span></div>
-          <p style="color:#4c1d95;">DFT、分子动力学、机器学习。用计算机模拟化学反应。</p></div>
+        <div class="course-card cosmos-card" onclick="showCourse('超分子化学')"><div class="tag">前沿</div><h4>超分子化学</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 5</span><span class="arc-badge arc-prs">PRS 7</span><span class="arc-badge arc-ftr">FTR 9+</span><span class="arc-badge arc-byd">BYD 11</span></div><p>分子识别、自组装、主客体化学。</p></div>
+        <div class="course-card cosmos-card" onclick="showCourse('化学生物学')"><div class="tag">交叉</div><h4>化学生物学</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 5</span><span class="arc-badge arc-prs">PRS 7</span><span class="arc-badge arc-ftr">FTR 9+</span><span class="arc-badge arc-ins">INS 12</span></div><p>用化学工具研究生命。蛋白质、DNA、糖类的化学。</p></div>
+        <div class="course-card ultimate-card" onclick="showCourse('计算化学')"><div class="tag" style="background:#ede9fe;color:#4c1d95;">终极</div><h4 style="color:#4c1d95;">计算化学</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 6</span><span class="arc-badge arc-prs">PRS 8</span><span class="arc-badge arc-ftr">FTR 10+</span><span class="arc-badge arc-ins">INS 12</span></div><p style="color:#4c1d95;">DFT、分子动力学、机器学习。用计算机模拟化学反应。</p></div>
+        <div class="course-card ultimate-card" onclick="showCourse('单分子化学')"><div class="tag" style="background:#ede9fe;color:#4c1d95;">前沿</div><h4 style="color:#4c1d95;">单分子化学</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 6</span><span class="arc-badge arc-prs">PRS 8</span><span class="arc-badge arc-ftr">FTR 10+</span><span class="arc-badge arc-byd">BYD 11+</span></div><p style="color:#4c1d95;">单分子成像、单分子操纵、单分子反应。看到化学的原子级细节。</p></div>
       </div>
     </div>
 
     <h2 class="phase-title nexus">✨ 额外章 · 化学交汇</h2>
     <div class="phase-en">CHEMICAL CONVERGENCE</div>
     <p class="phase-desc">化学不是孤岛，它与物理、生物、材料、环境紧密交织。</p>
+
     <div class="domain" style="--domain-color:#059669;">
-      <div class="domain-header"><h3>🌟 交叉方向</h3><span class="domain-count">4门</span><span class="domain-desc">与其他学科的交汇</span></div>
+      <div class="domain-header"><h3>🌟 交叉方向</h3><span class="domain-count">6门</span><span class="domain-desc">与其他学科的交汇</span></div>
       <div class="domain-grid">
-        <div class="course-card cosmos-card" onclick="showCourse('药物化学')"><div class="tag">应用</div><h4>药物化学</h4>
-          <div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 10</span></div>
-          <p>药物设计、构效关系、药代动力学。化学与医学的桥梁。</p></div>
-        <div class="course-card cosmos-card" onclick="showCourse('食品化学')"><div class="tag">应用</div><h4>食品化学</h4>
-          <div class="arc-badges"><span class="arc-badge arc-pst">PST 3</span><span class="arc-badge arc-prs">PRS 5</span><span class="arc-badge arc-ftr">FTR 7</span></div>
-          <p>食品成分、添加剂、风味化学。了解你吃的是什么。</p></div>
-        <div class="course-card cosmos-card" onclick="showCourse('高分子材料')"><div class="tag">应用</div><h4>高分子材料</h4>
-          <div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 10</span></div>
-          <p>塑料、橡胶、纤维、涂料。现代生活无处不有高分子。</p></div>
-        <div class="course-card cosmos-card" onclick="showCourse('绿色化学')"><div class="tag">未来</div><h4>绿色化学</h4>
-          <div class="arc-badges"><span class="arc-badge arc-pst">PST 3</span><span class="arc-badge arc-prs">PRS 5</span><span class="arc-badge arc-ftr">FTR 7</span></div>
-          <p>原子经济性、可再生资源、环境友好合成。化学的可持续未来。</p></div>
+        <div class="course-card cosmos-card" onclick="showCourse('药物化学')"><div class="tag">应用</div><h4>药物化学</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 10</span></div><p>药物设计、构效关系、药代动力学。</p></div>
+        <div class="course-card cosmos-card" onclick="showCourse('食品化学')"><div class="tag">应用</div><h4>食品化学</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 3</span><span class="arc-badge arc-prs">PRS 5</span><span class="arc-badge arc-ftr">FTR 7</span></div><p>食品成分、添加剂、风味化学。</p></div>
+        <div class="course-card cosmos-card" onclick="showCourse('高分子材料')"><div class="tag">应用</div><h4>高分子材料</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 10</span></div><p>塑料、橡胶、纤维、涂料。</p></div>
+        <div class="course-card cosmos-card" onclick="showCourse('绿色化学')"><div class="tag">未来</div><h4>绿色化学</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 3</span><span class="arc-badge arc-prs">PRS 5</span><span class="arc-badge arc-ftr">FTR 7</span></div><p>原子经济性、可再生资源、环境友好合成。</p></div>
+        <div class="course-card cosmos-card" onclick="showCourse('放射化学')"><div class="tag">交叉</div><h4>放射化学</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span></div><p>放射性元素、核素、标记化合物、核医学。</p></div>
+        <div class="course-card cosmos-card" onclick="showCourse('化学信息学')"><div class="tag">前沿</div><h4>化学信息学</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span></div><p>分子数据库、QSAR、化学机器学习。</p></div>
       </div>
     </div>
+
   </main>
 
   <footer>
@@ -239,8 +240,7 @@
 
 <div class="overlay" id="overlay" onclick="closeInfo(event)">
   <div class="modal" onclick="event.stopPropagation()">
-    <h2 id="modalTitle">课程详情</h2>
-    <p id="modalText"></p>
+    <h2 id="modalTitle">课程详情</h2><p id="modalText"></p>
     <div class="quote" id="modalQuote" style="display:none;"></div>
     <div class="arc-diff-row" id="arcDiffRow"></div>
     <div class="resource-section" id="bookSection" style="display:none;"><div class="resource-label">📖 推荐教材（点击跳转 Z-Library）</div><div class="resource-list" id="bookList"></div></div>
@@ -254,30 +254,50 @@
 </div>
 
 <script>
-const COURSES = {
-  '普通化学':{desc:'化学平衡、酸碱、氧化还原、化学热力学、化学动力学。',arc:['PST 1','PRS 3','FTR 5'],tag:'入门',quote:'化学是研究物质变化的科学。',prereq:[],next:['无机化学','有机化学','物理化学'],books:['Atkins《Chemical Principles》','《普通化学》'],videos:[{name:'普通化学 网课',keyword:'普通化学网课'}]},
-  '无机化学':{desc:'元素化学、配位化学、晶体场理论、金属有机化学。',arc:['PST 3','PRS 5','FTR 7','ETR 9'],tag:'核心',quote:'元素周期表是无机化学的地图。',prereq:['普通化学'],next:['物理化学','材料化学'],books:['格林伍德《元素化学》','Housecroft《Inorganic Chemistry》'],videos:[{name:'无机化学 网课',keyword:'无机化学网课'}]},
-  '原子结构':{desc:'波尔模型、量子数、电子云、原子轨道、电子排布。',arc:['PST 2','PRS 4','FTR 6'],tag:'基础',quote:'电子是化学的灵魂。',prereq:[],next:['化学键理论','量子化学'],books:['Atkins《Physical Chemistry》','《结构化学》'],videos:[{name:'原子结构 网课',keyword:'原子结构网课'}]},
-  '化学键理论':{desc:'离子键、共价键、VSEPR、分子轨道、杂化轨道。',arc:['PST 2','PRS 4','FTR 6'],tag:'基础',quote:'原子如何牵手，决定了物质的一切性质。',prereq:['原子结构'],next:['有机化学','无机化学'],books:['《结构化学》','Atkins《Molecular Quantum Mechanics》'],videos:[{name:'化学键理论 网课',keyword:'化学键理论'}]},
-  '有机化学':{desc:'烷烃、烯烃、芳香烃、卤代烃、醇、醛、酮、羧酸、胺、糖、氨基酸。',arc:['PST 3','PRS 5','FTR 7','BYD 10'],tag:'核心',quote:'有机化学是碳的化学——碳可以形成无数种化合物。',prereq:['普通化学'],next:['有机合成','高分子化学'],books:['邢其毅《基础有机化学》','Clayden《Organic Chemistry》'],videos:[{name:'有机化学 网课',keyword:'有机化学网课'}]},
-  '分析化学':{desc:'滴定分析、光谱分析、色谱分析、质谱、电化学分析。',arc:['PST 3','PRS 5','FTR 7','ETR 9'],tag:'核心',quote:'分析化学是化学家的眼睛。',prereq:['普通化学'],next:['仪器分析','环境化学'],books:['武汉大学《分析化学》','Skoog《Analytical Chemistry》'],videos:[{name:'分析化学 网课',keyword:'分析化学网课'}]},
-  '高分子化学':{desc:'聚合反应、链结构、塑料、橡胶、纤维、涂料。',arc:['PST 3','PRS 5','FTR 7'],tag:'方向',quote:'高分子塑造了现代生活。',prereq:['有机化学'],next:['高分子材料'],books:['潘祖仁《高分子化学》','Odian《Principles of Polymerization》'],videos:[{name:'高分子化学 网课',keyword:'高分子化学网课'}]},
-  '有机合成':{desc:'逆合成分析、保护基、立体选择性、全合成。',arc:['PST 5','PRS 7','FTR 9+','BYD 11'],tag:'进阶',quote:'有机合成是化学的艺术。',prereq:['有机化学'],next:['药物化学'],books:['Warren《Organic Synthesis》','Corey《The Logic of Chemical Synthesis》'],videos:[{name:'有机合成 网课',keyword:'有机合成网课'}]},
-  '物理化学':{desc:'热力学、动力学、电化学、表面化学、统计热力学。',arc:['PST 4','PRS 6','FTR 8','BYD 11'],tag:'核心',quote:'用物理定律描述化学——这是化学的数学灵魂。',prereq:['普通化学','数学分析'],next:['量子化学','催化化学','电化学'],books:['Atkins《Physical Chemistry》','傅献彩《物理化学》'],videos:[{name:'物理化学 网课',keyword:'物理化学网课'}]},
-  '量子化学':{desc:'Schrödinger方程、分子轨道、价键理论、DFT。',arc:['PST 5','PRS 7','FTR 9+','INS 12'],tag:'进阶',quote:'化学的量子本质，用Schrödinger方程理解化学键。',prereq:['物理化学','量子力学'],next:['计算化学'],books:['Szabo & Ostlund《Modern Quantum Chemistry》','徐光宪《量子化学》'],videos:[{name:'量子化学 网课',keyword:'量子化学网课'}]},
-  '催化化学':{desc:'均相催化、多相催化、酶催化、催化机理。',arc:['PST 4','PRS 6','FTR 8','BYD 10'],tag:'方向',quote:'催化剂改变了化学工业。',prereq:['物理化学'],next:[],books:['Chorkendorff《Concepts of Modern Catalysis》'],videos:[{name:'催化化学 网课',keyword:'催化化学网课'}]},
-  '电化学':{desc:'电池、电解、腐蚀、燃料电池、电化学界面。',arc:['PST 4','PRS 6','FTR 8','BYD 10'],tag:'方向',quote:'化学能与电能的转换，新能源的核心。',prereq:['物理化学'],next:['能源化学'],books:['Bard & Faulkner《Electrochemical Methods》'],videos:[{name:'电化学 网课',keyword:'电化学网课'}]},
-  '材料化学':{desc:'无机材料、有机材料、复合材料、纳米材料。',arc:['PST 4','PRS 6','FTR 8','BYD 10'],tag:'核心',quote:'材料是化学的终极产品。',prereq:['无机化学','物理化学'],next:['纳米化学','能源化学'],books:['《材料化学》','West《Solid State Chemistry》'],videos:[{name:'材料化学 网课',keyword:'材料化学网课'}]},
-  '纳米化学':{desc:'纳米颗粒、量子点、碳纳米管、自组装。',arc:['PST 4','PRS 6','FTR 8','BYD 10'],tag:'前沿',quote:'纳米尺度，化学与量子物理交汇。',prereq:['材料化学'],next:[],books:['《纳米化学》','Ozin《Nanochemistry》'],videos:[{name:'纳米化学 网课',keyword:'纳米化学网课'}]},
-  '能源化学':{desc:'太阳能电池、锂离子电池、氢能、燃料电池。',arc:['PST 4','PRS 6','FTR 8'],tag:'方向',quote:'新能源的化学基础，人类未来的能源。',prereq:['电化学','材料化学'],next:[],books:['《能源化学》'],videos:[{name:'能源化学 网课',keyword:'能源化学网课'}]},
-  '环境化学':{desc:'大气化学、水化学、土壤化学、环境污染。',arc:['PST 3','PRS 5','FTR 7'],tag:'方向',quote:'用化学理解地球，用化学保护地球。',prereq:['分析化学'],next:[],books:['《环境化学》','Manahan《Environmental Chemistry》'],videos:[{name:'环境化学 网课',keyword:'环境化学网课'}]},
-  '超分子化学':{desc:'分子识别、自组装、主客体化学、超分子器件。',arc:['PST 5','PRS 7','FTR 9+','BYD 11'],tag:'前沿',quote:'分子以上的化学——非共价键的世界。',prereq:['有机化学','物理化学'],next:[],books:['Lehn《Supramolecular Chemistry》'],videos:[{name:'超分子化学 网课',keyword:'超分子化学网课'}]},
-  '化学生物学':{desc:'蛋白质、DNA、糖类的化学，化学生物学工具。',arc:['PST 5','PRS 7','FTR 9+','INS 12'],tag:'交叉',quote:'用化学工具研究生命——化学与生物学的融合。',prereq:['有机化学','生物化学'],next:[],books:['《化学生物学》','Miller《Chemical Biology》'],videos:[{name:'化学生物学 网课',keyword:'化学生物学网课'}]},
-  '计算化学':{desc:'DFT、分子动力学、机器学习、量子化学计算。',arc:['PST 6','PRS 8','FTR 10+','INS 12'],tag:'终极',quote:'用计算机模拟化学反应——化学的第三个维度。',prereq:['量子化学','计算物理'],next:[],books:['Jensen《Introduction to Computational Chemistry》'],videos:[{name:'计算化学 网课',keyword:'计算化学网课'}]},
-  '药物化学':{desc:'药物设计、构效关系、药代动力学、药物合成。',arc:['PST 4','PRS 6','FTR 8','BYD 10'],tag:'应用',quote:'化学与医学的桥梁，让分子成为药物。',prereq:['有机合成'],next:[],books:['《药物化学》','Patrick《An Introduction to Medicinal Chemistry》'],videos:[{name:'药物化学 网课',keyword:'药物化学网课'}]},
-  '食品化学':{desc:'食品成分、添加剂、风味化学、食品安全。',arc:['PST 3','PRS 5','FTR 7'],tag:'应用',quote:'了解你吃的是什么。',prereq:['有机化学','分析化学'],next:[],books:['《食品化学》'],videos:[{name:'食品化学 网课',keyword:'食品化学网课'}]},
-  '高分子材料':{desc:'塑料、橡胶、纤维、涂料、功能高分子。',arc:['PST 4','PRS 6','FTR 8','BYD 10'],tag:'应用',quote:'现代生活无处不有高分子。',prereq:['高分子化学'],next:[],books:['《高分子材料》'],videos:[{name:'高分子材料 网课',keyword:'高分子材料网课'}]},
-  '绿色化学':{desc:'原子经济性、可再生资源、环境友好合成。',arc:['PST 3','PRS 5','FTR 7'],tag:'未来',quote:'化学的可持续未来。',prereq:['有机化学','环境化学'],next:[],books:['Anastas & Warner《Green Chemistry》'],videos:[{name:'绿色化学 网课',keyword:'绿色化学网课'}]},
+const COURSES={
+'普通化学':{desc:'化学平衡、酸碱、氧化还原、化学热力学、化学动力学。',arc:['PST 1','PRS 3','FTR 5'],tag:'入门',quote:'化学是研究物质变化的科学。',prereq:[],next:['无机化学','有机化学','物理化学'],books:['Atkins《Chemical Principles》','《普通化学》'],videos:[{name:'普通化学 网课',keyword:'普通化学网课'}]},
+'无机化学':{desc:'元素化学、配位化学、晶体场理论、金属有机化学。',arc:['PST 3','PRS 5','FTR 7','ETR 9'],tag:'核心',quote:'元素周期表是无机化学的地图。',prereq:['普通化学'],next:['物理化学','材料化学'],books:['格林伍德《元素化学》','Housecroft《Inorganic Chemistry》'],videos:[{name:'无机化学 网课',keyword:'无机化学网课'}]},
+'原子结构':{desc:'波尔模型、量子数、电子云、原子轨道、电子排布。',arc:['PST 2','PRS 4','FTR 6'],tag:'基础',quote:'电子是化学的灵魂。',prereq:[],next:['化学键理论','量子化学'],books:['Atkins《Physical Chemistry》','《结构化学》'],videos:[{name:'原子结构 网课',keyword:'原子结构网课'}]},
+'化学键理论':{desc:'离子键、共价键、VSEPR、分子轨道、杂化轨道。',arc:['PST 2','PRS 4','FTR 6'],tag:'基础',quote:'原子如何牵手，决定了物质的一切性质。',prereq:['原子结构'],next:['有机化学','无机化学'],books:['《结构化学》','Atkins《Molecular Quantum Mechanics》'],videos:[{name:'化学键理论 网课',keyword:'化学键理论'}]},
+'溶液化学':{desc:'溶解度、依数性、胶体、表面活性剂。',arc:['PST 2','PRS 4','FTR 6'],tag:'基础',quote:'溶液是化学反应的舞台。',prereq:['普通化学'],next:['胶体与界面化学'],books:['《溶液化学》'],videos:[{name:'溶液化学 网课',keyword:'溶液化学网课'}]},
+'有机化学':{desc:'烷烃、烯烃、芳香烃、卤代烃、醇、醛、酮、羧酸、胺、糖、氨基酸。',arc:['PST 3','PRS 5','FTR 7','BYD 10'],tag:'核心',quote:'有机化学是碳的化学——碳可以形成无数种化合物。',prereq:['普通化学'],next:['有机合成','高分子化学'],books:['邢其毅《基础有机化学》','Clayden《Organic Chemistry》'],videos:[{name:'有机化学 网课',keyword:'有机化学网课'}]},
+'有机反应机理':{desc:'亲核取代、消除、加成、自由基反应、重排。',arc:['PST 4','PRS 6','FTR 8','BYD 10'],tag:'进阶',quote:'理解反应为什么发生。',prereq:['有机化学'],next:['有机合成'],books:['Carey & Sundberg《Advanced Organic Chemistry》'],videos:[{name:'有机反应机理 网课',keyword:'有机反应机理'}]},
+'立体化学':{desc:'手性、对映异构、非对映异构、构象分析。',arc:['PST 3','PRS 5','FTR 7'],tag:'核心',quote:'手性是生命化学的奇妙之处。',prereq:['有机化学'],next:['有机合成'],books:['Eliel《Stereochemistry of Organic Compounds》'],videos:[{name:'立体化学 网课',keyword:'立体化学网课'}]},
+'有机波谱':{desc:'NMR、IR、MS、UV。',arc:['PST 3','PRS 5','FTR 7','ETR 9'],tag:'核心',quote:'化学家的眼睛。',prereq:['有机化学'],next:[],books:['Silverstein《Spectrometric Identification of Organic Compounds》'],videos:[{name:'有机波谱 网课',keyword:'有机波谱网课'}]},
+'有机合成':{desc:'逆合成分析、保护基、立体选择性、全合成。',arc:['PST 5','PRS 7','FTR 9+','BYD 11'],tag:'进阶',quote:'有机合成是化学的艺术。',prereq:['有机化学'],next:['药物化学'],books:['Warren《Organic Synthesis》','Corey《The Logic of Chemical Synthesis》'],videos:[{name:'有机合成 网课',keyword:'有机合成网课'}]},
+'天然产物化学':{desc:'生物碱、萜类、黄酮、多糖、抗生素。',arc:['PST 4','PRS 6','FTR 8'],tag:'方向',quote:'大自然的化学合成。',prereq:['有机化学'],next:['药物化学'],books:['《天然产物化学》'],videos:[{name:'天然产物化学 网课',keyword:'天然产物化学'}]},
+'分析化学':{desc:'滴定分析、光谱分析、色谱分析、质谱、电化学分析。',arc:['PST 3','PRS 5','FTR 7','ETR 9'],tag:'核心',quote:'分析化学是化学家的眼睛。',prereq:['普通化学'],next:['仪器分析','环境化学'],books:['武汉大学《分析化学》','Skoog《Analytical Chemistry》'],videos:[{name:'分析化学 网课',keyword:'分析化学网课'}]},
+'仪器分析':{desc:'光谱仪、色谱仪、电化学分析、质谱。',arc:['PST 4','PRS 6','FTR 8'],tag:'核心',quote:'用仪器"看"分子。',prereq:['分析化学'],next:[],books:['《仪器分析》'],videos:[{name:'仪器分析 网课',keyword:'仪器分析网课'}]},
+'电分析化学':{desc:'电位法、伏安法、电导法、库仑法。',arc:['PST 3','PRS 5','FTR 7'],tag:'方向',quote:'电信号记录化学过程。',prereq:['分析化学'],next:[],books:['Bard & Faulkner《Electrochemical Methods》'],videos:[{name:'电分析化学 网课',keyword:'电分析化学'}]},
+'高分子化学':{desc:'聚合反应、链结构、塑料、橡胶、纤维、涂料。',arc:['PST 3','PRS 5','FTR 7'],tag:'核心',quote:'高分子塑造了现代生活。',prereq:['有机化学'],next:['高分子材料'],books:['潘祖仁《高分子化学》','Odian《Principles of Polymerization》'],videos:[{name:'高分子化学 网课',keyword:'高分子化学网课'}]},
+'高分子物理':{desc:'链构象、玻璃化转变、粘弹性、结晶。',arc:['PST 4','PRS 6','FTR 8'],tag:'进阶',quote:'高分子为什么这么柔软？',prereq:['高分子化学'],next:['高分子材料'],books:['《高分子物理》'],videos:[{name:'高分子物理 网课',keyword:'高分子物理网课'}]},
+'物理化学':{desc:'热力学、动力学、电化学、表面化学、统计热力学。',arc:['PST 4','PRS 6','FTR 8','BYD 11'],tag:'核心',quote:'用物理定律描述化学——这是化学的数学灵魂。',prereq:['普通化学','数学分析'],next:['量子化学','催化化学','电化学'],books:['Atkins《Physical Chemistry》','傅献彩《物理化学》'],videos:[{name:'物理化学 网课',keyword:'物理化学网课'}]},
+'化学热力学':{desc:'焓、熵、自由能、化学平衡、相平衡。',arc:['PST 3','PRS 5','FTR 7','ETR 9'],tag:'核心',quote:'反应能否发生？热力学告诉你。',prereq:['物理化学'],next:['化学动力学'],books:['《化学热力学》'],videos:[{name:'化学热力学 网课',keyword:'化学热力学'}]},
+'化学动力学':{desc:'反应速率、活化能、反应机理、催化动力学。',arc:['PST 3','PRS 5','FTR 7','BYD 10'],tag:'核心',quote:'反应有多快？动力学告诉你。',prereq:['物理化学'],next:['催化化学'],books:['《化学动力学》'],videos:[{name:'化学动力学 网课',keyword:'化学动力学'}]},
+'量子化学':{desc:'Schrödinger方程、分子轨道、价键理论、DFT。',arc:['PST 5','PRS 7','FTR 9+','INS 12'],tag:'进阶',quote:'化学的量子本质，用Schrödinger方程理解化学键。',prereq:['物理化学','量子力学'],next:['计算化学'],books:['Szabo & Ostlund《Modern Quantum Chemistry》','徐光宪《量子化学》'],videos:[{name:'量子化学 网课',keyword:'量子化学网课'}]},
+'催化化学':{desc:'均相催化、多相催化、酶催化、催化机理。',arc:['PST 4','PRS 6','FTR 8','BYD 10'],tag:'方向',quote:'催化剂改变了化学工业。',prereq:['物理化学'],next:[],books:['Chorkendorff《Concepts of Modern Catalysis》'],videos:[{name:'催化化学 网课',keyword:'催化化学网课'}]},
+'电化学':{desc:'电池、电解、腐蚀、燃料电池、电化学界面。',arc:['PST 4','PRS 6','FTR 8','BYD 10'],tag:'方向',quote:'化学能与电能的转换，新能源的核心。',prereq:['物理化学'],next:['能源化学'],books:['Bard & Faulkner《Electrochemical Methods》'],videos:[{name:'电化学 网课',keyword:'电化学网课'}]},
+'光化学':{desc:'光激发、光化学反应、光催化、光合作用。',arc:['PST 4','PRS 6','FTR 8'],tag:'方向',quote:'光如何驱动化学反应。',prereq:['物理化学'],next:[],books:['Turro《Modern Molecular Photochemistry》'],videos:[{name:'光化学 网课',keyword:'光化学网课'}]},
+'表面化学':{desc:'吸附、催化、表面分析、表面修饰。',arc:['PST 4','PRS 6','FTR 8'],tag:'方向',quote:'界面上的化学。',prereq:['物理化学'],next:[],books:['Somorjai《Introduction to Surface Chemistry》'],videos:[{name:'表面化学 网课',keyword:'表面化学网课'}]},
+'胶体与界面化学':{desc:'胶体、乳液、表面活性剂、自组装。',arc:['PST 3','PRS 5','FTR 7'],tag:'方向',quote:'胶体是介于分子和宏观物质之间的世界。',prereq:['物理化学','溶液化学'],next:[],books:['《胶体与界面化学》'],videos:[{name:'胶体化学 网课',keyword:'胶体化学网课'}]},
+'材料化学':{desc:'无机材料、有机材料、复合材料、纳米材料。',arc:['PST 4','PRS 6','FTR 8','BYD 10'],tag:'核心',quote:'材料是化学的终极产品。',prereq:['无机化学','物理化学'],next:['纳米化学','能源化学'],books:['《材料化学》','West《Solid State Chemistry》'],videos:[{name:'材料化学 网课',keyword:'材料化学网课'}]},
+'固体化学':{desc:'晶体结构、缺陷、固相反应、离子导体。',arc:['PST 4','PRS 6','FTR 8'],tag:'核心',quote:'固态的化学世界。',prereq:['无机化学','材料化学'],next:[],books:['West《Solid State Chemistry》'],videos:[{name:'固体化学 网课',keyword:'固体化学网课'}]},
+'纳米化学':{desc:'纳米颗粒、量子点、碳纳米管、自组装。',arc:['PST 4','PRS 6','FTR 8','BYD 10'],tag:'前沿',quote:'纳米尺度，化学与量子物理交汇。',prereq:['材料化学'],next:[],books:['《纳米化学》','Ozin《Nanochemistry》'],videos:[{name:'纳米化学 网课',keyword:'纳米化学网课'}]},
+'能源化学':{desc:'太阳能电池、锂离子电池、氢能、燃料电池。',arc:['PST 4','PRS 6','FTR 8'],tag:'方向',quote:'新能源的化学基础。',prereq:['电化学','材料化学'],next:[],books:['《能源化学》'],videos:[{name:'能源化学 网课',keyword:'能源化学网课'}]},
+'环境化学':{desc:'大气化学、水化学、土壤化学、环境污染。',arc:['PST 3','PRS 5','FTR 7'],tag:'方向',quote:'用化学理解地球，用化学保护地球。',prereq:['分析化学'],next:[],books:['《环境化学》','Manahan《Environmental Chemistry》'],videos:[{name:'环境化学 网课',keyword:'环境化学网课'}]},
+'配位化学':{desc:'配合物、晶体场理论、配体场理论、磁化学。',arc:['PST 4','PRS 6','FTR 8','ETR 9'],tag:'核心',quote:'金属与配体的舞蹈。',prereq:['无机化学'],next:['金属有机化学'],books:['《配位化学》','Cotton《Advanced Inorganic Chemistry》'],videos:[{name:'配位化学 网课',keyword:'配位化学网课'}]},
+'金属有机化学':{desc:'金属-碳键、催化循环、Grignard试剂、Suzuki偶联。',arc:['PST 5','PRS 7','FTR 9+','BYD 11'],tag:'进阶',quote:'金属有机化学是有机合成的利器。',prereq:['配位化学','有机化学'],next:['催化化学'],books:['Crabtree《The Organometallic Chemistry of the Transition Metals》'],videos:[{name:'金属有机化学 网课',keyword:'金属有机化学'}]},
+'生物无机化学':{desc:'金属酶、金属蛋白、生物矿化、金属药物。',arc:['PST 5','PRS 7','FTR 9+'],tag:'交叉',quote:'生命也在利用金属。',prereq:['配位化学','生物化学'],next:[],books:['《生物无机化学》'],videos:[{name:'生物无机化学 网课',keyword:'生物无机化学'}]},
+'超分子化学':{desc:'分子识别、自组装、主客体化学、超分子器件。',arc:['PST 5','PRS 7','FTR 9+','BYD 11'],tag:'前沿',quote:'分子以上的化学——非共价键的世界。',prereq:['有机化学','物理化学'],next:[],books:['Lehn《Supramolecular Chemistry》'],videos:[{name:'超分子化学 网课',keyword:'超分子化学网课'}]},
+'化学生物学':{desc:'蛋白质、DNA、糖类的化学，化学生物学工具。',arc:['PST 5','PRS 7','FTR 9+','INS 12'],tag:'交叉',quote:'用化学工具研究生命。',prereq:['有机化学','生物化学'],next:[],books:['《化学生物学》','Miller《Chemical Biology》'],videos:[{name:'化学生物学 网课',keyword:'化学生物学网课'}]},
+'计算化学':{desc:'DFT、分子动力学、机器学习、量子化学计算。',arc:['PST 6','PRS 8','FTR 10+','INS 12'],tag:'终极',quote:'用计算机模拟化学反应——化学的第三个维度。',prereq:['量子化学','计算物理'],next:[],books:['Jensen《Introduction to Computational Chemistry》'],videos:[{name:'计算化学 网课',keyword:'计算化学网课'}]},
+'单分子化学':{desc:'单分子成像、单分子操纵、单分子反应、单分子光谱。',arc:['PST 6','PRS 8','FTR 10+','BYD 11+'],tag:'前沿',quote:'看到化学的原子级细节。',prereq:['物理化学','纳米化学'],next:[],books:['《单分子化学》'],videos:[{name:'单分子化学 网课',keyword:'单分子化学'}]},
+'药物化学':{desc:'药物设计、构效关系、药代动力学、药物合成。',arc:['PST 4','PRS 6','FTR 8','BYD 10'],tag:'应用',quote:'化学与医学的桥梁，让分子成为药物。',prereq:['有机合成'],next:[],books:['《药物化学》','Patrick《An Introduction to Medicinal Chemistry》'],videos:[{name:'药物化学 网课',keyword:'药物化学网课'}]},
+'食品化学':{desc:'食品成分、添加剂、风味化学、食品安全。',arc:['PST 3','PRS 5','FTR 7'],tag:'应用',quote:'了解你吃的是什么。',prereq:['有机化学','分析化学'],next:[],books:['《食品化学》'],videos:[{name:'食品化学 网课',keyword:'食品化学网课'}]},
+'高分子材料':{desc:'塑料、橡胶、纤维、涂料、功能高分子。',arc:['PST 4','PRS 6','FTR 8','BYD 10'],tag:'应用',quote:'现代生活无处不有高分子。',prereq:['高分子化学'],next:[],books:['《高分子材料》'],videos:[{name:'高分子材料 网课',keyword:'高分子材料网课'}]},
+'绿色化学':{desc:'原子经济性、可再生资源、环境友好合成。',arc:['PST 3','PRS 5','FTR 7'],tag:'未来',quote:'化学的可持续未来。',prereq:['有机化学','环境化学'],next:[],books:['Anastas & Warner《Green Chemistry》'],videos:[{name:'绿色化学 网课',keyword:'绿色化学网课'}]},
+'放射化学':{desc:'放射性元素、核素、标记化合物、核医学。',arc:['PST 4','PRS 6','FTR 8'],tag:'交叉',quote:'放射性是化学的另一把钥匙。',prereq:['原子结构'],next:[],books:['《放射化学》'],videos:[{name:'放射化学 网课',keyword:'放射化学网课'}]},
+'化学信息学':{desc:'分子数据库、QSAR、化学机器学习、分子对接。',arc:['PST 4','PRS 6','FTR 8'],tag:'前沿',quote:'用数据驱动化学发现。',prereq:['计算化学','有机化学'],next:[],books:['《化学信息学》'],videos:[{name:'化学信息学 网课',keyword:'化学信息学'}]},
 };
 function zlibBookUrl(n){const c=n.replace(/[《》]/g,'').trim();return 'https://z-library.biz/s/'+encodeURIComponent(c)}
 function biliSearchUrl(k){return 'https://search.bilibili.com/all?keyword='+encodeURIComponent(k)}
