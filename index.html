@@ -128,24 +128,19 @@
   }
   .course-card p { margin: 0; font-size: 11.5px; color: var(--muted); line-height: 1.55; }
 
-  /* ========== Arcaea 难度徽章 ==========
-     前三难度：浅色底 + 深色字
-     第四难度（ETR/BYD/INS）：深色底 + 白字
-  ==================================== */
   .arc-badges { display: flex; flex-wrap: wrap; gap: 3px; margin-bottom: 8px; }
   .arc-badge {
     display: inline-flex; align-items: center;
     font-size: 9.5px; font-weight: 800; padding: 2px 6px;
     border-radius: 5px; letter-spacing: .02em; white-space: nowrap;
   }
-  /* 前三难度：浅底深字 */
   .arc-pst { background: #dbeafe; color: #1e40af; }
   .arc-prs { background: #d1fae5; color: #065f46; }
   .arc-ftr { background: #b39dff; color: #2e1065; }
-  /* 第四难度：深底白字 */
   .arc-etr { background: #0c4a6e; color: #ffffff; }
   .arc-byd { background: #7f1d1d; color: #ffffff; }
   .arc-ins { background: #4c1d95; color: #ffffff; }
+  .arc-ins-plus { background: #2e1065; color: #fbbf24; box-shadow: 0 0 0 1px #fbbf24 inset; }
 
   .tag {
     display: inline-block; font-size: 10px; padding: 3px 8px; border-radius: 5px;
@@ -166,6 +161,8 @@
   .cosmos-card:hover { border-color: #818cf8; }
   .ultimate-card { border: 2px solid #6d28d9; background: linear-gradient(135deg, #faf5ff, #ede9fe); box-shadow: 0 0 25px rgba(109,40,217,.3); }
   .ultimate-card:hover { border-color: #4c1d95; box-shadow: 0 0 35px rgba(109,40,217,.5); }
+  .god-card { border: 2px solid #fbbf24; background: linear-gradient(135deg, #fef3c7, #fde68a); box-shadow: 0 0 30px rgba(251,191,36,.5); }
+  .god-card:hover { border-color: #f59e0b; box-shadow: 0 0 45px rgba(251,191,36,.7); }
 
   .overlay{position:fixed;inset:0;background:rgba(15,23,42,.46);display:none;align-items:center;justify-content:center;padding:18px;z-index:50}
   .overlay.show{display:flex}
@@ -175,7 +172,6 @@
   .modal p{color:#475569;line-height:1.8;margin:0;white-space:pre-wrap; font-size: 15px;}
   .modal .quote { margin-top: 16px; padding: 14px; background: #f8fafc; border-left: 4px solid #2563eb; border-radius: 6px; font-style: italic; color: #334155;}
 
-  /* ========== 弹窗中的大号难度展示 ========== */
   .arc-diff-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 4px; }
   .arc-diff-item {
     display: flex; align-items: center; gap: 6px;
@@ -184,20 +180,21 @@
   }
   .arc-diff-item .label { font-size: 11px; font-weight: 700; }
   .arc-diff-item .value { font-size: 16px; font-weight: 900; }
-  /* 前三难度：浅底深字 */
   .arc-diff-item.pst { background: #dbeafe; border-color: #bfdbfe; }
   .arc-diff-item.pst .label, .arc-diff-item.pst .value { color: #1e40af; }
   .arc-diff-item.prs { background: #d1fae5; border-color: #a7f3d0; }
   .arc-diff-item.prs .label, .arc-diff-item.prs .value { color: #065f46; }
   .arc-diff-item.ftr { background: #b39dff; border-color: #a78bfa; }
   .arc-diff-item.ftr .label, .arc-diff-item.ftr .value { color: #2e1065; }
-  /* 第四难度：深底白字（跟 INS 统一风格） */
   .arc-diff-item.etr { background: #0c4a6e; border-color: #075985; }
   .arc-diff-item.etr .label, .arc-diff-item.etr .value { color: #ffffff; }
   .arc-diff-item.byd { background: #7f1d1d; border-color: #991b1b; }
   .arc-diff-item.byd .label, .arc-diff-item.byd .value { color: #ffffff; }
   .arc-diff-item.ins { background: #4c1d95; border-color: #5b21b6; }
   .arc-diff-item.ins .label, .arc-diff-item.ins .value { color: #ffffff; }
+  .arc-diff-item.ins-plus { background: #2e1065; border-color: #fbbf24; }
+  .arc-diff-item.ins-plus .label { color: #fbbf24; }
+  .arc-diff-item.ins-plus .value { color: #fef3c7; }
 
   .resource-section { margin-top: 18px; padding-top: 16px; border-top: 1px dashed #e2e8f0; }
   .resource-label { font-size: 13px; font-weight: 800; color: #334155; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
@@ -211,9 +208,12 @@
   .resource-item:hover { background: #eef4fb; border-color: #bfdbfe; }
   .video-item { background: #fef2f2; border-color: #fecaca; color: #991b1b; font-weight: 600; }
   .video-item:hover { background: #fee2e2; border-color: #fca5a5; }
+  .book-item { background: #f0fdf4; border-color: #bbf7d0; color: #166534; font-weight: 600; }
+  .book-item:hover { background: #dcfce7; border-color: #86efac; }
   .resource-icon { flex-shrink: 0; font-size: 14px; }
   .resource-arrow { margin-left: auto; color: #94a3b8; font-weight: bold; }
   .video-item .resource-arrow { color: #f87171; }
+  .book-item .resource-arrow { color: #22c55e; }
 
   .relations {
     margin-top: 22px; padding-top: 20px;
@@ -258,7 +258,7 @@
   <header>
     <div class="eyebrow">MY PHYSICS JOURNEY</div>
     <h1>物理学知识体系</h1>
-    <p class="subtitle">以领域分类的物理知识网络。难度采用 Arcaea 风格：PST / PRS / FTR，外加 ETR / BYD / INS 三选一作为终极挑战。</p>
+    <p class="subtitle">以领域分类的物理知识网络。难度采用 Arcaea 风格：PST / PRS / FTR，第四难度根据阶段不同使用 ETR / BYD / INS。INS 12+ 为全书唯一最高难度。</p>
     <div class="toolbar">
       <button onclick="window.scrollTo({top:0,behavior:'smooth'})">回到顶部</button>
     </div>
@@ -274,9 +274,9 @@
 
   <main class="roadmap">
 
-    <!-- ============ 第一阶段：数学地基 ============ -->
+    <!-- 第一阶段 -->
     <h2 class="phase-title">🧮 第一阶段：数学地基</h2>
-    <p class="phase-desc">所有数学与计算工具统一归入此阶段，是后面所有物理课程的共同底座。</p>
+    <p class="phase-desc">所有数学与计算工具统一归入此阶段。第四难度仅使用 ETR（浅蓝）。</p>
 
     <div class="domain" style="--domain-color: #2563eb;">
       <div class="domain-header">
@@ -332,7 +332,7 @@
             <span class="arc-badge arc-pst">PST 4</span>
             <span class="arc-badge arc-prs">PRS 6</span>
             <span class="arc-badge arc-ftr">FTR 8</span>
-            <span class="arc-badge arc-byd">BYD 10</span>
+            <span class="arc-badge arc-etr">ETR 10</span>
           </div>
           <p>抽象代数、对称性。物理学家最爱的“魔法”工具。</p>
         </div>
@@ -353,7 +353,7 @@
             <span class="arc-badge arc-pst">PST 5</span>
             <span class="arc-badge arc-prs">PRS 7</span>
             <span class="arc-badge arc-ftr">FTR 9+</span>
-            <span class="arc-badge arc-etr">ETR 11+</span>
+            <span class="arc-badge arc-etr">ETR 11</span>
           </div>
           <p>复变函数、积分变换、偏微分方程。面如死灰。</p>
         </div>
@@ -364,7 +364,7 @@
             <span class="arc-badge arc-pst">PST 5</span>
             <span class="arc-badge arc-prs">PRS 7</span>
             <span class="arc-badge arc-ftr">FTR 9+</span>
-            <span class="arc-badge arc-etr">ETR 11+</span>
+            <span class="arc-badge arc-etr">ETR 11</span>
           </div>
           <p>贝塞尔、勒让德、球谐函数。阴魂不散。</p>
         </div>
@@ -391,9 +391,9 @@
       </div>
     </div>
 
-    <!-- ============ 第二阶段：经典物理 ============ -->
+    <!-- 第二阶段 -->
     <h2 class="phase-title classic">⚛️ 第二阶段：经典物理</h2>
-    <p class="phase-desc">四大经典领域：力学、电磁、热学、光学。每个领域下按研究方向分类。</p>
+    <p class="phase-desc">四大经典领域：力学、电磁、热学、光学。第四难度使用 ETR / BYD 混合。</p>
 
     <div class="domain" style="--domain-color: #0d9488;">
       <div class="domain-header">
@@ -430,7 +430,7 @@
             <span class="arc-badge arc-pst">PST 4</span>
             <span class="arc-badge arc-prs">PRS 6</span>
             <span class="arc-badge arc-ftr">FTR 8</span>
-            <span class="arc-badge arc-byd">BYD 10+</span>
+            <span class="arc-badge arc-byd">BYD 10</span>
           </div>
           <p>NS方程、湍流、边界层。经典物理最后的难题。</p>
         </div>
@@ -473,7 +473,7 @@
             <span class="arc-badge arc-pst">PST 5</span>
             <span class="arc-badge arc-prs">PRS 7</span>
             <span class="arc-badge arc-ftr">FTR 9+</span>
-            <span class="arc-badge arc-etr">ETR 11+</span>
+            <span class="arc-badge arc-byd">BYD 11</span>
           </div>
           <p>麦克斯韦方程组、相对论电磁场。物理梦还在交织……</p>
         </div>
@@ -514,7 +514,7 @@
             <span class="arc-badge arc-pst">PST 4</span>
             <span class="arc-badge arc-prs">PRS 6</span>
             <span class="arc-badge arc-ftr">FTR 8</span>
-            <span class="arc-badge arc-byd">BYD 10+</span>
+            <span class="arc-badge arc-byd">BYD 10</span>
           </div>
           <p>晶体管到芯片，版图到流片。承载一个时代的算力。</p>
         </div>
@@ -542,10 +542,10 @@
           <div class="tag" style="background:#ede9fe; color:#6d28d9;">终极大魔王</div>
           <h4>热力学与统计物理</h4>
           <div class="arc-badges">
-            <span class="arc-badge arc-pst">PST 6</span>
-            <span class="arc-badge arc-prs">PRS 8</span>
-            <span class="arc-badge arc-ftr">FTR 10</span>
-            <span class="arc-badge arc-ins">INS 12</span>
+            <span class="arc-badge arc-pst">PST 5</span>
+            <span class="arc-badge arc-prs">PRS 7</span>
+            <span class="arc-badge arc-ftr">FTR 9+</span>
+            <span class="arc-badge arc-byd">BYD 11</span>
           </div>
           <p>宏观热现象与微观粒子的桥梁。躁动吧！小宇宙！</p>
         </div>
@@ -599,7 +599,7 @@
             <span class="arc-badge arc-pst">PST 4</span>
             <span class="arc-badge arc-prs">PRS 6</span>
             <span class="arc-badge arc-ftr">FTR 8</span>
-            <span class="arc-badge arc-byd">BYD 10+</span>
+            <span class="arc-badge arc-byd">BYD 10</span>
           </div>
           <p>受激辐射、光放大。让电子们“卷”起来！</p>
         </div>
@@ -609,17 +609,17 @@
           <div class="arc-badges">
             <span class="arc-badge arc-pst">PST 4</span>
             <span class="arc-badge arc-prs">PRS 6</span>
-            <span class="arc-badge arc-ftr">FTR 9</span>
-            <span class="arc-badge arc-byd">BYD 10+</span>
+            <span class="arc-badge arc-ftr">FTR 8</span>
+            <span class="arc-badge arc-byd">BYD 10</span>
           </div>
           <p>倍频、四波混频。光不仅直线传播，还会跟光打架！</p>
         </div>
       </div>
     </div>
 
-    <!-- ============ 第三阶段：量子物理 ============ -->
+    <!-- 第三阶段 -->
     <h2 class="phase-title quantum">🌀 第三阶段：量子物理</h2>
-    <p class="phase-desc">走进微观世界的大门。量子核心、量子应用、核物理三个方向并列。</p>
+    <p class="phase-desc">走进微观世界的大门。量子核心、量子应用、核物理三个方向并列。第四难度使用 ETR / BYD 混合。</p>
 
     <div class="domain" style="--domain-color: #7c3aed;">
       <div class="domain-header">
@@ -635,6 +635,7 @@
             <span class="arc-badge arc-pst">PST 4</span>
             <span class="arc-badge arc-prs">PRS 6</span>
             <span class="arc-badge arc-ftr">FTR 8</span>
+            <span class="arc-badge arc-etr">ETR 9</span>
           </div>
           <p>核式结构、电子跃迁。看到最终魔王的影子……</p>
         </div>
@@ -644,8 +645,8 @@
           <div class="arc-badges">
             <span class="arc-badge arc-pst">PST 6</span>
             <span class="arc-badge arc-prs">PRS 8</span>
-            <span class="arc-badge arc-ftr">FTR 10+</span>
-            <span class="arc-badge arc-ins">INS 12</span>
+            <span class="arc-badge arc-ftr">FTR 10</span>
+            <span class="arc-badge arc-byd">BYD 11</span>
           </div>
           <p style="color: #78350f;">微观世界的全新理论。遇事不决，量子力学。</p>
         </div>
@@ -677,7 +678,7 @@
             <span class="arc-badge arc-pst">PST 4</span>
             <span class="arc-badge arc-prs">PRS 6</span>
             <span class="arc-badge arc-ftr">FTR 8</span>
-            <span class="arc-badge arc-byd">BYD 10+</span>
+            <span class="arc-badge arc-byd">BYD 10</span>
           </div>
           <p>Shor、Grover、量子门。经典算一万年，量子算几分钟。</p>
         </div>
@@ -705,9 +706,9 @@
       </div>
     </div>
 
-    <!-- ============ 第四阶段：凝聚态与半导体产业 ============ -->
+    <!-- 第四阶段 -->
     <h2 class="phase-title apps">💎 第四阶段：凝聚态与半导体产业</h2>
-    <p class="phase-desc">物理理论的终极应用。凝聚态基础 → 材料工程 → 半导体产业链 → 光电应用，四条并行主线。</p>
+    <p class="phase-desc">物理理论的终极应用。第四难度使用 ETR / BYD 混合。</p>
 
     <div class="domain" style="--domain-color: #0f766e;">
       <div class="domain-header">
@@ -723,7 +724,7 @@
             <span class="arc-badge arc-pst">PST 5</span>
             <span class="arc-badge arc-prs">PRS 7</span>
             <span class="arc-badge arc-ftr">FTR 9+</span>
-            <span class="arc-badge arc-ins">INS 12</span>
+            <span class="arc-badge arc-byd">BYD 11</span>
           </div>
           <p>晶体结构、能带理论。微观量子的宏观体现。</p>
         </div>
@@ -734,7 +735,7 @@
             <span class="arc-badge arc-pst">PST 5</span>
             <span class="arc-badge arc-prs">PRS 7</span>
             <span class="arc-badge arc-ftr">FTR 9</span>
-            <span class="arc-badge arc-byd">BYD 10+</span>
+            <span class="arc-badge arc-byd">BYD 10</span>
           </div>
           <p>结构决定性质。在原子尺度上盖房子！</p>
         </div>
@@ -807,7 +808,7 @@
             <span class="arc-badge arc-pst">PST 4</span>
             <span class="arc-badge arc-prs">PRS 6</span>
             <span class="arc-badge arc-ftr">FTR 8</span>
-            <span class="arc-badge arc-byd">BYD 10+</span>
+            <span class="arc-badge arc-byd">BYD 10</span>
           </div>
           <p>PN结、MOSFET、HEMT。器件是芯片的细胞。</p>
         </div>
@@ -818,7 +819,7 @@
             <span class="arc-badge arc-pst">PST 4</span>
             <span class="arc-badge arc-prs">PRS 6</span>
             <span class="arc-badge arc-ftr">FTR 8</span>
-            <span class="arc-badge arc-byd">BYD 10+</span>
+            <span class="arc-badge arc-byd">BYD 10</span>
           </div>
           <p>光刻、刻蚀、离子注入。从沙子到芯片的纳米魔术。</p>
         </div>
@@ -845,9 +846,9 @@
       </div>
     </div>
 
-    <!-- ============ 第五阶段：宇宙的尽头 ============ -->
+    <!-- 第五阶段 -->
     <h2 class="phase-title cosmos">🌌 第五阶段：宇宙的尽头</h2>
-    <p class="phase-desc">物理学的最前沿。从弯曲时空到大尺度宇宙结构，从基本粒子到场论，最终抵达量子引力与弦理论的终极统一。</p>
+    <p class="phase-desc">物理学的最前沿。唯一允许出现 INS 难度的阶段。全书仅 2 个 12 等级（含 1 个 12+），3 个 11+ 等级。</p>
 
     <div class="domain" style="--domain-color: #4338ca;">
       <div class="domain-header">
@@ -874,7 +875,7 @@
             <span class="arc-badge arc-pst">PST 5</span>
             <span class="arc-badge arc-prs">PRS 7</span>
             <span class="arc-badge arc-ftr">FTR 9</span>
-            <span class="arc-badge arc-byd">BYD 10+</span>
+            <span class="arc-badge arc-byd">BYD 10</span>
           </div>
           <p>大爆炸、CMB、暗物质、暗能量。宇宙的起源与命运。</p>
         </div>
@@ -906,7 +907,7 @@
             <span class="arc-badge arc-pst">PST 5</span>
             <span class="arc-badge arc-prs">PRS 7</span>
             <span class="arc-badge arc-ftr">FTR 9+</span>
-            <span class="arc-badge arc-byd">BYD 11</span>
+            <span class="arc-badge arc-byd">BYD 11+</span>
           </div>
           <p>夸克、轻子、Higgs。标准模型是20世纪物理最伟大的成就之一。</p>
         </div>
@@ -928,7 +929,7 @@
             <span class="arc-badge arc-pst">PST 6</span>
             <span class="arc-badge arc-prs">PRS 8</span>
             <span class="arc-badge arc-ftr">FTR 10+</span>
-            <span class="arc-badge arc-ins">INS 12</span>
+            <span class="arc-badge arc-byd">BYD 11+</span>
           </div>
           <p>路径积分、费曼图、重整化。粒子物理与凝聚态的共同语言。</p>
         </div>
@@ -946,23 +947,23 @@
           <div class="tag" style="background:#ede9fe; color:#4c1d95;">万有理论候选</div>
           <h4 style="color: #4c1d95;">弦理论</h4>
           <div class="arc-badges">
-            <span class="arc-badge arc-pst">PST 7</span>
-            <span class="arc-badge arc-prs">PRS 9+</span>
-            <span class="arc-badge arc-ftr">FTR 11+</span>
-            <span class="arc-badge arc-ins">INS 12</span>
+            <span class="arc-badge arc-pst">PST 6</span>
+            <span class="arc-badge arc-prs">PRS 8</span>
+            <span class="arc-badge arc-ftr">FTR 10+</span>
+            <span class="arc-badge arc-byd">BYD 11+</span>
           </div>
           <p style="color: #4c1d95;">一维弦的振动模式、10维时空、超对称、M理论。万有理论的候选者。</p>
         </div>
-        <div class="course-card ultimate-card" onclick="showCourse('量子引力')">
-          <div class="tag" style="background:#ede9fe; color:#4c1d95;">终极难题</div>
-          <h4 style="color: #4c1d95;">量子引力</h4>
+        <div class="course-card god-card" onclick="showCourse('量子引力')">
+          <div class="tag" style="background:#fef3c7; color:#92400e;">⭐ 全书唯一 12+</div>
+          <h4 style="color: #78350f;">量子引力</h4>
           <div class="arc-badges">
             <span class="arc-badge arc-pst">PST 7</span>
             <span class="arc-badge arc-prs">PRS 9+</span>
             <span class="arc-badge arc-ftr">FTR 11+</span>
-            <span class="arc-badge arc-ins">INS 12</span>
+            <span class="arc-badge arc-ins-plus">INS 12+</span>
           </div>
-          <p style="color: #4c1d95;">引力的量子化。圈量子引力、因果动力学三角剖分。物理学最后的圣杯。</p>
+          <p style="color: #78350f;">引力的量子化。圈量子引力、因果动力学三角剖分。物理学最后的圣杯。</p>
         </div>
       </div>
     </div>
@@ -985,12 +986,12 @@
     <div class="arc-diff-row" id="arcDiffRow"></div>
 
     <div class="resource-section" id="bookSection" style="display: none;">
-      <div class="resource-label">📖 推荐教材</div>
+      <div class="resource-label">📖 推荐教材（点击跳转豆瓣）</div>
       <div class="resource-list" id="bookList"></div>
     </div>
 
     <div class="resource-section" id="videoSection" style="display: none;">
-      <div class="resource-label">▶️ B站网课资源</div>
+      <div class="resource-label">▶️ B站网课资源（点击跳转B站搜索）</div>
       <div class="resource-list" id="videoList"></div>
     </div>
 
@@ -1017,9 +1018,9 @@ const COURSES = {
     arc: ['PST 1', 'PRS 2', 'FTR 3'], tag: '数学准备',
     quote: '小初高的知识你忘完了没有？反三角、极坐标、向量叉乘……',
     prereq: [], next: ['高等数学', '线性代数'],
-    books: ['高中数学（人教版/苏教版等）', '《初等数学》'],
+    books: ['人教版高中数学全套教材', '《初等数学》'],
     videos: [
-      { name: '宋浩《高等数学0基础一遍过》极限篇（含衔接内容）', url: 'https://www.bilibili.com/video/BV1Mh4y1p7Dk' }
+      { name: '宋浩《高等数学0基础一遍过》极限篇', keyword: '宋浩高等数学0基础一遍过' }
     ]
   },
   '高等数学': {
@@ -1029,8 +1030,8 @@ const COURSES = {
     prereq: ['小初高数学'], next: ['数学物理方法', '概率论与数理统计', '计算物理'],
     books: ['同济大学《高等数学》（第七版）', '《托马斯微积分》', '《普林斯顿微积分读本》'],
     videos: [
-      { name: '宋浩《高等数学》全程教学视频 2.0版（1.2亿播放）', url: 'https://www.bilibili.com/video/BV1CA411E7Hd' },
-      { name: '宋浩《微积分》全程教学视频', url: 'https://www.bilibili.com/video/BV1Ts411H7Fz' }
+      { name: '宋浩《高等数学》全程教学视频 2.0版', keyword: '宋浩高等数学' },
+      { name: '宋浩《微积分》全程教学视频', keyword: '宋浩微积分' }
     ]
   },
   '线性代数': {
@@ -1040,8 +1041,8 @@ const COURSES = {
     prereq: ['小初高数学'], next: ['数学物理方法', '量子力学', '群论', '计算物理'],
     books: ['同济大学《线性代数》（第六版）', '《线性代数应该这样学》', 'Gilbert Strang《Introduction to Linear Algebra》'],
     videos: [
-      { name: '宋浩《线性代数》全程教学视频', url: 'https://www.bilibili.com/video/BV1aE411o7Fb' },
-      { name: '3Blue1Brown《线性代数的本质》', url: 'https://www.bilibili.com/video/BV1ys411472E' }
+      { name: '宋浩《线性代数》全程教学视频', keyword: '宋浩线性代数' },
+      { name: '3Blue1Brown《线性代数的本质》', keyword: '线性代数的本质' }
     ]
   },
   '概率论与数理统计': {
@@ -1051,40 +1052,40 @@ const COURSES = {
     prereq: ['高等数学'], next: ['热力学与统计物理', '量子力学'],
     books: ['浙大版《概率论与数理统计》（第四版）', '《概率论与数理统计》茆诗松'],
     videos: [
-      { name: '宋浩《概率论与数理统计》全程教学视频', url: 'https://www.bilibili.com/video/BV1ot411y7mU' },
-      { name: '浙江大学《概率论与数理统计》', url: 'https://www.bilibili.com/video/BV1vW41147Uw' }
+      { name: '宋浩《概率论与数理统计》全程教学视频', keyword: '宋浩概率论与数理统计' },
+      { name: '浙江大学《概率论与数理统计》', keyword: '浙江大学概率论与数理统计' }
     ]
   },
   '群论': {
-    desc: '抽象代数的核心分支，研究对称性的数学结构。\n\n群、环、域、表示论，物理学家用来描述晶体对称性、粒子物理和量子态的“魔法”工具。\n\n你会发现自然界的许多规律都可以用对称性来表达。',
-    arc: ['PST 4', 'PRS 6', 'FTR 8', 'BYD 10'], tag: '数学进阶',
-    quote: '物理学家最爱的“魔法”工具——对称性即美。',
+    desc: '抽象代数的核心分支，研究对称性的数学结构。\n\n群、环、域、表示论，物理学家用来描述晶体对称性、粒子物理和量子态的"魔法"工具。\n\n你会发现自然界的许多规律都可以用对称性来表达。',
+    arc: ['PST 4', 'PRS 6', 'FTR 8', 'ETR 10'], tag: '数学进阶',
+    quote: '物理学家最爱的"魔法"工具——对称性即美。',
     prereq: ['线性代数'], next: ['量子力学', '固体物理', '粒子物理'],
     books: ['《群论》李新征', '《物理学中的群论》马中骐', '《Group Theory in a Nutshell for Physicists》'],
     videos: [
-      { name: '〖筱说物理〗全网最友好的群论入门课程（10h已完结）', url: 'https://www.bilibili.com/video/BV1km42137wN' },
-      { name: '南开大学《近世代数/抽象代数》国家级精品课', url: 'https://www.bilibili.com/video/BV1rs411J7mZ' }
+      { name: '筱说物理 全网最友好的群论入门课程', keyword: '筱说物理群论' },
+      { name: '南开大学《近世代数/抽象代数》国家级精品课', keyword: '南开大学近世代数' }
     ]
   },
   '数学物理方法': {
     desc: '这是物理学的数学工具箱，将为你提供解决物理问题的强大数学武器。\n\n从复变函数到积分变换，从数学物理方程到特殊函数。',
-    arc: ['PST 5', 'PRS 7', 'FTR 9+', 'ETR 11+'], tag: '进阶数学工具',
+    arc: ['PST 5', 'PRS 7', 'FTR 9+', 'ETR 11'], tag: '进阶数学工具',
     quote: '噩梦、第二卷的初焉，此章节，面如死灰。',
     prereq: ['高等数学', '线性代数'], next: ['电动力学', '量子力学', '特殊函数'],
     books: ['梁昆淼《数学物理方法》（第五版）', '吴崇试《数学物理方法》（第三版）', '顾樵《数学物理方法》'],
     videos: [
-      { name: '北京大学《数学物理方法》吴崇试 全108讲', url: 'https://www.bilibili.com/video/BV1qt411u7cG' },
-      { name: '周国全《数学物理方法》全82集（B站点击破百万）', url: 'https://www.bilibili.com/video/BV1sW411e7um' }
+      { name: '北京大学《数学物理方法》吴崇试 全108讲', keyword: '吴崇试数学物理方法' },
+      { name: '周国全《数学物理方法》全82集', keyword: '周国全数学物理方法' }
     ]
   },
   '特殊函数': {
     desc: '你以为考完数理方法就结束了吗？不！\n\n贝塞尔、勒让德、球谐函数，它们在你的电动力学、量子力学、甚至固体物理里无处不在，阴魂不散！\n\n它们是你推导公式时的噩梦，也是物理世界的通用语言。',
-    arc: ['PST 5', 'PRS 7', 'FTR 9+', 'ETR 11+'], tag: '数学物理延伸',
+    arc: ['PST 5', 'PRS 7', 'FTR 9+', 'ETR 11'], tag: '数学物理延伸',
     quote: '阴魂不散的贝塞尔和勒让德。',
     prereq: ['数学物理方法'], next: ['电动力学', '量子力学', '固体物理'],
     books: ['王竹溪《特殊函数概论》', '《特殊函数》刘式适', 'Arfken《Mathematical Methods for Physicists》'],
     videos: [
-      { name: 'B站搜索：特殊函数 贝塞尔 勒让德', url: 'https://search.bilibili.com/all?keyword=%E7%89%B9%E6%AE%8A%E5%87%BD%E6%95%B0%E8%B4%9D%E5%A1%9E%E5%B0%94' }
+      { name: '特殊函数 贝塞尔 勒让德 专题课', keyword: '特殊函数贝塞尔勒让德' }
     ]
   },
   '计算物理': {
@@ -1094,8 +1095,8 @@ const COURSES = {
     prereq: ['高等数学', '线性代数'], next: ['材料物理'],
     books: ['《计算物理》彭芳麟', '《Numerical Recipes》', '《Python科学计算》'],
     videos: [
-      { name: '德国科隆大学《计算物理全系列》数值模拟×Julia编程', url: 'https://www.bilibili.com/video/BV1fx4y1W7cE' },
-      { name: '东南大学《数值分析》课程精讲', url: 'https://www.bilibili.com/video/BV1Gh4y1t7kH' }
+      { name: '德国科隆大学《计算物理全系列》', keyword: '科隆大学计算物理' },
+      { name: '东南大学《数值分析》课程精讲', keyword: '东南大学数值分析' }
     ]
   },
 
@@ -1106,8 +1107,8 @@ const COURSES = {
     prereq: ['高等数学'], next: ['理论力学', '流体力学', '固体力学'],
     books: ['舒幼生《力学》（北大）', '漆安慎《力学》', '《Fundamentals of Physics》Halliday'],
     videos: [
-      { name: 'B站搜索：B站物院 力学', url: 'https://search.bilibili.com/all?keyword=B站物院+力学' },
-      { name: '舒幼生《力学》习题讲解', url: 'https://search.bilibili.com/all?keyword=舒幼生力学' }
+      { name: 'B站物院 力学 系列', keyword: 'B站物院力学' },
+      { name: '舒幼生《力学》习题讲解', keyword: '舒幼生力学' }
     ]
   },
   '理论力学': {
@@ -1117,18 +1118,18 @@ const COURSES = {
     prereq: ['力学', '高等数学'], next: ['电动力学', '量子力学', '相对论'],
     books: ['周衍柏《理论力学教程》', '梁昆淼《力学》', 'Goldstein《Classical Mechanics》'],
     videos: [
-      { name: '哈尔滨工业大学《理论力学（物理类）》任延宇', url: 'https://www.bilibili.com/video/BV1ft411Z7kF' },
-      { name: '《理论力学》5小时速通期末速成课', url: 'https://www.bilibili.com/video/BV1Kx4y1a7q3' }
+      { name: '哈尔滨工业大学《理论力学（物理类）》任延宇', keyword: '任延宇理论力学' },
+      { name: '《理论力学》速通期末速成课', keyword: '理论力学速成' }
     ]
   },
   '流体力学': {
     desc: 'Navier-Stokes 方程、湍流、边界层。天气预报、飞机设计、血液流动都靠它。\n\n流体力学的难点在于：你永远无法精确求解 NS 方程，但你可以假装自己解出来了。',
-    arc: ['PST 4', 'PRS 6', 'FTR 8', 'BYD 10+'], tag: '工程力学',
+    arc: ['PST 4', 'PRS 6', 'FTR 8', 'BYD 10'], tag: '工程力学',
     quote: '湍流是经典物理最后的难题之一。',
     prereq: ['力学'], next: ['材料制备技术'],
     books: ['吴望一《流体力学》', '《Fluid Mechanics》Landau', '张兆顺《流体力学》'],
     videos: [
-      { name: 'B站搜索：流体力学 网课 推荐', url: 'https://search.bilibili.com/all?keyword=流体力学+网课' }
+      { name: '流体力学 网课 推荐', keyword: '流体力学网课' }
     ]
   },
   '固体力学': {
@@ -1138,7 +1139,7 @@ const COURSES = {
     prereq: ['力学'], next: ['材料物理'],
     books: ['徐芝纶《弹性力学》', '《材料力学》孙训方', 'Timoshenko《Theory of Elasticity》'],
     videos: [
-      { name: 'B站搜索：弹性力学 固体力学 网课', url: 'https://search.bilibili.com/all?keyword=弹性力学+网课' }
+      { name: '弹性力学 固体力学 网课', keyword: '弹性力学网课' }
     ]
   },
   '电磁学': {
@@ -1148,20 +1149,20 @@ const COURSES = {
     prereq: ['力学', '高等数学'], next: ['电动力学', '电路', '光学'],
     books: ['赵凯华《电磁学》', '贾起民《电磁学》', 'Griffiths《Introduction to Electrodynamics》'],
     videos: [
-      { name: '〖B站物院〗电磁学（Bro姐主讲）', url: 'https://www.bilibili.com/video/BV1yJ411p7tZ' },
-      { name: '北京大学《电磁学》国家精品课', url: 'https://www.bilibili.com/video/BV1sW41177oU' }
+      { name: 'B站物院 电磁学（Bro姐主讲）', keyword: 'B站物院电磁学' },
+      { name: '北京大学《电磁学》国家精品课', keyword: '北京大学电磁学' }
     ]
   },
   '电动力学': {
     desc: '电磁学的进一步深化，将带你走进电磁场的微观世界。\n\n麦克斯韦方程组作为电动力学的核心，将让你看到电场与磁场在微观层面的紧密联系与相互作用。',
-    arc: ['PST 5', 'PRS 7', 'FTR 9+', 'ETR 11+'], tag: '理论核心',
+    arc: ['PST 5', 'PRS 7', 'FTR 9+', 'BYD 11'], tag: '理论核心',
     quote: '移动变换，电磁相对，物理梦还在交织……',
     prereq: ['电磁学', '数学物理方法'], next: ['量子力学', '激光原理', '相对论', '粒子物理'],
     books: ['郭硕鸿《电动力学》（第三版）', 'Jackson《Classical Electrodynamics》', 'Griffiths《电动力学导论》'],
     videos: [
-      { name: '北京大学《电动力学》田光善（高清完整版）', url: 'https://www.bilibili.com/video/BV1cW411K7w2' },
-      { name: '〖B站物院〗电动力学（Bro姐主讲）', url: 'https://www.bilibili.com/video/BV1yJ411p7VQ' },
-      { name: '《电动力学》零基础速成/期末救急', url: 'https://www.bilibili.com/video/BV1Ks4y1M7sM' }
+      { name: '北京大学《电动力学》田光善 高清完整版', keyword: '田光善电动力学' },
+      { name: 'B站物院 电动力学（Bro姐主讲）', keyword: 'B站物院电动力学' },
+      { name: '《电动力学》零基础速成/期末救急', keyword: '电动力学速成' }
     ]
   },
   '电路': {
@@ -1171,38 +1172,38 @@ const COURSES = {
     prereq: ['电磁学'], next: ['模拟电子技术', '数字电子技术'],
     books: ['邱关源《电路》（第五版）', '《电路分析基础》李瀚荪'],
     videos: [
-      { name: 'B站搜索：电路 邱关源 网课', url: 'https://search.bilibili.com/all?keyword=电路+邱关源' }
+      { name: '电路 邱关源 网课', keyword: '电路邱关源' }
     ]
   },
   '模拟电子技术': {
-    desc: '模电玄学，玄之又玄，众妙之门。\n\n三极管放大器、运放、滤波器，调参调到怀疑人生。\n\n老师说：“这个电路你按我说的改，不要问为什么。”',
+    desc: '模电玄学，玄之又玄，众妙之门。\n\n三极管放大器、运放、滤波器，调参调到怀疑人生。\n\n老师说："这个电路你按我说的改，不要问为什么。"',
     arc: ['PST 3', 'PRS 5', 'FTR 7'], tag: '电子工程',
     quote: '模拟电路的世界里，每个元件都不听话，但你却要让它听话。',
     prereq: ['电路'], next: ['集成电路'],
     books: ['童诗白《模拟电子技术基础》（第五版）', '康华光《电子技术基础》'],
     videos: [
-      { name: 'B站搜索：模拟电子技术 童诗白 网课', url: 'https://search.bilibili.com/all?keyword=模拟电子技术+童诗白' },
-      { name: 'B站搜索：模电 速成 不挂科', url: 'https://search.bilibili.com/all?keyword=模电+速成' }
+      { name: '模拟电子技术 童诗白 网课', keyword: '模拟电子技术童诗白' },
+      { name: '模电 速成 不挂科', keyword: '模电速成' }
     ]
   },
   '数字电子技术': {
-    desc: '0和1的世界，逻辑清晰。\n\n但是，当你遇到时序逻辑、触发器、状态机，你就知道什么叫“数电不难，难的是老师觉得你不难”。',
+    desc: '0和1的世界，逻辑清晰。\n\n但是，当你遇到时序逻辑、触发器、状态机，你就知道什么叫"数电不难，难的是老师觉得你不难"。',
     arc: ['PST 2', 'PRS 4', 'FTR 6'], tag: '电子工程',
     quote: '布尔代数、卡诺图、Verilog，这是数字世界的地基。',
     prereq: ['电路'], next: ['集成电路'],
     books: ['阎石《数字电子技术基础》（第六版）', '《Digital Design》Wakerly'],
     videos: [
-      { name: 'B站搜索：数字电子技术 阎石 网课', url: 'https://search.bilibili.com/all?keyword=数字电子技术+阎石' }
+      { name: '数字电子技术 阎石 网课', keyword: '数字电子技术阎石' }
     ]
   },
   '集成电路': {
     desc: '把整个计算机缩小到指甲盖大小。从晶体管到芯片，从版图到流片，这是现代科技的巅峰。\n\n摩尔定律快到头了，接下来看你们的了！',
-    arc: ['PST 4', 'PRS 6', 'FTR 8', 'BYD 10+'], tag: '芯片·硬核',
+    arc: ['PST 4', 'PRS 6', 'FTR 8', 'BYD 10'], tag: '芯片·硬核',
     quote: '一颗芯片，承载一个时代的算力。',
     prereq: ['模拟电子技术', '数字电子技术', '半导体器件'], next: [],
     books: ['Rabaey《Digital Integrated Circuits》', '《CMOS超大规模集成电路设计》Weste', '《集成电路设计》王志华'],
     videos: [
-      { name: 'B站搜索：集成电路设计 网课', url: 'https://search.bilibili.com/all?keyword=集成电路设计+网课' }
+      { name: '集成电路设计 网课', keyword: '集成电路设计网课' }
     ]
   },
   '热学': {
@@ -1212,19 +1213,19 @@ const COURSES = {
     prereq: ['力学'], next: ['热力学与统计物理'],
     books: ['李椿《热学》', '秦允豪《热学》', '《Thermodynamics》Fermi'],
     videos: [
-      { name: 'B站搜索：热学 李椿 网课', url: 'https://search.bilibili.com/all?keyword=热学+李椿+网课' }
+      { name: '热学 李椿 网课', keyword: '热学李椿' }
     ]
   },
   '热力学与统计物理': {
     desc: '这是热学的理论升华，将宏观的热现象与微观的粒子运动紧密联系起来。\n\n通过对气体分子运动论的学习，让你从宏观与微观两个角度全面理解热现象。',
-    arc: ['PST 6', 'PRS 8', 'FTR 10', 'INS 12'], tag: '理论核心·终极',
+    arc: ['PST 5', 'PRS 7', 'FTR 9+', 'BYD 11'], tag: '理论核心·终极',
     quote: '躁动吧！物理人的小宇宙！！！',
     prereq: ['热学', '概率论与数理统计', '量子力学'], next: ['固体物理', '材料物理', '宇宙学'],
     books: ['汪志诚《热力学·统计物理》（第五版）', '林宗涵《热力学与统计物理学》', 'Pathria《Statistical Mechanics》'],
     videos: [
-      { name: '〖复旦〗热力学与统计物理全解！附讲义、课件、习题讲解', url: 'https://www.bilibili.com/video/BV1kh411k7kZ' },
-      { name: '热力学与统计物理考研复习/自学收藏', url: 'https://www.bilibili.com/video/BV1Gm4y1M7eF' },
-      { name: '物理期末人不挂科必看！热力学与统计物理速成课丨6H速通', url: 'https://www.bilibili.com/video/BV1mN4y1k7hG' }
+      { name: '复旦大学 热力学与统计物理 全解', keyword: '复旦大学热力学与统计物理' },
+      { name: '热力学与统计物理 考研复习/自学', keyword: '热力学与统计物理考研' },
+      { name: '热力学与统计物理 速成课 6H速通', keyword: '热力学统计物理速成' }
     ]
   },
   '光学': {
@@ -1234,20 +1235,19 @@ const COURSES = {
     prereq: ['电磁学'], next: ['工程光学', '激光原理'],
     books: ['赵凯华《光学》', '姚启钧《光学教程》', 'Hecht《Optics》'],
     videos: [
-      { name: '华科《物理光学》', url: 'https://www.bilibili.com/video/BV1XC411L7QE' },
-      { name: '崔宏滨《光学》教学视频', url: 'https://www.bilibili.com/video/BV1Fx41147uX' }
+      { name: '华科《物理光学》', keyword: '华科物理光学' },
+      { name: '崔宏滨《光学》教学视频', keyword: '崔宏滨光学' }
     ]
   },
   '工程光学': {
     desc: '物理光学是理论，工程光学是实干。\n\n透镜设计、光路计算、像差分析、光学系统集成。画光路图能画到你手抽筋，Zemax 一开就是一整天。',
     arc: ['PST 3', 'PRS 5', 'FTR 7', 'ETR 9'], tag: '光学工程',
-    quote: '把光学从黑板搬进实验室和工厂，这才是真正的“光”工！',
+    quote: '把光学从黑板搬进实验室和工厂，这才是真正的"光"工！',
     prereq: ['光学'], next: ['光学系统设计'],
     books: ['郁道银《工程光学》（第四版）', '李湘宁《工程光学》', '《Modern Optical Engineering》Smith'],
     videos: [
-      { name: '《工程光学》考研课程 小蓝书习题讲解', url: 'https://www.bilibili.com/video/BV1mH4y1P7nD' },
-      { name: '《工程光学 几何光学 应用光学 现代光学》知识点梳理', url: 'https://www.bilibili.com/video/BV1Xf421Q7kM' },
-      { name: '〖865工程光学〗27上海理工大学考研强化冲刺课程', url: 'https://www.bilibili.com/video/BV1Ns421M7vC' }
+      { name: '《工程光学》考研课程 小蓝书习题讲解', keyword: '工程光学考研' },
+      { name: '工程光学 几何光学 应用光学 现代光学 知识点梳理', keyword: '工程光学知识点' }
     ]
   },
   '光学系统设计': {
@@ -1257,52 +1257,52 @@ const COURSES = {
     prereq: ['工程光学'], next: ['激光原理'],
     books: ['《光学系统设计》Milton Laikin', '《Zemax光学设计超级学习手册》', '《现代光学设计方法》李林'],
     videos: [
-      { name: 'B站搜索：Zemax 光学系统设计 教程', url: 'https://search.bilibili.com/all?keyword=Zemax+光学设计' }
+      { name: 'Zemax 光学系统设计 教程', keyword: 'Zemax光学设计' }
     ]
   },
   '激光原理': {
-    desc: '受激辐射、粒子数反转、光放大。\n\n想当个激光器？你得先让电子们“卷”起来，达到粒子数反转，才能让光子如脱缰的野马般放大。',
-    arc: ['PST 4', 'PRS 6', 'FTR 8', 'BYD 10+'], tag: '光电方向·硬核',
+    desc: '受激辐射、粒子数反转、光放大。\n\n想当个激光器？你得先让电子们"卷"起来，达到粒子数反转，才能让光子如脱缰的野马般放大。',
+    arc: ['PST 4', 'PRS 6', 'FTR 8', 'BYD 10'], tag: '光电方向·硬核',
     quote: '激光一开，谁与争锋！',
     prereq: ['光学', '原子物理学', '光学系统设计'], next: ['非线性光学'],
     books: ['周炳琨《激光原理》（第六版）', '《Principles of Lasers》Svelto'],
     videos: [
-      { name: 'B站搜索：激光原理 周炳琨 网课', url: 'https://search.bilibili.com/all?keyword=激光原理+周炳琨' }
+      { name: '激光原理 周炳琨 网课', keyword: '激光原理周炳琨' }
     ]
   },
   '非线性光学': {
     desc: '强光下的光学。倍频、和频、差频、四波混频、光孤子。\n\n当光强足够大，光学就不线性了。激光出现后，非线性光学才成为可能。',
-    arc: ['PST 4', 'PRS 6', 'FTR 9', 'BYD 10+'], tag: '前沿光学',
+    arc: ['PST 4', 'PRS 6', 'FTR 8', 'BYD 10'], tag: '前沿光学',
     quote: '从此光不仅会直线传播，还会跟光自己打架。光速不变？介质里也能变慢！',
     prereq: ['激光原理'], next: [],
     books: ['石顺祥《非线性光学》', 'Boyd《Nonlinear Optics》'],
     videos: [
-      { name: 'B站搜索：非线性光学 网课', url: 'https://search.bilibili.com/all?keyword=非线性光学+网课' }
+      { name: '非线性光学 网课', keyword: '非线性光学网课' }
     ]
   },
   '原子物理学': {
     desc: '走进微观世界的大门，原子物理学将带你探索原子的结构与性质。\n\n从原子的核式结构模型出发，你将了解电子的跃迁、原子的能级等概念。',
-    arc: ['PST 4', 'PRS 6', 'FTR 8'], tag: '近代物理',
+    arc: ['PST 4', 'PRS 6', 'FTR 8', 'ETR 9'], tag: '近代物理',
     quote: '终于，看到了最终魔王的影子，但你还不是他……',
     prereq: ['电磁学'], next: ['量子力学', '原子核物理'],
     books: ['褚圣麟《原子物理学》', '杨福家《原子物理学》', 'Foot《Atomic Physics》'],
     videos: [
-      { name: 'B站搜索：B站物院 原子物理', url: 'https://search.bilibili.com/all?keyword=B站物院+原子物理' },
-      { name: '原子物理2026 全系列课程', url: 'https://search.bilibili.com/all?keyword=原子物理2026' },
-      { name: '《原子物理学》褚圣麟 课程讲解', url: 'https://www.bilibili.com/video/BV1Kc411i7K7' }
+      { name: 'B站物院 原子物理', keyword: 'B站物院原子物理' },
+      { name: '原子物理 全系列课程', keyword: '原子物理课程' },
+      { name: '《原子物理学》褚圣麟 课程讲解', keyword: '褚圣麟原子物理' }
     ]
   },
   '量子力学': {
     desc: '物理学的尽头，或许不是？\n\n这是微观世界的全新理论体系，将彻底颠覆你对经典物理学的认识。\n\n你将会为人类研究出新的高度，或许会研究出不可触摸的神明。',
-    arc: ['PST 6', 'PRS 8', 'FTR 10+', 'INS 12'], tag: '终章·最终魔王',
+    arc: ['PST 6', 'PRS 8', 'FTR 10', 'BYD 11'], tag: '终章·最终魔王',
     quote: '遇事不决，量子力学。',
     prereq: ['理论力学', '数学物理方法', '原子物理学', '线性代数', '群论'],
     next: ['固体物理', '量子信息', '量子计算', '原子核物理', '粒子物理', '规范场论'],
     books: ['周世勋《量子力学教程》', '曾谨言《量子力学》', 'Griffiths《量子力学概论》', 'Sakurai《Modern Quantum Mechanics》'],
     videos: [
-      { name: '北京大学《量子力学》田光善 国家精品课程 全58讲', url: 'https://www.bilibili.com/video/BV1gW411K7uW' },
-      { name: '中南大学《追着你喂饭的量子力学》牛冬梅教授（量子入门神器）', url: 'https://www.bilibili.com/video/BV1cN4y1k7hG' },
-      { name: '斯坦福大学《量子力学》平行宇宙入场券', url: 'https://www.bilibili.com/video/BV1Rk4y1N7jH' }
+      { name: '北京大学《量子力学》田光善 国家精品课程 全58讲', keyword: '田光善量子力学' },
+      { name: '中南大学《追着你喂饭的量子力学》牛冬梅教授', keyword: '牛冬梅量子力学' },
+      { name: '斯坦福大学《量子力学》平行宇宙入场券', keyword: '斯坦福量子力学' }
     ]
   },
   '量子信息': {
@@ -1312,17 +1312,17 @@ const COURSES = {
     prereq: ['量子力学'], next: [],
     books: ['《量子信息论》Nielsen & Chuang', '《量子信息与量子计算》李承祖'],
     videos: [
-      { name: 'B站搜索：量子信息 量子计算 网课', url: 'https://search.bilibili.com/all?keyword=量子信息+网课' }
+      { name: '量子信息 量子计算 网课', keyword: '量子信息网课' }
     ]
   },
   '量子计算': {
     desc: 'Shor 算法、Grover 算法、量子门、量子线路、量子纠错。\n\n经典计算机要算一万年的，量子计算机几分钟就搞定。',
-    arc: ['PST 4', 'PRS 6', 'FTR 8', 'BYD 10+'], tag: '前沿科技',
+    arc: ['PST 4', 'PRS 6', 'FTR 8', 'BYD 10'], tag: '前沿科技',
     quote: '量子霸权，谁能问鼎？',
     prereq: ['量子力学', '线性代数'], next: [],
     books: ['Nielsen & Chuang《量子计算与量子信息》', '《Quantum Computing》Loeffler'],
     videos: [
-      { name: 'B站搜索：量子计算 网课 推荐', url: 'https://search.bilibili.com/all?keyword=量子计算+网课' }
+      { name: '量子计算 网课 推荐', keyword: '量子计算网课' }
     ]
   },
   '原子核物理': {
@@ -1332,30 +1332,30 @@ const COURSES = {
     prereq: ['原子物理学', '量子力学'], next: ['粒子物理'],
     books: ['卢希庭《原子核物理》', 'Krane《Introductory Nuclear Physics》'],
     videos: [
-      { name: 'B站搜索：原子核物理 网课', url: 'https://search.bilibili.com/all?keyword=原子核物理+网课' }
+      { name: '原子核物理 网课', keyword: '原子核物理网课' }
     ]
   },
   '固体物理': {
     desc: '从晶体结构、倒易空间、声子和能带理论出发，研究固体中的电子、晶格与磁性。\n\n它是半导体、材料、二维材料、超导和许多光电材料研究的理论基础。',
-    arc: ['PST 5', 'PRS 7', 'FTR 9+', 'INS 12'], tag: '凝聚态终极',
+    arc: ['PST 5', 'PRS 7', 'FTR 9+', 'BYD 11'], tag: '凝聚态终极',
     quote: '微观量子世界在宏观材料中的终极体现。',
     prereq: ['量子力学', '热力学与统计物理', '群论'], next: ['半导体物理', '材料物理', '发光物理'],
     books: ['黄昆《固体物理学》', 'Kittel《固体物理导论》', 'Ashcroft & Mermin《Solid State Physics》'],
     videos: [
-      { name: '电子科技大学《固体物理学》课程精讲', url: 'https://www.bilibili.com/video/BV1Gh4y1t7kH' },
-      { name: '河南工业大学《固体物理》基础课程 期末考试复习精讲', url: 'https://www.bilibili.com/video/BV1Cx4y1Q7mD' },
-      { name: 'B站搜索：B站物院 固体物理', url: 'https://search.bilibili.com/all?keyword=B站物院+固体物理' }
+      { name: '电子科技大学《固体物理学》课程精讲', keyword: '电子科技大学固体物理' },
+      { name: '河南工业大学《固体物理》期末考试复习精讲', keyword: '固体物理期末复习' },
+      { name: 'B站物院 固体物理', keyword: 'B站物院固体物理' }
     ]
   },
   '材料物理': {
     desc: '结构决定性质，性质决定功能。从原子排列到宏观性能，从金属到陶瓷到高分子。\n\n你们做材料的，不就是烧炉子吗？不，我们是在原子尺度上盖房子！',
-    arc: ['PST 5', 'PRS 7', 'FTR 9', 'BYD 10+'], tag: '材料科学',
+    arc: ['PST 5', 'PRS 7', 'FTR 9', 'BYD 10'], tag: '材料科学',
     quote: '物理、化学、工程的完美交叉，新材料是科技革命的先导。',
     prereq: ['固体物理'], next: ['半导体材料', '材料制备技术', '材料测试技术'],
     books: ['《材料科学基础》胡赓祥', '《材料物理》石德珂', 'Callister《Materials Science and Engineering》'],
     videos: [
-      { name: '枣子学长《材料科学基础》0基础24讲', url: 'https://www.bilibili.com/video/BV1Nm4y1H7sF' },
-      { name: '中科大《802材料科学基础》系列课程', url: 'https://www.bilibili.com/video/BV1Gm4y1M7eF' }
+      { name: '枣子学长《材料科学基础》0基础24讲', keyword: '枣子学长材料科学基础' },
+      { name: '中科大《802材料科学基础》系列课程', keyword: '中科大材料科学基础' }
     ]
   },
   '材料制备技术': {
@@ -1365,7 +1365,7 @@ const COURSES = {
     prereq: ['材料物理'], next: ['半导体工艺'],
     books: ['《材料制备科学与技术》', '《薄膜材料与薄膜技术》郑伟涛', '《晶体生长》'],
     videos: [
-      { name: 'B站搜索：材料制备技术 薄膜制备 晶体生长', url: 'https://search.bilibili.com/all?keyword=材料制备+薄膜+晶体生长' }
+      { name: '材料制备技术 薄膜制备 晶体生长', keyword: '材料制备薄膜晶体生长' }
     ]
   },
   '材料测试技术': {
@@ -1375,7 +1375,7 @@ const COURSES = {
     prereq: ['材料物理'], next: ['半导体材料'],
     books: ['《材料现代分析测试方法》周玉', '《材料表征》Leng', '《X射线衍射学》'],
     videos: [
-      { name: 'B站搜索：XRD SEM TEM 材料测试 教程', url: 'https://search.bilibili.com/all?keyword=XRD+SEM+TEM+教程' }
+      { name: 'XRD SEM TEM 材料测试 教程', keyword: 'XRD SEM TEM教程' }
     ]
   },
   '半导体物理': {
@@ -1385,9 +1385,9 @@ const COURSES = {
     prereq: ['固体物理', '量子力学'], next: ['半导体材料', '半导体器件'],
     books: ['刘恩科《半导体物理学》（第七版）', '施敏《半导体器件物理》', 'Neamen《Semiconductor Physics and Devices》'],
     videos: [
-      { name: '西安电子科技大学《半导体物理》国家级精品课程', url: 'https://www.bilibili.com/video/BV1Uh4y1Y7kD' },
-      { name: '2027西电801考研《半导体物理》全程班 刘恩科版', url: 'https://www.bilibili.com/video/BV1Xs4y1X7mN' },
-      { name: '《半导体物理学》带字幕 4.5小时期末速成课', url: 'https://www.bilibili.com/video/BV1Nh4y1m7sD' }
+      { name: '西安电子科技大学《半导体物理》国家级精品课程', keyword: '西电半导体物理' },
+      { name: '西电801考研《半导体物理》全程班 刘恩科版', keyword: '西电801半导体物理' },
+      { name: '《半导体物理学》带字幕 4.5小时期末速成课', keyword: '半导体物理速成' }
     ]
   },
   '半导体材料': {
@@ -1397,28 +1397,28 @@ const COURSES = {
     prereq: ['材料物理', '半导体物理'], next: ['半导体器件'],
     books: ['《半导体材料》杨树人', '《硅材料科学与技术》'],
     videos: [
-      { name: 'B站搜索：半导体材料 网课', url: 'https://search.bilibili.com/all?keyword=半导体材料+网课' }
+      { name: '半导体材料 网课', keyword: '半导体材料网课' }
     ]
   },
   '半导体器件': {
     desc: 'PN结、二极管、三极管、MOSFET、HEMT、激光二极管、探测器。\n\n一个PN结就够你学一学期。从器件物理到电路模型，这是连接物理和工程的桥梁。',
-    arc: ['PST 4', 'PRS 6', 'FTR 8', 'BYD 10+'], tag: '半导体器件',
+    arc: ['PST 4', 'PRS 6', 'FTR 8', 'BYD 10'], tag: '半导体器件',
     quote: '器件是芯片的细胞，每个器件都是一段物理故事。',
     prereq: ['半导体物理'], next: ['集成电路', '半导体工艺'],
     books: ['施敏《半导体器件物理》（第三版）', 'Neamen《半导体物理与器件》', 'Sze《Physics of Semiconductor Devices》'],
     videos: [
-      { name: '〖半导体物理与器件〗25考研全程班 尼曼版', url: 'https://www.bilibili.com/video/BV1Xs4y1X7mN' },
-      { name: 'B站搜索：半导体器件物理 施敏 网课', url: 'https://search.bilibili.com/all?keyword=半导体器件物理+施敏' }
+      { name: '半导体物理与器件 考研全程班 尼曼版', keyword: '半导体物理与器件尼曼' },
+      { name: '半导体器件物理 施敏 网课', keyword: '施敏半导体器件物理' }
     ]
   },
   '半导体工艺': {
     desc: '光刻、刻蚀、离子注入、薄膜沉积、CMP、封装。纳米尺度的加工技术，芯片制造的核心。\n\n光刻机为什么这么难？学完这本你就知道了。',
-    arc: ['PST 4', 'PRS 6', 'FTR 8', 'BYD 10+'], tag: '半导体工艺·卡脖子',
+    arc: ['PST 4', 'PRS 6', 'FTR 8', 'BYD 10'], tag: '半导体工艺·卡脖子',
     quote: '从沙子到芯片，这是一场纳米级别的魔术。',
     prereq: ['半导体器件', '材料制备技术'], next: ['集成电路'],
     books: ['《半导体制造技术》Quirk', '《芯片制造》Peter Van Zant', '《集成电路制造工艺》'],
     videos: [
-      { name: 'B站搜索：半导体工艺 光刻 刻蚀 教程', url: 'https://search.bilibili.com/all?keyword=半导体工艺+光刻' }
+      { name: '半导体工艺 光刻 刻蚀 教程', keyword: '半导体工艺光刻' }
     ]
   },
   '发光物理': {
@@ -1428,7 +1428,7 @@ const COURSES = {
     prereq: ['固体物理', '半导体物理'], next: [],
     books: ['《发光物理》徐叙瑢', '《发光学与发光材料》', '《LED原理与应用》'],
     videos: [
-      { name: 'B站搜索：发光物理 LED 荧光 教程', url: 'https://search.bilibili.com/all?keyword=发光物理+LED' }
+      { name: '发光物理 LED 荧光 教程', keyword: '发光物理LED' }
     ]
   },
   '相对论': {
@@ -1438,20 +1438,20 @@ const COURSES = {
     prereq: ['电动力学', '理论力学'], next: ['宇宙学', '黑洞物理', '粒子物理'],
     books: ['梁灿彬《微分几何入门与广义相对论》', 'Schutz《A First Course in General Relativity》', 'Landau《The Classical Theory of Fields》'],
     videos: [
-      { name: '北京师范大学《从爱因斯坦到霍金的宇宙》赵峥教授', url: 'https://www.bilibili.com/video/BV1WK4y1t72y' },
-      { name: '张朝阳的物理课（相对论、微分几何、天体物理合集）', url: 'https://www.bilibili.com/video/BV1pL411U7mN' }
+      { name: '北京师范大学《从爱因斯坦到霍金的宇宙》赵峥教授', keyword: '赵峥从爱因斯坦到霍金' },
+      { name: '张朝阳的物理课 相对论 微分几何 天体物理合集', keyword: '张朝阳物理课' }
     ]
   },
   '宇宙学': {
     desc: '大爆炸、宇宙微波背景辐射、暗物质、暗能量、宇宙加速膨胀。\n\n宇宙起源于138亿年前的一次大爆炸，而它至今仍在加速膨胀。\n\n我们看得见的物质只占宇宙的5%，剩下95%是什么？没人知道。',
-    arc: ['PST 5', 'PRS 7', 'FTR 9', 'BYD 10+'], tag: '最大尺度',
+    arc: ['PST 5', 'PRS 7', 'FTR 9', 'BYD 10'], tag: '最大尺度',
     quote: '宇宙的最不可理解之处，在于它居然是可以被理解的。——爱因斯坦',
     prereq: ['相对论', '热力学与统计物理'], next: [],
     books: ['《宇宙学》Ryden', '《宇宙学导论》赵峥', '《The Early Universe》Kolb & Turner'],
     videos: [
-      { name: '赵峥教授《宇宙学16讲》从大爆炸到现代宇宙探索', url: 'https://www.bilibili.com/video/BV1Wk4y1B7xH' },
-      { name: '理论宇宙学入门 第一课', url: 'https://www.bilibili.com/video/BV1nw411J7mC' },
-      { name: 'Waterloo研究生课《宇宙学广义相对论》全24讲', url: 'https://www.bilibili.com/video/BV1mN4y1k7hG' }
+      { name: '赵峥教授《宇宙学16讲》', keyword: '赵峥宇宙学16讲' },
+      { name: '理论宇宙学入门 第一课', keyword: '理论宇宙学入门' },
+      { name: 'Waterloo研究生课《宇宙学广义相对论》全24讲', keyword: '宇宙学广义相对论' }
     ]
   },
   '黑洞物理': {
@@ -1461,19 +1461,19 @@ const COURSES = {
     prereq: ['相对论', '量子力学', '热力学与统计物理'], next: ['量子引力'],
     books: ['《黑洞与时间弯曲》Thorne', '《黑洞热力学》', 'Hawking《The Nature of Space and Time》'],
     videos: [
-      { name: 'B站搜索：黑洞物理 霍金辐射 教程', url: 'https://search.bilibili.com/all?keyword=黑洞物理+霍金辐射' }
+      { name: '黑洞物理 霍金辐射 教程', keyword: '黑洞物理霍金辐射' }
     ]
   },
   '粒子物理': {
     desc: '夸克、轻子、规范玻色子、Higgs 粒子。标准模型是20世纪物理最伟大的成就之一。\n\n但是中微子有质量、暗物质找不到、引力无法量子化……标准模型之上还有什么？',
-    arc: ['PST 5', 'PRS 7', 'FTR 9+', 'BYD 11'], tag: '标准模型',
+    arc: ['PST 5', 'PRS 7', 'FTR 9+', 'BYD 11+'], tag: '标准模型',
     quote: '标准模型就像一个美丽的谎言——它几乎解释了一切，但总有解释不了的。',
     prereq: ['量子力学', '电动力学', '相对论', '群论'], next: ['规范场论', '量子场论'],
     books: ['格里菲斯《粒子物理导论》', '章乃森《粒子物理学》', '肖振军《粒子物理导论》', 'Halzen & Martin《Quarks and Leptons》'],
     videos: [
-      { name: 'B站搜索：复旦大学 粒子物理', url: 'https://search.bilibili.com/all?keyword=复旦大学+粒子物理' },
-      { name: '粒子物理2025 全系列课程', url: 'https://search.bilibili.com/all?keyword=粒子物理2025' },
-      { name: '量子场论的物理动机——量子场论第一讲', url: 'https://www.bilibili.com/video/BV1Jm4y1K7hD' }
+      { name: '复旦大学 粒子物理', keyword: '复旦大学粒子物理' },
+      { name: '粒子物理 全系列课程', keyword: '粒子物理课程' },
+      { name: '量子场论的物理动机——量子场论第一讲', keyword: '量子场论第一讲' }
     ]
   },
   '规范场论': {
@@ -1483,41 +1483,50 @@ const COURSES = {
     prereq: ['量子力学', '粒子物理', '群论'], next: ['量子场论'],
     books: ['Peskin & Schroeder《An Introduction to Quantum Field Theory》', 'Weinberg《The Quantum Theory of Fields》', 'Srednicki《Quantum Field Theory》'],
     videos: [
-      { name: 'B站搜索：量子场论 规范场论 网课', url: 'https://search.bilibili.com/all?keyword=量子场论+规范场论' },
-      { name: 'B站搜索：Yang-Mills 理论 教学', url: 'https://search.bilibili.com/all?keyword=Yang-Mills+理论' }
+      { name: '量子场论 规范场论 网课', keyword: '量子场论规范场论' },
+      { name: 'Yang-Mills 理论 教学', keyword: 'Yang-Mills理论' }
     ]
   },
   '量子场论': {
     desc: '把量子力学和狭义相对论结合起来，描述基本粒子的产生与湮灭。\n\n路径积分、费曼图、重整化。从QED到QCD，从标准模型到凝聚态，量子场论是现代物理的共同语言。',
-    arc: ['PST 6', 'PRS 8', 'FTR 10+', 'INS 12'], tag: '场论核心',
+    arc: ['PST 6', 'PRS 8', 'FTR 10+', 'BYD 11+'], tag: '场论核心',
     quote: '量子场论是物理学的通用语言——粒子是场的激发，真空是场的基态。',
     prereq: ['量子力学', '电动力学', '相对论', '规范场论'], next: ['弦理论', '量子引力'],
     books: ['Peskin & Schroeder《An Introduction to Quantum Field Theory》', 'Srednicki《Quantum Field Theory》', 'Weinberg《The Quantum Theory of Fields》'],
     videos: [
-      { name: 'B站搜索：量子场论 网课 推荐', url: 'https://search.bilibili.com/all?keyword=量子场论+网课' }
+      { name: '量子场论 网课 推荐', keyword: '量子场论网课' }
     ]
   },
   '弦理论': {
     desc: '把基本粒子看作一维弦的振动模式。10维时空、超对称、M理论。\n\n弦理论是万有理论的候选者，但还没有实验证据。\n\n它统一了引力和量子力学，代价是额外维度和超对称粒子。',
-    arc: ['PST 7', 'PRS 9+', 'FTR 11+', 'INS 12'], tag: '万有理论候选',
+    arc: ['PST 6', 'PRS 8', 'FTR 10+', 'BYD 11+'], tag: '万有理论候选',
     quote: '弦理论是万有理论的候选者——但还没有实验证据。',
     prereq: ['量子场论', '相对论', '群论'], next: [],
     books: ['Polchinski《String Theory》', 'Becker《String Theory and M-Theory》', 'Zwiebach《A First Course in String Theory》'],
     videos: [
-      { name: 'B站搜索：弦理论 网课 推荐', url: 'https://search.bilibili.com/all?keyword=弦理论+网课' }
+      { name: '弦理论 网课 推荐', keyword: '弦理论网课' }
     ]
   },
   '量子引力': {
     desc: '引力的量子化。圈量子引力、因果动力学三角剖分、渐近安全引力。\n\n把引力和量子力学统一起来，是物理学最后的圣杯。\n\n时空在最微小的尺度上可能是离散的、泡沫状的、纠缠的。',
-    arc: ['PST 7', 'PRS 9+', 'FTR 11+', 'INS 12'], tag: '终极难题',
+    arc: ['PST 7', 'PRS 9+', 'FTR 11+', 'INS 12+'], tag: '终极难题',
     quote: '物理学最后的圣杯——把引力和量子力学统一起来。',
     prereq: ['量子场论', '相对论', '黑洞物理'], next: [],
     books: ['Rovelli《Quantum Gravity》', 'Thiemann《Modern Canonical Quantum General Relativity》', 'Rovelli《现实不似你所见》'],
     videos: [
-      { name: 'B站搜索：量子引力 圈量子引力 教程', url: 'https://search.bilibili.com/all?keyword=量子引力+圈量子引力' }
+      { name: '量子引力 圈量子引力 教程', keyword: '量子引力圈量子引力' }
     ]
   }
 };
+
+/* ==================== URL 生成工具 ==================== */
+function doubanBookUrl(name) {
+  const clean = name.replace(/[《》]/g, '').trim();
+  return `https://search.douban.com/book/subject_search?search_text=${encodeURIComponent(clean)}`;
+}
+function biliSearchUrl(keyword) {
+  return `https://search.bilibili.com/all?keyword=${encodeURIComponent(keyword)}`;
+}
 
 /* ==================== 弹窗控制 ==================== */
 let currentCourse = null;
@@ -1549,7 +1558,9 @@ function showCourse(name) {
     const type = parts[0];
     const val = parts[1];
     const item = document.createElement('div');
-    item.className = `arc-diff-item ${type.toLowerCase()}`;
+    let cls = type.toLowerCase();
+    if (type === 'INS' && val === '12+') cls = 'ins-plus';
+    item.className = `arc-diff-item ${cls}`;
     item.innerHTML = `<span class="label">${type}</span><span class="value">${val}</span>`;
     arcRow.appendChild(item);
   });
@@ -1588,9 +1599,12 @@ function showCourse(name) {
     bookSection.style.display = 'block';
     bookList.innerHTML = '';
     course.books.forEach(b => {
-      const item = document.createElement('div');
-      item.className = 'resource-item';
-      item.innerHTML = `<span class="resource-icon">📖</span><span>${b}</span>`;
+      const item = document.createElement('a');
+      item.className = 'resource-item book-item';
+      item.href = doubanBookUrl(b);
+      item.target = '_blank';
+      item.rel = 'noopener';
+      item.innerHTML = `<span class="resource-icon">📖</span><span>${b}</span><span class="resource-arrow">→</span>`;
       bookList.appendChild(item);
     });
   } else {
@@ -1605,7 +1619,7 @@ function showCourse(name) {
     course.videos.forEach(v => {
       const item = document.createElement('a');
       item.className = 'resource-item video-item';
-      item.href = v.url;
+      item.href = biliSearchUrl(v.keyword || v.name);
       item.target = '_blank';
       item.rel = 'noopener';
       item.innerHTML = `<span class="resource-icon">▶️</span><span>${v.name}</span><span class="resource-arrow">→</span>`;
@@ -1628,51 +1642,4 @@ document.addEventListener('keydown', e => { if(e.key === 'Escape') hideInfo(); }
 /* 浏览次数 */
 function initViewCount() {
   const sessionKey = 'phys_session_viewed';
-  let views = parseInt(localStorage.getItem('phys_views') || '0', 10);
-  if (!sessionStorage.getItem(sessionKey)) {
-    views += 1;
-    localStorage.setItem('phys_views', views);
-    sessionStorage.setItem(sessionKey, 'true');
-  }
-  document.getElementById('viewCount').textContent = views.toLocaleString();
-}
-
-/* 点赞 */
-function initLikes() {
-  let likes = parseInt(localStorage.getItem('phys_likes') || '0', 10);
-  const liked = localStorage.getItem('phys_liked') === 'true';
-  document.getElementById('likeCount').textContent = likes.toLocaleString();
-  if (liked) {
-    document.getElementById('heartIcon').textContent = '❤️';
-    document.getElementById('likeBtn').classList.add('liked');
-  }
-}
-function toggleLike() {
-  let likes = parseInt(localStorage.getItem('phys_likes') || '0', 10);
-  const liked = localStorage.getItem('phys_liked') === 'true';
-  const btn = document.getElementById('likeBtn');
-  const heart = document.getElementById('heartIcon');
-  if (liked) {
-    likes = Math.max(0, likes - 1);
-    localStorage.setItem('phys_liked', 'false');
-    heart.textContent = '🤍';
-    btn.classList.remove('liked');
-  } else {
-    likes += 1;
-    localStorage.setItem('phys_liked', 'true');
-    heart.textContent = '❤️';
-    btn.classList.add('liked');
-    heart.style.animation = 'none';
-    setTimeout(() => { heart.style.animation = ''; }, 10);
-  }
-  localStorage.setItem('phys_likes', likes);
-  document.getElementById('likeCount').textContent = likes.toLocaleString();
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-  initViewCount();
-  initLikes();
-});
-</script>
-</body>
-</html>
+  let views = parseInt(localStorage.getItem('phys_views') || '0
