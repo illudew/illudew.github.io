@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>化学知识体系 - 我的化学之旅</title>
+<style>
+  :root{--bg:#f4f7fb;--card:#fff;--ink:#152033;--muted:#607089;--shadow:0 12px 32px rgba(20,36,60,.09);}
+  *{box-sizing:border-box}html{scroll-behavior:smooth}
+  body{margin:0;font-family:system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;color:var(--ink);
+    background:radial-gradient(circle at 10% 10%,rgba(16,185,129,.08),transparent 28%),
+    radial-gradient(circle at 90% 10%,rgba(59,130,246,.08),transparent 28%),var(--bg)}
+  .wrap{width:min(1400px,94vw);margin:auto}
+  header{padding:52px 0 20px;text-align:center}
+  .eyebrow{font-size:13px;letter-spacing:.22em;color:var(--muted);font-weight:700;text-transform:uppercase}
+  h1{margin:10px 0 8px;font-size:clamp(34px,5vw,64px);line-height:1.08;letter-spacing:-.03em}
+  .subtitle{margin:0 auto;color:var(--muted);font-size:16px;max-width:820px;line-height:1.8}
+  .nav-tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:26px 0 8px}
+  .nav-tab{padding:8px 20px;border-radius:999px;text-decoration:none;font-weight:700;font-size:14px;border:1px solid #d5deea;background:#fff;transition:.25s}
+  .nav-tab:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(20,36,60,.1)}
+  .nav-tab.active{background:linear-gradient(135deg,#065f46,#3b82f6);color:#fff;border-color:transparent;box-shadow:0 8px 20px rgba(16,185,129,.35)}
+  .nav-tab.math{color:#1e40af;border-color:#bfdbfe}
+  .nav-tab.chem{color:#065f46;border-color:#bbf7d0}
+  .nav-tab.bio{color:#9a3412;border-color:#fed7aa}
+  .nav-tab.phys{color:#5b21b6;border-color:#ddd6fe}
+  .toolbar{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:16px 0 8px}
+  button{border:1px solid #d5deea;background:#fff;color:var(--ink);border-radius:999px;padding:9px 14px;font:inherit;cursor:pointer;transition:.2s}
+  button:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(20,36,60,.08)}
+  .engagement-bar{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:10px 0 0}
+  .stat-item,.like-btn{display:inline-flex;align-items:center;gap:6px;padding:9px 18px;background:#fff;border:1px solid #d5deea;border-radius:999px;font-size:14px;font-weight:600;color:#475569;transition:.25s}
+  .like-btn{cursor:pointer;font-family:inherit}.like-btn.liked{background:#fee2e2;border-color:#fca5a5;color:#b91c1c}
+  .stat-value,.like-count{color:#059669;font-weight:800}
+  .roadmap{margin-top:30px;background:rgba(255,255,255,.74);border:1px solid rgba(189,201,218,.7);box-shadow:var(--shadow);border-radius:28px;padding:34px}
+  .phase-title{font-size:24px;font-weight:800;margin:60px 0 4px;display:flex;align-items:center;gap:12px;color:#1e293b}
+  .phase-title:first-child{margin-top:0}.phase-title::before{content:"";display:block;width:6px;height:30px;border-radius:4px;background:#059669;flex-shrink:0}
+  .phase-en{font-size:11px;letter-spacing:.4em;color:#94a3b8;font-weight:700;text-transform:uppercase;margin:0 0 12px 18px;font-style:italic}
+  .phase-title.classic::before{background:#3b82f6}.phase-title.quantum::before{background:#7c3aed}.phase-title.apps::before{background:#c2410c}.phase-title.cosmos::before{background:#4338ca}.phase-title.nexus::before{background:#059669}
+  .phase-desc{color:var(--muted);font-size:14px;margin:0 0 24px 18px;line-height:1.7}
+  .domain{margin-bottom:26px;padding:16px 18px 18px 22px;position:relative;background:rgba(255,255,255,.6);border-radius:18px;border:1px solid #e5ebf2}
+  .domain::before{content:"";position:absolute;left:6px;top:16px;bottom:16px;width:5px;border-radius:5px;background:var(--domain-color,#059669);box-shadow:0 0 12px rgba(5,150,105,.25)}
+  .domain-header{display:flex;align-items:center;gap:10px;margin-bottom:14px;padding-left:6px}.domain-header h3{margin:0;font-size:18px;color:#1e293b}
+  .domain-count{font-size:11px;padding:3px 10px;border-radius:999px;background:#f1f5f9;color:#64748b;font-weight:600}
+  .domain-desc{font-size:12px;color:#94a3b8;margin-left:auto;font-style:italic}
+  .domain-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+  .course-card{background:#fff;border:1px solid #dbe3ee;border-radius:14px;padding:14px;cursor:pointer;transition:.25s}
+  .course-card:hover{transform:translateY(-3px);box-shadow:0 10px 20px rgba(25,44,75,.1);border-color:#aabbd0}
+  .course-card h4{margin:0 0 6px;font-size:14.5px;color:#1e293b}.course-card p{margin:0;font-size:11.5px;color:var(--muted);line-height:1.55}
+  .arc-badges{display:flex;flex-wrap:wrap;gap:3px;margin-bottom:8px}
+  .arc-badge{font-size:9.5px;font-weight:800;padding:2px 6px;border-radius:5px;white-space:nowrap}
+  .arc-pst{background:#dbeafe;color:#1e40af}.arc-prs{background:#d1fae5;color:#065f46}.arc-ftr{background:#b39dff;color:#2e1065}
+  .arc-etr{background:#0c4a6e;color:#fff}.arc-byd{background:#7f1d1d;color:#fff}.arc-ins{background:#4c1d95;color:#fff}
+  .arc-ins-plus{background:#2e1065;color:#fbbf24;box-shadow:0 0 0 1px #fbbf24 inset}
+  .tag{display:inline-block;font-size:10px;padding:3px 8px;border-radius:5px;background:#f1f5f9;color:#475569;margin-bottom:6px;font-weight:600}
+  .hard-card{border-color:#fecaca;background:#fff5f5}.final-card{border-color:#ddd6fe;background:#faf5ff}
+  .chip-card{border-color:#fed7aa;background:#fff7ed}.cosmos-card{border-color:#c7d2fe;background:linear-gradient(135deg,#eef2ff,#e0e7ff)}
+  .ultimate-card{border:2px solid #6d28d9;background:linear-gradient(135deg,#faf5ff,#ede9fe)}
+  .god-card{border:2px solid #fbbf24;background:linear-gradient(135deg,#fef3c7,#fde68a);box-shadow:0 0 30px rgba(251,191,36,.5)}
+  .overlay{position:fixed;inset:0;background:rgba(15,23,42,.46);display:none;align-items:center;justify-content:center;padding:18px;z-index:50}
+  .overlay.show{display:flex}.modal{width:min(660px,96vw);background:#fff;border-radius:24px;padding:28px;max-height:86vh;overflow-y:auto}
+  .modal h2{margin:0 0 12px;font-size:24px;color:#1e293b}.modal p{color:#475569;line-height:1.8;margin:0;white-space:pre-wrap;font-size:15px}
+  .modal .quote{margin-top:16px;padding:14px;background:#f8fafc;border-left:4px solid #059669;border-radius:6px;font-style:italic;color:#334155}
+  .arc-diff-row{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 4px}
+  .arc-diff-item{display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:10px;font-size:13px;font-weight:700}
+  .arc-diff-item .label{font-size:11px}.arc-diff-item .value{font-size:16px;font-weight:900}
+  .arc-diff-item.pst{background:#dbeafe}.arc-diff-item.pst .label,.arc-diff-item.pst .value{color:#1e40af}
+  .arc-diff-item.prs{background:#d1fae5}.arc-diff-item.prs .label,.arc-diff-item.prs .value{color:#065f46}
+  .arc-diff-item.ftr{background:#b39dff}.arc-diff-item.ftr .label,.arc-diff-item.ftr .value{color:#2e1065}
+  .arc-diff-item.etr{background:#0c4a6e}.arc-diff-item.etr .label,.arc-diff-item.etr .value{color:#fff}
+  .arc-diff-item.byd{background:#7f1d1d}.arc-diff-item.byd .label,.arc-diff-item.byd .value{color:#fff}
+  .arc-diff-item.ins{background:#4c1d95}.arc-diff-item.ins .label,.arc-diff-item.ins .value{color:#fff}
+  .arc-diff-item.ins-plus{background:#2e1065;border:1px solid #fbbf24}.arc-diff-item.ins-plus .label{color:#fbbf24}.arc-diff-item.ins-plus .value{color:#fef3c7}
+  .resource-section{margin-top:18px;padding-top:16px;border-top:1px dashed #e2e8f0}
+  .resource-label{font-size:13px;font-weight:800;color:#334155;margin-bottom:10px}
+  .resource-list{display:flex;flex-direction:column;gap:6px}
+  .resource-item{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:10px;font-size:13px;color:#334155;background:#f8fafc;border:1px solid #e2e8f0;transition:.2s;text-decoration:none}
+  .video-item{background:#fef2f2;border-color:#fecaca;color:#991b1b;font-weight:600}.book-item{background:#f0fdf4;border-color:#bbf7d0;color:#166534;font-weight:600}
+  .resource-arrow{margin-left:auto;color:#94a3b8;font-weight:bold}
+  .relations{margin-top:22px;padding-top:20px;border-top:1px dashed #e2e8f0;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .relation-label{font-size:12px;font-weight:800;color:#64748b;margin-bottom:8px}
+  .relation-label.prereq{color:#2563eb}.relation-label.next{color:#059669}
+  .relation-list{display:flex;flex-wrap:wrap;gap:6px}
+  .relation-chip{font-size:12px;padding:5px 10px;border-radius:8px;background:#eff6ff;color:#1e40af;cursor:pointer;border:1px solid #dbeafe;font-weight:600}
+  .relation-chip.next-chip{background:#ecfdf5;color:#047857;border-color:#d1fae5}
+  .relation-empty{font-size:12px;color:#94a3b8;font-style:italic}
+  .modal-close{margin-top:20px;background:#0f172a;color:#fff;border-color:#0f172a;padding:10px 20px;font-weight:bold}
+  footer{padding:34px 0 50px;color:var(--muted);text-align:center;font-size:13px}
+  @media(max-width:900px){.wrap{width:min(94vw,720px)}.roadmap{padding:20px}.phase-title{font-size:19px}.domain-desc{display:none}.relations{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">MY CHEMISTRY JOURNEY</div>
+    <h1>化学知识体系</h1>
+    <p class="subtitle">六幕知识的旅途，从原子序曲到化学尽头的炼金王国。</p>
+    <nav class="nav-tabs">
+      <a class="nav-tab phys" href="index.html">⚛️ 物理</a>
+      <a class="nav-tab math" href="math.html">📐 数学</a>
+      <a class="nav-tab chem active" href="chemistry.html">🧪 化学</a>
+      <a class="nav-tab bio" href="biology.html">🧬 生物</a>
+    </nav>
+    <div class="toolbar"><button onclick="window.scrollTo({top:0,behavior:'smooth'})">回到顶部</button></div>
+    <div class="engagement-bar">
+      <div class="stat-item"><span>👁️</span><span class="stat-value" id="viewCount">--</span><span>次浏览</span></div>
+      <button class="like-btn" id="likeBtn" onclick="toggleLike()"><span id="heartIcon">🤍</span><span>点赞</span><span class="like-count" id="likeCount">--</span></button>
+    </div>
+  </header>
+
+  <main class="roadmap">
+    <h2 class="phase-title">⚗️ 第一章 · 原子序曲</h2>
+    <div class="phase-en">ATOMIC OVERTURE</div>
+    <p class="phase-desc">一切化学从原子开始。电子排布、化学键、周期律——化学的三块基石。</p>
+    <div class="domain" style="--domain-color:#059669;">
+      <div class="domain-header"><h3>🔬 基础化学</h3><span class="domain-count">4门</span><span class="domain-desc">化学的入门基石</span></div>
+      <div class="domain-grid">
+        <div class="course-card" onclick="showCourse('普通化学')"><div class="tag">入门</div><h4>普通化学</h4>
+          <div class="arc-badges"><span class="arc-badge arc-pst">PST 1</span><span class="arc-badge arc-prs">PRS 3</span><span class="arc-badge arc-ftr">FTR 5</span></div>
+          <p>化学平衡、酸碱、氧化还原、热力学。化学世界的入口。</p></div>
+        <div class="course-card" onclick="showCourse('无机化学')"><div class="tag">核心</div><h4>无机化学</h4>
+          <div class="arc-badges"><span class="arc-badge arc-pst">PST 3</span><span class="arc-badge arc-prs">PRS 5</span><span class="arc-badge arc-ftr">FTR 7</span><span class="arc-badge arc-etr">ETR 9</span></div>
+          <p>元素化学、配位化学、晶体场理论。元素周期表的故事。</p></div>
+        <div class="course-card" onclick="showCourse('原子结构')"><div class="tag">基础</div><h4>原子结构</h4>
+          <div class="arc-badges"><span class="arc-badge arc-pst">PST 2</span><span class="arc-badge arc-prs">PRS 4</span><span class="arc-badge arc-ftr">FTR 6</span></div>
+          <p>波尔模型、量子数、电子云、原子轨道。</p></div>
+        <div class="course-card" onclick="showCourse('化学键理论')"><div class="tag">基础</div><h4>化学键理论</h4>
+          <div class="arc-badges"><span class="arc-badge arc-pst">PST 2</span><span class="arc-badge arc-prs">PRS 4</span><span class="arc-badge arc-ftr">FTR 6</span></div>
+          <p>离子键、共价键、VSEPR、分子轨道。原子如何牵手。</p></div>
+      </div>
+    </div>
+
+    <h2 class="phase-title classic">🧬 第二章 · 分子华尔兹</h2>
+    <div class="phase-en">MOLECULAR WALTZ</div>
+    <p class="phase-desc">碳的化学是生命的基础，有机化学是化学最壮丽的乐章。</p>
+    <div class="domain" style="--domain-color:#3b82f6;">
+      <div class="domain-header"><h3>🌿 有机化学</h3><span class="domain-count">4门</span><span class="domain-desc">碳的化学王国</span></div>
+      <div class="domain-grid">
+        <div class="course-card" onclick="showCourse('有机化学')"><div class="tag">核心</div><h4>有机化学</h4>
+          <div class="arc-badges"><span class="arc-badge arc-pst">PST 3</span><span class="arc-badge arc-prs">PRS 5</span><span class="arc-badge arc-ftr">FTR 7</span><span class="arc-badge arc-byd">BYD 10</span></div>
+          <p>烷烃、烯烃、芳香烃、卤代烃、醇、醛、酮、羧酸、胺。有机世界的基础地图。</p></div>
+        <div class="course-card" onclick="showCourse('分析化学')"><div class="tag">核心</div><h4>分析化学</h4>
+          <div class="arc-badges"><span class="arc-badge arc-pst">PST 3</span><span class="arc-badge arc-prs">PRS 5</span><span class="arc-badge arc-ftr">FTR 7</span><span class="arc-badge arc-etr">ETR 9</span></div>
+          <p>滴定、光谱、色谱、质谱。化学家的眼睛。</p></div>
+        <div class="course-card" onclick="showCourse('高分子化学')"><div class="tag">方向</div><h4>高分子化学</h4>
+          <div class="arc-badges"><span class="arc-badge arc-pst">PST 3</span><span class="arc-badge arc-prs">PRS 5</span><span class="arc-badge arc-ftr">FTR 7</span></div>
+          <p>聚合反应、链结构、塑料、橡胶、纤维。</p></div>
+        <div class="course-card hard-card" onclick="showCourse('有机合成')"><div class="tag" style="background:#fee2e2;color:#b91c1c;">进阶</div><h4>有机合成</h4>
+          <div class="arc-badges"><span class="arc-badge arc-pst">PST 5</span><span class="arc-badge arc-prs">PRS 7</span><span class="arc-badge arc-ftr">FTR 9+</span><span class="arc-badge arc-byd">BYD 11</span></div>
+          <p>逆合成分析、保护基、立体选择性。像搭积木一样构建分子。</p></div>
+      </div>
+    </div>
+
+    <h2 class="phase-title quantum">⚡ 第三章 · 反应深渊</h2>
+    <div class="phase-en">REACTION ABYSS</div>
+    <p class="phase-desc">用物理定律理解化学反应，物理化学是化学的数学灵魂。</p>
+    <div class="domain" style="--domain-color:#7c3aed;">
+      <div class="domain-header"><h3>🔥 物理化学</h3><span class="domain-count">4门</span><span class="domain-desc">化学的物理基础</span></div>
+      <div class="domain-grid">
+        <div class="course-card" onclick="showCourse('物理化学')"><div class="tag">核心</div><h4>物理化学</h4>
+          <div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 11</span></div>
+          <p>热力学、动力学、电化学、表面化学。用物理定律描述化学。</p></div>
+        <div class="course-card hard-card" onclick="showCourse('量子化学')"><div class="tag" style="background:#fee2e2;color:#b91c1c;">进阶</div><h4>量子化学</h4>
+          <div class="arc-badges"><span class="arc-badge arc-pst">PST 5</span><span class="arc-badge arc-prs">PRS 7</span><span class="arc-badge arc-ftr">FTR 9+</span><span class="arc-badge arc-ins">INS 12</span></div>
+          <p>Schrödinger方程、分子轨道、DFT。化学的量子本质。</p></div>
+        <div class="course-card" onclick="showCourse('催化化学')"><div class="tag">方向</div><h4>催化化学</h4>
+          <div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 10</span></div>
+          <p>均相催化、多相催化、酶催化。化学工业的核心。</p></div>
+        <div class="course-card" onclick="showCourse('电化学')"><div class="tag">方向</div><h4>电化学</h4>
+          <div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 10</span></div>
+          <p>电池、电解、腐蚀、燃料电池。化学能与电能的转换。</p></div>
+      </div>
+    </div>
+
+    <h2 class="phase-title apps">💎 第四章 · 材料炼金</h2>
+    <div class="phase-en">MATERIALS ALCHEMY</div>
+    <p class="phase-desc">从传统炼丹术到现代材料科学，化学家是新时代的炼金术士。</p>
+    <div class="domain" style="--domain-color:#c2410c;">
+      <div class="domain-header"><h3>🧱 材料化学</h3><span class="domain-count">4门</span><span class="domain-desc">从分子到材料</span></div>
+      <div class="domain-grid">
+        <div class="course-card" onclick="showCourse('材料化学')"><div class="tag">核心</div><h4>材料化学</h4>
+          <div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 10</span></div>
+          <p>无机材料、有机材料、复合材料、纳米材料。现代材料的化学基础。</p></div>
+        <div class="course-card" onclick="showCourse('纳米化学')"><div class="tag">前沿</div><h4>纳米化学</h4>
+          <div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 10</span></div>
+          <p>纳米颗粒、量子点、碳纳米管。物质在纳米尺度的化学。</p></div>
+        <div class="course-card" onclick="showCourse('能源化学')"><div class="tag">方向</div><h4>能源化学</h4>
+          <div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span></div>
+          <p>太阳能电池、锂离子电池、氢能。新能源的化学基础。</p></div>
+        <div class="course-card" onclick="showCourse('环境化学')"><div class="tag">方向</div><h4>环境化学</h4>
+          <div class="arc-badges"><span class="arc-badge arc-pst">PST 3</span><span class="arc-badge arc-prs">PRS 5</span><span class="arc-badge arc-ftr">FTR 7</span></div>
+          <p>大气化学、水化学、土壤化学。用化学理解地球。</p></div>
+      </div>
+    </div>
+
+    <h2 class="phase-title cosmos">🏛️ 第五章 · 化学尽头</h2>
+    <div class="phase-en">CHEMICAL HORIZON</div>
+    <p class="phase-desc">超分子、化学生物学、计算化学——化学正在向其他学科渗透与融合。</p>
+    <div class="domain" style="--domain-color:#4338ca;">
+      <div class="domain-header"><h3>🌌 化学前沿</h3><span class="domain-count">3门</span><span class="domain-desc">化学的终极探索</span></div>
+      <div class="domain-grid">
+        <div class="course-card cosmos-card" onclick="showCourse('超分子化学')"><div class="tag">前沿</div><h4>超分子化学</h4>
+          <div class="arc-badges"><span class="arc-badge arc-pst">PST 5</span><span class="arc-badge arc-prs">PRS 7</span><span class="arc-badge arc-ftr">FTR 9+</span><span class="arc-badge arc-byd">BYD 11</span></div>
+          <p>分子识别、自组装、主客体化学。分子以上的化学。</p></div>
+        <div class="course-card cosmos-card" onclick="showCourse('化学生物学')"><div class="tag">交叉</div><h4>化学生物学</h4>
+          <div class="arc-badges"><span class="arc-badge arc-pst">PST 5</span><span class="arc-badge arc-prs">PRS 7</span><span class="arc-badge arc-ftr">FTR 9+</span><span class="arc-badge arc-ins">INS 12</span></div>
+          <p>用化学工具研究生命。蛋白质、DNA、糖类的化学。</p></div>
+        <div class="course-card ultimate-card" onclick="showCourse('计算化学')"><div class="tag" style="background:#ede9fe;color:#4c1d95;">终极</div><h4 style="color:#4c1d95;">计算化学</h4>
+          <div class="arc-badges"><span class="arc-badge arc-pst">PST 6</span><span class="arc-badge arc-prs">PRS 8</span><span class="arc-badge arc-ftr">FTR 10+</span><span class="arc-badge arc-ins">INS 12</span></div>
+          <p style="color:#4c1d95;">DFT、分子动力学、机器学习。用计算机模拟化学反应。</p></div>
+      </div>
+    </div>
+
+    <h2 class="phase-title nexus">✨ 额外章 · 化学交汇</h2>
+    <div class="phase-en">CHEMICAL CONVERGENCE</div>
+    <p class="phase-desc">化学不是孤岛，它与物理、生物、材料、环境紧密交织。</p>
+    <div class="domain" style="--domain-color:#059669;">
+      <div class="domain-header"><h3>🌟 交叉方向</h3><span class="domain-count">4门</span><span class="domain-desc">与其他学科的交汇</span></div>
+      <div class="domain-grid">
+        <div class="course-card cosmos-card" onclick="showCourse('药物化学')"><div class="tag">应用</div><h4>药物化学</h4>
+          <div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 10</span></div>
+          <p>药物设计、构效关系、药代动力学。化学与医学的桥梁。</p></div>
+        <div class="course-card cosmos-card" onclick="showCourse('食品化学')"><div class="tag">应用</div><h4>食品化学</h4>
+          <div class="arc-badges"><span class="arc-badge arc-pst">PST 3</span><span class="arc-badge arc-prs">PRS 5</span><span class="arc-badge arc-ftr">FTR 7</span></div>
+          <p>食品成分、添加剂、风味化学。了解你吃的是什么。</p></div>
+        <div class="course-card cosmos-card" onclick="showCourse('高分子材料')"><div class="tag">应用</div><h4>高分子材料</h4>
+          <div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 10</span></div>
+          <p>塑料、橡胶、纤维、涂料。现代生活无处不有高分子。</p></div>
+        <div class="course-card cosmos-card" onclick="showCourse('绿色化学')"><div class="tag">未来</div><h4>绿色化学</h4>
+          <div class="arc-badges"><span class="arc-badge arc-pst">PST 3</span><span class="arc-badge arc-prs">PRS 5</span><span class="arc-badge arc-ftr">FTR 7</span></div>
+          <p>原子经济性、可再生资源、环境友好合成。化学的可持续未来。</p></div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div>Chemistry Knowledge Map · 单文件静态网站 · 适用于 GitHub Pages</div>
+    <div style="margin-top:8px">四学科知识网络 · 难度采用 Arcaea 风格</div>
+  </footer>
+</div>
+
+<div class="overlay" id="overlay" onclick="closeInfo(event)">
+  <div class="modal" onclick="event.stopPropagation()">
+    <h2 id="modalTitle">课程详情</h2>
+    <p id="modalText"></p>
+    <div class="quote" id="modalQuote" style="display:none;"></div>
+    <div class="arc-diff-row" id="arcDiffRow"></div>
+    <div class="resource-section" id="bookSection" style="display:none;"><div class="resource-label">📖 推荐教材（点击跳转 Z-Library）</div><div class="resource-list" id="bookList"></div></div>
+    <div class="resource-section" id="videoSection" style="display:none;"><div class="resource-label">▶️ B站网课资源（点击跳转B站搜索）</div><div class="resource-list" id="videoList"></div></div>
+    <div class="relations">
+      <div class="relation-group"><div class="relation-label prereq">📚 前置学科</div><div class="relation-list" id="prereqList"></div></div>
+      <div class="relation-group"><div class="relation-label next">🎯 后续学科</div><div class="relation-list" id="nextList"></div></div>
+    </div>
+    <button class="modal-close" onclick="hideInfo()">关闭</button>
+  </div>
+</div>
+
+<script>
+const COURSES = {
+  '普通化学':{desc:'化学平衡、酸碱、氧化还原、化学热力学、化学动力学。',arc:['PST 1','PRS 3','FTR 5'],tag:'入门',quote:'化学是研究物质变化的科学。',prereq:[],next:['无机化学','有机化学','物理化学'],books:['Atkins《Chemical Principles》','《普通化学》'],videos:[{name:'普通化学 网课',keyword:'普通化学网课'}]},
+  '无机化学':{desc:'元素化学、配位化学、晶体场理论、金属有机化学。',arc:['PST 3','PRS 5','FTR 7','ETR 9'],tag:'核心',quote:'元素周期表是无机化学的地图。',prereq:['普通化学'],next:['物理化学','材料化学'],books:['格林伍德《元素化学》','Housecroft《Inorganic Chemistry》'],videos:[{name:'无机化学 网课',keyword:'无机化学网课'}]},
+  '原子结构':{desc:'波尔模型、量子数、电子云、原子轨道、电子排布。',arc:['PST 2','PRS 4','FTR 6'],tag:'基础',quote:'电子是化学的灵魂。',prereq:[],next:['化学键理论','量子化学'],books:['Atkins《Physical Chemistry》','《结构化学》'],videos:[{name:'原子结构 网课',keyword:'原子结构网课'}]},
+  '化学键理论':{desc:'离子键、共价键、VSEPR、分子轨道、杂化轨道。',arc:['PST 2','PRS 4','FTR 6'],tag:'基础',quote:'原子如何牵手，决定了物质的一切性质。',prereq:['原子结构'],next:['有机化学','无机化学'],books:['《结构化学》','Atkins《Molecular Quantum Mechanics》'],videos:[{name:'化学键理论 网课',keyword:'化学键理论'}]},
+  '有机化学':{desc:'烷烃、烯烃、芳香烃、卤代烃、醇、醛、酮、羧酸、胺、糖、氨基酸。',arc:['PST 3','PRS 5','FTR 7','BYD 10'],tag:'核心',quote:'有机化学是碳的化学——碳可以形成无数种化合物。',prereq:['普通化学'],next:['有机合成','高分子化学'],books:['邢其毅《基础有机化学》','Clayden《Organic Chemistry》'],videos:[{name:'有机化学 网课',keyword:'有机化学网课'}]},
+  '分析化学':{desc:'滴定分析、光谱分析、色谱分析、质谱、电化学分析。',arc:['PST 3','PRS 5','FTR 7','ETR 9'],tag:'核心',quote:'分析化学是化学家的眼睛。',prereq:['普通化学'],next:['仪器分析','环境化学'],books:['武汉大学《分析化学》','Skoog《Analytical Chemistry》'],videos:[{name:'分析化学 网课',keyword:'分析化学网课'}]},
+  '高分子化学':{desc:'聚合反应、链结构、塑料、橡胶、纤维、涂料。',arc:['PST 3','PRS 5','FTR 7'],tag:'方向',quote:'高分子塑造了现代生活。',prereq:['有机化学'],next:['高分子材料'],books:['潘祖仁《高分子化学》','Odian《Principles of Polymerization》'],videos:[{name:'高分子化学 网课',keyword:'高分子化学网课'}]},
+  '有机合成':{desc:'逆合成分析、保护基、立体选择性、全合成。',arc:['PST 5','PRS 7','FTR 9+','BYD 11'],tag:'进阶',quote:'有机合成是化学的艺术。',prereq:['有机化学'],next:['药物化学'],books:['Warren《Organic Synthesis》','Corey《The Logic of Chemical Synthesis》'],videos:[{name:'有机合成 网课',keyword:'有机合成网课'}]},
+  '物理化学':{desc:'热力学、动力学、电化学、表面化学、统计热力学。',arc:['PST 4','PRS 6','FTR 8','BYD 11'],tag:'核心',quote:'用物理定律描述化学——这是化学的数学灵魂。',prereq:['普通化学','数学分析'],next:['量子化学','催化化学','电化学'],books:['Atkins《Physical Chemistry》','傅献彩《物理化学》'],videos:[{name:'物理化学 网课',keyword:'物理化学网课'}]},
+  '量子化学':{desc:'Schrödinger方程、分子轨道、价键理论、DFT。',arc:['PST 5','PRS 7','FTR 9+','INS 12'],tag:'进阶',quote:'化学的量子本质，用Schrödinger方程理解化学键。',prereq:['物理化学','量子力学'],next:['计算化学'],books:['Szabo & Ostlund《Modern Quantum Chemistry》','徐光宪《量子化学》'],videos:[{name:'量子化学 网课',keyword:'量子化学网课'}]},
+  '催化化学':{desc:'均相催化、多相催化、酶催化、催化机理。',arc:['PST 4','PRS 6','FTR 8','BYD 10'],tag:'方向',quote:'催化剂改变了化学工业。',prereq:['物理化学'],next:[],books:['Chorkendorff《Concepts of Modern Catalysis》'],videos:[{name:'催化化学 网课',keyword:'催化化学网课'}]},
+  '电化学':{desc:'电池、电解、腐蚀、燃料电池、电化学界面。',arc:['PST 4','PRS 6','FTR 8','BYD 10'],tag:'方向',quote:'化学能与电能的转换，新能源的核心。',prereq:['物理化学'],next:['能源化学'],books:['Bard & Faulkner《Electrochemical Methods》'],videos:[{name:'电化学 网课',keyword:'电化学网课'}]},
+  '材料化学':{desc:'无机材料、有机材料、复合材料、纳米材料。',arc:['PST 4','PRS 6','FTR 8','BYD 10'],tag:'核心',quote:'材料是化学的终极产品。',prereq:['无机化学','物理化学'],next:['纳米化学','能源化学'],books:['《材料化学》','West《Solid State Chemistry》'],videos:[{name:'材料化学 网课',keyword:'材料化学网课'}]},
+  '纳米化学':{desc:'纳米颗粒、量子点、碳纳米管、自组装。',arc:['PST 4','PRS 6','FTR 8','BYD 10'],tag:'前沿',quote:'纳米尺度，化学与量子物理交汇。',prereq:['材料化学'],next:[],books:['《纳米化学》','Ozin《Nanochemistry》'],videos:[{name:'纳米化学 网课',keyword:'纳米化学网课'}]},
+  '能源化学':{desc:'太阳能电池、锂离子电池、氢能、燃料电池。',arc:['PST 4','PRS 6','FTR 8'],tag:'方向',quote:'新能源的化学基础，人类未来的能源。',prereq:['电化学','材料化学'],next:[],books:['《能源化学》'],videos:[{name:'能源化学 网课',keyword:'能源化学网课'}]},
+  '环境化学':{desc:'大气化学、水化学、土壤化学、环境污染。',arc:['PST 3','PRS 5','FTR 7'],tag:'方向',quote:'用化学理解地球，用化学保护地球。',prereq:['分析化学'],next:[],books:['《环境化学》','Manahan《Environmental Chemistry》'],videos:[{name:'环境化学 网课',keyword:'环境化学网课'}]},
+  '超分子化学':{desc:'分子识别、自组装、主客体化学、超分子器件。',arc:['PST 5','PRS 7','FTR 9+','BYD 11'],tag:'前沿',quote:'分子以上的化学——非共价键的世界。',prereq:['有机化学','物理化学'],next:[],books:['Lehn《Supramolecular Chemistry》'],videos:[{name:'超分子化学 网课',keyword:'超分子化学网课'}]},
+  '化学生物学':{desc:'蛋白质、DNA、糖类的化学，化学生物学工具。',arc:['PST 5','PRS 7','FTR 9+','INS 12'],tag:'交叉',quote:'用化学工具研究生命——化学与生物学的融合。',prereq:['有机化学','生物化学'],next:[],books:['《化学生物学》','Miller《Chemical Biology》'],videos:[{name:'化学生物学 网课',keyword:'化学生物学网课'}]},
+  '计算化学':{desc:'DFT、分子动力学、机器学习、量子化学计算。',arc:['PST 6','PRS 8','FTR 10+','INS 12'],tag:'终极',quote:'用计算机模拟化学反应——化学的第三个维度。',prereq:['量子化学','计算物理'],next:[],books:['Jensen《Introduction to Computational Chemistry》'],videos:[{name:'计算化学 网课',keyword:'计算化学网课'}]},
+  '药物化学':{desc:'药物设计、构效关系、药代动力学、药物合成。',arc:['PST 4','PRS 6','FTR 8','BYD 10'],tag:'应用',quote:'化学与医学的桥梁，让分子成为药物。',prereq:['有机合成'],next:[],books:['《药物化学》','Patrick《An Introduction to Medicinal Chemistry》'],videos:[{name:'药物化学 网课',keyword:'药物化学网课'}]},
+  '食品化学':{desc:'食品成分、添加剂、风味化学、食品安全。',arc:['PST 3','PRS 5','FTR 7'],tag:'应用',quote:'了解你吃的是什么。',prereq:['有机化学','分析化学'],next:[],books:['《食品化学》'],videos:[{name:'食品化学 网课',keyword:'食品化学网课'}]},
+  '高分子材料':{desc:'塑料、橡胶、纤维、涂料、功能高分子。',arc:['PST 4','PRS 6','FTR 8','BYD 10'],tag:'应用',quote:'现代生活无处不有高分子。',prereq:['高分子化学'],next:[],books:['《高分子材料》'],videos:[{name:'高分子材料 网课',keyword:'高分子材料网课'}]},
+  '绿色化学':{desc:'原子经济性、可再生资源、环境友好合成。',arc:['PST 3','PRS 5','FTR 7'],tag:'未来',quote:'化学的可持续未来。',prereq:['有机化学','环境化学'],next:[],books:['Anastas & Warner《Green Chemistry》'],videos:[{name:'绿色化学 网课',keyword:'绿色化学网课'}]},
+};
+function zlibBookUrl(n){const c=n.replace(/[《》]/g,'').trim();return 'https://z-library.biz/s/'+encodeURIComponent(c)}
+function biliSearchUrl(k){return 'https://search.bilibili.com/all?keyword='+encodeURIComponent(k)}
+let currentCourse=null;
+function showCourse(name){const c=COURSES[name];if(!c){console.warn('Not found:',name);return}currentCourse=name;
+  document.getElementById('modalTitle').textContent=name;document.getElementById('modalText').textContent=c.desc;
+  const q=document.getElementById('modalQuote');if(c.quote){q.style.display='block';q.textContent=c.quote}else q.style.display='none';
+  const arcRow=document.getElementById('arcDiffRow');arcRow.innerHTML='';
+  (c.arc||[]).forEach(a=>{const p=a.split(' ');const t=p[0],v=p[1];const i=document.createElement('div');
+    let cls=t.toLowerCase();if(t==='INS'&&v==='12+')cls='ins-plus';
+    i.className='arc-diff-item '+cls;i.innerHTML='<span class="label">'+t+'</span><span class="value">'+v+'</span>';arcRow.appendChild(i)});
+  const pre=document.getElementById('prereqList');pre.innerHTML='';
+  if(c.prereq&&c.prereq.length){c.prereq.forEach(p=>{const s=document.createElement('span');s.className='relation-chip';s.textContent=p;s.onclick=e=>{e.stopPropagation();showCourse(p)};pre.appendChild(s)})}
+  else pre.innerHTML='<span class="relation-empty">无（起点学科）</span>';
+  const nx=document.getElementById('nextList');nx.innerHTML='';
+  if(c.next&&c.next.length){c.next.forEach(n=>{const s=document.createElement('span');s.className='relation-chip next-chip';s.textContent=n;s.onclick=e=>{e.stopPropagation();showCourse(n)};nx.appendChild(s)})}
+  else nx.innerHTML='<span class="relation-empty">无（终端学科）</span>';
+  const bs=document.getElementById('bookSection'),bl=document.getElementById('bookList');
+  if(c.books&&c.books.length){bs.style.display='block';bl.innerHTML='';c.books.forEach(b=>{const a=document.createElement('a');a.className='resource-item book-item';a.href=zlibBookUrl(b);a.target='_blank';a.rel='noopener';a.innerHTML='<span class="resource-icon">📖</span><span>'+b+'</span><span class="resource-arrow">→</span>';bl.appendChild(a)})}else bs.style.display='none';
+  const vs=document.getElementById('videoSection'),vl=document.getElementById('videoList');
+  if(c.videos&&c.videos.length){vs.style.display='block';vl.innerHTML='';c.videos.forEach(v=>{const a=document.createElement('a');a.className='resource-item video-item';a.href=biliSearchUrl(v.keyword||v.name);a.target='_blank';a.rel='noopener';a.innerHTML='<span class="resource-icon">▶️</span><span>'+v.name+'</span><span class="resource-arrow">→</span>';vl.appendChild(a)})}else vs.style.display='none';
+  document.getElementById('overlay').classList.add('show')}
+function hideInfo(){document.getElementById('overlay').classList.remove('show');currentCourse=null}
+function closeInfo(e){if(e.target.id==='overlay')hideInfo()}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')hideInfo()});
+function initViewCount(){const k='chem_session_viewed';let v=parseInt(localStorage.getItem('chem_views')||'0',10);if(!sessionStorage.getItem(k)){v+=1;localStorage.setItem('chem_views',v);sessionStorage.setItem(k,'true')}document.getElementById('viewCount').textContent=v.toLocaleString()}
+function initLikes(){let l=parseInt(localStorage.getItem('chem_likes')||'0',10);const liked=localStorage.getItem('chem_liked')==='true';document.getElementById('likeCount').textContent=l.toLocaleString();if(liked){document.getElementById('heartIcon').textContent='❤️';document.getElementById('likeBtn').classList.add('liked')}}
+function toggleLike(){let l=parseInt(localStorage.getItem('chem_likes')||'0',10);const liked=localStorage.getItem('chem_liked')==='true';const b=document.getElementById('likeBtn'),h=document.getElementById('heartIcon');if(liked){l=Math.max(0,l-1);localStorage.setItem('chem_liked','false');h.textContent='🤍';b.classList.remove('liked')}else{l+=1;localStorage.setItem('chem_liked','true');h.textContent='❤️';b.classList.add('liked')}localStorage.setItem('chem_likes',l);document.getElementById('likeCount').textContent=l.toLocaleString()}
+document.addEventListener('DOMContentLoaded',()=>{initViewCount();initLikes()});
+</script>
+</body>
+</html>
