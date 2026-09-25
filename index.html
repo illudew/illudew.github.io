@@ -167,10 +167,6 @@
   .ultimate-card { border: 2px solid #6d28d9; background: linear-gradient(135deg, #faf5ff, #ede9fe); box-shadow: 0 0 25px rgba(109,40,217,.3); }
   .ultimate-card:hover { border-color: #4c1d95; box-shadow: 0 0 35px rgba(109,40,217,.5); }
 
-  .god-card { border: 2px solid #fbbf24; background: linear-gradient(135deg, #fef3c7, #fde68a); box-shadow: 0 0 30px rgba(251,191,36,.5); }
-  .god-card:hover { border-color: #f59e0b; box-shadow: 0 0 45px rgba(251,191,36,.7); }
-
-
   .overlay{position:fixed;inset:0;background:rgba(15,23,42,.46);display:none;align-items:center;justify-content:center;padding:18px;z-index:50}
   .overlay.show{display:flex}
   .modal{width:min(660px,96vw);background:white;border-radius:24px;padding:28px;box-shadow:0 24px 80px rgba(0,0,0,.25);animation:popIn .3s cubic-bezier(0.175, 0.885, 0.32, 1.275); max-height: 86vh; overflow-y: auto;}
@@ -203,12 +199,6 @@
   .arc-diff-item.ins { background: #4c1d95; border-color: #5b21b6; }
   .arc-diff-item.ins .label, .arc-diff-item.ins .value { color: #ffffff; }
 
-  .arc-badge.arc-ins-plus { background: #2e1065; color: #fbbf24; box-shadow: 0 0 0 1px #fbbf24 inset; }
-  .arc-diff-item.ins-plus { background: #2e1065; border-color: #fbbf24; }
-  .arc-diff-item.ins-plus .label { color: #fbbf24; }
-  .arc-diff-item.ins-plus .value { color: #fef3c7; }
-
-
   .resource-section { margin-top: 18px; padding-top: 16px; border-top: 1px dashed #e2e8f0; }
   .resource-label { font-size: 13px; font-weight: 800; color: #334155; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
   .resource-list { display: flex; flex-direction: column; gap: 6px; }
@@ -221,10 +211,9 @@
   .resource-item:hover { background: #eef4fb; border-color: #bfdbfe; }
   .video-item { background: #fef2f2; border-color: #fecaca; color: #991b1b; font-weight: 600; }
   .video-item:hover { background: #fee2e2; border-color: #fca5a5; }
-
-  .book-item { background: #f0fdf4; border-color: #bbf7d0; color: #166534; font-weight: 600; }
-  .book-item:hover { background: #dcfce7; border-color: #86efac; }
-
+.book-item { background: #f0fdf4; border-color: #bbf7d0; color: #166534; font-weight: 600; }
+.book-item:hover { background: #dcfce7; border-color: #86efac; }
+.resource-item .resource-arrow { color: #22c55e; }
   .resource-icon { flex-shrink: 0; font-size: 14px; }
   .resource-arrow { margin-left: auto; color: #94a3b8; font-weight: bold; }
   .video-item .resource-arrow { color: #f87171; }
@@ -967,16 +956,16 @@
           </div>
           <p style="color: #4c1d95;">一维弦的振动模式、10维时空、超对称、M理论。万有理论的候选者。</p>
         </div>
-        <div class="course-card god-card" onclick="showCourse('量子引力')">
-          <div class="tag" style="background:#fef3c7; color:#92400e;">⭐ 全书唯一 12+</div>
-          <h4 style="color: #78350f;">量子引力</h4>
+        <div class="course-card ultimate-card" onclick="showCourse('量子引力')">
+          <div class="tag" style="background:#ede9fe; color:#4c1d95;">终极难题</div>
+          <h4 style="color: #4c1d95;">量子引力</h4>
           <div class="arc-badges">
             <span class="arc-badge arc-pst">PST 7</span>
             <span class="arc-badge arc-prs">PRS 9+</span>
             <span class="arc-badge arc-ftr">FTR 11+</span>
-            <span class="arc-badge arc-ins-plus">INS 12+</span>
+            <span class="arc-badge arc-ins">INS 12</span>
           </div>
-          <p style="color: #78350f;">引力的量子化。圈量子引力、因果动力学三角剖分。物理学最后的圣杯。</p>
+          <p style="color: #4c1d95;">引力的量子化。圈量子引力、因果动力学三角剖分。物理学最后的圣杯。</p>
         </div>
       </div>
     </div>
@@ -1536,6 +1525,15 @@ const COURSES = {
 /* ==================== 弹窗控制 ==================== */
 let currentCourse = null;
 
+/* ==================== URL 生成工具 ==================== */
+function doubanBookUrl(name) {
+  const clean = name.replace(/[《》]/g, '').trim();
+  return 'https://search.douban.com/book/subject_search?search_text=' + encodeURIComponent(clean);
+}
+function biliSearchUrl(keyword) {
+  return 'https://search.bilibili.com/all?keyword=' + encodeURIComponent(keyword);
+}
+
 function showCourse(name) {
   const course = COURSES[name];
   if (!course) {
@@ -1619,20 +1617,10 @@ function showCourse(name) {
   if (course.videos && course.videos.length > 0) {
     videoSection.style.display = 'block';
     videoList.innerHTML = '';
-    /* ==================== URL 生成工具 ==================== */
-function doubanBookUrl(name) {
-  const clean = name.replace(/[《》]/g, '').trim();
-  return 'https://search.douban.com/book/subject_search?search_text=' + encodeURIComponent(clean);
-}
-function biliSearchUrl(keyword) {
-  return 'https://search.bilibili.com/all?keyword=' + encodeURIComponent(keyword);
-}
-
-course.videos.forEach(v => {
+    course.videos.forEach(v => {
       const item = document.createElement('a');
       item.className = 'resource-item video-item';
-      // 优先使用直接URL，没有则用keyword搜索
-      item.href = v.url || biliSearchUrl(v.keyword || v.name);
+      item.href = v.url || biliSearchUrl(v.keyword);
       item.target = '_blank';
       item.rel = 'noopener';
       item.innerHTML = `<span class="resource-icon">▶️</span><span>${v.name}</span><span class="resource-arrow">→</span>`;
