@@ -2,142 +2,85 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="数学知识体系：基于个人学习路线的数学知识网络">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>数学知识体系 - 我的数学之旅</title>
 <style>
-  :root{--bg:#f4f7fb;--card:#ffffff;--ink:#152033;--muted:#607089;--shadow:0 12px 32px rgba(20,36,60,.09);}
-  *{box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;color:var(--ink);
-    background:radial-gradient(circle at 10% 10%,rgba(37,99,235,.08),transparent 28%),
-    radial-gradient(circle at 90% 10%,rgba(124,58,237,.08),transparent 28%),var(--bg);}
-  a{color:inherit}
+  :root{--bg:#f4f7fb;--card:#fff;--ink:#152033;--muted:#607089;--shadow:0 12px 32px rgba(20,36,60,.09);}
+  *{box-sizing:border-box}html{scroll-behavior:smooth}
+  body{margin:0;font-family:system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;color:var(--ink);background:radial-gradient(circle at 10% 10%,rgba(37,99,235,.08),transparent 28%),radial-gradient(circle at 90% 10%,rgba(124,58,237,.08),transparent 28%),var(--bg)}
   .wrap{width:min(1400px,94vw);margin:auto}
   header{padding:52px 0 20px;text-align:center}
   .eyebrow{font-size:13px;letter-spacing:.22em;color:var(--muted);font-weight:700;text-transform:uppercase}
   h1{margin:10px 0 8px;font-size:clamp(34px,5vw,64px);line-height:1.08;letter-spacing:-.03em}
   .subtitle{margin:0 auto;color:var(--muted);font-size:16px;max-width:820px;line-height:1.8}
-
-  /* 学科导航 */
   .nav-tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:26px 0 8px}
-  .nav-tab{padding:8px 20px;border-radius:999px;text-decoration:none;font-weight:700;font-size:14px;
-    border:1px solid #d5deea;background:#fff;transition:.25s}
+  .nav-tab{padding:8px 20px;border-radius:999px;text-decoration:none;font-weight:700;font-size:14px;border:1px solid #d5deea;background:#fff;transition:.25s}
   .nav-tab:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(20,36,60,.1)}
   .nav-tab.active{background:linear-gradient(135deg,#1e40af,#7c3aed);color:#fff;border-color:transparent;box-shadow:0 8px 20px rgba(37,99,235,.35)}
-  .nav-tab.math{color:#1e40af;border-color:#bfdbfe}
-  .nav-tab.chem{color:#065f46;border-color:#bbf7d0}
-  .nav-tab.bio{color:#9a3412;border-color:#fed7aa}
-  .nav-tab.phys{color:#5b21b6;border-color:#ddd6fe}
-
+  .nav-tab.math{color:#1e40af;border-color:#bfdbfe}.nav-tab.chem{color:#065f46;border-color:#bbf7d0}
+  .nav-tab.bio{color:#9a3412;border-color:#fed7aa}.nav-tab.phys{color:#5b21b6;border-color:#ddd6fe}
   .toolbar{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:16px 0 8px}
-  button{border:1px solid #d5deea;background:#fff;color:var(--ink);border-radius:999px;padding:9px 14px;font:inherit;cursor:pointer;transition:.2s ease;}
+  button{border:1px solid #d5deea;background:#fff;color:var(--ink);border-radius:999px;padding:9px 14px;font:inherit;cursor:pointer;transition:.2s}
   button:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(20,36,60,.08)}
   .engagement-bar{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:10px 0 0}
-  .stat-item,.like-btn{display:inline-flex;align-items:center;gap:6px;padding:9px 18px;background:#fff;border:1px solid #d5deea;
-    border-radius:999px;font-size:14px;font-weight:600;color:#475569;transition:.25s}
-  .like-btn{cursor:pointer;font-family:inherit}
-  .like-btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(20,36,60,.1)}
-  .like-btn.liked{background:#fee2e2;border-color:#fca5a5;color:#b91c1c}
-  .stat-value,.like-count{color:#2563eb;font-weight:800}
-
+  .stat-item,.like-btn{display:inline-flex;align-items:center;gap:6px;padding:9px 18px;background:#fff;border:1px solid #d5deea;border-radius:999px;font-size:14px;font-weight:600;color:#475569;transition:.25s}
+  .like-btn{cursor:pointer;font-family:inherit}.like-btn.liked{background:#fee2e2;border-color:#fca5a5;color:#b91c1c}
+  .stat-value,.like-count{color:#1e40af;font-weight:800}
   .roadmap{margin-top:30px;background:rgba(255,255,255,.74);border:1px solid rgba(189,201,218,.7);box-shadow:var(--shadow);border-radius:28px;padding:34px}
-  .phase-title{font-size:24px;font-weight:800;margin:60px 0 4px;display:flex;align-items:center;gap:12px;color:#1e293b;letter-spacing:-.01em}
-  .phase-title:first-child{margin-top:0}
-  .phase-title::before{content:"";display:block;width:6px;height:30px;border-radius:4px;background:#2563eb;flex-shrink:0}
+  .phase-title{font-size:24px;font-weight:800;margin:60px 0 4px;display:flex;align-items:center;gap:12px;color:#1e293b}
+  .phase-title:first-child{margin-top:0}.phase-title::before{content:"";display:block;width:6px;height:30px;border-radius:4px;background:#2563eb;flex-shrink:0}
   .phase-en{font-size:11px;letter-spacing:.4em;color:#94a3b8;font-weight:700;text-transform:uppercase;margin:0 0 12px 18px;font-style:italic}
-  .phase-title.classic::before{background:#0f766e}
-  .phase-title.quantum::before{background:#7c3aed}
-  .phase-title.apps::before{background:#c2410c}
-  .phase-title.cosmos::before{background:#4338ca}
-  .phase-title.nexus::before{background:#059669}
+  .phase-title.classic::before{background:#0f766e}.phase-title.quantum::before{background:#7c3aed}.phase-title.apps::before{background:#c2410c}.phase-title.cosmos::before{background:#4338ca}.phase-title.nexus::before{background:#059669}
   .phase-desc{color:var(--muted);font-size:14px;margin:0 0 24px 18px;line-height:1.7}
-
   .domain{margin-bottom:26px;padding:16px 18px 18px 22px;position:relative;background:rgba(255,255,255,.6);border-radius:18px;border:1px solid #e5ebf2}
   .domain::before{content:"";position:absolute;left:6px;top:16px;bottom:16px;width:5px;border-radius:5px;background:var(--domain-color,#2563eb);box-shadow:0 0 12px rgba(37,99,235,.25)}
-  .domain-header{display:flex;align-items:center;gap:10px;margin-bottom:14px;padding-left:6px}
-  .domain-header h3{margin:0;font-size:18px;color:#1e293b}
+  .domain-header{display:flex;align-items:center;gap:10px;margin-bottom:14px;padding-left:6px}.domain-header h3{margin:0;font-size:18px;color:#1e293b}
   .domain-count{font-size:11px;padding:3px 10px;border-radius:999px;background:#f1f5f9;color:#64748b;font-weight:600}
   .domain-desc{font-size:12px;color:#94a3b8;margin-left:auto;font-style:italic}
   .domain-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
-
-  .course-card{background:#fff;border:1px solid #dbe3ee;border-radius:14px;padding:14px;cursor:pointer;transition:.25s;position:relative;overflow:hidden}
+  .course-card{background:#fff;border:1px solid #dbe3ee;border-radius:14px;padding:14px;cursor:pointer;transition:.25s}
   .course-card:hover{transform:translateY(-3px);box-shadow:0 10px 20px rgba(25,44,75,.1);border-color:#aabbd0}
-  .course-card h4{margin:0 0 6px;font-size:14.5px;line-height:1.3;color:#1e293b}
-  .course-card p{margin:0;font-size:11.5px;color:var(--muted);line-height:1.55}
+  .course-card h4{margin:0 0 6px;font-size:14.5px;color:#1e293b}.course-card p{margin:0;font-size:11.5px;color:var(--muted);line-height:1.55}
   .arc-badges{display:flex;flex-wrap:wrap;gap:3px;margin-bottom:8px}
-  .arc-badge{display:inline-flex;align-items:center;font-size:9.5px;font-weight:800;padding:2px 6px;border-radius:5px;letter-spacing:.02em;white-space:nowrap}
-  .arc-pst{background:#dbeafe;color:#1e40af}
-  .arc-prs{background:#d1fae5;color:#065f46}
-  .arc-ftr{background:#b39dff;color:#2e1065}
-  .arc-etr{background:#0c4a6e;color:#fff}
-  .arc-byd{background:#7f1d1d;color:#fff}
-  .arc-ins{background:#4c1d95;color:#fff}
+  .arc-badge{font-size:9.5px;font-weight:800;padding:2px 6px;border-radius:5px;white-space:nowrap}
+  .arc-pst{background:#dbeafe;color:#1e40af}.arc-prs{background:#d1fae5;color:#065f46}.arc-ftr{background:#b39dff;color:#2e1065}
+  .arc-etr{background:#0c4a6e;color:#fff}.arc-byd{background:#7f1d1d;color:#fff}.arc-ins{background:#4c1d95;color:#fff}
   .arc-ins-plus{background:#2e1065;color:#fbbf24;box-shadow:0 0 0 1px #fbbf24 inset}
   .tag{display:inline-block;font-size:10px;padding:3px 8px;border-radius:5px;background:#f1f5f9;color:#475569;margin-bottom:6px;font-weight:600}
-
-  .special-card{background:#f8fafc;border-style:dashed}
-  .hard-card{border-color:#fecaca;background:#fff5f5}
-  .final-card{border-color:#ddd6fe;background:#faf5ff}
-  .chip-card{border-color:#fed7aa;background:#fff7ed}
-  .legendary-card{border:2px solid #f59e0b;background:linear-gradient(135deg,#fffbeb,#fef3c7);box-shadow:0 0 20px rgba(245,158,11,.25)}
-  .cosmos-card{border-color:#c7d2fe;background:linear-gradient(135deg,#eef2ff,#e0e7ff)}
-  .ultimate-card{border:2px solid #6d28d9;background:linear-gradient(135deg,#faf5ff,#ede9fe);box-shadow:0 0 25px rgba(109,40,217,.3)}
+  .hard-card{border-color:#fecaca;background:#fff5f5}.final-card{border-color:#ddd6fe;background:#faf5ff}
+  .chip-card{border-color:#fed7aa;background:#fff7ed}.cosmos-card{border-color:#c7d2fe;background:linear-gradient(135deg,#eef2ff,#e0e7ff)}
+  .ultimate-card{border:2px solid #6d28d9;background:linear-gradient(135deg,#faf5ff,#ede9fe)}
   .god-card{border:2px solid #fbbf24;background:linear-gradient(135deg,#fef3c7,#fde68a);box-shadow:0 0 30px rgba(251,191,36,.5)}
-
   .overlay{position:fixed;inset:0;background:rgba(15,23,42,.46);display:none;align-items:center;justify-content:center;padding:18px;z-index:50}
-  .overlay.show{display:flex}
-  .modal{width:min(660px,96vw);background:white;border-radius:24px;padding:28px;box-shadow:0 24px 80px rgba(0,0,0,.25);animation:popIn .3s;max-height:86vh;overflow-y:auto}
-  @keyframes popIn{from{transform:scale(.9);opacity:0}to{transform:scale(1);opacity:1}}
-  .modal h2{margin:0 0 12px;font-size:24px;color:#1e293b}
-  .modal p{color:#475569;line-height:1.8;margin:0;white-space:pre-wrap;font-size:15px}
-  .modal .quote{margin-top:16px;padding:14px;background:#f8fafc;border-left:4px solid #2563eb;border-radius:6px;font-style:italic;color:#334155}
-
+  .overlay.show{display:flex}.modal{width:min(660px,96vw);background:#fff;border-radius:24px;padding:28px;max-height:86vh;overflow-y:auto}
+  .modal h2{margin:0 0 12px;font-size:24px;color:#1e293b}.modal p{color:#475569;line-height:1.8;margin:0;white-space:pre-wrap;font-size:15px}
+  .modal .quote{margin-top:16px;padding:14px;background:#f8fafc;border-left:4px solid #1e40af;border-radius:6px;font-style:italic;color:#334155}
   .arc-diff-row{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 4px}
-  .arc-diff-item{display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:10px;font-size:13px;font-weight:700;border:1px solid transparent}
-  .arc-diff-item .label{font-size:11px;font-weight:700}
-  .arc-diff-item .value{font-size:16px;font-weight:900}
-  .arc-diff-item.pst{background:#dbeafe;border-color:#bfdbfe}
-  .arc-diff-item.pst .label,.arc-diff-item.pst .value{color:#1e40af}
-  .arc-diff-item.prs{background:#d1fae5;border-color:#a7f3d0}
-  .arc-diff-item.prs .label,.arc-diff-item.prs .value{color:#065f46}
-  .arc-diff-item.ftr{background:#b39dff;border-color:#a78bfa}
-  .arc-diff-item.ftr .label,.arc-diff-item.ftr .value{color:#2e1065}
-  .arc-diff-item.etr{background:#0c4a6e;border-color:#075985}
-  .arc-diff-item.etr .label,.arc-diff-item.etr .value{color:#fff}
-  .arc-diff-item.byd{background:#7f1d1d;border-color:#991b1b}
-  .arc-diff-item.byd .label,.arc-diff-item.byd .value{color:#fff}
-  .arc-diff-item.ins{background:#4c1d95;border-color:#5b21b6}
-  .arc-diff-item.ins .label,.arc-diff-item.ins .value{color:#fff}
-  .arc-diff-item.ins-plus{background:#2e1065;border-color:#fbbf24}
-  .arc-diff-item.ins-plus .label{color:#fbbf24}
-  .arc-diff-item.ins-plus .value{color:#fef3c7}
-
+  .arc-diff-item{display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:10px;font-size:13px;font-weight:700}
+  .arc-diff-item .label{font-size:11px}.arc-diff-item .value{font-size:16px;font-weight:900}
+  .arc-diff-item.pst{background:#dbeafe}.arc-diff-item.pst .label,.arc-diff-item.pst .value{color:#1e40af}
+  .arc-diff-item.prs{background:#d1fae5}.arc-diff-item.prs .label,.arc-diff-item.prs .value{color:#065f46}
+  .arc-diff-item.ftr{background:#b39dff}.arc-diff-item.ftr .label,.arc-diff-item.ftr .value{color:#2e1065}
+  .arc-diff-item.etr{background:#0c4a6e}.arc-diff-item.etr .label,.arc-diff-item.etr .value{color:#fff}
+  .arc-diff-item.byd{background:#7f1d1d}.arc-diff-item.byd .label,.arc-diff-item.byd .value{color:#fff}
+  .arc-diff-item.ins{background:#4c1d95}.arc-diff-item.ins .label,.arc-diff-item.ins .value{color:#fff}
+  .arc-diff-item.ins-plus{background:#2e1065;border:1px solid #fbbf24}.arc-diff-item.ins-plus .label{color:#fbbf24}.arc-diff-item.ins-plus .value{color:#fef3c7}
   .resource-section{margin-top:18px;padding-top:16px;border-top:1px dashed #e2e8f0}
-  .resource-label{font-size:13px;font-weight:800;color:#334155;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+  .resource-label{font-size:13px;font-weight:800;color:#334155;margin-bottom:10px}
   .resource-list{display:flex;flex-direction:column;gap:6px}
-  .resource-item{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:10px;font-size:13px;color:#334155;
-    background:#f8fafc;border:1px solid #e2e8f0;transition:.2s;text-decoration:none;line-height:1.5}
-  .resource-item:hover{background:#eef4fb;border-color:#bfdbfe}
-  .video-item{background:#fef2f2;border-color:#fecaca;color:#991b1b;font-weight:600}
-  .book-item{background:#f0fdf4;border-color:#bbf7d0;color:#166534;font-weight:600}
-  .resource-icon{flex-shrink:0;font-size:14px}
+  .resource-item{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:10px;font-size:13px;color:#334155;background:#f8fafc;border:1px solid #e2e8f0;transition:.2s;text-decoration:none}
+  .video-item{background:#fef2f2;border-color:#fecaca;color:#991b1b;font-weight:600}.book-item{background:#f0fdf4;border-color:#bbf7d0;color:#166534;font-weight:600}
   .resource-arrow{margin-left:auto;color:#94a3b8;font-weight:bold}
-
   .relations{margin-top:22px;padding-top:20px;border-top:1px dashed #e2e8f0;display:grid;grid-template-columns:1fr 1fr;gap:16px}
-  .relation-group{display:flex;flex-direction:column;gap:8px}
-  .relation-label{font-size:12px;font-weight:800;letter-spacing:.05em;color:#64748b;display:flex;align-items:center;gap:5px}
-  .relation-label.prereq{color:#2563eb}
-  .relation-label.next{color:#059669}
+  .relation-label{font-size:12px;font-weight:800;color:#64748b;margin-bottom:8px}
+  .relation-label.prereq{color:#2563eb}.relation-label.next{color:#059669}
   .relation-list{display:flex;flex-wrap:wrap;gap:6px}
-  .relation-chip{font-size:12px;padding:5px 10px;border-radius:8px;background:#eff6ff;color:#1e40af;cursor:pointer;transition:.2s;border:1px solid #dbeafe;font-weight:600}
-  .relation-chip:hover{background:#dbeafe;transform:translateY(-1px)}
+  .relation-chip{font-size:12px;padding:5px 10px;border-radius:8px;background:#eff6ff;color:#1e40af;cursor:pointer;border:1px solid #dbeafe;font-weight:600}
   .relation-chip.next-chip{background:#ecfdf5;color:#047857;border-color:#d1fae5}
   .relation-empty{font-size:12px;color:#94a3b8;font-style:italic}
-
-  .modal-close{margin-top:20px;background:#0f172a;color:white;border-color:#0f172a;padding:10px 20px;font-weight:bold}
+  .modal-close{margin-top:20px;background:#0f172a;color:#fff;border-color:#0f172a;padding:10px 20px;font-weight:bold}
   footer{padding:34px 0 50px;color:var(--muted);text-align:center;font-size:13px}
-  @media(max-width:900px){.wrap{width:min(94vw,720px)}.roadmap{padding:20px}.phase-title{font-size:19px}.phase-en{font-size:10px;letter-spacing:.28em}.domain-desc{display:none}.domain-grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}.relations{grid-template-columns:1fr}}
+  @media(max-width:900px){.wrap{width:min(94vw,720px)}.roadmap{padding:20px}.phase-title{font-size:19px}.domain-desc{display:none}.relations{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -160,34 +103,28 @@
   </header>
 
   <main class="roadmap">
+
     <h2 class="phase-title">✏️ 第一章 · 算术星火</h2>
     <div class="phase-en">ARITHMETIC SPARK</div>
     <p class="phase-desc">数学的起点是最朴素的计数，从这里出发，人类点亮了抽象世界的第一束光。</p>
 
     <div class="domain" style="--domain-color:#2563eb;">
-      <div class="domain-header"><h3>🧮 数学分析</h3><span class="domain-count">3门</span><span class="domain-desc">从极限到微积分</span></div>
+      <div class="domain-header"><h3>🧮 分析基础</h3><span class="domain-count">4门</span><span class="domain-desc">从极限到微积分</span></div>
       <div class="domain-grid">
-        <div class="course-card" onclick="showCourse('数学分析')"><div class="tag">基础必修</div><h4>数学分析</h4>
-          <div class="arc-badges"><span class="arc-badge arc-pst">PST 2</span><span class="arc-badge arc-prs">PRS 5</span><span class="arc-badge arc-ftr">FTR 7</span><span class="arc-badge arc-etr">ETR 9</span></div>
-          <p>极限、连续、微分、积分、级数。分析学的皇冠。</p></div>
-        <div class="course-card" onclick="showCourse('高等代数')"><div class="tag">基础必修</div><h4>高等代数</h4>
-          <div class="arc-badges"><span class="arc-badge arc-pst">PST 2</span><span class="arc-badge arc-prs">PRS 4</span><span class="arc-badge arc-ftr">FTR 6</span></div>
-          <p>多项式、行列式、矩阵、线性空间、Jordan标准形。</p></div>
-        <div class="course-card" onclick="showCourse('解析几何')"><div class="tag">基础必修</div><h4>解析几何</h4>
-          <div class="arc-badges"><span class="arc-badge arc-pst">PST 1</span><span class="arc-badge arc-prs">PRS 3</span><span class="arc-badge arc-ftr">FTR 5</span></div>
-          <p>用代数研究几何：曲线、曲面、二次型。数学美学的入口。</p></div>
+        <div class="course-card" onclick="showCourse('数学分析')"><div class="tag">基础必修</div><h4>数学分析</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 2</span><span class="arc-badge arc-prs">PRS 5</span><span class="arc-badge arc-ftr">FTR 7</span><span class="arc-badge arc-etr">ETR 9</span></div><p>极限、连续、微分、积分、级数。分析学的皇冠。</p></div>
+        <div class="course-card" onclick="showCourse('高等代数')"><div class="tag">基础必修</div><h4>高等代数</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 2</span><span class="arc-badge arc-prs">PRS 4</span><span class="arc-badge arc-ftr">FTR 6</span></div><p>多项式、行列式、矩阵、线性空间、Jordan标准形。</p></div>
+        <div class="course-card" onclick="showCourse('解析几何')"><div class="tag">基础必修</div><h4>解析几何</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 1</span><span class="arc-badge arc-prs">PRS 3</span><span class="arc-badge arc-ftr">FTR 5</span></div><p>用代数研究几何：曲线、曲面、二次型。</p></div>
+        <div class="course-card" onclick="showCourse('集合论')"><div class="tag">基础</div><h4>集合论</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 2</span><span class="arc-badge arc-prs">PRS 4</span><span class="arc-badge arc-ftr">FTR 6</span></div><p>集合、映射、基数、序数。现代数学的共同语言。</p></div>
       </div>
     </div>
 
     <div class="domain" style="--domain-color:#7c3aed;">
-      <div class="domain-header"><h3>🔢 数论初步</h3><span class="domain-count">2门</span><span class="domain-desc">整数的奥秘</span></div>
+      <div class="domain-header"><h3>🎲 组合与数论</h3><span class="domain-count">4门</span><span class="domain-desc">离散世界的数学</span></div>
       <div class="domain-grid">
-        <div class="course-card" onclick="showCourse('初等数论')"><div class="tag">经典方向</div><h4>初等数论</h4>
-          <div class="arc-badges"><span class="arc-badge arc-pst">PST 3</span><span class="arc-badge arc-prs">PRS 5</span><span class="arc-badge arc-ftr">FTR 7</span></div>
-          <p>同余、二次剩余、原根、连分数。数论是最纯粹的数学。</p></div>
-        <div class="course-card" onclick="showCourse('数学史')"><div class="tag">通识</div><h4>数学史</h4>
-          <div class="arc-badges"><span class="arc-badge arc-pst">PST 1</span><span class="arc-badge arc-prs">PRS 2</span><span class="arc-badge arc-ftr">FTR 3</span></div>
-          <p>从毕达哥拉斯到格罗滕迪克。知道数学家在想什么，比知道定理更重要。</p></div>
+        <div class="course-card" onclick="showCourse('初等数论')"><div class="tag">经典</div><h4>初等数论</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 3</span><span class="arc-badge arc-prs">PRS 5</span><span class="arc-badge arc-ftr">FTR 7</span></div><p>同余、二次剩余、原根、连分数。</p></div>
+        <div class="course-card" onclick="showCourse('组合数学')"><div class="tag">核心</div><h4>组合数学</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 3</span><span class="arc-badge arc-prs">PRS 5</span><span class="arc-badge arc-ftr">FTR 7</span><span class="arc-badge arc-etr">ETR 9</span></div><p>计数、排列组合、生成函数、Ramsey理论。</p></div>
+        <div class="course-card" onclick="showCourse('图论')"><div class="tag">核心</div><h4>图论</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 2</span><span class="arc-badge arc-prs">PRS 4</span><span class="arc-badge arc-ftr">FTR 6</span></div><p>图、树、匹配、网络流。离散结构的骨架。</p></div>
+        <div class="course-card" onclick="showCourse('数学史')"><div class="tag">通识</div><h4>数学史</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 1</span><span class="arc-badge arc-prs">PRS 2</span><span class="arc-badge arc-ftr">FTR 3</span></div><p>从毕达哥拉斯到格罗滕迪克。</p></div>
       </div>
     </div>
 
@@ -196,32 +133,23 @@
     <p class="phase-desc">从数字到结构，从计算到抽象。代数回廊里的每一步都在重塑你对"运算"的理解。</p>
 
     <div class="domain" style="--domain-color:#0f766e;">
-      <div class="domain-header"><h3>💠 抽象代数</h3><span class="domain-count">4门</span><span class="domain-desc">对称性的数学</span></div>
+      <div class="domain-header"><h3>💠 抽象代数</h3><span class="domain-count">5门</span><span class="domain-desc">对称性的数学</span></div>
       <div class="domain-grid">
-        <div class="course-card" onclick="showCourse('抽象代数')"><div class="tag">核心</div><h4>抽象代数</h4>
-          <div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 10</span></div>
-          <p>群、环、域、模。现代数学的通用语言。</p></div>
-        <div class="course-card" onclick="showCourse('群论')"><div class="tag">核心</div><h4>群论</h4>
-          <div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-etr">ETR 10</span></div>
-          <p>对称性的语言。物理、化学、密码学都靠它。</p></div>
-        <div class="course-card" onclick="showCourse('环与域')"><div class="tag">进阶</div><h4>环与域</h4>
-          <div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span></div>
-          <p>从整数环到有限域，Galois理论的舞台。</p></div>
-        <div class="course-card hard-card" onclick="showCourse('表示论')"><div class="tag" style="background:#fee2e2;color:#b91c1c;">进阶</div><h4>表示论</h4>
-          <div class="arc-badges"><span class="arc-badge arc-pst">PST 5</span><span class="arc-badge arc-prs">PRS 7</span><span class="arc-badge arc-ftr">FTR 9+</span><span class="arc-badge arc-byd">BYD 11</span></div>
-          <p>把抽象群"翻译"成矩阵。对称性的具体化。</p></div>
+        <div class="course-card" onclick="showCourse('抽象代数')"><div class="tag">核心</div><h4>抽象代数</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 10</span></div><p>群、环、域、模。现代数学的通用语言。</p></div>
+        <div class="course-card" onclick="showCourse('群论')"><div class="tag">核心</div><h4>群论</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-etr">ETR 10</span></div><p>对称性的语言。物理、化学、密码学都靠它。</p></div>
+        <div class="course-card" onclick="showCourse('环与域')"><div class="tag">进阶</div><h4>环与域</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span></div><p>从整数环到有限域，Galois理论的舞台。</p></div>
+        <div class="course-card" onclick="showCourse('交换代数')"><div class="tag">进阶</div><h4>交换代数</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 5</span><span class="arc-badge arc-prs">PRS 7</span><span class="arc-badge arc-ftr">FTR 9+</span><span class="arc-badge arc-byd">BYD 11</span></div><p>理想、局部化、Noether环、维数理论。代数几何的代数基础。</p></div>
+        <div class="course-card hard-card" onclick="showCourse('表示论')"><div class="tag" style="background:#fee2e2;color:#b91c1c;">进阶</div><h4>表示论</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 5</span><span class="arc-badge arc-prs">PRS 7</span><span class="arc-badge arc-ftr">FTR 9+</span><span class="arc-badge arc-byd">BYD 11</span></div><p>把抽象群"翻译"成矩阵。对称性的具体化。</p></div>
       </div>
     </div>
 
     <div class="domain" style="--domain-color:#ea580c;">
-      <div class="domain-header"><h3>🔷 线性代数进阶</h3><span class="domain-count">2门</span><span class="domain-desc">从有限维到无限维</span></div>
+      <div class="domain-header"><h3>🔷 代数进阶</h3><span class="domain-count">4门</span><span class="domain-desc">从有限维到范畴</span></div>
       <div class="domain-grid">
-        <div class="course-card" onclick="showCourse('线性代数进阶')"><div class="tag">进阶</div><h4>线性代数进阶</h4>
-          <div class="arc-badges"><span class="arc-badge arc-pst">PST 3</span><span class="arc-badge arc-prs">PRS 5</span><span class="arc-badge arc-ftr">FTR 7</span><span class="arc-badge arc-etr">ETR 9</span></div>
-          <p>双线性型、辛空间、张量代数。向更深的结构进发。</p></div>
-        <div class="course-card" onclick="showCourse('矩阵分析')"><div class="tag">应用方向</div><h4>矩阵分析</h4>
-          <div class="arc-badges"><span class="arc-badge arc-pst">PST 3</span><span class="arc-badge arc-prs">PRS 5</span><span class="arc-badge arc-ftr">FTR 7</span></div>
-          <p>矩阵函数、矩阵微分、矩阵分解。数值计算的理论基础。</p></div>
+        <div class="course-card" onclick="showCourse('线性代数进阶')"><div class="tag">进阶</div><h4>线性代数进阶</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 3</span><span class="arc-badge arc-prs">PRS 5</span><span class="arc-badge arc-ftr">FTR 7</span><span class="arc-badge arc-etr">ETR 9</span></div><p>双线性型、辛空间、张量代数、外代数。</p></div>
+        <div class="course-card" onclick="showCourse('矩阵分析')"><div class="tag">应用</div><h4>矩阵分析</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 3</span><span class="arc-badge arc-prs">PRS 5</span><span class="arc-badge arc-ftr">FTR 7</span></div><p>矩阵函数、矩阵微分、矩阵分解。</p></div>
+        <div class="course-card hard-card" onclick="showCourse('模论')"><div class="tag" style="background:#fee2e2;color:#b91c1c;">进阶</div><h4>模论</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 5</span><span class="arc-badge arc-prs">PRS 7</span><span class="arc-badge arc-ftr">FTR 9+</span><span class="arc-badge arc-byd">BYD 11</span></div><p>模、自由模、投射模、内射模。环上的"线性代数"。</p></div>
+        <div class="course-card hard-card" onclick="showCourse('范畴论')"><div class="tag" style="background:#fee2e2;color:#b91c1c;">终极</div><h4>范畴论</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 6</span><span class="arc-badge arc-prs">PRS 8</span><span class="arc-badge arc-ftr">FTR 10+</span><span class="arc-badge arc-ins">INS 12</span></div><p>对象、态射、函子、自然变换。数学的"数学"。</p></div>
       </div>
     </div>
 
@@ -230,32 +158,31 @@
     <p class="phase-desc">从实数到复数，从有限维到无穷维。分析学是数学最深邃的深渊。</p>
 
     <div class="domain" style="--domain-color:#7c3aed;">
-      <div class="domain-header"><h3>🌌 分析核心</h3><span class="domain-count">4门</span><span class="domain-desc">从实变到泛函</span></div>
+      <div class="domain-header"><h3>🌌 分析核心</h3><span class="domain-count">5门</span><span class="domain-desc">从实变到泛函</span></div>
       <div class="domain-grid">
-        <div class="course-card" onclick="showCourse('实变函数')"><div class="tag">核心</div><h4>实变函数</h4>
-          <div class="arc-badges"><span class="arc-badge arc-pst">PST 5</span><span class="arc-badge arc-prs">PRS 7</span><span class="arc-badge arc-ftr">FTR 9+</span><span class="arc-badge arc-byd">BYD 11</span></div>
-          <p>测度论、Lebesgue积分。重新理解"长度"和"面积"。</p></div>
-        <div class="course-card" onclick="showCourse('复变函数')"><div class="tag">核心</div><h4>复变函数</h4>
-          <div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 10</span></div>
-          <p>解析函数、留数定理、保形映射。复分析是数学的诗。</p></div>
-        <div class="course-card hard-card" onclick="showCourse('泛函分析')"><div class="tag" style="background:#fee2e2;color:#b91c1c;">深渊</div><h4>泛函分析</h4>
-          <div class="arc-badges"><span class="arc-badge arc-pst">PST 5</span><span class="arc-badge arc-prs">PRS 7</span><span class="arc-badge arc-ftr">FTR 9+</span><span class="arc-badge arc-byd">BYD 11</span></div>
-          <p>Banach空间、Hilbert空间、算子理论。量子力学的数学基础。</p></div>
-        <div class="course-card" onclick="showCourse('微分方程')"><div class="tag">应用核心</div><h4>微分方程</h4>
-          <div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-etr">ETR 10</span></div>
-          <p>ODE、PDE、变分法。物理和工程的语言。</p></div>
+        <div class="course-card" onclick="showCourse('实变函数')"><div class="tag">核心</div><h4>实变函数</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 5</span><span class="arc-badge arc-prs">PRS 7</span><span class="arc-badge arc-ftr">FTR 9+</span><span class="arc-badge arc-byd">BYD 11</span></div><p>测度论、Lebesgue积分。重新理解"长度"和"面积"。</p></div>
+        <div class="course-card" onclick="showCourse('复变函数')"><div class="tag">核心</div><h4>复变函数</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 10</span></div><p>解析函数、留数定理、保形映射。</p></div>
+        <div class="course-card hard-card" onclick="showCourse('泛函分析')"><div class="tag" style="background:#fee2e2;color:#b91c1c;">深渊</div><h4>泛函分析</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 5</span><span class="arc-badge arc-prs">PRS 7</span><span class="arc-badge arc-ftr">FTR 9+</span><span class="arc-badge arc-byd">BYD 11</span></div><p>Banach空间、Hilbert空间、算子理论。</p></div>
+        <div class="course-card" onclick="showCourse('微分方程')"><div class="tag">应用核心</div><h4>微分方程</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-etr">ETR 10</span></div><p>ODE、PDE、变分法。物理和工程的语言。</p></div>
+        <div class="course-card hard-card" onclick="showCourse('偏微分方程')"><div class="tag" style="background:#fee2e2;color:#b91c1c;">进阶</div><h4>偏微分方程</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 5</span><span class="arc-badge arc-prs">PRS 7</span><span class="arc-badge arc-ftr">FTR 9+</span><span class="arc-badge arc-byd">BYD 11</span></div><p>椭圆型、抛物型、双曲型方程。Sobolev空间、弱解。</p></div>
       </div>
     </div>
 
     <div class="domain" style="--domain-color:#6366f1;">
-      <div class="domain-header"><h3>🔮 拓扑入门</h3><span class="domain-count">2门</span><span class="domain-desc">连续性的抽象</span></div>
+      <div class="domain-header"><h3>🔮 拓扑与几何初步</h3><span class="domain-count">3门</span><span class="domain-desc">连续性的抽象</span></div>
       <div class="domain-grid">
-        <div class="course-card" onclick="showCourse('点集拓扑')"><div class="tag">进阶</div><h4>点集拓扑</h4>
-          <div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 10</span></div>
-          <p>开集、闭集、紧致性、连通性。连续性的最抽象形式。</p></div>
-        <div class="course-card" onclick="showCourse('代数拓扑')"><div class="tag">进阶</div><h4>代数拓扑</h4>
-          <div class="arc-badges"><span class="arc-badge arc-pst">PST 5</span><span class="arc-badge arc-prs">PRS 7</span><span class="arc-badge arc-ftr">FTR 9+</span><span class="arc-badge arc-ins">INS 12</span></div>
-          <p>同伦、同调、上同调。拓扑与代数的华丽联姻。</p></div>
+        <div class="course-card" onclick="showCourse('点集拓扑')"><div class="tag">进阶</div><h4>点集拓扑</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 10</span></div><p>开集、闭集、紧致性、连通性。</p></div>
+        <div class="course-card hard-card" onclick="showCourse('代数拓扑')"><div class="tag" style="background:#fee2e2;color:#b91c1c;">进阶</div><h4>代数拓扑</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 5</span><span class="arc-badge arc-prs">PRS 7</span><span class="arc-badge arc-ftr">FTR 9+</span><span class="arc-badge arc-ins">INS 12</span></div><p>同伦、同调、上同调。拓扑与代数的华丽联姻。</p></div>
+        <div class="course-card hard-card" onclick="showCourse('微分流形')"><div class="tag" style="background:#fee2e2;color:#b91c1c;">进阶</div><h4>微分流形</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 5</span><span class="arc-badge arc-prs">PRS 7</span><span class="arc-badge arc-ftr">FTR 9+</span><span class="arc-badge arc-byd">BYD 11</span></div><p>流形、切空间、余切空间、微分形式。现代几何的舞台。</p></div>
+      </div>
+    </div>
+
+    <div class="domain" style="--domain-color:#0891b2;">
+      <div class="domain-header"><h3>🎵 调和分析</h3><span class="domain-count">3门</span><span class="domain-desc">Fourier的世界</span></div>
+      <div class="domain-grid">
+        <div class="course-card" onclick="showCourse('Fourier分析')"><div class="tag">核心</div><h4>Fourier分析</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 10</span></div><p>Fourier级数、Fourier变换、卷积。把函数拆成正弦波。</p></div>
+        <div class="course-card hard-card" onclick="showCourse('调和分析')"><div class="tag" style="background:#fee2e2;color:#b91c1c;">进阶</div><h4>调和分析</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 5</span><span class="arc-badge arc-prs">PRS 7</span><span class="arc-badge arc-ftr">FTR 9+</span><span class="arc-badge arc-byd">BYD 11</span></div><p>奇异积分、Littlewood-Paley理论、Hardy空间。</p></div>
+        <div class="course-card" onclick="showCourse('小波分析')"><div class="tag">应用</div><h4>小波分析</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span></div><p>小波、多分辨率分析、图像压缩。信号处理的新工具。</p></div>
       </div>
     </div>
 
@@ -264,20 +191,14 @@
     <p class="phase-desc">随机性是宇宙的底色。概率论告诉我们：不确定性本身可以精确地描述。</p>
 
     <div class="domain" style="--domain-color:#c2410c;">
-      <div class="domain-header"><h3>🎯 概率与统计</h3><span class="domain-count">4门</span><span class="domain-desc">从随机变量到随机过程</span></div>
+      <div class="domain-header"><h3>🎯 概率与统计</h3><span class="domain-count">6门</span><span class="domain-desc">从随机变量到随机过程</span></div>
       <div class="domain-grid">
-        <div class="course-card" onclick="showCourse('概率论')"><div class="tag">核心</div><h4>概率论</h4>
-          <div class="arc-badges"><span class="arc-badge arc-pst">PST 3</span><span class="arc-badge arc-prs">PRS 5</span><span class="arc-badge arc-ftr">FTR 7</span><span class="arc-badge arc-etr">ETR 9</span></div>
-          <p>概率空间、随机变量、期望方差、大数定律、中心极限定理。</p></div>
-        <div class="course-card" onclick="showCourse('数理统计')"><div class="tag">核心</div><h4>数理统计</h4>
-          <div class="arc-badges"><span class="arc-badge arc-pst">PST 3</span><span class="arc-badge arc-prs">PRS 5</span><span class="arc-badge arc-ftr">FTR 7</span><span class="arc-badge arc-byd">BYD 10</span></div>
-          <p>参数估计、假设检验、回归分析。从数据反演真相。</p></div>
-        <div class="course-card hard-card" onclick="showCourse('随机过程')"><div class="tag" style="background:#fee2e2;color:#b91c1c;">进阶</div><h4>随机过程</h4>
-          <div class="arc-badges"><span class="arc-badge arc-pst">PST 5</span><span class="arc-badge arc-prs">PRS 7</span><span class="arc-badge arc-ftr">FTR 9+</span><span class="arc-badge arc-ins">INS 12</span></div>
-          <p>Markov链、布朗运动、鞅。随机性是动态的。</p></div>
-        <div class="course-card" onclick="showCourse('贝叶斯统计')"><div class="tag">现代方向</div><h4>贝叶斯统计</h4>
-          <div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 10</span></div>
-          <p>先验、后验、MCMC。数据科学最流行的统计学派。</p></div>
+        <div class="course-card" onclick="showCourse('概率论')"><div class="tag">核心</div><h4>概率论</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 3</span><span class="arc-badge arc-prs">PRS 5</span><span class="arc-badge arc-ftr">FTR 7</span><span class="arc-badge arc-etr">ETR 9</span></div><p>概率空间、随机变量、期望方差、大数定律、中心极限定理。</p></div>
+        <div class="course-card" onclick="showCourse('数理统计')"><div class="tag">核心</div><h4>数理统计</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 3</span><span class="arc-badge arc-prs">PRS 5</span><span class="arc-badge arc-ftr">FTR 7</span><span class="arc-badge arc-byd">BYD 10</span></div><p>参数估计、假设检验、回归分析。</p></div>
+        <div class="course-card hard-card" onclick="showCourse('随机过程')"><div class="tag" style="background:#fee2e2;color:#b91c1c;">进阶</div><h4>随机过程</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 5</span><span class="arc-badge arc-prs">PRS 7</span><span class="arc-badge arc-ftr">FTR 9+</span><span class="arc-badge arc-ins">INS 12</span></div><p>Markov链、布朗运动、鞅。</p></div>
+        <div class="course-card" onclick="showCourse('贝叶斯统计')"><div class="tag">现代</div><h4>贝叶斯统计</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 10</span></div><p>先验、后验、MCMC。</p></div>
+        <div class="course-card hard-card" onclick="showCourse('随机分析')"><div class="tag" style="background:#fee2e2;color:#b91c1c;">进阶</div><h4>随机分析</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 6</span><span class="arc-badge arc-prs">PRS 8</span><span class="arc-badge arc-ftr">FTR 10+</span><span class="arc-badge arc-ins">INS 12</span></div><p>Ito积分、随机微分方程、鞅论。随机世界里的微积分。</p></div>
+        <div class="course-card" onclick="showCourse('信息论')"><div class="tag">应用</div><h4>信息论</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 10</span></div><p>熵、互信息、信道容量。信息时代的数学基础。</p></div>
       </div>
     </div>
 
@@ -286,29 +207,21 @@
     <p class="phase-desc">从代数几何到朗兰兹纲领，这是数学的最高峰，也是人类抽象能力的极限。</p>
 
     <div class="domain" style="--domain-color:#4338ca;">
-      <div class="domain-header"><h3>🌐 现代几何</h3><span class="domain-count">3门</span><span class="domain-desc">空间与结构的终极探索</span></div>
+      <div class="domain-header"><h3>🌐 现代几何</h3><span class="domain-count">4门</span><span class="domain-desc">空间与结构的终极探索</span></div>
       <div class="domain-grid">
-        <div class="course-card cosmos-card" onclick="showCourse('微分几何')"><div class="tag">核心</div><h4>微分几何</h4>
-          <div class="arc-badges"><span class="arc-badge arc-pst">PST 5</span><span class="arc-badge arc-prs">PRS 7</span><span class="arc-badge arc-ftr">FTR 9+</span><span class="arc-badge arc-byd">BYD 11</span></div>
-          <p>流形、张量、联络、曲率。广义相对论的舞台。</p></div>
-        <div class="course-card cosmos-card" onclick="showCourse('代数几何')"><div class="tag">终极</div><h4>代数几何</h4>
-          <div class="arc-badges"><span class="arc-badge arc-pst">PST 6</span><span class="arc-badge arc-prs">PRS 8</span><span class="arc-badge arc-ftr">FTR 10+</span><span class="arc-badge arc-ins">INS 12</span></div>
-          <p>概形、层、上同调。用代数方法研究几何对象。Grothendieck的遗产。</p></div>
-        <div class="course-card ultimate-card" onclick="showCourse('朗兰兹纲领')"><div class="tag" style="background:#ede9fe;color:#4c1d95;">终极</div><h4 style="color:#4c1d95;">朗兰兹纲领</h4>
-          <div class="arc-badges"><span class="arc-badge arc-pst">PST 7</span><span class="arc-badge arc-prs">PRS 9+</span><span class="arc-badge arc-ftr">FTR 11+</span><span class="arc-badge arc-ins-plus">INS 12+</span></div>
-          <p style="color:#4c1d95;">数论、表示论、代数几何的统一纲领。数学的"大统一理论"。</p></div>
+        <div class="course-card cosmos-card" onclick="showCourse('微分几何')"><div class="tag">核心</div><h4>微分几何</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 5</span><span class="arc-badge arc-prs">PRS 7</span><span class="arc-badge arc-ftr">FTR 9+</span><span class="arc-badge arc-byd">BYD 11</span></div><p>流形、张量、联络、曲率。广义相对论的舞台。</p></div>
+        <div class="course-card cosmos-card" onclick="showCourse('黎曼几何')"><div class="tag">进阶</div><h4>黎曼几何</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 6</span><span class="arc-badge arc-prs">PRS 8</span><span class="arc-badge arc-ftr">FTR 10+</span><span class="arc-badge arc-ins">INS 12</span></div><p>度规、测地线、曲率张量、比较定理。弯曲空间的几何学。</p></div>
+        <div class="course-card cosmos-card" onclick="showCourse('代数几何')"><div class="tag">终极</div><h4>代数几何</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 6</span><span class="arc-badge arc-prs">PRS 8</span><span class="arc-badge arc-ftr">FTR 10+</span><span class="arc-badge arc-ins">INS 12</span></div><p>概形、层、上同调。Grothendieck的遗产。</p></div>
+        <div class="course-card ultimate-card" onclick="showCourse('朗兰兹纲领')"><div class="tag" style="background:#ede9fe;color:#4c1d95;">终极</div><h4 style="color:#4c1d95;">朗兰兹纲领</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 7</span><span class="arc-badge arc-prs">PRS 9+</span><span class="arc-badge arc-ftr">FTR 11+</span><span class="arc-badge arc-ins-plus">INS 12+</span></div><p style="color:#4c1d95;">数论、表示论、代数几何的统一纲领。数学的"大统一理论"。</p></div>
       </div>
     </div>
 
     <div class="domain" style="--domain-color:#6d28d9;">
-      <div class="domain-header"><h3>🔭 逻辑与基础</h3><span class="domain-count">2门</span><span class="domain-desc">数学的地基与极限</span></div>
+      <div class="domain-header"><h3>🔭 逻辑与基础</h3><span class="domain-count">3门</span><span class="domain-desc">数学的地基与极限</span></div>
       <div class="domain-grid">
-        <div class="course-card final-card" onclick="showCourse('数理逻辑')"><div class="tag">基础</div><h4>数理逻辑</h4>
-          <div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 10</span></div>
-          <p>命题逻辑、一阶逻辑、完备性、紧致性。</p></div>
-        <div class="course-card god-card" onclick="showCourse('集合论与哥德尔定理')"><div class="tag" style="background:#fef3c7;color:#92400e;">⭐ 终极难题</div><h4 style="color:#78350f;">集合论与哥德尔定理</h4>
-          <div class="arc-badges"><span class="arc-badge arc-pst">PST 7</span><span class="arc-badge arc-prs">PRS 9+</span><span class="arc-badge arc-ftr">FTR 11+</span><span class="arc-badge arc-ins-plus">INS 12+</span></div>
-          <p style="color:#78350f;">ZFC、连续统假设、不完备定理。数学自身的地基动摇之处。</p></div>
+        <div class="course-card final-card" onclick="showCourse('数理逻辑')"><div class="tag">基础</div><h4>数理逻辑</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 10</span></div><p>命题逻辑、一阶逻辑、完备性、紧致性。</p></div>
+        <div class="course-card final-card" onclick="showCourse('模型论')"><div class="tag">进阶</div><h4>模型论</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 6</span><span class="arc-badge arc-prs">PRS 8</span><span class="arc-badge arc-ftr">FTR 10+</span><span class="arc-badge arc-byd">BYD 11</span></div><p>结构、紧致性定理、Löwenheim-Skolem。逻辑与代数的交汇。</p></div>
+        <div class="course-card god-card" onclick="showCourse('集合论与哥德尔定理')"><div class="tag" style="background:#fef3c7;color:#92400e;">⭐ 终极难题</div><h4 style="color:#78350f;">集合论与哥德尔定理</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 7</span><span class="arc-badge arc-prs">PRS 9+</span><span class="arc-badge arc-ftr">FTR 11+</span><span class="arc-badge arc-ins-plus">INS 12+</span></div><p style="color:#78350f;">ZFC、连续统假设、不完备定理。数学自身的地基动摇之处。</p></div>
       </div>
     </div>
 
@@ -317,22 +230,18 @@
     <p class="phase-desc">数学不只是抽象，它驱动着密码学、金融、人工智能——所有现代技术的心脏。</p>
 
     <div class="domain" style="--domain-color:#059669;">
-      <div class="domain-header"><h3>🛠️ 应用方向</h3><span class="domain-count">4门</span><span class="domain-desc">从理论到实践的桥梁</span></div>
+      <div class="domain-header"><h3>🛠️ 应用方向</h3><span class="domain-count">7门</span><span class="domain-desc">从理论到实践的桥梁</span></div>
       <div class="domain-grid">
-        <div class="course-card cosmos-card" onclick="showCourse('数值分析')"><div class="tag">应用</div><h4>数值分析</h4>
-          <div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 10</span></div>
-          <p>数值逼近、数值积分、迭代法。让计算机"算得出"数学。</p></div>
-        <div class="course-card cosmos-card" onclick="showCourse('运筹学')"><div class="tag">应用</div><h4>运筹学</h4>
-          <div class="arc-badges"><span class="arc-badge arc-pst">PST 3</span><span class="arc-badge arc-prs">PRS 5</span><span class="arc-badge arc-ftr">FTR 7</span></div>
-          <p>线性规划、整数规划、网络流。让决策变得最优。</p></div>
-        <div class="course-card cosmos-card" onclick="showCourse('密码学')"><div class="tag">应用</div><h4>密码学</h4>
-          <div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 10</span></div>
-          <p>RSA、椭圆曲线、格密码。数论最实用的战争。</p></div>
-        <div class="course-card cosmos-card" onclick="showCourse('数学物理方法')"><div class="tag">交叉</div><h4>数学物理方法</h4>
-          <div class="arc-badges"><span class="arc-badge arc-pst">PST 5</span><span class="arc-badge arc-prs">PRS 7</span><span class="arc-badge arc-ftr">FTR 9+</span><span class="arc-badge arc-byd">BYD 11</span></div>
-          <p>复变函数、Fourier分析、特殊函数。物理学家的工具箱。</p></div>
+        <div class="course-card cosmos-card" onclick="showCourse('数值分析')"><div class="tag">应用</div><h4>数值分析</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 10</span></div><p>数值逼近、数值积分、迭代法。</p></div>
+        <div class="course-card cosmos-card" onclick="showCourse('运筹学')"><div class="tag">应用</div><h4>运筹学</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 3</span><span class="arc-badge arc-prs">PRS 5</span><span class="arc-badge arc-ftr">FTR 7</span></div><p>线性规划、整数规划、网络流。</p></div>
+        <div class="course-card cosmos-card" onclick="showCourse('优化理论')"><div class="tag">应用</div><h4>优化理论</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 10</span></div><p>凸优化、梯度法、对偶理论。机器学习的数学引擎。</p></div>
+        <div class="course-card cosmos-card" onclick="showCourse('控制论')"><div class="tag">应用</div><h4>控制论</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span></div><p>线性系统、稳定性、最优控制。让系统按你的意愿运行。</p></div>
+        <div class="course-card cosmos-card" onclick="showCourse('博弈论')"><div class="tag">应用</div><h4>博弈论</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 10</span></div><p>Nash均衡、合作博弈、机制设计。决策的数学。</p></div>
+        <div class="course-card cosmos-card" onclick="showCourse('密码学')"><div class="tag">应用</div><h4>密码学</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 10</span></div><p>RSA、椭圆曲线、格密码。数论最实用的战争。</p></div>
+        <div class="course-card cosmos-card" onclick="showCourse('数学物理方法')"><div class="tag">交叉</div><h4>数学物理方法</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 5</span><span class="arc-badge arc-prs">PRS 7</span><span class="arc-badge arc-ftr">FTR 9+</span><span class="arc-badge arc-byd">BYD 11</span></div><p>复变函数、Fourier分析、特殊函数。物理学家的工具箱。</p></div>
       </div>
     </div>
+
   </main>
 
   <footer>
@@ -343,8 +252,7 @@
 
 <div class="overlay" id="overlay" onclick="closeInfo(event)">
   <div class="modal" onclick="event.stopPropagation()">
-    <h2 id="modalTitle">课程详情</h2>
-    <p id="modalText"></p>
+    <h2 id="modalTitle">课程详情</h2><p id="modalText"></p>
     <div class="quote" id="modalQuote" style="display:none;"></div>
     <div class="arc-diff-row" id="arcDiffRow"></div>
     <div class="resource-section" id="bookSection" style="display:none;"><div class="resource-label">📖 推荐教材（点击跳转 Z-Library）</div><div class="resource-list" id="bookList"></div></div>
@@ -358,65 +266,77 @@
 </div>
 
 <script>
-const COURSES = {
-  '数学分析': {desc:'极限、连续、微分、积分、级数、一致收敛。\n\n分析学的皇冠，也是所有现代分析课程的基础。',arc:['PST 2','PRS 5','FTR 7','ETR 9'],tag:'基础必修',quote:'极限是所有分析学的起点——ε-δ语言，你将在此第一次直面数学的严密。',prereq:[],next:['实变函数','复变函数','泛函分析'],books:['华东师大版《数学分析》','卓里奇《数学分析》','Rudin《Principles of Mathematical Analysis》'],videos:[{name:'陈纪修《数学分析》全程课程',keyword:'陈纪修数学分析'}]},
-  '高等代数': {desc:'多项式、行列式、矩阵、线性空间、线性变换、Jordan标准形。',arc:['PST 2','PRS 4','FTR 6'],tag:'基础必修',quote:'矩阵不只是数字的表格，它是线性变换在某个基下的影子。',prereq:[],next:['抽象代数','线性代数进阶'],books:['北大版《高等代数》','丘维声《高等代数》'],videos:[{name:'丘维声《高等代数》全程',keyword:'丘维声高等代数'}]},
-  '解析几何': {desc:'向量代数、曲线曲面、二次型。用代数研究几何。',arc:['PST 1','PRS 3','FTR 5'],tag:'基础必修',quote:'笛卡尔把代数与几何联姻，从此数学有了两条腿。',prereq:[],next:['微分几何','线性代数进阶'],books:['吕林根《解析几何》'],videos:[{name:'解析几何 网课',keyword:'解析几何网课'}]},
-  '初等数论': {desc:'同余、二次剩余、原根、连分数、丢番图方程。\n\n数论是最纯粹的数学，也是最实用的数学（RSA！）。',arc:['PST 3','PRS 5','FTR 7'],tag:'经典方向',quote:'数学是科学的女王，数论是数学的女王。——高斯',prereq:[],next:['代数数论','密码学'],books:['潘承洞《初等数论》','Hardy & Wright《An Introduction to the Theory of Numbers》'],videos:[{name:'初等数论 网课',keyword:'初等数论网课'}]},
-  '数学史': {desc:'从毕达哥拉斯到格罗滕迪克，从欧几里得到Wiles。',arc:['PST 1','PRS 2','FTR 3'],tag:'通识',quote:'不懂历史的人没有未来，不懂数学史的人不懂数学的灵魂。',prereq:[],next:[],books:['克莱因《古今数学思想》','Mankiewicz《数学的故事》'],videos:[{name:'数学史 纪录片',keyword:'数学史纪录片'}]},
-  '抽象代数': {desc:'群、环、域、模、Galois理论。现代数学的通用语言。',arc:['PST 4','PRS 6','FTR 8','BYD 10'],tag:'核心',quote:'代数把运算抽象成结构，从此万物皆可代数。',prereq:['高等代数'],next:['表示论','代数几何','代数数论'],books:['Rotman《Advanced Modern Algebra》','Dummit & Foote《Abstract Algebra》'],videos:[{name:'南开大学《抽象代数》精品课',keyword:'南开大学抽象代数'}]},
-  '群论': {desc:'对称性的数学。群、子群、正规子群、同态、群作用。',arc:['PST 4','PRS 6','FTR 8','ETR 10'],tag:'核心',quote:'对称性即美，群论即美学的数学化。',prereq:['高等代数'],next:['表示论','量子力学','粒子物理'],books:['Dummit & Foote《Abstract Algebra》群论章节','Armstrong《Groups and Symmetry》'],videos:[{name:'群论 入门课程',keyword:'群论入门'}]},
-  '环与域': {desc:'环、理想、商环、域、扩张、Galois理论。',arc:['PST 4','PRS 6','FTR 8'],tag:'进阶',quote:'Galois用群论解决了五次方程不可解问题——他去世时年仅20岁。',prereq:['抽象代数'],next:['代数数论','代数几何'],books:['Atiyah-Macdonald《Introduction to Commutative Algebra》'],videos:[{name:'环与域 网课',keyword:'环与域网课'}]},
-  '表示论': {desc:'把抽象群"翻译"成矩阵。Lie群、Lie代数、特征标。',arc:['PST 5','PRS 7','FTR 9+','BYD 11'],tag:'进阶',quote:'表示论是把抽象化为具体的魔法。',prereq:['群论','线性代数进阶'],next:['量子场论','粒子物理'],books:['Serre《Linear Representations of Finite Groups》','Fulton & Harris《Representation Theory》'],videos:[{name:'表示论 网课',keyword:'表示论网课'}]},
-  '线性代数进阶': {desc:'双线性型、辛空间、张量代数、外代数。',arc:['PST 3','PRS 5','FTR 7','ETR 9'],tag:'进阶',quote:'从有限维到无限维，线性代数永远在路上。',prereq:['高等代数'],next:['泛函分析','表示论'],books:['Hoffman & Kunze《Linear Algebra》'],videos:[{name:'线性代数进阶 网课',keyword:'线性代数进阶'}]},
-  '矩阵分析': {desc:'矩阵函数、矩阵微分、矩阵分解、矩阵不等式。',arc:['PST 3','PRS 5','FTR 7'],tag:'应用方向',quote:'矩阵是现代科学的通用语言。',prereq:['高等代数'],next:['数值分析'],books:['Horn & Johnson《Matrix Analysis》'],videos:[{name:'矩阵分析 网课',keyword:'矩阵分析网课'}]},
-  '实变函数': {desc:'测度论、Lebesgue积分、可测函数、收敛定理。',arc:['PST 5','PRS 7','FTR 9+','BYD 11'],tag:'核心',quote:'重新定义"长度"，Lebesgue积分是现代分析的基石。',prereq:['数学分析'],next:['泛函分析','概率论'],books:['周民强《实变函数论》','Rudin《Real and Complex Analysis》'],videos:[{name:'实变函数 网课',keyword:'实变函数网课'}]},
-  '复变函数': {desc:'解析函数、Cauchy积分、留数定理、保形映射。',arc:['PST 4','PRS 6','FTR 8','BYD 10'],tag:'核心',quote:'复分析是数学中最优美的一章。——Littlewood',prereq:['数学分析'],next:['泛函分析','数学物理方法'],books:['Ahlfors《Complex Analysis》','Stein《Complex Analysis》'],videos:[{name:'复变函数 网课',keyword:'复变函数网课'}]},
-  '泛函分析': {desc:'Banach空间、Hilbert空间、算子理论、谱理论。',arc:['PST 5','PRS 7','FTR 9+','BYD 11'],tag:'深渊',quote:'无穷维的世界里，直觉开始失效，但数学依然美丽。',prereq:['实变函数','复变函数'],next:['量子力学','量子场论'],books:['Rudin《Functional Analysis》','Brezis《Functional Analysis》'],videos:[{name:'泛函分析 网课',keyword:'泛函分析网课'}]},
-  '微分方程': {desc:'ODE、PDE、变分法、Green函数、Sturm-Liouville理论。',arc:['PST 4','PRS 6','FTR 8','ETR 10'],tag:'应用核心',quote:'自然界用微分方程说话。',prereq:['数学分析','高等代数'],next:['数学物理方法','数值分析'],books:['Evans《Partial Differential Equations》','Arnold《Ordinary Differential Equations》'],videos:[{name:'微分方程 网课',keyword:'微分方程网课'}]},
-  '点集拓扑': {desc:'开集、闭集、紧致性、连通性、分离公理。',arc:['PST 4','PRS 6','FTR 8','BYD 10'],tag:'进阶',quote:'连续性的最抽象形式——拓扑学家分不清咖啡杯和甜甜圈。',prereq:['数学分析'],next:['代数拓扑','微分几何'],books:['Munkres《Topology》'],videos:[{name:'点集拓扑 网课',keyword:'点集拓扑网课'}]},
-  '代数拓扑': {desc:'同伦、同调、上同调、基本群、纤维丛。',arc:['PST 5','PRS 7','FTR 9+','INS 12'],tag:'进阶',quote:'代数拓扑是用代数给拓扑空间"编号"。',prereq:['点集拓扑','抽象代数'],next:['代数几何','拓扑量子场论'],books:['Hatcher《Algebraic Topology》'],videos:[{name:'代数拓扑 网课',keyword:'代数拓扑网课'}]},
-  '概率论': {desc:'概率空间、随机变量、期望方差、大数定律、中心极限定理。',arc:['PST 3','PRS 5','FTR 7','ETR 9'],tag:'核心',quote:'概率是人生的数学化。',prereq:['数学分析','实变函数'],next:['随机过程','数理统计'],books:['Durrett《Probability》','Billingsley《Probability and Measure》'],videos:[{name:'概率论 网课',keyword:'概率论网课'}]},
-  '数理统计': {desc:'参数估计、假设检验、回归分析、方差分析。',arc:['PST 3','PRS 5','FTR 7','BYD 10'],tag:'核心',quote:'从数据反演真相，统计学家是数字时代的侦探。',prereq:['概率论'],next:['贝叶斯统计','机器学习'],books:['Casella & Berger《Statistical Inference》'],videos:[{name:'数理统计 网课',keyword:'数理统计网课'}]},
-  '随机过程': {desc:'Markov链、布朗运动、鞅、Ito积分。',arc:['PST 5','PRS 7','FTR 9+','INS 12'],tag:'进阶',quote:'随机过程是动态的概率论。',prereq:['概率论'],next:['随机分析','金融数学'],books:['Durrett《Stochastic Calculus》','Karatzas & Shreve《Brownian Motion》'],videos:[{name:'随机过程 网课',keyword:'随机过程网课'}]},
-  '贝叶斯统计': {desc:'先验、后验、共轭分布、MCMC、变分推断。',arc:['PST 4','PRS 6','FTR 8','BYD 10'],tag:'现代方向',quote:'贝叶斯把先验知识引入统计推断。',prereq:['数理统计'],next:['机器学习'],books:['Gelman《Bayesian Data Analysis》'],videos:[{name:'贝叶斯统计 网课',keyword:'贝叶斯统计网课'}]},
-  '微分几何': {desc:'流形、切空间、张量场、联络、曲率、测地线。',arc:['PST 5','PRS 7','FTR 9+','BYD 11'],tag:'核心',quote:'广义相对论就是微分几何的物理实现。',prereq:['数学分析','点集拓扑'],next:['广义相对论','代数几何'],books:['do Carmo《Differential Geometry》','Lee《Introduction to Smooth Manifolds》'],videos:[{name:'微分几何 网课',keyword:'微分几何网课'}]},
-  '代数几何': {desc:'仿射簇、射影簇、概形、层、上同调。',arc:['PST 6','PRS 8','FTR 10+','INS 12'],tag:'终极',quote:'Grothendieck用概形重构了整个代数几何。',prereq:['抽象代数','代数拓扑'],next:['朗兰兹纲领'],books:['Hartshorne《Algebraic Geometry》','Vakil《The Rising Sea》'],videos:[{name:'代数几何 网课',keyword:'代数几何网课'}]},
-  '朗兰兹纲领': {desc:'数论、表示论、代数几何的统一纲领。\n\n数学的"大统一理论"，被称为数学的未来。',arc:['PST 7','PRS 9+','FTR 11+','INS 12+'],tag:'终极',quote:'朗兰兹纲领是数学的"大统一理论"。',prereq:['代数几何','表示论','代数数论'],next:[],books:['Langlands《Letter to Weil》','Frenkel《Langlands Correspondence》'],videos:[{name:'朗兰兹纲领 讲座',keyword:'朗兰兹纲领'}]},
-  '数理逻辑': {desc:'命题逻辑、一阶逻辑、完备性、紧致性、模型论。',arc:['PST 4','PRS 6','FTR 8','BYD 10'],tag:'基础',quote:'逻辑是数学的地基。',prereq:['数学分析'],next:['集合论与哥德尔定理'],books:['Enderton《A Mathematical Introduction to Logic》'],videos:[{name:'数理逻辑 网课',keyword:'数理逻辑网课'}]},
-  '集合论与哥德尔定理': {desc:'ZFC公理系统、连续统假设、不完备定理。',arc:['PST 7','PRS 9+','FTR 11+','INS 12+'],tag:'终极难题',quote:'哥德尔定理证明了：数学永远不可能完美自洽。',prereq:['数理逻辑'],next:[],books:['Kunen《Set Theory》','Hofstadter《Gödel, Escher, Bach》'],videos:[{name:'哥德尔不完备定理 讲座',keyword:'哥德尔不完备定理'}]},
-  '数值分析': {desc:'数值逼近、数值积分、线性方程组迭代、特征值算法。',arc:['PST 4','PRS 6','FTR 8','BYD 10'],tag:'应用',quote:'计算机不会做极限，但会做数值逼近。',prereq:['数学分析','线性代数进阶'],next:['机器学习','计算物理'],books:['Burden & Faires《Numerical Analysis》'],videos:[{name:'数值分析 网课',keyword:'数值分析网课'}]},
-  '运筹学': {desc:'线性规划、整数规划、网络流、动态规划。',arc:['PST 3','PRS 5','FTR 7'],tag:'应用',quote:'把决策变成数学问题。',prereq:['线性代数进阶'],next:[],books:['Hillier & Lieberman《Introduction to Operations Research》'],videos:[{name:'运筹学 网课',keyword:'运筹学网课'}]},
-  '密码学': {desc:'RSA、椭圆曲线、格密码、零知识证明。',arc:['PST 4','PRS 6','FTR 8','BYD 10'],tag:'应用',quote:'数论最实用的战争，信息安全的核心。',prereq:['初等数论','抽象代数'],next:[],books:['Katz & Lindell《Introduction to Modern Cryptography》'],videos:[{name:'密码学 网课',keyword:'密码学网课'}]},
-  '数学物理方法': {desc:'复变函数、Fourier分析、Laplace变换、特殊函数。',arc:['PST 5','PRS 7','FTR 9+','BYD 11'],tag:'交叉',quote:'物理学家的数学工具箱。',prereq:['数学分析','复变函数'],next:['量子力学','电动力学'],books:['梁昆淼《数学物理方法》','Arfken《Mathematical Methods for Physicists》'],videos:[{name:'数学物理方法 网课',keyword:'数学物理方法网课'}]},
+const COURSES={
+'数学分析':{desc:'极限、连续、微分、积分、级数、一致收敛。\n\n分析学的皇冠，也是所有现代分析课程的基础。',arc:['PST 2','PRS 5','FTR 7','ETR 9'],tag:'基础必修',quote:'极限是所有分析学的起点——ε-δ语言，你将在此第一次直面数学的严密。',prereq:[],next:['实变函数','复变函数','泛函分析'],books:['华东师大版《数学分析》','卓里奇《数学分析》','Rudin《Principles of Mathematical Analysis》'],videos:[{name:'陈纪修《数学分析》全程课程',keyword:'陈纪修数学分析'}]},
+'高等代数':{desc:'多项式、行列式、矩阵、线性空间、线性变换、Jordan标准形。',arc:['PST 2','PRS 4','FTR 6'],tag:'基础必修',quote:'矩阵不只是数字的表格，它是线性变换在某个基下的影子。',prereq:[],next:['抽象代数','线性代数进阶'],books:['北大版《高等代数》','丘维声《高等代数》'],videos:[{name:'丘维声《高等代数》全程',keyword:'丘维声高等代数'}]},
+'解析几何':{desc:'向量代数、曲线曲面、二次型。用代数研究几何。',arc:['PST 1','PRS 3','FTR 5'],tag:'基础必修',quote:'笛卡尔把代数与几何联姻，从此数学有了两条腿。',prereq:[],next:['微分几何','线性代数进阶'],books:['吕林根《解析几何》'],videos:[{name:'解析几何 网课',keyword:'解析几何网课'}]},
+'集合论':{desc:'集合、映射、关系、基数、序数、选择公理。',arc:['PST 2','PRS 4','FTR 6'],tag:'基础',quote:'集合论是数学的地基。',prereq:[],next:['数理逻辑','点集拓扑'],books:['Kunen《Set Theory》','《集合论》'],videos:[{name:'集合论 网课',keyword:'集合论网课'}]},
+'初等数论':{desc:'同余、二次剩余、原根、连分数、丢番图方程。',arc:['PST 3','PRS 5','FTR 7'],tag:'经典',quote:'数学是科学的女王，数论是数学的女王。——高斯',prereq:[],next:['代数数论','密码学'],books:['潘承洞《初等数论》','Hardy & Wright《An Introduction to the Theory of Numbers》'],videos:[{name:'初等数论 网课',keyword:'初等数论网课'}]},
+'组合数学':{desc:'计数、排列组合、生成函数、Ramsey理论、设计理论。',arc:['PST 3','PRS 5','FTR 7','ETR 9'],tag:'核心',quote:'组合数学是离散世界的艺术。',prereq:[],next:['图论','概率论'],books:['Brualdi《Introductory Combinatorics》','《组合数学》'],videos:[{name:'组合数学 网课',keyword:'组合数学网课'}]},
+'图论':{desc:'图、树、匹配、染色、网络流、平面图。',arc:['PST 2','PRS 4','FTR 6'],tag:'核心',quote:'图论是离散结构的骨架。',prereq:[],next:['组合数学','算法设计'],books:['Bondy & Murty《Graph Theory》','《图论》'],videos:[{name:'图论 网课',keyword:'图论网课'}]},
+'数学史':{desc:'从毕达哥拉斯到格罗滕迪克，从欧几里得到Wiles。',arc:['PST 1','PRS 2','FTR 3'],tag:'通识',quote:'不懂历史的人没有未来，不懂数学史的人不懂数学的灵魂。',prereq:[],next:[],books:['克莱因《古今数学思想》','Mankiewicz《数学的故事》'],videos:[{name:'数学史 纪录片',keyword:'数学史纪录片'}]},
+'抽象代数':{desc:'群、环、域、模、Galois理论。现代数学的通用语言。',arc:['PST 4','PRS 6','FTR 8','BYD 10'],tag:'核心',quote:'代数把运算抽象成结构，从此万物皆可代数。',prereq:['高等代数'],next:['表示论','代数几何','代数数论'],books:['Rotman《Advanced Modern Algebra》','Dummit & Foote《Abstract Algebra》'],videos:[{name:'南开大学《抽象代数》精品课',keyword:'南开大学抽象代数'}]},
+'群论':{desc:'对称性的数学。群、子群、正规子群、同态、群作用。',arc:['PST 4','PRS 6','FTR 8','ETR 10'],tag:'核心',quote:'对称性即美，群论即美学的数学化。',prereq:['高等代数'],next:['表示论','量子力学','粒子物理'],books:['Dummit & Foote《Abstract Algebra》','Armstrong《Groups and Symmetry》'],videos:[{name:'群论 入门课程',keyword:'群论入门'}]},
+'环与域':{desc:'环、理想、商环、域、扩张、Galois理论。',arc:['PST 4','PRS 6','FTR 8'],tag:'进阶',quote:'Galois用群论解决了五次方程不可解问题——他去世时年仅20岁。',prereq:['抽象代数'],next:['代数数论','代数几何'],books:['Atiyah-Macdonald《Introduction to Commutative Algebra》'],videos:[{name:'环与域 网课',keyword:'环与域网课'}]},
+'交换代数':{desc:'理想、局部化、Noether环、维数理论、Hilbert零点定理。',arc:['PST 5','PRS 7','FTR 9+','BYD 11'],tag:'进阶',quote:'交换代数是代数几何的代数基础。',prereq:['环与域'],next:['代数几何'],books:['Atiyah-Macdonald《Introduction to Commutative Algebra》','Matsumura《Commutative Ring Theory》'],videos:[{name:'交换代数 网课',keyword:'交换代数网课'}]},
+'表示论':{desc:'把抽象群"翻译"成矩阵。Lie群、Lie代数、特征标。',arc:['PST 5','PRS 7','FTR 9+','BYD 11'],tag:'进阶',quote:'表示论是把抽象化为具体的魔法。',prereq:['群论','线性代数进阶'],next:['量子场论','粒子物理'],books:['Serre《Linear Representations of Finite Groups》','Fulton & Harris《Representation Theory》'],videos:[{name:'表示论 网课',keyword:'表示论网课'}]},
+'线性代数进阶':{desc:'双线性型、辛空间、张量代数、外代数。',arc:['PST 3','PRS 5','FTR 7','ETR 9'],tag:'进阶',quote:'从有限维到无限维，线性代数永远在路上。',prereq:['高等代数'],next:['泛函分析','表示论'],books:['Hoffman & Kunze《Linear Algebra》'],videos:[{name:'线性代数进阶 网课',keyword:'线性代数进阶'}]},
+'矩阵分析':{desc:'矩阵函数、矩阵微分、矩阵分解、矩阵不等式。',arc:['PST 3','PRS 5','FTR 7'],tag:'应用',quote:'矩阵是现代科学的通用语言。',prereq:['高等代数'],next:['数值分析'],books:['Horn & Johnson《Matrix Analysis》'],videos:[{name:'矩阵分析 网课',keyword:'矩阵分析网课'}]},
+'模论':{desc:'模、自由模、投射模、内射模、张量积。',arc:['PST 5','PRS 7','FTR 9+','BYD 11'],tag:'进阶',quote:'模是环上的线性代数。',prereq:['抽象代数'],next:['同调代数','代数几何'],books:['Rotman《An Introduction to Homological Algebra》'],videos:[{name:'模论 网课',keyword:'模论网课'}]},
+'范畴论':{desc:'对象、态射、函子、自然变换、伴随函子。',arc:['PST 6','PRS 8','FTR 10+','INS 12'],tag:'终极',quote:'范畴论是数学的"数学"。',prereq:['抽象代数','代数拓扑'],next:['代数几何','拓扑量子场论'],books:['Mac Lane《Categories for the Working Mathematician》'],videos:[{name:'范畴论 网课',keyword:'范畴论网课'}]},
+'实变函数':{desc:'测度论、Lebesgue积分、可测函数、收敛定理。',arc:['PST 5','PRS 7','FTR 9+','BYD 11'],tag:'核心',quote:'重新定义"长度"，Lebesgue积分是现代分析的基石。',prereq:['数学分析'],next:['泛函分析','概率论'],books:['周民强《实变函数论》','Rudin《Real and Complex Analysis》'],videos:[{name:'实变函数 网课',keyword:'实变函数网课'}]},
+'复变函数':{desc:'解析函数、Cauchy积分、留数定理、保形映射。',arc:['PST 4','PRS 6','FTR 8','BYD 10'],tag:'核心',quote:'复分析是数学中最优美的一章。——Littlewood',prereq:['数学分析'],next:['泛函分析','数学物理方法'],books:['Ahlfors《Complex Analysis》','Stein《Complex Analysis》'],videos:[{name:'复变函数 网课',keyword:'复变函数网课'}]},
+'泛函分析':{desc:'Banach空间、Hilbert空间、算子理论、谱理论。',arc:['PST 5','PRS 7','FTR 9+','BYD 11'],tag:'深渊',quote:'无穷维的世界里，直觉开始失效，但数学依然美丽。',prereq:['实变函数','复变函数'],next:['量子力学','量子场论'],books:['Rudin《Functional Analysis》','Brezis《Functional Analysis》'],videos:[{name:'泛函分析 网课',keyword:'泛函分析网课'}]},
+'微分方程':{desc:'ODE、PDE、变分法、Green函数、Sturm-Liouville理论。',arc:['PST 4','PRS 6','FTR 8','ETR 10'],tag:'应用核心',quote:'自然界用微分方程说话。',prereq:['数学分析','高等代数'],next:['数学物理方法','数值分析'],books:['Evans《Partial Differential Equations》','Arnold《Ordinary Differential Equations》'],videos:[{name:'微分方程 网课',keyword:'微分方程网课'}]},
+'偏微分方程':{desc:'椭圆型、抛物型、双曲型方程。Sobolev空间、弱解。',arc:['PST 5','PRS 7','FTR 9+','BYD 11'],tag:'进阶',quote:'偏微分方程是物理和工程的语言。',prereq:['实变函数','泛函分析'],next:['调和分析'],books:['Evans《Partial Differential Equations》'],videos:[{name:'偏微分方程 网课',keyword:'偏微分方程网课'}]},
+'点集拓扑':{desc:'开集、闭集、紧致性、连通性、分离公理。',arc:['PST 4','PRS 6','FTR 8','BYD 10'],tag:'进阶',quote:'连续性的最抽象形式——拓扑学家分不清咖啡杯和甜甜圈。',prereq:['数学分析'],next:['代数拓扑','微分几何'],books:['Munkres《Topology》'],videos:[{name:'点集拓扑 网课',keyword:'点集拓扑网课'}]},
+'代数拓扑':{desc:'同伦、同调、上同调、基本群、纤维丛。',arc:['PST 5','PRS 7','FTR 9+','INS 12'],tag:'进阶',quote:'代数拓扑是用代数给拓扑空间"编号"。',prereq:['点集拓扑','抽象代数'],next:['代数几何','拓扑量子场论'],books:['Hatcher《Algebraic Topology》'],videos:[{name:'代数拓扑 网课',keyword:'代数拓扑网课'}]},
+'微分流形':{desc:'流形、切空间、余切空间、微分形式、Stokes定理。',arc:['PST 5','PRS 7','FTR 9+','BYD 11'],tag:'进阶',quote:'微分流形是现代几何与拓扑的舞台。',prereq:['点集拓扑','数学分析'],next:['黎曼几何','代数几何'],books:['Lee《Introduction to Smooth Manifolds》'],videos:[{name:'微分流形 网课',keyword:'微分流形网课'}]},
+'Fourier分析':{desc:'Fourier级数、Fourier变换、卷积、采样定理。',arc:['PST 4','PRS 6','FTR 8','BYD 10'],tag:'核心',quote:'Fourier把函数拆成正弦波，这是数学最伟大的魔术之一。',prereq:['数学分析'],next:['调和分析','小波分析'],books:['Stein & Shakarchi《Fourier Analysis》'],videos:[{name:'Fourier分析 网课',keyword:'Fourier分析网课'}]},
+'调和分析':{desc:'奇异积分、Littlewood-Paley理论、Hardy空间。',arc:['PST 5','PRS 7','FTR 9+','BYD 11'],tag:'进阶',quote:'调和分析是分析学的核心领域之一。',prereq:['Fourier分析','实变函数'],next:[],books:['Stein《Harmonic Analysis》'],videos:[{name:'调和分析 网课',keyword:'调和分析网课'}]},
+'小波分析':{desc:'小波、多分辨率分析、图像压缩、时频分析。',arc:['PST 4','PRS 6','FTR 8'],tag:'应用',quote:'小波分析是信号处理的新工具。',prereq:['Fourier分析'],next:[],books:['Daubechies《Ten Lectures on Wavelets》'],videos:[{name:'小波分析 网课',keyword:'小波分析网课'}]},
+'概率论':{desc:'概率空间、随机变量、期望方差、大数定律、中心极限定理。',arc:['PST 3','PRS 5','FTR 7','ETR 9'],tag:'核心',quote:'概率是人生的数学化。',prereq:['数学分析','实变函数'],next:['随机过程','数理统计'],books:['Durrett《Probability》','Billingsley《Probability and Measure》'],videos:[{name:'概率论 网课',keyword:'概率论网课'}]},
+'数理统计':{desc:'参数估计、假设检验、回归分析、方差分析。',arc:['PST 3','PRS 5','FTR 7','BYD 10'],tag:'核心',quote:'从数据反演真相，统计学家是数字时代的侦探。',prereq:['概率论'],next:['贝叶斯统计','机器学习'],books:['Casella & Berger《Statistical Inference》'],videos:[{name:'数理统计 网课',keyword:'数理统计网课'}]},
+'随机过程':{desc:'Markov链、布朗运动、鞅、Ito积分。',arc:['PST 5','PRS 7','FTR 9+','INS 12'],tag:'进阶',quote:'随机过程是动态的概率论。',prereq:['概率论'],next:['随机分析','金融数学'],books:['Durrett《Stochastic Calculus》','Karatzas & Shreve《Brownian Motion》'],videos:[{name:'随机过程 网课',keyword:'随机过程网课'}]},
+'贝叶斯统计':{desc:'先验、后验、共轭分布、MCMC、变分推断。',arc:['PST 4','PRS 6','FTR 8','BYD 10'],tag:'现代',quote:'贝叶斯把先验知识引入统计推断。',prereq:['数理统计'],next:['机器学习'],books:['Gelman《Bayesian Data Analysis》'],videos:[{name:'贝叶斯统计 网课',keyword:'贝叶斯统计网课'}]},
+'随机分析':{desc:'Ito积分、随机微分方程、鞅论、Girsanov定理。',arc:['PST 6','PRS 8','FTR 10+','INS 12'],tag:'进阶',quote:'随机世界里的微积分。',prereq:['随机过程','实变函数'],next:['金融数学'],books:['Karatzas & Shreve《Brownian Motion and Stochastic Calculus》'],videos:[{name:'随机分析 网课',keyword:'随机分析网课'}]},
+'信息论':{desc:'熵、互信息、信道容量、编码理论。',arc:['PST 4','PRS 6','FTR 8','BYD 10'],tag:'应用',quote:'信息论是信息时代的数学基础。',prereq:['概率论'],next:['机器学习'],books:['Cover & Thomas《Elements of Information Theory》'],videos:[{name:'信息论 网课',keyword:'信息论网课'}]},
+'微分几何':{desc:'流形、切空间、张量场、联络、曲率、测地线。',arc:['PST 5','PRS 7','FTR 9+','BYD 11'],tag:'核心',quote:'广义相对论就是微分几何的物理实现。',prereq:['数学分析','点集拓扑'],next:['黎曼几何','代数几何'],books:['do Carmo《Differential Geometry》','Lee《Introduction to Smooth Manifolds》'],videos:[{name:'微分几何 网课',keyword:'微分几何网课'}]},
+'黎曼几何':{desc:'度规、测地线、曲率张量、比较定理。',arc:['PST 6','PRS 8','FTR 10+','INS 12'],tag:'进阶',quote:'黎曼几何是弯曲空间的几何学。',prereq:['微分几何'],next:['广义相对论'],books:['do Carmo《Riemannian Geometry》','Petersen《Riemannian Geometry》'],videos:[{name:'黎曼几何 网课',keyword:'黎曼几何网课'}]},
+'代数几何':{desc:'仿射簇、射影簇、概形、层、上同调。',arc:['PST 6','PRS 8','FTR 10+','INS 12'],tag:'终极',quote:'Grothendieck用概形重构了整个代数几何。',prereq:['抽象代数','代数拓扑'],next:['朗兰兹纲领'],books:['Hartshorne《Algebraic Geometry》','Vakil《The Rising Sea》'],videos:[{name:'代数几何 网课',keyword:'代数几何网课'}]},
+'朗兰兹纲领':{desc:'数论、表示论、代数几何的统一纲领。数学的"大统一理论"。',arc:['PST 7','PRS 9+','FTR 11+','INS 12+'],tag:'终极',quote:'朗兰兹纲领是数学的"大统一理论"。',prereq:['代数几何','表示论'],next:[],books:['Langlands《Letter to Weil》','Frenkel《Langlands Correspondence》'],videos:[{name:'朗兰兹纲领 讲座',keyword:'朗兰兹纲领'}]},
+'数理逻辑':{desc:'命题逻辑、一阶逻辑、完备性、紧致性、模型论。',arc:['PST 4','PRS 6','FTR 8','BYD 10'],tag:'基础',quote:'逻辑是数学的地基。',prereq:['数学分析'],next:['模型论','集合论与哥德尔定理'],books:['Enderton《A Mathematical Introduction to Logic》'],videos:[{name:'数理逻辑 网课',keyword:'数理逻辑网课'}]},
+'模型论':{desc:'结构、紧致性定理、Löwenheim-Skolem定理、类型空间。',arc:['PST 6','PRS 8','FTR 10+','BYD 11'],tag:'进阶',quote:'模型论是逻辑与代数的交汇。',prereq:['数理逻辑'],next:[],books:['Marker《Model Theory》'],videos:[{name:'模型论 网课',keyword:'模型论网课'}]},
+'集合论与哥德尔定理':{desc:'ZFC公理系统、连续统假设、不完备定理。',arc:['PST 7','PRS 9+','FTR 11+','INS 12+'],tag:'终极难题',quote:'哥德尔定理证明了：数学永远不可能完美自洽。',prereq:['数理逻辑'],next:[],books:['Kunen《Set Theory》','Hofstadter《Gödel, Escher, Bach》'],videos:[{name:'哥德尔不完备定理 讲座',keyword:'哥德尔不完备定理'}]},
+'数值分析':{desc:'数值逼近、数值积分、线性方程组迭代、特征值算法。',arc:['PST 4','PRS 6','FTR 8','BYD 10'],tag:'应用',quote:'计算机不会做极限，但会做数值逼近。',prereq:['数学分析','线性代数进阶'],next:['机器学习','计算物理'],books:['Burden & Faires《Numerical Analysis》'],videos:[{name:'数值分析 网课',keyword:'数值分析网课'}]},
+'运筹学':{desc:'线性规划、整数规划、网络流、动态规划。',arc:['PST 3','PRS 5','FTR 7'],tag:'应用',quote:'把决策变成数学问题。',prereq:['线性代数进阶'],next:[],books:['Hillier & Lieberman《Introduction to Operations Research》'],videos:[{name:'运筹学 网课',keyword:'运筹学网课'}]},
+'优化理论':{desc:'凸优化、梯度法、对偶理论、KKT条件。',arc:['PST 4','PRS 6','FTR 8','BYD 10'],tag:'应用',quote:'优化理论是机器学习的数学引擎。',prereq:['数学分析','线性代数进阶'],next:['机器学习'],books:['Boyd & Vandenberghe《Convex Optimization》'],videos:[{name:'优化理论 网课',keyword:'优化理论网课'}]},
+'控制论':{desc:'线性系统、稳定性、最优控制、Kalman滤波。',arc:['PST 4','PRS 6','FTR 8'],tag:'应用',quote:'让系统按你的意愿运行。',prereq:['微分方程','线性代数进阶'],next:[],books:['Ogata《Modern Control Engineering》'],videos:[{name:'控制论 网课',keyword:'控制论网课'}]},
+'博弈论':{desc:'Nash均衡、合作博弈、机制设计、拍卖理论。',arc:['PST 4','PRS 6','FTR 8','BYD 10'],tag:'应用',quote:'博弈论是决策的数学。',prereq:['概率论','优化理论'],next:[],books:['Osborne & Rubinstein《A Course in Game Theory》'],videos:[{name:'博弈论 网课',keyword:'博弈论网课'}]},
+'密码学':{desc:'RSA、椭圆曲线、格密码、零知识证明。',arc:['PST 4','PRS 6','FTR 8','BYD 10'],tag:'应用',quote:'数论最实用的战争，信息安全的核心。',prereq:['初等数论','抽象代数'],next:[],books:['Katz & Lindell《Introduction to Modern Cryptography》'],videos:[{name:'密码学 网课',keyword:'密码学网课'}]},
+'数学物理方法':{desc:'复变函数、Fourier分析、Laplace变换、特殊函数。',arc:['PST 5','PRS 7','FTR 9+','BYD 11'],tag:'交叉',quote:'物理学家的数学工具箱。',prereq:['数学分析','复变函数'],next:['量子力学','电动力学'],books:['梁昆淼《数学物理方法》','Arfken《Mathematical Methods for Physicists》'],videos:[{name:'数学物理方法 网课',keyword:'数学物理方法网课'}]},
 };
-
-function zlibBookUrl(name){const c=name.replace(/[《》]/g,'').trim();return 'https://z-library.biz/s/'+encodeURIComponent(c)}
+function zlibBookUrl(n){const c=n.replace(/[《》]/g,'').trim();return 'https://z-library.biz/s/'+encodeURIComponent(c)}
 function biliSearchUrl(k){return 'https://search.bilibili.com/all?keyword='+encodeURIComponent(k)}
 let currentCourse=null;
-function showCourse(name){
-  const c=COURSES[name];if(!c){console.warn('Not found:',name);return;}
-  currentCourse=name;
-  document.getElementById('modalTitle').textContent=name;
-  document.getElementById('modalText').textContent=c.desc;
-  const q=document.getElementById('modalQuote');
-  if(c.quote){q.style.display='block';q.textContent=c.quote;}else q.style.display='none';
+function showCourse(name){const c=COURSES[name];if(!c){console.warn('Not found:',name);return}currentCourse=name;
+  document.getElementById('modalTitle').textContent=name;document.getElementById('modalText').textContent=c.desc;
+  const q=document.getElementById('modalQuote');if(c.quote){q.style.display='block';q.textContent=c.quote}else q.style.display='none';
   const arcRow=document.getElementById('arcDiffRow');arcRow.innerHTML='';
   (c.arc||[]).forEach(a=>{const p=a.split(' ');const t=p[0],v=p[1];const i=document.createElement('div');
     let cls=t.toLowerCase();if(t==='INS'&&v==='12+')cls='ins-plus';
-    i.className='arc-diff-item '+cls;i.innerHTML='<span class="label">'+t+'</span><span class="value">'+v+'</span>';arcRow.appendChild(i);});
+    i.className='arc-diff-item '+cls;i.innerHTML='<span class="label">'+t+'</span><span class="value">'+v+'</span>';arcRow.appendChild(i)});
   const pre=document.getElementById('prereqList');pre.innerHTML='';
-  if(c.prereq&&c.prereq.length){c.prereq.forEach(p=>{const s=document.createElement('span');s.className='relation-chip';s.textContent=p;s.onclick=e=>{e.stopPropagation();showCourse(p)};pre.appendChild(s)});}
+  if(c.prereq&&c.prereq.length){c.prereq.forEach(p=>{const s=document.createElement('span');s.className='relation-chip';s.textContent=p;s.onclick=e=>{e.stopPropagation();showCourse(p)};pre.appendChild(s)})}
   else pre.innerHTML='<span class="relation-empty">无（起点学科）</span>';
   const nx=document.getElementById('nextList');nx.innerHTML='';
-  if(c.next&&c.next.length){c.next.forEach(n=>{const s=document.createElement('span');s.className='relation-chip next-chip';s.textContent=n;s.onclick=e=>{e.stopPropagation();showCourse(n)};nx.appendChild(s)});}
+  if(c.next&&c.next.length){c.next.forEach(n=>{const s=document.createElement('span');s.className='relation-chip next-chip';s.textContent=n;s.onclick=e=>{e.stopPropagation();showCourse(n)};nx.appendChild(s)})}
   else nx.innerHTML='<span class="relation-empty">无（终端学科）</span>';
   const bs=document.getElementById('bookSection'),bl=document.getElementById('bookList');
-  if(c.books&&c.books.length){bs.style.display='block';bl.innerHTML='';c.books.forEach(b=>{const a=document.createElement('a');a.className='resource-item book-item';a.href=zlibBookUrl(b);a.target='_blank';a.rel='noopener';a.innerHTML='<span class="resource-icon">📖</span><span>'+b+'</span><span class="resource-arrow">→</span>';bl.appendChild(a)});}else bs.style.display='none';
+  if(c.books&&c.books.length){bs.style.display='block';bl.innerHTML='';c.books.forEach(b=>{const a=document.createElement('a');a.className='resource-item book-item';a.href=zlibBookUrl(b);a.target='_blank';a.rel='noopener';a.innerHTML='<span class="resource-icon">📖</span><span>'+b+'</span><span class="resource-arrow">→</span>';bl.appendChild(a)})}else bs.style.display='none';
   const vs=document.getElementById('videoSection'),vl=document.getElementById('videoList');
-  if(c.videos&&c.videos.length){vs.style.display='block';vl.innerHTML='';c.videos.forEach(v=>{const a=document.createElement('a');a.className='resource-item video-item';a.href=biliSearchUrl(v.keyword||v.name);a.target='_blank';a.rel='noopener';a.innerHTML='<span class="resource-icon">▶️</span><span>'+v.name+'</span><span class="resource-arrow">→</span>';vl.appendChild(a)});}else vs.style.display='none';
-  document.getElementById('overlay').classList.add('show');
-}
+  if(c.videos&&c.videos.length){vs.style.display='block';vl.innerHTML='';c.videos.forEach(v=>{const a=document.createElement('a');a.className='resource-item video-item';a.href=biliSearchUrl(v.keyword||v.name);a.target='_blank';a.rel='noopener';a.innerHTML='<span class="resource-icon">▶️</span><span>'+v.name+'</span><span class="resource-arrow">→</span>';vl.appendChild(a)})}else vs.style.display='none';
+  document.getElementById('overlay').classList.add('show')}
 function hideInfo(){document.getElementById('overlay').classList.remove('show');currentCourse=null}
 function closeInfo(e){if(e.target.id==='overlay')hideInfo()}
 document.addEventListener('keydown',e=>{if(e.key==='Escape')hideInfo()});
