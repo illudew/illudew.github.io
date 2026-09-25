@@ -2,18 +2,16 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>生物知识体系 - 我的生物之旅</title>
 <style>
   :root{--bg:#f4f7fb;--card:#fff;--ink:#152033;--muted:#607089;--shadow:0 12px 32px rgba(20,36,60,.09);}
   *{box-sizing:border-box}html{scroll-behavior:smooth}
-  body{margin:0;font-family:system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;color:var(--ink);
-    background:radial-gradient(circle at 10% 10%,rgba(249,115,22,.08),transparent 28%),
-    radial-gradient(circle at 90% 10%,rgba(16,185,129,.08),transparent 28%),var(--bg)}
+  body{margin:0;font-family:system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;color:var(--ink);background:radial-gradient(circle at 10% 10%,rgba(249,115,22,.08),transparent 28%),radial-gradient(circle at 90% 10%,rgba(16,185,129,.08),transparent 28%),var(--bg)}
   .wrap{width:min(1400px,94vw);margin:auto}
   header{padding:52px 0 20px;text-align:center}
   .eyebrow{font-size:13px;letter-spacing:.22em;color:var(--muted);font-weight:700;text-transform:uppercase}
-  h1{margin:10px 0 8px;font-size:clamp(34px,5vw,64px);line-height:1.08;letter-spacing:-.03em}
+  h1{margin:10px 0 8px;font-size:clamp(34px,5vw,64px);line-height:1.08}
   .subtitle{margin:0 auto;color:var(--muted);font-size:16px;max-width:820px;line-height:1.8}
   .nav-tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:26px 0 8px}
   .nav-tab{padding:8px 20px;border-radius:999px;text-decoration:none;font-weight:700;font-size:14px;border:1px solid #d5deea;background:#fff;transition:.25s}
@@ -108,128 +106,124 @@
     <h2 class="phase-title">🌱 第一章 · 生命序曲</h2>
     <div class="phase-en">LIFE OVERTURE</div>
     <p class="phase-desc">细胞是生命的基本单位，从细胞出发，我们开始探索生命之谜。</p>
+
     <div class="domain" style="--domain-color:#ea580c;">
       <div class="domain-header"><h3>🔬 生物学基础</h3><span class="domain-count">4门</span><span class="domain-desc">生命科学入门</span></div>
       <div class="domain-grid">
-        <div class="course-card" onclick="showCourse('普通生物学')"><div class="tag">入门</div><h4>普通生物学</h4>
-          <div class="arc-badges"><span class="arc-badge arc-pst">PST 1</span><span class="arc-badge arc-prs">PRS 3</span><span class="arc-badge arc-ftr">FTR 5</span></div>
-          <p>细胞、遗传、进化、生态。生物学全景图。</p></div>
-        <div class="course-card" onclick="showCourse('细胞生物学')"><div class="tag">核心</div><h4>细胞生物学</h4>
-          <div class="arc-badges"><span class="arc-badge arc-pst">PST 3</span><span class="arc-badge arc-prs">PRS 5</span><span class="arc-badge arc-ftr">FTR 7</span><span class="arc-badge arc-etr">ETR 9</span></div>
-          <p>细胞结构、细胞器、细胞信号、细胞周期。生命的微观工厂。</p></div>
-        <div class="course-card" onclick="showCourse('遗传学')"><div class="tag">核心</div><h4>遗传学</h4>
-          <div class="arc-badges"><span class="arc-badge arc-pst">PST 3</span><span class="arc-badge arc-prs">PRS 5</span><span class="arc-badge arc-ftr">FTR 7</span><span class="arc-badge arc-byd">BYD 10</span></div>
-          <p>孟德尔遗传、染色体、基因突变、群体遗传。从豌豆到基因编辑。</p></div>
-        <div class="course-card" onclick="showCourse('生物化学')"><div class="tag">核心</div><h4>生物化学</h4>
-          <div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 10</span></div>
-          <p>蛋白质、酶、代谢、核酸。生命的化学语言。</p></div>
+        <div class="course-card" onclick="showCourse('普通生物学')"><div class="tag">入门</div><h4>普通生物学</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 1</span><span class="arc-badge arc-prs">PRS 3</span><span class="arc-badge arc-ftr">FTR 5</span></div><p>细胞、遗传、进化、生态。生物学全景图。</p></div>
+        <div class="course-card" onclick="showCourse('细胞生物学')"><div class="tag">核心</div><h4>细胞生物学</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 3</span><span class="arc-badge arc-prs">PRS 5</span><span class="arc-badge arc-ftr">FTR 7</span><span class="arc-badge arc-etr">ETR 9</span></div><p>细胞结构、细胞器、细胞信号、细胞周期。</p></div>
+        <div class="course-card" onclick="showCourse('遗传学')"><div class="tag">核心</div><h4>遗传学</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 3</span><span class="arc-badge arc-prs">PRS 5</span><span class="arc-badge arc-ftr">FTR 7</span><span class="arc-badge arc-byd">BYD 10</span></div><p>孟德尔遗传、染色体、基因突变、群体遗传。</p></div>
+        <div class="course-card" onclick="showCourse('生物化学')"><div class="tag">核心</div><h4>生物化学</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 10</span></div><p>蛋白质、酶、代谢、核酸。生命的化学语言。</p></div>
+      </div>
+    </div>
+
+    <div class="domain" style="--domain-color:#10b981;">
+      <div class="domain-header"><h3>🌿 植物与动物</h3><span class="domain-count">4门</span><span class="domain-desc">多细胞生命的形态与功能</span></div>
+      <div class="domain-grid">
+        <div class="course-card" onclick="showCourse('微生物学')"><div class="tag">核心</div><h4>微生物学</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 3</span><span class="arc-badge arc-prs">PRS 5</span><span class="arc-badge arc-ftr">FTR 7</span></div><p>细菌、真菌、病毒、微生物生态。</p></div>
+        <div class="course-card" onclick="showCourse('植物学')"><div class="tag">方向</div><h4>植物学</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 2</span><span class="arc-badge arc-prs">PRS 4</span><span class="arc-badge arc-ftr">FTR 6</span></div><p>植物形态、解剖、分类、光合作用。</p></div>
+        <div class="course-card" onclick="showCourse('动物学')"><div class="tag">方向</div><h4>动物学</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 2</span><span class="arc-badge arc-prs">PRS 4</span><span class="arc-badge arc-ftr">FTR 6</span></div><p>无脊椎动物、脊椎动物、比较解剖学。</p></div>
+        <div class="course-card" onclick="showCourse('进化论基础')"><div class="tag">基础</div><h4>进化论基础</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 2</span><span class="arc-badge arc-prs">PRS 4</span><span class="arc-badge arc-ftr">FTR 6</span></div><p>达尔文、自然选择、物种起源。</p></div>
       </div>
     </div>
 
     <h2 class="phase-title classic">🧬 第二章 · 分子回廊</h2>
     <div class="phase-en">MOLECULAR CORRIDOR</div>
     <p class="phase-desc">DNA双螺旋的发现开启了分子生物学时代，从这里我们开始读懂生命之书。</p>
+
     <div class="domain" style="--domain-color:#10b981;">
-      <div class="domain-header"><h3>🔷 分子生物学</h3><span class="domain-count">4门</span><span class="domain-desc">从DNA到蛋白质</span></div>
+      <div class="domain-header"><h3>🔷 分子生物学</h3><span class="domain-count">5门</span><span class="domain-desc">从DNA到蛋白质</span></div>
       <div class="domain-grid">
-        <div class="course-card" onclick="showCourse('分子生物学')"><div class="tag">核心</div><h4>分子生物学</h4>
-          <div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 10</span></div>
-          <p>DNA复制、转录、翻译、基因调控。中心法则的完整故事。</p></div>
-        <div class="course-card" onclick="showCourse('基因工程')"><div class="tag">方向</div><h4>基因工程</h4>
-          <div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 10</span></div>
-          <p>PCR、CRISPR、克隆、转基因。改写生命之书。</p></div>
-        <div class="course-card hard-card" onclick="showCourse('蛋白质组学')"><div class="tag" style="background:#fee2e2;color:#b91c1c;">前沿</div><h4>蛋白质组学</h4>
-          <div class="arc-badges"><span class="arc-badge arc-pst">PST 5</span><span class="arc-badge arc-prs">PRS 7</span><span class="arc-badge arc-ftr">FTR 9+</span><span class="arc-badge arc-byd">BYD 11</span></div>
-          <p>质谱、蛋白质鉴定、翻译后修饰。蛋白质的全景研究。</p></div>
-        <div class="course-card" onclick="showCourse('代谢组学')"><div class="tag">前沿</div><h4>代谢组学</h4>
-          <div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span></div>
-          <p>代谢物分析、代谢通路、系统生物学。生命的化学指纹。</p></div>
+        <div class="course-card" onclick="showCourse('分子生物学')"><div class="tag">核心</div><h4>分子生物学</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 10</span></div><p>DNA复制、转录、翻译、基因调控。</p></div>
+        <div class="course-card" onclick="showCourse('基因组学')"><div class="tag">前沿</div><h4>基因组学</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 10</span></div><p>基因组测序、组装、注释、比较基因组学。</p></div>
+        <div class="course-card" onclick="showCourse('转录组学')"><div class="tag">前沿</div><h4>转录组学</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span></div><p>RNA-seq、差异表达、单细胞转录组。</p></div>
+        <div class="course-card hard-card" onclick="showCourse('表观遗传学')"><div class="tag" style="background:#fee2e2;color:#b91c1c;">前沿</div><h4>表观遗传学</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 5</span><span class="arc-badge arc-prs">PRS 7</span><span class="arc-badge arc-ftr">FTR 9+</span><span class="arc-badge arc-byd">BYD 11</span></div><p>DNA甲基化、组蛋白修饰、非编码RNA。不改变序列的遗传。</p></div>
+        <div class="course-card hard-card" onclick="showCourse('蛋白质组学')"><div class="tag" style="background:#fee2e2;color:#b91c1c;">前沿</div><h4>蛋白质组学</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 5</span><span class="arc-badge arc-prs">PRS 7</span><span class="arc-badge arc-ftr">FTR 9+</span><span class="arc-badge arc-byd">BYD 11</span></div><p>质谱、蛋白质鉴定、翻译后修饰。</p></div>
+      </div>
+    </div>
+
+    <div class="domain" style="--domain-color:#6366f1;">
+      <div class="domain-header"><h3>🔧 基因工程与工具</h3><span class="domain-count">3门</span><span class="domain-desc">改写生命的技术</span></div>
+      <div class="domain-grid">
+        <div class="course-card" onclick="showCourse('基因工程')"><div class="tag">方向</div><h4>基因工程</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 10</span></div><p>PCR、CRISPR、克隆、转基因。</p></div>
+        <div class="course-card" onclick="showCourse('结构生物学')"><div class="tag">交叉</div><h4>结构生物学</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 10</span></div><p>X射线晶体学、冷冻电镜、NMR。</p></div>
+        <div class="course-card hard-card" onclick="showCourse('RNA生物学')"><div class="tag" style="background:#fee2e2;color:#b91c1c;">前沿</div><h4>RNA生物学</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 5</span><span class="arc-badge arc-prs">PRS 7</span><span class="arc-badge arc-ftr">FTR 9+</span></div><p>mRNA、tRNA、rRNA、miRNA、lncRNA、RNAi。</p></div>
       </div>
     </div>
 
     <h2 class="phase-title quantum">⚡ 第三章 · 系统深渊</h2>
     <div class="phase-en">SYSTEMS ABYSS</div>
     <p class="phase-desc">从单分子到多细胞系统，从细胞到器官，从器官到个体——系统生物学探索生命的整体性。</p>
+
     <div class="domain" style="--domain-color:#7c3aed;">
-      <div class="domain-header"><h3>🧠 系统生物学</h3><span class="domain-count">4门</span><span class="domain-desc">生命的整体性</span></div>
+      <div class="domain-header"><h3>🧠 系统生物学</h3><span class="domain-count">5门</span><span class="domain-desc">生命的整体性</span></div>
       <div class="domain-grid">
-        <div class="course-card" onclick="showCourse('生理学')"><div class="tag">核心</div><h4>生理学</h4>
-          <div class="arc-badges"><span class="arc-badge arc-pst">PST 3</span><span class="arc-badge arc-prs">PRS 5</span><span class="arc-badge arc-ftr">FTR 7</span><span class="arc-badge arc-etr">ETR 9</span></div>
-          <p>循环、呼吸、消化、神经、内分泌。人体机器的运转。</p></div>
-        <div class="course-card" onclick="showCourse('免疫学')"><div class="tag">核心</div><h4>免疫学</h4>
-          <div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 10</span></div>
-          <p>先天免疫、适应性免疫、抗体、疫苗。身体里的军队。</p></div>
-        <div class="course-card hard-card" onclick="showCourse('神经生物学')"><div class="tag" style="background:#fee2e2;color:#b91c1c;">进阶</div><h4>神经生物学</h4>
-          <div class="arc-badges"><span class="arc-badge arc-pst">PST 5</span><span class="arc-badge arc-prs">PRS 7</span><span class="arc-badge arc-ftr">FTR 9+</span><span class="arc-badge arc-ins">INS 12</span></div>
-          <p>神经元、突触、神经递质、脑。宇宙最复杂的结构。</p></div>
-        <div class="course-card" onclick="showCourse('发育生物学')"><div class="tag">进阶</div><h4>发育生物学</h4>
-          <div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 10</span></div>
-          <p>受精卵如何变成个体——生命最神奇的魔术。</p></div>
+        <div class="course-card" onclick="showCourse('生理学')"><div class="tag">核心</div><h4>生理学</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 3</span><span class="arc-badge arc-prs">PRS 5</span><span class="arc-badge arc-ftr">FTR 7</span><span class="arc-badge arc-etr">ETR 9</span></div><p>循环、呼吸、消化、神经、内分泌。</p></div>
+        <div class="course-card" onclick="showCourse('免疫学')"><div class="tag">核心</div><h4>免疫学</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 10</span></div><p>先天免疫、适应性免疫、抗体、疫苗。</p></div>
+        <div class="course-card hard-card" onclick="showCourse('神经生物学')"><div class="tag" style="background:#fee2e2;color:#b91c1c;">进阶</div><h4>神经生物学</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 5</span><span class="arc-badge arc-prs">PRS 7</span><span class="arc-badge arc-ftr">FTR 9+</span><span class="arc-badge arc-ins">INS 12</span></div><p>神经元、突触、神经递质、脑。</p></div>
+        <div class="course-card" onclick="showCourse('发育生物学')"><div class="tag">进阶</div><h4>发育生物学</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 10</span></div><p>受精、卵裂、分化、形态发生、干细胞。</p></div>
+        <div class="course-card" onclick="showCourse('内分泌学')"><div class="tag">方向</div><h4>内分泌学</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 3</span><span class="arc-badge arc-prs">PRS 5</span><span class="arc-badge arc-ftr">FTR 7</span></div><p>激素、受体、内分泌腺、代谢调控。</p></div>
+      </div>
+    </div>
+
+    <div class="domain" style="--domain-color:#b91c1c;">
+      <div class="domain-header"><h3>🩺 医学相关</h3><span class="domain-count">3门</span><span class="domain-desc">生物学与医学的交汇</span></div>
+      <div class="domain-grid">
+        <div class="course-card" onclick="showCourse('病理学')"><div class="tag">医学</div><h4>病理学</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span></div><p>细胞损伤、炎症、肿瘤、疾病机理。</p></div>
+        <div class="course-card" onclick="showCourse('药理学')"><div class="tag">医学</div><h4>药理学</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span></div><p>药物作用机制、药代动力学、药物毒性。</p></div>
+        <div class="course-card" onclick="showCourse('干细胞生物学')"><div class="tag">前沿</div><h4>干细胞生物学</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 5</span><span class="arc-badge arc-prs">PRS 7</span><span class="arc-badge arc-ftr">FTR 9+</span><span class="arc-badge arc-byd">BYD 11</span></div><p>胚胎干细胞、诱导多能干细胞、再生医学。</p></div>
       </div>
     </div>
 
     <h2 class="phase-title apps">🌳 第四章 · 生态迷宫</h2>
     <div class="phase-en">ECOLOGICAL LABYRINTH</div>
     <p class="phase-desc">从个体到种群，从群落再到生态系统，生命与环境的互动构成了生物圈。</p>
+
     <div class="domain" style="--domain-color:#c2410c;">
-      <div class="domain-header"><h3>🌍 生态与进化</h3><span class="domain-count">4门</span><span class="domain-desc">生命与环境的互动</span></div>
+      <div class="domain-header"><h3>🌍 生态与进化</h3><span class="domain-count">6门</span><span class="domain-desc">生命与环境的互动</span></div>
       <div class="domain-grid">
-        <div class="course-card" onclick="showCourse('生态学')"><div class="tag">核心</div><h4>生态学</h4>
-          <div class="arc-badges"><span class="arc-badge arc-pst">PST 3</span><span class="arc-badge arc-prs">PRS 5</span><span class="arc-badge arc-ftr">FTR 7</span></div>
-          <p>种群、群落、生态系统、生物圈。生命与环境。</p></div>
-        <div class="course-card" onclick="showCourse('进化生物学')"><div class="tag">核心</div><h4>进化生物学</h4>
-          <div class="arc-badges"><span class="arc-badge arc-pst">PST 3</span><span class="arc-badge arc-prs">PRS 5</span><span class="arc-badge arc-ftr">FTR 7</span><span class="arc-badge arc-byd">BYD 10</span></div>
-          <p>自然选择、性选择、分子进化。生命多样性的由来。</p></div>
-        <div class="course-card" onclick="showCourse('生物多样性')"><div class="tag">方向</div><h4>生物多样性</h4>
-          <div class="arc-badges"><span class="arc-badge arc-pst">PST 3</span><span class="arc-badge arc-prs">PRS 5</span><span class="arc-badge arc-ftr">FTR 7</span></div>
-          <p>物种多样性、遗传多样性、生态系统多样性。地球生命的宝藏。</p></div>
-        <div class="course-card" onclick="showCourse('保护生物学')"><div class="tag">方向</div><h4>保护生物学</h4>
-          <div class="arc-badges"><span class="arc-badge arc-pst">PST 3</span><span class="arc-badge arc-prs">PRS 5</span><span class="arc-badge arc-ftr">FTR 7</span></div>
-          <p>物种濒危、栖息地保护、生态修复。守护地球生命。</p></div>
+        <div class="course-card" onclick="showCourse('生态学')"><div class="tag">核心</div><h4>生态学</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 3</span><span class="arc-badge arc-prs">PRS 5</span><span class="arc-badge arc-ftr">FTR 7</span></div><p>种群、群落、生态系统、生物圈。</p></div>
+        <div class="course-card" onclick="showCourse('进化生物学')"><div class="tag">核心</div><h4>进化生物学</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 3</span><span class="arc-badge arc-prs">PRS 5</span><span class="arc-badge arc-ftr">FTR 7</span><span class="arc-badge arc-byd">BYD 10</span></div><p>自然选择、性选择、分子进化。</p></div>
+        <div class="course-card" onclick="showCourse('种群生态学')"><div class="tag">方向</div><h4>种群生态学</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 3</span><span class="arc-badge arc-prs">PRS 5</span><span class="arc-badge arc-ftr">FTR 7</span></div><p>种群增长、种间关系、种群调节。</p></div>
+        <div class="course-card" onclick="showCourse('群落生态学')"><div class="tag">方向</div><h4>群落生态学</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 3</span><span class="arc-badge arc-prs">PRS 5</span><span class="arc-badge arc-ftr">FTR 7</span></div><p>群落结构、演替、物种多样性。</p></div>
+        <div class="course-card" onclick="showCourse('生物多样性')"><div class="tag">方向</div><h4>生物多样性</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 3</span><span class="arc-badge arc-prs">PRS 5</span><span class="arc-badge arc-ftr">FTR 7</span></div><p>物种多样性、遗传多样性、生态系统多样性。</p></div>
+        <div class="course-card" onclick="showCourse('保护生物学')"><div class="tag">方向</div><h4>保护生物学</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 3</span><span class="arc-badge arc-prs">PRS 5</span><span class="arc-badge arc-ftr">FTR 7</span></div><p>物种濒危、栖息地保护、生态修复。</p></div>
       </div>
     </div>
 
     <h2 class="phase-title cosmos">🏛️ 第五章 · 生命尽头</h2>
     <div class="phase-en">BIOLOGICAL HORIZON</div>
     <p class="phase-desc">合成生物学、生物信息学、脑科学——生物学正在从"描述"走向"创造"。</p>
+
     <div class="domain" style="--domain-color:#4338ca;">
-      <div class="domain-header"><h3>🌌 生物前沿</h3><span class="domain-count">4门</span><span class="domain-desc">生命科学的未来</span></div>
+      <div class="domain-header"><h3>🌌 生物前沿</h3><span class="domain-count">5门</span><span class="domain-desc">生命科学的未来</span></div>
       <div class="domain-grid">
-        <div class="course-card cosmos-card" onclick="showCourse('合成生物学')"><div class="tag">前沿</div><h4>合成生物学</h4>
-          <div class="arc-badges"><span class="arc-badge arc-pst">PST 5</span><span class="arc-badge arc-prs">PRS 7</span><span class="arc-badge arc-ftr">FTR 9+</span><span class="arc-badge arc-byd">BYD 11</span></div>
-          <p>基因线路、人工细胞、生物制造。像工程师一样设计生命。</p></div>
-        <div class="course-card cosmos-card" onclick="showCourse('系统生物学')"><div class="tag">前沿</div><h4>系统生物学</h4>
-          <div class="arc-badges"><span class="arc-badge arc-pst">PST 5</span><span class="arc-badge arc-prs">PRS 7</span><span class="arc-badge arc-ftr">FTR 9+</span><span class="arc-badge arc-ins">INS 12</span></div>
-          <p>网络分析、动力学建模、多组学整合。用系统思维理解生命。</p></div>
-        <div class="course-card cosmos-card" onclick="showCourse('生物信息学')"><div class="tag">前沿</div><h4>生物信息学</h4>
-          <div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 10</span></div>
-          <p>序列比对、基因组组装、机器学习。用计算机解读生命。</p></div>
-        <div class="course-card ultimate-card" onclick="showCourse('脑科学')"><div class="tag" style="background:#ede9fe;color:#4c1d95;">终极</div><h4 style="color:#4c1d95;">脑科学</h4>
-          <div class="arc-badges"><span class="arc-badge arc-pst">PST 7</span><span class="arc-badge arc-prs">PRS 9+</span><span class="arc-badge arc-ftr">FTR 11+</span><span class="arc-badge arc-ins-plus">INS 12+</span></div>
-          <p style="color:#4c1d95;">连接组学、神经计算、意识研究。宇宙最复杂的结构——人脑。</p></div>
+        <div class="course-card cosmos-card" onclick="showCourse('合成生物学')"><div class="tag">前沿</div><h4>合成生物学</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 5</span><span class="arc-badge arc-prs">PRS 7</span><span class="arc-badge arc-ftr">FTR 9+</span><span class="arc-badge arc-byd">BYD 11</span></div><p>基因线路、人工细胞、生物制造。</p></div>
+        <div class="course-card cosmos-card" onclick="showCourse('系统生物学')"><div class="tag">前沿</div><h4>系统生物学</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 5</span><span class="arc-badge arc-prs">PRS 7</span><span class="arc-badge arc-ftr">FTR 9+</span><span class="arc-badge arc-ins">INS 12</span></div><p>网络分析、动力学建模、多组学整合。</p></div>
+        <div class="course-card cosmos-card" onclick="showCourse('生物信息学')"><div class="tag">前沿</div><h4>生物信息学</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 10</span></div><p>序列比对、基因组组装、机器学习。</p></div>
+        <div class="course-card cosmos-card" onclick="showCourse('计算神经科学')"><div class="tag">前沿</div><h4>计算神经科学</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 5</span><span class="arc-badge arc-prs">PRS 7</span><span class="arc-badge arc-ftr">FTR 9+</span><span class="arc-badge arc-ins">INS 12</span></div><p>神经元模型、神经网络、认知计算。</p></div>
+        <div class="course-card god-card" onclick="showCourse('脑科学')"><div class="tag" style="background:#fef3c7;color:#92400e;">⭐ 终极难题</div><h4 style="color:#78350f;">脑科学</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 7</span><span class="arc-badge arc-prs">PRS 9+</span><span class="arc-badge arc-ftr">FTR 11+</span><span class="arc-badge arc-ins-plus">INS 12+</span></div><p style="color:#78350f;">连接组学、神经计算、意识研究。宇宙最复杂的结构——人脑。</p></div>
       </div>
     </div>
 
     <h2 class="phase-title nexus">✨ 额外章 · 生物交汇</h2>
     <div class="phase-en">BIOLOGICAL CONVERGENCE</div>
     <p class="phase-desc">生物学与物理、化学、医学、环境交织，构成了生命科学的多彩画卷。</p>
+
     <div class="domain" style="--domain-color:#059669;">
-      <div class="domain-header"><h3>🌟 交叉方向</h3><span class="domain-count">4门</span><span class="domain-desc">与其他学科的交汇</span></div>
+      <div class="domain-header"><h3>🌟 交叉方向</h3><span class="domain-count">8门</span><span class="domain-desc">与其他学科的交汇</span></div>
       <div class="domain-grid">
-        <div class="course-card cosmos-card" onclick="showCourse('生物物理学')"><div class="tag">交叉</div><h4>生物物理学</h4>
-          <div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 10</span></div>
-          <p>分子马达、细胞力学、单分子技术。用物理工具研究生命。</p></div>
-        <div class="course-card cosmos-card" onclick="showCourse('结构生物学')"><div class="tag">交叉</div><h4>结构生物学</h4>
-          <div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 10</span></div>
-          <p>X射线晶体学、冷冻电镜、NMR。看清蛋白质的三维结构。</p></div>
-        <div class="course-card cosmos-card" onclick="showCourse('癌症生物学')"><div class="tag">应用</div><h4>癌症生物学</h4>
-          <div class="arc-badges"><span class="arc-badge arc-pst">PST 5</span><span class="arc-badge arc-prs">PRS 7</span><span class="arc-badge arc-ftr">FTR 9+</span><span class="arc-badge arc-ins">INS 12</span></div>
-          <p>癌基因、抑癌基因、肿瘤微环境、靶向治疗。攻克癌症的艰难征程。</p></div>
-        <div class="course-card cosmos-card" onclick="showCourse('病毒学')"><div class="tag">应用</div><h4>病毒学</h4>
-          <div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 10</span></div>
-          <p>病毒结构、感染机制、抗病毒药物、疫苗。看不见的敌人。</p></div>
+        <div class="course-card cosmos-card" onclick="showCourse('生物物理学')"><div class="tag">交叉</div><h4>生物物理学</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 10</span></div><p>分子马达、细胞力学、单分子技术。</p></div>
+        <div class="course-card cosmos-card" onclick="showCourse('癌症生物学')"><div class="tag">应用</div><h4>癌症生物学</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 5</span><span class="arc-badge arc-prs">PRS 7</span><span class="arc-badge arc-ftr">FTR 9+</span><span class="arc-badge arc-ins">INS 12</span></div><p>癌基因、抑癌基因、肿瘤微环境、靶向治疗。</p></div>
+        <div class="course-card cosmos-card" onclick="showCourse('病毒学')"><div class="tag">应用</div><h4>病毒学</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 10</span></div><p>病毒结构、感染机制、抗病毒药物、疫苗。</p></div>
+        <div class="course-card cosmos-card" onclick="showCourse('微生物组学')"><div class="tag">前沿</div><h4>微生物组学</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 5</span><span class="arc-badge arc-prs">PRS 7</span><span class="arc-badge arc-ftr">FTR 9+</span><span class="arc-badge arc-byd">BYD 11</span></div><p>肠道菌群、微生物-宿主互作、宏基因组学。</p></div>
+        <div class="course-card cosmos-card" onclick="showCourse('免疫工程')"><div class="tag">前沿</div><h4>免疫工程</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 5</span><span class="arc-badge arc-prs">PRS 7</span><span class="arc-badge arc-ftr">FTR 9+</span><span class="arc-badge arc-byd">BYD 11</span></div><p>CAR-T、抗体工程、免疫检查点、疫苗设计。</p></div>
+        <div class="course-card cosmos-card" onclick="showCourse('组织工程')"><div class="tag">应用</div><h4>组织工程</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span></div><p>生物材料、支架、3D生物打印。</p></div>
+        <div class="course-card cosmos-card" onclick="showCourse('基因治疗')"><div class="tag">前沿</div><h4>基因治疗</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 5</span><span class="arc-badge arc-prs">PRS 7</span><span class="arc-badge arc-ftr">FTR 9+</span><span class="arc-badge arc-byd">BYD 11</span></div><p>基因编辑治疗、载体设计、罕见病治疗。</p></div>
+        <div class="course-card cosmos-card" onclick="showCourse('精准医学')"><div class="tag">应用</div><h4>精准医学</h4><div class="arc-badges"><span class="arc-badge arc-pst">PST 5</span><span class="arc-badge arc-prs">PRS 7</span><span class="arc-badge arc-ftr">FTR 9+</span><span class="arc-badge arc-byd">BYD 10</span></div><p>个性化医疗、药物基因组学、液体活检。</p></div>
       </div>
     </div>
+
   </main>
 
   <footer>
@@ -240,8 +234,7 @@
 
 <div class="overlay" id="overlay" onclick="closeInfo(event)">
   <div class="modal" onclick="event.stopPropagation()">
-    <h2 id="modalTitle">课程详情</h2>
-    <p id="modalText"></p>
+    <h2 id="modalTitle">课程详情</h2><p id="modalText"></p>
     <div class="quote" id="modalQuote" style="display:none;"></div>
     <div class="arc-diff-row" id="arcDiffRow"></div>
     <div class="resource-section" id="bookSection" style="display:none;"><div class="resource-label">📖 推荐教材（点击跳转 Z-Library）</div><div class="resource-list" id="bookList"></div></div>
@@ -255,31 +248,50 @@
 </div>
 
 <script>
-const COURSES = {
-  '普通生物学':{desc:'细胞、遗传、进化、生态、生物多样性。生物学的全景图。',arc:['PST 1','PRS 3','FTR 5'],tag:'入门',quote:'Nothing in biology makes sense except in the light of evolution. —— Dobzhansky',prereq:[],next:['细胞生物学','遗传学','生物化学'],books:['Campbell《Biology》','陈阅增《普通生物学》'],videos:[{name:'普通生物学 网课',keyword:'普通生物学网课'}]},
-  '细胞生物学':{desc:'细胞膜、细胞器、细胞骨架、细胞信号、细胞周期。',arc:['PST 3','PRS 5','FTR 7','ETR 9'],tag:'核心',quote:'细胞是生命的基本单位。',prereq:['普通生物学'],next:['分子生物学','生理学'],books:['Alberts《Molecular Biology of the Cell》','翟中和《细胞生物学》'],videos:[{name:'细胞生物学 网课',keyword:'细胞生物学网课'}]},
-  '遗传学':{desc:'孟德尔遗传、染色体、基因突变、基因重组、群体遗传。',arc:['PST 3','PRS 5','FTR 7','BYD 10'],tag:'核心',quote:'基因是遗传的基本单位。',prereq:['普通生物学'],next:['分子生物学','进化生物学'],books:['Griffiths《Introduction to Genetic Analysis》','刘祖洞《遗传学》'],videos:[{name:'遗传学 网课',keyword:'遗传学网课'}]},
-  '生物化学':{desc:'蛋白质、酶、代谢、核酸、生物膜。',arc:['PST 4','PRS 6','FTR 8','BYD 10'],tag:'核心',quote:'生命的化学语言。',prereq:['普通化学'],next:['分子生物学','代谢组学'],books:['Lehninger《Principles of Biochemistry》','王镜岩《生物化学》'],videos:[{name:'生物化学 网课',keyword:'生物化学网课'}]},
-  '分子生物学':{desc:'DNA复制、转录、翻译、基因调控、表观遗传。',arc:['PST 4','PRS 6','FTR 8','BYD 10'],tag:'核心',quote:'中心法则：DNA→RNA→蛋白质。',prereq:['生物化学','遗传学'],next:['基因工程','蛋白质组学'],books:['Watson《Molecular Biology of the Gene》','朱玉贤《现代分子生物学》'],videos:[{name:'分子生物学 网课',keyword:'分子生物学网课'}]},
-  '基因工程':{desc:'PCR、CRISPR、分子克隆、转基因、基因编辑。',arc:['PST 4','PRS 6','FTR 8','BYD 10'],tag:'方向',quote:'CRISPR是21世纪最伟大的生物技术。',prereq:['分子生物学'],next:['合成生物学'],books:['《基因工程》','Green《Molecular Cloning》'],videos:[{name:'基因工程 网课',keyword:'基因工程网课'}]},
-  '蛋白质组学':{desc:'质谱、蛋白质鉴定、翻译后修饰、蛋白质互作。',arc:['PST 5','PRS 7','FTR 9+','BYD 11'],tag:'前沿',quote:'蛋白质组学是后基因组时代的核心。',prereq:['生物化学','分子生物学'],next:[],books:['《蛋白质组学》'],videos:[{name:'蛋白质组学 网课',keyword:'蛋白质组学网课'}]},
-  '代谢组学':{desc:'代谢物分析、代谢通路、系统生物学。',arc:['PST 4','PRS 6','FTR 8'],tag:'前沿',quote:'代谢物是生命活动的最终产物。',prereq:['生物化学'],next:[],books:['《代谢组学》'],videos:[{name:'代谢组学 网课',keyword:'代谢组学网课'}]},
-  '生理学':{desc:'循环、呼吸、消化、神经、内分泌、泌尿。',arc:['PST 3','PRS 5','FTR 7','ETR 9'],tag:'核心',quote:'生理学是研究人体功能的科学。',prereq:['细胞生物学'],next:['神经生物学'],books:['Guyton《Textbook of Medical Physiology》','姚泰《生理学》'],videos:[{name:'生理学 网课',keyword:'生理学网课'}]},
-  '免疫学':{desc:'先天免疫、适应性免疫、抗体、疫苗、免疫疾病。',arc:['PST 4','PRS 6','FTR 8','BYD 10'],tag:'核心',quote:'免疫系统是身体里的军队。',prereq:['细胞生物学','生物化学'],next:[],books:['Janeway《Immunobiology》','曹雪涛《医学免疫学》'],videos:[{name:'免疫学 网课',keyword:'免疫学网课'}]},
-  '神经生物学':{desc:'神经元、突触、神经递质、脑、认知。',arc:['PST 5','PRS 7','FTR 9+','INS 12'],tag:'进阶',quote:'人脑是宇宙最复杂的结构。',prereq:['生理学','细胞生物学'],next:['脑科学'],books:['Kandel《Principles of Neural Science》'],videos:[{name:'神经生物学 网课',keyword:'神经生物学网课'}]},
-  '发育生物学':{desc:'受精、卵裂、分化、形态发生、干细胞。',arc:['PST 4','PRS 6','FTR 8','BYD 10'],tag:'进阶',quote:'从一个细胞到一个个体，这是生命最神奇的魔术。',prereq:['细胞生物学','遗传学'],next:[],books:['Gilbert《Developmental Biology》'],videos:[{name:'发育生物学 网课',keyword:'发育生物学网课'}]},
-  '生态学':{desc:'种群、群落、生态系统、生物圈、生态平衡。',arc:['PST 3','PRS 5','FTR 7'],tag:'核心',quote:'生态学是研究生物与环境相互关系的科学。',prereq:['普通生物学'],next:['保护生物学'],books:['Odum《Fundamentals of Ecology》','牛翠娟《基础生态学》'],videos:[{name:'生态学 网课',keyword:'生态学网课'}]},
-  '进化生物学':{desc:'自然选择、性选择、分子进化、物种形成。',arc:['PST 3','PRS 5','FTR 7','BYD 10'],tag:'核心',quote:'Nothing in biology makes sense except in the light of evolution.',prereq:['遗传学'],next:[],books:['Futuyma《Evolution》'],videos:[{name:'进化生物学 网课',keyword:'进化生物学网课'}]},
-  '生物多样性':{desc:'物种多样性、遗传多样性、生态系统多样性、保护。',arc:['PST 3','PRS 5','FTR 7'],tag:'方向',quote:'生物多样性是地球生命的宝藏。',prereq:['生态学','进化生物学'],next:['保护生物学'],books:['《生物多样性》'],videos:[{name:'生物多样性 网课',keyword:'生物多样性网课'}]},
-  '保护生物学':{desc:'物种濒危、栖息地保护、生态修复、自然保护区。',arc:['PST 3','PRS 5','FTR 7'],tag:'方向',quote:'守护地球生命，保护人类未来。',prereq:['生态学','生物多样性'],next:[],books:['Primack《Essentials of Conservation Biology》'],videos:[{name:'保护生物学 网课',keyword:'保护生物学网课'}]},
-  '合成生物学':{desc:'基因线路、人工细胞、生物制造、CRISPR应用。',arc:['PST 5','PRS 7','FTR 9+','BYD 11'],tag:'前沿',quote:'像工程师一样设计生命。',prereq:['基因工程','分子生物学'],next:[],books:['《合成生物学》'],videos:[{name:'合成生物学 网课',keyword:'合成生物学网课'}]},
-  '系统生物学':{desc:'网络分析、动力学建模、多组学整合、系统思维。',arc:['PST 5','PRS 7','FTR 9+','INS 12'],tag:'前沿',quote:'用系统思维理解生命。',prereq:['分子生物学','生物化学'],next:[],books:['Alon《An Introduction to Systems Biology》'],videos:[{name:'系统生物学 网课',keyword:'系统生物学网课'}]},
-  '生物信息学':{desc:'序列比对、基因组组装、基因预测、机器学习。',arc:['PST 4','PRS 6','FTR 8','BYD 10'],tag:'前沿',quote:'用计算机解读生命之书。',prereq:['分子生物学','计算物理'],next:['系统生物学'],books:['《生物信息学》','PeVsner《Bioinformatics and Functional Genomics》'],videos:[{name:'生物信息学 网课',keyword:'生物信息学网课'}]},
-  '脑科学':{desc:'连接组学、神经计算、意识研究、脑机接口。',arc:['PST 7','PRS 9+','FTR 11+','INS 12+'],tag:'终极',quote:'宇宙最复杂的结构——人脑。',prereq:['神经生物学'],next:[],books:['Kandel《Principles of Neural Science》','《脑科学》'],videos:[{name:'脑科学 网课',keyword:'脑科学网课'}]},
-  '生物物理学':{desc:'分子马达、细胞力学、单分子技术、生物膜物理。',arc:['PST 4','PRS 6','FTR 8','BYD 10'],tag:'交叉',quote:'用物理工具研究生命。',prereq:['生物化学','物理化学'],next:[],books:['Phillips《Physical Biology of the Cell》'],videos:[{name:'生物物理学 网课',keyword:'生物物理学网课'}]},
-  '结构生物学':{desc:'X射线晶体学、冷冻电镜、NMR、分子对接。',arc:['PST 4','PRS 6','FTR 8','BYD 10'],tag:'交叉',quote:'看清蛋白质的三维结构，才能理解它的功能。',prereq:['生物化学','物理化学'],next:[],books:['《结构生物学》'],videos:[{name:'结构生物学 网课',keyword:'结构生物学网课'}]},
-  '癌症生物学':{desc:'癌基因、抑癌基因、肿瘤微环境、靶向治疗。',arc:['PST 5','PRS 7','FTR 9+','INS 12'],tag:'应用',quote:'攻克癌症是人类共同的梦想。',prereq:['细胞生物学','分子生物学'],next:[],books:['Weinberg《The Biology of Cancer》'],videos:[{name:'癌症生物学 网课',keyword:'癌症生物学网课'}]},
-  '病毒学':{desc:'病毒结构、感染机制、抗病毒药物、疫苗。',arc:['PST 4','PRS 6','FTR 8','BYD 10'],tag:'应用',quote:'看不见的敌人，看得见的科学。',prereq:['细胞生物学','分子生物学'],next:[],books:['Flint《Principles of Virology》'],videos:[{name:'病毒学 网课',keyword:'病毒学网课'}]},
+const COURSES={
+'普通生物学':{desc:'细胞、遗传、进化、生态、生物多样性。生物学的全景图。',arc:['PST 1','PRS 3','FTR 5'],tag:'入门',quote:'Nothing in biology makes sense except in the light of evolution. —— Dobzhansky',prereq:[],next:['细胞生物学','遗传学','生物化学'],books:['Campbell《Biology》','陈阅增《普通生物学》'],videos:[{name:'普通生物学 网课',keyword:'普通生物学网课'}]},
+'细胞生物学':{desc:'细胞膜、细胞器、细胞骨架、细胞信号、细胞周期。',arc:['PST 3','PRS 5','FTR 7','ETR 9'],tag:'核心',quote:'细胞是生命的基本单位。',prereq:['普通生物学'],next:['分子生物学','生理学'],books:['Alberts《Molecular Biology of the Cell》','翟中和《细胞生物学》'],videos:[{name:'细胞生物学 网课',keyword:'细胞生物学网课'}]},
+'遗传学':{desc:'孟德尔遗传、染色体、基因突变、基因重组、群体遗传。',arc:['PST 3','PRS 5','FTR 7','BYD 10'],tag:'核心',quote:'基因是遗传的基本单位。',prereq:['普通生物学'],next:['分子生物学','进化生物学'],books:['Griffiths《Introduction to Genetic Analysis》','刘祖洞《遗传学》'],videos:[{name:'遗传学 网课',keyword:'遗传学网课'}]},
+'生物化学':{desc:'蛋白质、酶、代谢、核酸、生物膜。',arc:['PST 4','PRS 6','FTR 8','BYD 10'],tag:'核心',quote:'生命的化学语言。',prereq:['普通化学'],next:['分子生物学','代谢组学'],books:['Lehninger《Principles of Biochemistry》','王镜岩《生物化学》'],videos:[{name:'生物化学 网课',keyword:'生物化学网课'}]},
+'微生物学':{desc:'细菌、真菌、病毒、微生物生态、微生物代谢。',arc:['PST 3','PRS 5','FTR 7'],tag:'核心',quote:'微生物主宰地球。',prereq:['细胞生物学'],next:['病毒学','微生物组学'],books:['Prescott《Microbiology》'],videos:[{name:'微生物学 网课',keyword:'微生物学网课'}]},
+'植物学':{desc:'植物形态、解剖、分类、光合作用、植物激素。',arc:['PST 2','PRS 4','FTR 6'],tag:'方向',quote:'植物是地球的生命基础。',prereq:['普通生物学'],next:[],books:['《植物学》'],videos:[{name:'植物学 网课',keyword:'植物学网课'}]},
+'动物学':{desc:'无脊椎动物、脊椎动物、比较解剖学、动物行为。',arc:['PST 2','PRS 4','FTR 6'],tag:'方向',quote:'动物王国的多样之美。',prereq:['普通生物学'],next:[],books:['《动物学》'],videos:[{name:'动物学 网课',keyword:'动物学网课'}]},
+'进化论基础':{desc:'达尔文、自然选择、物种起源、适应与演化。',arc:['PST 2','PRS 4','FTR 6'],tag:'基础',quote:'进化论是生物学的统一理论。',prereq:[],next:['进化生物学'],books:['Darwin《On the Origin of Species》'],videos:[{name:'进化论 网课',keyword:'进化论网课'}]},
+'分子生物学':{desc:'DNA复制、转录、翻译、基因调控、表观遗传。',arc:['PST 4','PRS 6','FTR 8','BYD 10'],tag:'核心',quote:'中心法则：DNA→RNA→蛋白质。',prereq:['生物化学','遗传学'],next:['基因工程','蛋白质组学'],books:['Watson《Molecular Biology of the Gene》','朱玉贤《现代分子生物学》'],videos:[{name:'分子生物学 网课',keyword:'分子生物学网课'}]},
+'基因组学':{desc:'基因组测序、组装、注释、比较基因组学、功能基因组学。',arc:['PST 4','PRS 6','FTR 8','BYD 10'],tag:'前沿',quote:'基因组学是后基因组时代的核心。',prereq:['分子生物学'],next:['生物信息学'],books:['《基因组学》','Brown《Genomes》'],videos:[{name:'基因组学 网课',keyword:'基因组学网课'}]},
+'转录组学':{desc:'RNA-seq、差异表达、单细胞转录组、非编码RNA。',arc:['PST 4','PRS 6','FTR 8'],tag:'前沿',quote:'转录组是基因表达的完整快照。',prereq:['分子生物学'],next:['生物信息学'],books:['《转录组学》'],videos:[{name:'转录组学 网课',keyword:'转录组学网课'}]},
+'表观遗传学':{desc:'DNA甲基化、组蛋白修饰、非编码RNA、染色质重塑。',arc:['PST 5','PRS 7','FTR 9+','BYD 11'],tag:'前沿',quote:'不改变序列的遗传。',prereq:['分子生物学'],next:[],books:['《表观遗传学》','Allis《Epigenetics》'],videos:[{name:'表观遗传学 网课',keyword:'表观遗传学'}]},
+'蛋白质组学':{desc:'质谱、蛋白质鉴定、翻译后修饰、蛋白质互作。',arc:['PST 5','PRS 7','FTR 9+','BYD 11'],tag:'前沿',quote:'蛋白质组学是后基因组时代的核心。',prereq:['生物化学','分子生物学'],next:[],books:['《蛋白质组学》'],videos:[{name:'蛋白质组学 网课',keyword:'蛋白质组学网课'}]},
+'基因工程':{desc:'PCR、CRISPR、分子克隆、转基因、基因编辑。',arc:['PST 4','PRS 6','FTR 8','BYD 10'],tag:'方向',quote:'CRISPR是21世纪最伟大的生物技术。',prereq:['分子生物学'],next:['合成生物学'],books:['《基因工程》','Green《Molecular Cloning》'],videos:[{name:'基因工程 网课',keyword:'基因工程网课'}]},
+'结构生物学':{desc:'X射线晶体学、冷冻电镜、NMR、分子对接。',arc:['PST 4','PRS 6','FTR 8','BYD 10'],tag:'交叉',quote:'看清蛋白质的三维结构，才能理解它的功能。',prereq:['生物化学','物理化学'],next:[],books:['《结构生物学》'],videos:[{name:'结构生物学 网课',keyword:'结构生物学网课'}]},
+'RNA生物学':{desc:'mRNA、tRNA、rRNA、miRNA、lncRNA、RNAi。',arc:['PST 5','PRS 7','FTR 9+'],tag:'前沿',quote:'RNA不只是信使，它还是调控者、催化剂。',prereq:['分子生物学'],next:[],books:['《RNA生物学》'],videos:[{name:'RNA生物学 网课',keyword:'RNA生物学'}]},
+'生理学':{desc:'循环、呼吸、消化、神经、内分泌、泌尿。',arc:['PST 3','PRS 5','FTR 7','ETR 9'],tag:'核心',quote:'生理学是研究人体功能的科学。',prereq:['细胞生物学'],next:['神经生物学'],books:['Guyton《Textbook of Medical Physiology》','姚泰《生理学》'],videos:[{name:'生理学 网课',keyword:'生理学网课'}]},
+'免疫学':{desc:'先天免疫、适应性免疫、抗体、疫苗、免疫疾病。',arc:['PST 4','PRS 6','FTR 8','BYD 10'],tag:'核心',quote:'免疫系统是身体里的军队。',prereq:['细胞生物学','生物化学'],next:['免疫工程'],books:['Janeway《Immunobiology》','曹雪涛《医学免疫学》'],videos:[{name:'免疫学 网课',keyword:'免疫学网课'}]},
+'神经生物学':{desc:'神经元、突触、神经递质、脑、认知。',arc:['PST 5','PRS 7','FTR 9+','INS 12'],tag:'进阶',quote:'人脑是宇宙最复杂的结构。',prereq:['生理学','细胞生物学'],next:['脑科学','计算神经科学'],books:['Kandel《Principles of Neural Science》'],videos:[{name:'神经生物学 网课',keyword:'神经生物学网课'}]},
+'发育生物学':{desc:'受精、卵裂、分化、形态发生、干细胞。',arc:['PST 4','PRS 6','FTR 8','BYD 10'],tag:'进阶',quote:'从一个细胞到一个个体，这是生命最神奇的魔术。',prereq:['细胞生物学','遗传学'],next:[],books:['Gilbert《Developmental Biology》'],videos:[{name:'发育生物学 网课',keyword:'发育生物学网课'}]},
+'内分泌学':{desc:'激素、受体、内分泌腺、代谢调控、内分泌疾病。',arc:['PST 3','PRS 5','FTR 7'],tag:'方向',quote:'激素是身体的化学信使。',prereq:['生理学'],next:[],books:['《内分泌学》'],videos:[{name:'内分泌学 网课',keyword:'内分泌学网课'}]},
+'病理学':{desc:'细胞损伤、炎症、肿瘤、疾病机理、免疫病理。',arc:['PST 4','PRS 6','FTR 8'],tag:'医学',quote:'病理学是医学的基础。',prereq:['生理学','免疫学'],next:['癌症生物学'],books:['Robbins《Basic Pathology》'],videos:[{name:'病理学 网课',keyword:'病理学网课'}]},
+'药理学':{desc:'药物作用机制、药代动力学、药物毒性、药物设计。',arc:['PST 4','PRS 6','FTR 8'],tag:'医学',quote:'药理学是连接化学与医学的桥梁。',prereq:['生理学','生物化学'],next:[],books:['《药理学》','Katzung《Basic & Clinical Pharmacology》'],videos:[{name:'药理学 网课',keyword:'药理学网课'}]},
+'干细胞生物学':{desc:'胚胎干细胞、诱导多能干细胞、再生医学。',arc:['PST 5','PRS 7','FTR 9+','BYD 11'],tag:'前沿',quote:'干细胞是再生医学的希望。',prereq:['细胞生物学','发育生物学'],next:['组织工程'],books:['《干细胞生物学》'],videos:[{name:'干细胞 网课',keyword:'干细胞生物学'}]},
+'生态学':{desc:'种群、群落、生态系统、生物圈、生态平衡。',arc:['PST 3','PRS 5','FTR 7'],tag:'核心',quote:'生态学是研究生物与环境相互关系的科学。',prereq:['普通生物学'],next:['保护生物学'],books:['Odum《Fundamentals of Ecology》','牛翠娟《基础生态学》'],videos:[{name:'生态学 网课',keyword:'生态学网课'}]},
+'进化生物学':{desc:'自然选择、性选择、分子进化、物种形成。',arc:['PST 3','PRS 5','FTR 7','BYD 10'],tag:'核心',quote:'Nothing in biology makes sense except in the light of evolution.',prereq:['遗传学'],next:[],books:['Futuyma《Evolution》'],videos:[{name:'进化生物学 网课',keyword:'进化生物学网课'}]},
+'种群生态学':{desc:'种群增长、种间关系、种群调节、生活史。',arc:['PST 3','PRS 5','FTR 7'],tag:'方向',quote:'种群是生态学的基本单位。',prereq:['生态学'],next:[],books:['《种群生态学》'],videos:[{name:'种群生态学 网课',keyword:'种群生态学'}]},
+'群落生态学':{desc:'群落结构、演替、物种多样性、群落稳定性。',arc:['PST 3','PRS 5','FTR 7'],tag:'方向',quote:'群落是物种的集合。',prereq:['生态学'],next:[],books:['《群落生态学》'],videos:[{name:'群落生态学 网课',keyword:'群落生态学'}]},
+'生物多样性':{desc:'物种多样性、遗传多样性、生态系统多样性、保护。',arc:['PST 3','PRS 5','FTR 7'],tag:'方向',quote:'生物多样性是地球生命的宝藏。',prereq:['生态学','进化生物学'],next:['保护生物学'],books:['《生物多样性》'],videos:[{name:'生物多样性 网课',keyword:'生物多样性网课'}]},
+'保护生物学':{desc:'物种濒危、栖息地保护、生态修复、自然保护区。',arc:['PST 3','PRS 5','FTR 7'],tag:'方向',quote:'守护地球生命，保护人类未来。',prereq:['生态学','生物多样性'],next:[],books:['Primack《Essentials of Conservation Biology》'],videos:[{name:'保护生物学 网课',keyword:'保护生物学网课'}]},
+'合成生物学':{desc:'基因线路、人工细胞、生物制造、CRISPR应用。',arc:['PST 5','PRS 7','FTR 9+','BYD 11'],tag:'前沿',quote:'像工程师一样设计生命。',prereq:['基因工程','分子生物学'],next:[],books:['《合成生物学》'],videos:[{name:'合成生物学 网课',keyword:'合成生物学网课'}]},
+'系统生物学':{desc:'网络分析、动力学建模、多组学整合、系统思维。',arc:['PST 5','PRS 7','FTR 9+','INS 12'],tag:'前沿',quote:'用系统思维理解生命。',prereq:['分子生物学','生物化学'],next:[],books:['Alon《An Introduction to Systems Biology》'],videos:[{name:'系统生物学 网课',keyword:'系统生物学网课'}]},
+'生物信息学':{desc:'序列比对、基因组组装、基因预测、机器学习。',arc:['PST 4','PRS 6','FTR 8','BYD 10'],tag:'前沿',quote:'用计算机解读生命之书。',prereq:['分子生物学','计算物理'],next:['系统生物学'],books:['《生物信息学》','PeVsner《Bioinformatics and Functional Genomics》'],videos:[{name:'生物信息学 网课',keyword:'生物信息学网课'}]},
+'计算神经科学':{desc:'神经元模型、神经网络、认知计算、脑机接口。',arc:['PST 5','PRS 7','FTR 9+','INS 12'],tag:'前沿',quote:'用数学和计算理解大脑。',prereq:['神经生物学'],next:['脑科学'],books:['Dayan & Abbott《Theoretical Neuroscience》'],videos:[{name:'计算神经科学 网课',keyword:'计算神经科学'}]},
+'脑科学':{desc:'连接组学、神经计算、意识研究、脑机接口。',arc:['PST 7','PRS 9+','FTR 11+','INS 12+'],tag:'终极难题',quote:'宇宙最复杂的结构——人脑。',prereq:['神经生物学','计算神经科学'],next:[],books:['Kandel《Principles of Neural Science》','《脑科学》'],videos:[{name:'脑科学 网课',keyword:'脑科学网课'}]},
+'生物物理学':{desc:'分子马达、细胞力学、单分子技术、生物膜物理。',arc:['PST 4','PRS 6','FTR 8','BYD 10'],tag:'交叉',quote:'用物理工具研究生命。',prereq:['生物化学','物理化学'],next:[],books:['Phillips《Physical Biology of the Cell》'],videos:[{name:'生物物理学 网课',keyword:'生物物理学网课'}]},
+'癌症生物学':{desc:'癌基因、抑癌基因、肿瘤微环境、靶向治疗。',arc:['PST 5','PRS 7','FTR 9+','INS 12'],tag:'应用',quote:'攻克癌症是人类共同的梦想。',prereq:['细胞生物学','分子生物学'],next:[],books:['Weinberg《The Biology of Cancer》'],videos:[{name:'癌症生物学 网课',keyword:'癌症生物学网课'}]},
+'病毒学':{desc:'病毒结构、感染机制、抗病毒药物、疫苗。',arc:['PST 4','PRS 6','FTR 8','BYD 10'],tag:'应用',quote:'看不见的敌人，看得见的科学。',prereq:['细胞生物学','分子生物学'],next:[],books:['Flint《Principles of Virology》'],videos:[{name:'病毒学 网课',keyword:'病毒学网课'}]},
+'微生物组学':{desc:'肠道菌群、微生物-宿主互作、宏基因组学。',arc:['PST 5','PRS 7','FTR 9+','BYD 11'],tag:'前沿',quote:'你是你自己的微生物生态系统。',prereq:['微生物学','基因组学'],next:[],books:['《微生物组学》'],videos:[{name:'微生物组学 网课',keyword:'微生物组学'}]},
+'免疫工程':{desc:'CAR-T、抗体工程、免疫检查点、疫苗设计。',arc:['PST 5','PRS 7','FTR 9+','BYD 11'],tag:'前沿',quote:'改造免疫系统对抗疾病。',prereq:['免疫学','基因工程'],next:[],books:['《免疫工程》'],videos:[{name:'免疫工程 网课',keyword:'免疫工程'}]},
+'组织工程':{desc:'生物材料、支架、3D生物打印、器官再生。',arc:['PST 4','PRS 6','FTR 8'],tag:'应用',quote:'用工程手段重建组织。',prereq:['干细胞生物学','生物材料'],next:[],books:['《组织工程》'],videos:[{name:'组织工程 网课',keyword:'组织工程网课'}]},
+'基因治疗':{desc:'基因编辑治疗、载体设计、罕见病治疗。',arc:['PST 5','PRS 7','FTR 9+','BYD 11'],tag:'前沿',quote:'用基因修复生命。',prereq:['基因工程','分子生物学'],next:[],books:['《基因治疗》'],videos:[{name:'基因治疗 网课',keyword:'基因治疗网课'}]},
+'精准医学':{desc:'个性化医疗、药物基因组学、液体活检。',arc:['PST 5','PRS 7','FTR 9+','BYD 10'],tag:'应用',quote:'每人一份专属的医疗方案。',prereq:['基因组学','药理学'],next:[],books:['《精准医学》'],videos:[{name:'精准医学 网课',keyword:'精准医学网课'}]},
 };
 function zlibBookUrl(n){const c=n.replace(/[《》]/g,'').trim();return 'https://z-library.biz/s/'+encodeURIComponent(c)}
 function biliSearchUrl(k){return 'https://search.bilibili.com/all?keyword='+encodeURIComponent(k)}
