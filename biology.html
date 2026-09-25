@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>生物知识体系 - 我的生物之旅</title>
+<style>
+  :root{--bg:#f4f7fb;--card:#fff;--ink:#152033;--muted:#607089;--shadow:0 12px 32px rgba(20,36,60,.09);}
+  *{box-sizing:border-box}html{scroll-behavior:smooth}
+  body{margin:0;font-family:system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;color:var(--ink);
+    background:radial-gradient(circle at 10% 10%,rgba(249,115,22,.08),transparent 28%),
+    radial-gradient(circle at 90% 10%,rgba(16,185,129,.08),transparent 28%),var(--bg)}
+  .wrap{width:min(1400px,94vw);margin:auto}
+  header{padding:52px 0 20px;text-align:center}
+  .eyebrow{font-size:13px;letter-spacing:.22em;color:var(--muted);font-weight:700;text-transform:uppercase}
+  h1{margin:10px 0 8px;font-size:clamp(34px,5vw,64px);line-height:1.08;letter-spacing:-.03em}
+  .subtitle{margin:0 auto;color:var(--muted);font-size:16px;max-width:820px;line-height:1.8}
+  .nav-tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:26px 0 8px}
+  .nav-tab{padding:8px 20px;border-radius:999px;text-decoration:none;font-weight:700;font-size:14px;border:1px solid #d5deea;background:#fff;transition:.25s}
+  .nav-tab:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(20,36,60,.1)}
+  .nav-tab.active{background:linear-gradient(135deg,#9a3412,#10b981);color:#fff;border-color:transparent;box-shadow:0 8px 20px rgba(249,115,22,.35)}
+  .nav-tab.math{color:#1e40af;border-color:#bfdbfe}.nav-tab.chem{color:#065f46;border-color:#bbf7d0}
+  .nav-tab.bio{color:#9a3412;border-color:#fed7aa}.nav-tab.phys{color:#5b21b6;border-color:#ddd6fe}
+  .toolbar{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:16px 0 8px}
+  button{border:1px solid #d5deea;background:#fff;color:var(--ink);border-radius:999px;padding:9px 14px;font:inherit;cursor:pointer;transition:.2s}
+  button:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(20,36,60,.08)}
+  .engagement-bar{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:10px 0 0}
+  .stat-item,.like-btn{display:inline-flex;align-items:center;gap:6px;padding:9px 18px;background:#fff;border:1px solid #d5deea;border-radius:999px;font-size:14px;font-weight:600;color:#475569;transition:.25s}
+  .like-btn{cursor:pointer;font-family:inherit}.like-btn.liked{background:#fee2e2;border-color:#fca5a5;color:#b91c1c}
+  .stat-value,.like-count{color:#ea580c;font-weight:800}
+  .roadmap{margin-top:30px;background:rgba(255,255,255,.74);border:1px solid rgba(189,201,218,.7);box-shadow:var(--shadow);border-radius:28px;padding:34px}
+  .phase-title{font-size:24px;font-weight:800;margin:60px 0 4px;display:flex;align-items:center;gap:12px;color:#1e293b}
+  .phase-title:first-child{margin-top:0}.phase-title::before{content:"";display:block;width:6px;height:30px;border-radius:4px;background:#ea580c;flex-shrink:0}
+  .phase-en{font-size:11px;letter-spacing:.4em;color:#94a3b8;font-weight:700;text-transform:uppercase;margin:0 0 12px 18px;font-style:italic}
+  .phase-title.classic::before{background:#10b981}.phase-title.quantum::before{background:#7c3aed}.phase-title.apps::before{background:#c2410c}.phase-title.cosmos::before{background:#4338ca}.phase-title.nexus::before{background:#059669}
+  .phase-desc{color:var(--muted);font-size:14px;margin:0 0 24px 18px;line-height:1.7}
+  .domain{margin-bottom:26px;padding:16px 18px 18px 22px;position:relative;background:rgba(255,255,255,.6);border-radius:18px;border:1px solid #e5ebf2}
+  .domain::before{content:"";position:absolute;left:6px;top:16px;bottom:16px;width:5px;border-radius:5px;background:var(--domain-color,#ea580c);box-shadow:0 0 12px rgba(234,88,12,.25)}
+  .domain-header{display:flex;align-items:center;gap:10px;margin-bottom:14px;padding-left:6px}.domain-header h3{margin:0;font-size:18px;color:#1e293b}
+  .domain-count{font-size:11px;padding:3px 10px;border-radius:999px;background:#f1f5f9;color:#64748b;font-weight:600}
+  .domain-desc{font-size:12px;color:#94a3b8;margin-left:auto;font-style:italic}
+  .domain-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+  .course-card{background:#fff;border:1px solid #dbe3ee;border-radius:14px;padding:14px;cursor:pointer;transition:.25s}
+  .course-card:hover{transform:translateY(-3px);box-shadow:0 10px 20px rgba(25,44,75,.1);border-color:#aabbd0}
+  .course-card h4{margin:0 0 6px;font-size:14.5px;color:#1e293b}.course-card p{margin:0;font-size:11.5px;color:var(--muted);line-height:1.55}
+  .arc-badges{display:flex;flex-wrap:wrap;gap:3px;margin-bottom:8px}
+  .arc-badge{font-size:9.5px;font-weight:800;padding:2px 6px;border-radius:5px;white-space:nowrap}
+  .arc-pst{background:#dbeafe;color:#1e40af}.arc-prs{background:#d1fae5;color:#065f46}.arc-ftr{background:#b39dff;color:#2e1065}
+  .arc-etr{background:#0c4a6e;color:#fff}.arc-byd{background:#7f1d1d;color:#fff}.arc-ins{background:#4c1d95;color:#fff}
+  .arc-ins-plus{background:#2e1065;color:#fbbf24;box-shadow:0 0 0 1px #fbbf24 inset}
+  .tag{display:inline-block;font-size:10px;padding:3px 8px;border-radius:5px;background:#f1f5f9;color:#475569;margin-bottom:6px;font-weight:600}
+  .hard-card{border-color:#fecaca;background:#fff5f5}.final-card{border-color:#ddd6fe;background:#faf5ff}
+  .chip-card{border-color:#fed7aa;background:#fff7ed}.cosmos-card{border-color:#c7d2fe;background:linear-gradient(135deg,#eef2ff,#e0e7ff)}
+  .ultimate-card{border:2px solid #6d28d9;background:linear-gradient(135deg,#faf5ff,#ede9fe)}
+  .god-card{border:2px solid #fbbf24;background:linear-gradient(135deg,#fef3c7,#fde68a);box-shadow:0 0 30px rgba(251,191,36,.5)}
+  .overlay{position:fixed;inset:0;background:rgba(15,23,42,.46);display:none;align-items:center;justify-content:center;padding:18px;z-index:50}
+  .overlay.show{display:flex}.modal{width:min(660px,96vw);background:#fff;border-radius:24px;padding:28px;max-height:86vh;overflow-y:auto}
+  .modal h2{margin:0 0 12px;font-size:24px;color:#1e293b}.modal p{color:#475569;line-height:1.8;margin:0;white-space:pre-wrap;font-size:15px}
+  .modal .quote{margin-top:16px;padding:14px;background:#f8fafc;border-left:4px solid #ea580c;border-radius:6px;font-style:italic;color:#334155}
+  .arc-diff-row{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 4px}
+  .arc-diff-item{display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:10px;font-size:13px;font-weight:700}
+  .arc-diff-item .label{font-size:11px}.arc-diff-item .value{font-size:16px;font-weight:900}
+  .arc-diff-item.pst{background:#dbeafe}.arc-diff-item.pst .label,.arc-diff-item.pst .value{color:#1e40af}
+  .arc-diff-item.prs{background:#d1fae5}.arc-diff-item.prs .label,.arc-diff-item.prs .value{color:#065f46}
+  .arc-diff-item.ftr{background:#b39dff}.arc-diff-item.ftr .label,.arc-diff-item.ftr .value{color:#2e1065}
+  .arc-diff-item.etr{background:#0c4a6e}.arc-diff-item.etr .label,.arc-diff-item.etr .value{color:#fff}
+  .arc-diff-item.byd{background:#7f1d1d}.arc-diff-item.byd .label,.arc-diff-item.byd .value{color:#fff}
+  .arc-diff-item.ins{background:#4c1d95}.arc-diff-item.ins .label,.arc-diff-item.ins .value{color:#fff}
+  .arc-diff-item.ins-plus{background:#2e1065;border:1px solid #fbbf24}.arc-diff-item.ins-plus .label{color:#fbbf24}.arc-diff-item.ins-plus .value{color:#fef3c7}
+  .resource-section{margin-top:18px;padding-top:16px;border-top:1px dashed #e2e8f0}
+  .resource-label{font-size:13px;font-weight:800;color:#334155;margin-bottom:10px}
+  .resource-list{display:flex;flex-direction:column;gap:6px}
+  .resource-item{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:10px;font-size:13px;color:#334155;background:#f8fafc;border:1px solid #e2e8f0;transition:.2s;text-decoration:none}
+  .video-item{background:#fef2f2;border-color:#fecaca;color:#991b1b;font-weight:600}.book-item{background:#f0fdf4;border-color:#bbf7d0;color:#166534;font-weight:600}
+  .resource-arrow{margin-left:auto;color:#94a3b8;font-weight:bold}
+  .relations{margin-top:22px;padding-top:20px;border-top:1px dashed #e2e8f0;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .relation-label{font-size:12px;font-weight:800;color:#64748b;margin-bottom:8px}
+  .relation-label.prereq{color:#2563eb}.relation-label.next{color:#059669}
+  .relation-list{display:flex;flex-wrap:wrap;gap:6px}
+  .relation-chip{font-size:12px;padding:5px 10px;border-radius:8px;background:#eff6ff;color:#1e40af;cursor:pointer;border:1px solid #dbeafe;font-weight:600}
+  .relation-chip.next-chip{background:#ecfdf5;color:#047857;border-color:#d1fae5}
+  .relation-empty{font-size:12px;color:#94a3b8;font-style:italic}
+  .modal-close{margin-top:20px;background:#0f172a;color:#fff;border-color:#0f172a;padding:10px 20px;font-weight:bold}
+  footer{padding:34px 0 50px;color:var(--muted);text-align:center;font-size:13px}
+  @media(max-width:900px){.wrap{width:min(94vw,720px)}.roadmap{padding:20px}.phase-title{font-size:19px}.domain-desc{display:none}.relations{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">MY BIOLOGY JOURNEY</div>
+    <h1>生物知识体系</h1>
+    <p class="subtitle">六幕知识的旅途，从生命序曲到生命尽头的无限可能。</p>
+    <nav class="nav-tabs">
+      <a class="nav-tab phys" href="index.html">⚛️ 物理</a>
+      <a class="nav-tab math" href="math.html">📐 数学</a>
+      <a class="nav-tab chem" href="chemistry.html">🧪 化学</a>
+      <a class="nav-tab bio active" href="biology.html">🧬 生物</a>
+    </nav>
+    <div class="toolbar"><button onclick="window.scrollTo({top:0,behavior:'smooth'})">回到顶部</button></div>
+    <div class="engagement-bar">
+      <div class="stat-item"><span>👁️</span><span class="stat-value" id="viewCount">--</span><span>次浏览</span></div>
+      <button class="like-btn" id="likeBtn" onclick="toggleLike()"><span id="heartIcon">🤍</span><span>点赞</span><span class="like-count" id="likeCount">--</span></button>
+    </div>
+  </header>
+
+  <main class="roadmap">
+    <h2 class="phase-title">🌱 第一章 · 生命序曲</h2>
+    <div class="phase-en">LIFE OVERTURE</div>
+    <p class="phase-desc">细胞是生命的基本单位，从细胞出发，我们开始探索生命之谜。</p>
+    <div class="domain" style="--domain-color:#ea580c;">
+      <div class="domain-header"><h3>🔬 生物学基础</h3><span class="domain-count">4门</span><span class="domain-desc">生命科学入门</span></div>
+      <div class="domain-grid">
+        <div class="course-card" onclick="showCourse('普通生物学')"><div class="tag">入门</div><h4>普通生物学</h4>
+          <div class="arc-badges"><span class="arc-badge arc-pst">PST 1</span><span class="arc-badge arc-prs">PRS 3</span><span class="arc-badge arc-ftr">FTR 5</span></div>
+          <p>细胞、遗传、进化、生态。生物学全景图。</p></div>
+        <div class="course-card" onclick="showCourse('细胞生物学')"><div class="tag">核心</div><h4>细胞生物学</h4>
+          <div class="arc-badges"><span class="arc-badge arc-pst">PST 3</span><span class="arc-badge arc-prs">PRS 5</span><span class="arc-badge arc-ftr">FTR 7</span><span class="arc-badge arc-etr">ETR 9</span></div>
+          <p>细胞结构、细胞器、细胞信号、细胞周期。生命的微观工厂。</p></div>
+        <div class="course-card" onclick="showCourse('遗传学')"><div class="tag">核心</div><h4>遗传学</h4>
+          <div class="arc-badges"><span class="arc-badge arc-pst">PST 3</span><span class="arc-badge arc-prs">PRS 5</span><span class="arc-badge arc-ftr">FTR 7</span><span class="arc-badge arc-byd">BYD 10</span></div>
+          <p>孟德尔遗传、染色体、基因突变、群体遗传。从豌豆到基因编辑。</p></div>
+        <div class="course-card" onclick="showCourse('生物化学')"><div class="tag">核心</div><h4>生物化学</h4>
+          <div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 10</span></div>
+          <p>蛋白质、酶、代谢、核酸。生命的化学语言。</p></div>
+      </div>
+    </div>
+
+    <h2 class="phase-title classic">🧬 第二章 · 分子回廊</h2>
+    <div class="phase-en">MOLECULAR CORRIDOR</div>
+    <p class="phase-desc">DNA双螺旋的发现开启了分子生物学时代，从这里我们开始读懂生命之书。</p>
+    <div class="domain" style="--domain-color:#10b981;">
+      <div class="domain-header"><h3>🔷 分子生物学</h3><span class="domain-count">4门</span><span class="domain-desc">从DNA到蛋白质</span></div>
+      <div class="domain-grid">
+        <div class="course-card" onclick="showCourse('分子生物学')"><div class="tag">核心</div><h4>分子生物学</h4>
+          <div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 10</span></div>
+          <p>DNA复制、转录、翻译、基因调控。中心法则的完整故事。</p></div>
+        <div class="course-card" onclick="showCourse('基因工程')"><div class="tag">方向</div><h4>基因工程</h4>
+          <div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 10</span></div>
+          <p>PCR、CRISPR、克隆、转基因。改写生命之书。</p></div>
+        <div class="course-card hard-card" onclick="showCourse('蛋白质组学')"><div class="tag" style="background:#fee2e2;color:#b91c1c;">前沿</div><h4>蛋白质组学</h4>
+          <div class="arc-badges"><span class="arc-badge arc-pst">PST 5</span><span class="arc-badge arc-prs">PRS 7</span><span class="arc-badge arc-ftr">FTR 9+</span><span class="arc-badge arc-byd">BYD 11</span></div>
+          <p>质谱、蛋白质鉴定、翻译后修饰。蛋白质的全景研究。</p></div>
+        <div class="course-card" onclick="showCourse('代谢组学')"><div class="tag">前沿</div><h4>代谢组学</h4>
+          <div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span></div>
+          <p>代谢物分析、代谢通路、系统生物学。生命的化学指纹。</p></div>
+      </div>
+    </div>
+
+    <h2 class="phase-title quantum">⚡ 第三章 · 系统深渊</h2>
+    <div class="phase-en">SYSTEMS ABYSS</div>
+    <p class="phase-desc">从单分子到多细胞系统，从细胞到器官，从器官到个体——系统生物学探索生命的整体性。</p>
+    <div class="domain" style="--domain-color:#7c3aed;">
+      <div class="domain-header"><h3>🧠 系统生物学</h3><span class="domain-count">4门</span><span class="domain-desc">生命的整体性</span></div>
+      <div class="domain-grid">
+        <div class="course-card" onclick="showCourse('生理学')"><div class="tag">核心</div><h4>生理学</h4>
+          <div class="arc-badges"><span class="arc-badge arc-pst">PST 3</span><span class="arc-badge arc-prs">PRS 5</span><span class="arc-badge arc-ftr">FTR 7</span><span class="arc-badge arc-etr">ETR 9</span></div>
+          <p>循环、呼吸、消化、神经、内分泌。人体机器的运转。</p></div>
+        <div class="course-card" onclick="showCourse('免疫学')"><div class="tag">核心</div><h4>免疫学</h4>
+          <div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 10</span></div>
+          <p>先天免疫、适应性免疫、抗体、疫苗。身体里的军队。</p></div>
+        <div class="course-card hard-card" onclick="showCourse('神经生物学')"><div class="tag" style="background:#fee2e2;color:#b91c1c;">进阶</div><h4>神经生物学</h4>
+          <div class="arc-badges"><span class="arc-badge arc-pst">PST 5</span><span class="arc-badge arc-prs">PRS 7</span><span class="arc-badge arc-ftr">FTR 9+</span><span class="arc-badge arc-ins">INS 12</span></div>
+          <p>神经元、突触、神经递质、脑。宇宙最复杂的结构。</p></div>
+        <div class="course-card" onclick="showCourse('发育生物学')"><div class="tag">进阶</div><h4>发育生物学</h4>
+          <div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 10</span></div>
+          <p>受精卵如何变成个体——生命最神奇的魔术。</p></div>
+      </div>
+    </div>
+
+    <h2 class="phase-title apps">🌳 第四章 · 生态迷宫</h2>
+    <div class="phase-en">ECOLOGICAL LABYRINTH</div>
+    <p class="phase-desc">从个体到种群，从群落再到生态系统，生命与环境的互动构成了生物圈。</p>
+    <div class="domain" style="--domain-color:#c2410c;">
+      <div class="domain-header"><h3>🌍 生态与进化</h3><span class="domain-count">4门</span><span class="domain-desc">生命与环境的互动</span></div>
+      <div class="domain-grid">
+        <div class="course-card" onclick="showCourse('生态学')"><div class="tag">核心</div><h4>生态学</h4>
+          <div class="arc-badges"><span class="arc-badge arc-pst">PST 3</span><span class="arc-badge arc-prs">PRS 5</span><span class="arc-badge arc-ftr">FTR 7</span></div>
+          <p>种群、群落、生态系统、生物圈。生命与环境。</p></div>
+        <div class="course-card" onclick="showCourse('进化生物学')"><div class="tag">核心</div><h4>进化生物学</h4>
+          <div class="arc-badges"><span class="arc-badge arc-pst">PST 3</span><span class="arc-badge arc-prs">PRS 5</span><span class="arc-badge arc-ftr">FTR 7</span><span class="arc-badge arc-byd">BYD 10</span></div>
+          <p>自然选择、性选择、分子进化。生命多样性的由来。</p></div>
+        <div class="course-card" onclick="showCourse('生物多样性')"><div class="tag">方向</div><h4>生物多样性</h4>
+          <div class="arc-badges"><span class="arc-badge arc-pst">PST 3</span><span class="arc-badge arc-prs">PRS 5</span><span class="arc-badge arc-ftr">FTR 7</span></div>
+          <p>物种多样性、遗传多样性、生态系统多样性。地球生命的宝藏。</p></div>
+        <div class="course-card" onclick="showCourse('保护生物学')"><div class="tag">方向</div><h4>保护生物学</h4>
+          <div class="arc-badges"><span class="arc-badge arc-pst">PST 3</span><span class="arc-badge arc-prs">PRS 5</span><span class="arc-badge arc-ftr">FTR 7</span></div>
+          <p>物种濒危、栖息地保护、生态修复。守护地球生命。</p></div>
+      </div>
+    </div>
+
+    <h2 class="phase-title cosmos">🏛️ 第五章 · 生命尽头</h2>
+    <div class="phase-en">BIOLOGICAL HORIZON</div>
+    <p class="phase-desc">合成生物学、生物信息学、脑科学——生物学正在从"描述"走向"创造"。</p>
+    <div class="domain" style="--domain-color:#4338ca;">
+      <div class="domain-header"><h3>🌌 生物前沿</h3><span class="domain-count">4门</span><span class="domain-desc">生命科学的未来</span></div>
+      <div class="domain-grid">
+        <div class="course-card cosmos-card" onclick="showCourse('合成生物学')"><div class="tag">前沿</div><h4>合成生物学</h4>
+          <div class="arc-badges"><span class="arc-badge arc-pst">PST 5</span><span class="arc-badge arc-prs">PRS 7</span><span class="arc-badge arc-ftr">FTR 9+</span><span class="arc-badge arc-byd">BYD 11</span></div>
+          <p>基因线路、人工细胞、生物制造。像工程师一样设计生命。</p></div>
+        <div class="course-card cosmos-card" onclick="showCourse('系统生物学')"><div class="tag">前沿</div><h4>系统生物学</h4>
+          <div class="arc-badges"><span class="arc-badge arc-pst">PST 5</span><span class="arc-badge arc-prs">PRS 7</span><span class="arc-badge arc-ftr">FTR 9+</span><span class="arc-badge arc-ins">INS 12</span></div>
+          <p>网络分析、动力学建模、多组学整合。用系统思维理解生命。</p></div>
+        <div class="course-card cosmos-card" onclick="showCourse('生物信息学')"><div class="tag">前沿</div><h4>生物信息学</h4>
+          <div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 10</span></div>
+          <p>序列比对、基因组组装、机器学习。用计算机解读生命。</p></div>
+        <div class="course-card ultimate-card" onclick="showCourse('脑科学')"><div class="tag" style="background:#ede9fe;color:#4c1d95;">终极</div><h4 style="color:#4c1d95;">脑科学</h4>
+          <div class="arc-badges"><span class="arc-badge arc-pst">PST 7</span><span class="arc-badge arc-prs">PRS 9+</span><span class="arc-badge arc-ftr">FTR 11+</span><span class="arc-badge arc-ins-plus">INS 12+</span></div>
+          <p style="color:#4c1d95;">连接组学、神经计算、意识研究。宇宙最复杂的结构——人脑。</p></div>
+      </div>
+    </div>
+
+    <h2 class="phase-title nexus">✨ 额外章 · 生物交汇</h2>
+    <div class="phase-en">BIOLOGICAL CONVERGENCE</div>
+    <p class="phase-desc">生物学与物理、化学、医学、环境交织，构成了生命科学的多彩画卷。</p>
+    <div class="domain" style="--domain-color:#059669;">
+      <div class="domain-header"><h3>🌟 交叉方向</h3><span class="domain-count">4门</span><span class="domain-desc">与其他学科的交汇</span></div>
+      <div class="domain-grid">
+        <div class="course-card cosmos-card" onclick="showCourse('生物物理学')"><div class="tag">交叉</div><h4>生物物理学</h4>
+          <div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 10</span></div>
+          <p>分子马达、细胞力学、单分子技术。用物理工具研究生命。</p></div>
+        <div class="course-card cosmos-card" onclick="showCourse('结构生物学')"><div class="tag">交叉</div><h4>结构生物学</h4>
+          <div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 10</span></div>
+          <p>X射线晶体学、冷冻电镜、NMR。看清蛋白质的三维结构。</p></div>
+        <div class="course-card cosmos-card" onclick="showCourse('癌症生物学')"><div class="tag">应用</div><h4>癌症生物学</h4>
+          <div class="arc-badges"><span class="arc-badge arc-pst">PST 5</span><span class="arc-badge arc-prs">PRS 7</span><span class="arc-badge arc-ftr">FTR 9+</span><span class="arc-badge arc-ins">INS 12</span></div>
+          <p>癌基因、抑癌基因、肿瘤微环境、靶向治疗。攻克癌症的艰难征程。</p></div>
+        <div class="course-card cosmos-card" onclick="showCourse('病毒学')"><div class="tag">应用</div><h4>病毒学</h4>
+          <div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 10</span></div>
+          <p>病毒结构、感染机制、抗病毒药物、疫苗。看不见的敌人。</p></div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div>Biology Knowledge Map · 单文件静态网站 · 适用于 GitHub Pages</div>
+    <div style="margin-top:8px">四学科知识网络 · 难度采用 Arcaea 风格</div>
+  </footer>
+</div>
+
+<div class="overlay" id="overlay" onclick="closeInfo(event)">
+  <div class="modal" onclick="event.stopPropagation()">
+    <h2 id="modalTitle">课程详情</h2>
+    <p id="modalText"></p>
+    <div class="quote" id="modalQuote" style="display:none;"></div>
+    <div class="arc-diff-row" id="arcDiffRow"></div>
+    <div class="resource-section" id="bookSection" style="display:none;"><div class="resource-label">📖 推荐教材（点击跳转 Z-Library）</div><div class="resource-list" id="bookList"></div></div>
+    <div class="resource-section" id="videoSection" style="display:none;"><div class="resource-label">▶️ B站网课资源（点击跳转B站搜索）</div><div class="resource-list" id="videoList"></div></div>
+    <div class="relations">
+      <div class="relation-group"><div class="relation-label prereq">📚 前置学科</div><div class="relation-list" id="prereqList"></div></div>
+      <div class="relation-group"><div class="relation-label next">🎯 后续学科</div><div class="relation-list" id="nextList"></div></div>
+    </div>
+    <button class="modal-close" onclick="hideInfo()">关闭</button>
+  </div>
+</div>
+
+<script>
+const COURSES = {
+  '普通生物学':{desc:'细胞、遗传、进化、生态、生物多样性。生物学的全景图。',arc:['PST 1','PRS 3','FTR 5'],tag:'入门',quote:'Nothing in biology makes sense except in the light of evolution. —— Dobzhansky',prereq:[],next:['细胞生物学','遗传学','生物化学'],books:['Campbell《Biology》','陈阅增《普通生物学》'],videos:[{name:'普通生物学 网课',keyword:'普通生物学网课'}]},
+  '细胞生物学':{desc:'细胞膜、细胞器、细胞骨架、细胞信号、细胞周期。',arc:['PST 3','PRS 5','FTR 7','ETR 9'],tag:'核心',quote:'细胞是生命的基本单位。',prereq:['普通生物学'],next:['分子生物学','生理学'],books:['Alberts《Molecular Biology of the Cell》','翟中和《细胞生物学》'],videos:[{name:'细胞生物学 网课',keyword:'细胞生物学网课'}]},
+  '遗传学':{desc:'孟德尔遗传、染色体、基因突变、基因重组、群体遗传。',arc:['PST 3','PRS 5','FTR 7','BYD 10'],tag:'核心',quote:'基因是遗传的基本单位。',prereq:['普通生物学'],next:['分子生物学','进化生物学'],books:['Griffiths《Introduction to Genetic Analysis》','刘祖洞《遗传学》'],videos:[{name:'遗传学 网课',keyword:'遗传学网课'}]},
+  '生物化学':{desc:'蛋白质、酶、代谢、核酸、生物膜。',arc:['PST 4','PRS 6','FTR 8','BYD 10'],tag:'核心',quote:'生命的化学语言。',prereq:['普通化学'],next:['分子生物学','代谢组学'],books:['Lehninger《Principles of Biochemistry》','王镜岩《生物化学》'],videos:[{name:'生物化学 网课',keyword:'生物化学网课'}]},
+  '分子生物学':{desc:'DNA复制、转录、翻译、基因调控、表观遗传。',arc:['PST 4','PRS 6','FTR 8','BYD 10'],tag:'核心',quote:'中心法则：DNA→RNA→蛋白质。',prereq:['生物化学','遗传学'],next:['基因工程','蛋白质组学'],books:['Watson《Molecular Biology of the Gene》','朱玉贤《现代分子生物学》'],videos:[{name:'分子生物学 网课',keyword:'分子生物学网课'}]},
+  '基因工程':{desc:'PCR、CRISPR、分子克隆、转基因、基因编辑。',arc:['PST 4','PRS 6','FTR 8','BYD 10'],tag:'方向',quote:'CRISPR是21世纪最伟大的生物技术。',prereq:['分子生物学'],next:['合成生物学'],books:['《基因工程》','Green《Molecular Cloning》'],videos:[{name:'基因工程 网课',keyword:'基因工程网课'}]},
+  '蛋白质组学':{desc:'质谱、蛋白质鉴定、翻译后修饰、蛋白质互作。',arc:['PST 5','PRS 7','FTR 9+','BYD 11'],tag:'前沿',quote:'蛋白质组学是后基因组时代的核心。',prereq:['生物化学','分子生物学'],next:[],books:['《蛋白质组学》'],videos:[{name:'蛋白质组学 网课',keyword:'蛋白质组学网课'}]},
+  '代谢组学':{desc:'代谢物分析、代谢通路、系统生物学。',arc:['PST 4','PRS 6','FTR 8'],tag:'前沿',quote:'代谢物是生命活动的最终产物。',prereq:['生物化学'],next:[],books:['《代谢组学》'],videos:[{name:'代谢组学 网课',keyword:'代谢组学网课'}]},
+  '生理学':{desc:'循环、呼吸、消化、神经、内分泌、泌尿。',arc:['PST 3','PRS 5','FTR 7','ETR 9'],tag:'核心',quote:'生理学是研究人体功能的科学。',prereq:['细胞生物学'],next:['神经生物学'],books:['Guyton《Textbook of Medical Physiology》','姚泰《生理学》'],videos:[{name:'生理学 网课',keyword:'生理学网课'}]},
+  '免疫学':{desc:'先天免疫、适应性免疫、抗体、疫苗、免疫疾病。',arc:['PST 4','PRS 6','FTR 8','BYD 10'],tag:'核心',quote:'免疫系统是身体里的军队。',prereq:['细胞生物学','生物化学'],next:[],books:['Janeway《Immunobiology》','曹雪涛《医学免疫学》'],videos:[{name:'免疫学 网课',keyword:'免疫学网课'}]},
+  '神经生物学':{desc:'神经元、突触、神经递质、脑、认知。',arc:['PST 5','PRS 7','FTR 9+','INS 12'],tag:'进阶',quote:'人脑是宇宙最复杂的结构。',prereq:['生理学','细胞生物学'],next:['脑科学'],books:['Kandel《Principles of Neural Science》'],videos:[{name:'神经生物学 网课',keyword:'神经生物学网课'}]},
+  '发育生物学':{desc:'受精、卵裂、分化、形态发生、干细胞。',arc:['PST 4','PRS 6','FTR 8','BYD 10'],tag:'进阶',quote:'从一个细胞到一个个体，这是生命最神奇的魔术。',prereq:['细胞生物学','遗传学'],next:[],books:['Gilbert《Developmental Biology》'],videos:[{name:'发育生物学 网课',keyword:'发育生物学网课'}]},
+  '生态学':{desc:'种群、群落、生态系统、生物圈、生态平衡。',arc:['PST 3','PRS 5','FTR 7'],tag:'核心',quote:'生态学是研究生物与环境相互关系的科学。',prereq:['普通生物学'],next:['保护生物学'],books:['Odum《Fundamentals of Ecology》','牛翠娟《基础生态学》'],videos:[{name:'生态学 网课',keyword:'生态学网课'}]},
+  '进化生物学':{desc:'自然选择、性选择、分子进化、物种形成。',arc:['PST 3','PRS 5','FTR 7','BYD 10'],tag:'核心',quote:'Nothing in biology makes sense except in the light of evolution.',prereq:['遗传学'],next:[],books:['Futuyma《Evolution》'],videos:[{name:'进化生物学 网课',keyword:'进化生物学网课'}]},
+  '生物多样性':{desc:'物种多样性、遗传多样性、生态系统多样性、保护。',arc:['PST 3','PRS 5','FTR 7'],tag:'方向',quote:'生物多样性是地球生命的宝藏。',prereq:['生态学','进化生物学'],next:['保护生物学'],books:['《生物多样性》'],videos:[{name:'生物多样性 网课',keyword:'生物多样性网课'}]},
+  '保护生物学':{desc:'物种濒危、栖息地保护、生态修复、自然保护区。',arc:['PST 3','PRS 5','FTR 7'],tag:'方向',quote:'守护地球生命，保护人类未来。',prereq:['生态学','生物多样性'],next:[],books:['Primack《Essentials of Conservation Biology》'],videos:[{name:'保护生物学 网课',keyword:'保护生物学网课'}]},
+  '合成生物学':{desc:'基因线路、人工细胞、生物制造、CRISPR应用。',arc:['PST 5','PRS 7','FTR 9+','BYD 11'],tag:'前沿',quote:'像工程师一样设计生命。',prereq:['基因工程','分子生物学'],next:[],books:['《合成生物学》'],videos:[{name:'合成生物学 网课',keyword:'合成生物学网课'}]},
+  '系统生物学':{desc:'网络分析、动力学建模、多组学整合、系统思维。',arc:['PST 5','PRS 7','FTR 9+','INS 12'],tag:'前沿',quote:'用系统思维理解生命。',prereq:['分子生物学','生物化学'],next:[],books:['Alon《An Introduction to Systems Biology》'],videos:[{name:'系统生物学 网课',keyword:'系统生物学网课'}]},
+  '生物信息学':{desc:'序列比对、基因组组装、基因预测、机器学习。',arc:['PST 4','PRS 6','FTR 8','BYD 10'],tag:'前沿',quote:'用计算机解读生命之书。',prereq:['分子生物学','计算物理'],next:['系统生物学'],books:['《生物信息学》','PeVsner《Bioinformatics and Functional Genomics》'],videos:[{name:'生物信息学 网课',keyword:'生物信息学网课'}]},
+  '脑科学':{desc:'连接组学、神经计算、意识研究、脑机接口。',arc:['PST 7','PRS 9+','FTR 11+','INS 12+'],tag:'终极',quote:'宇宙最复杂的结构——人脑。',prereq:['神经生物学'],next:[],books:['Kandel《Principles of Neural Science》','《脑科学》'],videos:[{name:'脑科学 网课',keyword:'脑科学网课'}]},
+  '生物物理学':{desc:'分子马达、细胞力学、单分子技术、生物膜物理。',arc:['PST 4','PRS 6','FTR 8','BYD 10'],tag:'交叉',quote:'用物理工具研究生命。',prereq:['生物化学','物理化学'],next:[],books:['Phillips《Physical Biology of the Cell》'],videos:[{name:'生物物理学 网课',keyword:'生物物理学网课'}]},
+  '结构生物学':{desc:'X射线晶体学、冷冻电镜、NMR、分子对接。',arc:['PST 4','PRS 6','FTR 8','BYD 10'],tag:'交叉',quote:'看清蛋白质的三维结构，才能理解它的功能。',prereq:['生物化学','物理化学'],next:[],books:['《结构生物学》'],videos:[{name:'结构生物学 网课',keyword:'结构生物学网课'}]},
+  '癌症生物学':{desc:'癌基因、抑癌基因、肿瘤微环境、靶向治疗。',arc:['PST 5','PRS 7','FTR 9+','INS 12'],tag:'应用',quote:'攻克癌症是人类共同的梦想。',prereq:['细胞生物学','分子生物学'],next:[],books:['Weinberg《The Biology of Cancer》'],videos:[{name:'癌症生物学 网课',keyword:'癌症生物学网课'}]},
+  '病毒学':{desc:'病毒结构、感染机制、抗病毒药物、疫苗。',arc:['PST 4','PRS 6','FTR 8','BYD 10'],tag:'应用',quote:'看不见的敌人，看得见的科学。',prereq:['细胞生物学','分子生物学'],next:[],books:['Flint《Principles of Virology》'],videos:[{name:'病毒学 网课',keyword:'病毒学网课'}]},
+};
+function zlibBookUrl(n){const c=n.replace(/[《》]/g,'').trim();return 'https://z-library.biz/s/'+encodeURIComponent(c)}
+function biliSearchUrl(k){return 'https://search.bilibili.com/all?keyword='+encodeURIComponent(k)}
+let currentCourse=null;
+function showCourse(name){const c=COURSES[name];if(!c){console.warn('Not found:',name);return}currentCourse=name;
+  document.getElementById('modalTitle').textContent=name;document.getElementById('modalText').textContent=c.desc;
+  const q=document.getElementById('modalQuote');if(c.quote){q.style.display='block';q.textContent=c.quote}else q.style.display='none';
+  const arcRow=document.getElementById('arcDiffRow');arcRow.innerHTML='';
+  (c.arc||[]).forEach(a=>{const p=a.split(' ');const t=p[0],v=p[1];const i=document.createElement('div');
+    let cls=t.toLowerCase();if(t==='INS'&&v==='12+')cls='ins-plus';
+    i.className='arc-diff-item '+cls;i.innerHTML='<span class="label">'+t+'</span><span class="value">'+v+'</span>';arcRow.appendChild(i)});
+  const pre=document.getElementById('prereqList');pre.innerHTML='';
+  if(c.prereq&&c.prereq.length){c.prereq.forEach(p=>{const s=document.createElement('span');s.className='relation-chip';s.textContent=p;s.onclick=e=>{e.stopPropagation();showCourse(p)};pre.appendChild(s)})}
+  else pre.innerHTML='<span class="relation-empty">无（起点学科）</span>';
+  const nx=document.getElementById('nextList');nx.innerHTML='';
+  if(c.next&&c.next.length){c.next.forEach(n=>{const s=document.createElement('span');s.className='relation-chip next-chip';s.textContent=n;s.onclick=e=>{e.stopPropagation();showCourse(n)};nx.appendChild(s)})}
+  else nx.innerHTML='<span class="relation-empty">无（终端学科）</span>';
+  const bs=document.getElementById('bookSection'),bl=document.getElementById('bookList');
+  if(c.books&&c.books.length){bs.style.display='block';bl.innerHTML='';c.books.forEach(b=>{const a=document.createElement('a');a.className='resource-item book-item';a.href=zlibBookUrl(b);a.target='_blank';a.rel='noopener';a.innerHTML='<span class="resource-icon">📖</span><span>'+b+'</span><span class="resource-arrow">→</span>';bl.appendChild(a)})}else bs.style.display='none';
+  const vs=document.getElementById('videoSection'),vl=document.getElementById('videoList');
+  if(c.videos&&c.videos.length){vs.style.display='block';vl.innerHTML='';c.videos.forEach(v=>{const a=document.createElement('a');a.className='resource-item video-item';a.href=biliSearchUrl(v.keyword||v.name);a.target='_blank';a.rel='noopener';a.innerHTML='<span class="resource-icon">▶️</span><span>'+v.name+'</span><span class="resource-arrow">→</span>';vl.appendChild(a)})}else vs.style.display='none';
+  document.getElementById('overlay').classList.add('show')}
+function hideInfo(){document.getElementById('overlay').classList.remove('show');currentCourse=null}
+function closeInfo(e){if(e.target.id==='overlay')hideInfo()}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')hideInfo()});
+function initViewCount(){const k='bio_session_viewed';let v=parseInt(localStorage.getItem('bio_views')||'0',10);if(!sessionStorage.getItem(k)){v+=1;localStorage.setItem('bio_views',v);sessionStorage.setItem(k,'true')}document.getElementById('viewCount').textContent=v.toLocaleString()}
+function initLikes(){let l=parseInt(localStorage.getItem('bio_likes')||'0',10);const liked=localStorage.getItem('bio_liked')==='true';document.getElementById('likeCount').textContent=l.toLocaleString();if(liked){document.getElementById('heartIcon').textContent='❤️';document.getElementById('likeBtn').classList.add('liked')}}
+function toggleLike(){let l=parseInt(localStorage.getItem('bio_likes')||'0',10);const liked=localStorage.getItem('bio_liked')==='true';const b=document.getElementById('likeBtn'),h=document.getElementById('heartIcon');if(liked){l=Math.max(0,l-1);localStorage.setItem('bio_liked','false');h.textContent='🤍';b.classList.remove('liked')}else{l+=1;localStorage.setItem('bio_liked','true');h.textContent='❤️';b.classList.add('liked')}localStorage.setItem('bio_likes',l);document.getElementById('likeCount').textContent=l.toLocaleString()}
+document.addEventListener('DOMContentLoaded',()=>{initViewCount();initLikes()});
+</script>
+</body>
+</html>
