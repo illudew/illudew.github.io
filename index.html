@@ -58,19 +58,31 @@
     padding: 34px;
   }
 
+  /* ========== 阶段标题（中英双语） ========== */
   .phase-title {
-    font-size: 22px; font-weight: 800; margin: 50px 0 8px;
+    font-size: 24px; font-weight: 800; margin: 60px 0 4px;
     display: flex; align-items: center; gap: 12px; color: #1e293b;
+    letter-spacing: -.01em;
   }
   .phase-title:first-child { margin-top: 0; }
   .phase-title::before {
-    content: ""; display: block; width: 6px; height: 28px;
+    content: ""; display: block; width: 6px; height: 30px;
     border-radius: 4px; background: #2563eb; flex-shrink: 0;
+  }
+  .phase-en {
+    font-size: 11px;
+    letter-spacing: .4em;
+    color: #94a3b8;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin: 0 0 12px 18px;
+    font-style: italic;
   }
   .phase-title.classic::before { background: #0f766e; }
   .phase-title.quantum::before { background: #7c3aed; }
   .phase-title.apps::before { background: #c2410c; }
   .phase-title.cosmos::before { background: #4338ca; }
+  .phase-title.nexus::before { background: #059669; }
 
   .phase-desc { color: var(--muted); font-size: 14px; margin: 0 0 24px 18px; line-height: 1.7; }
 
@@ -246,7 +258,8 @@
   @media(max-width:900px){
     .wrap{width:min(94vw,720px)}
     .roadmap { padding: 20px; }
-    .phase-title { font-size: 18px; }
+    .phase-title { font-size: 19px; }
+    .phase-en { font-size: 10px; letter-spacing: .28em; }
     .domain-desc { display: none; }
     .domain-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
     .relations { grid-template-columns: 1fr; }
@@ -258,7 +271,7 @@
   <header>
     <div class="eyebrow">MY PHYSICS JOURNEY</div>
     <h1>物理学知识体系</h1>
-    <p class="subtitle">以领域分类的物理知识网络。难度采用 Arcaea 风格：PST / PRS / FTR，外加 ETR / BYD / INS 三选一作为终极挑战。</p>
+    <p class="subtitle">六幕知识的旅途，从数学的棱镜到宇宙的尽头。难度采用 Arcaea 风格：PST / PRS / FTR / ETR / BYD / INS。</p>
     <div class="toolbar">
       <button onclick="window.scrollTo({top:0,behavior:'smooth'})">回到顶部</button>
     </div>
@@ -274,9 +287,10 @@
 
   <main class="roadmap">
 
-    <!-- ============ 第一阶段：数学地基 ============ -->
-    <h2 class="phase-title">🧮 第一阶段：数学地基</h2>
-    <p class="phase-desc">所有数学与计算工具统一归入此阶段，是后面所有物理课程的共同底座。</p>
+    <!-- ============ 第一章 · Prismatic Foundation ============ -->
+    <h2 class="phase-title">🔮 第一章 · 棱镜基石</h2>
+    <div class="phase-en">PRISMATIC FOUNDATION</div>
+    <p class="phase-desc">一切理论的起点是一束白光，而数学是把它分解为七色的棱镜。本章所有科目的第四难度仅使用 ETR。</p>
 
     <div class="domain" style="--domain-color: #2563eb;">
       <div class="domain-header">
@@ -309,8 +323,8 @@
           <div class="tag">前传第2章</div>
           <h4>线性代数</h4>
           <div class="arc-badges">
-            <span class="arc-badge arc-pst">PST 2</span>
-            <span class="arc-badge arc-prs">PRS 4</span>
+            <span class="arc-badge arc-pst">PST 3</span>
+            <span class="arc-badge arc-prs">PRS 5</span>
             <span class="arc-badge arc-ftr">FTR 7</span>
           </div>
           <p>行列式、矩阵、线性方程组。新手村困难章节。</p>
@@ -332,7 +346,7 @@
             <span class="arc-badge arc-pst">PST 4</span>
             <span class="arc-badge arc-prs">PRS 6</span>
             <span class="arc-badge arc-ftr">FTR 8</span>
-            <span class="arc-badge arc-byd">BYD 10</span>
+            <span class="arc-badge arc-etr">ETR 10</span>
           </div>
           <p>抽象代数、对称性。物理学家最爱的"魔法"工具。</p>
         </div>
@@ -353,7 +367,7 @@
             <span class="arc-badge arc-pst">PST 5</span>
             <span class="arc-badge arc-prs">PRS 7</span>
             <span class="arc-badge arc-ftr">FTR 9+</span>
-            <span class="arc-badge arc-etr">ETR 11+</span>
+            <span class="arc-badge arc-etr">ETR 11</span>
           </div>
           <p>复变函数、积分变换、偏微分方程。面如死灰。</p>
         </div>
@@ -364,7 +378,7 @@
             <span class="arc-badge arc-pst">PST 5</span>
             <span class="arc-badge arc-prs">PRS 7</span>
             <span class="arc-badge arc-ftr">FTR 9+</span>
-            <span class="arc-badge arc-etr">ETR 11+</span>
+            <span class="arc-badge arc-etr">ETR 11</span>
           </div>
           <p>贝塞尔、勒让德、球谐函数。阴魂不散。</p>
         </div>
@@ -375,6 +389,7 @@
             <span class="arc-badge arc-pst">PST 3</span>
             <span class="arc-badge arc-prs">PRS 5</span>
             <span class="arc-badge arc-ftr">FTR 7</span>
+            <span class="arc-badge arc-etr">ETR 9</span>
           </div>
           <p>梯度、散度、旋度、斯托克斯定理。电磁学的数学语言。</p>
         </div>
@@ -401,9 +416,10 @@
       </div>
     </div>
 
-    <!-- ============ 第二阶段：经典物理 ============ -->
-    <h2 class="phase-title classic">⚛️ 第二阶段：经典物理</h2>
-    <p class="phase-desc">五大经典领域：力学、电磁、热学、光学、声学。每个领域下按研究方向分类。</p>
+    <!-- ============ 第二章 · Echoes of Aeon ============ -->
+    <h2 class="phase-title classic">⚔️ 第二章 · 回响纪元</h2>
+    <div class="phase-en">ECHOES OF AEON</div>
+    <p class="phase-desc">五大经典领域在时光中回响：力、电磁、热、光、声。本章使用 BYD 与 ETR 交叉。</p>
 
     <div class="domain" style="--domain-color: #0d9488;">
       <div class="domain-header">
@@ -440,7 +456,7 @@
             <span class="arc-badge arc-pst">PST 4</span>
             <span class="arc-badge arc-prs">PRS 6</span>
             <span class="arc-badge arc-ftr">FTR 8</span>
-            <span class="arc-badge arc-byd">BYD 10+</span>
+            <span class="arc-badge arc-byd">BYD 10</span>
           </div>
           <p>NS方程、湍流、边界层。经典物理最后的难题。</p>
         </div>
@@ -494,7 +510,7 @@
             <span class="arc-badge arc-pst">PST 5</span>
             <span class="arc-badge arc-prs">PRS 7</span>
             <span class="arc-badge arc-ftr">FTR 9+</span>
-            <span class="arc-badge arc-etr">ETR 11+</span>
+            <span class="arc-badge arc-byd">BYD 11</span>
           </div>
           <p>麦克斯韦方程组、相对论电磁场。物理梦还在交织……</p>
         </div>
@@ -515,6 +531,7 @@
             <span class="arc-badge arc-pst">PST 3</span>
             <span class="arc-badge arc-prs">PRS 5</span>
             <span class="arc-badge arc-ftr">FTR 7</span>
+            <span class="arc-badge arc-etr">ETR 9</span>
           </div>
           <p>三极管、运放、滤波器。调参调到怀疑人生。</p>
         </div>
@@ -535,7 +552,7 @@
             <span class="arc-badge arc-pst">PST 4</span>
             <span class="arc-badge arc-prs">PRS 6</span>
             <span class="arc-badge arc-ftr">FTR 8</span>
-            <span class="arc-badge arc-byd">BYD 10+</span>
+            <span class="arc-badge arc-byd">BYD 10</span>
           </div>
           <p>晶体管到芯片，版图到流片。承载一个时代的算力。</p>
         </div>
@@ -630,7 +647,7 @@
           <div class="arc-badges">
             <span class="arc-badge arc-pst">PST 4</span>
             <span class="arc-badge arc-prs">PRS 6</span>
-            <span class="arc-badge arc-ftr">FTR 9</span>
+            <span class="arc-badge arc-ftr">FTR 8</span>
             <span class="arc-badge arc-byd">BYD 10+</span>
           </div>
           <p>倍频、四波混频。光不仅直线传播，还会跟光打架！</p>
@@ -658,9 +675,10 @@
       </div>
     </div>
 
-    <!-- ============ 第三阶段：量子与近代物理 ============ -->
-    <h2 class="phase-title quantum">🌀 第三阶段：量子与近代物理</h2>
-    <p class="phase-desc">走进微观世界的大门。量子核心、量子应用、核物理、实验基础四个方向并列。</p>
+    <!-- ============ 第三章 · Whispers of Quantum ============ -->
+    <h2 class="phase-title quantum">🌀 第三章 · 量子低语</h2>
+    <div class="phase-en">WHISPERS OF QUANTUM</div>
+    <p class="phase-desc">微观世界在耳畔低语，颠覆你对物理的一切认知。本章使用 BYD 与 ETR 交叉。</p>
 
     <div class="domain" style="--domain-color: #7c3aed;">
       <div class="domain-header">
@@ -762,7 +780,7 @@
             <span class="arc-badge arc-prs">PRS 2</span>
             <span class="arc-badge arc-ftr">FTR 3</span>
           </div>
-          <p>从拧螺丝到调光路。物理学的实验基础，动手能力的起点。</p>
+          <p>从拧螺丝到调光路。物理学的实验基础。</p>
         </div>
         <div class="course-card" onclick="showCourse('科学史')">
           <div class="tag">科学通识</div>
@@ -777,9 +795,10 @@
       </div>
     </div>
 
-    <!-- ============ 第四阶段：凝聚态与半导体产业 ============ -->
-    <h2 class="phase-title apps">💎 第四阶段：凝聚态与半导体产业</h2>
-    <p class="phase-desc">物理理论的终极应用。凝聚态基础 → 凝聚态前沿 → 材料工程 → 半导体产业链 → 光电应用，五条并行主线。</p>
+    <!-- ============ 第四章 · Matter's Labyrinth ============ -->
+    <h2 class="phase-title apps">💠 第四章 · 物质迷宫</h2>
+    <div class="phase-en">MATTER'S LABYRINTH</div>
+    <p class="phase-desc">凝聚态、材料、半导体——从量子到芯片的浩瀚迷宫。本章使用 BYD 与 ETR 交叉。</p>
 
     <div class="domain" style="--domain-color: #0f766e;">
       <div class="domain-header">
@@ -806,7 +825,7 @@
             <span class="arc-badge arc-pst">PST 5</span>
             <span class="arc-badge arc-prs">PRS 7</span>
             <span class="arc-badge arc-ftr">FTR 9</span>
-            <span class="arc-badge arc-byd">BYD 10+</span>
+            <span class="arc-badge arc-byd">BYD 10</span>
           </div>
           <p>结构决定性质。在原子尺度上盖房子！</p>
         </div>
@@ -827,7 +846,7 @@
             <span class="arc-badge arc-pst">PST 5</span>
             <span class="arc-badge arc-prs">PRS 7</span>
             <span class="arc-badge arc-ftr">FTR 9+</span>
-            <span class="arc-badge arc-ins">INS 12</span>
+            <span class="arc-badge arc-byd">BYD 11</span>
           </div>
           <p style="color: #4c1d95;">零电阻、迈斯纳效应、BCS理论。宏观量子现象最壮观的展示。</p>
         </div>
@@ -849,7 +868,7 @@
             <span class="arc-badge arc-pst">PST 6</span>
             <span class="arc-badge arc-prs">PRS 8</span>
             <span class="arc-badge arc-ftr">FTR 10+</span>
-            <span class="arc-badge arc-ins">INS 12</span>
+            <span class="arc-badge arc-byd">BYD 11+</span>
           </div>
           <p style="color: #4c1d95;">拓扑绝缘体、拓扑半金属。用拓扑不变量分类物质的新范式。</p>
         </div>
@@ -860,7 +879,7 @@
             <span class="arc-badge arc-pst">PST 5</span>
             <span class="arc-badge arc-prs">PRS 7</span>
             <span class="arc-badge arc-ftr">FTR 9</span>
-            <span class="arc-badge arc-byd">BYD 10+</span>
+            <span class="arc-badge arc-byd">BYD 10</span>
           </div>
           <p style="color: #4c1d95;">石墨烯、MoS2、黑磷。原子层厚度的材料世界，薄到离谱，强到离谱。</p>
         </div>
@@ -871,7 +890,7 @@
             <span class="arc-badge arc-pst">PST 5</span>
             <span class="arc-badge arc-prs">PRS 7</span>
             <span class="arc-badge arc-ftr">FTR 9</span>
-            <span class="arc-badge arc-byd">BYD 10+</span>
+            <span class="arc-badge arc-byd">BYD 10</span>
           </div>
           <p style="color: #4c1d95;">液氦超流、玻色-爱因斯坦凝聚。接近绝对零度，量子涨落主宰一切。</p>
         </div>
@@ -892,6 +911,7 @@
             <span class="arc-badge arc-pst">PST 3</span>
             <span class="arc-badge arc-prs">PRS 5</span>
             <span class="arc-badge arc-ftr">FTR 7</span>
+            <span class="arc-badge arc-etr">ETR 9</span>
           </div>
           <p>烧炉子、镀膜、拉单晶。今天你烧炉子了吗？</p>
         </div>
@@ -902,6 +922,7 @@
             <span class="arc-badge arc-pst">PST 3</span>
             <span class="arc-badge arc-prs">PRS 5</span>
             <span class="arc-badge arc-ftr">FTR 7</span>
+            <span class="arc-badge arc-etr">ETR 9</span>
           </div>
           <p>XRD、SEM、TEM。样品制备一小时，分析数据一整天。</p>
         </div>
@@ -976,15 +997,17 @@
             <span class="arc-badge arc-pst">PST 3</span>
             <span class="arc-badge arc-prs">PRS 5</span>
             <span class="arc-badge arc-ftr">FTR 7</span>
+            <span class="arc-badge arc-etr">ETR 9</span>
           </div>
           <p>电子跃迁，释放光子。你不发光怎么照亮全人类？</p>
         </div>
       </div>
     </div>
 
-    <!-- ============ 第五阶段：宇宙与粒子物理 ============ -->
-    <h2 class="phase-title cosmos">🌌 第五阶段：宇宙与粒子物理</h2>
-    <p class="phase-desc">物理学的最前沿。从弯曲时空到大尺度宇宙结构，从基本粒子到场论，最终抵达量子引力与弦理论的终极统一。INS 12+ 为全书唯一最高难度。</p>
+    <!-- ============ 第五章 · Terminus of Cosmos ============ -->
+    <h2 class="phase-title cosmos">🌌 第五章 · 宇宙的尽头</h2>
+    <div class="phase-en">TERMINUS OF COSMOS</div>
+    <p class="phase-desc">从弯曲时空到基本粒子，最终抵达量子引力与弦理论。全篇唯一允许 INS 难度的终章。</p>
 
     <div class="domain" style="--domain-color: #4338ca;">
       <div class="domain-header">
@@ -1011,7 +1034,7 @@
             <span class="arc-badge arc-pst">PST 5</span>
             <span class="arc-badge arc-prs">PRS 7</span>
             <span class="arc-badge arc-ftr">FTR 9</span>
-            <span class="arc-badge arc-byd">BYD 10+</span>
+            <span class="arc-badge arc-byd">BYD 11</span>
           </div>
           <p>大爆炸、CMB、暗物质、暗能量。宇宙的起源与命运。</p>
         </div>
@@ -1065,7 +1088,7 @@
             <span class="arc-badge arc-pst">PST 6</span>
             <span class="arc-badge arc-prs">PRS 8</span>
             <span class="arc-badge arc-ftr">FTR 10+</span>
-            <span class="arc-badge arc-byd">BYD 11+</span>
+            <span class="arc-badge arc-ins">INS 12</span>
           </div>
           <p>路径积分、费曼图、重整化。粒子物理与凝聚态的共同语言。</p>
         </div>
@@ -1126,6 +1149,11 @@
       </div>
     </div>
 
+    <!-- ============ 额外章 · Infinite Convergence ============ -->
+    <h2 class="phase-title nexus">✨ 额外章 · 无限交汇</h2>
+    <div class="phase-en">INFINITE CONVERGENCE</div>
+    <p class="phase-desc">物理学不再是孤岛。天体、等离子体、生物、核聚变——所有交叉学科在此汇流。本章使用 BYD 与 ETR 交叉。</p>
+
     <div class="domain" style="--domain-color: #059669;">
       <div class="domain-header">
         <h3>🌟 应用与交叉物理</h3>
@@ -1162,6 +1190,7 @@
             <span class="arc-badge arc-pst">PST 4</span>
             <span class="arc-badge arc-prs">PRS 6</span>
             <span class="arc-badge arc-ftr">FTR 8</span>
+            <span class="arc-badge arc-byd">BYD 10</span>
           </div>
           <p>用物理工具研究生命。蛋白质折叠、DNA力学、分子马达……</p>
         </div>
@@ -1172,6 +1201,7 @@
             <span class="arc-badge arc-pst">PST 5</span>
             <span class="arc-badge arc-prs">PRS 7</span>
             <span class="arc-badge arc-ftr">FTR 9</span>
+            <span class="arc-badge arc-byd">BYD 10</span>
           </div>
           <p>同步辐射、轫致辐射、切伦科夫辐射。加速的电荷必然辐射。</p>
         </div>
@@ -1193,7 +1223,7 @@
 
   <footer>
     <div>Physics Knowledge Map · 单文件静态网站 · 适用于 GitHub Pages</div>
-    <div style="margin-top:8px">整理自个人学习路线 PPT · 难度采用 Arcaea 风格</div>
+    <div style="margin-top:8px">整理自个人学习路线 PPT · 难度采用 Arcaea 风格 · 六幕知识旅途</div>
   </footer>
 </div>
 
@@ -1207,7 +1237,7 @@
     <div class="arc-diff-row" id="arcDiffRow"></div>
 
     <div class="resource-section" id="bookSection" style="display: none;">
-      <div class="resource-label">📖 推荐教材（点击跳转豆瓣图书）</div>
+      <div class="resource-label">📖 推荐教材（点击跳转 Z-Library）</div>
       <div class="resource-list" id="bookList"></div>
     </div>
 
@@ -1255,7 +1285,7 @@ const COURSES = {
   },
   '线性代数': {
     desc: '大学基础数学的另一个科目，你将会认识到行列式与矩阵等新伙伴加入。\n\n以及求解多元一次线性方程组的方法，对矩阵的性质深入探索。',
-    arc: ['PST 2', 'PRS 4', 'FTR 7'], tag: '数学基础',
+    arc: ['PST 3', 'PRS 5', 'FTR 7'], tag: '数学基础',
     quote: '新手村的困难章节之一。',
     prereq: ['初等数学'], next: ['数学物理方法', '量子力学', '群论', '计算物理'],
     books: ['同济大学《线性代数》（第六版）', '《线性代数应该这样学》', 'Gilbert Strang《Introduction to Linear Algebra》'],
@@ -1277,7 +1307,7 @@ const COURSES = {
   },
   '群论': {
     desc: '抽象代数的核心分支，研究对称性的数学结构。\n\n群、环、域、表示论，物理学家用来描述晶体对称性、粒子物理和量子态的"魔法"工具。',
-    arc: ['PST 4', 'PRS 6', 'FTR 8', 'BYD 10'], tag: '数学进阶',
+    arc: ['PST 4', 'PRS 6', 'FTR 8', 'ETR 10'], tag: '数学进阶',
     quote: '物理学家最爱的"魔法"工具——对称性即美。',
     prereq: ['线性代数'], next: ['量子力学', '固体物理', '粒子物理'],
     books: ['《群论》李新征', '《物理学中的群论》马中骐', '《Group Theory in a Nutshell for Physicists》'],
@@ -1288,7 +1318,7 @@ const COURSES = {
   },
   '数学物理方法': {
     desc: '这是物理学的数学工具箱，将为你提供解决物理问题的强大数学武器。\n\n从复变函数到积分变换，从数学物理方程到特殊函数。',
-    arc: ['PST 5', 'PRS 7', 'FTR 9+', 'ETR 11+'], tag: '进阶数学工具',
+    arc: ['PST 5', 'PRS 7', 'FTR 9+', 'ETR 11'], tag: '进阶数学工具',
     quote: '噩梦、第二卷的初焉，此章节，面如死灰。',
     prereq: ['高等数学', '线性代数'], next: ['电动力学', '量子力学', '特殊函数'],
     books: ['梁昆淼《数学物理方法》（第五版）', '吴崇试《数学物理方法》（第三版）', '顾樵《数学物理方法》'],
@@ -1299,7 +1329,7 @@ const COURSES = {
   },
   '特殊函数': {
     desc: '你以为考完数理方法就结束了吗？不！\n\n贝塞尔、勒让德、球谐函数，它们在你的电动力学、量子力学、甚至固体物理里无处不在，阴魂不散！',
-    arc: ['PST 5', 'PRS 7', 'FTR 9+', 'ETR 11+'], tag: '数学物理延伸',
+    arc: ['PST 5', 'PRS 7', 'FTR 9+', 'ETR 11'], tag: '数学物理延伸',
     quote: '阴魂不散的贝塞尔和勒让德。',
     prereq: ['数学物理方法'], next: ['电动力学', '量子力学', '固体物理'],
     books: ['王竹溪《特殊函数概论》', '《特殊函数》刘式适', 'Arfken《Mathematical Methods for Physicists》'],
@@ -1307,7 +1337,7 @@ const COURSES = {
   },
   '矢量分析': {
     desc: '向量微积分、梯度、散度、旋度、高斯定理、斯托克斯定理。\n\n这是电磁学、流体力学、广义相对论等高级物理课程的数学语言基础。',
-    arc: ['PST 3', 'PRS 5', 'FTR 7'], tag: '数学工具',
+    arc: ['PST 3', 'PRS 5', 'FTR 7', 'ETR 9'], tag: '数学工具',
     quote: '矢量分析是物理学的第二语言——学会它，你才能读懂物理学的"小说"。',
     prereq: ['高等数学', '线性代数'], next: ['电动力学', '流体力学', '相对论'],
     books: ['《矢量分析》许以超', 'Booth《Vector Calculus》', '华东师大版《数学分析》'],
@@ -1349,7 +1379,7 @@ const COURSES = {
   },
   '流体力学': {
     desc: 'Navier-Stokes 方程、湍流、边界层。天气预报、飞机设计、血液流动都靠它。\n\n流体力学的难点在于：你永远无法精确求解 NS 方程，但你可以假装自己解出来了。',
-    arc: ['PST 4', 'PRS 6', 'FTR 8', 'BYD 10+'], tag: '工程力学',
+    arc: ['PST 4', 'PRS 6', 'FTR 8', 'BYD 10'], tag: '工程力学',
     quote: '湍流是经典物理最后的难题之一。',
     prereq: ['力学'], next: ['计算流体力学', '等离子体物理'],
     books: ['吴望一《流体力学》', 'Landau《Fluid Mechanics》', '张兆顺《流体力学》'],
@@ -1385,7 +1415,7 @@ const COURSES = {
   },
   '电动力学': {
     desc: '电磁学的进一步深化，将带你走进电磁场的微观世界。\n\n麦克斯韦方程组作为电动力学的核心，将让你看到电场与磁场在微观层面的紧密联系与相互作用。',
-    arc: ['PST 5', 'PRS 7', 'FTR 9+', 'ETR 11+'], tag: '理论核心',
+    arc: ['PST 5', 'PRS 7', 'FTR 9+', 'BYD 11'], tag: '理论核心',
     quote: '移动变换，电磁相对，物理梦还在交织……',
     prereq: ['电磁学', '数学物理方法'], next: ['量子力学', '激光原理', '相对论', '粒子物理'],
     books: ['郭硕鸿《电动力学》（第三版）', 'Jackson《Classical Electrodynamics》', 'Griffiths《电动力学导论》'],
@@ -1405,7 +1435,7 @@ const COURSES = {
   },
   '模拟电子技术': {
     desc: '模电玄学，玄之又玄，众妙之门。\n\n三极管放大器、运放、滤波器，调参调到怀疑人生。',
-    arc: ['PST 3', 'PRS 5', 'FTR 7'], tag: '电子工程',
+    arc: ['PST 3', 'PRS 5', 'FTR 7', 'ETR 9'], tag: '电子工程',
     quote: '模拟电路的世界里，每个元件都不听话，但你却要让它听话。',
     prereq: ['电路'], next: ['集成电路'],
     books: ['童诗白《模拟电子技术基础》（第五版）', '康华光《电子技术基础》'],
@@ -1424,7 +1454,7 @@ const COURSES = {
   },
   '集成电路': {
     desc: '把整个计算机缩小到指甲盖大小。从晶体管到芯片，从版图到流片，这是现代科技的巅峰。',
-    arc: ['PST 4', 'PRS 6', 'FTR 8', 'BYD 10+'], tag: '芯片·硬核',
+    arc: ['PST 4', 'PRS 6', 'FTR 8', 'BYD 10'], tag: '芯片·硬核',
     quote: '一颗芯片，承载一个时代的算力。',
     prereq: ['模拟电子技术', '数字电子技术', '半导体器件'], next: [],
     books: ['Rabaey《Digital Integrated Circuits》', 'Weste《CMOS超大规模集成电路设计》'],
@@ -1488,7 +1518,7 @@ const COURSES = {
   },
   '非线性光学': {
     desc: '强光下的光学。倍频、和频、差频、四波混频、光孤子。',
-    arc: ['PST 4', 'PRS 6', 'FTR 9', 'BYD 10+'], tag: '前沿光学',
+    arc: ['PST 4', 'PRS 6', 'FTR 8', 'BYD 10+'], tag: '前沿光学',
     quote: '从此光不仅会直线传播，还会跟光自己打架。',
     prereq: ['激光原理'], next: [],
     books: ['石顺祥《非线性光学》', 'Boyd《Nonlinear Optics》'],
@@ -1583,7 +1613,7 @@ const COURSES = {
   },
   '材料物理': {
     desc: '结构决定性质，性质决定功能。从原子排列到宏观性能，从金属到陶瓷到高分子。',
-    arc: ['PST 5', 'PRS 7', 'FTR 9', 'BYD 10+'], tag: '材料科学',
+    arc: ['PST 5', 'PRS 7', 'FTR 9', 'BYD 10'], tag: '材料科学',
     quote: '物理、化学、工程的完美交叉，新材料是科技革命的先导。',
     prereq: ['固体物理'], next: ['半导体材料', '材料制备技术', '材料测试技术'],
     books: ['胡赓祥《材料科学基础》', '石德珂《材料物理》', 'Callister《Materials Science and Engineering》'],
@@ -1594,7 +1624,7 @@ const COURSES = {
   },
   '超导物理': {
     desc: '零电阻、迈斯纳效应、BCS理论、高温超导、拓扑超导。\n\n当温度降到足够低，电子会配对形成库珀对，然后在晶格中无阻穿行。',
-    arc: ['PST 5', 'PRS 7', 'FTR 9+', 'INS 12'], tag: '凝聚态前沿',
+    arc: ['PST 5', 'PRS 7', 'FTR 9+', 'BYD 11'], tag: '凝聚态前沿',
     quote: '超导是宏观量子现象最壮观的展示——电阻为零。',
     prereq: ['固体物理', '量子力学', '热力学与统计物理'], next: ['拓扑物态'],
     books: ['田民波《超导物理与超导体》', 'Tinkham《Introduction to Superconductivity》', 'De Gennes《Superconductivity of Metals and Alloys》'],
@@ -1610,7 +1640,7 @@ const COURSES = {
   },
   '拓扑物态': {
     desc: '拓扑绝缘体、拓扑半金属、拓扑超导体。用拓扑不变量分类物质的新范式。',
-    arc: ['PST 6', 'PRS 8', 'FTR 10+', 'INS 12'], tag: '凝聚态理论前沿',
+    arc: ['PST 6', 'PRS 8', 'FTR 10+', 'BYD 11+'], tag: '凝聚态理论前沿',
     quote: '咖啡杯和甜甜圈在拓扑学家眼里是一样的。',
     prereq: ['固体物理', '量子力学', '群论'], next: ['拓扑量子场论'],
     books: ['Bernevig《Topological Insulators and Topological Superconductors》', '《拓扑绝缘体和拓扑超导体》'],
@@ -1618,7 +1648,7 @@ const COURSES = {
   },
   '二维材料': {
     desc: '石墨烯、过渡金属硫族化合物(MoS2)、黑磷、MXene。原子层厚度的材料世界。',
-    arc: ['PST 5', 'PRS 7', 'FTR 9', 'BYD 10+'], tag: '纳米材料前沿',
+    arc: ['PST 5', 'PRS 7', 'FTR 9', 'BYD 10'], tag: '纳米材料前沿',
     quote: '石墨烯——薄到透明，强到离谱。',
     prereq: ['固体物理', '纳米物理', '量子力学'], next: [],
     books: ['《二维材料物理学》', 'Castro Neto et al.《The Electronic Properties of Graphene》'],
@@ -1626,7 +1656,7 @@ const COURSES = {
   },
   '低温物理': {
     desc: '接近绝对零度的世界。液氦超流、玻色-爱因斯坦凝聚、极低温下的量子现象。',
-    arc: ['PST 5', 'PRS 7', 'FTR 9', 'BYD 10+'], tag: '极低温物理',
+    arc: ['PST 5', 'PRS 7', 'FTR 9', 'BYD 10'], tag: '极低温物理',
     quote: '在绝对零度附近，物质会展现出你最不可思议的量子行为。',
     prereq: ['热力学与统计物理', '量子力学', '固体物理'], next: ['超导物理'],
     books: ['《低温物理》', 'Pomeranchuk《Low Temperature Physics》', 'White《Cryogenic Engineering》'],
@@ -1634,7 +1664,7 @@ const COURSES = {
   },
   '材料制备技术': {
     desc: '烧炉子、镀膜、拉单晶、外延生长、CVD、PVD、分子束外延。',
-    arc: ['PST 3', 'PRS 5', 'FTR 7'], tag: '材料制备',
+    arc: ['PST 3', 'PRS 5', 'FTR 7', 'ETR 9'], tag: '材料制备',
     quote: '好的材料是制备出来的，手上的功夫比脑子里的公式更重要。',
     prereq: ['材料物理'], next: ['半导体工艺'],
     books: ['《材料制备科学与技术》', '郑伟涛《薄膜材料与薄膜技术》', '《晶体生长》'],
@@ -1642,7 +1672,7 @@ const COURSES = {
   },
   '材料测试技术': {
     desc: 'XRD、SEM、TEM、AFM、XPS、Raman。不管什么材料，先测一下。',
-    arc: ['PST 3', 'PRS 5', 'FTR 7'], tag: '材料表征',
+    arc: ['PST 3', 'PRS 5', 'FTR 7', 'ETR 9'], tag: '材料表征',
     quote: '你们做测试的，就是材料的法医！',
     prereq: ['材料物理'], next: ['半导体材料'],
     books: ['周玉《材料现代分析测试方法》', '《材料表征》', '《X射线衍射学》'],
@@ -1688,7 +1718,7 @@ const COURSES = {
   },
   '发光物理': {
     desc: '电子从高能级跃迁到低能级，释放出绚烂的光子。',
-    arc: ['PST 3', 'PRS 5', 'FTR 7'], tag: '光电方向',
+    arc: ['PST 3', 'PRS 5', 'FTR 7', 'ETR 9'], tag: '光电方向',
     quote: '你不发光怎么照亮全人类？',
     prereq: ['固体物理', '半导体物理'], next: [],
     books: ['徐叙瑢《发光物理》', '《发光学与发光材料》', '《LED原理与应用》'],
@@ -1708,7 +1738,7 @@ const COURSES = {
   },
   '宇宙学': {
     desc: '大爆炸、宇宙微波背景辐射、暗物质、暗能量、宇宙加速膨胀。',
-    arc: ['PST 5', 'PRS 7', 'FTR 9', 'BYD 10+'], tag: '最大尺度',
+    arc: ['PST 5', 'PRS 7', 'FTR 9', 'BYD 11'], tag: '最大尺度',
     quote: '宇宙的最不可理解之处，在于它居然是可以被理解的。',
     prereq: ['相对论', '热力学与统计物理'], next: [],
     books: ['Ryden《宇宙学》', '赵峥《宇宙学导论》', 'Kolb & Turner《The Early Universe》'],
@@ -1749,7 +1779,7 @@ const COURSES = {
   },
   '量子场论': {
     desc: '把量子力学和狭义相对论结合起来，描述基本粒子的产生与湮灭。',
-    arc: ['PST 6', 'PRS 8', 'FTR 10+', 'BYD 11+'], tag: '场论核心',
+    arc: ['PST 6', 'PRS 8', 'FTR 10+', 'INS 12'], tag: '场论核心',
     quote: '量子场论是物理学的通用语言。',
     prereq: ['量子力学', '电动力学', '相对论', '规范场论'], next: ['弦理论', '量子引力'],
     books: ['Peskin & Schroeder《An Introduction to Quantum Field Theory》', 'Srednicki《Quantum Field Theory》'],
@@ -1787,6 +1817,7 @@ const COURSES = {
     books: ['Witten《Topological Quantum Field Theory》', '《拓扑量子场论》'],
     videos: [{ name: '拓扑量子场论 网课', keyword: '拓扑量子场论网课' }]
   },
+
   '天体物理学': {
     desc: '用物理学的工具研究宇宙中的天体。恒星演化、星系动力学、活动星系核、引力透镜……',
     arc: ['PST 5', 'PRS 7', 'FTR 9+', 'BYD 11'], tag: '天体物理',
@@ -1805,7 +1836,7 @@ const COURSES = {
   },
   '生物物理': {
     desc: '用物理学的原理和方法研究生物大分子和生命过程。',
-    arc: ['PST 4', 'PRS 6', 'FTR 8'], tag: '交叉学科',
+    arc: ['PST 4', 'PRS 6', 'FTR 8', 'BYD 10'], tag: '交叉学科',
     quote: '生命不是违反热力学第二定律，它只是在巧妙地利用它。',
     prereq: ['热力学与统计物理', '量子力学'], next: [],
     books: ['Phillips《Physical Biology of the Cell》', '《生物物理学》朱正纲'],
@@ -1813,7 +1844,7 @@ const COURSES = {
   },
   '辐射过程': {
     desc: '带电粒子如何辐射电磁波？同步辐射、轫致辐射、切伦科夫辐射、黑体辐射……',
-    arc: ['PST 5', 'PRS 7', 'FTR 9'], tag: '辐射物理',
+    arc: ['PST 5', 'PRS 7', 'FTR 9', 'BYD 10'], tag: '辐射物理',
     quote: '加速的电荷必然辐射——这是电磁学给你的最优雅的判决。',
     prereq: ['电动力学', '相对论'], next: ['天体物理学'],
     books: ['Jackson《Classical Electrodynamics》辐射章节', 'Landau & Lifshitz《Classical Theory of Fields》'],
@@ -1830,9 +1861,9 @@ const COURSES = {
 };
 
 /* ==================== URL 生成工具 ==================== */
-function doubanBookUrl(name) {
+function zlibBookUrl(name) {
   const clean = name.replace(/[《》]/g, '').trim();
-  return 'https://search.douban.com/book/subject_search?search_text=' + encodeURIComponent(clean);
+  return 'https://zh.z-lib.gs/s/' + encodeURIComponent(clean);
 }
 function biliSearchUrl(keyword) {
   return 'https://search.bilibili.com/all?keyword=' + encodeURIComponent(keyword);
@@ -1911,7 +1942,7 @@ function showCourse(name) {
     course.books.forEach(b => {
       const item = document.createElement('a');
       item.className = 'resource-item book-item';
-      item.href = doubanBookUrl(b);
+      item.href = zlibBookUrl(b);
       item.target = '_blank';
       item.rel = 'noopener';
       item.innerHTML = '<span class="resource-icon">📖</span><span>' + b + '</span><span class="resource-arrow">→</span>';
