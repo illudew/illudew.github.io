@@ -128,18 +128,24 @@
   }
   .course-card p { margin: 0; font-size: 11.5px; color: var(--muted); line-height: 1.55; }
 
+  /* ========== Arcaea 难度徽章 ==========
+     前三难度：浅色底 + 深色字
+     第四难度（ETR/BYD/INS）：深色底 + 白字
+  ==================================== */
   .arc-badges { display: flex; flex-wrap: wrap; gap: 3px; margin-bottom: 8px; }
   .arc-badge {
     display: inline-flex; align-items: center;
     font-size: 9.5px; font-weight: 800; padding: 2px 6px;
     border-radius: 5px; letter-spacing: .02em; white-space: nowrap;
   }
+  /* 前三难度：浅底深字 */
   .arc-pst { background: #dbeafe; color: #1e40af; }
   .arc-prs { background: #d1fae5; color: #065f46; }
-  .arc-ftr { background: #ede9fe; color: #5b21b6; }
-  .arc-byd { background: #fee2e2; color: #991b1b; }
-  .arc-etr { background: #e0f2fe; color: #0369a1; }
-  .arc-ins { background: #4c1d95; color: #e9d5ff; }
+  .arc-ftr { background: #b39dff; color: #2e1065; }
+  /* 第四难度：深底白字 */
+  .arc-etr { background: #0c4a6e; color: #ffffff; }
+  .arc-byd { background: #7f1d1d; color: #ffffff; }
+  .arc-ins { background: #4c1d95; color: #ffffff; }
 
   .tag {
     display: inline-block; font-size: 10px; padding: 3px 8px; border-radius: 5px;
@@ -158,6 +164,8 @@
   .legendary-card:hover { border-color: #d97706; box-shadow: 0 0 30px rgba(245,158,11,.45); }
   .cosmos-card { border-color: #c7d2fe; background: linear-gradient(135deg, #eef2ff, #e0e7ff); }
   .cosmos-card:hover { border-color: #818cf8; }
+  .ultimate-card { border: 2px solid #6d28d9; background: linear-gradient(135deg, #faf5ff, #ede9fe); box-shadow: 0 0 25px rgba(109,40,217,.3); }
+  .ultimate-card:hover { border-color: #4c1d95; box-shadow: 0 0 35px rgba(109,40,217,.5); }
 
   .overlay{position:fixed;inset:0;background:rgba(15,23,42,.46);display:none;align-items:center;justify-content:center;padding:18px;z-index:50}
   .overlay.show{display:flex}
@@ -167,9 +175,8 @@
   .modal p{color:#475569;line-height:1.8;margin:0;white-space:pre-wrap; font-size: 15px;}
   .modal .quote { margin-top: 16px; padding: 14px; background: #f8fafc; border-left: 4px solid #2563eb; border-radius: 6px; font-style: italic; color: #334155;}
 
-  .arc-diff-row {
-    display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 4px;
-  }
+  /* ========== 弹窗中的大号难度展示 ========== */
+  .arc-diff-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 4px; }
   .arc-diff-item {
     display: flex; align-items: center; gap: 6px;
     padding: 6px 12px; border-radius: 10px; font-size: 13px; font-weight: 700;
@@ -177,79 +184,41 @@
   }
   .arc-diff-item .label { font-size: 11px; font-weight: 700; }
   .arc-diff-item .value { font-size: 16px; font-weight: 900; }
-
+  /* 前三难度：浅底深字 */
   .arc-diff-item.pst { background: #dbeafe; border-color: #bfdbfe; }
   .arc-diff-item.pst .label, .arc-diff-item.pst .value { color: #1e40af; }
   .arc-diff-item.prs { background: #d1fae5; border-color: #a7f3d0; }
   .arc-diff-item.prs .label, .arc-diff-item.prs .value { color: #065f46; }
-  .arc-diff-item.ftr { background: #ede9fe; border-color: #ddd6fe; }
-  .arc-diff-item.ftr .label, .arc-diff-item.ftr .value { color: #5b21b6; }
-  .arc-diff-item.byd { background: #fee2e2; border-color: #fecaca; }
-  .arc-diff-item.byd .label, .arc-diff-item.byd .value { color: #991b1b; }
-  .arc-diff-item.etr { background: #e0f2fe; border-color: #bae6fd; }
-  .arc-diff-item.etr .label, .arc-diff-item.etr .value { color: #0369a1; }
+  .arc-diff-item.ftr { background: #b39dff; border-color: #a78bfa; }
+  .arc-diff-item.ftr .label, .arc-diff-item.ftr .value { color: #2e1065; }
+  /* 第四难度：深底白字（跟 INS 统一风格） */
+  .arc-diff-item.etr { background: #0c4a6e; border-color: #075985; }
+  .arc-diff-item.etr .label, .arc-diff-item.etr .value { color: #ffffff; }
+  .arc-diff-item.byd { background: #7f1d1d; border-color: #991b1b; }
+  .arc-diff-item.byd .label, .arc-diff-item.byd .value { color: #ffffff; }
   .arc-diff-item.ins { background: #4c1d95; border-color: #5b21b6; }
-  .arc-diff-item.ins .label { color: #c4b5fd; }
-  .arc-diff-item.ins .value { color: #e9d5ff; }
+  .arc-diff-item.ins .label, .arc-diff-item.ins .value { color: #ffffff; }
 
-  .resource-section {
-    margin-top: 18px;
-    padding-top: 16px;
-    border-top: 1px dashed #e2e8f0;
-  }
-  .resource-label {
-    font-size: 13px;
-    font-weight: 800;
-    color: #334155;
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-  .resource-list {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
+  .resource-section { margin-top: 18px; padding-top: 16px; border-top: 1px dashed #e2e8f0; }
+  .resource-label { font-size: 13px; font-weight: 800; color: #334155; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+  .resource-list { display: flex; flex-direction: column; gap: 6px; }
   .resource-item {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 12px;
-    border-radius: 10px;
-    font-size: 13px;
-    color: #334155;
-    background: #f8fafc;
-    border: 1px solid #e2e8f0;
-    transition: .2s;
-    text-decoration: none;
-    line-height: 1.5;
+    display: flex; align-items: center; gap: 8px; padding: 8px 12px;
+    border-radius: 10px; font-size: 13px; color: #334155;
+    background: #f8fafc; border: 1px solid #e2e8f0;
+    transition: .2s; text-decoration: none; line-height: 1.5;
   }
-  .resource-item:hover {
-    background: #eef4fb;
-    border-color: #bfdbfe;
-  }
-  .video-item {
-    background: #fef2f2;
-    border-color: #fecaca;
-    color: #991b1b;
-    font-weight: 600;
-  }
-  .video-item:hover {
-    background: #fee2e2;
-    border-color: #fca5a5;
-  }
+  .resource-item:hover { background: #eef4fb; border-color: #bfdbfe; }
+  .video-item { background: #fef2f2; border-color: #fecaca; color: #991b1b; font-weight: 600; }
+  .video-item:hover { background: #fee2e2; border-color: #fca5a5; }
   .resource-icon { flex-shrink: 0; font-size: 14px; }
   .resource-arrow { margin-left: auto; color: #94a3b8; font-weight: bold; }
   .video-item .resource-arrow { color: #f87171; }
 
   .relations {
-    margin-top: 22px;
-    padding-top: 20px;
+    margin-top: 22px; padding-top: 20px;
     border-top: 1px dashed #e2e8f0;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
   }
   .relation-group { display: flex; flex-direction: column; gap: 8px; }
   .relation-label {
@@ -289,7 +258,7 @@
   <header>
     <div class="eyebrow">MY PHYSICS JOURNEY</div>
     <h1>物理学知识体系</h1>
-    <p class="subtitle">以领域分类的物理知识网络。难度采用 Arcaea 风格：PST / PRS / FTR，外加 ETR / BYD / INS 三选一作为终极挑战。9+ / 10+ / 11+ 代表该等级的极限谱面。</p>
+    <p class="subtitle">以领域分类的物理知识网络。难度采用 Arcaea 风格：PST / PRS / FTR，外加 ETR / BYD / INS 三选一作为终极挑战。</p>
     <div class="toolbar">
       <button onclick="window.scrollTo({top:0,behavior:'smooth'})">回到顶部</button>
     </div>
@@ -305,7 +274,7 @@
 
   <main class="roadmap">
 
-    <!-- 第一阶段 -->
+    <!-- ============ 第一阶段：数学地基 ============ -->
     <h2 class="phase-title">🧮 第一阶段：数学地基</h2>
     <p class="phase-desc">所有数学与计算工具统一归入此阶段，是后面所有物理课程的共同底座。</p>
 
@@ -321,8 +290,8 @@
           <h4>小初高数学</h4>
           <div class="arc-badges">
             <span class="arc-badge arc-pst">PST 1</span>
-            <span class="arc-badge arc-prs">PRS 5</span>
-            <span class="arc-badge arc-ftr">FTR 7</span>
+            <span class="arc-badge arc-prs">PRS 2</span>
+            <span class="arc-badge arc-ftr">FTR 3</span>
           </div>
           <p>反三角、极坐标、向量叉乘，地基打牢。</p>
         </div>
@@ -341,7 +310,7 @@
           <h4>线性代数</h4>
           <div class="arc-badges">
             <span class="arc-badge arc-pst">PST 2</span>
-            <span class="arc-badge arc-prs">PRS 5</span>
+            <span class="arc-badge arc-prs">PRS 4</span>
             <span class="arc-badge arc-ftr">FTR 7</span>
           </div>
           <p>行列式、矩阵、线性方程组。新手村困难章节。</p>
@@ -352,7 +321,7 @@
           <div class="arc-badges">
             <span class="arc-badge arc-pst">PST 3</span>
             <span class="arc-badge arc-prs">PRS 5</span>
-            <span class="arc-badge arc-ftr">FTR 7+</span>
+            <span class="arc-badge arc-ftr">FTR 7</span>
           </div>
           <p>随机变量、分布、统计推断。不会统计等于白做实验。</p>
         </div>
@@ -363,7 +332,7 @@
             <span class="arc-badge arc-pst">PST 4</span>
             <span class="arc-badge arc-prs">PRS 6</span>
             <span class="arc-badge arc-ftr">FTR 8</span>
-            <span class="arc-badge arc-byd">BYD 10+</span>
+            <span class="arc-badge arc-byd">BYD 10</span>
           </div>
           <p>抽象代数、对称性。物理学家最爱的“魔法”工具。</p>
         </div>
@@ -413,16 +382,16 @@
           <div class="tag">工具课</div>
           <h4>计算物理</h4>
           <div class="arc-badges">
-            <span class="arc-badge arc-pst">PST 3</span>
-            <span class="arc-badge arc-prs">PRS 5</span>
-            <span class="arc-badge arc-ftr">FTR 7</span>
+            <span class="arc-badge arc-pst">PST 2</span>
+            <span class="arc-badge arc-prs">PRS 4</span>
+            <span class="arc-badge arc-ftr">FTR 6</span>
           </div>
           <p>调包侠的起点，代码跑通靠玄学。</p>
         </div>
       </div>
     </div>
 
-    <!-- 第二阶段 -->
+    <!-- ============ 第二阶段：经典物理 ============ -->
     <h2 class="phase-title classic">⚛️ 第二阶段：经典物理</h2>
     <p class="phase-desc">四大经典领域：力学、电磁、热学、光学。每个领域下按研究方向分类。</p>
 
@@ -447,9 +416,10 @@
           <div class="tag">理论物理</div>
           <h4>理论力学</h4>
           <div class="arc-badges">
-            <span class="arc-badge arc-pst">PST 5</span>
-            <span class="arc-badge arc-prs">PRS 7</span>
-            <span class="arc-badge arc-ftr">FTR 9+</span>
+            <span class="arc-badge arc-pst">PST 4</span>
+            <span class="arc-badge arc-prs">PRS 6</span>
+            <span class="arc-badge arc-ftr">FTR 8</span>
+            <span class="arc-badge arc-byd">BYD 10</span>
           </div>
           <p>拉格朗日、哈密顿。真正的物理才刚刚开始！</p>
         </div>
@@ -457,9 +427,9 @@
           <div class="tag">工程力学</div>
           <h4>流体力学</h4>
           <div class="arc-badges">
-            <span class="arc-badge arc-pst">PST 5</span>
-            <span class="arc-badge arc-prs">PRS 7</span>
-            <span class="arc-badge arc-ftr">FTR 9+</span>
+            <span class="arc-badge arc-pst">PST 4</span>
+            <span class="arc-badge arc-prs">PRS 6</span>
+            <span class="arc-badge arc-ftr">FTR 8</span>
             <span class="arc-badge arc-byd">BYD 10+</span>
           </div>
           <p>NS方程、湍流、边界层。经典物理最后的难题。</p>
@@ -468,9 +438,10 @@
           <div class="tag">工程力学</div>
           <h4>固体力学</h4>
           <div class="arc-badges">
-            <span class="arc-badge arc-pst">PST 4</span>
-            <span class="arc-badge arc-prs">PRS 6</span>
-            <span class="arc-badge arc-ftr">FTR 8+</span>
+            <span class="arc-badge arc-pst">PST 3</span>
+            <span class="arc-badge arc-prs">PRS 5</span>
+            <span class="arc-badge arc-ftr">FTR 7</span>
+            <span class="arc-badge arc-etr">ETR 9</span>
           </div>
           <p>应力应变、本构关系、有限元。让物理变成桥梁和高楼。</p>
         </div>
@@ -488,9 +459,10 @@
           <div class="tag">第2章</div>
           <h4>电磁学</h4>
           <div class="arc-badges">
-            <span class="arc-badge arc-pst">PST 4</span>
-            <span class="arc-badge arc-prs">PRS 6</span>
-            <span class="arc-badge arc-ftr">FTR 8+</span>
+            <span class="arc-badge arc-pst">PST 3</span>
+            <span class="arc-badge arc-prs">PRS 5</span>
+            <span class="arc-badge arc-ftr">FTR 7</span>
+            <span class="arc-badge arc-etr">ETR 9</span>
           </div>
           <p>电场磁场、电磁感应。雷公助我！</p>
         </div>
@@ -498,9 +470,9 @@
           <div class="tag" style="background:#fee2e2; color:#b91c1c;">理论物理</div>
           <h4>电动力学</h4>
           <div class="arc-badges">
-            <span class="arc-badge arc-pst">PST 6</span>
-            <span class="arc-badge arc-prs">PRS 8</span>
-            <span class="arc-badge arc-ftr">FTR 10+</span>
+            <span class="arc-badge arc-pst">PST 5</span>
+            <span class="arc-badge arc-prs">PRS 7</span>
+            <span class="arc-badge arc-ftr">FTR 9+</span>
             <span class="arc-badge arc-etr">ETR 11+</span>
           </div>
           <p>麦克斯韦方程组、相对论电磁场。物理梦还在交织……</p>
@@ -509,9 +481,9 @@
           <div class="tag">支线</div>
           <h4>电路</h4>
           <div class="arc-badges">
-            <span class="arc-badge arc-pst">PST 3</span>
-            <span class="arc-badge arc-prs">PRS 5</span>
-            <span class="arc-badge arc-ftr">FTR 7</span>
+            <span class="arc-badge arc-pst">PST 2</span>
+            <span class="arc-badge arc-prs">PRS 4</span>
+            <span class="arc-badge arc-ftr">FTR 6</span>
           </div>
           <p>电路定律与分析方法。电阻炸了！</p>
         </div>
@@ -519,9 +491,9 @@
           <div class="tag" style="background:#fef3c7; color:#b45309;">模电·玄学</div>
           <h4>模拟电子技术</h4>
           <div class="arc-badges">
-            <span class="arc-badge arc-pst">PST 4</span>
-            <span class="arc-badge arc-prs">PRS 6</span>
-            <span class="arc-badge arc-ftr">FTR 8+</span>
+            <span class="arc-badge arc-pst">PST 3</span>
+            <span class="arc-badge arc-prs">PRS 5</span>
+            <span class="arc-badge arc-ftr">FTR 7</span>
           </div>
           <p>三极管、运放、滤波器。调参调到怀疑人生。</p>
         </div>
@@ -529,9 +501,9 @@
           <div class="tag" style="background:#e0e7ff; color:#3730a3;">数电·逻辑</div>
           <h4>数字电子技术</h4>
           <div class="arc-badges">
-            <span class="arc-badge arc-pst">PST 3</span>
-            <span class="arc-badge arc-prs">PRS 5</span>
-            <span class="arc-badge arc-ftr">FTR 7</span>
+            <span class="arc-badge arc-pst">PST 2</span>
+            <span class="arc-badge arc-prs">PRS 4</span>
+            <span class="arc-badge arc-ftr">FTR 6</span>
           </div>
           <p>布尔代数、触发器、状态机。数电不难，难的是老师觉得你不难。</p>
         </div>
@@ -539,10 +511,10 @@
           <div class="tag" style="background:#ffedd5; color:#c2410c;">产业方向</div>
           <h4>集成电路</h4>
           <div class="arc-badges">
-            <span class="arc-badge arc-pst">PST 5</span>
-            <span class="arc-badge arc-prs">PRS 7</span>
-            <span class="arc-badge arc-ftr">FTR 9+</span>
-            <span class="arc-badge arc-byd">BYD 11+</span>
+            <span class="arc-badge arc-pst">PST 4</span>
+            <span class="arc-badge arc-prs">PRS 6</span>
+            <span class="arc-badge arc-ftr">FTR 8</span>
+            <span class="arc-badge arc-byd">BYD 10+</span>
           </div>
           <p>晶体管到芯片，版图到流片。承载一个时代的算力。</p>
         </div>
@@ -572,7 +544,7 @@
           <div class="arc-badges">
             <span class="arc-badge arc-pst">PST 6</span>
             <span class="arc-badge arc-prs">PRS 8</span>
-            <span class="arc-badge arc-ftr">FTR 10+</span>
+            <span class="arc-badge arc-ftr">FTR 10</span>
             <span class="arc-badge arc-ins">INS 12</span>
           </div>
           <p>宏观热现象与微观粒子的桥梁。躁动吧！小宇宙！</p>
@@ -591,10 +563,10 @@
           <div class="tag">第4章</div>
           <h4>光学</h4>
           <div class="arc-badges">
-            <span class="arc-badge arc-pst">PST 4</span>
-            <span class="arc-badge arc-prs">PRS 6</span>
-            <span class="arc-badge arc-ftr">FTR 8+</span>
-            <span class="arc-badge arc-etr">ETR 9+</span>
+            <span class="arc-badge arc-pst">PST 3</span>
+            <span class="arc-badge arc-prs">PRS 5</span>
+            <span class="arc-badge arc-ftr">FTR 7</span>
+            <span class="arc-badge arc-etr">ETR 9</span>
           </div>
           <p>干涉、衍射、偏振。小心光会让你骨折！</p>
         </div>
@@ -602,10 +574,10 @@
           <div class="tag">工程方向</div>
           <h4>工程光学</h4>
           <div class="arc-badges">
-            <span class="arc-badge arc-pst">PST 4</span>
-            <span class="arc-badge arc-prs">PRS 6</span>
-            <span class="arc-badge arc-ftr">FTR 8+</span>
-            <span class="arc-badge arc-etr">ETR 9+</span>
+            <span class="arc-badge arc-pst">PST 3</span>
+            <span class="arc-badge arc-prs">PRS 5</span>
+            <span class="arc-badge arc-ftr">FTR 7</span>
+            <span class="arc-badge arc-etr">ETR 9</span>
           </div>
           <p>透镜设计、光路计算、像差分析。把光学搬进工厂！</p>
         </div>
@@ -615,8 +587,8 @@
           <div class="arc-badges">
             <span class="arc-badge arc-pst">PST 4</span>
             <span class="arc-badge arc-prs">PRS 6</span>
-            <span class="arc-badge arc-ftr">FTR 8+</span>
-            <span class="arc-badge arc-byd">BYD 10+</span>
+            <span class="arc-badge arc-ftr">FTR 8</span>
+            <span class="arc-badge arc-byd">BYD 10</span>
           </div>
           <p>从单透镜到复杂镜头组。Zemax一开，头发掉一半。</p>
         </div>
@@ -624,10 +596,10 @@
           <div class="tag" style="background:#fef3c7; color:#b45309;">光电·硬核</div>
           <h4>激光原理</h4>
           <div class="arc-badges">
-            <span class="arc-badge arc-pst">PST 5</span>
-            <span class="arc-badge arc-prs">PRS 7</span>
-            <span class="arc-badge arc-ftr">FTR 9+</span>
-            <span class="arc-badge arc-byd">BYD 11+</span>
+            <span class="arc-badge arc-pst">PST 4</span>
+            <span class="arc-badge arc-prs">PRS 6</span>
+            <span class="arc-badge arc-ftr">FTR 8</span>
+            <span class="arc-badge arc-byd">BYD 10+</span>
           </div>
           <p>受激辐射、光放大。让电子们“卷”起来！</p>
         </div>
@@ -635,17 +607,17 @@
           <div class="tag" style="background:#fee2e2; color:#b91c1c;">前沿光学</div>
           <h4>非线性光学</h4>
           <div class="arc-badges">
-            <span class="arc-badge arc-pst">PST 5</span>
-            <span class="arc-badge arc-prs">PRS 7</span>
-            <span class="arc-badge arc-ftr">FTR 9+</span>
-            <span class="arc-badge arc-byd">BYD 11+</span>
+            <span class="arc-badge arc-pst">PST 4</span>
+            <span class="arc-badge arc-prs">PRS 6</span>
+            <span class="arc-badge arc-ftr">FTR 9</span>
+            <span class="arc-badge arc-byd">BYD 10+</span>
           </div>
           <p>倍频、四波混频。光不仅直线传播，还会跟光打架！</p>
         </div>
       </div>
     </div>
 
-    <!-- 第三阶段 -->
+    <!-- ============ 第三阶段：量子物理 ============ -->
     <h2 class="phase-title quantum">🌀 第三阶段：量子物理</h2>
     <p class="phase-desc">走进微观世界的大门。量子核心、量子应用、核物理三个方向并列。</p>
 
@@ -660,9 +632,9 @@
           <div class="tag">第5章</div>
           <h4>原子物理学</h4>
           <div class="arc-badges">
-            <span class="arc-badge arc-pst">PST 5</span>
-            <span class="arc-badge arc-prs">PRS 7</span>
-            <span class="arc-badge arc-ftr">FTR 9</span>
+            <span class="arc-badge arc-pst">PST 4</span>
+            <span class="arc-badge arc-prs">PRS 6</span>
+            <span class="arc-badge arc-ftr">FTR 8</span>
           </div>
           <p>核式结构、电子跃迁。看到最终魔王的影子……</p>
         </div>
@@ -670,8 +642,8 @@
           <div class="tag" style="background:#fef3c7; color:#b45309;">👑 最终魔王</div>
           <h4 style="color: #92400e;">量子力学</h4>
           <div class="arc-badges">
-            <span class="arc-badge arc-pst">PST 7</span>
-            <span class="arc-badge arc-prs">PRS 9+</span>
+            <span class="arc-badge arc-pst">PST 6</span>
+            <span class="arc-badge arc-prs">PRS 8</span>
             <span class="arc-badge arc-ftr">FTR 10+</span>
             <span class="arc-badge arc-ins">INS 12</span>
           </div>
@@ -691,10 +663,10 @@
           <div class="tag" style="background:#ede9fe; color:#6d28d9;">前沿交叉</div>
           <h4>量子信息</h4>
           <div class="arc-badges">
-            <span class="arc-badge arc-pst">PST 5</span>
-            <span class="arc-badge arc-prs">PRS 7</span>
-            <span class="arc-badge arc-ftr">FTR 9+</span>
-            <span class="arc-badge arc-byd">BYD 11+</span>
+            <span class="arc-badge arc-pst">PST 4</span>
+            <span class="arc-badge arc-prs">PRS 6</span>
+            <span class="arc-badge arc-ftr">FTR 8</span>
+            <span class="arc-badge arc-byd">BYD 10</span>
           </div>
           <p>量子比特、量子纠缠。量子加密，绝对安全！</p>
         </div>
@@ -702,10 +674,10 @@
           <div class="tag" style="background:#ede9fe; color:#6d28d9;">前沿交叉</div>
           <h4>量子计算</h4>
           <div class="arc-badges">
-            <span class="arc-badge arc-pst">PST 6</span>
-            <span class="arc-badge arc-prs">PRS 8</span>
-            <span class="arc-badge arc-ftr">FTR 10+</span>
-            <span class="arc-badge arc-byd">BYD 11+</span>
+            <span class="arc-badge arc-pst">PST 4</span>
+            <span class="arc-badge arc-prs">PRS 6</span>
+            <span class="arc-badge arc-ftr">FTR 8</span>
+            <span class="arc-badge arc-byd">BYD 10+</span>
           </div>
           <p>Shor、Grover、量子门。经典算一万年，量子算几分钟。</p>
         </div>
@@ -723,16 +695,17 @@
           <div class="tag">核物理分支</div>
           <h4>原子核物理</h4>
           <div class="arc-badges">
-            <span class="arc-badge arc-pst">PST 5</span>
-            <span class="arc-badge arc-prs">PRS 7</span>
-            <span class="arc-badge arc-ftr">FTR 9</span>
+            <span class="arc-badge arc-pst">PST 4</span>
+            <span class="arc-badge arc-prs">PRS 6</span>
+            <span class="arc-badge arc-ftr">FTR 8</span>
+            <span class="arc-badge arc-byd">BYD 10</span>
           </div>
           <p>裂变聚变释放能量。微观世界的暴力美学。</p>
         </div>
       </div>
     </div>
 
-    <!-- 第四阶段 -->
+    <!-- ============ 第四阶段：凝聚态与半导体产业 ============ -->
     <h2 class="phase-title apps">💎 第四阶段：凝聚态与半导体产业</h2>
     <p class="phase-desc">物理理论的终极应用。凝聚态基础 → 材料工程 → 半导体产业链 → 光电应用，四条并行主线。</p>
 
@@ -747,9 +720,9 @@
           <div class="tag" style="background:#ffedd5; color:#c2410c;">材料基石</div>
           <h4>固体物理</h4>
           <div class="arc-badges">
-            <span class="arc-badge arc-pst">PST 6</span>
-            <span class="arc-badge arc-prs">PRS 8</span>
-            <span class="arc-badge arc-ftr">FTR 10+</span>
+            <span class="arc-badge arc-pst">PST 5</span>
+            <span class="arc-badge arc-prs">PRS 7</span>
+            <span class="arc-badge arc-ftr">FTR 9+</span>
             <span class="arc-badge arc-ins">INS 12</span>
           </div>
           <p>晶体结构、能带理论。微观量子的宏观体现。</p>
@@ -758,10 +731,10 @@
           <div class="tag" style="background:#ffedd5; color:#c2410c;">材料方向</div>
           <h4>材料物理</h4>
           <div class="arc-badges">
-            <span class="arc-badge arc-pst">PST 6</span>
-            <span class="arc-badge arc-prs">PRS 8</span>
-            <span class="arc-badge arc-ftr">FTR 10+</span>
-            <span class="arc-badge arc-byd">BYD 11+</span>
+            <span class="arc-badge arc-pst">PST 5</span>
+            <span class="arc-badge arc-prs">PRS 7</span>
+            <span class="arc-badge arc-ftr">FTR 9</span>
+            <span class="arc-badge arc-byd">BYD 10+</span>
           </div>
           <p>结构决定性质。在原子尺度上盖房子！</p>
         </div>
@@ -779,9 +752,9 @@
           <div class="tag">材料制备</div>
           <h4>材料制备技术</h4>
           <div class="arc-badges">
-            <span class="arc-badge arc-pst">PST 4</span>
-            <span class="arc-badge arc-prs">PRS 6</span>
-            <span class="arc-badge arc-ftr">FTR 8+</span>
+            <span class="arc-badge arc-pst">PST 3</span>
+            <span class="arc-badge arc-prs">PRS 5</span>
+            <span class="arc-badge arc-ftr">FTR 7</span>
           </div>
           <p>烧炉子、镀膜、拉单晶。今天你烧炉子了吗？</p>
         </div>
@@ -789,9 +762,9 @@
           <div class="tag">材料表征</div>
           <h4>材料测试技术</h4>
           <div class="arc-badges">
-            <span class="arc-badge arc-pst">PST 4</span>
-            <span class="arc-badge arc-prs">PRS 6</span>
-            <span class="arc-badge arc-ftr">FTR 8+</span>
+            <span class="arc-badge arc-pst">PST 3</span>
+            <span class="arc-badge arc-prs">PRS 5</span>
+            <span class="arc-badge arc-ftr">FTR 7</span>
           </div>
           <p>XRD、SEM、TEM。样品制备一小时，分析数据一整天。</p>
         </div>
@@ -809,10 +782,10 @@
           <div class="tag" style="background:#ffedd5; color:#c2410c;">半导体·核心</div>
           <h4>半导体物理</h4>
           <div class="arc-badges">
-            <span class="arc-badge arc-pst">PST 6</span>
-            <span class="arc-badge arc-prs">PRS 8</span>
-            <span class="arc-badge arc-ftr">FTR 10+</span>
-            <span class="arc-badge arc-byd">BYD 11+</span>
+            <span class="arc-badge arc-pst">PST 5</span>
+            <span class="arc-badge arc-prs">PRS 7</span>
+            <span class="arc-badge arc-ftr">FTR 9+</span>
+            <span class="arc-badge arc-byd">BYD 11</span>
           </div>
           <p>能带、载流子、PN结。没有它现代科技瘫痪！</p>
         </div>
@@ -820,10 +793,10 @@
           <div class="tag" style="background:#ffedd5; color:#c2410c;">半导体材料</div>
           <h4>半导体材料</h4>
           <div class="arc-badges">
-            <span class="arc-badge arc-pst">PST 5</span>
-            <span class="arc-badge arc-prs">PRS 7</span>
-            <span class="arc-badge arc-ftr">FTR 9+</span>
-            <span class="arc-badge arc-byd">BYD 11+</span>
+            <span class="arc-badge arc-pst">PST 4</span>
+            <span class="arc-badge arc-prs">PRS 6</span>
+            <span class="arc-badge arc-ftr">FTR 8</span>
+            <span class="arc-badge arc-byd">BYD 10</span>
           </div>
           <p>硅、锗、砷化镓、氮化镓。一代材料，一代器件。</p>
         </div>
@@ -831,10 +804,10 @@
           <div class="tag" style="background:#ffedd5; color:#c2410c;">半导体器件</div>
           <h4>半导体器件</h4>
           <div class="arc-badges">
-            <span class="arc-badge arc-pst">PST 5</span>
-            <span class="arc-badge arc-prs">PRS 7</span>
-            <span class="arc-badge arc-ftr">FTR 9+</span>
-            <span class="arc-badge arc-byd">BYD 11+</span>
+            <span class="arc-badge arc-pst">PST 4</span>
+            <span class="arc-badge arc-prs">PRS 6</span>
+            <span class="arc-badge arc-ftr">FTR 8</span>
+            <span class="arc-badge arc-byd">BYD 10+</span>
           </div>
           <p>PN结、MOSFET、HEMT。器件是芯片的细胞。</p>
         </div>
@@ -842,10 +815,10 @@
           <div class="tag" style="background:#ffedd5; color:#c2410c;">半导体工艺·卡脖子</div>
           <h4>半导体工艺</h4>
           <div class="arc-badges">
-            <span class="arc-badge arc-pst">PST 6</span>
-            <span class="arc-badge arc-prs">PRS 8</span>
-            <span class="arc-badge arc-ftr">FTR 10+</span>
-            <span class="arc-badge arc-byd">BYD 11+</span>
+            <span class="arc-badge arc-pst">PST 4</span>
+            <span class="arc-badge arc-prs">PRS 6</span>
+            <span class="arc-badge arc-ftr">FTR 8</span>
+            <span class="arc-badge arc-byd">BYD 10+</span>
           </div>
           <p>光刻、刻蚀、离子注入。从沙子到芯片的纳米魔术。</p>
         </div>
@@ -863,23 +836,23 @@
           <div class="tag">光电分支</div>
           <h4>发光物理</h4>
           <div class="arc-badges">
-            <span class="arc-badge arc-pst">PST 4</span>
-            <span class="arc-badge arc-prs">PRS 6</span>
-            <span class="arc-badge arc-ftr">FTR 8+</span>
+            <span class="arc-badge arc-pst">PST 3</span>
+            <span class="arc-badge arc-prs">PRS 5</span>
+            <span class="arc-badge arc-ftr">FTR 7</span>
           </div>
           <p>电子跃迁，释放光子。你不发光怎么照亮全人类？</p>
         </div>
       </div>
     </div>
 
-    <!-- 第五阶段 -->
+    <!-- ============ 第五阶段：宇宙的尽头 ============ -->
     <h2 class="phase-title cosmos">🌌 第五阶段：宇宙的尽头</h2>
-    <p class="phase-desc">物理学的最前沿。从弯曲时空到大尺度宇宙结构，从基本粒子到规范场论的终极统一。</p>
+    <p class="phase-desc">物理学的最前沿。从弯曲时空到大尺度宇宙结构，从基本粒子到场论，最终抵达量子引力与弦理论的终极统一。</p>
 
     <div class="domain" style="--domain-color: #4338ca;">
       <div class="domain-header">
         <h3>🌠 引力与宇宙</h3>
-        <span class="domain-count">2门</span>
+        <span class="domain-count">3门</span>
         <span class="domain-desc">时空、引力、宇宙演化</span>
       </div>
       <div class="domain-grid">
@@ -887,10 +860,10 @@
           <div class="tag" style="background:#e0e7ff; color:#3730a3;">时空理论</div>
           <h4>相对论</h4>
           <div class="arc-badges">
-            <span class="arc-badge arc-pst">PST 6</span>
-            <span class="arc-badge arc-prs">PRS 8</span>
-            <span class="arc-badge arc-ftr">FTR 10+</span>
-            <span class="arc-badge arc-byd">BYD 11+</span>
+            <span class="arc-badge arc-pst">PST 5</span>
+            <span class="arc-badge arc-prs">PRS 7</span>
+            <span class="arc-badge arc-ftr">FTR 9+</span>
+            <span class="arc-badge arc-byd">BYD 11</span>
           </div>
           <p>狭义与广义相对论，弯曲时空，引力波。时空不是舞台，而是演员。</p>
         </div>
@@ -900,10 +873,21 @@
           <div class="arc-badges">
             <span class="arc-badge arc-pst">PST 5</span>
             <span class="arc-badge arc-prs">PRS 7</span>
-            <span class="arc-badge arc-ftr">FTR 9+</span>
-            <span class="arc-badge arc-byd">BYD 11+</span>
+            <span class="arc-badge arc-ftr">FTR 9</span>
+            <span class="arc-badge arc-byd">BYD 10+</span>
           </div>
           <p>大爆炸、CMB、暗物质、暗能量。宇宙的起源与命运。</p>
+        </div>
+        <div class="course-card cosmos-card" onclick="showCourse('黑洞物理')">
+          <div class="tag" style="background:#e0e7ff; color:#3730a3;">极端引力</div>
+          <h4>黑洞物理</h4>
+          <div class="arc-badges">
+            <span class="arc-badge arc-pst">PST 5</span>
+            <span class="arc-badge arc-prs">PRS 7</span>
+            <span class="arc-badge arc-ftr">FTR 9+</span>
+            <span class="arc-badge arc-byd">BYD 11</span>
+          </div>
+          <p>事件视界、霍金辐射、黑洞热力学、信息悖论。黑洞不是黑的。</p>
         </div>
       </div>
     </div>
@@ -911,7 +895,7 @@
     <div class="domain" style="--domain-color: #6d28d9;">
       <div class="domain-header">
         <h3>⚛️ 粒子与场论</h3>
-        <span class="domain-count">2门</span>
+        <span class="domain-count">3门</span>
         <span class="domain-desc">基本粒子与相互作用的终极理论</span>
       </div>
       <div class="domain-grid">
@@ -919,10 +903,10 @@
           <div class="tag" style="background:#ede9fe; color:#6d28d9;">标准模型</div>
           <h4>粒子物理</h4>
           <div class="arc-badges">
-            <span class="arc-badge arc-pst">PST 6</span>
-            <span class="arc-badge arc-prs">PRS 8</span>
-            <span class="arc-badge arc-ftr">FTR 10+</span>
-            <span class="arc-badge arc-byd">BYD 11+</span>
+            <span class="arc-badge arc-pst">PST 5</span>
+            <span class="arc-badge arc-prs">PRS 7</span>
+            <span class="arc-badge arc-ftr">FTR 9+</span>
+            <span class="arc-badge arc-byd">BYD 11</span>
           </div>
           <p>夸克、轻子、Higgs。标准模型是20世纪物理最伟大的成就之一。</p>
         </div>
@@ -936,6 +920,49 @@
             <span class="arc-badge arc-ins">INS 12</span>
           </div>
           <p>Yang-Mills理论、量子场论、重整化。用对称性书写宇宙的法则。</p>
+        </div>
+        <div class="course-card final-card" onclick="showCourse('量子场论')">
+          <div class="tag" style="background:#ede9fe; color:#6d28d9;">场论核心</div>
+          <h4>量子场论</h4>
+          <div class="arc-badges">
+            <span class="arc-badge arc-pst">PST 6</span>
+            <span class="arc-badge arc-prs">PRS 8</span>
+            <span class="arc-badge arc-ftr">FTR 10+</span>
+            <span class="arc-badge arc-ins">INS 12</span>
+          </div>
+          <p>路径积分、费曼图、重整化。粒子物理与凝聚态的共同语言。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="domain" style="--domain-color: #4c1d95;">
+      <div class="domain-header">
+        <h3>🔮 终极理论</h3>
+        <span class="domain-count">2门</span>
+        <span class="domain-desc">物理学的终极问题</span>
+      </div>
+      <div class="domain-grid">
+        <div class="course-card ultimate-card" onclick="showCourse('弦理论')">
+          <div class="tag" style="background:#ede9fe; color:#4c1d95;">万有理论候选</div>
+          <h4 style="color: #4c1d95;">弦理论</h4>
+          <div class="arc-badges">
+            <span class="arc-badge arc-pst">PST 7</span>
+            <span class="arc-badge arc-prs">PRS 9+</span>
+            <span class="arc-badge arc-ftr">FTR 11+</span>
+            <span class="arc-badge arc-ins">INS 12</span>
+          </div>
+          <p style="color: #4c1d95;">一维弦的振动模式、10维时空、超对称、M理论。万有理论的候选者。</p>
+        </div>
+        <div class="course-card ultimate-card" onclick="showCourse('量子引力')">
+          <div class="tag" style="background:#ede9fe; color:#4c1d95;">终极难题</div>
+          <h4 style="color: #4c1d95;">量子引力</h4>
+          <div class="arc-badges">
+            <span class="arc-badge arc-pst">PST 7</span>
+            <span class="arc-badge arc-prs">PRS 9+</span>
+            <span class="arc-badge arc-ftr">FTR 11+</span>
+            <span class="arc-badge arc-ins">INS 12</span>
+          </div>
+          <p style="color: #4c1d95;">引力的量子化。圈量子引力、因果动力学三角剖分。物理学最后的圣杯。</p>
         </div>
       </div>
     </div>
@@ -987,7 +1014,7 @@
 const COURSES = {
   '小初高数学': {
     desc: '小初高的知识你忘完了没有？\n\n什么？反三角是什么？极坐标是什么？向量叉乘又是什么？？？\n\n跟着此章节回顾小初高数学基础与高数前的准备吧。',
-    arc: ['PST 1', 'PRS 5', 'FTR 7'], tag: '数学准备',
+    arc: ['PST 1', 'PRS 2', 'FTR 3'], tag: '数学准备',
     quote: '小初高的知识你忘完了没有？反三角、极坐标、向量叉乘……',
     prereq: [], next: ['高等数学', '线性代数'],
     books: ['高中数学（人教版/苏教版等）', '《初等数学》'],
@@ -1008,7 +1035,7 @@ const COURSES = {
   },
   '线性代数': {
     desc: '大学基础数学的另一个科目，你将会认识到行列式与矩阵等新伙伴加入。\n\n以及求解多元一次线性方程组的方法，对矩阵的性质深入探索。',
-    arc: ['PST 2', 'PRS 5', 'FTR 7'], tag: '数学基础',
+    arc: ['PST 2', 'PRS 4', 'FTR 7'], tag: '数学基础',
     quote: '新手村的困难章节之一。',
     prereq: ['小初高数学'], next: ['数学物理方法', '量子力学', '群论', '计算物理'],
     books: ['同济大学《线性代数》（第六版）', '《线性代数应该这样学》', 'Gilbert Strang《Introduction to Linear Algebra》'],
@@ -1019,7 +1046,7 @@ const COURSES = {
   },
   '概率论与数理统计': {
     desc: '建立随机变量、分布、期望、方差和统计推断框架。\n\n连接热统、实验误差与数据科学，处理不确定性的数学语言。',
-    arc: ['PST 3', 'PRS 5', 'FTR 7+'], tag: '数学基础',
+    arc: ['PST 3', 'PRS 5', 'FTR 7'], tag: '数学基础',
     quote: '不会统计，等于白做实验。',
     prereq: ['高等数学'], next: ['热力学与统计物理', '量子力学'],
     books: ['浙大版《概率论与数理统计》（第四版）', '《概率论与数理统计》茆诗松'],
@@ -1030,7 +1057,7 @@ const COURSES = {
   },
   '群论': {
     desc: '抽象代数的核心分支，研究对称性的数学结构。\n\n群、环、域、表示论，物理学家用来描述晶体对称性、粒子物理和量子态的“魔法”工具。\n\n你会发现自然界的许多规律都可以用对称性来表达。',
-    arc: ['PST 4', 'PRS 6', 'FTR 8', 'BYD 10+'], tag: '数学进阶',
+    arc: ['PST 4', 'PRS 6', 'FTR 8', 'BYD 10'], tag: '数学进阶',
     quote: '物理学家最爱的“魔法”工具——对称性即美。',
     prereq: ['线性代数'], next: ['量子力学', '固体物理', '粒子物理'],
     books: ['《群论》李新征', '《物理学中的群论》马中骐', '《Group Theory in a Nutshell for Physicists》'],
@@ -1062,7 +1089,7 @@ const COURSES = {
   },
   '计算物理': {
     desc: '自从学了计算物理，我就成了调包侠。Matlab和Python就是我的再生父母。\n\n代码跑通靠玄学，数据全靠P图（划掉）美化。遇事不决，先写个循环！',
-    arc: ['PST 3', 'PRS 5', 'FTR 7'], tag: '计算科学',
+    arc: ['PST 2', 'PRS 4', 'FTR 6'], tag: '计算科学',
     quote: '调包侠的起点，代码跑通靠玄学。遇事不决，先写个循环！',
     prereq: ['高等数学', '线性代数'], next: ['材料物理'],
     books: ['《计算物理》彭芳麟', '《Numerical Recipes》', '《Python科学计算》'],
@@ -1085,7 +1112,7 @@ const COURSES = {
   },
   '理论力学': {
     desc: '这是力学的深化与拓展，是对力学规律的更高层次的抽象与总结。\n\n从拉格朗日方程到哈密顿原理，你将看到力学体系在数学形式上的优美与简洁。',
-    arc: ['PST 5', 'PRS 7', 'FTR 9+'], tag: '理论核心',
+    arc: ['PST 4', 'PRS 6', 'FTR 8', 'BYD 10'], tag: '理论核心',
     quote: '欢迎来到物理，真正的物理才刚刚开始！！！',
     prereq: ['力学', '高等数学'], next: ['电动力学', '量子力学', '相对论'],
     books: ['周衍柏《理论力学教程》', '梁昆淼《力学》', 'Goldstein《Classical Mechanics》'],
@@ -1096,7 +1123,7 @@ const COURSES = {
   },
   '流体力学': {
     desc: 'Navier-Stokes 方程、湍流、边界层。天气预报、飞机设计、血液流动都靠它。\n\n流体力学的难点在于：你永远无法精确求解 NS 方程，但你可以假装自己解出来了。',
-    arc: ['PST 5', 'PRS 7', 'FTR 9+', 'BYD 10+'], tag: '工程力学',
+    arc: ['PST 4', 'PRS 6', 'FTR 8', 'BYD 10+'], tag: '工程力学',
     quote: '湍流是经典物理最后的难题之一。',
     prereq: ['力学'], next: ['材料制备技术'],
     books: ['吴望一《流体力学》', '《Fluid Mechanics》Landau', '张兆顺《流体力学》'],
@@ -1106,7 +1133,7 @@ const COURSES = {
   },
   '固体力学': {
     desc: '应力、应变、弹性模量、本构关系、有限元分析。\n\n桥梁为什么不塌？飞机翅膀为什么不断？材料在受力下的变形与破坏，是土木、机械、航空的必修课。',
-    arc: ['PST 4', 'PRS 6', 'FTR 8+'], tag: '工程力学',
+    arc: ['PST 3', 'PRS 5', 'FTR 7', 'ETR 9'], tag: '工程力学',
     quote: '让物理变成桥梁和高楼。',
     prereq: ['力学'], next: ['材料物理'],
     books: ['徐芝纶《弹性力学》', '《材料力学》孙训方', 'Timoshenko《Theory of Elasticity》'],
@@ -1116,7 +1143,7 @@ const COURSES = {
   },
   '电磁学': {
     desc: '当电与磁交织在一起，就构成了电磁学这一神奇的领域。\n\n你将学习到电场与磁场的性质，其中电磁感应现象与电磁波更是将电与磁的联系推向高潮。',
-    arc: ['PST 4', 'PRS 6', 'FTR 8+'], tag: '普通物理',
+    arc: ['PST 3', 'PRS 5', 'FTR 7', 'ETR 9'], tag: '普通物理',
     quote: '左手磁，右手电，雷公助我！以雷霆击碎黑暗！！！',
     prereq: ['力学', '高等数学'], next: ['电动力学', '电路', '光学'],
     books: ['赵凯华《电磁学》', '贾起民《电磁学》', 'Griffiths《Introduction to Electrodynamics》'],
@@ -1127,7 +1154,7 @@ const COURSES = {
   },
   '电动力学': {
     desc: '电磁学的进一步深化，将带你走进电磁场的微观世界。\n\n麦克斯韦方程组作为电动力学的核心，将让你看到电场与磁场在微观层面的紧密联系与相互作用。',
-    arc: ['PST 6', 'PRS 8', 'FTR 10+', 'ETR 11+'], tag: '理论核心',
+    arc: ['PST 5', 'PRS 7', 'FTR 9+', 'ETR 11+'], tag: '理论核心',
     quote: '移动变换，电磁相对，物理梦还在交织……',
     prereq: ['电磁学', '数学物理方法'], next: ['量子力学', '激光原理', '相对论', '粒子物理'],
     books: ['郭硕鸿《电动力学》（第三版）', 'Jackson《Classical Electrodynamics》', 'Griffiths《电动力学导论》'],
@@ -1139,7 +1166,7 @@ const COURSES = {
   },
   '电路': {
     desc: '这是电气工程的基础，也是物理学在电磁学领域的应用实践。\n\n从电路的基本定律到复杂电路的分析方法，你将学习到如何设计、分析和优化电路。',
-    arc: ['PST 3', 'PRS 5', 'FTR 7'], tag: '电子工程',
+    arc: ['PST 2', 'PRS 4', 'FTR 6'], tag: '电子工程',
     quote: '老师你看，我的电阻会发光哦，嘣！（电阻炸了）',
     prereq: ['电磁学'], next: ['模拟电子技术', '数字电子技术'],
     books: ['邱关源《电路》（第五版）', '《电路分析基础》李瀚荪'],
@@ -1149,7 +1176,7 @@ const COURSES = {
   },
   '模拟电子技术': {
     desc: '模电玄学，玄之又玄，众妙之门。\n\n三极管放大器、运放、滤波器，调参调到怀疑人生。\n\n老师说：“这个电路你按我说的改，不要问为什么。”',
-    arc: ['PST 4', 'PRS 6', 'FTR 8+'], tag: '电子工程',
+    arc: ['PST 3', 'PRS 5', 'FTR 7'], tag: '电子工程',
     quote: '模拟电路的世界里，每个元件都不听话，但你却要让它听话。',
     prereq: ['电路'], next: ['集成电路'],
     books: ['童诗白《模拟电子技术基础》（第五版）', '康华光《电子技术基础》'],
@@ -1160,7 +1187,7 @@ const COURSES = {
   },
   '数字电子技术': {
     desc: '0和1的世界，逻辑清晰。\n\n但是，当你遇到时序逻辑、触发器、状态机，你就知道什么叫“数电不难，难的是老师觉得你不难”。',
-    arc: ['PST 3', 'PRS 5', 'FTR 7'], tag: '电子工程',
+    arc: ['PST 2', 'PRS 4', 'FTR 6'], tag: '电子工程',
     quote: '布尔代数、卡诺图、Verilog，这是数字世界的地基。',
     prereq: ['电路'], next: ['集成电路'],
     books: ['阎石《数字电子技术基础》（第六版）', '《Digital Design》Wakerly'],
@@ -1170,7 +1197,7 @@ const COURSES = {
   },
   '集成电路': {
     desc: '把整个计算机缩小到指甲盖大小。从晶体管到芯片，从版图到流片，这是现代科技的巅峰。\n\n摩尔定律快到头了，接下来看你们的了！',
-    arc: ['PST 5', 'PRS 7', 'FTR 9+', 'BYD 11+'], tag: '芯片·硬核',
+    arc: ['PST 4', 'PRS 6', 'FTR 8', 'BYD 10+'], tag: '芯片·硬核',
     quote: '一颗芯片，承载一个时代的算力。',
     prereq: ['模拟电子技术', '数字电子技术', '半导体器件'], next: [],
     books: ['Rabaey《Digital Integrated Circuits》', '《CMOS超大规模集成电路设计》Weste', '《集成电路设计》王志华'],
@@ -1190,7 +1217,7 @@ const COURSES = {
   },
   '热力学与统计物理': {
     desc: '这是热学的理论升华，将宏观的热现象与微观的粒子运动紧密联系起来。\n\n通过对气体分子运动论的学习，让你从宏观与微观两个角度全面理解热现象。',
-    arc: ['PST 6', 'PRS 8', 'FTR 10+', 'INS 12'], tag: '理论核心·终极',
+    arc: ['PST 6', 'PRS 8', 'FTR 10', 'INS 12'], tag: '理论核心·终极',
     quote: '躁动吧！物理人的小宇宙！！！',
     prereq: ['热学', '概率论与数理统计', '量子力学'], next: ['固体物理', '材料物理', '宇宙学'],
     books: ['汪志诚《热力学·统计物理》（第五版）', '林宗涵《热力学与统计物理学》', 'Pathria《Statistical Mechanics》'],
@@ -1202,7 +1229,7 @@ const COURSES = {
   },
   '光学': {
     desc: '光学是研究光的产生、传播、接收和应用的学科。\n\n从几何光学到物理光学，你将学习到光的反射、折射、干涉、衍射等现象。',
-    arc: ['PST 4', 'PRS 6', 'FTR 8+', 'ETR 9+'], tag: '普通物理',
+    arc: ['PST 3', 'PRS 5', 'FTR 7', 'ETR 9'], tag: '普通物理',
     quote: '光的威力无穷无尽，小心有的光会让你骨折！',
     prereq: ['电磁学'], next: ['工程光学', '激光原理'],
     books: ['赵凯华《光学》', '姚启钧《光学教程》', 'Hecht《Optics》'],
@@ -1213,7 +1240,7 @@ const COURSES = {
   },
   '工程光学': {
     desc: '物理光学是理论，工程光学是实干。\n\n透镜设计、光路计算、像差分析、光学系统集成。画光路图能画到你手抽筋，Zemax 一开就是一整天。',
-    arc: ['PST 4', 'PRS 6', 'FTR 8+', 'ETR 9+'], tag: '光学工程',
+    arc: ['PST 3', 'PRS 5', 'FTR 7', 'ETR 9'], tag: '光学工程',
     quote: '把光学从黑板搬进实验室和工厂，这才是真正的“光”工！',
     prereq: ['光学'], next: ['光学系统设计'],
     books: ['郁道银《工程光学》（第四版）', '李湘宁《工程光学》', '《Modern Optical Engineering》Smith'],
@@ -1225,7 +1252,7 @@ const COURSES = {
   },
   '光学系统设计': {
     desc: '从单透镜到复杂镜头组，从望远镜到光刻机物镜。\n\n优化函数、公差分析、杂散光抑制、热分析。Zemax 一开，头发掉一半。',
-    arc: ['PST 4', 'PRS 6', 'FTR 8+', 'BYD 10+'], tag: '工程设计',
+    arc: ['PST 4', 'PRS 6', 'FTR 8', 'BYD 10'], tag: '工程设计',
     quote: '光刻机的镜头，是人类制造的最精密的光学系统。',
     prereq: ['工程光学'], next: ['激光原理'],
     books: ['《光学系统设计》Milton Laikin', '《Zemax光学设计超级学习手册》', '《现代光学设计方法》李林'],
@@ -1235,7 +1262,7 @@ const COURSES = {
   },
   '激光原理': {
     desc: '受激辐射、粒子数反转、光放大。\n\n想当个激光器？你得先让电子们“卷”起来，达到粒子数反转，才能让光子如脱缰的野马般放大。',
-    arc: ['PST 5', 'PRS 7', 'FTR 9+', 'BYD 11+'], tag: '光电方向·硬核',
+    arc: ['PST 4', 'PRS 6', 'FTR 8', 'BYD 10+'], tag: '光电方向·硬核',
     quote: '激光一开，谁与争锋！',
     prereq: ['光学', '原子物理学', '光学系统设计'], next: ['非线性光学'],
     books: ['周炳琨《激光原理》（第六版）', '《Principles of Lasers》Svelto'],
@@ -1245,7 +1272,7 @@ const COURSES = {
   },
   '非线性光学': {
     desc: '强光下的光学。倍频、和频、差频、四波混频、光孤子。\n\n当光强足够大，光学就不线性了。激光出现后，非线性光学才成为可能。',
-    arc: ['PST 5', 'PRS 7', 'FTR 9+', 'BYD 11+'], tag: '前沿光学',
+    arc: ['PST 4', 'PRS 6', 'FTR 9', 'BYD 10+'], tag: '前沿光学',
     quote: '从此光不仅会直线传播，还会跟光自己打架。光速不变？介质里也能变慢！',
     prereq: ['激光原理'], next: [],
     books: ['石顺祥《非线性光学》', 'Boyd《Nonlinear Optics》'],
@@ -1255,7 +1282,7 @@ const COURSES = {
   },
   '原子物理学': {
     desc: '走进微观世界的大门，原子物理学将带你探索原子的结构与性质。\n\n从原子的核式结构模型出发，你将了解电子的跃迁、原子的能级等概念。',
-    arc: ['PST 5', 'PRS 7', 'FTR 9'], tag: '近代物理',
+    arc: ['PST 4', 'PRS 6', 'FTR 8'], tag: '近代物理',
     quote: '终于，看到了最终魔王的影子，但你还不是他……',
     prereq: ['电磁学'], next: ['量子力学', '原子核物理'],
     books: ['褚圣麟《原子物理学》', '杨福家《原子物理学》', 'Foot《Atomic Physics》'],
@@ -1267,7 +1294,7 @@ const COURSES = {
   },
   '量子力学': {
     desc: '物理学的尽头，或许不是？\n\n这是微观世界的全新理论体系，将彻底颠覆你对经典物理学的认识。\n\n你将会为人类研究出新的高度，或许会研究出不可触摸的神明。',
-    arc: ['PST 7', 'PRS 9+', 'FTR 10+', 'INS 12'], tag: '终章·最终魔王',
+    arc: ['PST 6', 'PRS 8', 'FTR 10+', 'INS 12'], tag: '终章·最终魔王',
     quote: '遇事不决，量子力学。',
     prereq: ['理论力学', '数学物理方法', '原子物理学', '线性代数', '群论'],
     next: ['固体物理', '量子信息', '量子计算', '原子核物理', '粒子物理', '规范场论'],
@@ -1280,7 +1307,7 @@ const COURSES = {
   },
   '量子信息': {
     desc: '比特变成了量子比特，0和1的叠加态。量子纠缠、量子计算、量子通信。\n\n薛定谔的猫不仅又死又活，还能给你发送加密信息。',
-    arc: ['PST 5', 'PRS 7', 'FTR 9+', 'BYD 11+'], tag: '前沿科技',
+    arc: ['PST 4', 'PRS 6', 'FTR 8', 'BYD 10'], tag: '前沿科技',
     quote: '遇事不决，量子力学；量子加密，绝对安全！',
     prereq: ['量子力学'], next: [],
     books: ['《量子信息论》Nielsen & Chuang', '《量子信息与量子计算》李承祖'],
@@ -1290,7 +1317,7 @@ const COURSES = {
   },
   '量子计算': {
     desc: 'Shor 算法、Grover 算法、量子门、量子线路、量子纠错。\n\n经典计算机要算一万年的，量子计算机几分钟就搞定。',
-    arc: ['PST 6', 'PRS 8', 'FTR 10+', 'BYD 11+'], tag: '前沿科技',
+    arc: ['PST 4', 'PRS 6', 'FTR 8', 'BYD 10+'], tag: '前沿科技',
     quote: '量子霸权，谁能问鼎？',
     prereq: ['量子力学', '线性代数'], next: [],
     books: ['Nielsen & Chuang《量子计算与量子信息》', '《Quantum Computing》Loeffler'],
@@ -1300,7 +1327,7 @@ const COURSES = {
   },
   '原子核物理': {
     desc: '夸克、轻子、强子。质子中子抱团取暖，动不动就裂变聚变，动辄释放出毁天灭地的能量。\n\n这是核物理，不是核平物理！',
-    arc: ['PST 5', 'PRS 7', 'FTR 9'], tag: '高能核物理',
+    arc: ['PST 4', 'PRS 6', 'FTR 8', 'BYD 10'], tag: '高能核物理',
     quote: '从核结构到核能，微观世界的暴力美学。',
     prereq: ['原子物理学', '量子力学'], next: ['粒子物理'],
     books: ['卢希庭《原子核物理》', 'Krane《Introductory Nuclear Physics》'],
@@ -1310,7 +1337,7 @@ const COURSES = {
   },
   '固体物理': {
     desc: '从晶体结构、倒易空间、声子和能带理论出发，研究固体中的电子、晶格与磁性。\n\n它是半导体、材料、二维材料、超导和许多光电材料研究的理论基础。',
-    arc: ['PST 6', 'PRS 8', 'FTR 10+', 'INS 12'], tag: '凝聚态终极',
+    arc: ['PST 5', 'PRS 7', 'FTR 9+', 'INS 12'], tag: '凝聚态终极',
     quote: '微观量子世界在宏观材料中的终极体现。',
     prereq: ['量子力学', '热力学与统计物理', '群论'], next: ['半导体物理', '材料物理', '发光物理'],
     books: ['黄昆《固体物理学》', 'Kittel《固体物理导论》', 'Ashcroft & Mermin《Solid State Physics》'],
@@ -1322,7 +1349,7 @@ const COURSES = {
   },
   '材料物理': {
     desc: '结构决定性质，性质决定功能。从原子排列到宏观性能，从金属到陶瓷到高分子。\n\n你们做材料的，不就是烧炉子吗？不，我们是在原子尺度上盖房子！',
-    arc: ['PST 6', 'PRS 8', 'FTR 10+', 'BYD 11+'], tag: '材料科学',
+    arc: ['PST 5', 'PRS 7', 'FTR 9', 'BYD 10+'], tag: '材料科学',
     quote: '物理、化学、工程的完美交叉，新材料是科技革命的先导。',
     prereq: ['固体物理'], next: ['半导体材料', '材料制备技术', '材料测试技术'],
     books: ['《材料科学基础》胡赓祥', '《材料物理》石德珂', 'Callister《Materials Science and Engineering》'],
@@ -1333,7 +1360,7 @@ const COURSES = {
   },
   '材料制备技术': {
     desc: '烧炉子、镀膜、拉单晶、外延生长、CVD、PVD、分子束外延。\n\n今天你烧炉子了吗？实验室里不是在制备样品，就是在去制备样品的路上。',
-    arc: ['PST 4', 'PRS 6', 'FTR 8+'], tag: '材料制备',
+    arc: ['PST 3', 'PRS 5', 'FTR 7'], tag: '材料制备',
     quote: '好的材料是制备出来的，手上的功夫比脑子里的公式更重要。',
     prereq: ['材料物理'], next: ['半导体工艺'],
     books: ['《材料制备科学与技术》', '《薄膜材料与薄膜技术》郑伟涛', '《晶体生长》'],
@@ -1343,7 +1370,7 @@ const COURSES = {
   },
   '材料测试技术': {
     desc: 'XRD、SEM、TEM、AFM、XPS、Raman。不管什么材料，先测一下。\n\n样品制备一小时，测试五分钟，分析数据一整天。',
-    arc: ['PST 4', 'PRS 6', 'FTR 8+'], tag: '材料表征',
+    arc: ['PST 3', 'PRS 5', 'FTR 7'], tag: '材料表征',
     quote: '你们做测试的，就是材料的法医！——每个谱峰背后都藏着一个秘密。',
     prereq: ['材料物理'], next: ['半导体材料'],
     books: ['《材料现代分析测试方法》周玉', '《材料表征》Leng', '《X射线衍射学》'],
@@ -1353,7 +1380,7 @@ const COURSES = {
   },
   '半导体物理': {
     desc: '能带、载流子、掺杂、输运、复合、异质结。这是物理与微电子工业的完美结合。\n\n从手机芯片到太阳能电池，从LED到激光器，没有它，现代科技直接瘫痪。',
-    arc: ['PST 6', 'PRS 8', 'FTR 10+', 'BYD 11+'], tag: '专业核心',
+    arc: ['PST 5', 'PRS 7', 'FTR 9+', 'BYD 11'], tag: '专业核心',
     quote: '这是你未来主攻的方向，也是物理人改变世界的利器！',
     prereq: ['固体物理', '量子力学'], next: ['半导体材料', '半导体器件'],
     books: ['刘恩科《半导体物理学》（第七版）', '施敏《半导体器件物理》', 'Neamen《Semiconductor Physics and Devices》'],
@@ -1365,7 +1392,7 @@ const COURSES = {
   },
   '半导体材料': {
     desc: '硅、锗、砷化镓、氮化镓、碳化硅。第一代、第二代、第三代半导体。\n\n没有材料，你们设计再好的芯片也造不出来！从直拉到区熔，从衬底到外延。',
-    arc: ['PST 5', 'PRS 7', 'FTR 9+', 'BYD 11+'], tag: '半导体材料',
+    arc: ['PST 4', 'PRS 6', 'FTR 8', 'BYD 10'], tag: '半导体材料',
     quote: '材料是半导体产业的根基，一代材料，一代器件。',
     prereq: ['材料物理', '半导体物理'], next: ['半导体器件'],
     books: ['《半导体材料》杨树人', '《硅材料科学与技术》'],
@@ -1375,7 +1402,7 @@ const COURSES = {
   },
   '半导体器件': {
     desc: 'PN结、二极管、三极管、MOSFET、HEMT、激光二极管、探测器。\n\n一个PN结就够你学一学期。从器件物理到电路模型，这是连接物理和工程的桥梁。',
-    arc: ['PST 5', 'PRS 7', 'FTR 9+', 'BYD 11+'], tag: '半导体器件',
+    arc: ['PST 4', 'PRS 6', 'FTR 8', 'BYD 10+'], tag: '半导体器件',
     quote: '器件是芯片的细胞，每个器件都是一段物理故事。',
     prereq: ['半导体物理'], next: ['集成电路', '半导体工艺'],
     books: ['施敏《半导体器件物理》（第三版）', 'Neamen《半导体物理与器件》', 'Sze《Physics of Semiconductor Devices》'],
@@ -1386,7 +1413,7 @@ const COURSES = {
   },
   '半导体工艺': {
     desc: '光刻、刻蚀、离子注入、薄膜沉积、CMP、封装。纳米尺度的加工技术，芯片制造的核心。\n\n光刻机为什么这么难？学完这本你就知道了。',
-    arc: ['PST 6', 'PRS 8', 'FTR 10+', 'BYD 11+'], tag: '半导体工艺·卡脖子',
+    arc: ['PST 4', 'PRS 6', 'FTR 8', 'BYD 10+'], tag: '半导体工艺·卡脖子',
     quote: '从沙子到芯片，这是一场纳米级别的魔术。',
     prereq: ['半导体器件', '材料制备技术'], next: ['集成电路'],
     books: ['《半导体制造技术》Quirk', '《芯片制造》Peter Van Zant', '《集成电路制造工艺》'],
@@ -1396,7 +1423,7 @@ const COURSES = {
   },
   '发光物理': {
     desc: '电子从高能级跃迁到低能级，释放出绚烂的光子。\n\n这不仅是物理，更是光电、半导体和未来的光刻机光源！你不发光，怎么照亮全人类？',
-    arc: ['PST 4', 'PRS 6', 'FTR 8+'], tag: '光电方向',
+    arc: ['PST 3', 'PRS 5', 'FTR 7'], tag: '光电方向',
     quote: '探索光与物质相互作用的终极奥秘。LED、激光器、荧光粉，都从这里开始。',
     prereq: ['固体物理', '半导体物理'], next: [],
     books: ['《发光物理》徐叙瑢', '《发光学与发光材料》', '《LED原理与应用》'],
@@ -1406,9 +1433,9 @@ const COURSES = {
   },
   '相对论': {
     desc: '狭义相对论颠覆了绝对时空，广义相对论把引力解释为时空弯曲。\n\n时间会变慢，空间会收缩，光线会拐弯，黑洞会吞噬一切。\n\nE=mc² 只是开始，爱因斯坦场方程才是终极。',
-    arc: ['PST 6', 'PRS 8', 'FTR 10+', 'BYD 11+'], tag: '时空理论',
+    arc: ['PST 5', 'PRS 7', 'FTR 9+', 'BYD 11'], tag: '时空理论',
     quote: '时空不是舞台，而是演员。——引力波都探测到了，你还不学相对论？',
-    prereq: ['电动力学', '理论力学'], next: ['宇宙学', '粒子物理'],
+    prereq: ['电动力学', '理论力学'], next: ['宇宙学', '黑洞物理', '粒子物理'],
     books: ['梁灿彬《微分几何入门与广义相对论》', 'Schutz《A First Course in General Relativity》', 'Landau《The Classical Theory of Fields》'],
     videos: [
       { name: '北京师范大学《从爱因斯坦到霍金的宇宙》赵峥教授', url: 'https://www.bilibili.com/video/BV1WK4y1t72y' },
@@ -1417,7 +1444,7 @@ const COURSES = {
   },
   '宇宙学': {
     desc: '大爆炸、宇宙微波背景辐射、暗物质、暗能量、宇宙加速膨胀。\n\n宇宙起源于138亿年前的一次大爆炸，而它至今仍在加速膨胀。\n\n我们看得见的物质只占宇宙的5%，剩下95%是什么？没人知道。',
-    arc: ['PST 5', 'PRS 7', 'FTR 9+', 'BYD 11+'], tag: '最大尺度',
+    arc: ['PST 5', 'PRS 7', 'FTR 9', 'BYD 10+'], tag: '最大尺度',
     quote: '宇宙的最不可理解之处，在于它居然是可以被理解的。——爱因斯坦',
     prereq: ['相对论', '热力学与统计物理'], next: [],
     books: ['《宇宙学》Ryden', '《宇宙学导论》赵峥', '《The Early Universe》Kolb & Turner'],
@@ -1427,11 +1454,21 @@ const COURSES = {
       { name: 'Waterloo研究生课《宇宙学广义相对论》全24讲', url: 'https://www.bilibili.com/video/BV1mN4y1k7hG' }
     ]
   },
+  '黑洞物理': {
+    desc: '事件视界、霍金辐射、黑洞热力学、信息悖论。\n\n黑洞不是黑的——霍金辐射让它缓慢蒸发。\n\n黑洞信息悖论是量子力学与广义相对论最深刻的冲突之一。',
+    arc: ['PST 5', 'PRS 7', 'FTR 9+', 'BYD 11'], tag: '极端引力',
+    quote: '黑洞不是黑的——它蒸发，但它也吞噬信息。',
+    prereq: ['相对论', '量子力学', '热力学与统计物理'], next: ['量子引力'],
+    books: ['《黑洞与时间弯曲》Thorne', '《黑洞热力学》', 'Hawking《The Nature of Space and Time》'],
+    videos: [
+      { name: 'B站搜索：黑洞物理 霍金辐射 教程', url: 'https://search.bilibili.com/all?keyword=黑洞物理+霍金辐射' }
+    ]
+  },
   '粒子物理': {
     desc: '夸克、轻子、规范玻色子、Higgs 粒子。标准模型是20世纪物理最伟大的成就之一。\n\n但是中微子有质量、暗物质找不到、引力无法量子化……标准模型之上还有什么？',
-    arc: ['PST 6', 'PRS 8', 'FTR 10+', 'BYD 11+'], tag: '标准模型',
+    arc: ['PST 5', 'PRS 7', 'FTR 9+', 'BYD 11'], tag: '标准模型',
     quote: '标准模型就像一个美丽的谎言——它几乎解释了一切，但总有解释不了的。',
-    prereq: ['量子力学', '电动力学', '相对论', '群论'], next: ['规范场论'],
+    prereq: ['量子力学', '电动力学', '相对论', '群论'], next: ['规范场论', '量子场论'],
     books: ['格里菲斯《粒子物理导论》', '章乃森《粒子物理学》', '肖振军《粒子物理导论》', 'Halzen & Martin《Quarks and Leptons》'],
     videos: [
       { name: 'B站搜索：复旦大学 粒子物理', url: 'https://search.bilibili.com/all?keyword=复旦大学+粒子物理' },
@@ -1443,11 +1480,41 @@ const COURSES = {
     desc: 'Yang-Mills 理论、量子场论、路径积分、重整化、对称性自发破缺。\n\n从电磁力到弱力到强力，所有基本相互作用都可以用规范场论来描述。\n\n这是理论物理的巅峰，也是通往终极统一理论的必经之路。',
     arc: ['PST 6', 'PRS 8', 'FTR 10+', 'INS 12'], tag: '终极理论',
     quote: '用对称性书写宇宙的法则。——如果上帝有语言，那一定是群论。',
-    prereq: ['量子力学', '粒子物理', '群论'], next: [],
+    prereq: ['量子力学', '粒子物理', '群论'], next: ['量子场论'],
     books: ['Peskin & Schroeder《An Introduction to Quantum Field Theory》', 'Weinberg《The Quantum Theory of Fields》', 'Srednicki《Quantum Field Theory》'],
     videos: [
       { name: 'B站搜索：量子场论 规范场论 网课', url: 'https://search.bilibili.com/all?keyword=量子场论+规范场论' },
       { name: 'B站搜索：Yang-Mills 理论 教学', url: 'https://search.bilibili.com/all?keyword=Yang-Mills+理论' }
+    ]
+  },
+  '量子场论': {
+    desc: '把量子力学和狭义相对论结合起来，描述基本粒子的产生与湮灭。\n\n路径积分、费曼图、重整化。从QED到QCD，从标准模型到凝聚态，量子场论是现代物理的共同语言。',
+    arc: ['PST 6', 'PRS 8', 'FTR 10+', 'INS 12'], tag: '场论核心',
+    quote: '量子场论是物理学的通用语言——粒子是场的激发，真空是场的基态。',
+    prereq: ['量子力学', '电动力学', '相对论', '规范场论'], next: ['弦理论', '量子引力'],
+    books: ['Peskin & Schroeder《An Introduction to Quantum Field Theory》', 'Srednicki《Quantum Field Theory》', 'Weinberg《The Quantum Theory of Fields》'],
+    videos: [
+      { name: 'B站搜索：量子场论 网课 推荐', url: 'https://search.bilibili.com/all?keyword=量子场论+网课' }
+    ]
+  },
+  '弦理论': {
+    desc: '把基本粒子看作一维弦的振动模式。10维时空、超对称、M理论。\n\n弦理论是万有理论的候选者，但还没有实验证据。\n\n它统一了引力和量子力学，代价是额外维度和超对称粒子。',
+    arc: ['PST 7', 'PRS 9+', 'FTR 11+', 'INS 12'], tag: '万有理论候选',
+    quote: '弦理论是万有理论的候选者——但还没有实验证据。',
+    prereq: ['量子场论', '相对论', '群论'], next: [],
+    books: ['Polchinski《String Theory》', 'Becker《String Theory and M-Theory》', 'Zwiebach《A First Course in String Theory》'],
+    videos: [
+      { name: 'B站搜索：弦理论 网课 推荐', url: 'https://search.bilibili.com/all?keyword=弦理论+网课' }
+    ]
+  },
+  '量子引力': {
+    desc: '引力的量子化。圈量子引力、因果动力学三角剖分、渐近安全引力。\n\n把引力和量子力学统一起来，是物理学最后的圣杯。\n\n时空在最微小的尺度上可能是离散的、泡沫状的、纠缠的。',
+    arc: ['PST 7', 'PRS 9+', 'FTR 11+', 'INS 12'], tag: '终极难题',
+    quote: '物理学最后的圣杯——把引力和量子力学统一起来。',
+    prereq: ['量子场论', '相对论', '黑洞物理'], next: [],
+    books: ['Rovelli《Quantum Gravity》', 'Thiemann《Modern Canonical Quantum General Relativity》', 'Rovelli《现实不似你所见》'],
+    videos: [
+      { name: 'B站搜索：量子引力 圈量子引力 教程', url: 'https://search.bilibili.com/all?keyword=量子引力+圈量子引力' }
     ]
   }
 };
