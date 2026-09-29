@@ -1,0 +1,325 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+物理学知识体系 - 专题页面批量生成器
+模仿 linear-algebra.html / engineering-optics.html 的 la- 前缀模式生成全部学科页面。
+"""
+import os
+import json
+
+OUT_DIR = "/workspace"
+
+# ============================================================
+# 工具：将 LaTeX 正文转义为 JS 模板字符串
+# ============================================================
+def js_escape(s):
+    """将普通 LaTeX 文本转为可嵌入 JS 反引号字符串的形式。"""
+    # 反斜杠双写；反引号转义；${ 转义（避免模板字符串插值）
+    s = s.replace("\\", "\\\\")
+    s = s.replace("`", "\\`")
+    s = s.replace("${", "\\${")
+    return s
+
+# ============================================================
+# SVG 图库（通用，按需引用）
+# ============================================================
+def fig_svg(key):
+    figs = {
+        "line": '<svg viewBox="0 0 340 200" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif"><line x1="30" y1="160" x2="320" y2="160" stroke="#94a3b8" stroke-width="1.4"/><line x1="40" y1="180" x2="40" y2="20" stroke="#94a3b8" stroke-width="1.4"/><line x1="40" y1="180" x2="310" y2="40" stroke="#2563eb" stroke-width="2.4"/></svg>',
+        "curve": '<svg viewBox="0 0 340 200" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif"><path d="M40,160 Q120,40 200,120 T320,80" fill="none" stroke="#2563eb" stroke-width="2.4"/></svg>',
+        "circle": '<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif"><circle cx="100" cy="100" r="70" fill="none" stroke="#2563eb" stroke-width="2.4"/><circle cx="100" cy="100" r="3" fill="#0f172a"/></svg>',
+        "triangle": '<svg viewBox="0 0 200 180" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif"><polygon points="100,20 180,160 20,160" fill="none" stroke="#2563eb" stroke-width="2.4"/></svg>',
+        "wave": '<svg viewBox="0 0 340 120" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif"><path d="M20,60 Q60,10 100,60 T180,60 T260,60 T340,60" fill="none" stroke="#2563eb" stroke-width="2.4"/><line x1="20" y1="60" x2="340" y2="60" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4,4"/></svg>',
+        "atom": '<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif"><ellipse cx="100" cy="100" rx="80" ry="30" fill="none" stroke="#2563eb" stroke-width="1.8"/><ellipse cx="100" cy="100" rx="80" ry="30" fill="none" stroke="#7c3aed" stroke-width="1.8" transform="rotate(60 100 100)"/><ellipse cx="100" cy="100" rx="80" ry="30" fill="none" stroke="#dc2626" stroke-width="1.8" transform="rotate(120 100 100)"/><circle cx="100" cy="100" r="10" fill="#fbbf24"/></svg>',
+        "lens": '<svg viewBox="0 0 240 160" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif"><line x1="20" y1="80" x2="220" y2="80" stroke="#94a3b8" stroke-width="1"/><ellipse cx="120" cy="80" rx="14" ry="60" fill="rgba(37,99,235,.15)" stroke="#2563eb" stroke-width="2"/><line x1="20" y1="80" x2="120" y2="80" stroke="#2563eb" stroke-width="1.8"/><line x1="120" y1="80" x2="220" y2="80" stroke="#dc2626" stroke-width="1.8" stroke-dasharray="5,4"/></svg>',
+    }
+    return figs.get(key, "")
+
+# ============================================================
+# HTML 模板
+# ============================================================
+HTML_HEAD = '''<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="{meta_desc}">
+<title>{title} · 知识体系</title>
+<script>
+window.MathJax = {{
+  tex: {{
+    inlineMath: [['$','$'], ['\\\\(','\\\\)']],
+    displayMath: [['$$','$$'], ['\\\\[','\\\\]']],
+    processEscapes: true,
+    packages: {{'[+]': ['ams','boldsymbol']}}
+  }},
+  options: {{
+    skipHtmlTags: ['script','noscript','style','textarea','pre','code'],
+    ignoreHtmlClass: 'tex2jax_ignore'
+  }},
+  svg: {{ fontCache: 'global' }}
+}};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" async></script>
+<style>
+  :root{{--la-bg:#f4f7fb;--la-card:#ffffff;--la-ink:#152033;--la-muted:#607089;--la-shadow:0 12px 32px rgba(20,36,60,.09);}}
+  *{{box-sizing:border-box}}
+  html{{scroll-behavior:smooth}}
+  body{{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;color:var(--la-ink);background:radial-gradient(circle at 10% 10%,rgba(37,99,235,.08),transparent 28%),radial-gradient(circle at 90% 10%,rgba(124,58,237,.08),transparent 28%),var(--la-bg);line-height:1.7}}
+  a{{color:inherit}}
+  .la-wrap{{width:min(1400px,94vw);margin:auto}}
+  .la-header{{padding:52px 0 20px;text-align:center}}
+  .la-eyebrow{{font-size:13px;letter-spacing:.22em;color:var(--la-muted);font-weight:700;text-transform:uppercase}}
+  h1{{margin:10px 0 8px;font-size:clamp(30px,5vw,54px);line-height:1.08;letter-spacing:-.03em}}
+  .la-subtitle{{margin:0 auto;color:var(--la-muted);font-size:16px;max-width:820px;line-height:1.8}}
+  .back-bar{{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:22px 0 6px}}
+  .back-btn{{display:inline-flex;align-items:center;gap:8px;padding:10px 22px;border-radius:999px;text-decoration:none;font-size:14px;font-weight:800;background:#fff;color:#1e3a8a;border:1px solid #c7d7ee;box-shadow:0 8px 20px rgba(20,36,60,.08);transition:.25s;cursor:pointer}}
+  .back-btn:hover{{transform:translateY(-2px);box-shadow:0 14px 30px rgba(20,36,60,.14);color:#4c1d95;border-color:#ddd6fe}}
+  .la-nav-tabs{{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:22px 0 8px}}
+  .la-nav-tab{{padding:8px 16px;border-radius:999px;text-decoration:none;font-weight:700;font-size:13px;border:1px solid #d5deea;background:#fff;transition:.25s;color:#334155}}
+  .la-nav-tab:hover{{transform:translateY(-2px);box-shadow:0 8px 20px rgba(20,36,60,.1)}}
+  .la-nav-tab.c1{{color:#1e40af;border-color:#bfdbfe}}
+  .la-nav-tab.c2{{color:#0f766e;border-color:#99f6e4}}
+  .la-nav-tab.c3{{color:#047857;border-color:#a7f3d0}}
+  .la-nav-tab.c4{{color:#c2410c;border-color:#fed7aa}}
+  .la-nav-tab.c5{{color:#6d28d9;border-color:#ddd6fe}}
+  .la-nav-tab.c6{{color:#be185d;border-color:#fbcfe8}}
+  .la-toolbar{{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:16px 0 8px}}
+  button{{border:1px solid #d5deea;background:#fff;color:var(--la-ink);border-radius:999px;padding:9px 14px;font:inherit;cursor:pointer;transition:.2s ease}}
+  button:hover{{transform:translateY(-1px);box-shadow:0 8px 20px rgba(20,36,60,.08)}}
+  .la-engagement-bar{{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:10px 0 0}}
+  .la-stat-item{{display:inline-flex;align-items:center;gap:6px;padding:9px 18px;background:#fff;border:1px solid #d5deea;border-radius:999px;font-size:14px;font-weight:600;color:#475569}}
+  .la-stat-value{{color:#2563eb;font-weight:800}}
+  .la-legend{{margin:26px auto 0;max-width:1100px;background:rgba(255,255,255,.8);border:1px solid #dde5ef;border-radius:20px;padding:16px 22px;display:flex;gap:14px;flex-wrap:wrap;justify-content:center;box-shadow:var(--la-shadow)}}
+  .la-legend-title{{font-size:12px;font-weight:800;letter-spacing:.16em;color:#94a3b8;align-self:center;margin-right:6px}}
+  .la-arc-badge{{display:inline-flex;align-items:center;font-size:10px;font-weight:800;padding:3px 8px;border-radius:6px;letter-spacing:.03em;white-space:nowrap}}
+  .la-arc-def{{background:#dbeafe;color:#1e40af}}
+  .la-arc-thm{{background:#d1fae5;color:#065f46}}
+  .la-arc-der{{background:#ede9fe;color:#5b21b6}}
+  .la-arc-exa{{background:#cffafe;color:#155e75}}
+  .la-arc-app{{background:#ffedd5;color:#9a3412}}
+  .la-arc-his{{background:#f1f5f9;color:#475569}}
+  .la-roadmap{{margin-top:30px;background:rgba(255,255,255,.74);border:1px solid rgba(189,201,218,.7);box-shadow:var(--la-shadow);border-radius:28px;padding:34px}}
+  .la-phase-title{{font-size:24px;font-weight:800;margin:60px 0 4px;display:flex;align-items:center;gap:12px;color:#1e293b;letter-spacing:-.01em}}
+  .la-phase-title:first-child{{margin-top:0}}
+  .la-phase-title::before{{content:"";display:block;width:6px;height:30px;border-radius:4px;background:#2563eb;flex-shrink:0}}
+  .la-phase-title.la-ch1::before{{background:#2563eb}}
+  .la-phase-title.la-ch2::before{{background:#0d9488}}
+  .la-phase-title.la-ch3::before{{background:#059669}}
+  .la-phase-title.la-ch4::before{{background:#c2410c}}
+  .la-phase-title.la-ch5::before{{background:#7c3aed}}
+  .la-phase-title.la-ch6::before{{background:#be185d}}
+  .la-phase-en{{font-size:11px;letter-spacing:.36em;color:#94a3b8;font-weight:700;text-transform:uppercase;margin:0 0 12px 18px;font-style:italic}}
+  .la-phase-desc{{color:var(--la-muted);font-size:14px;margin:0 0 24px 18px;line-height:1.8;max-width:960px}}
+  .la-domain{{margin-bottom:26px;padding:16px 18px 18px 22px;position:relative;background:rgba(255,255,255,.6);border-radius:18px;border:1px solid #e5ebf2}}
+  .la-domain::before{{content:"";position:absolute;left:6px;top:16px;bottom:16px;width:5px;border-radius:5px;background:var(--domain-color,#2563eb);box-shadow:0 0 12px rgba(37,99,235,.25)}}
+  .la-domain-header{{display:flex;align-items:center;gap:10px;margin-bottom:14px;padding-left:6px;flex-wrap:wrap}}
+  .la-domain-header h3{{margin:0;font-size:18px;color:#1e293b}}
+  .la-domain-count{{font-size:11px;padding:3px 10px;border-radius:999px;background:#f1f5f9;color:#64748b;font-weight:600}}
+  .la-domain-desc{{font-size:12px;color:#94a3b8;margin-left:auto;font-style:italic}}
+  .la-domain-grid{{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}}
+  .la-course-card{{background:#fff;border:1px solid #dbe3ee;border-radius:14px;padding:14px;cursor:pointer;transition:.25s;position:relative;overflow:hidden}}
+  .la-course-card:hover{{transform:translateY(-3px);box-shadow:0 10px 20px rgba(25,44,75,.1);border-color:#aabbd0}}
+  .la-course-card h4{{margin:0 0 8px;font-size:14.5px;line-height:1.35;color:#1e293b}}
+  .la-course-card p{{margin:0;font-size:11.5px;color:var(--la-muted);line-height:1.6}}
+  .la-arc-badges{{display:flex;flex-wrap:wrap;gap:3px;margin-bottom:8px}}
+  .la-overlay{{position:fixed;inset:0;background:rgba(15,23,42,.5);display:none;align-items:center;justify-content:center;padding:18px;z-index:60;backdrop-filter:blur(2px)}}
+  .la-overlay.show{{display:flex}}
+  .la-modal{{width:min(820px,96vw);background:white;border-radius:24px;padding:30px;box-shadow:0 24px 80px rgba(0,0,0,.28);animation:laPopIn .3s;max-height:90vh;overflow-y:auto}}
+  @keyframes laPopIn{{from{{transform:scale(.94);opacity:0}}to{{transform:scale(1);opacity:1}}}}
+  .la-modal h2{{margin:0 0 10px;font-size:23px;color:#1e293b;line-height:1.35}}
+  .la-modal .la-crumbs{{font-size:12px;color:#94a3b8;margin:0 0 14px;font-weight:600;letter-spacing:.02em}}
+  .la-modal .la-arc-badges{{margin:0 0 16px}}
+  .la-modal-body{{color:#334155;font-size:15px;line-height:1.9}}
+  .la-modal-body p{{margin:0 0 12px}}
+  .la-modal-body strong{{color:#0f172a}}
+  .la-modal-body ul{{margin:0 0 12px;padding-left:22px}}
+  .la-modal-body li{{margin-bottom:6px}}
+  .la-fml{{margin:16px 0;padding:14px 18px;background:linear-gradient(135deg,#f8fafc,#eef4fb);border-left:4px solid #93b4e8;border-radius:10px;overflow-x:auto;font-size:16px}}
+  .la-fml .note{{display:block;font-size:12.5px;color:#8496ad;margin-top:8px;line-height:1.6;font-family:system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif}}
+  .la-fml mjx-container[display="true"]{{margin:0 !important}}
+  .la-fig{{margin:18px auto;padding:14px 16px 10px;background:#fafcff;border:1px solid #e2ebf7;border-radius:14px;display:flex;flex-direction:column;align-items:center;max-width:600px}}
+  .la-fig svg{{display:block;width:100%;height:auto;max-width:560px}}
+  .la-fig .la-fig-cap{{font-size:12px;color:#8496ad;margin-top:8px;text-align:center;letter-spacing:.02em}}
+  .la-callout{{margin:14px 0;padding:12px 16px;background:#fffbeb;border-left:3px solid #fbbf24;border-radius:8px;font-size:13.5px;color:#78350f;line-height:1.8}}
+  .la-callout.la-app{{background:#fff7ed;border-color:#fb923c;color:#7c2d12}}
+  .la-callout.la-his{{background:#f8fafc;border-color:#94a3b8;color:#334155}}
+  .la-modal-close{{margin-top:22px;background:#0f172a;color:white;border-color:#0f172a;padding:10px 20px;font-weight:bold}}
+  .la-footer{{padding:34px 0 50px;color:var(--la-muted);text-align:center;font-size:13px;line-height:1.9}}
+  @media(max-width:900px){{.la-wrap{{width:min(94vw,720px)}}.la-roadmap{{padding:20px}}.la-phase-title{{font-size:19px}}.la-phase-en{{font-size:10px;letter-spacing:.26em}}.la-domain-desc{{display:none}}.la-domain-grid{{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}}.la-modal{{padding:22px}}}}
+</style>
+</head>
+<body>
+<div class="la-wrap">
+  <header class="la-header">
+    <div class="la-eyebrow">{eyebrow} · KNOWLEDGE MAP</div>
+    <h1>{title} · 知识体系</h1>
+    <p class="la-subtitle">{subtitle}</p>
+    <div class="back-bar"><a class="back-btn" href="index.html">← 返回总览</a></div>
+    <div class="la-nav-tabs">{nav_tabs}</div>
+    <div class="la-toolbar">
+      <button onclick="window.scrollTo({{top:0,behavior:'smooth'}})">回到顶部</button>
+    </div>
+    <div class="la-engagement-bar">
+      <div class="la-stat-item"><span>📘</span><span class="la-stat-value" id="laKCount">--</span><span>个知识点</span></div>
+      <div class="la-stat-item"><span>🧮</span><span class="la-stat-value" id="laFCount">--</span><span>条核心公式</span></div>
+    </div>
+  </header>
+  <div class="la-legend">
+    <span class="la-legend-title">六类知识记号</span>
+    <span class="la-arc-badge la-arc-def">定 义</span>
+    <span class="la-arc-badge la-arc-thm">定 理</span>
+    <span class="la-arc-badge la-arc-der">推 导</span>
+    <span class="la-arc-badge la-arc-exa">例 子</span>
+    <span class="la-arc-badge la-arc-app">应 用</span>
+    <span class="la-arc-badge la-arc-his">注 记</span>
+  </div>
+  <main class="la-roadmap" id="laRoadmap"></main>
+  <footer class="la-footer">
+    <div>{title} · 知识体系可视化 · MathJax + SVG</div>
+    <div style="margin-top:8px">物理学知识网络 · 单文件静态站点</div>
+  </footer>
+</div>
+<div class="la-overlay" id="laOverlay" onclick="closeLaInfo(event)">
+  <div class="la-modal" onclick="event.stopPropagation()">
+    <p class="la-crumbs" id="laCrumbs"></p>
+    <h2 id="laTitle">知识点</h2>
+    <div class="la-arc-badges" id="laTags"></div>
+    <div class="la-modal-body" id="laBody"></div>
+    <button class="la-modal-close" onclick="hideLaInfo()">关 闭</button>
+  </div>
+</div>
+<script>
+const LA_FIG = {{ {fig_dict} }};
+const LA_TAG_LABEL = {{def:'定 义', thm:'定 理', der:'推 导', exa:'例 子', app:'应 用', his:'注 记'}};
+const LA_DATA = [
+{data_json}
+];
+const LA_KP = {{}};
+function laBuildCard(item){{
+  const tags = item.tags.map(t => `<span class="la-arc-badge la-arc-${{t}}">${{LA_TAG_LABEL[t]}}</span>`).join('');
+  return `<div class="la-course-card" onclick="showLaItem('${{item.id}}')"><div class="la-arc-badges">${{tags}}</div><h4>${{item.name}}</h4><p>${{item.brief}}</p></div>`;
+}}
+function renderLa(){{
+  const root = document.getElementById('laRoadmap');
+  let html = '';
+  LA_DATA.forEach(ch => {{
+    html += `<h2 class="la-phase-title ${{ch.id}}" id="${{ch.id}}">${{ch.num}} · ${{ch.title}}</h2>`;
+    html += `<div class="la-phase-en">${{ch.en}}</div>`;
+    html += `<p class="la-phase-desc">${{ch.desc}}</p>`;
+    ch.sections.forEach(sec => {{
+      html += `<div class="la-domain" style="--domain-color:${{sec.color}};"><div class="la-domain-header"><h3>${{sec.name}}</h3><span class="la-domain-count">${{sec.items.length}} 个知识点</span><span class="la-domain-desc">${{sec.desc}}</span></div><div class="la-domain-grid">`;
+      sec.items.forEach(it => {{ html += laBuildCard(it); LA_KP[it.id] = {{item: it, section: sec.name, chapter: `${{ch.num}} · ${{ch.title}}`}}; }});
+      html += `</div></div>`;
+    }});
+  }});
+  root.innerHTML = html;
+  const kCount = Object.keys(LA_KP).length;
+  const fCount = (root.innerHTML.match(/\\$\\$/g) || []).length;
+  document.getElementById('laKCount').textContent = kCount;
+  document.getElementById('laFCount').textContent = Math.round(fCount / 2);
+}}
+function showLaItem(id){{
+  const rec = LA_KP[id];
+  if(!rec) return;
+  const it = rec.item;
+  document.getElementById('laCrumbs').textContent = rec.chapter + ' ／ ' + rec.section;
+  document.getElementById('laTitle').textContent = it.name;
+  document.getElementById('laTags').innerHTML = it.tags.map(t => `<span class="la-arc-badge la-arc-${{t}}">${{LA_TAG_LABEL[t]}}</span>`).join('');
+  let bodyHtml = it.body;
+  if (it.fig && LA_FIG[it.fig]) {{
+    const figHtml = `<div class="la-fig">${{LA_FIG[it.fig]}}<div class="la-fig-cap">${{it.figCap || ''}}</div></div>`;
+    bodyHtml = figHtml + bodyHtml;
+  }}
+  document.getElementById('laBody').innerHTML = bodyHtml;
+  document.getElementById('laOverlay').classList.add('show');
+  document.querySelector('.la-modal').scrollTop = 0;
+  if (window.MathJax && window.MathJax.typesetPromise) {{ window.MathJax.typesetPromise([document.getElementById('laBody')]).catch(()=>{{}}); }}
+}}
+function hideLaInfo(){{ document.getElementById('laOverlay').classList.remove('show'); }}
+function closeLaInfo(e){{ if(e.target.id === 'laOverlay') hideLaInfo(); }}
+document.addEventListener('keydown', e => {{ if(e.key === 'Escape') hideLaInfo(); }});
+document.addEventListener('DOMContentLoaded', () => {{
+  renderLa();
+  if (window.MathJax && window.MathJax.typesetPromise) {{ window.MathJax.typesetPromise([document.getElementById('laRoadmap')]).catch(()=>{{}}); }}
+}});
+</script>
+</body>
+</html>
+'''
+
+# ============================================================
+# 渲染单个学科
+# ============================================================
+def render_subject(sub):
+    """sub: dict with keys filename, title, eyebrow, subtitle, meta_desc, chapters"""
+    # nav tabs
+    nav_tabs = ""
+    for i, ch in enumerate(sub["chapters"], 1):
+        nav_tabs += f'<a class="la-nav-tab c{i}" href="#{ch["id"]}">{ch["num"]} · {ch["title"]}</a>'
+
+    # build LA_DATA as JS
+    data_parts = []
+    for ch in sub["chapters"]:
+        secs_parts = []
+        for sec in ch["sections"]:
+            items_parts = []
+            for it in sec["items"]:
+                body_js = js_escape(it["body"])
+                item_fields = [
+                    f"id:'{it['id']}'",
+                    f"name:'{it['name']}'",
+                    f"tags:{json.dumps(it['tags'], ensure_ascii=False)}",
+                    f"brief:'{js_escape(it['brief'])}'",
+                ]
+                if it.get("fig"):
+                    item_fields.append(f"fig:'{it['fig']}'")
+                if it.get("figCap"):
+                    item_fields.append(f"figCap:'{js_escape(it['figCap'])}'")
+                item_fields.append(f"body:`{body_js}`")
+                items_parts.append("{" + ",".join(item_fields) + "}")
+            secs_parts.append(
+                "{" + f"name:'{sec['name']}',color:'{sec['color']}',desc:'{js_escape(sec['desc'])}',items:[{','.join(items_parts)}]" + "}"
+            )
+        data_parts.append(
+            "{" + f"id:'{ch['id']}',num:'{ch['num']}',title:'{ch['title']}',en:'{ch['en']}',sub:'{js_escape(ch.get('sub',''))}',desc:'{js_escape(ch['desc'])}',sections:[{','.join(secs_parts)}]" + "}"
+        )
+    data_json = ",\n".join(data_parts)
+
+    # fig dict
+    fig_keys = set()
+    for ch in sub["chapters"]:
+        for sec in ch["sections"]:
+            for it in sec["items"]:
+                if it.get("fig"):
+                    fig_keys.add(it["fig"])
+    fig_entries = []
+    for k in sorted(fig_keys):
+        svg = fig_svg(k)
+        if svg:
+            fig_entries.append(f"'{k}':`{svg}`")
+    fig_dict = ",".join(fig_entries)
+
+    html = HTML_HEAD.format(
+        meta_desc=sub["meta_desc"],
+        title=sub["title"],
+        eyebrow=sub["eyebrow"],
+        subtitle=sub["subtitle"],
+        nav_tabs=nav_tabs,
+        fig_dict=fig_dict,
+        data_json=data_json,
+    )
+    return html
+
+def write_subject(sub):
+    html = render_subject(sub)
+    path = os.path.join(OUT_DIR, sub["filename"])
+    with open(path, "w", encoding="utf-8") as f:
+        f.write(html)
+    print(f"  [OK] {sub['filename']}  ({len(sub['chapters'])} 章)")
+
+# ============================================================
+# 主入口（数据在 subjects.py 中定义，此处仅测试模板）
+# ============================================================
+if __name__ == "__main__":
+    print("Generator template loaded. Import subjects from gen_subjects.py to run.")
