@@ -1919,6 +1919,21 @@ SUBJECTS.append({
 })
 
 print("Total subjects defined:", len(SUBJECTS))
+
+# 补充 index.html 引用但原列表缺失的 4 个学科
+SUBJECTS.append({"filename":"linear-algebra.html","title":"线性代数","eyebrow":"LINEAR ALGEBRA","subtitle":"行列式 · 矩阵 · 向量空间 · 特征值 · 二次型","meta_desc":"线性代数知识体系","chapters":[]})
+SUBJECTS.append({"filename":"newtonian-mechanics.html","title":"牛顿力学","eyebrow":"NEWTONIAN MECHANICS","subtitle":"运动学 · 牛顿定律 · 动量能量 · 刚体振动","meta_desc":"牛顿力学知识体系","chapters":[]})
+SUBJECTS.append({"filename":"engineering-optics.html","title":"工程光学","eyebrow":"ENGINEERING OPTICS","subtitle":"几何光学 · 像差 · 光学系统","meta_desc":"工程光学知识体系","chapters":[]})
+SUBJECTS.append({"filename":"quantum-information.html","title":"量子信息","eyebrow":"QUANTUM INFORMATION","subtitle":"量子比特 · 纠缠 · 量子通信","meta_desc":"量子信息知识体系","chapters":[]})
+
+# 用 build_subjects 生成的扩展章节替换原章节（每科≥300知识点）
+from build_subjects import expand_subject, SUBJECT_MAP
+for s in SUBJECTS:
+    fn = s["filename"]
+    if fn in SUBJECT_MAP:
+        prefix = fn.replace("-","_").replace(".html","")
+        s["chapters"] = expand_subject(fn, SUBJECT_MAP[fn], prefix)
+
 for s in SUBJECTS:
     write_subject(s)
 print(f"\nDone! Generated {len(SUBJECTS)} subject pages.")

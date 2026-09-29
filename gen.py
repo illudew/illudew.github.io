@@ -224,7 +224,7 @@ window.MathJax = {{
 </div>
 <script>
 const LA_FIG = {{ {fig_dict} }};
-const LA_TAG_LABEL = {{def:'定 义', thm:'定 理', der:'推 导', exa:'例 子', app:'应 用', his:'注 记'}};
+const LA_TAG_LABEL = {{def:'定 义', thm:'定 理', der:'推 导', exa:'例 子', app:'应 用', note:'注 记', his:'背 景', ext:'拓 展'}};
 const LA_DATA = [
 {data_json}
 ];
