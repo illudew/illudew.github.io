@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="线性代数：原理与应用 · 知识体系（前六章 + 厄米矩阵 + 辛矩阵）">
-<title>线性代数：原理与应用 · 知识体系</title>
+<meta name="description" content="线性代数 · 知识体系（线性空间 + 矩阵与线性方程组 + 行列式 + 特征值理论 + 应用与延伸）">
+<title>线性代数 · 知识体系</title>
 
 <!-- MathJax -->
 <script>
@@ -69,7 +69,6 @@ window.MathJax = {
   .la-nav-tab.c3{color:#047857;border-color:#a7f3d0}
   .la-nav-tab.c4{color:#c2410c;border-color:#fed7aa}
   .la-nav-tab.c5{color:#6d28d9;border-color:#ddd6fe}
-  .la-nav-tab.c6{color:#be123c;border-color:#fecdd3}
 
   .la-toolbar{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:16px 0 8px}
   button{border:1px solid #d5deea;background:#fff;color:var(--la-ink);border-radius:999px;padding:9px 14px;
@@ -101,12 +100,11 @@ window.MathJax = {
     gap:12px;color:#1e293b;letter-spacing:-.01em}
   .la-phase-title:first-child{margin-top:0}
   .la-phase-title::before{content:"";display:block;width:6px;height:30px;border-radius:4px;background:#2563eb;flex-shrink:0}
-  .la-phase-title.ch1::before{background:#2563eb}
-  .la-phase-title.ch2::before{background:#0d9488}
-  .la-phase-title.ch3::before{background:#059669}
-  .la-phase-title.ch4::before{background:#c2410c}
-  .la-phase-title.ch5::before{background:#7c3aed}
-  .la-phase-title.ch6::before{background:#be123c}
+  .la-phase-title.la-ch1::before{background:#2563eb}
+  .la-phase-title.la-ch2::before{background:#0d9488}
+  .la-phase-title.la-ch3::before{background:#059669}
+  .la-phase-title.la-ch4::before{background:#c2410c}
+  .la-phase-title.la-ch5::before{background:#7c3aed}
 
   .la-phase-en{font-size:11px;letter-spacing:.36em;color:#94a3b8;font-weight:700;text-transform:uppercase;
     margin:0 0 12px 18px;font-style:italic}
@@ -191,9 +189,9 @@ window.MathJax = {
 <div class="la-wrap">
 
   <header class="la-header">
-    <div class="la-eyebrow">LINEAR ALGEBRA · PRINCIPLES & APPLICATIONS</div>
-    <h1>线性代数：原理与应用</h1>
-    <p class="la-subtitle">前六章 · 从线性空间到张量构造 · 附厄米矩阵与辛矩阵<br>以几何直观与代数结构，理解现代数学的通用语言</p>
+    <div class="la-eyebrow">LINEAR ALGEBRA · KNOWLEDGE MAP</div>
+    <h1>线性代数 · 知识体系</h1>
+    <p class="la-subtitle">线性空间 · 矩阵与线性方程组 · 行列式 · 特征值理论 · 应用与延伸<br>从公理化结构到 SVD、张量、辛几何与量子论的统一语言</p>
 
     <div class="back-bar">
       <a class="back-btn" href="index.html">← 返回总览</a>
@@ -204,12 +202,12 @@ window.MathJax = {
       <a class="la-nav-tab c2" href="#la-ch2">第二章 · 矩阵与线性方程组</a>
       <a class="la-nav-tab c3" href="#la-ch3">第三章 · 行列式</a>
       <a class="la-nav-tab c4" href="#la-ch4">第四章 · 特征值理论</a>
-      <a class="la-nav-tab c5" href="#la-ch5">第五章 · 内积空间（含厄米矩阵）</a>
-      <a class="la-nav-tab c6" href="#la-ch6">第六章 · 线性空间构造（含辛矩阵）</a>
+      <a class="la-nav-tab c5" href="#la-ch5">第五章 · 应用与延伸</a>
     </div>
 
     <div class="la-toolbar">
       <button onclick="window.scrollTo({top:0,behavior:'smooth'})">回到顶部</button>
+      <button onclick="expandAllLa()">展开全部</button>
     </div>
 
     <div class="la-engagement-bar">
@@ -231,8 +229,8 @@ window.MathJax = {
   <main class="la-roadmap" id="laRoadmap"></main>
 
   <footer class="la-footer">
-    <div>线性代数：原理与应用 · 知识体系可视化 · MathJax + SVG</div>
-    <div style="margin-top:8px">李思（清华大学）讲义整理 · 单文件静态站点</div>
+    <div>线性代数 · 知识体系可视化 · MathJax + SVG</div>
+    <div style="margin-top:8px">同济《工程数学·线性代数》 × 李思《线性代数：原理与应用》 综合整理 · 单文件静态站点</div>
   </footer>
 
 </div>
@@ -259,7 +257,7 @@ const LA_FIG = {
   <line x1="40" y1="180" x2="310" y2="40" stroke="#2563eb" stroke-width="2.4"/>
   <text x="316" y="174" fill="#475569" font-size="13" font-weight="700" font-style="italic">t</text>
   <text x="26" y="18" fill="#475569" font-size="13" font-weight="700" font-style="italic">y</text>
-  <text x="220" y="72" fill="#2563eb" font-size="14" font-weight="700" font-style="italic">y = at + b</text>
+  <text x="210" y="72" fill="#2563eb" font-size="14" font-weight="700" font-style="italic">y = at + b</text>
 </svg>`,
 
   subspace: `<svg viewBox="0 0 340 220" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif">
@@ -271,8 +269,8 @@ const LA_FIG = {
   <circle cx="40" cy="170" r="4" fill="#0f172a"/>
   <text x="316" y="184" fill="#475569" font-size="13" font-weight="700" font-style="italic">x</text>
   <text x="26" y="18" fill="#475569" font-size="13" font-weight="700" font-style="italic">y</text>
-  <text x="210" y="80" fill="#2563eb" font-size="13" font-weight="700" font-style="italic">y = ax（子空间）</text>
-  <text x="180" y="40" fill="#dc2626" font-size="13" font-weight="700" font-style="italic">y = ax + b（非子空间）</text>
+  <text x="195" y="90" fill="#2563eb" font-size="13" font-weight="700" font-style="italic">y = ax（子空间）</text>
+  <text x="170" y="40" fill="#dc2626" font-size="13" font-weight="700" font-style="italic">y = ax + b（非子空间）</text>
 </svg>`,
 
   span: `<svg viewBox="0 0 340 220" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif">
@@ -301,8 +299,8 @@ const LA_FIG = {
   <line x1="50" y1="180" x2="230" y2="80" stroke="#7c3aed" stroke-width="2" stroke-dasharray="5,4"/>
   <text x="100" y="196" fill="#2563eb" font-size="13" font-weight="700" font-style="italic">v₁</text>
   <text x="84" y="120" fill="#dc2626" font-size="13" font-weight="700" font-style="italic">v₂</text>
-  <text x="200" y="70" fill="#7c3aed" font-size="13" font-weight="700" font-style="italic">u = 1v₁ + 2v₂</text>
-  <text x="230" y="140" fill="#64748b" font-size="12">基 {v₁, v₂} 给出坐标 (1, 2)</text>
+  <text x="200" y="70" fill="#7c3aed" font-size="13" font-weight="700" font-style="italic">u = 1·v₁ + 2·v₂</text>
+  <text x="200" y="140" fill="#64748b" font-size="12">基 {v₁, v₂} 给出坐标 (1, 2)</text>
 </svg>`,
 
   linmap: `<svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif">
@@ -311,15 +309,33 @@ const LA_FIG = {
   </defs>
   <rect x="30" y="60" width="120" height="80" fill="#dbeafe" stroke="#2563eb" stroke-width="1.6" rx="8"/>
   <rect x="250" y="60" width="120" height="80" fill="#fee2e2" stroke="#dc2626" stroke-width="1.6" rx="8"/>
-  <text x="66" y="105" fill="#2563eb" font-size="15" font-weight="700" font-style="italic">V</text>
-  <text x="286" y="105" fill="#dc2626" font-size="15" font-weight="700" font-style="italic">W</text>
+  <text x="72" y="105" fill="#2563eb" font-size="16" font-weight="700" font-style="italic">V</text>
+  <text x="292" y="105" fill="#dc2626" font-size="16" font-weight="700" font-style="italic">W</text>
   <line x1="155" y1="100" x2="245" y2="100" stroke="#0f172a" stroke-width="2" marker-end="url(#la-a5)"/>
-  <text x="170" y="92" fill="#0f172a" font-size="15" font-weight="700" font-style="italic">f</text>
-  <text x="80" y="160" fill="#475569" font-size="12">线性映射</text>
-  <text x="270" y="160" fill="#475569" font-size="12">像空间</text>
+  <text x="192" y="92" fill="#0f172a" font-size="15" font-weight="700" font-style="italic">f</text>
+  <text x="62" y="160" fill="#475569" font-size="12">线性映射</text>
+  <text x="276" y="160" fill="#475569" font-size="12">像空间</text>
 </svg>`,
 
-  det: `<svg viewBox="0 0 360 220" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif">
+  matmul: `<svg viewBox="0 0 380 200" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif">
+  <defs>
+    <marker id="la-am1" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><polygon points="0 0, 9 4.5, 0 9" fill="#2563eb"/></marker>
+    <marker id="la-am2" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><polygon points="0 0, 9 4.5, 0 9" fill="#7c3aed"/></marker>
+  </defs>
+  <circle cx="60" cy="100" r="22" fill="#dbeafe" stroke="#2563eb" stroke-width="1.6"/>
+  <circle cx="190" cy="100" r="22" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.6"/>
+  <circle cx="320" cy="100" r="22" fill="#fee2e2" stroke="#dc2626" stroke-width="1.6"/>
+  <text x="52" y="106" fill="#2563eb" font-size="15" font-weight="700" font-style="italic">i</text>
+  <text x="182" y="106" fill="#b45309" font-size="15" font-weight="700" font-style="italic">k</text>
+  <text x="312" y="106" fill="#dc2626" font-size="15" font-weight="700" font-style="italic">j</text>
+  <line x1="82" y1="100" x2="164" y2="100" stroke="#2563eb" stroke-width="2" marker-end="url(#la-am1)"/>
+  <line x1="212" y1="100" x2="294" y2="100" stroke="#7c3aed" stroke-width="2" marker-end="url(#la-am2)"/>
+  <text x="112" y="92" fill="#2563eb" font-size="12" font-style="italic">a_ik</text>
+  <text x="242" y="92" fill="#7c3aed" font-size="12" font-style="italic">b_kj</text>
+  <text x="130" y="170" fill="#475569" font-size="12">(AB)_ij = ∑_k a_ik · b_kj</text>
+</svg>`,
+
+  det2: `<svg viewBox="0 0 360 220" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif">
   <defs>
     <marker id="la-a6a" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><polygon points="0 0, 8 4, 0 8" fill="#2563eb"/></marker>
     <marker id="la-a6b" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><polygon points="0 0, 8 4, 0 8" fill="#dc2626"/></marker>
@@ -327,9 +343,27 @@ const LA_FIG = {
   <polygon points="60,160 260,120 300,50 100,90" fill="#c7d2fe" stroke="#4338ca" stroke-width="1.8" opacity=".75"/>
   <line x1="60" y1="160" x2="260" y2="120" stroke="#2563eb" stroke-width="2.4" marker-end="url(#la-a6a)"/>
   <line x1="60" y1="160" x2="100" y2="90" stroke="#dc2626" stroke-width="2.4" marker-end="url(#la-a6b)"/>
-  <text x="152" y="154" fill="#2563eb" font-size="14" font-weight="700" font-style="italic">u</text>
+  <text x="150" y="154" fill="#2563eb" font-size="14" font-weight="700" font-style="italic">u</text>
   <text x="66" y="118" fill="#dc2626" font-size="14" font-weight="700" font-style="italic">v</text>
-  <text x="140" y="30" fill="#4338ca" font-size="13" font-weight="700">S = |det(u, v)|</text>
+  <text x="130" y="30" fill="#4338ca" font-size="13" font-weight="700">S = |det(u, v)|</text>
+</svg>`,
+
+  volume: `<svg viewBox="0 0 380 240" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif">
+  <defs>
+    <marker id="la-v1" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><polygon points="0 0, 9 4.5, 0 9" fill="#2563eb"/></marker>
+    <marker id="la-v2" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><polygon points="0 0, 9 4.5, 0 9" fill="#dc2626"/></marker>
+    <marker id="la-v3" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><polygon points="0 0, 9 4.5, 0 9" fill="#059669"/></marker>
+  </defs>
+  <polygon points="70,180 220,180 280,150 130,150" fill="#bfdbfe" stroke="#2563eb" stroke-width="1.2" opacity=".7"/>
+  <polygon points="220,180 280,150 280,80 220,110" fill="#fecaca" stroke="#dc2626" stroke-width="1.2" opacity=".7"/>
+  <polygon points="70,180 220,180 220,110 70,110" fill="#d1fae5" stroke="#059669" stroke-width="1.2" opacity=".55"/>
+  <line x1="70" y1="180" x2="220" y2="180" stroke="#2563eb" stroke-width="2.4" marker-end="url(#la-v1)"/>
+  <line x1="70" y1="180" x2="130" y2="150" stroke="#dc2626" stroke-width="2.4" marker-end="url(#la-v2)"/>
+  <line x1="70" y1="180" x2="70" y2="110" stroke="#059669" stroke-width="2.4" marker-end="url(#la-v3)"/>
+  <text x="145" y="196" fill="#2563eb" font-size="13" font-weight="700" font-style="italic">u</text>
+  <text x="100" y="146" fill="#dc2626" font-size="13" font-weight="700" font-style="italic">v</text>
+  <text x="52" y="120" fill="#059669" font-size="13" font-weight="700" font-style="italic">w</text>
+  <text x="290" y="60" fill="#4338ca" font-size="12" font-weight="700">V = u · (v × w)</text>
 </svg>`,
 
   eigen: `<svg viewBox="0 0 380 220" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif">
@@ -343,17 +377,17 @@ const LA_FIG = {
   <line x1="50" y1="170" x2="280" y2="60" stroke="#dc2626" stroke-width="2.4" marker-end="url(#la-a7b)"/>
   <text x="208" y="58" fill="#2563eb" font-size="14" font-weight="700" font-style="italic">v</text>
   <text x="288" y="58" fill="#dc2626" font-size="14" font-weight="700" font-style="italic">Av = λv</text>
-  <text x="200" y="130" fill="#475569" font-size="12" font-style="italic">特征方向：A 只拉伸，不转向</text>
+  <text x="180" y="130" fill="#475569" font-size="12" font-style="italic">特征方向：A 只拉伸，不转向</text>
 </svg>`,
 
   jordan: `<svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif">
   <rect x="40" y="50" width="80" height="100" fill="#fef3c7" stroke="#c2410c" stroke-width="1.6" rx="6"/>
   <rect x="140" y="50" width="80" height="100" fill="#fde68a" stroke="#c2410c" stroke-width="1.6" rx="6"/>
   <rect x="240" y="50" width="80" height="100" fill="#fed7aa" stroke="#c2410c" stroke-width="1.6" rx="6"/>
-  <text x="66" y="105" fill="#7c2d12" font-size="14" font-weight="700" font-style="italic">J₁</text>
-  <text x="166" y="105" fill="#7c2d12" font-size="14" font-weight="700" font-style="italic">J₂</text>
-  <text x="266" y="105" fill="#7c2d12" font-size="14" font-weight="700" font-style="italic">J₃</text>
-  <text x="120" y="180" fill="#7c2d12" font-size="13" font-weight="700">Jordan 标准型：分块对角</text>
+  <text x="70" y="105" fill="#7c2d12" font-size="14" font-weight="700" font-style="italic">J₁</text>
+  <text x="170" y="105" fill="#7c2d12" font-size="14" font-weight="700" font-style="italic">J₂</text>
+  <text x="270" y="105" fill="#7c2d12" font-size="14" font-weight="700" font-style="italic">J₃</text>
+  <text x="112" y="180" fill="#7c2d12" font-size="13" font-weight="700">Jordan 标准型：分块对角</text>
 </svg>`,
 
   orthogonal: `<svg viewBox="0 0 360 220" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif">
@@ -394,33 +428,23 @@ const LA_FIG = {
   <ellipse cx="265" cy="110" rx="70" ry="40" fill="#fee2e2" stroke="#dc2626" stroke-width="1.8"/>
   <line x1="265" y1="110" x2="320" y2="110" stroke="#dc2626" stroke-width="2" marker-end="url(#la-ab)"/>
   <line x1="265" y1="110" x2="265" y2="82" stroke="#dc2626" stroke-width="2" marker-end="url(#la-ab)"/>
-  <text x="82" y="184" fill="#2563eb" font-size="12" font-weight="700">单位圆</text>
-  <text x="238" y="184" fill="#dc2626" font-size="12" font-weight="700">A 的像：椭圆</text>
+  <text x="78" y="186" fill="#2563eb" font-size="12" font-weight="700">单位圆</text>
+  <text x="238" y="186" fill="#dc2626" font-size="12" font-weight="700">A 的像：椭圆</text>
   <text x="322" y="105" fill="#dc2626" font-size="13" font-weight="700" font-style="italic">σ₁</text>
   <text x="272" y="80" fill="#dc2626" font-size="13" font-weight="700" font-style="italic">σ₂</text>
-  <text x="160" y="112" fill="#0f172a" font-size="18" font-weight="700">→</text>
-</svg>`,
-
-  hermitian: `<svg viewBox="0 0 360 220" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif">
-  <circle cx="180" cy="110" r="80" fill="#faf5ff" stroke="#7c3aed" stroke-width="1.6"/>
-  <line x1="100" y1="110" x2="260" y2="110" stroke="#94a3b8" stroke-width="1.4"/>
-  <line x1="180" y1="30" x2="180" y2="190" stroke="#94a3b8" stroke-width="1.4"/>
-  <line x1="180" y1="110" x2="235" y2="70" stroke="#dc2626" stroke-width="2.4" marker-end="url(#la-a9)"/>
-  <text x="150" y="98" fill="#7c3aed" font-size="14" font-weight="700" font-style="italic">z</text>
-  <text x="240" y="66" fill="#dc2626" font-size="14" font-weight="700" font-style="italic">Az</text>
-  <text x="30" y="30" fill="#7c3aed" font-size="12" font-style="italic">厄米内积：⟨z, w⟩ = z̄¹w₁ + z̄₂w₂</text>
+  <text x="168" y="115" fill="#0f172a" font-size="20" font-weight="700">→</text>
 </svg>`,
 
   tensor: `<svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif">
   <rect x="40" y="60" width="80" height="80" fill="#dbeafe" stroke="#2563eb" stroke-width="1.8" rx="8"/>
   <rect x="280" y="60" width="80" height="80" fill="#fee2e2" stroke="#dc2626" stroke-width="1.8" rx="8"/>
   <rect x="160" y="70" width="80" height="60" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.8" rx="8"/>
-  <text x="66" y="105" fill="#2563eb" font-size="15" font-weight="700" font-style="italic">V</text>
-  <text x="306" y="105" fill="#dc2626" font-size="15" font-weight="700" font-style="italic">W</text>
-  <text x="164" y="105" fill="#7c3aed" font-size="14" font-weight="700" font-style="italic">V ⊗ W</text>
-  <text x="128" y="108" fill="#0f172a" font-size="22" font-weight="700">⊗</text>
-  <text x="252" y="108" fill="#0f172a" font-size="22" font-weight="700">=</text>
-  <text x="110" y="180" fill="#475569" font-size="12" font-style="italic">dim = dim V × dim W</text>
+  <text x="72" y="105" fill="#2563eb" font-size="15" font-weight="700" font-style="italic">V</text>
+  <text x="312" y="105" fill="#dc2626" font-size="15" font-weight="700" font-style="italic">W</text>
+  <text x="168" y="105" fill="#7c3aed" font-size="14" font-weight="700" font-style="italic">V ⊗ W</text>
+  <text x="132" y="112" fill="#0f172a" font-size="22" font-weight="700">⊗</text>
+  <text x="252" y="112" fill="#0f172a" font-size="22" font-weight="700">=</text>
+  <text x="90" y="180" fill="#475569" font-size="12" font-style="italic">dim = dim V × dim W</text>
 </svg>`,
 
   symplectic: `<svg viewBox="0 0 400 220" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif">
@@ -434,48 +458,90 @@ const LA_FIG = {
   <line x1="200" y1="110" x2="200" y2="60" stroke="#7c3aed" stroke-width="2.4" marker-end="url(#la-ac)"/>
   <text x="330" y="114" fill="#7c3aed" font-size="13" font-weight="700" font-style="italic">q</text>
   <text x="204" y="56" fill="#7c3aed" font-size="13" font-weight="700" font-style="italic">p</text>
-  <text x="90" y="200" fill="#7c3aed" font-size="13" font-weight="700">辛形式：ω(u, v) = ⟨Ju, v⟩ 反对称</text>
+  <text x="88" y="200" fill="#7c3aed" font-size="13" font-weight="700">辛形式 ω(u, v) = uᵀ J v 反对称</text>
+</svg>`,
+
+  lie: `<svg viewBox="0 0 400 220" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif">
+  <ellipse cx="120" cy="110" rx="70" ry="50" fill="#dbeafe" stroke="#2563eb" stroke-width="1.6"/>
+  <text x="100" y="115" fill="#2563eb" font-size="16" font-weight="700" font-style="italic">G</text>
+  <text x="60" y="184" fill="#2563eb" font-size="12" font-weight="700">Lie 群</text>
+  <ellipse cx="290" cy="110" rx="70" ry="50" fill="#f3e8ff" stroke="#7c3aed" stroke-width="1.6"/>
+  <text x="274" y="115" fill="#7c3aed" font-size="16" font-weight="700" font-style="italic">𝔤</text>
+  <text x="238" y="184" fill="#7c3aed" font-size="12" font-weight="700">Lie 代数</text>
+  <line x1="192" y1="110" x2="218" y2="110" stroke="#0f172a" stroke-width="1.8"/>
+  <line x1="218" y1="110" x2="202" y2="102" stroke="#0f172a" stroke-width="1.8"/>
+  <line x1="218" y1="110" x2="202" y2="118" stroke="#0f172a" stroke-width="1.8"/>
+  <text x="174" y="98" fill="#0f172a" font-size="11" font-weight="700">exp</text>
+  <text x="176" y="132" fill="#0f172a" font-size="11" font-weight="700">log</text>
+</svg>`,
+
+  hermitian: `<svg viewBox="0 0 360 220" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif">
+  <defs><marker id="la-hh" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><polygon points="0 0, 8 4, 0 8" fill="#dc2626"/></marker></defs>
+  <circle cx="180" cy="110" r="80" fill="#faf5ff" stroke="#7c3aed" stroke-width="1.6"/>
+  <line x1="100" y1="110" x2="260" y2="110" stroke="#94a3b8" stroke-width="1.4"/>
+  <line x1="180" y1="30" x2="180" y2="190" stroke="#94a3b8" stroke-width="1.4"/>
+  <line x1="180" y1="110" x2="235" y2="70" stroke="#dc2626" stroke-width="2.4" marker-end="url(#la-hh)"/>
+  <text x="148" y="98" fill="#7c3aed" font-size="14" font-weight="700" font-style="italic">z</text>
+  <text x="240" y="66" fill="#dc2626" font-size="14" font-weight="700" font-style="italic">Az</text>
+  <text x="20" y="28" fill="#7c3aed" font-size="12" font-style="italic">厄米内积 ⟨z, w⟩ = Σ z̄ᵢ wᵢ</text>
+</svg>`,
+
+  qm: `<svg viewBox="0 0 380 220" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif">
+  <circle cx="110" cy="110" r="56" fill="#dbeafe" stroke="#2563eb" stroke-width="1.8"/>
+  <text x="86" y="120" fill="#2563eb" font-size="22" font-weight="700" font-style="italic">|ψ⟩</text>
+  <circle cx="270" cy="110" r="56" fill="#fee2e2" stroke="#dc2626" stroke-width="1.8"/>
+  <text x="240" y="120" fill="#dc2626" font-size="22" font-weight="700" font-style="italic">A|ψ⟩</text>
+  <line x1="172" y1="110" x2="208" y2="110" stroke="#0f172a" stroke-width="2"/>
+  <line x1="208" y1="110" x2="190" y2="100" stroke="#0f172a" stroke-width="2"/>
+  <line x1="208" y1="110" x2="190" y2="120" stroke="#0f172a" stroke-width="2"/>
+  <text x="170" y="92" fill="#0f172a" font-size="14" font-weight="700" font-style="italic">A</text>
+  <text x="80" y="200" fill="#475569" font-size="12">量子态</text>
+  <text x="242" y="200" fill="#475569" font-size="12">观测结果</text>
 </svg>`
 };
 
 /* =========================================================
-   数据
+   数据 —— 五大章节
    ========================================================= */
 const LA_TAG_LABEL = {def:'定 义', thm:'定 理', der:'推 导', exa:'例 子', app:'应 用', his:'注 记'};
 
 const LA_DATA = [
-/* ================= 第一章 ================= */
+/* ============================================================
+   第一章 · 线性空间
+   ============================================================ */
 {
   id:'la-ch1', num:'第一章', title:'线性空间', en:'LINEAR SPACES',
   sub:'从直线到抽象向量空间',
-  desc:'线性结构是关于"加法"和"数乘"的结构。一个集合如果有这两个运算，我们称其为线性空间。本章从最直观的直线出发，建立线性空间、子空间、基、维数、线性映射与矩阵的完整语言。',
+  desc:'线性结构就是关于"加法"和"数乘"的结构。一个集合如果有这两个运算，我们称其为线性空间。本章从最直观的直线出发，建立线性空间、子空间、基、维数、线性映射与矩阵的完整语言。',
   sections:[
     {name:'1.1 线性空间与子空间', color:'#2563eb', desc:'加法与数乘——线性结构的起点', items:[
-      {id:'la-k1-1', name:'线性空间的定义', tags:['def','exa'], brief:'带加法和数乘两个运算、满足八条公理的集合。',
-        fig:'line', figCap:'图 1.1　直线 $y = at+b$ 用"加法+数乘"描述',
-        body:`<p>描述直线关系 $\\boldsymbol{r} = t\\boldsymbol{a} + \\boldsymbol{b}$ 需要两个操作：<strong>加法</strong> $\\boldsymbol{a} + \\boldsymbol{b}$ 与<strong>数乘</strong> $t\\boldsymbol{a}$。</p>
+      {id:'la-k1-1', name:'线性空间的定义', tags:['def','exa'], brief:'带加法和数乘、满足八条公理的集合。',
+        fig:'line', figCap:'图 1.1　直线 $y = at+b$ 用"加法 + 数乘"描述',
+        body:`<p>描述直线关系 $\\boldsymbol{r} = t\\boldsymbol{a} + \\boldsymbol{b}$ 需要两个操作：<strong>加法</strong> $\\boldsymbol{a}+\\boldsymbol{b}$ 与<strong>数乘</strong> $t\\boldsymbol{a}$。</p>
 <p><strong>定义</strong>　数域 $k$（$k=\\mathbb{R}$ 或 $\\mathbb{C}$）上的<strong>线性空间</strong>是一个集合 $V$ 及二元运算</p>
-<div class="la-fml">$$\\text{加法：} V\\times V\\to V, \\qquad \\text{数乘：} k\\times V\\to V$$
-$$\\begin{aligned}
-&1.\\ \\boldsymbol{u}+\\boldsymbol{v}=\\boldsymbol{v}+\\boldsymbol{u} &&2.\\ (\\boldsymbol{u}+\\boldsymbol{v})+\\boldsymbol{w}=\\boldsymbol{u}+(\\boldsymbol{v}+\\boldsymbol{w})\\\\
-&3.\\ \\exists\\boldsymbol{0},\\ \\boldsymbol{0}+\\boldsymbol{u}=\\boldsymbol{u} &&4.\\ \\exists(-\\boldsymbol{u}),\\ \\boldsymbol{u}+(-\\boldsymbol{u})=\\boldsymbol{0}\\\\
-&5.\\ 1\\boldsymbol{u}=\\boldsymbol{u} &&6.\\ a(b\\boldsymbol{u})=(ab)\\boldsymbol{u}\\\\
-&7.\\ a(\\boldsymbol{u}+\\boldsymbol{v})=a\\boldsymbol{u}+a\\boldsymbol{v} &&8.\\ (a+b)\\boldsymbol{u}=a\\boldsymbol{u}+b\\boldsymbol{u}
+<div class="la-fml">$$\\text{加法：} V\\times V\\to V, \\qquad \\text{数乘：} k\\times V\\to V$$</div>
+<p>使得对任意 $\\boldsymbol u,\\boldsymbol v,\\boldsymbol w\\in V$，$a,b\\in k$ 成立：</p>
+<div class="la-fml">$$\\begin{aligned}
+&1.\\ \\boldsymbol u+\\boldsymbol v=\\boldsymbol v+\\boldsymbol u &&2.\\ (\\boldsymbol u+\\boldsymbol v)+\\boldsymbol w=\\boldsymbol u+(\\boldsymbol v+\\boldsymbol w)\\\\
+&3.\\ \\exists\\boldsymbol 0,\\ \\boldsymbol 0+\\boldsymbol u=\\boldsymbol u &&4.\\ \\exists(-\\boldsymbol u),\\ \\boldsymbol u+(-\\boldsymbol u)=\\boldsymbol 0\\\\
+&5.\\ 1\\boldsymbol u=\\boldsymbol u &&6.\\ a(b\\boldsymbol u)=(ab)\\boldsymbol u\\\\
+&7.\\ a(\\boldsymbol u+\\boldsymbol v)=a\\boldsymbol u+a\\boldsymbol v &&8.\\ (a+b)\\boldsymbol u=a\\boldsymbol u+b\\boldsymbol u
 \\end{aligned}$$</div>
-<p><strong>常见例子</strong></p>
+<p><strong>典型例子</strong></p>
 <ul>
 <li>$\\mathbb{R}^3$、$\\mathbb{R}^n$ 是实线性空间</li>
-<li>所有一元多项式 $\\mathbb{R}[x]$ 构成线性空间</li>
-<li>次数 $\\leq n$ 的多项式构成线性空间（但恰好次数 $n$ 的不构成）</li>
+<li>全体一元多项式 $\\mathbb{R}[x]$ 构成线性空间</li>
+<li>次数 $\\leq n$ 的多项式构成线性空间（恰好 $n$ 次的不构成）</li>
+<li>微分算子 $D$ 的核 $\\{f\\mid Df=0\\}$ 构成线性空间</li>
 <li>量子物理态构成复线性空间（Hilbert 空间）</li>
-<li>微分方程 $Df=0$ 的解集构成线性空间</li>
-</ul>`},
+</ul>
+<div class="la-callout la-his">注记　同一个集合若定义不同的线性运算，会构成不同的线性空间；若定义的运算不是线性运算，则不能构成线性空间。</div>`},
       {id:'la-k1-2', name:'直和', tags:['def','exa'], brief:'两个线性空间"并排"组合成一个新的线性空间。',
         body:`<p>给定两个线性空间 $V,W$，定义一个新的线性空间 $V\\oplus W$，称为 $V$ 和 $W$ 的<strong>直和</strong>。</p>
 <div class="la-fml">$$V\\oplus W = \\{(v,w)\\mid v\\in V,\\ w\\in W\\}$$
 $$(v_1,w_1)+(v_2,w_2):=(v_1+v_2,\\ w_1+w_2),\\quad \\lambda(v,w):=(\\lambda v,\\ \\lambda w)$$</div>
 <p>类似地可以定义 $m$ 个线性空间的直和 $V_1\\oplus\\cdots\\oplus V_m$。</p>
-<div class="la-callout la-his">注记　$\\mathbb{R}^n = \\underbrace{\\mathbb{R}\\oplus\\cdots\\oplus\\mathbb{R}}_{n}$，也可以写成 $\\mathbb{R}^{m+k}=\\mathbb{R}^m\\oplus\\mathbb{R}^k$。</div>`},
+<div class="la-callout la-his">例　$\\mathbb{R}^n = \\underbrace{\\mathbb{R}\\oplus\\cdots\\oplus\\mathbb{R}}_{n}$；$\\mathbb{R}^{m+k}=\\mathbb{R}^m\\oplus\\mathbb{R}^k$。</div>`},
       {id:'la-k1-3', name:'线性子空间', tags:['def','exa'], brief:'包含零元、对加法和数乘封闭的 $V$ 的子集。',
         fig:'subspace', figCap:'图 1.2　过原点的直线是 $\\mathbb{R}^2$ 的线性子空间；不过原点则不是',
         body:`<p><strong>定义</strong>　$V$ 的子集 $W$ 称为 $V$ 的<strong>线性子空间</strong>，如果 $W$ 包含零元，且对加法和数乘封闭：</p>
@@ -487,83 +553,87 @@ $$(v_1,w_1)+(v_2,w_2):=(v_1+v_2,\\ w_1+w_2),\\quad \\lambda(v,w):=(\\lambda v,\\
 <div class="la-callout la-app">典型例子：$\\mathbb{R}^3$ 中过原点的平面是子空间；不过原点的平面不是。$\\mathbb{R}[x]$ 中所有满足 $f(x_0)=0$ 的多项式构成子空间。</div>`}
     ]},
     {name:'1.2 线性组合与线性相关性', color:'#7c3aed', desc:'向量组的"基本"与"冗余"', items:[
-      {id:'la-k1-4', name:'线性组合与张成', tags:['def','exa'], brief:'$u = \\lambda_1 v_1 + \\cdots + \\lambda_m v_m$，$u$ 由 $v_i$ 线性表达。',
-        fig:'span', figCap:'图 1.3　$\\mathrm{Span}\\{u,v\\}$ 是由两个向量张成的平面',
-        body:`<p><strong>定义</strong>　设 $v_1,\\dots,v_m\\in V$，$\\lambda_1,\\dots,\\lambda_m\\in k$，向量 $u = \\lambda_1 v_1 + \\cdots + \\lambda_m v_m$ 称为 $v_1,\\dots,v_m$ 的<strong>线性组合</strong>。所有这样表达的向量构成的集合记为</p>
-<div class="la-fml">$$\\mathrm{Span}\\{v_1,\\dots,v_m\\}$$</div>
-<p><strong>命题</strong>　$\\mathrm{Span}\\{v_1,\\dots,v_m\\}$ 是 $V$ 的线性子空间。</p>
-<div class="la-callout la-his">注记　线性表达的方式可能不唯一：例如 $u = v_1+v_2+v_3 = 2v_1+2v_2$。什么时候唯一？这引出了线性无关的概念。</div>`},
-      {id:'la-k1-5', name:'线性相关与线性无关', tags:['def','thm'], brief:'存在非平凡零组合 ⟺ 相关；否则无关。',
-        body:`<p><strong>定义</strong>　$V$ 中向量 $v_1,\\dots,v_m$ 称为<strong>线性相关</strong>，如果存在不全为 0 的 $\\lambda_1,\\dots,\\lambda_m$ 使得</p>
-<div class="la-fml">$$\\lambda_1 v_1 + \\cdots + \\lambda_m v_m = \\boldsymbol{0}$$</div>
-<p>否则称 $v_1,\\dots,v_m$ <strong>线性无关</strong>。等价地，零元只能被平凡地线性表达。</p>
-<p><strong>命题</strong>　$v_1,\\dots,v_m$ 线性相关 $\\iff$ 其中某个向量可被其他向量线性表达。</p>
-<p><strong>命题</strong>　若 $v_1,\\dots,v_m$ 线性无关，$u$ 是它们的线性组合，则表达方式唯一。</p>
+      {id:'la-k1-4', name:'线性组合与张成', tags:['def','exa'], brief:'$\\boldsymbol u = \\lambda_1 \\boldsymbol v_1 + \\cdots + \\lambda_m \\boldsymbol v_m$，$\\boldsymbol u$ 由 $\\boldsymbol v_i$ 线性表达。',
+        fig:'span', figCap:'图 1.3　$\\mathrm{Span}\\{\\boldsymbol u,\\boldsymbol v\\}$ 是由两个向量张成的平面',
+        body:`<p><strong>定义</strong>　设 $\\boldsymbol v_1,\\dots,\\boldsymbol v_m\\in V$，$\\lambda_1,\\dots,\\lambda_m\\in k$，向量 $\\boldsymbol u = \\lambda_1\\boldsymbol v_1 + \\cdots + \\lambda_m\\boldsymbol v_m$ 称为 $\\boldsymbol v_1,\\dots,\\boldsymbol v_m$ 的<strong>线性组合</strong>。所有这样表达的向量构成的集合记为</p>
+<div class="la-fml">$$\\mathrm{Span}\\{\\boldsymbol v_1,\\dots,\\boldsymbol v_m\\}$$</div>
+<p><strong>命题</strong>　$\\mathrm{Span}\\{\\boldsymbol v_1,\\dots,\\boldsymbol v_m\\}$ 是 $V$ 的线性子空间。</p>
+<div class="la-callout la-his">注记　线性表达的方式可能不唯一：例如 $\\boldsymbol u = \\boldsymbol v_1+\\boldsymbol v_2+\\boldsymbol v_3 = 2\\boldsymbol v_1+2\\boldsymbol v_2$。什么时候唯一？这引出了线性无关的概念。</div>`},
+      {id:'la-k1-5', name:'线性相关与线性无关', tags:['def','thm'], brief:'存在非平凡的零线性组合 ⟺ 相关；否则无关。',
+        body:`<p><strong>定义</strong>　$V$ 中向量 $\\boldsymbol v_1,\\dots,\\boldsymbol v_m$ 称为<strong>线性相关</strong>，如果存在不全为 $0$ 的 $\\lambda_1,\\dots,\\lambda_m$ 使得</p>
+<div class="la-fml">$$\\lambda_1\\boldsymbol v_1 + \\cdots + \\lambda_m\\boldsymbol v_m = \\boldsymbol 0$$</div>
+<p>否则称 $\\boldsymbol v_1,\\dots,\\boldsymbol v_m$ <strong>线性无关</strong>。等价地，零元只能被平凡地线性表达。</p>
+<p><strong>命题</strong>　$\\boldsymbol v_1,\\dots,\\boldsymbol v_m$ 线性相关 $\\iff$ 其中某个向量可被其他向量线性表达。</p>
+<p><strong>命题</strong>　若 $\\boldsymbol v_1,\\dots,\\boldsymbol v_m$ 线性无关，$\\boldsymbol u$ 是它们的线性组合，则表达方式唯一。</p>
 <div class="la-callout la-app">几何直观：两向量线性相关 $\\iff$ 共线；$\\mathbb{R}^3$ 中三向量线性相关 $\\iff$ 共面。</div>`}
     ]},
     {name:'1.3 基与维数', color:'#0f766e', desc:'一个线性空间的"坐标系统"', items:[
       {id:'la-k1-6', name:'基与维数', tags:['def','thm'], brief:'线性无关且能张成整个空间的一组向量。',
-        fig:'basis', figCap:'图 1.4　基 $\\{v_1,v_2\\}$ 给向量 $u$ 一个唯一的坐标 $(1,2)$',
-        body:`<p><strong>定义</strong>　$V$ 的一组向量 $v_1,\\dots,v_n$ 称为 $V$ 的<strong>基</strong>，如果它们线性无关且 $V=\\mathrm{Span}\\{v_1,\\dots,v_n\\}$。</p>
-<p><strong>命题</strong>　设 $v_1,\\dots,v_n$ 是 $V$ 的基，则映射 $\\phi: k^n\\to V$，$(\\lambda_1,\\dots,\\lambda_n)\\mapsto \\sum_i\\lambda_i v_i$ 是 $k^n$ 与 $V$ 之间的一一对应。因此 $V$ 中每个向量都可以用一组数（坐标）唯一标记。</p>
+        fig:'basis', figCap:'图 1.4　基 $\\{\\boldsymbol v_1,\\boldsymbol v_2\\}$ 给向量 $\\boldsymbol u$ 一个唯一的坐标 $(1,2)$',
+        body:`<p><strong>定义</strong>　$V$ 的一组向量 $\\boldsymbol v_1,\\dots,\\boldsymbol v_n$ 称为 $V$ 的<strong>基</strong>，如果它们线性无关且 $V=\\mathrm{Span}\\{\\boldsymbol v_1,\\dots,\\boldsymbol v_n\\}$。</p>
+<p><strong>命题</strong>　设 $\\boldsymbol v_1,\\dots,\\boldsymbol v_n$ 是 $V$ 的基，则映射 $\\phi: k^n\\to V$，$(\\lambda_1,\\dots,\\lambda_n)\\mapsto \\sum_i\\lambda_i\\boldsymbol v_i$ 是 $k^n$ 与 $V$ 之间的一一对应。因此 $V$ 中每个向量都可以用一组数（坐标）唯一标记。</p>
 <p><strong>定理</strong>　$V$ 的任意两组基都包含相同数目的向量。</p>
-<p><strong>定义</strong>　这个共同的数 $n$ 称为 $V$ 的<strong>维数</strong>，记为 $\\dim V = n$。</p>`},
+<p><strong>定义</strong>　这个共同的数 $n$ 称为 $V$ 的<strong>维数</strong>，记为 $\\dim V = n$。</p>
+<div class="la-callout la-his">注记　$n$ 维空间中找一组基，等价于找 $n$ 个线性无关的向量。</div>`},
       {id:'la-k1-7', name:'向量组的秩', tags:['def','thm'], brief:'极大线性无关组中向量的个数。',
-        body:`<p><strong>定义</strong>　$S$ 的一组向量 $\\{u_1,\\dots,u_r\\}$ 称为 $S$ 的<strong>极大线性无关组</strong>，如果它们线性无关，且对任意 $u\\in S$，$\\{u,u_1,\\dots,u_r\\}$ 都线性相关。</p>
-<p><strong>命题</strong>　$\\{u_1,\\dots,u_r\\}$ 是 $S$ 的极大线性无关组 $\\iff$ 它们是 $\\mathrm{Span}\\,S$ 的基，因此 $r=\\dim\\mathrm{Span}\\,S$。</p>
-<p><strong>定义</strong>　向量组 $\\{v_1,\\dots,v_m\\}$ 的极大线性无关组的向量个数 $r$ 称为向量组的<strong>秩</strong>，记为 $r=\\mathrm{rank}\\{v_1,\\dots,v_m\\}$。</p>`}
+        body:`<p><strong>定义</strong>　$S$ 的一组向量 $\\{\\boldsymbol u_1,\\dots,\\boldsymbol u_r\\}$ 称为 $S$ 的<strong>极大线性无关组</strong>，如果它们线性无关，且对任意 $\\boldsymbol u\\in S$，$\\{\\boldsymbol u,\\boldsymbol u_1,\\dots,\\boldsymbol u_r\\}$ 都线性相关。</p>
+<p><strong>命题</strong>　$\\{\\boldsymbol u_1,\\dots,\\boldsymbol u_r\\}$ 是 $S$ 的极大线性无关组 $\\iff$ 它们是 $\\mathrm{Span}\\,S$ 的基，因此 $r=\\dim\\mathrm{Span}\\,S$。</p>
+<p><strong>定义</strong>　向量组 $\\{\\boldsymbol v_1,\\dots,\\boldsymbol v_m\\}$ 的极大线性无关组的向量个数 $r$ 称为向量组的<strong>秩</strong>，记为 $r=\\mathrm{rank}\\{\\boldsymbol v_1,\\dots,\\boldsymbol v_m\\}$。</p>`}
     ]},
     {name:'1.4 线性映射与矩阵', color:'#c2410c', desc:'保持线性结构的映射与矩阵的一一对应', items:[
       {id:'la-k1-8', name:'线性映射', tags:['def','exa'], brief:'保持加法与数乘的映射。',
         fig:'linmap', figCap:'图 1.5　线性映射 $f: V\\to W$ 保持线性结构',
         body:`<p><strong>定义</strong>　两线性空间 $V,W$ 之间的映射 $f: V\\to W$ 称为<strong>线性映射</strong>，如果</p>
-<div class="la-fml">$$\\text{保加法：}f(v_1+v_2)=f(v_1)+f(v_2),\\qquad \\text{保数乘：}f(\\lambda v)=\\lambda f(v)$$</div>
+<div class="la-fml">$$\\text{保加法：}f(\\boldsymbol v_1+\\boldsymbol v_2)=f(\\boldsymbol v_1)+f(\\boldsymbol v_2),\\qquad \\text{保数乘：}f(\\lambda\\boldsymbol v)=\\lambda f(\\boldsymbol v)$$</div>
 <p>特别地，$f$ 一定把零向量映到零向量。</p>
 <p><strong>命题</strong>　线性映射 $f$ 由其在基上的取值完全确定。</p>
-<div class="la-callout la-app">例：$f(x,y)=2x+3y$ 是线性映射；$f(x,y)=2x+3y-1$ 不是。旋转 $f(x,y)=(-y,x)$ 是线性映射。</div>`},
+<div class="la-callout la-app">例　$f(x,y)=2x+3y$ 是线性映射；$f(x,y)=2x+3y-1$ 不是。旋转 $f(x,y)=(-y,x)$ 是线性映射。</div>`},
       {id:'la-k1-9', name:'像与核', tags:['def','thm'], brief:'$\\mathrm{im}\\,f\\subset W$，$\\ker f\\subset V$，都是子空间。',
         body:`<p><strong>定义</strong>　设 $f: V\\to W$ 是线性映射。</p>
 <ul>
-<li><strong>像</strong>：$\\mathrm{im}(f)=f(V)=\\{w\\in W\\mid \\exists v\\in V,f(v)=w\\}$</li>
-<li><strong>核</strong>：$\\ker(f)=\\{v\\in V\\mid f(v)=\\boldsymbol{0}\\}$</li>
+<li><strong>像</strong>：$\\mathrm{im}(f)=f(V)=\\{\\boldsymbol w\\in W\\mid \\exists \\boldsymbol v\\in V,\\ f(\\boldsymbol v)=\\boldsymbol w\\}$</li>
+<li><strong>核</strong>：$\\ker(f)=\\{\\boldsymbol v\\in V\\mid f(\\boldsymbol v)=\\boldsymbol 0\\}$</li>
 </ul>
 <p><strong>命题</strong>　$\\mathrm{im}(f)$ 是 $W$ 的子空间，$\\ker(f)$ 是 $V$ 的子空间。</p>
 <p><strong>命题</strong>　$f$ 是单射 $\\iff \\ker(f)=\\{0\\}$。$f$ 是线性同构 $\\iff \\mathrm{im}\\,f=W$ 且 $\\ker f=\\{0\\}$。</p>`},
       {id:'la-k1-10', name:'矩阵与线性映射的对应', tags:['def','thm'], brief:'$m\\times n$ 矩阵与 $\\mathbb{R}^n\\to\\mathbb{R}^m$ 的线性映射一一对应。',
-        body:`<p>设 $f:\\mathbb{R}^n\\to\\mathbb{R}^m$ 是线性映射，$\\{e_1,\\dots,e_n\\}$ 是标准基。把向量 $f(e_j)$ 作为列排起来，得到 $m\\times n$ 矩阵</p>
-<div class="la-fml">$$A = \\bigl[\\,f(e_1)\\ f(e_2)\\ \\cdots\\ f(e_n)\\,\\bigr] = \\begin{pmatrix} a_{11} & \\cdots & a_{1n}\\\\ \\vdots & & \\vdots\\\\ a_{m1} & \\cdots & a_{mn}\\end{pmatrix}$$</div>
-<p><strong>命题</strong>　线性映射 $f:\\mathbb{R}^n\\to\\mathbb{R}^m$ 与 $m\\times n$ 矩阵一一对应。向量形式的线性映射即矩阵乘法 $f(x) = Ax$。</p>
+        body:`<p>设 $f:\\mathbb{R}^n\\to\\mathbb{R}^m$ 是线性映射，$\\{\\boldsymbol e_1,\\dots,\\boldsymbol e_n\\}$ 是标准基。把向量 $f(\\boldsymbol e_j)$ 作为列排起来，得到 $m\\times n$ 矩阵</p>
+<div class="la-fml">$$A = \\bigl[\\,f(\\boldsymbol e_1)\\ f(\\boldsymbol e_2)\\ \\cdots\\ f(\\boldsymbol e_n)\\,\\bigr] = \\begin{pmatrix} a_{11} & \\cdots & a_{1n}\\\\ \\vdots & & \\vdots\\\\ a_{m1} & \\cdots & a_{mn}\\end{pmatrix}$$</div>
+<p><strong>命题</strong>　线性映射 $f:\\mathbb{R}^n\\to\\mathbb{R}^m$ 与 $m\\times n$ 矩阵一一对应。向量形式的线性映射即矩阵乘法 $f(\\boldsymbol x) = A\\boldsymbol x$。</p>
 <div class="la-callout la-his">注记　矩阵乘法对应线性映射的复合——这是矩阵乘法定义的几何根源。</div>`}
     ]}
   ]
 },
 
-/* ================= 第二章 ================= */
+/* ============================================================
+   第二章 · 矩阵与线性方程组
+   ============================================================ */
 {
-  id:'la-ch2', num:'第二章', title:'矩阵与线性方程组', en:'MATRICES & SYSTEMS',
+  id:'la-ch2', num:'第二章', title:'矩阵与线性方程组', en:'MATRICES & LINEAR SYSTEMS',
   sub:'消元法、秩与解空间',
-  desc:'矩阵的乘法对应线性映射的复合。本章系统讨论矩阵运算、线性方程组求解与秩—零化度定理，完整揭示线性方程组的解结构。',
+  desc:'矩阵的乘法对应线性映射的复合。本章系统讨论矩阵运算、线性方程组的求解与秩—零化度定理，完整揭示线性方程组的解结构。',
   sections:[
     {name:'2.1 矩阵的基本运算', color:'#0d9488', desc:'加法、数乘、乘法与分块', items:[
       {id:'la-k2-1', name:'矩阵的加法与数乘', tags:['def','exa'], brief:'$M_{m\\times n}$ 是 $mn$ 维线性空间。',
         body:`<p>一个 $m\\times n$ 矩阵记为 $A=(a_{ij})$。<strong>加法</strong> $A+B=(a_{ij}+b_{ij})$；<strong>数乘</strong> $\\lambda A=(\\lambda a_{ij})$。</p>
 <p><strong>命题</strong>　$M_{m\\times n}$ 在矩阵加法和数乘下构成线性空间，且 $\\dim M_{m\\times n}=mn$。</p>`},
       {id:'la-k2-2', name:'矩阵的乘法', tags:['def','der'], brief:'$(AB)_{ij}=\\sum_k a_{ik}b_{kj}$。',
+        fig:'matmul', figCap:'图 2.1　矩阵乘法即"节点连接"：$c_{ij}=\\sum_k a_{ik}b_{kj}$',
         body:`<p><strong>定义</strong>　设 $A$ 是 $m\\times p$ 矩阵，$B$ 是 $p\\times n$ 矩阵。乘积 $C=AB$ 是 $m\\times n$ 矩阵，其 $(i,j)$ 分量为</p>
 <div class="la-fml">$$c_{ij} = \\sum_{k=1}^{p} a_{ik} b_{kj}$$</div>
 <p>即 $(AB)$ 的 $(i,j)$ 分量是 $A$ 的第 $i$ 行与 $B$ 的第 $j$ 列对应位置相乘求和。</p>
-<div class="la-callout la-his">注记　矩阵乘积可以理解为"节点的连接"：$a_{ik}$ 是从 $i$ 到 $k$ 的权值，$b_{kj}$ 是从 $k$ 到 $j$ 的权值，$c_{ij}=\\sum_k a_{ik}b_{kj}$ 是从 $i$ 经过 $k$ 到 $j$ 的所有路径权值之和。</div>
+<div class="la-callout la-his">注记　$a_{ik}$ 可看作从 $i$ 到 $k$ 的权值，$b_{kj}$ 从 $k$ 到 $j$ 的权值，$c_{ij}=\\sum_k a_{ik}b_{kj}$ 是从 $i$ 经过 $k$ 到 $j$ 的所有路径权值之和。</div>
 <p>性质：结合律 $(AB)C=A(BC)$；一般不满足交换律 $AB\\neq BA$。</p>`},
-      {id:'la-k2-3', name:'矩阵乘法与映射复合', tags:['thm','der'], brief:'$A(Bx)=(AB)x$：矩阵乘法对应线性映射的复合。',
+      {id:'la-k2-3', name:'矩阵乘法与映射复合', tags:['thm','der'], brief:'$A(B\\boldsymbol x)=(AB)\\boldsymbol x$：矩阵乘法对应线性映射的复合。',
         body:`<p><strong>命题</strong>　若线性映射 $f:\\mathbb{R}^p\\to\\mathbb{R}^m$ 对应 $m\\times p$ 矩阵 $A$，$g:\\mathbb{R}^n\\to\\mathbb{R}^p$ 对应 $p\\times n$ 矩阵 $B$，则复合 $f\\circ g:\\mathbb{R}^n\\to\\mathbb{R}^m$ 对应 $AB$。</p>
-<p>矩阵形式即 $A(Bx) = (AB)x$。矩阵乘法的结合律对应映射复合的结合律。</p>`},
+<p>矩阵形式即 $A(B\\boldsymbol x) = (AB)\\boldsymbol x$。矩阵乘法的结合律对应映射复合的结合律。</p>`},
       {id:'la-k2-4', name:'分块矩阵', tags:['def','exa'], brief:'把矩阵按块划分，乘积块由小块相乘再相加。',
         body:`<p>将 $m\\times n$ 矩阵按行列划分为若干块：</p>
 <div class="la-fml">$$A = \\begin{pmatrix} A_{11} & A_{12} & \\cdots\\\\ A_{21} & A_{22} & \\cdots\\\\ \\vdots & \\vdots & \\ddots\\end{pmatrix}$$</div>
 <p>则乘积 $C=AB$ 的分块表达为 $C_{ij} = \\sum_k A_{ik}B_{kj}$。</p>
-<div class="la-callout la-his">注记　每块的乘积顺序重要：$A_{11}B_{11}+A_{12}B_{21}$ 中 $A$ 块在前，$B$ 块在后。特别地，把 $B$ 分成列向量 $B=[\\beta_1\\ \\cdots\\ \\beta_n]$，则 $AB=[A\\beta_1\\ \\cdots\\ A\\beta_n]$。</div>`}
+<div class="la-callout la-his">注记　每块的乘积顺序重要：$A_{11}B_{11}+A_{12}B_{21}$ 中 $A$ 块在前，$B$ 块在后。特别地，把 $B$ 分成列向量 $B=[\\boldsymbol\\beta_1\\ \\cdots\\ \\boldsymbol\\beta_n]$，则 $AB=[A\\boldsymbol\\beta_1\\ \\cdots\\ A\\boldsymbol\\beta_n]$。</div>`}
     ]},
-    {name:'2.2 线性方程组', color:'#ea580c', desc:'消元法与初等行变换', items:[
+    {name:'2.2 线性方程组与消元法', color:'#ea580c', desc:'初等行变换与解的存在性', items:[
       {id:'la-k2-5', name:'消元法与初等行变换', tags:['def','der'], brief:'三种行变换：换行、乘非零常数、行相加——保持解不变。',
         body:`<p><strong>三种初等变换</strong>（不改变方程组的解）：</p>
 <ul>
@@ -573,23 +643,23 @@ $$(v_1,w_1)+(v_2,w_2):=(v_1+v_2,\\ w_1+w_2),\\quad \\lambda(v,w):=(\\lambda v,\\
 </ul>
 <p><strong>命题</strong>　通过初等行变换可以把增广矩阵化为阶梯形。由此可以判断线性方程组是否有解。</p>
 <div class="la-callout la-app">历史一瞥　高斯 1801 年用消元法预测小行星谷神星的轨道，使 24 岁的高斯声名鹊起，也推动了线性方程组理论的发展。</div>`},
-      {id:'la-k2-6', name:'矩阵形式与增广矩阵', tags:['def','thm'], brief:'$Ax=b$；系数矩阵与增广矩阵 $\\bar{A}=[A|b]$。',
+      {id:'la-k2-6', name:'矩阵形式与增广矩阵', tags:['def','thm'], brief:'$A\\boldsymbol x=\\boldsymbol b$；系数矩阵与增广矩阵 $\\bar{A}=[A|\\boldsymbol b]$。',
         body:`<p>线性方程组写成矩阵形式</p>
-<div class="la-fml">$$Ax = b,\\quad A=\\begin{pmatrix} a_{11} & \\cdots & a_{1n}\\\\ \\vdots & & \\vdots\\\\ a_{m1} & \\cdots & a_{mn}\\end{pmatrix},\\ x=\\begin{pmatrix}x_1\\\\ \\vdots\\\\ x_n\\end{pmatrix},\\ b=\\begin{pmatrix}b_1\\\\ \\vdots\\\\ b_m\\end{pmatrix}$$</div>
-<p>把 $b$ 作为额外的一列放在 $A$ 右边，得到 $m\\times(n+1)$ 的<strong>增广矩阵</strong> $\\bar{A}=[A\\,|\\,b]$。</p>
+<div class="la-fml">$$A\\boldsymbol x = \\boldsymbol b,\\quad A=\\begin{pmatrix} a_{11} & \\cdots & a_{1n}\\\\ \\vdots & & \\vdots\\\\ a_{m1} & \\cdots & a_{mn}\\end{pmatrix},\\ \\boldsymbol x=\\begin{pmatrix}x_1\\\\ \\vdots\\\\ x_n\\end{pmatrix},\\ \\boldsymbol b=\\begin{pmatrix}b_1\\\\ \\vdots\\\\ b_m\\end{pmatrix}$$</div>
+<p>把 $\\boldsymbol b$ 作为额外的一列放在 $A$ 右边，得到 $m\\times(n+1)$ 的<strong>增广矩阵</strong> $\\bar{A}=[A\\,|\\,\\boldsymbol b]$。</p>
 <p><strong>命题</strong>　线性方程组有解 $\\iff$ 增广矩阵化为阶梯形后，$b_{r+1}'=\\cdots=b_m'=0$。</p>`},
-      {id:'la-k2-7', name:'齐次线性方程组', tags:['def','thm'], brief:'$Ax=0$；总有零解；通解 = 特解 + 齐次通解。',
-        body:`<p>方程 $Ax=0$ 称为<strong>齐次线性方程组</strong>，总有零解（平凡解）。</p>
-<p>设 $x_0$ 是非齐次方程 $Ax=b$ 的解，$u$ 是齐次方程 $Ax=0$ 的解，则 $x_0+u$ 也是非齐次方程的解。因此</p>
+      {id:'la-k2-7', name:'齐次线性方程组', tags:['def','thm'], brief:'$A\\boldsymbol x=0$；总有零解；非齐次通解 = 特解 + 齐次通解。',
+        body:`<p>方程 $A\\boldsymbol x=0$ 称为<strong>齐次线性方程组</strong>，总有零解（平凡解）。</p>
+<p>设 $\\boldsymbol x_0$ 是非齐次方程 $A\\boldsymbol x=\\boldsymbol b$ 的解，$\\boldsymbol u$ 是齐次方程 $A\\boldsymbol x=0$ 的解，则 $\\boldsymbol x_0+\\boldsymbol u$ 也是非齐次方程的解。因此</p>
 <div class="la-fml">$$\\boxed{\\text{非齐次通解} = \\text{非齐次特解} + \\text{齐次通解}}$$</div>
 <p><strong>推论</strong>　如果齐次方程只有零解，则非齐次方程的解（如果存在）唯一。</p>`}
     ]},
-    {name:'2.3 线性方程组的解空间', color:'#4f46e5', desc:'秩—零化度定理与解的结构', items:[
-      {id:'la-k2-8', name:'齐次方程组的解空间', tags:['def','thm'], brief:'$K=\\{x\\mid Ax=0\\}$ 是 $\\mathbb{R}^n$ 的线性子空间。',
-        body:`<p>齐次方程 $Ax=0$ 的所有解构成集合 $K = \\{x\\in\\mathbb{R}^n\\mid Ax=0\\}$。</p>
-<p><strong>命题</strong>　$K$ 是 $\\mathbb{R}^n$ 的线性子空间。设 $\\{u_1,\\dots,u_s\\}$ 是 $K$ 的一组基，则齐次方程的通解为 $x = c_1u_1+\\cdots+c_su_s$。</p>`},
+    {name:'2.3 矩阵的秩与解空间', color:'#4f46e5', desc:'秩—零化度定理与解的结构', items:[
+      {id:'la-k2-8', name:'齐次方程组的解空间', tags:['def','thm'], brief:'$K=\\{\\boldsymbol x\\mid A\\boldsymbol x=0\\}$ 是 $\\mathbb{R}^n$ 的线性子空间。',
+        body:`<p>齐次方程 $A\\boldsymbol x=0$ 的所有解构成集合 $K = \\{\\boldsymbol x\\in\\mathbb{R}^n\\mid A\\boldsymbol x=0\\}$。</p>
+<p><strong>命题</strong>　$K$ 是 $\\mathbb{R}^n$ 的线性子空间。设 $\\{\\boldsymbol u_1,\\dots,\\boldsymbol u_s\\}$ 是 $K$ 的一组基，则齐次方程的通解为 $\\boldsymbol x = c_1\\boldsymbol u_1+\\cdots+c_s\\boldsymbol u_s$。</p>`},
       {id:'la-k2-9', name:'矩阵的秩', tags:['def','thm'], brief:'行秩 = 列秩 = 阶梯形非零行数。',
-        body:`<p><strong>定义</strong>　矩阵 $A$ 的行秩为行向量张成线性空间的维数；列秩为列向量张成线性空间的维数。</p>
+        body:`<p><strong>定义</strong>　矩阵 $A$ 的<strong>行秩</strong>为行向量张成线性空间的维数；<strong>列秩</strong>为列向量张成线性空间的维数。</p>
 <p><strong>命题</strong>　初等行变换不改变矩阵的行秩和列秩。</p>
 <p><strong>定理</strong>　行秩 = 列秩，统称为矩阵的<strong>秩</strong>，记为 $\\mathrm{rank}\\,A$。</p>`},
       {id:'la-k2-10', name:'秩—零化度定理', tags:['thm','app'], brief:'$\\dim\\mathrm{im}(f)+\\dim\\ker(f)=\\dim V$。',
@@ -599,9 +669,9 @@ $$(v_1,w_1)+(v_2,w_2):=(v_1+v_2,\\ w_1+w_2),\\quad \\lambda(v,w):=(\\lambda v,\\
 <p>更一般地，对任意有限维线性空间的线性映射 $f:V\\to W$，$\\dim\\mathrm{im}(f)+\\dim\\ker(f)=\\dim V$。</p>
 <div class="la-callout la-his">几何直观　$f$ 把 $V$ "压缩"到它的像，被"压缩"的部分维数是 $\\ker f$。</div>`},
       {id:'la-k2-11', name:'非齐次方程组的解结构', tags:['thm','exa'], brief:'$\\mathrm{rank}\\,A=\\mathrm{rank}\\,\\bar{A}$ 时有解；通解含 $n-r$ 个自由参数。',
-        body:`<p><strong>定理</strong>　设 $A$ 是 $m\\times n$ 矩阵，$\\mathrm{rank}\\,A=r$。考虑 $Ax=b$，$\\bar{A}$ 是增广矩阵。</p>
+        body:`<p><strong>定理</strong>　设 $A$ 是 $m\\times n$ 矩阵，$\\mathrm{rank}\\,A=r$。考虑 $A\\boldsymbol x=\\boldsymbol b$，$\\bar{A}$ 是增广矩阵。</p>
 <ul>
-<li>$Ax=b$ 有解 $\\iff \\mathrm{rank}\\,\\bar{A}=r$</li>
+<li>$A\\boldsymbol x=\\boldsymbol b$ 有解 $\\iff \\mathrm{rank}\\,\\bar{A}=r$</li>
 <li>若 $r=n$，解唯一</li>
 <li>若 $r<n$，解不唯一，通解含 $n-r$ 个独立参数</li>
 </ul>
@@ -610,7 +680,9 @@ $$(v_1,w_1)+(v_2,w_2):=(v_1+v_2,\\ w_1+w_2),\\quad \\lambda(v,w):=(\\lambda v,\\
   ]
 },
 
-/* ================= 第三章 ================= */
+/* ============================================================
+   第三章 · 行列式
+   ============================================================ */
 {
   id:'la-ch3', num:'第三章', title:'行列式', en:'DETERMINANTS',
   sub:'面积元、体积元与组合定义',
@@ -618,30 +690,31 @@ $$(v_1,w_1)+(v_2,w_2):=(v_1+v_2,\\ w_1+w_2),\\quad \\lambda(v,w):=(\\lambda v,\\
   sections:[
     {name:'3.1 面积元与体积元', color:'#059669', desc:'从几何直观到行列式', items:[
       {id:'la-k3-1', name:'面积元', tags:['def','exa'], brief:'$2\\times 2$ 行列式是平行四边形带符号面积。',
-        fig:'det', figCap:'图 3.1　$u,v$ 张成的平行四边形面积 = $|\\det(u,v)|$',
-        body:`<p>平面上由 $u=(u_1,u_2)$，$v=(v_1,v_2)$ 张成的平行四边形，面积为</p>
+        fig:'det2', figCap:'图 3.1　$\\boldsymbol u,\\boldsymbol v$ 张成的平行四边形面积 $= |\\det(\\boldsymbol u,\\boldsymbol v)|$',
+        body:`<p>平面上由 $\\boldsymbol u=(u_1,u_2)$、$\\boldsymbol v=(v_1,v_2)$ 张成的平行四边形，面积为</p>
 <div class="la-fml">$$\\left|\\begin{array}{cc}u_1 & u_2\\\\ v_1 & v_2\\end{array}\\right| = u_1 v_2 - u_2 v_1$$</div>
 <p>称为 $2\\times 2$ 矩阵的行列式，是<strong>带符号面积</strong>：符号和两个向量的定向顺序有关。</p>
-<p><strong>外积视角</strong>　定义外积 $u\\wedge v$（反对称、双线性），则 $u\\wedge v = (u_1v_2-u_2v_1)\\,e_1\\wedge e_2$。$u\\wedge v$ 是 $u,v$ 张成平行四边形的面积元。</p>`},
-      {id:'la-k3-2', name:'体积元', tags:['def','exa'], brief:'$\\det A = u\\cdot(v\\times w)$ 是平行六面体的带符号体积。',
-        body:`<p>空间中由 $u,v,w$ 张成的平行六面体体积为 $|u\\cdot(v\\times w)|$。</p>
-<p>$3\\times3$ 矩阵的行列式定义为</p>
-<div class="la-fml">$$\\det\\begin{pmatrix}u_1 & u_2 & u_3\\\\ v_1 & v_2 & v_3\\\\ w_1 & w_2 & w_3\\end{pmatrix} = u\\cdot(v\\times w)$$</div>
-<p>它是带符号体积。交换任意两行，行列式变号；若两行相同，行列式为 0。</p>`}
+<p><strong>外积视角</strong>　定义外积 $\\boldsymbol u\\wedge\\boldsymbol v$（反对称、双线性），则 $\\boldsymbol u\\wedge\\boldsymbol v = (u_1v_2-u_2v_1)\\,\\boldsymbol e_1\\wedge\\boldsymbol e_2$。$\\boldsymbol u\\wedge\\boldsymbol v$ 是 $\\boldsymbol u,\\boldsymbol v$ 张成平行四边形的面积元。</p>`},
+      {id:'la-k3-2', name:'体积元', tags:['def','exa'], brief:'$\\det A = \\boldsymbol u\\cdot(\\boldsymbol v\\times\\boldsymbol w)$ 是平行六面体的带符号体积。',
+        fig:'volume', figCap:'图 3.2　平行六面体的带符号体积 = $\\boldsymbol u\\cdot(\\boldsymbol v\\times\\boldsymbol w)$',
+        body:`<p>空间中由 $\\boldsymbol u,\\boldsymbol v,\\boldsymbol w$ 张成的平行六面体体积为 $|\\boldsymbol u\\cdot(\\boldsymbol v\\times\\boldsymbol w)|$。</p>
+<p>$3\\times 3$ 矩阵的行列式定义为</p>
+<div class="la-fml">$$\\det\\begin{pmatrix}u_1 & u_2 & u_3\\\\ v_1 & v_2 & v_3\\\\ w_1 & w_2 & w_3\\end{pmatrix} = \\boldsymbol u\\cdot(\\boldsymbol v\\times\\boldsymbol w)$$</div>
+<p>它是带符号体积。交换任意两行，行列式变号；若两行相同，行列式为 $0$。</p>`}
     ]},
     {name:'3.2 n 阶行列式', color:'#0891b2', desc:'几何定义与组合定义', items:[
       {id:'la-k3-3', name:'行列式的组合定义', tags:['def','thm'], brief:'$\\det A = \\sum_{\\sigma\\in S_n}\\mathrm{sgn}(\\sigma)\\prod_i a_{i\\sigma(i)}$。',
         body:`<p>对 $n$ 阶方阵 $A=(a_{ij})$，定义</p>
 <div class="la-fml">$$\\det A = \\sum_{\\sigma\\in S_n}\\mathrm{sgn}(\\sigma)\\prod_{i=1}^n a_{i\\sigma(i)}$$</div>
 <p>其中 $S_n$ 是所有 $n$ 元置换的集合，$\\mathrm{sgn}(\\sigma)=\\pm1$ 是置换 $\\sigma$ 的符号。</p>
-<div class="la-callout la-his">注记　置换 $\\sigma$ 的符号 $\\mathrm{sgn}(\\sigma)$ 也可以通过行列式定义：若 $A_\\sigma$ 是对应置换的矩阵（每行每列恰有一个 1），则 $\\mathrm{sgn}(\\sigma)=\\det A_\\sigma$。</div>`},
+<div class="la-callout la-his">注记　置换 $\\sigma$ 的符号 $\\mathrm{sgn}(\\sigma)$ 也可以通过行列式定义：若 $A_\\sigma$ 是对应置换的矩阵（每行每列恰有一个 $1$），则 $\\mathrm{sgn}(\\sigma)=\\det A_\\sigma$。</div>`},
       {id:'la-k3-4', name:'行列式的基本性质', tags:['thm'], brief:'单行线性、反对称、零行、倍数行、行加法。',
         body:`<p>行列式满足：</p>
 <ul>
-<li><strong>单行线性</strong>：对某一行向量 $\\alpha_i$ 有线性性</li>
+<li><strong>单行线性</strong>：对某一行向量 $\\boldsymbol\\alpha_i$ 有线性性</li>
 <li><strong>反对称性</strong>：交换两行，行列式差一个负号</li>
-<li><strong>零行/相同行</strong>：某行全 0，或两行相同，则行列式为 0</li>
-<li><strong>倍数行</strong>：某行是另一行的倍数，行列式为 0</li>
+<li><strong>零行/相同行</strong>：某行全 $0$，或两行相同，则行列式为 $0$</li>
+<li><strong>倍数行</strong>：某行是另一行的倍数，行列式为 $0$</li>
 <li><strong>行加法</strong>：某行倍数加到另一行，行列式不变</li>
 </ul>
 <div class="la-fml">$$\\det(\\lambda A) = \\lambda^n\\det A,\\qquad \\det(AB)=(\\det A)(\\det B),\\qquad \\det A = \\det A^T$$</div>
@@ -665,43 +738,41 @@ $$(v_1,w_1)+(v_2,w_2):=(v_1+v_2,\\ w_1+w_2),\\quad \\lambda(v,w):=(\\lambda v,\\
 <div class="la-fml">$$\\det A = \\sum_{i=1}^n (-1)^{i+j}a_{ij}A_{ij}$$</div>
 <div class="la-callout la-app">经典应用　Vandermonde 行列式 $\\Delta_n(x_1,\\dots,x_n)=\\prod_{1\\leq i<j\\leq n}(x_j-x_i)$ 与三对角矩阵行列式的递推计算。</div>`}
     ]},
-    {name:'3.4 乘积的行列式', color:'#be123c', desc:'体积元在多重复合下的伸缩倍数', items:[
+    {name:'3.4 乘积行列式与逆矩阵', color:'#be123c', desc:'体积元伸缩、伴随矩阵与 Cramer 法则', items:[
       {id:'la-k3-7', name:'乘积的行列式', tags:['thm','der'], brief:'$\\det(AB)=(\\det A)(\\det B)$。',
         body:`<p><strong>定理</strong>　设 $A,B$ 是 $n$ 阶方阵，则 $\\det(AB)=(\\det A)(\\det B)$。</p>
 <p><strong>几何直观</strong>　$A,B$ 分别对应线性映射 $f,g$，$g$ 把 $n$ 维体积元伸缩 $\\det B$ 倍，$f$ 把 $n$ 维体积元伸缩 $\\det A$ 倍。则 $f\\circ g$ 把 $n$ 维体积元伸缩 $(\\det A)(\\det B)$ 倍。</p>
 <p><strong>推论</strong>　$A$ 可逆 $\\iff \\det A\\neq 0$，且 $\\det(A^{-1}) = 1/\\det A$。</p>
-<div class="la-callout la-app">实用结论：幂零矩阵 $A^N=0$ 必有 $\\det A=0$；奇数阶反对称矩阵 $A^T=-A$ 的行列式为 0。</div>`}
-    ]},
-    {name:'3.5 矩阵的逆', color:'#0891b2', desc:'可逆性判别、逆矩阵与 Cramer 法则', items:[
-      {id:'la-k3-8', name:'可逆矩阵的判别法', tags:['thm'], brief:'$A$ 可逆 $\\iff$ $\\det A\\neq0$ $\\iff$ $\\mathrm{rank}\\,A=n$。',
+<div class="la-callout la-app">实用结论：幂零矩阵 $A^N=0$ 必有 $\\det A=0$；奇数阶反对称矩阵 $A^T=-A$ 的行列式为 $0$。</div>`},
+      {id:'la-k3-8', name:'可逆矩阵与伴随矩阵', tags:['thm'], brief:'$A$ 可逆 $\\iff \\det A\\neq0$；$A^{-1} = \\frac{1}{\\det A}A^*$。',
         body:`<p><strong>定义</strong>　$n$ 阶方阵 $A$ 称为<strong>可逆</strong>，如果存在 $n$ 阶方阵 $B$ 使得 $AB=BA=I_n$。$B$ 称为 $A$ 的逆，记作 $A^{-1}$。</p>
 <p><strong>定理</strong>　$A$ 可逆 $\\iff \\det A\\neq 0$ $\\iff \\mathrm{rank}\\,A=n$。</p>
-<p><strong>推论</strong>　$\\det A^{-1}=(\\det A)^{-1}$；$AB=I_n$ 蕴含 $BA=I_n$。</p>`},
-      {id:'la-k3-9', name:'逆矩阵的计算与伴随矩阵', tags:['def','thm'], brief:'$A^{-1} = \\frac{1}{\\det A}A^*$，$A^*$ 是伴随矩阵。',
-        body:`<p><strong>方法一（初等行变换）</strong>　对 $n\\times 2n$ 矩阵 $[A\\,|\\,I_n]$ 作初等行变换，化为 $[I_n\\,|\\,B]$，则 $B=A^{-1}$。</p>
+<p><strong>方法一（初等行变换）</strong>　对 $n\\times 2n$ 矩阵 $[A\\,|\\,I_n]$ 作初等行变换，化为 $[I_n\\,|\\,B]$，则 $B=A^{-1}$。</p>
 <p><strong>方法二（伴随矩阵）</strong>　定义伴随矩阵 $A^*$ 的 $(i,j)$ 分量为 $(-1)^{i+j}A_{ji}$，其中 $A_{ji}$ 是余子式。则</p>
 <div class="la-fml">$$A^{-1} = \\frac{1}{\\det A}A^*$$</div>
 <p><strong>例</strong>　$2\\times2$ 矩阵 $A=\\begin{pmatrix}a&b\\\\c&d\\end{pmatrix}$ 的逆为 $\\dfrac{1}{ad-bc}\\begin{pmatrix}d&-b\\\\-c&a\\end{pmatrix}$。</p>`},
-      {id:'la-k3-10', name:'Cramer 法则', tags:['thm','app'], brief:'$x_i = \\det A_i / \\det A$。',
-        body:`<p><strong>定理（Cramer 法则）</strong>　设 $A$ 是 $n$ 阶方阵且 $\\det A\\neq 0$。则线性方程组 $Ax=b$ 有唯一解，且</p>
+      {id:'la-k3-9', name:'Cramer 法则', tags:['thm','app'], brief:'$x_i = \\det A_i / \\det A$。',
+        body:`<p><strong>定理（Cramer 法则）</strong>　设 $A$ 是 $n$ 阶方阵且 $\\det A\\neq 0$。则线性方程组 $A\\boldsymbol x=\\boldsymbol b$ 有唯一解，且</p>
 <div class="la-fml">$$x_i = \\frac{\\det A_i}{\\det A},\\qquad i=1,\\dots,n$$</div>
-<p>其中 $A_i$ 是把 $A$ 的第 $i$ 列替换成 $b$ 得到的方阵。</p>
-<div class="la-callout la-his">注记　Cramer 法则的证明关键在于 $\\det A_i=\\sum_j(-1)^{i+j}A_{ji}b_j$，这恰好是 $A^*b$ 的第 $i$ 个分量。</div>`}
+<p>其中 $A_i$ 是把 $A$ 的第 $i$ 列替换成 $\\boldsymbol b$ 得到的方阵。</p>
+<div class="la-callout la-his">注记　Cramer 法则的证明关键在于 $\\det A_i=\\sum_j(-1)^{i+j}A_{ji}b_j$，这恰好是 $A^*\\boldsymbol b$ 的第 $i$ 个分量。</div>`}
     ]}
   ]
 },
 
-/* ================= 第四章 ================= */
+/* ============================================================
+   第四章 · 特征值理论
+   ============================================================ */
 {
   id:'la-ch4', num:'第四章', title:'特征值理论', en:'EIGENVALUE THEORY',
   sub:'从特征多项式到 Jordan 标准型',
   desc:'特征值和特征向量刻画了线性变换的"不变方向"。本章建立特征多项式、相似对角化、根子空间分解与 Jordan 标准型的完整理论，并给出 Google PageRank 等经典应用。',
   sections:[
     {name:'4.1 特征值与特征向量', color:'#c2410c', desc:'不变方向与特征多项式', items:[
-      {id:'la-k4-1', name:'特征值与特征向量', tags:['def','exa'], brief:'$Av=\\lambda v$；$\\lambda$ 是特征值，$v$ 是特征向量。',
-        fig:'eigen', figCap:'图 4.1　特征向量：$A$ 只沿 $v$ 方向伸缩，不改变方向',
-        body:`<p><strong>定义</strong>　设 $A$ 是 $n$ 阶方阵。如果存在非零向量 $x$ 和数 $\\lambda$ 使得 $Ax=\\lambda x$，则 $\\lambda$ 称为 $A$ 的<strong>特征值</strong>，$x$ 称为属于 $\\lambda$ 的<strong>特征向量</strong>。</p>
-<p><strong>等价刻画</strong>　$\\lambda$ 是特征值 $\\iff$ 齐次方程组 $(\\lambda I_n-A)x=0$ 有非零解 $\\iff \\det(\\lambda I_n-A)=0$。</p>`},
+      {id:'la-k4-1', name:'特征值与特征向量', tags:['def','exa'], brief:'$A\\boldsymbol v=\\lambda\\boldsymbol v$；$\\lambda$ 是特征值，$\\boldsymbol v$ 是特征向量。',
+        fig:'eigen', figCap:'图 4.1　特征向量：$A$ 只沿 $\\boldsymbol v$ 方向伸缩，不改变方向',
+        body:`<p><strong>定义</strong>　设 $A$ 是 $n$ 阶方阵。如果存在非零向量 $\\boldsymbol x$ 和数 $\\lambda$ 使得 $A\\boldsymbol x=\\lambda\\boldsymbol x$，则 $\\lambda$ 称为 $A$ 的<strong>特征值</strong>，$\\boldsymbol x$ 称为属于 $\\lambda$ 的<strong>特征向量</strong>。</p>
+<p><strong>等价刻画</strong>　$\\lambda$ 是特征值 $\\iff$ 齐次方程组 $(\\lambda I_n-A)\\boldsymbol x=0$ 有非零解 $\\iff \\det(\\lambda I_n-A)=0$。</p>`},
       {id:'la-k4-2', name:'特征多项式', tags:['def','thm'], brief:'$\\phi(\\lambda)=\\det(\\lambda I_n-A)$，特征值即其根。',
         body:`<p><strong>定义</strong>　$n$ 阶方阵 $A$ 的<strong>特征多项式</strong>为</p>
 <div class="la-fml">$$\\phi(\\lambda) = \\det(\\lambda I_n - A) = \\lambda^n - (\\mathrm{Tr}\\,A)\\lambda^{n-1} + \\cdots + (-1)^n\\det A$$</div>
@@ -715,39 +786,33 @@ $$(v_1,w_1)+(v_2,w_2):=(v_1+v_2,\\ w_1+w_2),\\quad \\lambda(v,w):=(\\lambda v,\\
 <p><strong>应用</strong>　若 $A$ 可逆，则 $\\alpha_n=(-1)^n\\det A\\neq 0$，可得</p>
 <div class="la-fml">$$A^{-1} = -\\frac{1}{\\alpha_n}(A^{n-1} + \\alpha_1 A^{n-2} + \\cdots + \\alpha_{n-1}I_n)$$</div>`}
     ]},
-    {name:'4.2 相似变换', color:'#b45309', desc:'同一线性映射在不同基下的矩阵', items:[
+    {name:'4.2 相似与对角化', color:'#b45309', desc:'同一线性映射在不同基下的矩阵', items:[
       {id:'la-k4-4', name:'相似与对角化', tags:['def','thm'], brief:'$A=PBP^{-1}$；可对角化 $\\iff$ 有 $n$ 个线性无关的特征向量。',
         body:`<p><strong>定义</strong>　$n$ 阶方阵 $A$ 与 $B$ 称为<strong>相似</strong>，如果存在可逆方阵 $P$ 使得 $A=PBP^{-1}$。</p>
 <p><strong>命题</strong>　相似矩阵具有相同的特征多项式，因此有相同的 $\\mathrm{Tr}$ 和 $\\det$。</p>
 <p><strong>定义</strong>　$A$ 称为<strong>可对角化</strong>，如果 $A$ 相似于对角阵 $\\mathrm{diag}(\\lambda_1,\\dots,\\lambda_n)$。</p>
-<p><strong>命题</strong>　$A$ 可对角化 $\\iff$ 存在一组基 $\\{\\beta_1,\\dots,\\beta_n\\}$，其中每个 $\\beta_i$ 都是 $A$ 的特征向量。</p>
+<p><strong>命题</strong>　$A$ 可对角化 $\\iff$ 存在一组基 $\\{\\boldsymbol\\beta_1,\\dots,\\boldsymbol\\beta_n\\}$，其中每个 $\\boldsymbol\\beta_i$ 都是 $A$ 的特征向量。</p>
 <p><strong>命题</strong>　若 $A$ 具有 $n$ 个互不相同的特征值，则 $A$ 可对角化。</p>`},
-      {id:'la-k4-5', name:'相似变换的几何含义', tags:['thm','his'], brief:'相似变换是同一线性映射在不同基下的矩阵之间的关系。',
-        body:`<p>设 $f: k^n\\to k^n$ 是线性映射。取两组不同的基 $\\{\\alpha_i\\}$ 和 $\\{\\beta_i\\}$。设 $f$ 在这两组基下的矩阵分别为 $A,B$，过渡矩阵为 $P$，则 $A=PBP^{-1}$。</p>
+      {id:'la-k4-5', name:'相似变换的几何含义', tags:['thm','his'], brief:'相似变换是同一线性映射在不同基下矩阵之间的关系。',
+        body:`<p>设 $f: k^n\\to k^n$ 是线性映射。取两组不同的基 $\\{\\boldsymbol\\alpha_i\\}$ 和 $\\{\\boldsymbol\\beta_i\\}$。设 $f$ 在这两组基下的矩阵分别为 $A,B$，过渡矩阵为 $P$，则 $A=PBP^{-1}$。</p>
 <p><strong>几何含义</strong>　相似变换是同一个线性映射 $f$ 在不同基下表示矩阵之间的变换。</p>`}
     ]},
-    {name:'4.3 特征子空间与根子空间', color:'#7c3aed', desc:'几何重数、代数重数与直和分解', items:[
-      {id:'la-k4-6', name:'特征子空间', tags:['def','thm'], brief:'$V_\\lambda=\\{x\\mid Ax=\\lambda x\\}$ 是线性子空间；几何重数 $\\leq$ 代数重数。',
-        body:`<p><strong>定义</strong>　设 $\\lambda_0$ 是 $A$ 的一个特征值，$V_{\\lambda_0}=\\{x\\in k^n\\mid Ax=\\lambda_0 x\\}$ 称为 $\\lambda_0$ 的<strong>特征子空间</strong>，是 $k^n$ 的线性子空间。</p>
+    {name:'4.3 特征子空间与 Jordan 标准型', color:'#7c3aed', desc:'几何重数、代数重数与初等因子', items:[
+      {id:'la-k4-6', name:'特征子空间与根子空间', tags:['def','thm'], brief:'$V_\\lambda=\\{\\boldsymbol x\\mid A\\boldsymbol x=\\lambda\\boldsymbol x\\}$；几何重数 $\\leq$ 代数重数。',
+        body:`<p><strong>定义</strong>　设 $\\lambda_0$ 是 $A$ 的一个特征值，$V_{\\lambda_0}=\\{\\boldsymbol x\\in k^n\\mid A\\boldsymbol x=\\lambda_0\\boldsymbol x\\}$ 称为 $\\lambda_0$ 的<strong>特征子空间</strong>，是 $k^n$ 的线性子空间。</p>
 <p><strong>定义</strong>　若 $\\phi(\\lambda)=(\\lambda-\\lambda_0)^m g(\\lambda)$，$g(\\lambda_0)\\neq0$，称 $m$ 是 $\\lambda_0$ 的<strong>代数重数</strong>；$\\dim V_{\\lambda_0}$ 称为<strong>几何重数</strong>。</p>
-<p><strong>命题</strong>　特征值的几何重数 $\\leq$ 代数重数。</p>
-<p><strong>命题</strong>　不同特征值的特征子空间的和是直和。</p>`},
-      {id:'la-k4-7', name:'根子空间', tags:['def','thm'], brief:'$R_\\lambda=\\{x\\mid(\\lambda I-A)^m x=0\\}$；$\\dim R_\\lambda$ = 代数重数。',
-        body:`<p><strong>定义</strong>　设 $\\lambda_0$ 是 $A$ 的特征值，$\\lambda_0$ 的<strong>根子空间</strong>为</p>
-<div class="la-fml">$$R_{\\lambda_0} = \\{x\\mid \\exists m>0,\\ (\\lambda_0 I_n - A)^m x = 0\\}$$</div>
-<p><strong>命题</strong>　$R_{\\lambda_0}$ 是 $A$ 的不变子空间，$V_{\\lambda_0}\\subset R_{\\lambda_0}$。</p>
-<p><strong>命题</strong>　$\\dim R_{\\lambda_i}$ 等于 $\\lambda_i$ 的代数重数。</p>
+<p><strong>命题</strong>　特征值的几何重数 $\\leq$ 代数重数；不同特征值的特征子空间的和是直和。</p>
+<p><strong>定义</strong>　$\\lambda_0$ 的<strong>根子空间</strong>为</p>
+<div class="la-fml">$$R_{\\lambda_0} = \\{\\boldsymbol x\\mid \\exists m>0,\\ (\\lambda_0 I_n - A)^m\\boldsymbol x = 0\\}$$</div>
 <p><strong>定理</strong>　设 $\\lambda_1,\\dots,\\lambda_s$ 是 $A$ 所有互不相同的特征值，则</p>
 <div class="la-fml">$$k^n = R_{\\lambda_1}\\oplus R_{\\lambda_2}\\oplus\\cdots\\oplus R_{\\lambda_s}$$</div>
-<p>这是 Jordan 标准型理论的基础。</p>`}
-    ]},
-    {name:'4.4 Jordan 标准型', color:'#be123c', desc:'幂零变换、循环子空间与 Jordan 块', items:[
-      {id:'la-k4-8', name:'幂零变换与循环子空间', tags:['def','thm'], brief:'$f^m=0$；$C_x=\\mathrm{Span}\\{x,f(x),\\dots\\}$。',
+<p>且 $\\dim R_{\\lambda_i}$ 等于 $\\lambda_i$ 的代数重数。这是 Jordan 标准型理论的基础。</p>`},
+      {id:'la-k4-7', name:'幂零变换与循环子空间', tags:['def','thm'], brief:'$f^m=0$；$C_{\\boldsymbol x}=\\mathrm{Span}\\{\\boldsymbol x,f(\\boldsymbol x),\\dots\\}$。',
         body:`<p><strong>定义</strong>　线性变换 $f:V\\to V$ 称为<strong>幂零变换</strong>，如果存在正整数 $m$ 使 $f^m=0$。最小的 $m$ 称为幂零指数。</p>
 <p><strong>命题</strong>　$A$ 幂零 $\\iff$ $A$ 只有零特征值 $\\iff$ 特征多项式为 $\\lambda^n$。</p>
-<p><strong>定义</strong>　由向量 $x$ 生成的<strong>循环子空间</strong>为 $C_x = \\mathrm{Span}\\{x,f(x),f^2(x),\\dots\\}$。</p>
+<p><strong>定义</strong>　由向量 $\\boldsymbol x$ 生成的<strong>循环子空间</strong>为 $C_{\\boldsymbol x} = \\mathrm{Span}\\{\\boldsymbol x,f(\\boldsymbol x),f^2(\\boldsymbol x),\\dots\\}$。</p>
 <p><strong>定理</strong>　$n$ 维空间上的幂零变换总可以分解为循环子空间的直和。</p>`},
-      {id:'la-k4-9', name:'Jordan 块与 Jordan 标准型', tags:['def','thm'], brief:'每个复方阵都相似于由 Jordan 块构成的标准型。',
+      {id:'la-k4-8', name:'Jordan 标准型', tags:['def','thm'], brief:'每个复方阵都相似于由 Jordan 块构成的标准型。',
         fig:'jordan', figCap:'图 4.2　Jordan 标准型：分块对角，每块形如 $J_m(\\lambda)$',
         body:`<p><strong>定义</strong>　$m$ 阶 Jordan 块为</p>
 <div class="la-fml">$$J_m(\\lambda) = \\begin{pmatrix}\\lambda & 1 & & \\\\ & \\lambda & \\ddots & \\\\ & & \\ddots & 1\\\\ & & & \\lambda\\end{pmatrix}$$</div>
@@ -755,233 +820,186 @@ $$(v_1,w_1)+(v_2,w_2):=(v_1+v_2,\\ w_1+w_2),\\quad \\lambda(v,w):=(\\lambda v,\\
 <div class="la-fml">$$\\begin{pmatrix} J_1 & & \\\\ & \\ddots & \\\\ & & J_s\\end{pmatrix}$$</div>
 <p>其中 $J_i$ 是由属于 $\\lambda_i$ 的 Jordan 块构成的分块对角矩阵。这称为 $A$ 的 <strong>Jordan 标准型</strong>。</p>
 <div class="la-callout la-his">注记　初等因子 $\\{(\\lambda-\\lambda_i)^{m_i^{(j)}}\\}$ 完全决定 Jordan 标准型。两个方阵相似 $\\iff$ 具有相同的初等因子组。</div>`},
-      {id:'la-k4-10', name:'极小多项式', tags:['def','thm'], brief:'次数最低的首一化零多项式。',
+      {id:'la-k4-9', name:'极小多项式', tags:['def','thm'], brief:'次数最低的首一化零多项式。',
         body:`<p><strong>定义</strong>　方阵 $A$ 的所有非平凡化零多项式中次数最小的首一多项式称为 $A$ 的<strong>极小多项式</strong>，记为 $d_A(\\lambda)$。</p>
 <p><strong>命题</strong>　设 $A$ 的互异特征值为 $\\lambda_1,\\dots,\\lambda_s$，则</p>
 <div class="la-fml">$$d_A(\\lambda) = (\\lambda-\\lambda_1)^{d_1}\\cdots(\\lambda-\\lambda_s)^{d_s}$$</div>
 <p>其中 $d_i$ 是特征值 $\\lambda_i$ 的 Jordan 块最大阶数。极小多项式整除特征多项式，且两者有相同的根集。</p>`}
     ]},
-    {name:'4.5 应用与例子', color:'#0891b2', desc:'开根、指数矩阵与 Google PageRank', items:[
-      {id:'la-k4-11', name:'可逆矩阵开根', tags:['app','thm'], brief:'可逆复方阵都存在可逆平方根。',
-        body:`<p><strong>命题</strong>　设 $A$ 是 $n$ 阶可逆复方阵。则存在可逆方阵 $B$ 使得 $A=B^2$。更一般地，对任意正整数 $k$，存在可逆方阵 $B$ 使得 $A=B^k$。</p>
-<p>方法：对每个 Jordan 块 $J_n(\\lambda)$，利用 $(1+x)^{1/2}$ 的 Taylor 展开（由于 $N$ 幂零，级数截断），类似地处理。</p>`},
-      {id:'la-k4-12', name:'指数矩阵与微分方程', tags:['def','app'], brief:'$e^A=\\sum A^k/k!$；$\\det(e^A)=e^{\\mathrm{Tr}A}$；$e^{tA}$ 解线性微分方程组。',
-        body:`<p><strong>定义</strong>　矩阵指数定义为 $e^A = \\sum_{k=0}^\\infty A^k/k!$，对任意方阵 $A$ 均收敛。</p>
+    {name:'4.4 应用与例子', color:'#0891b2', desc:'开根、指数矩阵与 Google PageRank', items:[
+      {id:'la-k4-10', name:'可逆矩阵开根与指数矩阵', tags:['app','thm'], brief:'$e^A=\\sum A^k/k!$；$\\det(e^A)=e^{\\mathrm{Tr}A}$；$e^{tA}$ 解线性微分方程组。',
+        body:`<p><strong>命题</strong>　设 $A$ 是 $n$ 阶可逆复方阵，则存在可逆方阵 $B$ 使得 $A=B^2$。更一般地，对任意正整数 $k$，存在可逆方阵 $B$ 使得 $A=B^k$。</p>
+<p><strong>定义</strong>　矩阵指数定义为 $e^A = \\sum_{k=0}^\\infty A^k/k!$，对任意方阵 $A$ 均收敛。</p>
 <p><strong>命题</strong>　$\\det(e^A)=e^{\\mathrm{Tr}A}$；$e^A$ 可逆，其逆为 $e^{-A}$；若 $AB=BA$ 则 $e^{A+B}=e^Ae^B$。</p>
-<p><strong>应用</strong>　常微分方程组 $\\dot{y}=Ay$，$y(0)=y_0$ 的解为 $y(t)=e^{tA}y_0$。非齐次方程 $\\dot y=Ay+b(t)$ 的解为 $y(t)=e^{tA}y_0+\\int_0^t e^{(t-s)A}b(s)\\,ds$。</p>`},
-      {id:'la-k4-13', name:'Google PageRank', tags:['app','exa'], brief:'互联网链接矩阵的最大特征值 1 的特征向量给出网页排名。',
+<p><strong>应用</strong>　常微分方程组 $\\dot{\\boldsymbol y}=A\\boldsymbol y$，$\\boldsymbol y(0)=\\boldsymbol y_0$ 的解为 $\\boldsymbol y(t)=e^{tA}\\boldsymbol y_0$。</p>`},
+      {id:'la-k4-11', name:'Google PageRank', tags:['app','exa'], brief:'互联网链接矩阵的最大特征值 1 的特征向量给出网页排名。',
         body:`<p>将互联网视为有向图，每个节点是网页，边表示超链接。定义链接关系矩阵 $M=(m_{ij})$：$m_{ij}=1/L(j)$ 若 $j$ 链接到 $i$，否则 0，其中 $L(j)$ 是 $j$ 的出链数。</p>
-<p>PageRank 值 $r_i$ 满足 $Mr=r$，即 $r$ 是 $M$ 属于特征值 1 的特征向量。由于 $M$ 每列和为 1，$M^T$ 有特征值 1 的特征向量，因此 $M$ 也有特征值 1。</p>
-<div class="la-callout la-app">改进算法　引入阻尼因子 $d$（通常 0.85）：$\\widehat M = dM+(1-d)S$，$S$ 每个元为 $1/n$。可证明 $\\widehat M$ 的特征子空间 $V_1$ 是 1 维的，因此 PageRank 向量唯一。通过迭代 $r_{k+1}=\\widehat M r_k$ 即可收敛。</div>`}
+<p>PageRank 值 $\\boldsymbol r$ 满足 $M\\boldsymbol r=\\boldsymbol r$，即 $\\boldsymbol r$ 是 $M$ 属于特征值 1 的特征向量。</p>
+<div class="la-callout la-app">改进算法　引入阻尼因子 $d$（通常 0.85）：$\\widehat M = dM+(1-d)S$，$S$ 每个元为 $1/n$。可证明 $\\widehat M$ 的特征子空间 $V_1$ 是 1 维的，因此 PageRank 向量唯一。通过迭代 $\\boldsymbol r_{k+1}=\\widehat M\\boldsymbol r_k$ 即可收敛。</div>`}
     ]}
   ]
 },
 
-/* ================= 第五章 ================= */
+/* ============================================================
+   第五章 · 线性代数的应用与延伸
+   ============================================================ */
 {
-  id:'la-ch5', num:'第五章', title:'内积空间', en:'INNER PRODUCT SPACES',
-  sub:'几何结构 · 厄米矩阵 · 奇异值分解',
-  desc:'在代数结构之上引入几何结构——内积。本章建立欧几里得空间与酉空间的几何理论，包括正交化、正交方阵、正交相似、奇异值分解，并特别讨论厄米矩阵的正定性、谱定理与相关应用。',
+  id:'la-ch5', num:'第五章', title:'线性代数的应用与延伸', en:'APPLICATIONS & EXTENSIONS',
+  sub:'内积空间 · 奇异值分解 · 张量 · 辛几何 · 矩阵群 · 量子论',
+  desc:'从向量空间到张量代数，从内积空间到辛几何，线性代数不断延伸为现代数学与物理的通用语言。本章讨论正交性、奇异值分解、张量代数、外代数、辛矩阵、矩阵 Lie 群以及量子力学中的线性代数结构。',
   sections:[
-    {name:'5.1 欧几里得空间', color:'#0891b2', desc:'内积、Gram 矩阵、长度与夹角', items:[
-      {id:'la-k5-1', name:'实内积与欧几里得空间', tags:['def','exa'], brief:'正定、对称、双线性的二元函数 $\\langle\\cdot,\\cdot\\rangle$。',
-        fig:'orthogonal', figCap:'图 5.1　内积 $\\langle a,b\\rangle=|a||b|\\cos\\theta$，正交即 $\\langle a,b\\rangle=0$',
+    {name:'5.1 内积空间与正交性', color:'#0891b2', desc:'内积、Gram 矩阵、正交化与投影', items:[
+      {id:'la-k5-1', name:'内积与欧几里得空间', tags:['def','exa'], brief:'正定、对称、双线性的二元函数 $\\langle\\cdot,\\cdot\\rangle$。',
+        fig:'orthogonal', figCap:'图 5.1　内积 $\\langle\\boldsymbol a,\\boldsymbol b\\rangle=|\\boldsymbol a||\\boldsymbol b|\\cos\\theta$，正交即 $\\langle\\boldsymbol a,\\boldsymbol b\\rangle=0$',
         body:`<p><strong>定义</strong>　实线性空间 $V$ 上的<strong>内积</strong>是映射 $\\langle\\cdot,\\cdot\\rangle:V\\times V\\to\\mathbb{R}$，满足：</p>
 <ul>
-<li><strong>正定性</strong>：$\\langle x,x\\rangle\\geq 0$，等号成立 $\\iff x=0$</li>
-<li><strong>对称性</strong>：$\\langle x,y\\rangle=\\langle y,x\\rangle$</li>
-<li><strong>线性性</strong>：$\\langle ax+by,z\\rangle=a\\langle x,z\\rangle+b\\langle y,z\\rangle$</li>
+<li><strong>正定性</strong>：$\\langle\\boldsymbol x,\\boldsymbol x\\rangle\\geq 0$，等号成立 $\\iff \\boldsymbol x=0$</li>
+<li><strong>对称性</strong>：$\\langle\\boldsymbol x,\\boldsymbol y\\rangle=\\langle\\boldsymbol y,\\boldsymbol x\\rangle$</li>
+<li><strong>线性性</strong>：$\\langle a\\boldsymbol x+b\\boldsymbol y,\\boldsymbol z\\rangle=a\\langle\\boldsymbol x,\\boldsymbol z\\rangle+b\\langle\\boldsymbol y,\\boldsymbol z\\rangle$</li>
 </ul>
 <p>带内积的实线性空间称为<strong>欧几里得空间</strong>。</p>
-<p><strong>典型例子</strong>　$\\mathbb{R}^n$：$\\langle x,y\\rangle=\\sum_i x_iy_i$；$C^0[a,b]$：$\\langle f,g\\rangle=\\int_a^b f(x)g(x)\\,dx$。</p>`},
-      {id:'la-k5-2', name:'Gram 矩阵', tags:['def','thm'], brief:'$G_{ij}=\\langle\\alpha_i,\\alpha_j\\rangle$；内积完全由 Gram 矩阵决定。',
-        body:`<p><strong>定义</strong>　设 $\\{\\alpha_1,\\dots,\\alpha_n\\}$ 是 $V$ 的一组基，$G_{ij}=\\langle\\alpha_i,\\alpha_j\\rangle$，$G=(G_{ij})$ 称为内积在该基下的 <strong>Gram 矩阵</strong>。</p>
-<p>对任意 $x=\\sum_i x_i\\alpha_i$，$y=\\sum_j y_j\\alpha_j$，有</p>
-<div class="la-fml">$$\\langle x,y\\rangle = \\sum_{i,j}x_iy_j G_{ij} = x^T G y$$</div>
-<p><strong>命题</strong>　Gram 矩阵是正定实对称矩阵。反之，给定正定实对称矩阵 $G$，上式定义了内积。</p>`},
-      {id:'la-k5-3', name:'长度与夹角', tags:['def','thm'], brief:'$\\|x\\|=\\sqrt{\\langle x,x\\rangle}$；Cauchy-Schwarz 不等式。',
-        body:`<p><strong>定义</strong>　向量 $x$ 的长度为 $\\|x\\|=\\sqrt{\\langle x,x\\rangle}$。</p>
-<p><strong>定理（Cauchy-Schwarz 不等式）</strong>　$|\\langle x,y\\rangle|\\leq\\|x\\|\\|y\\|$，等号成立 $\\iff x,y$ 线性相关。</p>
-<p>因此可以定义 $x,y$ 的夹角 $\\theta\\in[0,\\pi]$ 为 $\\cos\\theta = \\dfrac{\\langle x,y\\rangle}{\\|x\\|\\|y\\|}$。</p>
-<p><strong>三角不等式</strong>　$\\|x+y\\|\\leq\\|x\\|+\\|y\\|$；<strong>平行四边形法则</strong>　$\\|x+y\\|^2+\\|x-y\\|^2=2\\|x\\|^2+2\\|y\\|^2$。</p>`}
+<p><strong>典型例子</strong>　$\\mathbb{R}^n$：$\\langle\\boldsymbol x,\\boldsymbol y\\rangle=\\sum_i x_iy_i$；$C^0[a,b]$：$\\langle f,g\\rangle=\\int_a^b f(x)g(x)\\,dx$。</p>
+<p><strong>长度与夹角</strong>　$\\|\\boldsymbol x\\|=\\sqrt{\\langle\\boldsymbol x,\\boldsymbol x\\rangle}$；$\\cos\\theta = \\dfrac{\\langle\\boldsymbol x,\\boldsymbol y\\rangle}{\\|\\boldsymbol x\\|\\|\\boldsymbol y\\|}$。</p>
+<p><strong>Cauchy-Schwarz</strong>　$|\\langle\\boldsymbol x,\\boldsymbol y\\rangle|\\leq\\|\\boldsymbol x\\|\\|\\boldsymbol y\\|$，等号成立 $\\iff \\boldsymbol x,\\boldsymbol y$ 线性相关。</p>`},
+      {id:'la-k5-2', name:'Gram 矩阵与正交化', tags:['def','thm'], brief:'$G_{ij}=\\langle\\boldsymbol\\alpha_i,\\boldsymbol\\alpha_j\\rangle$；Gram-Schmidt 正交化。',
+        body:`<p><strong>定义</strong>　设 $\\{\\boldsymbol\\alpha_1,\\dots,\\boldsymbol\\alpha_n\\}$ 是 $V$ 的一组基，$G_{ij}=\\langle\\boldsymbol\\alpha_i,\\boldsymbol\\alpha_j\\rangle$，$G=(G_{ij})$ 称为内积在该基下的 <strong>Gram 矩阵</strong>。</p>
+<p>对任意 $\\boldsymbol x=\\sum_i x_i\\boldsymbol\\alpha_i$，$\\boldsymbol y=\\sum_j y_j\\boldsymbol\\alpha_j$，有 $\\langle\\boldsymbol x,\\boldsymbol y\\rangle = \\sum_{i,j}x_iy_j G_{ij} = \\boldsymbol x^T G\\boldsymbol y$。</p>
+<p><strong>命题</strong>　Gram 矩阵是正定实对称矩阵。反之，给定正定实对称矩阵 $G$，上式定义了内积。</p>
+<p><strong>定理（Gram-Schmidt 正交化）</strong>　设 $\\{\\boldsymbol\\alpha_1,\\dots,\\boldsymbol\\alpha_n\\}$ 是 $n$ 维欧几里得空间的一组基。则存在正交基 $\\{\\boldsymbol\\beta_1,\\dots,\\boldsymbol\\beta_n\\}$，使过渡矩阵为上三角矩阵。</p>
+<div class="la-fml">$$\\boldsymbol\\beta_k = \\boldsymbol\\alpha_k - \\sum_{i=1}^{k-1}\\frac{\\langle\\boldsymbol\\beta_i,\\boldsymbol\\alpha_k\\rangle}{\\langle\\boldsymbol\\beta_i,\\boldsymbol\\beta_i\\rangle}\\boldsymbol\\beta_i, \\qquad k=1,\\dots,n$$</div>
+<p>进一步归一化 $\\boldsymbol\\gamma_i=\\boldsymbol\\beta_i/\\|\\boldsymbol\\beta_i\\|$ 得到<strong>标准正交基</strong>。</p>
+<div class="la-callout la-app">应用　QR 分解：任意可逆方阵 $A$ 可分解为 $A=QR$，$Q$ 正交阵，$R$ 对角元为正的上三角阵。</div>`},
+      {id:'la-k5-3', name:'正交投影与最小二乘', tags:['def','app'], brief:'$V=U\\oplus U^\\perp$；$p_U(\\boldsymbol x)$ 是 $U$ 中距离 $\\boldsymbol x$ 最近的向量。',
+        fig:'projection', figCap:'图 5.2　$p_U(\\boldsymbol x)$ 是 $\\boldsymbol x$ 在子空间 $U$ 上的正交投影',
+        body:`<p><strong>定义</strong>　子空间 $U$ 的正交补为 $U^\\perp=\\{\\boldsymbol\\alpha\\mid\\langle\\boldsymbol\\alpha,\\boldsymbol\\beta\\rangle=0,\\ \\forall\\boldsymbol\\beta\\in U\\}$。</p>
+<p><strong>命题</strong>　$V=U\\oplus U^\\perp$，任意向量 $\\boldsymbol x$ 唯一分解为 $\\boldsymbol x=\\boldsymbol x^\\parallel+\\boldsymbol x^\\perp$，$\\boldsymbol x^\\parallel\\in U$，$\\boldsymbol x^\\perp\\in U^\\perp$。$p_U(\\boldsymbol x)=\\boldsymbol x^\\parallel$ 称为正交投影。</p>
+<p><strong>命题</strong>　$p_U(\\boldsymbol x)$ 是 $U$ 中距离 $\\boldsymbol x$ 最近的向量：$\\|\\boldsymbol x-p_U(\\boldsymbol x)\\|=\\min_{\\boldsymbol y\\in U}\\|\\boldsymbol x-\\boldsymbol y\\|$。</p>
+<p><strong>最小二乘问题</strong>　给定 $m\\times n$ 实矩阵 $A$ 和 $\\boldsymbol y\\in\\mathbb{R}^m$，求 $\\min_{\\boldsymbol x\\in\\mathbb{R}^n}\\|A\\boldsymbol x-\\boldsymbol y\\|$ 的解。</p>
+<p><strong>命题</strong>　$\\boldsymbol x$ 是最小二乘解 $\\iff A^TA\\boldsymbol x=A^T\\boldsymbol y$（正规方程）。</p>
+<p>若 $A$ 列满秩，最小二乘解唯一，为 $\\boldsymbol x=(A^TA)^{-1}A^T\\boldsymbol y$。</p>
+<div class="la-callout la-app">应用　用线性函数 $y=at+b$ 拟合数据 $(t_i,y_i)$ 时，令 $A=\\begin{pmatrix}t_1&1\\\\ \\vdots&\\vdots\\\\ t_m&1\\end{pmatrix}$，$\\boldsymbol y=(y_i)$，最小二乘解即为最佳拟合参数。</div>`}
     ]},
-    {name:'5.2 正交基与正交化', color:'#7c3aed', desc:'Gram-Schmidt 正交化与正交投影', items:[
-      {id:'la-k5-4', name:'Gram-Schmidt 正交化', tags:['thm','der'], brief:'把任一组基化为正交基，过渡矩阵为上三角。',
-        body:`<p><strong>定理（Gram-Schmidt 正交化）</strong>　设 $\\{\\alpha_1,\\dots,\\alpha_n\\}$ 是 $n$ 维欧几里得空间的一组基。则存在正交基 $\\{\\beta_1,\\dots,\\beta_n\\}$，使过渡矩阵为上三角矩阵。</p>
-<p><strong>构造过程</strong></p>
-<div class="la-fml">$$\\beta_k = \\alpha_k - \\sum_{i=1}^{k-1}\\frac{\\langle\\beta_i,\\alpha_k\\rangle}{\\langle\\beta_i,\\beta_i\\rangle}\\beta_i, \\qquad k=1,\\dots,n$$</div>
-<p>进一步归一化 $\\gamma_i=\\beta_i/\\|\\beta_i\\|$ 得到<strong>标准正交基</strong>。</p>
-<div class="la-callout la-app">应用　QR 分解：任意可逆方阵 $A$ 可分解为 $A=QR$，$Q$ 正交阵，$R$ 对角元为正的上三角阵。QR 分解在求解线性方程组和最小二乘问题中非常有用。</div>`},
-      {id:'la-k5-5', name:'正交投影', tags:['def','thm'], brief:'$V=U\\oplus U^\\perp$；$p_U(x)$ 是 $U$ 中距离 $x$ 最近的向量。',
-        fig:'projection', figCap:'图 5.2　$p_U(x)$ 是 $x$ 在子空间 $U$ 上的正交投影',
-        body:`<p><strong>定义</strong>　子空间 $U$ 的正交补为 $U^\\perp=\\{\\alpha\\mid\\langle\\alpha,\\beta\\rangle=0,\\ \\forall\\beta\\in U\\}$。</p>
-<p><strong>命题</strong>　$V=U\\oplus U^\\perp$，任意向量 $x$ 唯一分解为 $x=x^\\parallel+x^\\perp$，$x^\\parallel\\in U$，$x^\\perp\\in U^\\perp$。$p_U(x)=x^\\parallel$ 称为正交投影。</p>
-<p><strong>命题</strong>　$p_U(x)$ 是 $U$ 中距离 $x$ 最近的向量：$\\|x-p_U(x)\\|=\\min_{y\\in U}\\|x-y\\|$。</p>`}
-    ]},
-    {name:'5.3 正交方阵', color:'#be123c', desc:'正交变换、反射、旋转', items:[
-      {id:'la-k5-6', name:'正交变换与正交方阵', tags:['def','thm'], brief:'$A^TA=I_n$；列（行）向量构成标准正交基。',
-        body:`<p><strong>定义</strong>　线性变换 $T:V\\to V$ 称为<strong>正交变换</strong>，如果 $\\|T(x)\\|=\\|x\\|$ 对所有 $x$ 成立。等价地，$T$ 保持内积不变。</p>
+    {name:'5.2 正交方阵与谱定理', color:'#be123c', desc:'正交变换、对称矩阵与奇异值分解', items:[
+      {id:'la-k5-4', name:'正交方阵', tags:['def','thm'], brief:'$A^TA=I_n$；列（行）向量构成标准正交基。',
+        body:`<p><strong>定义</strong>　线性变换 $T:V\\to V$ 称为<strong>正交变换</strong>，如果 $\\|T(\\boldsymbol x)\\|=\\|\\boldsymbol x\\|$ 对所有 $\\boldsymbol x$ 成立。等价地，$T$ 保持内积不变。</p>
 <p><strong>定义</strong>　$n$ 阶实方阵 $A$ 称为<strong>正交方阵</strong>，如果 $A^TA=AA^T=I_n$。所有正交方阵构成群 $\\mathrm{O}(n)$。</p>
 <p><strong>命题</strong>　$A\\in\\mathrm{O}(n)$ $\\iff$ $A$ 的列向量构成 $\\mathbb{R}^n$ 的标准正交基。</p>
-<p><strong>命题</strong>　$\\det A=\\pm1$。$\\det A=1$ 的构成子群 $\\mathrm{SO}(n)$（特殊正交群）。</p>`},
-      {id:'la-k5-7', name:'反射与旋转', tags:['def','exa'], brief:'反射 $\\det=-1$；旋转 $\\det=1$。',
-        body:`<p><strong>反射变换</strong>　设 $u$ 是非零向量，$H=\\{y\\mid\\langle y,u\\rangle=0\\}$ 是超平面。关于 $H$ 的反射为</p>
-<div class="la-fml">$$R_u(x) = x - 2\\frac{\\langle u,x\\rangle}{\\langle u,u\\rangle}u$$</div>
-<p>$R_u$ 是正交变换，$\\det R_u=-1$。</p>
+<p><strong>命题</strong>　$\\det A=\\pm1$。$\\det A=1$ 的构成子群 $\\mathrm{SO}(n)$（特殊正交群）。</p>
 <p><strong>2 维正交变换</strong>　$\\mathrm{O}(2)$ 的元素必为</p>
 <div class="la-fml">$$\\begin{pmatrix}\\cos\\theta & -\\sin\\theta\\\\ \\sin\\theta & \\cos\\theta\\end{pmatrix}\\ (\\text{旋转，}\\det=1) \\quad\\text{或}\\quad \\begin{pmatrix}\\cos\\theta & \\sin\\theta\\\\ \\sin\\theta & -\\cos\\theta\\end{pmatrix}\\ (\\text{反射，}\\det=-1)$$</div>
-<p><strong>定理（Cartan-Dieudonné）</strong>　$\\mathbb{R}^n$ 上任意正交变换都可写成至多 $n$ 个反射的复合。</p>`}
-    ]},
-    {name:'5.4 正交相似与奇异值分解', color:'#c2410c', desc:'实对称方阵与 SVD', items:[
-      {id:'la-k5-8', name:'实对称方阵', tags:['thm'], brief:'特征值为实数；正交相似于对角阵；半正定有唯一平方根。',
-        body:`<p><strong>定理</strong>　设 $A$ 是实对称方阵（$A=A^T$）。则 $A$ 的特征值均为实数，$A$ 必正交相似于对角阵。</p>
+<p><strong>定理（Cartan-Dieudonné）</strong>　$\\mathbb{R}^n$ 上任意正交变换都可写成至多 $n$ 个反射的复合。</p>`},
+      {id:'la-k5-5', name:'实对称方阵与谱定理', tags:['thm','app'], brief:'特征值为实数；正交相似于对角阵；半正定有唯一平方根。',
+        body:`<p><strong>定理（谱定理）</strong>　设 $A$ 是实对称方阵（$A=A^T$）。则 $A$ 的特征值均为实数，且存在正交矩阵 $P$ 使得</p>
+<div class="la-fml">$$P^T A P = \\mathrm{diag}(\\lambda_1,\\dots,\\lambda_n)$$</div>
 <p><strong>命题</strong>　实对称方阵 $A$ 正定（半正定）$\\iff$ 所有特征值 $>0$（$\\geq0$）。</p>
 <p><strong>命题</strong>　$n$ 阶半正定实对称方阵 $A$ 存在唯一的半正定实对称方阵 $B$ 使得 $A=B^2$。记为 $\\sqrt A$。</p>
 <p><strong>应用</strong>　极分解：任意可逆方阵 $A$ 可以写成 $A=R\\Theta$，其中 $R$ 半正定对称，$\\Theta$ 正交。</p>`},
-      {id:'la-k5-9', name:'奇异值分解（SVD）', tags:['thm','app'], brief:'$A=U\\Sigma V^T$；$\\sigma_i$ 是 $A^TA$ 非零特征值的平方根。',
+      {id:'la-k5-6', name:'奇异值分解（SVD）', tags:['thm','app'], brief:'$A=U\\Sigma V^T$；$\\sigma_i$ 是 $A^TA$ 非零特征值的平方根。',
         fig:'svd', figCap:'图 5.3　奇异值分解：单位圆在 $A$ 映射下变为椭圆，长/短半轴为奇异值 $\\sigma_1,\\sigma_2$',
         body:`<p><strong>定义</strong>　设 $A$ 是 $m\\times n$ 实矩阵。$n$ 阶半正定实对称方阵 $A^TA$ 的非零特征值的平方根称为 $A$ 的<strong>奇异值</strong>。</p>
 <p><strong>定理（奇异值分解）</strong>　设 $\\sigma_1\\geq\\cdots\\geq\\sigma_r>0$ 是 $A$ 的所有奇异值，则存在 $m$ 阶正交阵 $U$ 和 $n$ 阶正交阵 $V$ 使得</p>
 <div class="la-fml">$$A = U\\Sigma V^T,\\qquad \\Sigma = \\begin{pmatrix}\\sigma_1 & & & \\\\ & \\ddots & & \\\\ & & \\sigma_r & \\\\ & & & 0\\end{pmatrix}$$</div>
-<p><strong>几何意义</strong>　单位球面在 $A$ 作用下变为椭球，椭球各半轴长即为奇异值。</p>
-<div class="la-callout la-app">应用　数据压缩、主成分分析（PCA）、推荐系统、图像处理、最小二乘问题。</div>`}
+<p><strong>几何意义</strong>　单位球面在 $A$ 作用下变为椭球，椭球各半轴长即为奇异值。谱范数 $\\|A\\|$ 等于最大奇异值。</p>
+<div class="la-callout la-app">应用　数据压缩、主成分分析（PCA）、推荐系统、图像处理、最小二乘问题、Moore-Penrose 逆。</div>`}
     ]},
-    {name:'5.5 一些例子', color:'#0891b2', desc:'QR 分解、最小二乘、广义逆、矩阵范数', items:[
-      {id:'la-k5-10', name:'最小二乘法', tags:['app','thm'], brief:'$\\min_x\\|Ax-y\\|$ 的解满足 $A^TAx=A^Ty$。',
-        body:`<p>给定 $m\\times n$ 实矩阵 $A$ 和 $y\\in\\mathbb{R}^m$，<strong>最小二乘问题</strong>是求 $\\min_{x\\in\\mathbb{R}^n}\\|Ax-y\\|$ 的 $x$，称为线性方程组 $Ax=y$ 的<strong>最小二乘解</strong>。</p>
-<p><strong>命题</strong>　$x$ 是最小二乘解 $\\iff A^TAx=A^Ty$（正规方程）。</p>
-<p>若 $A$ 列满秩，最小二乘解唯一，为 $x=(A^TA)^{-1}A^Ty$。若 $A$ 有 QR 分解 $A=QR$，则 $x=R_1^{-1}Q_1^Ty$。</p>
-<div class="la-callout la-app">应用　用线性函数 $y=at+b$ 拟合数据 $(t_i,y_i)$ 时，令 $A=\\begin{pmatrix}t_1&1\\\\ \\vdots&\\vdots\\\\ t_m&1\\end{pmatrix}$，$y=(y_i)$，最小二乘解即为最佳拟合参数。</div>`},
-      {id:'la-k5-11', name:'广义逆与 Moore-Penrose 逆', tags:['def','app'], brief:'$AXA=A$；Moore-Penrose 逆满足四条额外条件。',
-        body:`<p><strong>定义</strong>　$m\\times n$ 矩阵 $A$ 的<strong>广义逆</strong>是满足 $AXA=A$ 的 $n\\times m$ 矩阵 $X$，记为 $A^-$。广义逆总存在但不唯一。</p>
-<p><strong>命题</strong>　线性方程组 $Ax=b$ 有解 $\\iff b=AA^-b$。此时 $x=A^-b$ 是特解，通解为</p>
-<div class="la-fml">$$x = A^- b + (I_n - A^- A)z$$</div>
-<p><strong>Moore-Penrose 逆</strong>　存在唯一的 $n\\times m$ 矩阵 $X$ 同时满足</p>
-<div class="la-fml">$$AXA=A,\\quad XAX=X,\\quad (AX)^T=AX,\\quad (XA)^T=XA$$</div>
-<p>称为 $A$ 的 <strong>Moore-Penrose 逆</strong>，记为 $A^+$。$A^+b$ 是最小二乘问题的一个解。</p>`},
-      {id:'la-k5-12', name:'矩阵谱范数与极限', tags:['def','app'], brief:'$\\|A\\|=\\max_{\\|x\\|=1}\\|Ax\\|$ = 最大奇异值。',
-        body:`<p><strong>定义</strong>　$m\\times n$ 实矩阵 $A$ 的<strong>谱范数</strong>为</p>
-<div class="la-fml">$$\\|A\\| = \\max_{x\\neq0}\\frac{\\|Ax\\|}{\\|x\\|} = \\max_{\\|x\\|=1}\\|Ax\\|$$</div>
-<p><strong>命题</strong>　$\\|A\\|$ 等于 $A$ 的最大奇异值。$\\|AB\\|\\leq\\|A\\|\\|B\\|$，$\\|A+B\\|\\leq\\|A\\|+\\|B\\|$，正交变换不改变范数 $\\|UAV^T\\|=\\|A\\|$。</p>
-<p><strong>矩阵极限</strong>　$\\lim_{k\\to\\infty}A_k=B$ 定义为 $\\lim_{k\\to\\infty}\\|A_k-B\\|=0$，等价于每个矩阵元收敛。</p>
-<p><strong>应用</strong>　指数矩阵 $e^{tA}$ 的收敛性由 $\\|e^A\\|\\leq e^{\\|A\\|}$ 保证。</p>`}
-    ]},
-    {name:'5.6 酉空间', color:'#7c3aed', desc:'复内积空间与正交性', items:[
-      {id:'la-k5-13', name:'厄米内积与酉空间', tags:['def','exa'], brief:'共轭对称性 $\\langle u,v\\rangle = \\overline{\\langle v,u\\rangle}$；对第二分量线性。',
-        fig:'hermitian', figCap:'图 5.4　复平面上的厄米内积与酉空间结构',
-        body:`<p><strong>定义</strong>　复线性空间 $V$ 上的<strong>厄米内积</strong>是映射 $\\langle\\cdot,\\cdot\\rangle: V\\times V\\to\\mathbb{C}$，满足：</p>
-<ul>
-<li>正定性：$\\langle u,u\\rangle\\geq 0$，等号成立 $\\iff u=0$</li>
-<li>共轭对称性：$\\langle u,v\\rangle = \\overline{\\langle v,u\\rangle}$</li>
-<li>线性性：$\\langle u,av+bw\\rangle = a\\langle u,v\\rangle + b\\langle u,w\\rangle$</li>
-</ul>
-<p>带厄米内积的复线性空间称为<strong>酉空间</strong>。</p>
-<p><strong>典型例子</strong>　$\\mathbb{C}^n$：$\\langle z,w\\rangle=\\sum_i \\bar z_i w_i$；复函数空间：$\\langle f,g\\rangle=\\int_a^b \\overline{f(x)}g(x)\\,dx$。</p>
-<p>Cauchy-Schwarz、三角不等式、平行四边形法则在酉空间中仍然成立。</p>`},
-      {id:'la-k5-14', name:'酉矩阵与正规矩阵', tags:['def','thm'], brief:'$A^\\dagger A=I_n$；正规矩阵 $AA^\\dagger=A^\\dagger A$ 可酉对角化。',
-        body:`<p><strong>定义</strong>　$n$ 阶复方阵 $A$ 称为<strong>酉矩阵</strong>，如果 $\\bar A^T A=A\\bar A^T=I_n$。所有酉矩阵构成群 $\\mathrm{U}(n)$，$\\det=1$ 的构成 $\\mathrm{SU}(n)$。</p>
-<p><strong>命题</strong>　酉矩阵的列向量构成 $\\mathbb{C}^n$ 的标准正交基。</p>
-<p><strong>定义</strong>　$n$ 阶复方阵 $A$ 称为<strong>正规矩阵</strong>，如果 $A\\bar A^T = \\bar A^T A$。</p>
-<p><strong>定理</strong>　$A$ 酉相似于对角方阵 $\\iff A$ 是正规矩阵。厄米方阵、酉方阵都是正规矩阵的特例。</p>`}
-    ]},
-    {name:'5.7 厄米矩阵', color:'#be123c', desc:'厄米矩阵、正定性、谱定理与应用', items:[
-      {id:'la-k5-15', name:'厄米矩阵与性质', tags:['def','thm'], brief:'$A=A^\\dagger$；特征值为实数；不同特征值的特征向量正交。',
-        body:`<p><strong>定义</strong>　$n$ 阶复方阵 $A$ 称为<strong>厄米矩阵</strong>，如果 $A=A^\\dagger$（即 $A=\\bar A^T$），即 $a_{ij}=\\overline{a_{ji}}$。</p>
-<p>厄米矩阵是实对称矩阵在复数域上的推广。</p>
-<p><strong>命题</strong>　厄米矩阵 $A$ 的特征值均为实数。属于不同特征值的特征向量相互正交。</p>
-<p><strong>例</strong>　Pauli 矩阵 $\\sigma_x,\\sigma_y,\\sigma_z$ 都是厄米矩阵；一般 $2\\times2$ 厄米矩阵可写为</p>
-<div class="la-fml">$$A = \\alpha_0 I_2 + \\alpha_1\\sigma_x + \\alpha_2\\sigma_y + \\alpha_3\\sigma_z,\\quad \\alpha_i\\in\\mathbb{R}$$</div>`},
-      {id:'la-k5-16', name:'厄米矩阵的谱定理', tags:['thm','app'], brief:'厄米矩阵必酉对角化；正定当且仅当特征值全正。',
-        body:`<p><strong>定理（谱定理）</strong>　设 $A$ 是 $n$ 阶厄米矩阵。则存在酉矩阵 $U$ 使得</p>
-<div class="la-fml">$$U A U^\\dagger = \\mathrm{diag}(\\lambda_1,\\dots,\\lambda_n),\\qquad \\lambda_i\\in\\mathbb{R}$$</div>
-<p>即厄米矩阵必正交/酉相似于实对角阵。</p>
-<p><strong>命题（正定性判别）</strong>　厄米矩阵 $A$ 是<strong>正定</strong>（半正定）的，即对任意非零 $z\\in\\mathbb{C}^n$ 有 $z^\\dagger A z>0$（$\\geq0$），$\\iff$ $A$ 的所有特征值 $>0$（$\\geq0$）。</p>
-<p><strong>命题</strong>　$n$ 阶半正定厄米矩阵 $A$ 存在唯一的半正定厄米矩阵 $B$ 使得 $A=B^2$。记 $B=\\sqrt A$。</p>
-<p><strong>命题</strong>　$A$ 正定 $\\iff$ 存在可逆 $P$ 使 $A=P^\\dagger P$。这给出正定性的另一个判别方式。</p>`},
-      {id:'la-k5-17', name:'厄米矩阵的应用', tags:['app','exa'], brief:'量子力学可观测量、奇异值分解、极分解。',
-        body:`<p><strong>量子力学</strong>　物理可观测量（能量、动量、自旋等）对应厄米算符。厄米性保证测量结果（特征值）为实数。</p>
-<p><strong>复 SVD</strong>　任意 $m\\times n$ 复矩阵 $A$ 都有奇异值分解 $A=U\\Sigma \\bar V^T$，其中 $U,V$ 是酉矩阵。$A^\\dagger A$ 是半正定厄米矩阵，其非零特征值的平方根即 $A$ 的奇异值。</p>
-<p><strong>极分解</strong>　任意 $n$ 阶复方阵 $A$ 可以写成 $A=R\\Theta$ 或 $A=\\Theta R$，其中 $R$ 是半正定厄米矩阵，$\\Theta$ 是酉矩阵。这与复数极坐标 $z=re^{i\\theta}$ 完全对应。</p>
-<p><strong>正定厄米矩阵不等式</strong>　对 $A,B$ 厄米，$\\mathrm{Tr}(AB)^2\\leq\\mathrm{Tr}(A^2B^2)$，等号成立 $\\iff AB=BA$。这是 Cauchy-Schwarz 不等式的矩阵版本。</p>`}
-    ]}
-  ]
-},
-
-/* ================= 第六章 ================= */
-{
-  id:'la-ch6', num:'第六章', title:'线性空间的一些构造', en:'CONSTRUCTIONS',
-  sub:'对偶空间、张量代数与辛矩阵',
-  desc:'本章从已知的线性空间构造新的线性空间：对偶空间、商空间、张量积、对称代数、外代数，并特别讨论辛形式与辛矩阵——这是经典力学（Hamilton 力学）与量子化理论中的重要结构。',
-  sections:[
-    {name:'6.1 线性构造', color:'#be123c', desc:'对偶空间、商空间与自由生成的向量空间', items:[
-      {id:'la-k6-1', name:'对偶空间', tags:['def','thm'], brief:'$V^*=\\{f:V\\to k\\text{ 线性}\\}$；对偶基与双重对偶。',
-        body:`<p><strong>定义</strong>　线性空间 $V$ 上的<strong>线性函数</strong>是线性映射 $f:V\\to k$。所有线性函数构成的集合 $V^*=\\{f:V\\to k\\mid f\\text{ 线性}\\}$ 称为 $V$ 的<strong>对偶空间</strong>。</p>
-<p><strong>命题（对偶基）</strong>　设 $\\{e_1,\\dots,e_n\\}$ 是 $V$ 的基，定义 $e^i(e_j)=\\delta^i_j$，则 $\\{e^1,\\dots,e^n\\}$ 构成 $V^*$ 的基。$\\dim V^*=\\dim V$。</p>
-<p><strong>双重对偶</strong>　$V\\to V^{**}$，$v\\mapsto\\hat v$，$\\hat v(f)=f(v)$ 是线性同构（有限维情形）。</p>`},
-      {id:'la-k6-2', name:'商空间', tags:['def','thm'], brief:'$V/W=\\{v+W\\}$；$\\dim(V/W)=\\dim V-\\dim W$。',
-        body:`<p><strong>定义</strong>　设 $W\\subset V$ 是子空间。在 $V$ 上定义等价关系 $v_1\\sim v_2\\iff v_1-v_2\\in W$，等价类 $v+W$ 称为陪集。<strong>商空间</strong>为 $V/W=\\{v+W\\mid v\\in V\\}$。</p>
-<p>在商空间上定义 $(v_1+W)+(v_2+W)=(v_1+v_2)+W$，$\\lambda(v+W)=\\lambda v+W$，则 $V/W$ 是线性空间。</p>
-<p><strong>命题</strong>　$\\dim(V/W)=\\dim V-\\dim W$。</p>
-<p><strong>命题</strong>　$(V/W)^*$ 自然同构于 $W$ 的零化子 $W^0=\\{f\\in V^*\\mid f(w)=0,\\forall w\\in W\\}$。</p>`},
-      {id:'la-k6-3', name:'自由生成的向量空间', tags:['def','thm'], brief:'任意集合 $X$ 可"自由生成"一个以 $X$ 为基的线性空间。',
-        body:`<p><strong>定义</strong>　给定集合 $X$ 和数域 $k$，<strong>由 $X$ 自由生成的向量空间</strong> $F(X)$ 由所有形式和 $\\sum_{x\\in X}a_x x$（其中只有有限个 $a_x$ 非零）构成，加法与数乘按分量定义。</p>
-<p><strong>性质</strong>　$X$ 构成 $F(X)$ 的一组基；$F(X)$ 是有限维 $\\iff X$ 是有限集。</p>
-<p><strong>泛性质</strong>　对任意集合映射 $\\phi:X\\to V$（$V$ 是任意线性空间），存在唯一的线性映射 $\\tilde\\phi: F(X)\\to V$ 使得 $\\tilde\\phi\\circ i=\\phi$，其中 $i: X\\to F(X)$ 是包含映射。</p>
-<div class="la-callout la-app">应用　$X=\\{1,x,x^2,\\dots\\}$ 时 $F(X)=\\mathbb{R}[x]$（多项式空间）。</div>`}
-    ]},
-    {name:'6.2 张量构造', color:'#c2410c', desc:'张量积、张量代数、对称代数、外代数', items:[
-      {id:'la-k6-4', name:'张量积', tags:['def','thm'], brief:'$V\\otimes W$ 通过双线性映射的泛性质定义；$\\dim(V\\otimes W)=\\dim V\\cdot\\dim W$。',
-        fig:'tensor', figCap:'图 6.1　张量积把 $V$ 和 $W$ "组合"成更大的空间 $V\\otimes W$',
-        body:`<p><strong>定义</strong>　$V$ 和 $W$ 的<strong>张量积</strong> $V\\otimes_k W$ 是商空间 $F(V\\times W)/R$，其中 $R$ 是由双线性关系生成的子空间。$V\\otimes W$ 中元素写成 $\\sum \\alpha_{ij}v_i\\otimes w_j$，满足：</p>
-<div class="la-fml">$$(v_1+v_2)\\otimes w = v_1\\otimes w+v_2\\otimes w,\\quad v\\otimes(w_1+w_2)=v\\otimes w_1+v\\otimes w_2$$
-$$(cv)\\otimes w = c(v\\otimes w) = v\\otimes(cw)$$</div>
+    {name:'5.3 张量代数与外代数', color:'#c2410c', desc:'张量积、对称代数、外代数与行列式', items:[
+      {id:'la-k5-7', name:'张量积', tags:['def','thm'], brief:'$V\\otimes W$ 通过双线性映射的泛性质定义；$\\dim(V\\otimes W)=\\dim V\\cdot\\dim W$。',
+        fig:'tensor', figCap:'图 5.4　张量积把 $V$ 和 $W$ "组合"成更大的空间 $V\\otimes W$',
+        body:`<p><strong>定义</strong>　$V$ 和 $W$ 的<strong>张量积</strong> $V\\otimes_k W$ 是商空间 $F(V\\times W)/R$，其中 $R$ 是由双线性关系生成的子空间。$V\\otimes W$ 中元素写成 $\\sum \\alpha_{ij}\\boldsymbol v_i\\otimes\\boldsymbol w_j$，满足：</p>
+<div class="la-fml">$$(\\boldsymbol v_1+\\boldsymbol v_2)\\otimes\\boldsymbol w = \\boldsymbol v_1\\otimes\\boldsymbol w+\\boldsymbol v_2\\otimes\\boldsymbol w,\\quad \\boldsymbol v\\otimes(\\boldsymbol w_1+\\boldsymbol w_2)=\\boldsymbol v\\otimes\\boldsymbol w_1+\\boldsymbol v\\otimes\\boldsymbol w_2$$
+$$(c\\boldsymbol v)\\otimes\\boldsymbol w = c(\\boldsymbol v\\otimes\\boldsymbol w) = \\boldsymbol v\\otimes(c\\boldsymbol w)$$</div>
 <p><strong>泛性质</strong>　任意双线性映射 $\\phi:V\\times W\\to U$ 唯一地诱导线性映射 $\\tilde\\phi:V\\otimes W\\to U$。</p>
-<p><strong>命题</strong>　若 $\\{e_i\\}$ 是 $V$ 的基，$\\{f_j\\}$ 是 $W$ 的基，则 $\\{e_i\\otimes f_j\\}$ 是 $V\\otimes W$ 的基。特别地 $\\dim(V\\otimes W)=\\dim V\\cdot\\dim W$。</p>`},
-      {id:'la-k6-5', name:'张量代数与对称代数', tags:['def','thm'], brief:'$T^m(V)=V^{\\otimes m}$；对称张量与多项式代数对应。',
+<p><strong>命题</strong>　若 $\\{\\boldsymbol e_i\\}$ 是 $V$ 的基，$\\{\\boldsymbol f_j\\}$ 是 $W$ 的基，则 $\\{\\boldsymbol e_i\\otimes\\boldsymbol f_j\\}$ 是 $V\\otimes W$ 的基。特别地 $\\dim(V\\otimes W)=\\dim V\\cdot\\dim W$。</p>`},
+      {id:'la-k5-8', name:'张量代数与对称代数', tags:['def','thm'], brief:'$T^m(V)=V^{\\otimes m}$；对称张量与多项式代数对应。',
         body:`<p><strong>定义</strong>　$m$ 阶张量 $T^m(V)=V\\otimes\\cdots\\otimes V$（$m$ 个）。张量积给出乘法 $T^r(V)\\times T^s(V)\\to T^{r+s}(V)$，全体张量构成<strong>张量代数</strong>。</p>
 <p><strong>对称张量</strong>　$A\\in T^m(V)$ 称为<strong>对称张量</strong>，如果对任意 $\\sigma\\in S_m$ 有 $\\sigma(A)=A$。所有 $m$ 阶对称张量构成子空间 $\\mathrm{Sym}^m(V)$，维数</p>
 <div class="la-fml">$$\\dim\\mathrm{Sym}^m(V)=\\binom{n+m-1}{m}$$</div>
 <p><strong>命题</strong>　$m$ 阶对称张量与 $m$ 次多项式一一对应。对称张量的乘法（对称化）构成交换代数，即<strong>对称代数</strong>。</p>`},
-      {id:'la-k6-6', name:'外代数与行列式', tags:['def','thm'], brief:'反对称张量；$v\\wedge v=0$；$\\dim\\wedge^m V=\\binom nm$。',
+      {id:'la-k5-9', name:'外代数与行列式', tags:['def','thm'], brief:'反对称张量；$\\boldsymbol v\\wedge\\boldsymbol v=0$；$\\dim\\wedge^m V=\\binom nm$。',
         body:`<p><strong>定义</strong>　$A\\in T^m(V)$ 称为<strong>反对称张量</strong>，如果 $\\sigma(A)=\\mathrm{sgn}(\\sigma)A$ 对所有 $\\sigma\\in S_m$ 成立。所有反对称张量构成外幂 $\\wedge^m V$。</p>
-<p>外积 $\\wedge$ 定义为反对称化 $A\\wedge B=\\mathrm{Alt}(A\\otimes B)$，满足 $A\\wedge B=(-1)^{rs}B\\wedge A$（$A\\in\\wedge^r V,B\\in\\wedge^s V$）。特别地 $v\\wedge v=0$。</p>
-<p><strong>命题</strong>　$\\{e_{i_1}\\wedge\\cdots\\wedge e_{i_m}\\mid i_1<\\cdots<i_m\\}$ 是 $\\wedge^m V$ 的基，维数为 $\\binom nm$。</p>
-<p><strong>行列式的内蕴定义</strong>　线性映射 $T:V\\to V$ 在最高次外幂 $\\wedge^n V$ 上的作用为乘一个标量 $\\det T$：$\\wedge^n T(\\omega)=(\\det T)\\omega$。</p>`},
-      {id:'la-k6-7', name:'Pfaffian', tags:['def','thm','app'], brief:'反对称矩阵的行列式 = Pfaffian 的平方。',
-        body:`<p>设 $A$ 是 $2n\\times2n$ 反对称矩阵。将 $A$ 表示为 2 阶反对称张量 $\\omega_A=\\sum_{i<j}a_{ij}e_i\\wedge e_j$，则 $A$ 的行列式是完全平方</p>
-<div class="la-fml">$$\\det A = (\\mathrm{Pf}(A))^2$$</div>
-<p>其中 $\\mathrm{Pf}(A)$ 称为 $A$ 的 <strong>Pfaffian</strong>，由 $\\frac{1}{n!}\\omega_A^n=\\mathrm{Pf}(A)\\,e_1\\wedge\\cdots\\wedge e_{2n}$ 定义。</p>
-<p><strong>显式公式</strong></p>
-<div class="la-fml">$$\\mathrm{Pf}(A)=\\frac{1}{2^n n!}\\sum_{\\sigma\\in S_{2n}}\\mathrm{sgn}(\\sigma)a_{\\sigma(1)\\sigma(2)}\\cdots a_{\\sigma(2n-1)\\sigma(2n)}$$</div>
-<div class="la-callout la-app">应用　Pfaffian 在统计力学、量子场论中扮演重要角色；奇数阶反对称矩阵行列式为 0。</div>`}
+<p>外积 $\\wedge$ 定义为反对称化 $A\\wedge B=\\mathrm{Alt}(A\\otimes B)$，满足 $A\\wedge B=(-1)^{rs}B\\wedge A$（$A\\in\\wedge^r V,B\\in\\wedge^s V$）。特别地 $\\boldsymbol v\\wedge\\boldsymbol v=0$。</p>
+<p><strong>命题</strong>　$\\{\\boldsymbol e_{i_1}\\wedge\\cdots\\wedge\\boldsymbol e_{i_m}\\mid i_1<\\cdots<i_m\\}$ 是 $\\wedge^m V$ 的基，维数为 $\\binom nm$。</p>
+<p><strong>行列式的内蕴定义</strong>　线性映射 $T:V\\to V$ 在最高次外幂 $\\wedge^n V$ 上的作用为乘一个标量 $\\det T$：$\\wedge^n T(\\omega)=(\\det T)\\omega$。</p>
+<p><strong>Pfaffian</strong>　反对称矩阵 $A$ 的行列式是完全平方 $\\det A = (\\mathrm{Pf}(A))^2$。</p>`}
     ]},
-    {name:'6.3 辛形式与辛矩阵', color:'#4c1d95', desc:'辛形式、辛群与哈密顿力学', items:[
-      {id:'la-k6-8', name:'辛形式与辛矩阵', tags:['def','thm'], brief:'反对称、非退化的双线性形式 $\\omega$；$A^TJA=J$。',
-        fig:'symplectic', figCap:'图 6.2　辛形式：反对称双线性结构，与内积（对称）不同',
+    {name:'5.4 辛几何与经典力学', color:'#4c1d95', desc:'辛形式、辛矩阵与哈密顿力学', items:[
+      {id:'la-k5-10', name:'辛形式与辛矩阵', tags:['def','thm'], brief:'反对称、非退化的双线性形式 $\\omega$；$A^TJA=J$。',
+        fig:'symplectic', figCap:'图 5.5　辛形式：反对称双线性结构，与内积（对称）本质不同',
         body:`<p><strong>定义</strong>　线性空间 $V$（$\\dim V=2n$）上的<strong>辛形式</strong>是一个双线性映射 $\\omega: V\\times V\\to\\mathbb{R}$，满足：</p>
 <ul>
-<li><strong>反对称性</strong>：$\\omega(u,v)=-\\omega(v,u)$</li>
-<li><strong>非退化性</strong>：若 $\\omega(u,v)=0$ 对所有 $v$ 成立，则 $u=0$</li>
+<li><strong>反对称性</strong>：$\\omega(\\boldsymbol u,\\boldsymbol v)=-\\omega(\\boldsymbol v,\\boldsymbol u)$</li>
+<li><strong>非退化性</strong>：若 $\\omega(\\boldsymbol u,\\boldsymbol v)=0$ 对所有 $\\boldsymbol v$ 成立，则 $\\boldsymbol u=0$</li>
 </ul>
 <p>等价地，在适当基（辛基）下，$\\omega$ 的矩阵为</p>
-<div class="la-fml">$$J = \\begin{pmatrix} 0 & I_n\\\\ -I_n & 0\\end{pmatrix},\\qquad \\omega(u,v) = u^T J v$$</div>
+<div class="la-fml">$$J = \\begin{pmatrix} 0 & I_n\\\\ -I_n & 0\\end{pmatrix},\\qquad \\omega(\\boldsymbol u,\\boldsymbol v) = \\boldsymbol u^T J\\boldsymbol v$$</div>
 <p><strong>定义</strong>　$2n$ 阶实矩阵 $A$ 称为<strong>辛矩阵</strong>，如果 $A^T J A = J$。所有辛矩阵构成群 $\\mathrm{Sp}(2n,\\mathbb{R})$。</p>
-<p><strong>命题</strong>　辛矩阵满足 $\\det A=1$，$A^{-1}=-JA^TJ$，且 $A^T$ 也是辛矩阵。$A$ 是辛矩阵 $\\iff A$ 保持辛形式：$\\omega(Au,Av)=\\omega(u,v)$。</p>`},
-      {id:'la-k6-9', name:'辛群的 Lie 代数', tags:['def','thm'], brief:'$\\mathfrak{sp}(2n)=\\{X\\mid X^TJ+JX=0\\}$；辛 Lie 代数。',
-        body:`<p><strong>定义</strong>　辛群 $\\mathrm{Sp}(2n)$ 的 <strong>Lie 代数</strong>为</p>
-<div class="la-fml">$$\\mathfrak{sp}(2n) = \\{X\\in M_{2n}(\\mathbb{R})\\mid X^TJ + JX = 0\\}$$</div>
-<p>即所有满足 $X^TJ=-JX$ 的矩阵构成。</p>
-<p><strong>性质</strong>　$\\mathfrak{sp}(2n)$ 在对易子 $[X,Y]=XY-YX$ 下封闭，构成 Lie 代数。</p>
-<p><strong>例</strong>　$\\mathfrak{sp}(2)=\\mathfrak{sl}(2,\\mathbb{R})$，即所有迹为零的 $2\\times2$ 实矩阵。这反映 $\\mathrm{Sp}(2)=\\mathrm{SL}(2,\\mathbb{R})$。</p>
-<p><strong>物理意义</strong>　辛群是保持哈密顿力学结构（辛形式）的对称群。$\\mathrm{Sp}(2n)$ 在经典力学、量子化、几何量子化中扮演核心角色。</p>`},
-      {id:'la-k6-10', name:'辛几何在经典力学中的应用', tags:['app','exa'], brief:'相空间的辛结构；Hamilton 方程；辛变换保持哈密顿力学形式。',
+<p><strong>命题</strong>　辛矩阵满足 $\\det A=1$，$A^{-1}=-JA^TJ$，且 $A^T$ 也是辛矩阵。$A$ 是辛矩阵 $\\iff A$ 保持辛形式：$\\omega(A\\boldsymbol u,A\\boldsymbol v)=\\omega(\\boldsymbol u,\\boldsymbol v)$。</p>
+<p><strong>辛 Lie 代数</strong>　$\\mathfrak{sp}(2n) = \\{X\\in M_{2n}(\\mathbb{R})\\mid X^TJ + JX = 0\\}$，在对易子 $[X,Y]=XY-YX$ 下封闭。</p>`},
+      {id:'la-k5-11', name:'辛几何在经典力学中的应用', tags:['app','exa'], brief:'相空间的辛结构；Hamilton 方程；辛变换保持哈密顿力学形式。',
         body:`<p><strong>相空间</strong>　力学系统的状态由位置 $q$ 与动量 $p$ 描述，$(q,p)$ 构成相空间 $\\mathbb{R}^{2n}$，配备标准辛形式</p>
 <div class="la-fml">$$\\omega = \\sum_{i=1}^n dp_i \\wedge dq_i$$</div>
 <p><strong>Hamilton 方程</strong>　设 $H(q,p)$ 是哈密顿量，运动方程为</p>
 <div class="la-fml">$$\\dot q_i = \\frac{\\partial H}{\\partial p_i},\\qquad \\dot p_i = -\\frac{\\partial H}{\\partial q_i}$$</div>
-<p>可以统一写成辛形式的表达式 $\\omega(\\cdot,\\dot x)=dH$ 或 $\\dot x = J\\nabla H$。</p>
+<p>可以统一写成辛形式 $\\dot x = J\\nabla H$。</p>
 <p><strong>辛变换</strong>　保持辛形式的坐标变换 $A$（即辛矩阵）将 Hamilton 方程变为 Hamilton 方程，对应"正则变换"。这是哈密顿力学的基本对称性。</p>
 <p><strong>量子化</strong>　经典力学的辛结构在量子化时对应于算符的对易关系 $[\\hat q,\\hat p]=i\\hbar$。辛几何是几何量子化的数学基础。</p>`}
+    ]},
+    {name:'5.5 矩阵群与 Lie 代数', color:'#0891b2', desc:'矩阵 Lie 群、指数映射与物理应用', items:[
+      {id:'la-k5-12', name:'常见矩阵 Lie 群', tags:['def','exa'], brief:'$\\mathrm{GL},\\mathrm{SL},\\mathrm{O},\\mathrm{SO},\\mathrm{U},\\mathrm{SU},\\mathrm{Sp},\\mathrm{O}(1,n-1)$。',
+        fig:'lie', figCap:'图 5.6　Lie 群与 Lie 代数通过指数/对数映射相互联系',
+        body:`<p><strong>一般线性群</strong>　$\\mathrm{GL}(n,K)=\\{A\\in M_n(K)\\mid A\\text{ 可逆}\\}$；<strong>特殊线性群</strong> $\\mathrm{SL}(n,K)=\\{A\\in\\mathrm{GL}(n,K)\\mid \\det A=1\\}$。</p>
+<p><strong>正交群</strong>　$\\mathrm{O}(n)=\\{A\\in\\mathrm{GL}(n,\\mathbb{R})\\mid A^TA=I_n\\}$；<strong>特殊正交群</strong> $\\mathrm{SO}(n)=\\{A\\in\\mathrm{O}(n)\\mid \\det A=1\\}$。</p>
+<p><strong>酉群</strong>　$\\mathrm{U}(n)=\\{A\\in\\mathrm{GL}(n,\\mathbb{C})\\mid \\bar A^T A=I_n\\}$；<strong>特殊酉群</strong> $\\mathrm{SU}(n)=\\{A\\in\\mathrm{U}(n)\\mid \\det A=1\\}$。</p>
+<p><strong>辛群</strong>　$\\mathrm{Sp}(2n)=\\{A\\in\\mathrm{GL}(2n,\\mathbb{R})\\mid A^TJA=J\\}$。</p>
+<p><strong>洛伦兹群</strong>　$\\mathrm{O}(1,n-1)=\\{\\Lambda\\in\\mathrm{GL}(n,\\mathbb{R})\\mid \\Lambda^T\\eta\\Lambda=\\eta\\}$，$\\eta=\\mathrm{diag}(1,-1,\\dots,-1)$。</p>`},
+      {id:'la-k5-13', name:'矩阵 Lie 代数与指数映射', tags:['def','thm'], brief:'$\\mathfrak g=\\{X\\mid e^{tX}\\in G\\}$；对易子 $[X,Y]=XY-YX$。',
+        body:`<p><strong>定义</strong>　矩阵 Lie 群 $G$ 的 <strong>Lie 代数</strong>为单位元处的切空间</p>
+<div class="la-fml">$$\\mathfrak g = \\{X\\in M_n(K)\\mid e^{tX}\\in G\\text{ 对所有 }t\\in\\mathbb{R}\\}$$</div>
+<p>$\\mathfrak g$ 在对易子 $[X,Y]=XY-YX$ 下封闭，满足双线性、反对称性与 Jacobi 恒等式。</p>
+<p><strong>典型 Lie 代数</strong></p>
+<ul>
+<li>$\\mathfrak{gl}(n,K)=M_n(K)$</li>
+<li>$\\mathfrak{sl}(n,K)=\\{X\\mid \\mathrm{Tr}\\,X=0\\}$</li>
+<li>$\\mathfrak{so}(n)=\\{X\\in M_n(\\mathbb{R})\\mid X^T=-X\\}$（反对称实矩阵）</li>
+<li>$\\mathfrak{u}(n)=\\{X\\mid X^\\dagger=-X\\}$（反厄米矩阵）</li>
+<li>$\\mathfrak{su}(n)=\\{X\\mid X^\\dagger=-X,\\ \\mathrm{Tr}\\,X=0\\}$</li>
+<li>$\\mathfrak{sp}(2n)=\\{X\\mid X^TJ+JX=0\\}$</li>
+</ul>
+<p><strong>指数映射</strong>　$\\exp:\\mathfrak g\\to G$，$X\\mapsto e^X$，建立了 Lie 代数（线性空间）与 Lie 群（流形）的局部微分同胚。</p>
+<p><strong>BCH 公式</strong>　$e^Xe^Y = e^{X+Y+\\frac12[X,Y]+\\frac1{12}[X,[X,Y]]-\\frac1{12}[Y,[X,Y]]+\\cdots}$。</p>`},
+      {id:'la-k5-14', name:'Pauli 矩阵与 SU(2) 的表示', tags:['app','exa'], brief:'Pauli 矩阵、SU(2)→SO(3) 覆盖、自旋 $1/2$。',
+        body:`<p><strong>Pauli 矩阵</strong></p>
+<div class="la-fml">$$\\sigma_1=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix},\\quad \\sigma_2=\\begin{pmatrix}0&-i\\\\ i&0\\end{pmatrix},\\quad \\sigma_3=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}$$</div>
+<p>满足 $\\sigma_i^2=I_2$，$\\sigma_j\\sigma_k=\\delta_{jk}I_2+i\\sum_l\\epsilon_{jkl}\\sigma_l$。</p>
+<p><strong>SU(2) 与 SO(3)</strong>　存在 2:1 覆盖 $\\rho:\\mathrm{SU}(2)\\to\\mathrm{SO}(3)$。对任意 $A\\in\\mathrm{SU}(2)$，$\\rho(A)=\\rho(-A)$。这解释了自旋 $1/2$ 粒子绕任一轴旋转 $360^\\circ$ 后状态不完全恢复，而变为原状态的负号。</p>
+<p><strong>SU(2) 的不可约表示</strong>　对每个非负整数 $n$，$\\mathrm{SU}(2)$ 存在 $n+1$ 维不可约表示。物理上常用自旋量子数 $j=n/2$，维数 $2j+1$。</p>`}
+    ]},
+    {name:'5.6 量子论中的线性代数', color:'#be123c', desc:'量子态、厄米算符与量子纠缠', items:[
+      {id:'la-k5-15', name:'量子态与厄米算符', tags:['def','app'], brief:'量子态是酉空间向量；可观测量是厄米算符，特征值为实数。',
+        fig:'qm', figCap:'图 5.7　量子态 $|\\psi\\rangle$ 在厄米算符 $A$ 作用下得到观测结果',
+        body:`<p><strong>量子态</strong>　量子力学中，系统的状态由一个完备的酉空间 $V$（Hilbert 空间）中的向量 $|\\psi\\rangle$ 描述。线性叠加原理成立：$|\\psi\\rangle = c_1|\\psi_1\\rangle + c_2|\\psi_2\\rangle + \\cdots$。</p>
+<p><strong>可观测量</strong>　物理观测量（位置、动量、自旋、能量等）对应于<strong>厄米算符</strong> $A=A^\\dagger$，即 $\\langle A^\\dagger\\phi|\\psi\\rangle=\\langle\\phi|A\\psi\\rangle$。</p>
+<p><strong>命题</strong>　厄米算符的特征值都是实数；属于不同特征值的特征向量相互正交。</p>
+<p><strong>测量与 Born 规则</strong>　若 $|\\psi\\rangle=\\sum_a c_a|\\psi_a\\rangle$，$A|\\psi_a\\rangle=\\lambda_a|\\psi_a\\rangle$，则测量结果 $\\lambda_a$ 的概率为 $|c_a|^2$。期望值 $\\langle A\\rangle_\\psi = \\langle\\psi|A|\\psi\\rangle$。</p>`},
+      {id:'la-k5-16', name:'厄米矩阵与谱定理', tags:['def','thm'], brief:'$A=A^\\dagger$；特征值为实数；酉对角化；正定性判别。',
+        fig:'hermitian', figCap:'图 5.8　厄米内积 $\\langle z,w\\rangle=\\sum\\bar z_iw_i$，厄米矩阵是实对称矩阵的推广',
+        body:`<p><strong>定义</strong>　$n$ 阶复方阵 $A$ 称为<strong>厄米矩阵</strong>，如果 $A=A^\\dagger$（即 $A=\\bar A^T$），即 $a_{ij}=\\overline{a_{ji}}$。</p>
+<p><strong>定理（谱定理）</strong>　设 $A$ 是 $n$ 阶厄米矩阵，则存在酉矩阵 $U$ 使得</p>
+<div class="la-fml">$$U A U^\\dagger = \\mathrm{diag}(\\lambda_1,\\dots,\\lambda_n),\\qquad \\lambda_i\\in\\mathbb{R}$$</div>
+<p><strong>命题（正定性判别）</strong>　厄米矩阵 $A$ 是<strong>正定</strong>（半正定）的，即对任意非零 $z\\in\\mathbb{C}^n$ 有 $z^\\dagger A z>0$（$\\geq0$），$\\iff$ $A$ 的所有特征值 $>0$（$\\geq0$）。</p>
+<p><strong>命题</strong>　$A$ 正定 $\\iff$ 存在可逆 $P$ 使 $A=P^\\dagger P$。</p>
+<p><strong>命题</strong>　$n$ 阶半正定厄米矩阵 $A$ 存在唯一的半正定厄米矩阵 $B$ 使得 $A=B^2$，记 $B=\\sqrt A$。</p>
+<p><strong>应用</strong>　复 SVD：任意 $m\\times n$ 复矩阵 $A$ 有 $A=U\\Sigma\\bar V^T$；极分解 $A=R\\Theta$（$R$ 半正定厄米，$\\Theta$ 酉矩阵）。</p>`},
+      {id:'la-k5-17', name:'量子纠缠与贝尔不等式', tags:['app','exa'], brief:'纠缠态、EPR 佯谬、Bell 不等式与量子非定域性。',
+        body:`<p><strong>复合系统</strong>　两个自旋粒子的复合系统态空间为 $\\mathbb{C}^2\\otimes\\mathbb{C}^2$，基为 $\\{|uu\\rangle,|ud\\rangle,|du\\rangle,|dd\\rangle\\}$。</p>
+<p><strong>定义</strong>　若 $|\\psi\\rangle\\in\\mathbb{C}^2\\otimes\\mathbb{C}^2$ 可写成 $|\\psi\\rangle=|\\phi\\rangle\\otimes|\\chi\\rangle$ 则称<strong>乘积态</strong>，否则称<strong>纠缠态</strong>。</p>
+<p><strong>单重态</strong></p>
+<div class="la-fml">$$|s\\rangle = \\frac{1}{\\sqrt2}(|ud\\rangle-|du\\rangle)$$</div>
+<p>是纠缠态。对任意方向 $\\boldsymbol n$，在单重态下对其中一个分量测量自旋：$\\sigma^{(1)}_{\\boldsymbol n}=\\pm1 \\Rightarrow \\sigma^{(2)}_{\\boldsymbol n}=\\mp1$。</p>
+<p><strong>EPR 佯谬</strong>　对纠缠态的一个粒子测量会瞬间影响另一个粒子，Einstein 称其为"鬼魅般的超距作用"。</p>
+<p><strong>贝尔不等式</strong>　对三个单位向量 $\\boldsymbol n_1,\\boldsymbol n_2,\\boldsymbol n_3$：</p>
+<div class="la-fml">$$|\\tilde P(\\boldsymbol n_1,\\boldsymbol n_2)-\\tilde P(\\boldsymbol n_1,\\boldsymbol n_3)|\\leq 1+\\tilde P(\\boldsymbol n_2,\\boldsymbol n_3)$$</div>
+<p>量子力学预言违反此不等式（取 $\\boldsymbol n_1,\\boldsymbol n_2$ 垂直，$\\boldsymbol n_3$ 与两者成 $45^\\circ$：左边 $\\sqrt2/2\\approx0.707$，右边 $1-\\sqrt2/2\\approx0.293$）。实验证实量子力学的预言，排除了定域隐变量理论。</p>`}
     ]}
   ]
 }
@@ -1064,6 +1082,10 @@ function hideLaInfo(){
 }
 function closeLaInfo(e){
   if(e.target.id === 'laOverlay') hideLaInfo();
+}
+function expandAllLa(){
+  /* 依次打开所有卡片知识点的浮层滚动查看（简化：逐个点击不可行），此处仅提示 */
+  alert('提示：点击任意知识卡片即可打开详情浮层。');
 }
 document.addEventListener('keydown', e => {
   if(e.key === 'Escape') hideLaInfo();
