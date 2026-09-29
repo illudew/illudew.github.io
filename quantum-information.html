@@ -1,0 +1,1699 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="量子信息基础 · 知识体系（量子力学基本框架 + 密度矩阵 + POVM + 量子信道 + 复合系统 + 量子纠缠 + 开放系统）">
+<title>量子信息基础 · 知识体系</title>
+
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\\[','\\]']],
+    processEscapes: true,
+    packages: {'[+]': ['ams','boldsymbol','physics']}
+  },
+  options: {
+    skipHtmlTags: ['script','noscript','style','textarea','pre','code'],
+    ignoreHtmlClass: 'tex2jax_ignore'
+  },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" async></script>
+
+<style>
+  :root{
+    --la-bg:#f4f7fb; --la-card:#ffffff; --la-ink:#152033; --la-muted:#607089;
+    --la-shadow:0 12px 32px rgba(20,36,60,.09);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    color:var(--la-ink);
+    background:
+      radial-gradient(circle at 10% 10%,rgba(37,99,235,.08),transparent 28%),
+      radial-gradient(circle at 90% 10%,rgba(124,58,237,.08),transparent 28%),
+      var(--la-bg);
+    line-height:1.7;
+  }
+  a{color:inherit}
+  .la-wrap{width:min(1400px,94vw);margin:auto}
+  .la-header{padding:52px 0 20px;text-align:center}
+  .la-eyebrow{font-size:13px;letter-spacing:.22em;color:var(--la-muted);font-weight:700;text-transform:uppercase}
+  h1{margin:10px 0 8px;font-size:clamp(30px,5vw,54px);line-height:1.08;letter-spacing:-.03em}
+  .la-subtitle{margin:0 auto;color:var(--la-muted);font-size:16px;max-width:820px;line-height:1.8}
+
+  .back-bar{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:22px 0 6px}
+  .back-btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:10px 22px;border-radius:999px;text-decoration:none;
+    font-size:14px;font-weight:800;
+    background:#fff;color:#1e3a8a;
+    border:1px solid #c7d7ee;
+    box-shadow:0 8px 20px rgba(20,36,60,.08);
+    transition:.25s;cursor:pointer;
+  }
+  .back-btn:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(20,36,60,.14);color:#4c1d95;border-color:#ddd6fe}
+
+  .la-nav-tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:22px 0 8px}
+  .la-nav-tab{padding:8px 16px;border-radius:999px;text-decoration:none;font-weight:700;font-size:13px;
+    border:1px solid #d5deea;background:#fff;transition:.25s;color:#334155}
+  .la-nav-tab:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(20,36,60,.1)}
+  .la-nav-tab.c1{color:#1e40af;border-color:#bfdbfe}
+  .la-nav-tab.c2{color:#0f766e;border-color:#99f6e4}
+  .la-nav-tab.c3{color:#047857;border-color:#a7f3d0}
+  .la-nav-tab.c4{color:#c2410c;border-color:#fed7aa}
+  .la-nav-tab.c5{color:#6d28d9;border-color:#ddd6fe}
+  .la-nav-tab.c6{color:#be123c;border-color:#fecdd3}
+
+  .la-toolbar{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:16px 0 8px}
+  button{border:1px solid #d5deea;background:#fff;color:var(--la-ink);border-radius:999px;padding:9px 14px;
+    font:inherit;cursor:pointer;transition:.2s ease}
+  button:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(20,36,60,.08)}
+
+  .la-engagement-bar{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:10px 0 0}
+  .la-stat-item{display:inline-flex;align-items:center;gap:6px;padding:9px 18px;background:#fff;border:1px solid #d5deea;
+    border-radius:999px;font-size:14px;font-weight:600;color:#475569}
+  .la-stat-value{color:#2563eb;font-weight:800}
+
+  .la-legend{margin:26px auto 0;max-width:1100px;background:rgba(255,255,255,.8);
+    border:1px solid #dde5ef;border-radius:20px;padding:16px 22px;display:flex;gap:14px;flex-wrap:wrap;
+    justify-content:center;box-shadow:var(--la-shadow)}
+  .la-legend-title{font-size:12px;font-weight:800;letter-spacing:.16em;color:#94a3b8;align-self:center;margin-right:6px}
+  .la-arc-badge{display:inline-flex;align-items:center;font-size:10px;font-weight:800;
+    padding:3px 8px;border-radius:6px;letter-spacing:.03em;white-space:nowrap}
+  .la-arc-def{background:#dbeafe;color:#1e40af}
+  .la-arc-thm{background:#d1fae5;color:#065f46}
+  .la-arc-der{background:#ede9fe;color:#5b21b6}
+  .la-arc-exa{background:#cffafe;color:#155e75}
+  .la-arc-app{background:#ffedd5;color:#9a3412}
+  .la-arc-his{background:#f1f5f9;color:#475569}
+
+  .la-roadmap{margin-top:30px;background:rgba(255,255,255,.74);border:1px solid rgba(189,201,218,.7);
+    box-shadow:var(--la-shadow);border-radius:28px;padding:34px}
+
+  .la-phase-title{font-size:24px;font-weight:800;margin:60px 0 4px;display:flex;align-items:center;
+    gap:12px;color:#1e293b;letter-spacing:-.01em}
+  .la-phase-title:first-child{margin-top:0}
+  .la-phase-title::before{content:"";display:block;width:6px;height:30px;border-radius:4px;background:#2563eb;flex-shrink:0}
+  .la-phase-title.la-ch1::before{background:#2563eb}
+  .la-phase-title.la-ch2::before{background:#0d9488}
+  .la-phase-title.la-ch3::before{background:#059669}
+  .la-phase-title.la-ch4::before{background:#c2410c}
+  .la-phase-title.la-ch5::before{background:#7c3aed}
+  .la-phase-title.la-ch6::before{background:#be123c}
+
+  .la-phase-en{font-size:11px;letter-spacing:.36em;color:#94a3b8;font-weight:700;text-transform:uppercase;
+    margin:0 0 12px 18px;font-style:italic}
+  .la-phase-desc{color:var(--la-muted);font-size:14px;margin:0 0 24px 18px;line-height:1.8;max-width:960px}
+
+  .la-domain{margin-bottom:26px;padding:16px 18px 18px 22px;position:relative;background:rgba(255,255,255,.6);
+    border-radius:18px;border:1px solid #e5ebf2}
+  .la-domain::before{content:"";position:absolute;left:6px;top:16px;bottom:16px;width:5px;border-radius:5px;
+    background:var(--domain-color,#2563eb);box-shadow:0 0 12px rgba(37,99,235,.25)}
+  .la-domain-header{display:flex;align-items:center;gap:10px;margin-bottom:14px;padding-left:6px;flex-wrap:wrap}
+  .la-domain-header h3{margin:0;font-size:18px;color:#1e293b}
+  .la-domain-count{font-size:11px;padding:3px 10px;border-radius:999px;background:#f1f5f9;color:#64748b;font-weight:600}
+  .la-domain-desc{font-size:12px;color:#94a3b8;margin-left:auto;font-style:italic}
+
+  .la-domain-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+  .la-course-card{background:#fff;border:1px solid #dbe3ee;border-radius:14px;padding:14px;cursor:pointer;
+    transition:.25s;position:relative;overflow:hidden}
+  .la-course-card:hover{transform:translateY(-3px);box-shadow:0 10px 20px rgba(25,44,75,.1);border-color:#aabbd0}
+  .la-course-card h4{margin:0 0 8px;font-size:14.5px;line-height:1.35;color:#1e293b}
+  .la-course-card p{margin:0;font-size:11.5px;color:var(--la-muted);line-height:1.6}
+  .la-arc-badges{display:flex;flex-wrap:wrap;gap:3px;margin-bottom:8px}
+
+  .la-overlay{position:fixed;inset:0;background:rgba(15,23,42,.5);display:none;align-items:center;
+    justify-content:center;padding:18px;z-index:60;backdrop-filter:blur(2px)}
+  .la-overlay.show{display:flex}
+  .la-modal{width:min(820px,96vw);background:white;border-radius:24px;padding:30px;
+    box-shadow:0 24px 80px rgba(0,0,0,.28);animation:laPopIn .3s;max-height:90vh;overflow-y:auto}
+  @keyframes laPopIn{from{transform:scale(.94);opacity:0}to{transform:scale(1);opacity:1}}
+  .la-modal h2{margin:0 0 10px;font-size:23px;color:#1e293b;line-height:1.35}
+  .la-modal .la-crumbs{font-size:12px;color:#94a3b8;margin:0 0 14px;font-weight:600;letter-spacing:.02em}
+  .la-modal .la-arc-badges{margin:0 0 16px}
+  .la-modal-body{color:#334155;font-size:15px;line-height:1.9}
+  .la-modal-body p{margin:0 0 12px}
+  .la-modal-body strong{color:#0f172a}
+  .la-modal-body ul{margin:0 0 12px;padding-left:22px}
+  .la-modal-body li{margin-bottom:6px}
+  .la-modal-body ol{margin:0 0 12px;padding-left:22px}
+
+  .la-fml{
+    margin:16px 0;padding:14px 18px;
+    background:linear-gradient(135deg,#f8fafc,#eef4fb);
+    border-left:4px solid #93b4e8;
+    border-radius:10px;
+    overflow-x:auto;
+    font-size:16px;
+  }
+  .la-fml .note{
+    display:block;font-size:12.5px;color:#8496ad;margin-top:8px;
+    line-height:1.6;font-family:system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+  }
+  .la-fml mjx-container[display="true"]{margin:0 !important}
+
+  .la-fig{
+    margin:18px auto;padding:14px 16px 10px;
+    background:#fafcff;border:1px solid #e2ebf7;border-radius:14px;
+    display:flex;flex-direction:column;align-items:center;
+    max-width:600px;
+  }
+  .la-fig svg{display:block;width:100%;height:auto;max-width:560px}
+  .la-fig .la-fig-cap{font-size:12px;color:#8496ad;margin-top:8px;text-align:center;letter-spacing:.02em}
+
+  .la-callout{margin:14px 0;padding:12px 16px;background:#fffbeb;border-left:3px solid #fbbf24;
+    border-radius:8px;font-size:13.5px;color:#78350f;line-height:1.8}
+  .la-callout.la-app{background:#fff7ed;border-color:#fb923c;color:#7c2d12}
+  .la-callout.la-his{background:#f8fafc;border-color:#94a3b8;color:#334155}
+
+  .la-modal-close{margin-top:22px;background:#0f172a;color:white;border-color:#0f172a;padding:10px 20px;font-weight:bold}
+  .la-footer{padding:34px 0 50px;color:var(--la-muted);text-align:center;font-size:13px;line-height:1.9}
+
+  @media(max-width:900px){
+    .la-wrap{width:min(94vw,720px)}
+    .la-roadmap{padding:20px}
+    .la-phase-title{font-size:19px}
+    .la-phase-en{font-size:10px;letter-spacing:.26em}
+    .la-domain-desc{display:none}
+    .la-domain-grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}
+    .la-modal{padding:22px}
+  }
+</style>
+</head>
+<body>
+
+<div class="la-wrap">
+
+  <header class="la-header">
+    <div class="la-eyebrow">QUANTUM INFORMATION · FOUNDATIONS</div>
+    <h1>量子信息基础</h1>
+    <p class="la-subtitle">Foundations of Quantum Information · 毛亚丽 · 物理科学学院<br>从量子力学基本假设到密度矩阵、POVM、量子信道、复合系统与开放系统</p>
+
+    <div class="back-bar">
+      <a class="back-btn" href="index.html">← 返回总览</a>
+    </div>
+
+    <div class="la-nav-tabs">
+      <a class="la-nav-tab c1" href="#la-ch1">第一章 · 量子力学基本框架</a>
+      <a class="la-nav-tab c2" href="#la-ch2">第二章 · 密度矩阵表示</a>
+      <a class="la-nav-tab c3" href="#la-ch3">第三章 · POVM 与量子测量</a>
+      <a class="la-nav-tab c4" href="#la-ch4">第四章 · 量子信道与 Kraus 算子</a>
+      <a class="la-nav-tab c5" href="#la-ch5">第五章 · 复合系统与量子纠缠</a>
+      <a class="la-nav-tab c6" href="#la-ch6">第六章 · 开放系统与 Lindblad 方程</a>
+    </div>
+
+    <div class="la-toolbar">
+      <button onclick="window.scrollTo({top:0,behavior:'smooth'})">回到顶部</button>
+    </div>
+
+    <div class="la-engagement-bar">
+      <div class="la-stat-item"><span>⚛️</span><span class="la-stat-value" id="laKCount">--</span><span>个知识点</span></div>
+      <div class="la-stat-item"><span>📐</span><span class="la-stat-value" id="laFCount">--</span><span>条核心公式</span></div>
+    </div>
+  </header>
+
+  <div class="la-legend">
+    <span class="la-legend-title">六类知识记号</span>
+    <span class="la-arc-badge la-arc-def">定 义</span>
+    <span class="la-arc-badge la-arc-thm">定 理</span>
+    <span class="la-arc-badge la-arc-der">推 导</span>
+    <span class="la-arc-badge la-arc-exa">例 子</span>
+    <span class="la-arc-badge la-arc-app">应 用</span>
+    <span class="la-arc-badge la-arc-his">注 记</span>
+  </div>
+
+  <main class="la-roadmap" id="laRoadmap"></main>
+
+  <footer class="la-footer">
+    <div>量子信息基础 · 知识体系可视化 · MathJax + SVG</div>
+    <div style="margin-top:8px">依据《量子信息基础》（毛亚丽 · 物理科学学院 · 2026-2027 秋季学期）整理 · 单文件静态站点</div>
+  </footer>
+
+</div>
+
+<div class="la-overlay" id="laOverlay" onclick="closeLaInfo(event)">
+  <div class="la-modal" onclick="event.stopPropagation()">
+    <p class="la-crumbs" id="laCrumbs"></p>
+    <h2 id="laTitle">知识点</h2>
+    <div class="la-arc-badges" id="laTags"></div>
+    <div class="la-modal-body" id="laBody"></div>
+    <button class="la-modal-close" onclick="hideLaInfo()">关 闭</button>
+  </div>
+</div>
+
+<script>
+/* =========================================================
+   SVG 图库
+   ========================================================= */
+const LA_FIG = {
+  qExperiment: `<svg viewBox="0 0 500 180" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif">
+  <defs><marker id="eq-a1" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><polygon points="0 0, 9 4.5, 0 9" fill="#94a3b8"/></marker></defs>
+  <rect x="30" y="45" width="90" height="80" fill="#ef4444" opacity="0.85" rx="8"/>
+  <text x="52" y="92" fill="white" font-size="14" font-weight="800">制备</text>
+  <line x1="120" y1="85" x2="175" y2="85" stroke="#94a3b8" stroke-width="2" marker-end="url(#eq-a1)"/>
+  <rect x="180" y="45" width="90" height="80" fill="#6366f1" opacity="0.85" rx="8"/>
+  <text x="202" y="92" fill="white" font-size="14" font-weight="800">演化</text>
+  <line x1="270" y1="85" x2="325" y2="85" stroke="#94a3b8" stroke-width="2" marker-end="url(#eq-a1)"/>
+  <rect x="330" y="45" width="90" height="80" fill="#22c55e" opacity="0.85" rx="8"/>
+  <text x="352" y="92" fill="white" font-size="14" font-weight="800">测量</text>
+  <line x1="420" y1="85" x2="460" y2="85" stroke="#94a3b8" stroke-width="2" marker-end="url(#eq-a1)"/>
+  <rect x="462" y="55" width="30" height="60" fill="#94a3b8" rx="4"/>
+  <text x="470" y="92" fill="white" font-size="10" font-weight="800">数据</text>
+</svg>`,
+
+  wavefunc: `<svg viewBox="0 0 440 200" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif">
+  <defs><marker id="eq-w1" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><polygon points="0 0, 8 4, 0 8" fill="#94a3b8"/></marker></defs>
+  <line x1="40" y1="100" x2="410" y2="100" stroke="#94a3b8" stroke-width="1.2" marker-end="url(#eq-w1)"/>
+  <line x1="60" y1="180" x2="60" y2="20" stroke="#94a3b8" stroke-width="1.2"/>
+  <path d="M 60 100 Q 130 20 200 100 Q 270 180 340 100 Q 380 60 400 100" fill="none" stroke="#2563eb" stroke-width="2.4"/>
+  <path d="M 60 100 Q 130 20 200 100 Q 270 180 340 100 Q 380 60 400 100 L 400 100 L 60 100 Z" fill="#dbeafe" opacity="0.5"/>
+  <circle cx="200" cy="100" r="4" fill="#dc2626"/>
+  <text x="188" y="122" fill="#dc2626" font-size="12" font-weight="700">|ψ|²</text>
+  <text x="330" y="40" fill="#2563eb" font-size="13" font-weight="700" font-style="italic">ψ(x)</text>
+  <text x="380" y="120" fill="#475569" font-size="11">x</text>
+</svg>`,
+
+  superposition: `<svg viewBox="0 0 460 200" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif">
+  <defs>
+    <marker id="eq-s1" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><polygon points="0 0, 9 4.5, 0 9" fill="#7c3aed"/></marker>
+  </defs>
+  <rect x="30" y="70" width="80" height="60" fill="#dbeafe" stroke="#2563eb" stroke-width="1.6" rx="6"/>
+  <text x="46" y="105" fill="#1e40af" font-size="16" font-weight="800" font-style="italic">|ψ₁⟩</text>
+  <rect x="150" y="70" width="80" height="60" fill="#fee2e2" stroke="#dc2626" stroke-width="1.6" rx="6"/>
+  <text x="166" y="105" fill="#b91c1c" font-size="16" font-weight="800" font-style="italic">|ψ₂⟩</text>
+  <line x1="115" y1="100" x2="145" y2="100" stroke="#7c3aed" stroke-width="2" marker-end="url(#eq-s1)"/>
+  <text x="120" y="90" fill="#7c3aed" font-size="12" font-weight="700" font-style="italic">c₁</text>
+  <text x="240" y="60" fill="#7c3aed" font-size="18" font-weight="800">⟶</text>
+  <rect x="290" y="70" width="160" height="60" fill="#f3e8ff" stroke="#7c3aed" stroke-width="1.8" rx="6"/>
+  <text x="308" y="105" fill="#5b21b6" font-size="14" font-weight="800" font-style="italic">|ψ⟩ = c₁|ψ₁⟩+c₂|ψ₂⟩</text>
+  <text x="100" y="170" fill="#475569" font-size="12">线性组合</text>
+  <text x="310" y="170" fill="#475569" font-size="12">归一化：|c₁|²+|c₂|²=1</text>
+</svg>`,
+
+  blochSphere: `<svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif">
+  <defs>
+    <radialGradient id="bs-grad" cx="40%" cy="35%">
+      <stop offset="0%" stop-color="#dbeafe"/>
+      <stop offset="100%" stop-color="#93c5fd"/>
+    </radialGradient>
+  </defs>
+  <ellipse cx="200" cy="150" rx="130" ry="130" fill="url(#bs-grad)" stroke="#2563eb" stroke-width="1.6"/>
+  <ellipse cx="200" cy="150" rx="130" ry="40" fill="none" stroke="#60a5fa" stroke-width="1.2" stroke-dasharray="4,4"/>
+  <line x1="70" y1="150" x2="330" y2="150" stroke="#475569" stroke-width="1"/>
+  <line x1="200" y1="270" x2="200" y2="20" stroke="#475569" stroke-width="1"/>
+  <line x1="108" y1="242" x2="292" y2="58" stroke="#475569" stroke-width="1"/>
+  <text x="336" y="154" fill="#475569" font-size="12" font-weight="700">y</text>
+  <text x="204" y="16" fill="#475569" font-size="12" font-weight="700">z</text>
+  <text x="98" y="256" fill="#475569" font-size="12" font-weight="700">x</text>
+  <line x1="200" y1="150" x2="285" y2="75" stroke="#dc2626" stroke-width="2.4"/>
+  <circle cx="285" cy="75" r="5" fill="#dc2626"/>
+  <text x="292" y="72" fill="#dc2626" font-size="12" font-weight="800" font-style="italic">|ψ⟩</text>
+  <path d="M 200 130 A 20 20 0 0 1 218 142" fill="none" stroke="#7c3aed" stroke-width="1.2"/>
+  <text x="208" y="130" fill="#7c3aed" font-size="11" font-weight="700" font-style="italic">θ</text>
+  <text x="230" y="168" fill="#7c3aed" font-size="11" font-weight="700" font-style="italic">φ</text>
+  <circle cx="200" cy="150" r="3" fill="#0f172a"/>
+  <text x="30" y="290" fill="#475569" font-size="11">|0⟩ 北极</text>
+  <text x="300" y="290" fill="#475569" font-size="11">|1⟩ 南极</text>
+</svg>`,
+
+  neumark: `<svg viewBox="0 0 480 240" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif">
+  <defs>
+    <marker id="eq-n1" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><polygon points="0 0, 9 4.5, 0 9" fill="#2563eb"/></marker>
+  </defs>
+  <ellipse cx="130" cy="120" rx="70" ry="60" fill="#dbeafe" stroke="#2563eb" stroke-width="1.6"/>
+  <text x="102" y="60" fill="#1e40af" font-size="12" font-weight="700">Hilbert 空间 H</text>
+  <text x="110" y="130" fill="#1e40af" font-size="12" font-weight="700" font-style="italic">POVM {F_α}</text>
+  <line x1="205" y1="120" x2="255" y2="120" stroke="#2563eb" stroke-width="2" marker-end="url(#eq-n1)"/>
+  <text x="212" y="112" fill="#2563eb" font-size="11" font-weight="700" font-style="italic">V</text>
+  <ellipse cx="340" cy="120" rx="100" ry="80" fill="#f3e8ff" stroke="#7c3aed" stroke-width="1.6" stroke-dasharray="6,4"/>
+  <text x="290" y="50" fill="#5b21b6" font-size="12" font-weight="700">扩展空间 K ⊇ H</text>
+  <text x="350" y="105" fill="#7c3aed" font-size="11" font-weight="700">PVM {E_α}</text>
+  <text x="130" y="220" fill="#0f172a" font-size="13" font-weight="700">F_α = V† E_α V</text>
+</svg>`,
+
+  krausChannel: `<svg viewBox="0 0 460 200" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif">
+  <defs>
+    <marker id="eq-k1" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><polygon points="0 0, 9 4.5, 0 9" fill="#dc2626"/></marker>
+    <marker id="eq-k2" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><polygon points="0 0, 9 4.5, 0 9" fill="#2563eb"/></marker>
+  </defs>
+  <rect x="40" y="70" width="80" height="60" fill="#dbeafe" stroke="#2563eb" stroke-width="1.6" rx="8"/>
+  <text x="62" y="105" fill="#1e40af" font-size="15" font-weight="800" font-style="italic">ρ</text>
+  <line x1="125" y1="100" x2="180" y2="100" stroke="#dc2626" stroke-width="2" marker-end="url(#eq-k1)"/>
+  <rect x="185" y="55" width="120" height="90" fill="#fee2e2" stroke="#dc2626" stroke-width="1.8" rx="10"/>
+  <text x="220" y="90" fill="#b91c1c" font-size="14" font-weight="800">信道</text>
+  <text x="208" y="115" fill="#b91c1c" font-size="13" font-weight="800" font-style="italic">E(ρ)</text>
+  <line x1="310" y1="100" x2="365" y2="100" stroke="#2563eb" stroke-width="2" marker-end="url(#eq-k2)"/>
+  <rect x="370" y="70" width="70" height="60" fill="#dcfce7" stroke="#16a34a" stroke-width="1.6" rx="8"/>
+  <text x="388" y="105" fill="#15803d" font-size="15" font-weight="800" font-style="italic">ρ′</text>
+  <text x="150" y="180" fill="#0f172a" font-size="13" font-weight="700">E(ρ) = Σ_i K_i ρ K_i†,  Σ_i K_i† K_i = I</text>
+</svg>`,
+
+  bellState: `<svg viewBox="0 0 460 220" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif">
+  <defs><marker id="eq-b1" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><polygon points="0 0, 8 4, 0 8" fill="#7c3aed"/></marker></defs>
+  <circle cx="80" cy="60" r="20" fill="#dbeafe" stroke="#2563eb" stroke-width="1.8"/>
+  <text x="66" y="66" fill="#1e40af" font-size="14" font-weight="800">A</text>
+  <circle cx="380" cy="60" r="20" fill="#fee2e2" stroke="#dc2626" stroke-width="1.8"/>
+  <text x="366" y="66" fill="#b91c1c" font-size="14" font-weight="800">B</text>
+  <line x1="100" y1="60" x2="360" y2="60" stroke="#7c3aed" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#eq-b1)"/>
+  <text x="200" y="50" fill="#7c3aed" font-size="12" font-weight="700">纠缠关联</text>
+  <text x="60" y="130" fill="#1e40af" font-size="13" font-weight="700">测量基选择</text>
+  <text x="46" y="152" fill="#475569" font-size="11" font-style="italic">{|0⟩, |1⟩} 或 {|+⟩, |−⟩}</text>
+  <text x="300" y="130" fill="#b91c1c" font-size="13" font-weight="700">条件态依赖</text>
+  <text x="310" y="152" fill="#475569" font-size="11" font-style="italic">约化密度矩阵 = I/2</text>
+  <text x="80" y="200" fill="#0f172a" font-size="13" font-weight="700">|Φ⁺⟩ = (|00⟩ + |11⟩)/√2</text>
+</svg>`,
+
+  schmidt: `<svg viewBox="0 0 460 200" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif">
+  <defs><marker id="eq-sc1" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><polygon points="0 0, 9 4.5, 0 9" fill="#16a34a"/></marker></defs>
+  <rect x="30" y="70" width="110" height="60" fill="#dbeafe" stroke="#2563eb" stroke-width="1.6" rx="8"/>
+  <text x="58" y="105" fill="#1e40af" font-size="14" font-weight="800" font-style="italic">|Ψ⟩_AB</text>
+  <line x1="145" y1="100" x2="200" y2="100" stroke="#16a34a" stroke-width="2" marker-end="url(#eq-sc1)"/>
+  <text x="155" y="92" fill="#16a34a" font-size="11" font-weight="700">SVD</text>
+  <rect x="210" y="55" width="230" height="90" fill="#dcfce7" stroke="#16a34a" stroke-width="1.8" rx="10"/>
+  <text x="222" y="90" fill="#15803d" font-size="12" font-weight="800" font-style="italic">|Ψ⟩_AB = Σ_i √p_i |φ_i⟩_A ⊗ |ψ_i⟩_B</text>
+  <text x="222" y="120" fill="#15803d" font-size="11" font-weight="700">施密特数 r 表征纠缠程度</text>
+</svg>`,
+
+  partialTrace: `<svg viewBox="0 0 460 220" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif">
+  <defs><marker id="eq-p1" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><polygon points="0 0, 9 4.5, 0 9" fill="#dc2626"/></marker></defs>
+  <rect x="50" y="60" width="140" height="100" fill="#dbeafe" stroke="#2563eb" stroke-width="1.8" rx="8"/>
+  <text x="90" y="100" fill="#1e40af" font-size="14" font-weight="800" font-style="italic">ρ_AB</text>
+  <text x="72" y="125" fill="#1e40af" font-size="11">联合系统</text>
+  <line x1="195" y1="110" x2="250" y2="110" stroke="#dc2626" stroke-width="2" marker-end="url(#eq-p1)"/>
+  <text x="200" y="100" fill="#dc2626" font-size="12" font-weight="700" font-style="italic">Tr_B</text>
+  <rect x="260" y="70" width="120" height="80" fill="#fee2e2" stroke="#dc2626" stroke-width="1.8" rx="8"/>
+  <text x="296" y="110" fill="#b91c1c" font-size="14" font-weight="800" font-style="italic">ρ_A</text>
+  <text x="278" y="130" fill="#b91c1c" font-size="11">子系统 A</text>
+  <text x="80" y="200" fill="#0f172a" font-size="13" font-weight="700">ρ_A = Tr_B(ρ_AB)</text>
+</svg>`,
+
+  purification: `<svg viewBox="0 0 460 220" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif">
+  <defs><marker id="eq-pu1" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><polygon points="0 0, 9 4.5, 0 9" fill="#7c3aed"/></marker></defs>
+  <rect x="40" y="70" width="110" height="80" fill="#f3e8ff" stroke="#7c3aed" stroke-width="1.8" rx="8"/>
+  <text x="72" y="110" fill="#5b21b6" font-size="15" font-weight="800" font-style="italic">ρ_A</text>
+  <line x1="155" y1="110" x2="205" y2="110" stroke="#7c3aed" stroke-width="2" marker-end="url(#eq-pu1)"/>
+  <text x="160" y="100" fill="#7c3aed" font-size="11" font-weight="700">纯化</text>
+  <rect x="215" y="60" width="210" height="100" fill="#dbeafe" stroke="#2563eb" stroke-width="1.8" rx="10"/>
+  <text x="230" y="95" fill="#1e40af" font-size="12" font-weight="800" font-style="italic">|Ψ⟩_AB = Σ_i √p_i |φ_i⟩_A |ψ_i⟩_B</text>
+  <text x="230" y="125" fill="#1e40af" font-size="11" font-weight="700">联合纯态（dim H_B ≥ rank ρ_A）</text>
+</svg>`,
+
+  cnotGate: `<svg viewBox="0 0 460 220" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif">
+  <line x1="60" y1="60" x2="400" y2="60" stroke="#2563eb" stroke-width="2"/>
+  <line x1="60" y1="140" x2="400" y2="140" stroke="#dc2626" stroke-width="2"/>
+  <text x="30" y="65" fill="#2563eb" font-size="13" font-weight="800">控制 |c⟩</text>
+  <text x="30" y="145" fill="#dc2626" font-size="13" font-weight="800">目标 |t⟩</text>
+  <circle cx="220" cy="60" r="6" fill="#2563eb"/>
+  <line x1="220" y1="60" x2="220" y2="140" stroke="#2563eb" stroke-width="2"/>
+  <circle cx="220" cy="140" r="14" fill="none" stroke="#2563eb" stroke-width="2"/>
+  <line x1="206" y1="140" x2="234" y2="140" stroke="#2563eb" stroke-width="2"/>
+  <line x1="220" y1="126" x2="220" y2="154" stroke="#2563eb" stroke-width="2"/>
+  <text x="242" y="105" fill="#0f172a" font-size="12" font-weight="700">CNOT</text>
+  <text x="90" y="200" fill="#475569" font-size="11">|c,t⟩ → |c, c⊕t⟩</text>
+</svg>`,
+
+  lindblad: `<svg viewBox="0 0 460 200" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif">
+  <rect x="50" y="55" width="360" height="90" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.4" rx="10"/>
+  <text x="80" y="92" fill="#2563eb" font-size="14" font-weight="800" font-style="italic">dρ/dt = −i/ℏ [H, ρ]</text>
+  <text x="280" y="92" fill="#dc2626" font-size="14" font-weight="800" font-style="italic">+ Σ L(ρ)</text>
+  <text x="80" y="122" fill="#2563eb" font-size="11" font-weight="700">相干项（自由演化）</text>
+  <text x="288" y="122" fill="#dc2626" font-size="11" font-weight="700">耗散项（环境耦合）</text>
+  <text x="110" y="180" fill="#0f172a" font-size="13" font-weight="700">Lindblad 主方程 · 开放系统连续演化</text>
+</svg>`,
+
+  sternGerlach: `<svg viewBox="0 0 460 200" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif">
+  <defs><marker id="eq-sg1" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><polygon points="0 0, 8 4, 0 8" fill="#94a3b8"/></marker></defs>
+  <rect x="30" y="85" width="40" height="30" fill="#94a3b8" rx="6"/>
+  <text x="34" y="105" fill="white" font-size="10" font-weight="800">源</text>
+  <line x1="70" y1="100" x2="200" y2="100" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#eq-sg1)"/>
+  <path d="M 200 40 L 240 40 L 260 100 L 240 160 L 200 160 Z" fill="#dbeafe" stroke="#2563eb" stroke-width="1.6"/>
+  <text x="212" y="105" fill="#1e40af" font-size="11" font-weight="700">S-G</text>
+  <line x1="260" y1="100" x2="400" y2="60" stroke="#dc2626" stroke-width="1.6"/>
+  <line x1="260" y1="100" x2="400" y2="140" stroke="#16a34a" stroke-width="1.6"/>
+  <circle cx="400" cy="60" r="4" fill="#dc2626"/>
+  <circle cx="400" cy="140" r="4" fill="#16a34a"/>
+  <text x="408" y="64" fill="#dc2626" font-size="11" font-weight="700">+ℏ/2</text>
+  <text x="408" y="144" fill="#16a34a" font-size="11" font-weight="700">−ℏ/2</text>
+</svg>`,
+
+  doubleSlit: `<svg viewBox="0 0 480 220" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif">
+  <rect x="30" y="80" width="60" height="60" fill="#a5b4fc" rx="6"/>
+  <text x="38" y="115" fill="#1e1b4b" font-size="11" font-weight="800">电子枪</text>
+  <line x1="90" y1="110" x2="170" y2="110" stroke="#6366f1" stroke-width="1.6"/>
+  <line x1="200" y1="30" x2="200" y2="190" stroke="#0f172a" stroke-width="2.4"/>
+  <rect x="194" y="80" width="12" height="20" fill="white" stroke="#0f172a" stroke-width="1.2"/>
+  <rect x="194" y="120" width="12" height="20" fill="white" stroke="#0f172a" stroke-width="1.2"/>
+  <path d="M 206 90 Q 300 40 410 60" fill="none" stroke="#7c3aed" stroke-width="1.2"/>
+  <path d="M 206 110 Q 300 100 410 100" fill="none" stroke="#7c3aed" stroke-width="1.2"/>
+  <path d="M 206 130 Q 300 160 410 140" fill="none" stroke="#7c3aed" stroke-width="1.2"/>
+  <line x1="410" y1="30" x2="410" y2="190" stroke="#0f172a" stroke-width="1.6"/>
+  <text x="180" y="210" fill="#0f172a" font-size="11">双缝</text>
+  <text x="380" y="210" fill="#0f172a" font-size="11">干涉屏</text>
+</svg>`,
+
+  densityMatrix: `<svg viewBox="0 0 440 220" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif">
+  <rect x="100" y="40" width="90" height="90" fill="#dbeafe" stroke="#2563eb" stroke-width="1.8" rx="6"/>
+  <text x="128" y="90" fill="#1e40af" font-size="18" font-weight="800" font-style="italic">ρ</text>
+  <text x="118" y="150" fill="#1e40af" font-size="11" font-weight="700">密度矩阵</text>
+  <line x1="210" y1="85" x2="250" y2="85" stroke="#94a3b8" stroke-width="2"/>
+  <text x="215" y="78" fill="#94a3b8" font-size="16" font-weight="700">=</text>
+  <text x="270" y="90" fill="#0f172a" font-size="14" font-weight="700" font-style="italic">Σ_i p_i |ψ_i⟩⟨ψ_i|</text>
+  <text x="270" y="120" fill="#475569" font-size="11">p_i ≥ 0, Σ p_i = 1</text>
+  <text x="130" y="190" fill="#0f172a" font-size="12" font-weight="700">Tr(ρ) = 1, ρ ≥ 0, ρ† = ρ</text>
+</svg>`,
+
+  povmMixed: `<svg viewBox="0 0 460 200" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif">
+  <defs><marker id="eq-pm1" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><polygon points="0 0, 8 4, 0 8" fill="#94a3b8"/></marker></defs>
+  <rect x="30" y="70" width="100" height="60" fill="#dbeafe" stroke="#2563eb" stroke-width="1.6" rx="8"/>
+  <text x="45" y="105" fill="#1e40af" font-size="13" font-weight="800">50% Z 基</text>
+  <rect x="150" y="70" width="100" height="60" fill="#fef3c7" stroke="#d97706" stroke-width="1.6" rx="8"/>
+  <text x="165" y="105" fill="#92400e" font-size="13" font-weight="800">50% X 基</text>
+  <line x1="260" y1="100" x2="310" y2="100" stroke="#94a3b8" stroke-width="2" marker-end="url(#eq-pm1)"/>
+  <rect x="320" y="60" width="110" height="80" fill="#dcfce7" stroke="#16a34a" stroke-width="1.6" rx="8"/>
+  <text x="335" y="95" fill="#15803d" font-size="13" font-weight="800">混合测量</text>
+  <text x="335" y="120" fill="#15803d" font-size="12" font-weight="700">→ POVM</text>
+</svg>`,
+
+  jointMeas: `<svg viewBox="0 0 480 220" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif">
+  <ellipse cx="120" cy="110" rx="60" ry="60" fill="#dbeafe" stroke="#2563eb" stroke-width="1.6"/>
+  <text x="90" y="115" fill="#1e40af" font-size="13" font-weight="800">POVM M</text>
+  <ellipse cx="240" cy="110" rx="60" ry="60" fill="#fee2e2" stroke="#dc2626" stroke-width="1.6"/>
+  <text x="210" y="115" fill="#b91c1c" font-size="13" font-weight="800">POVM N</text>
+  <ellipse cx="380" cy="110" rx="60" ry="60" fill="#f3e8ff" stroke="#7c3aed" stroke-width="1.6" stroke-dasharray="6,4"/>
+  <text x="345" y="115" fill="#5b21b6" font-size="13" font-weight="800">联合 POVM</text>
+  <text x="90" y="200" fill="#0f172a" font-size="12" font-weight="700">|m+n| + |m−n| ≤ 2</text>
+</svg>`
+};
+
+const LA_TAG_LABEL = {def:'定 义', thm:'定 理', der:'推 导', exa:'例 子', app:'应 用', his:'注 记'};
+
+const LA_DATA = [
+/* ================= 第一章 量子力学基本框架 ================= */
+{
+  id:'la-ch1', num:'第一章', title:'量子力学基本框架', en:'FOUNDATIONS OF QUANTUM MECHANICS',
+  sub:'量子实验、波函数、测量与演化',
+  desc:'本章从量子力学实验的阶段性划分出发，建立量子力学的基本公设体系：量子态由 Hilbert 空间中的归一化矢量（波函数）描述，量子测量由厄米算符的谱分解给出，量子演化由薛定谔方程描述。',
+  sections:[
+    {name:'1.1 量子力学是什么', color:'#2563eb', desc:'从实验到理论', items:[
+      {id:'la-k1-1', name:'量子力学实验的阶段划分', tags:['def','his'], brief:'制备 → 演化 → 测量 → 数据。',
+        fig:'qExperiment', figCap:'图 1.1　量子力学实验的三个阶段',
+        body:`<p><strong>核心问题</strong>　如何形式化地描述一个量子力学实验？</p>
+<p><strong>量子力学实验的阶段划分</strong></p>
+<ul>
+<li><strong>制备</strong>：生成量子态 $|\\psi\\rangle$</li>
+<li><strong>演化</strong>：输入量子态，输出量子态，$|\\psi_t\\rangle = U_t|\\psi\\rangle$</li>
+<li><strong>测量</strong>：输入量子态，输出经典数据，从数据中推断统计分布</li>
+</ul>
+<div class="la-callout la-his">典型实验　Stern-Gerlach 实验、电子双缝干涉实验。</div>`},
+      {id:'la-k1-2', name:'量子力学的定义', tags:['def','thm'], brief:'关于量子实验统计规律的理论。',
+        body:`<p><strong>Quantum mechanics is a theory making predictions about the statistics of a quantum experiment.</strong></p>
+<p>量子力学不是描述单次实验的结果，而是描述大量重复实验的统计规律。任何量子实验最终输出的都是经典数据（点击、计数、电流），量子力学预测这些数据的概率分布。</p>`},
+      {id:'la-k1-3', name:'量子力学基本公设一览', tags:['thm','def'], brief:'概率、可观测量、状态、演化。',
+        body:`<p>量子理论的四条基本公设：</p>
+<div class="la-fml">$$\\begin{aligned}
+\\text{State} &: \\quad |\\psi\\rangle \\in \\mathcal{H},\\quad \\langle\\psi|\\psi\\rangle = 1\\\\
+\\text{Observable} &: \\quad \\{|a_j\\rangle\\langle a_j|\\}\\\\
+\\text{Probability} &: \\quad P_j(t) = |\\langle a_j|\\psi_t\\rangle|^2\\\\
+\\text{Evolution} &: \\quad |\\psi_t\\rangle = U_t|\\psi\\rangle
+\\end{aligned}$$</div>
+<p>这四条公设构成量子信息处理的理论基础。</p>`},
+      {id:'la-k1-4', name:'Stern-Gerlach 实验', tags:['exa','app'], brief:'自旋量子化的经典实验。',
+        fig:'sternGerlach', figCap:'图 1.2　Stern-Gerlach 实验示意',
+        body:`<p>银原子束通过非均匀磁场，分裂为两束，分别对应自旋 $+\\hbar/2$ 和 $-\\hbar/2$。</p>
+<p>实验结果证明：</p>
+<ul>
+<li>自旋是量子化的，只能取离散值</li>
+<li>无法用经典连续变量描述</li>
+<li>测量会导致态坍缩</li>
+</ul>
+<p>沿 $z$ 方向测量得到 $+\\hbar/2$ 后，若再沿 $x$ 方向测量，结果仍以 50% 概率给出 $\\pm\\hbar/2$，体现了非对易性。</p>`},
+      {id:'la-k1-5', name:'电子双缝干涉实验', tags:['exa','app'], brief:'波粒二象性的经典实验。',
+        fig:'doubleSlit', figCap:'图 1.3　电子双缝干涉实验',
+        body:`<p>电子束通过双缝后，在屏幕上形成干涉条纹。</p>
+<p>实验结果说明：</p>
+<ul>
+<li>电子具有波动性，单电子也能产生干涉</li>
+<li>测量哪条缝会破坏干涉（互补原理）</li>
+<li>量子叠加与测量的本质问题</li>
+</ul>`}
+    ]},
+    {name:'1.2 量子态：波函数', color:'#0d9488', desc:'态矢量与叠加原理', items:[
+      {id:'la-k1-6', name:'波函数与态矢量', tags:['def','thm'], brief:'量子态由 Hilbert 空间中的归一化向量表示。',
+        fig:'wavefunc', figCap:'图 1.4　波函数与概率密度',
+        body:`<p><strong>量子态</strong>　量子态由 Hilbert 空间 $\\mathcal{H}$ 中的归一化向量 $|\\psi\\rangle$ 表示。</p>
+<p><strong>归一化条件</strong></p>
+<div class="la-fml">$$\\langle\\psi|\\psi\\rangle = 1$$</div>
+<p>波函数 $\\psi(x) = \\langle x|\\psi\\rangle$ 的模方 $|\\psi(x)|^2$ 表示在位置 $x$ 附近发现粒子的概率密度。</p>
+<div class="la-callout la-his">注记　全局相位 $e^{i\\theta}|\\psi\\rangle$ 与 $|\\psi\\rangle$ 描述同一物理态，没有物理意义；相对相位（如 $a|0\\rangle + e^{i\\phi}b|1\\rangle$）有物理意义。</div>`},
+      {id:'la-k1-7', name:'态叠加原理', tags:['thm','der'], brief:'线性组合仍是系统的可能状态。',
+        fig:'superposition', figCap:'图 1.5　量子态的线性叠加',
+        body:`<p>若 $|\\psi_1\\rangle, |\\psi_2\\rangle, \\dots, |\\psi_n\\rangle$ 是量子系统的可能状态，则它们的线性组合</p>
+<div class="la-fml">$$|\\psi\\rangle = c_1|\\psi_1\\rangle + c_2|\\psi_2\\rangle + \\cdots + c_n|\\psi_n\\rangle$$</div>
+<p>也是该系统的可能状态，其中系数满足归一化条件</p>
+<div class="la-fml">$$|c_1|^2 + |c_2|^2 + \\cdots + |c_n|^2 = 1$$</div>
+<p><strong>关键区别：量子叠加 vs 经典叠加</strong></p>
+<ul>
+<li><strong>经典叠加</strong>：如波的叠加，是"物理量的叠加"（如振幅相加）</li>
+<li><strong>量子叠加</strong>：是"状态的叠加"，测量时会坍缩到某一个基态（概率为 $|c_i|^2$），体现"量子随机性"</li>
+</ul>`},
+      {id:'la-k1-8', name:'量子比特', tags:['def','exa'], brief:'二维 Hilbert 空间中的量子态。',
+        body:`<p><strong>一般形式</strong></p>
+<div class="la-fml">$$|\\psi\\rangle = a|0\\rangle + b|1\\rangle,\\qquad |a|^2 + |b|^2 = 1$$</div>
+<p>计算基 $\\{|0\\rangle, |1\\rangle\\}$ 是 $\\sigma_z$ 的本征态。</p>
+<p><strong>常用正交基</strong></p>
+<ul>
+<li>$|\\pm\\rangle = \\frac{1}{\\sqrt{2}}(|0\\rangle \\pm |1\\rangle)$（$\\sigma_x$ 本征态）</li>
+<li>$|\\pm i\\rangle = \\frac{1}{\\sqrt{2}}(|0\\rangle \\pm i|1\\rangle)$（$\\sigma_y$ 本征态）</li>
+</ul>
+<p><strong>量子比特与经典比特的区别</strong></p>
+<ul>
+<li>经典比特仅能处于 0 或 1 确定状态</li>
+<li>量子比特可处于 $|0\\rangle$ 与 $|1\\rangle$ 的叠加态，叠加系数的模平方对应测量时取该基矢的概率</li>
+<li>全局相位无物理意义，相对相位有物理意义</li>
+</ul>`}
+    ]},
+    {name:'1.3 量子测量', color:'#7c3aed', desc:'可观测量、投影测量与玻恩规则', items:[
+      {id:'la-k1-9', name:'可观测量与谱分解', tags:['def','thm'], brief:'可观测量由厄米算符表示。',
+        body:`<p>量子力学中，可观测的物理量即可观测量由希尔伯特空间上的厄米算符 $A$ 表示，其谱分解为</p>
+<div class="la-fml">$$A = \\sum_i \\lambda_i P_i$$</div>
+<p>其中：</p>
+<ul>
+<li>$\\lambda_i \\in \\mathbb{R}$ 为测量的可能结果</li>
+<li>$P_i = |a_i\\rangle\\langle a_i|$ 为投影算符</li>
+<li>满足 $P_i P_j = \\delta_{ij} P_i$，$\\sum_i P_i = I$</li>
+</ul>
+<p>对应的测量就是<strong>投影测量</strong>（PVM）。</p>`},
+      {id:'la-k1-10', name:'玻恩规则', tags:['thm','der'], brief:'测量概率 = 投影期望值。',
+        body:`<p>若系统处于态 $|\\psi\\rangle$，测量可观测量 $A$ 时：</p>
+<p><strong>测量概率</strong>　得到本征值 $\\lambda_i$ 的概率为</p>
+<div class="la-fml">$$\\mathrm{Pr}(\\lambda_i) = \\langle\\psi|P_i|\\psi\\rangle = |\\langle a_i|\\psi\\rangle|^2$$</div>
+<p><strong>测量后态</strong>　系统状态坍缩为</p>
+<div class="la-fml">$$|\\psi\\rangle \\rightarrow \\frac{P_i|\\psi\\rangle}{\\sqrt{\\langle\\psi|P_i|\\psi\\rangle}} = |a_i\\rangle$$</div>
+<p><strong>期望值</strong></p>
+<div class="la-fml">$$\\langle A\\rangle = \\langle\\psi|A|\\psi\\rangle = \\sum_i \\lambda_i \\mathrm{Pr}(\\lambda_i)$$</div>
+<div class="la-callout la-his">玻恩规则是量子测量的核心统计规律，1954 年玻恩因此获诺贝尔物理学奖。</div>`}
+    ]},
+    {name:'1.4 幺正演化', color:'#c2410c', desc:'薛定谔方程与幺正算符', items:[
+      {id:'la-k1-11', name:'薛定谔方程', tags:['thm','der'], brief:'波函数的时间演化方程。',
+        body:`<p><strong>含时薛定谔方程</strong></p>
+<div class="la-fml">$$i\\hbar\\frac{\\partial|\\psi(t)\\rangle}{\\partial t} = H(t)|\\psi(t)\\rangle$$</div>
+<p>其中 $H(t)$ 为哈密顿量。</p>
+<p><strong>形式解</strong></p>
+<div class="la-fml">$$|\\psi(t)\\rangle = \\mathcal{T}\\exp\\left[\\frac{1}{i\\hbar}\\int_0^t H(s)\\,\\mathrm{d}s\\right]|\\psi(0)\\rangle$$</div>
+<p>其中 $\\mathcal{T}$ 为时间排序算符。当 $H$ 不显含时间时简化为 $|\\psi(t)\\rangle = e^{-iHt/\\hbar}|\\psi(0)\\rangle$。</p>`},
+      {id:'la-k1-12', name:'幺正演化算符', tags:['thm','app'], brief:'$U(t)$ 满足 $U^\\dagger U = I$。',
+        body:`<p>量子系统的时间演化可以表示为一个幺正变换</p>
+<div class="la-fml">$$|\\psi(t)\\rangle = U(t)|\\psi(0)\\rangle$$</div>
+<p>其中 $U(t)$ 满足</p>
+<div class="la-fml">$$\\frac{\\partial U(t)}{\\partial t} = \\frac{1}{i\\hbar}H(t)U(t),\\qquad U(0) = I$$</div>
+<p><strong>核心性质</strong></p>
+<ul>
+<li><strong>幺正性</strong>：$U^\\dagger U = U U^\\dagger = I$，保内积（保概率）</li>
+<li><strong>可逆性</strong>：存在逆演化 $U^\\dagger$</li>
+<li><strong>保纯态性</strong>：纯态演化为纯态</li>
+</ul>`}
+    ]}
+  ]
+},
+
+/* ================= 第二章 密度矩阵表示 ================= */
+{
+  id:'la-ch2', num:'第二章', title:'密度矩阵下的量子力学表示', en:'DENSITY MATRIX FORMALISM',
+  sub:'纯态与混态、密度算符、Bloch 球、Gleason 定理',
+  desc:'本章引入密度矩阵描述更一般的量子态——混态。密度矩阵可以描述纯态的统计混合、大系统的子系统、开放系统退相干后的状态等，是量子信息处理中不可或缺的工具。并介绍 Bloch 球表示与 Gleason 定理。',
+  sections:[
+    {name:'2.1 纯态与混态', color:'#0d9488', desc:'从系综到密度矩阵', items:[
+      {id:'la-k2-1', name:'纯态', tags:['def','his'], brief:'由 Hilbert 空间中的单位矢量描述。',
+        body:`<p><strong>纯态</strong>　单个孤立量子系统处于纯态，由 Hilbert 空间中的单位矢量 $|\\psi\\rangle$ 描述，对应密度矩阵 $\\rho = |\\psi\\rangle\\langle\\psi|$。</p>
+<p>满足 $\\rho^2 = \\rho$，$\\operatorname{Tr}\\rho^2 = 1$。</p>`},
+      {id:'la-k2-2', name:'混态与密度矩阵', tags:['def','der'], brief:'经典概率混合的系综描述。',
+        body:`<p><strong>问题</strong>　若制备量子系统时，以经典概率 $p_1, p_2, \\dots, p_n$ 分别制备纯态 $|\\psi_1\\rangle, |\\psi_2\\rangle, \\dots, |\\psi_n\\rangle$，该如何描述这个系综的量子态？</p>
+<p><strong>测量推导</strong>　对纯态 $|\\psi\\rangle$ 测量可观测量 $A = \\sum_i \\lambda_i P_i$，测得 $\\lambda_m$ 的概率为</p>
+<div class="la-fml">$$\\mathrm{Pr}(\\lambda_m) = \\langle\\psi|P_m|\\psi\\rangle = \\operatorname{Tr}(|\\psi\\rangle\\langle\\psi| P_m)$$</div>
+<p>对混态系统作测量，测得 $\\lambda_m$ 的概率为</p>
+<div class="la-fml">$$\\sum_i p_i \\operatorname{Tr}(|\\psi_i\\rangle\\langle\\psi_i| P_m) = \\operatorname{Tr}\\left(\\sum_i p_i|\\psi_i\\rangle\\langle\\psi_i| P_m\\right) = \\operatorname{Tr}(\\rho P_m)$$</div>
+<p>其中<strong>密度矩阵</strong></p>
+<div class="la-fml">$$\\rho = \\sum_i p_i|\\psi_i\\rangle\\langle\\psi_i|$$</div>
+<p>满足 $p_i \\geq 0$，$\\sum_i p_i = 1$。</p>`},
+      {id:'la-k2-3', name:'密度矩阵的性质', tags:['thm','der'], brief:'厄米、半正定、归一。',
+        fig:'densityMatrix', figCap:'图 2.1　密度矩阵的定义与性质',
+        body:`<p>量子混态由密度矩阵 $\\rho$ 描述，满足：</p>
+<ul>
+<li><strong>厄米性</strong>：$\\rho^\\dagger = \\rho$</li>
+<li><strong>半正定性</strong>：$\\rho \\geq 0$（所有本征值非负）</li>
+<li><strong>归一化</strong>：$\\operatorname{Tr}(\\rho) = 1$</li>
+</ul>
+<p><strong>纯态的判据</strong></p>
+<div class="la-fml">$$\\operatorname{Tr}(\\rho^2) = 1 \\Leftrightarrow \\rho^2 = \\rho \\Leftrightarrow \\text{纯态}$$</div>
+<div class="la-fml">$$\\operatorname{Tr}(\\rho^2) < 1 \\Leftrightarrow \\text{混态}$$</div>`},
+      {id:'la-k2-4', name:'混态示例 1：原子系综', tags:['exa','app'], brief:'极化方向随机分布的原子系综。',
+        body:`<p>原子物理实验中，有着大量的原子，它们的极化有不同的取向。单个原子的极化方向为 $\\hat{n}$，对应纯态 $|\\hat{n}\\rangle$。极化方向落在 $\\hat{n}$ 方向附近的经典概率分布为 $p(\\hat{n})$。</p>
+<p>这堆原子的系综密度矩阵为</p>
+<div class="la-fml">$$\\rho = \\int p(\\hat{n})|\\hat{n}\\rangle\\langle\\hat{n}|\\,\\mathrm{d}\\Omega$$</div>
+<p>特殊情形：</p>
+<ul>
+<li>完全随机（各向同性）：$p(\\hat{n}) = 1/4\\pi$，$\\rho = I/2$</li>
+<li>沿 $z$ 轴完全极化：$\\rho = |0\\rangle\\langle0|$</li>
+</ul>`},
+      {id:'la-k2-5', name:'混态示例 2：白炽灯光', tags:['exa','app'], brief:'偏振方向随机均匀分布。',
+        body:`<p>白炽灯发出的光，偏振方向随机均匀分布在各个方向。单个光子偏振方向为 $\\theta$，对应纯态</p>
+<div class="la-fml">$$|\\theta\\rangle = \\cos\\theta|H\\rangle + \\sin\\theta|V\\rangle$$</div>
+<p>偏振方向概率密度 $p(\\theta) = 1/\\pi$（$\\theta \\in [0, \\pi)$）。系综密度矩阵</p>
+<div class="la-fml">$$\\rho = \\int_0^\\pi p(\\theta)|\\theta\\rangle\\langle\\theta|\\,\\mathrm{d}\\theta = \\frac{1}{2}I$$</div>
+<p>处于最大混态。经过偏振片投影后：$\\rho' = |H\\rangle\\langle H| = \\begin{pmatrix} 1 & 0 \\\\ 0 & 0 \\end{pmatrix}$（变为纯态）。</p>`},
+      {id:'la-k2-6', name:'混态示例 3：复合系统子系统', tags:['exa','der'], brief:'纠缠态子系统的混态描述。',
+        body:`<p>设 Alice 和 Bob 各有一自旋 1/2 的粒子，处于量子态</p>
+<div class="la-fml">$$|\\psi\\rangle = \\frac{|0\\rangle\\otimes|1\\rangle + |1\\rangle\\otimes|0\\rangle}{\\sqrt{2}}$$</div>
+<p>若 Alice 沿 $\\{|0\\rangle, |1\\rangle\\}$ 做投影测量，Bob 不知道 Alice 的结果，其描述为</p>
+<div class="la-fml">$$\\left\\{\\left(\\frac{1}{2}, |1\\rangle\\right), \\left(\\frac{1}{2}, |0\\rangle\\right)\\right\\}$$</div>
+<p>若 Alice 沿 $\\{|+\\rangle, |-\\rangle\\}$ 做投影测量，Bob 的描述为</p>
+<div class="la-fml">$$\\left\\{\\left(\\frac{1}{2}, |+\\rangle\\right), \\left(\\frac{1}{2}, |-\\rangle\\right)\\right\\}$$</div>
+<p><strong>思考</strong>　在不知道 Alice 选择了什么测量基的情况下，Bob 的态的测量统计是否依赖 Alice 的选择？</p>
+<div class="la-callout la-his">答案　不依赖。无论 Alice 选择什么基，Bob 的约化密度矩阵始终为 $I/2$，测量统计不变。</div>`},
+      {id:'la-k2-7', name:'混态示例 4：热平衡态', tags:['exa','app'], brief:'玻尔兹曼分布与配分函数。',
+        body:`<p>系统哈密顿量 $H$ 的能量本征态为 $|E_n\\rangle$，对应能量 $E_n$。热平衡下各能量本征态以玻尔兹曼概率占据</p>
+<div class="la-fml">$$p_n = \\frac{e^{-\\beta E_n}}{Z},\\qquad \\beta = \\frac{1}{k_B T},\\qquad Z = \\sum_n e^{-\\beta E_n}$$</div>
+<p>系综密度矩阵</p>
+<div class="la-fml">$$\\rho = \\sum_n p_n|E_n\\rangle\\langle E_n| = \\frac{e^{-\\beta H}}{\\operatorname{Tr}(e^{-\\beta H})}$$</div>
+<p>极限情形：</p>
+<ul>
+<li>$T \\to 0$：$\\rho \\to |E_0\\rangle\\langle E_0|$（纯态，基态）</li>
+<li>$T \\to \\infty$：$\\rho \\to I/d$（最大混态）</li>
+</ul>
+<p><strong>单自旋系综热平衡态</strong>　在外磁场下，$H = \\gamma B_z\\sigma_z/2$，则</p>
+<div class="la-fml">$$\\rho_{eq} = \\frac{e^{-\\beta H}}{\\operatorname{Tr}(e^{-\\beta H})} \\approx \\frac{1}{2}I + \\epsilon\\frac{\\sigma_z}{2}$$</div>
+<p>核磁共振中通常 $\\epsilon \\sim 10^{-5}$。</p>`},
+      {id:'la-k2-8', name:'密度矩阵的含义', tags:['his','def'], brief:'密度矩阵可以描述什么。',
+        body:`<p>密度矩阵可以描述：</p>
+<ul>
+<li>一个量子系统以一定的几率分布处于一组纯态</li>
+<li>大系统中的子系统状态等</li>
+<li>不同量子系统的统计系综</li>
+<li>开放系统，与环境耦合，纯态退相干为混态</li>
+<li>混态是量子系统更一般的状态</li>
+</ul>
+<p>State of a system is just some mathematical structures that enable us to predict the outcomes of all possible measurements（测量结果和密度矩阵对应）。</p>
+<div class="la-callout la-his">Gleason 定理　数学严格保证密度矩阵是描述量子态的唯一数学结构。</div>`}
+    ]},
+    {name:'2.2 密度矩阵的展开', color:'#7c3aed', desc:'泡利基与参数自由度', items:[
+      {id:'la-k2-9', name:'密度矩阵的参数自由度', tags:['thm','der'], brief:'$4^n - 1$。',
+        body:`<p>对于 $n$ 比特系统，Hilbert 空间维数为 $N = 2^n$。密度矩阵可展开为</p>
+<div class="la-fml">$$\\rho = \\sum_{k=0}^{2^n-1}\\sum_{j=0}^{2^n-1}\\rho_{kj}|k\\rangle\\langle j|$$</div>
+<p>其中 $|k\\rangle\\langle j|$ 是正交归一的外积算符基底。</p>
+<p><strong>参数自由度</strong>　一般 $N \\times N$ 厄米矩阵有 $N^2$ 个实参数，归一化条件给出 1 个约束，故自由度为</p>
+<div class="la-fml">$$N^2 - 1 = 4^n - 1$$</div>`},
+      {id:'la-k2-10', name:'泡利算符作为基底', tags:['def','thm'], brief:'泡利张量积构成正交基。',
+        body:`<p>三个泡利算符</p>
+<div class="la-fml">$$X = \\sigma_x = \\begin{pmatrix}0&1\\\\1&0\\end{pmatrix},\\quad Y = \\sigma_y = \\begin{pmatrix}0&-i\\\\i&0\\end{pmatrix},\\quad Z = \\sigma_z = \\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}$$</div>
+<p>泡利张量积基底</p>
+<div class="la-fml">$$\\mathcal{P} = \\{P_k\\}_{k=0}^{4^n-1} = \\{I, X, Y, Z\\}^{\\otimes n}$$</div>
+<p>满足正交归一关系</p>
+<div class="la-fml">$$\\frac{\\operatorname{Tr}(P_k P_j)}{2^n} = \\delta_{kj}$$</div>
+<p><strong>密度矩阵的线性分解</strong></p>
+<div class="la-fml">$$\\rho = \\frac{1}{2^n}I^{\\otimes n} + \\frac{1}{2^n}\\sum_{k=1}^{4^n-1}x_k P_k,\\qquad x_k = \\operatorname{Tr}(\\rho P_k)$$</div>
+<p><strong>示例</strong></p>
+<ul>
+<li>任意 1 比特密度矩阵基底：$I, X, Y, Z$</li>
+<li>任意 2 比特密度矩阵基底：$II, IX, IY, IZ, XI, XX, XY, XZ, YI, \\dots, ZZ$</li>
+</ul>`},
+      {id:'la-k2-11', name:'密度矩阵的纯度', tags:['thm','der'], brief:'$1/2^n \\leq \\operatorname{Tr}\\rho^2 \\leq 1$。',
+        body:`<p><strong>定义</strong>　密度矩阵的纯度定义为 $\\operatorname{Tr}\\rho^2$。</p>
+<p><strong>上下界</strong></p>
+<div class="la-fml">$$\\frac{1}{2^n} \\leq \\operatorname{Tr}\\rho^2 \\leq 1$$</div>
+<p><strong>证明（上界）</strong>　设谱分解 $\\rho = \\sum_i \\lambda_i|i\\rangle\\langle i|$，$\\lambda_i \\geq 0$，$\\sum_i \\lambda_i = 1$。则</p>
+<div class="la-fml">$$\\operatorname{Tr}\\rho^2 = \\sum_i \\lambda_i^2 \\leq \\sum_i \\lambda_i = 1$$</div>
+<p>等号当且仅当 $\\rho$ 为纯态。</p>
+<p><strong>证明（下界）</strong>　由柯西不等式</p>
+<div class="la-fml">$$\\sum_i \\lambda_i^2 \\geq \\frac{1}{N}\\left(\\sum_i \\lambda_i\\right)^2 = \\frac{1}{2^n}$$</div>
+<p>等号当且仅当 $\\rho = I/2^n$（最大混态）。</p>
+<p><strong>单比特情况</strong>　由泡利展开 $\\rho = \\frac{1}{2}(I + \\vec{r}\\cdot\\vec{\\sigma})$，则</p>
+<div class="la-fml">$$\\operatorname{Tr}\\rho^2 = \\frac{1 + |\\vec{r}|^2}{2}$$</div>`}
+    ]},
+    {name:'2.3 布洛赫球表示', color:'#059669', desc:'单量子比特的几何图像', items:[
+      {id:'la-k2-12', name:'纯态的布洛赫球表示', tags:['def','thm'], brief:'纯态对应球面上的点。',
+        fig:'blochSphere', figCap:'图 2.2　布洛赫球',
+        body:`<p>任意单量子比特纯态可映射到三维单位球面（Bloch 球），参数化形式</p>
+<div class="la-fml">$$|\\psi\\rangle = \\cos\\frac{\\theta}{2}|0\\rangle + e^{i\\varphi}\\sin\\frac{\\theta}{2}|1\\rangle$$</div>
+<p>Bloch 矢量坐标</p>
+<div class="la-fml">$$x = \\sin\\theta\\cos\\varphi,\\quad y = \\sin\\theta\\sin\\varphi,\\quad z = \\cos\\theta$$</div>
+<p>其中 $\\theta \\in [0, \\pi]$ 为极角，$\\varphi \\in [0, 2\\pi)$ 为方位角，球面半径恒为 1。</p>
+<p><strong>示例：$|i\\rangle$ 态的 Bloch 坐标</strong></p>
+<div class="la-fml">$$|i\\rangle = \\frac{1}{\\sqrt{2}}(|0\\rangle + i|1\\rangle)$$</div>
+<p>对应 $\\theta = \\pi/2$，$\\varphi = \\pi/2$，则 $x = 0$，$y = 1$，$z = 0$，坐标为 $(0,1,0)$。</p>
+<div class="la-callout la-his">思考　正交的量子态在 Bloch 球面上不是相互垂直，而是方向相反，如 $|0\\rangle$ 和 $|1\\rangle$、$|+\\rangle$ 和 $|-\\rangle$、$|+i\\rangle$ 和 $|-i\\rangle$。</div>`},
+      {id:'la-k2-13', name:'混态的布洛赫球表示', tags:['def','thm'], brief:'混态对应球内部的点。',
+        body:`<p>单量子比特密度矩阵一般形式</p>
+<div class="la-fml">$$\\rho = \\frac{1}{2}(I + \\vec{r}\\cdot\\vec{\\sigma})$$</div>
+<p>其中 $\\vec{r} = (x, y, z)$ 为 Bloch 矢量，$|\\vec{r}| \\leq 1$。</p>
+<ul>
+<li>$|\\vec{r}| = 1$：纯态（球面），$\\rho^2 = \\rho$</li>
+<li>$|\\vec{r}| < 1$：混态（球内部），$\\rho^2 < \\rho$</li>
+<li>$|\\vec{r}| = 0$：完全混态 $\\rho = I/2$（球心）</li>
+</ul>
+<p><strong>示例 1</strong>　$\\rho = \\frac{3}{4}|0\\rangle\\langle0| + \\frac{1}{4}|1\\rangle\\langle1|$，Bloch 矢量 $\\vec{r} = (0, 0, 1/2)$，长度 $1/2$。</p>
+<p><strong>示例 2</strong>　$\\rho = I/2$，Bloch 矢量 $(0, 0, 0)$（球心），表示系统以等概率处于任意纯态，无任何量子相干性。</p>
+<p><strong>纯度与 Bloch 矢量长度</strong></p>
+<div class="la-fml">$$\\operatorname{Tr}\\rho^2 = \\frac{1 + |\\vec{r}|^2}{2}$$</div>`},
+      {id:'la-k2-14', name:'密度矩阵的几何性质', tags:['thm','his'], brief:'凸集、极点为纯态。',
+        body:`<p>密度矩阵集合的几何性质：</p>
+<ul>
+<li>密度矩阵集合是<strong>凸集</strong>，极点为纯态</li>
+<li>包含在 $4^n - 1$ 维空间中半径为 $\\sqrt{2^n - 1}$ 的球面内</li>
+<li>对于单比特系统，密度矩阵集合完全对应于 Bloch 球</li>
+<li>对于 $d \\geq 3$ 能级系统，广义 Bloch 球上不是每个点都对应一个量子态</li>
+</ul>
+<p><strong>混态分解的 Bloch 球表示</strong>　将混态分解为两个纯态的概率混合：$\\rho = p|\\psi_1\\rangle\\langle\\psi_1| + (1-p)|\\psi_2\\rangle\\langle\\psi_2|$，对应 Bloch 球中过 $\\rho$ 点的弦。</p>`}
+    ]},
+    {name:'2.4 Gleason 定理与密度矩阵框架', color:'#be123c', desc:'数学自洽性与量子力学框架', items:[
+      {id:'la-k2-15', name:'Gleason 定理', tags:['thm','his'], brief:'概率分配唯一确定密度矩阵。',
+        body:`<p><strong>Gleason 定理</strong>　在 $d \\geq 3$ 维 Hilbert 空间中，给每个一维投影 $|a\\rangle\\langle a|$ 分配概率 $p(|a\\rangle\\langle a|) \\in [0, 1]$，使得对每个投影测量 $\\{|a_j\\rangle\\langle a_j|\\}$ 有</p>
+<div class="la-fml">$$\\sum_j p(|a_j\\rangle\\langle a_j|) = 1$$</div>
+<p>则存在唯一的密度矩阵 $\\rho \\geq 0$，$\\operatorname{Tr}\\rho = 1$，使得</p>
+<div class="la-fml">$$p(|a_j\\rangle\\langle a_j|) = \\operatorname{Tr}(|a_j\\rangle\\langle a_j|\\rho) = \\langle a_j|\\rho|a_j\\rangle$$</div>
+<div class="la-callout la-his">历史　Gleason 于 1957 年证明，回应了 Mackey 1957 年提出的"确定 Hilbert 空间闭子空间上所有测度"的问题。Gleason 定理通过严格的数学证明，将量子测量的"概率分配规则"与"密度矩阵的量子态表示"唯一关联，是量子力学数学自洽性的关键支撑。</div>`},
+      {id:'la-k2-16', name:'密度矩阵框架下的量子力学', tags:['thm','def'], brief:'态、测量、演化的密度矩阵形式。',
+        body:`<p><strong>量子态</strong>　量子系统由密度矩阵 $\\rho$ 表示。</p>
+<p><strong>量子测量（投影测量）</strong>　设观测量 $A$ 具有谱分解 $A = \\sum_i \\lambda_i P_i$，系统处于态 $\\rho$，那么测量 $A$：</p>
+<ul>
+<li>以 $\\operatorname{Tr}(\\rho P_i) = \\rho_{ii}$ 的概率得到本征值 $\\lambda_i$</li>
+<li>系统态变换到 $\\rho \\to \\frac{P_i\\rho P_i}{\\operatorname{Tr}(\\rho P_i)}$</li>
+<li>期望值 $\\operatorname{Tr}(\\rho A)$</li>
+</ul>
+<p><strong>量子演化</strong>　满足 Liouville-von Neumann 方程</p>
+<div class="la-fml">$$\\frac{\\partial\\rho(t)}{\\partial t} = \\frac{1}{i\\hbar}[H(t), \\rho(t)]$$</div>
+<p>形式解</p>
+<div class="la-fml">$$\\rho(t) = U(t)\\rho(0)U^\\dagger(t),\\qquad U(t) = \\mathcal{T}\\exp\\left[\\frac{1}{i\\hbar}\\int_0^t H(s)\\,\\mathrm{d}s\\right]$$</div>`}
+    ]}
+  ]
+},
+
+/* ================= 第三章 POVM 与量子测量 ================= */
+{
+  id:'la-ch3', num:'第三章', title:'POVM 与量子测量的一般形式', en:'POVM & GENERALIZED MEASUREMENTS',
+  sub:'混合测量、POVM、Busch 定理、量子态区分、联合可测性',
+  desc:'本章从混合测量出发，引入正定算子测量（POVM）作为量子测量的一般描述，讨论 Busch 定理、单比特 POVM 的 Bloch 球表示、量子态区分与无歧义测量、联合可测性等内容。',
+  sections:[
+    {name:'3.1 混合测量与 POVM', color:'#059669', desc:'从投影测量到正定算子测量', items:[
+      {id:'la-k3-1', name:'混合测量', tags:['def','exa'], brief:'不同概率下的投影测量混合。',
+        fig:'povmMixed', figCap:'图 3.1　混合测量示意',
+        body:`<p><strong>问题</strong>　混态是纯态的混合，那么投影测量是否可以混合？</p>
+<p><strong>答案</strong>　可以。以不同的概率进行不同的投影测量。</p>
+<p><strong>实例</strong>　观测者将一个未知的量子比特态 $\\rho$ 输入量子测量设备，设备以 50% 概率对输入进行 $Z$ 基测量，以 50% 概率进行 $X$ 基测量，输出结果 $\\{1, -1\\}$。</p>
+<p>若测量结果为"0"，可能对应 $Z$ 测量的 $|0\\rangle$ 或 $X$ 测量的 $|+\\rangle$，末态为两者的概率混合。</p>
+<div class="la-callout la-his">结论　这类混合测量的末态不满足投影测量的"正交性"，需引入更一般的测量描述——正定算子测量（POVM）。</div>`},
+      {id:'la-k3-2', name:'POVM 的定义', tags:['def','thm'], brief:'测量算子满足完备性。',
+        body:`<p>正定算子测量（Positive Operator-Valued Measure, POVM）由一组 $\\{M_m\\}$（测量算子）描述，满足：</p>
+<ul>
+<li>$M_m$ 作用于系统的希尔伯特空间，指标 $m$ 对应测量结果</li>
+<li>若初始态为 $\\rho$，则结果 $m$ 的概率为
+<div class="la-fml">$$\\mathrm{Pr}(m) = \\operatorname{Tr}(M_m\\rho M_m^\\dagger)$$</div></li>
+<li>测量后的末态（归一化）为
+<div class="la-fml">$$\\rho_m = \\frac{M_m\\rho M_m^\\dagger}{\\operatorname{Tr}(M_m\\rho M_m^\\dagger)}$$</div></li>
+<li>完备性条件（由概率归一性推导）
+<div class="la-fml">$$\\sum_m M_m^\\dagger M_m = \\mathbb{I}$$</div></li>
+</ul>`},
+      {id:'la-k3-3', name:'POVM 元素', tags:['def','thm'], brief:'$E_m = M_m^\\dagger M_m$，概率公式简化。',
+        body:`<p>为简化概率计算，定义 $E_m = M_m^\\dagger M_m$（POVM 元素），则测量概率可改写为</p>
+<div class="la-fml">$$\\mathrm{Pr}(m) = \\operatorname{Tr}(E_m\\rho)$$</div>
+<p><strong>POVM 元素的三大性质</strong></p>
+<ul>
+<li><strong>厄米性</strong>：$E_m^\\dagger = E_m$</li>
+<li><strong>半正定性</strong>：$E_m \\geq 0$</li>
+<li><strong>归一性</strong>：$\\sum_m E_m = \\mathbb{I}$</li>
+</ul>
+<p>投影测量（PVM）是 POVM 的特例，此时 $E_m = M_m$，且 $E_m^2 = E_m$。</p>`},
+      {id:'la-k3-4', name:'PVM 的定义与性质', tags:['def','thm'], brief:'厄米、正交、完备。',
+        body:`<p>投影测量通常记为 $\\{M_m\\}$，满足：</p>
+<ul>
+<li><strong>厄米性</strong>：$M_m^\\dagger = M_m$</li>
+<li><strong>正交性</strong>：$M_m M_{m'} = \\delta_{m,m'} M_m$</li>
+<li><strong>完备性</strong>：$\\sum_m M_m^\\dagger M_m = I$</li>
+</ul>
+<p><strong>特点</strong></p>
+<ul>
+<li>相对于一般测量，投影测量要求测量算子是厄米且相互正交的投影算符</li>
+<li>示例 1：$\\{|0\\rangle\\langle0|, |1\\rangle\\langle1|\\}$ 是单比特系统两输出的投影测量</li>
+<li>示例 2：$\\{|0\\rangle\\langle0| + |1\\rangle\\langle1|, |2\\rangle\\langle2|\\}$ 是三维系统两输出的投影测量</li>
+</ul>
+<p>投影测量是 POVM 的特殊情况，此时 $E_m = M_m^\\dagger M_m = M_m$。</p>`},
+      {id:'la-k3-5', name:'混合测量的 POVM 元素计算', tags:['exa','der'], brief:'50% Z 基 + 50% X 基。',
+        body:`<p>延续前文"50% Z 基测量 + 50% X 基测量"的实例。</p>
+<p><strong>步骤 1：明确投影测量的算子</strong></p>
+<ul>
+<li>$Z$ 基：$P_{Z,0} = |0\\rangle\\langle0|$，$P_{Z,1} = |1\\rangle\\langle1|$</li>
+<li>$X$ 基：$P_{X,+} = |+\\rangle\\langle+|$，$P_{X,-} = |-\\rangle\\langle-|$</li>
+</ul>
+<p><strong>步骤 2：构造 POVM 元素</strong></p>
+<div class="la-fml">$$E_0 = \\frac{1}{2}(P_{Z,0} + P_{X,+}),\\qquad E_1 = \\frac{1}{2}(P_{Z,1} + P_{X,-})$$</div>
+<p><strong>步骤 3：矩阵形式</strong></p>
+<div class="la-fml">$$E_0 = \\frac{1}{2}\\left[\\begin{pmatrix}1&0\\\\0&0\\end{pmatrix} + \\frac{1}{2}\\begin{pmatrix}1&1\\\\1&1\\end{pmatrix}\\right] = \\begin{pmatrix}\\frac{3}{4}&\\frac{1}{4}\\\\[1mm] \\frac{1}{4}&\\frac{1}{4}\\end{pmatrix}$$</div>
+<p>验证半正定性：$E_0$ 的本征值均非负；验证归一性：$E_0 + E_1 = I$。</p>`}
+    ]},
+    {name:'3.2 POVM 的 Bloch 球表示', color:'#7c3aed', desc:'Biasedness 与 Sharpness', items:[
+      {id:'la-k3-6', name:'POVM 算子的 Bloch 形式', tags:['def','thm'], brief:'$O_\\pm(x, \\vec{m}) = \\frac{(1\\pm x)I \\pm \\vec{m}\\cdot\\vec{\\sigma}}{2}$。',
+        body:`<p>一类广泛应用的 POVM 算子可表示为</p>
+<div class="la-fml">$$O_\\pm(x, \\vec{m}) = \\frac{(1 \\pm x)\\mathbb{I} \\pm \\vec{m}\\cdot\\vec{\\sigma}}{2}$$</div>
+<p>参数物理意义：</p>
+<ul>
+<li>$x \\in \\mathbb{R}$：<strong>Biasedness</strong>，描述测量对"正负方向"的偏向程度，是判断是否存在系统性偏差的核心参数</li>
+<li>$\\vec{m} \\in \\mathbb{R}^3$：方向矢量，决定 POVM 对量子态"空间方向"的敏感轴（如沿 $z$ 轴时 $\\vec{m} = (0, 0, m)$）</li>
+<li>$m = |\\vec{m}|$：<strong>Sharpness</strong>，表征对相近量子态的分辨能力，是衡量测量精度的关键指标</li>
+</ul>
+<p><strong>约束条件</strong></p>
+<ul>
+<li><strong>完备性</strong>：$O_+(x, \\vec{m}) + O_-(x, \\vec{m}) = \\mathbb{I}$</li>
+<li><strong>正定性</strong>：算子本征值非负，因 $\\vec{m}\\cdot\\vec{\\sigma}$ 本征值为 $\\pm m$，故约束为 $|x| + m \\leq 1$</li>
+</ul>`},
+      {id:'la-k3-7', name:'无偏 POVM 与概率公式', tags:['thm','der'], brief:'$x = 0$ 时无偏；概率与 Bloch 矢量投影相关。',
+        body:`<p><strong>Unbiased POVM</strong>　当 $x = 0$ 时</p>
+<div class="la-fml">$$O_\\pm(0, \\vec{m}) = \\frac{\\mathbb{I} \\pm \\vec{m}\\cdot\\vec{\\sigma}}{2}$$</div>
+<p>对态 $\\rho = \\frac{1}{2}(I + \\vec{r}\\cdot\\vec{\\sigma})$，测量概率</p>
+<div class="la-fml">$$\\operatorname{tr}(\\rho O_+(0, \\vec{m})) = \\frac{1}{2} + \\frac{1}{2}\\vec{r}\\cdot\\vec{m}$$</div>
+<div class="la-fml">$$\\operatorname{tr}(\\rho O_-(0, \\vec{m})) = \\frac{1}{2} - \\frac{1}{2}\\vec{r}\\cdot\\vec{m}$$</div>
+<p><strong>方向对称性</strong>　对"对称态"$\\rho$（Bloch 矢量 $\\vec{r}$）与 $\\rho'$（Bloch 矢量 $-\\vec{r}$），满足</p>
+<div class="la-fml">$$\\operatorname{tr}(\\rho O_+(0, \\vec{m})) = \\operatorname{tr}(\\rho' O_-(0, \\vec{m}))$$</div>
+<p>体现无偏向性。</p>`},
+      {id:'la-k3-8', name:'泡利投影测量（Unbiased PVM）', tags:['exa','app'], brief:'$m = 1$，$x = 0$ 时退化为 PVM。',
+        body:`<p>当 Sharpness $m = 1$、Biasedness $x = 0$ 时，Unbiased POVM 退化为泡利投影测量（PVM）。以沿 $z$ 轴测量为例：</p>
+<div class="la-fml">$$O_+(0, \\vec{e}_z) = |0\\rangle\\langle0|,\\qquad O_-(0, \\vec{e}_z) = |1\\rangle\\langle1|$$</div>
+<p>代入概率公式得</p>
+<div class="la-fml">$$\\operatorname{tr}(\\rho|0\\rangle\\langle0|) = \\frac{1 + r_z}{2},\\qquad \\operatorname{tr}(\\rho|1\\rangle\\langle1|) = \\frac{1 - r_z}{2}$$</div>
+<p>测量概率仅由态的 $z$ 分量 $r_z$ 决定，对 $|0\\rangle$ 和 $|1\\rangle$ 响应无偏向。</p>`},
+      {id:'la-k3-9', name:'Sharpness 与投影度的关联', tags:['thm','app'], brief:'高 Sharpness 接近 PVM，低 Sharpness 具有模糊性。',
+        body:`<p>Sharpness 本质反映 POVM 算子接近投影算子的程度：</p>
+<ul>
+<li><strong>高 Sharpness（$m=1$）</strong>：sharp measurement，算子退化为投影算子（如 $O_+ = |\\psi\\rangle\\langle\\psi|$），具有"非此即彼"的确定性——对本征态 $|\\psi\\rangle$，$p_+ = 1$；对正交态 $|\\phi\\rangle$，$p_+ = 0$，无模糊性</li>
+<li><strong>低 Sharpness（$m<1$）</strong>：unsharp measurement，算子为"非投影正定算子"，本征值均为正（如 $m=0.5$ 时，本征值 0.75 和 0.25），测量结果有"模糊性"——无态能使 $p_+ = 1$ 或 0，但可换取噪声鲁棒性等特性</li>
+</ul>
+<p><strong>Sharpness 与 Biasedness 的约束关系</strong></p>
+<div class="la-fml">$$|x| + m \\leq 1$$</div>
+<p>二者呈"此消彼长"关系：无偏（$x=0$）时 Sharpness 上限为 1；有偏时上限降至 $1 - |x|$；极端情况 $|x| = 1$ 时 $m = 0$，POVM 失去分辨能力。</p>`},
+      {id:'la-k3-10', name:'POVM 的 Bloch 空间概率区域', tags:['thm','app'], brief:'概率区域与 Unbiasedness、Sharpness 的关系。',
+        body:`<p>单量子比特 POVM 的算子可映射到 Bloch 空间"概率区域"：</p>
+<ul>
+<li><strong>Unbiasedness（$x = 0$）</strong>：概率区域关于 Bloch 球中心对称，对球面上任意点 $\\vec{r}$ 与对径点 $-\\vec{r}$，测量概率对称</li>
+<li><strong>Sharpness（$m$）</strong>：$m$ 越大，概率区域沿 $\\vec{m}$ 方向"延伸越广"，对态方向的敏感程度越高，沿 $\\vec{m}$ 轴的概率梯度更陡</li>
+</ul>
+<p>以 $\\vec{m} = (0, 0, m)$（沿 $z$ 轴）的 Unbiased POVM 为例：</p>
+<div class="la-fml">$$p_+ = \\frac{1}{2} + \\frac{1}{2}mr_z$$</div>
+<ul>
+<li>$m = 1$ 时，$p_+$ 范围 $0 \\sim 1$（覆盖全概率区间）</li>
+<li>$m = 0.5$ 时，$p_+$ 范围 $0.25 \\sim 0.75$（范围缩小，敏感度降低）</li>
+</ul>`}
+    ]},
+    {name:'3.3 Busch 定理与量子态区分', color:'#c2410c', desc:'概率分配与量子态区分策略', items:[
+      {id:'la-k3-11', name:'Busch 定理', tags:['thm','his'], brief:'从 PVM 推广到所有 POVM。',
+        body:`<p><strong>Busch 定理</strong>　若对所有 POVM $\\{M_\\mu\\}$（满足 $\\sum_\\mu M_\\mu = I$），概率分配函数 $p: M \\mapsto p(M)$ 满足归一性</p>
+<div class="la-fml">$$\\sum_\\mu p(M_\\mu) = 1$$</div>
+<p>则存在唯一的密度矩阵 $\\rho$，使得</p>
+<div class="la-fml">$$p(M_\\mu) = \\operatorname{Tr}(\\rho M_\\mu)$$</div>
+<p>该定理扩展了 Gleason 定理的适用范围（从投影测量到所有 POVM），强化了密度矩阵作为量子态描述的唯一性。</p>
+<p><strong>证明思路（Busch 版本）</strong></p>
+<ul>
+<li><strong>线性性</strong>：由两个 POVM $\\{M, M', I - M - M'\\}$ 和 $\\{M + M', I - M - M'\\}$ 可证 $p(M) + p(M') = p(M + M')$</li>
+<li><strong>单调性</strong>：若 $I \\geq E \\geq F \\geq 0$，则 $p(E) \\geq p(F)$</li>
+<li><strong>缩放性</strong>：$p(tM) = tp(M)$</li>
+<li><strong>唯一扩展</strong>：扩展到所有厄米算子，存在唯一 $\\rho$ 使得 $\\operatorname{Tr}\\rho A = \\nu(A)$，$\\rho \\geq 0$，$\\operatorname{Tr}\\rho = 1$</li>
+</ul>
+<p>参考：P. Busch, Phys. Rev. Lett. <strong>91</strong>, 120403 (2003)。</p>`},
+      {id:'la-k3-12', name:'量子态区分问题', tags:['def','app'], brief:'最小错误区分与无歧义区分。',
+        body:`<p><strong>问题</strong>　两个纯量子比特态 $|\\psi_{1,2}\\rangle$（$\\langle\\psi_1|\\psi_2\\rangle \\neq 0,1$）被随机制备为混合态</p>
+<div class="la-fml">$$\\rho = \\frac{1}{2}|\\psi_1\\rangle\\langle\\psi_1| + \\frac{1}{2}|\\psi_2\\rangle\\langle\\psi_2|$$</div>
+<p>为了确定制备的是哪个态，需对该量子比特执行合适的测量。</p>
+<p><strong>策略 1：最小错误区分（Minimum error discrimination）</strong>　采用猜测型策略的 POVM $\\{M_0, M_1\\}$，正确猜测的概率满足</p>
+<div class="la-fml">$$P_{\\text{succ}} = p_0\\operatorname{Tr}(\\rho_0 M_0) + p_1\\operatorname{Tr}(\\rho_1 M_1) \\leq \\frac{1 + \\mathcal{D}}{2}$$</div>
+<div class="la-fml">$$\\mathcal{D} = \\sqrt{\\frac{1 - \\vec{n}_1\\cdot\\vec{n}_2}{2}}$$</div>
+<p>该上界称为 <strong>Helstrom bound</strong>，是最小错误区分的性能极限。</p>`},
+      {id:'la-k3-13', name:'无歧义区分', tags:['thm','app'], brief:'IDP 极限与三元 POVM。',
+        body:`<p><strong>策略 2：无歧义区分（Unambiguous discrimination）</strong>　采用含"无结论结果"的 POVM $\\{M_1, M_2, M_?\\}$，POVM 需满足核心条件</p>
+<div class="la-fml">$$\\langle\\psi_k|M_k|\\psi_k\\rangle > 0,\\qquad \\langle\\psi_j|M_k|\\psi_j\\rangle = 0\\ (j \\neq k)$$</div>
+<p>其中：</p>
+<ul>
+<li>$M_1/M_2$：明确结果，分别对应 $|\\psi_1\\rangle/|\\psi_2\\rangle$，判定 100% 可靠</li>
+<li>$M_?$：无结论结果，无法准确判断量子态，避免错误区分</li>
+</ul>
+<p><strong>IDP 极限（Ivanovic-Dieks-Peres）</strong>　无结论结果的概率满足</p>
+<div class="la-fml">$$p_? = \\operatorname{Tr}(M_?\\rho) \\geq |\\langle\\psi_1|\\psi_2\\rangle|$$</div>
+<p><strong>无歧义测量的结构</strong></p>
+<div class="la-fml">$$M_1 = \\alpha|\\psi_2^\\perp\\rangle\\langle\\psi_2^\\perp|,\\quad M_2 = \\beta|\\psi_1^\\perp\\rangle\\langle\\psi_1^\\perp|,\\quad M_? = \\mathbb{I} - M_1 - M_2$$</div>
+<p>由正定性可得 $\\alpha, \\beta \\geq 0$，$\\alpha + \\beta + |\\alpha\\vec{n}_1 + \\beta\\vec{n}_2| \\leq 2$。</p>
+<p>参考：I. D. Ivanovic, Phys. Lett. A <strong>123</strong>, 257 (1987)；D. Dieks, Phys. Lett. A <strong>126</strong>, 303 (1988)；A. Peres, Phys. Lett. A <strong>128</strong>, 19 (1988)。</p>`},
+      {id:'la-k3-14', name:'非正交量子态的无歧义区分', tags:['der','app'], brief:'Peres 辅助量子比特方法。',
+        body:`<p><strong>待区分的非正交量子态</strong>　考虑两个单量子比特纯态（$\\theta < \\pi/2$）</p>
+<div class="la-fml">$$|\\psi_{1,2}\\rangle = \\cos\\frac{\\theta}{2}|0\\rangle \\pm \\sin\\frac{\\theta}{2}|1\\rangle$$</div>
+<p>两态非正交，$\\langle\\psi_1|\\psi_2\\rangle = \\cos\\theta \\neq 0$，无法通过普通投影测量（PVM）无错误区分。</p>
+<p><strong>Peres 方法：辅助量子比特 + 幺正演化</strong></p>
+<p>定义两比特幺正算子 $U$，对基矢 $|00\\rangle, |01\\rangle, |10\\rangle, |11\\rangle$ 的作用为</p>
+<div class="la-fml">$$\\begin{cases}
+U|00\\rangle = \\tan\\frac{\\theta}{2}|00\\rangle + \\sqrt{1 - \\tan^2\\frac{\\theta}{2}}|11\\rangle\\\\
+U|01\\rangle = |01\\rangle\\\\
+U|10\\rangle = |10\\rangle\\\\
+U|11\\rangle = -\\sqrt{1 - \\tan^2\\frac{\\theta}{2}}|00\\rangle + \\tan\\frac{\\theta}{2}|11\\rangle
+\\end{cases}$$</div>
+<p>（验证：$U^\\dagger U = I$，满足幺正性）</p>
+<p><strong>实现与结果</strong>　将待区分态与辅助态直积后输入 $U$，得到</p>
+<div class="la-fml">$$U|\\psi_{1,2}\\rangle\\otimes|0\\rangle = \\sin\\frac{\\theta}{2}(|0\\rangle \\pm |1\\rangle)\\otimes|0\\rangle + \\sqrt{\\cos\\theta}|1\\rangle\\otimes|1\\rangle$$</div>
+<p>测量辅助量子比特的状态：</p>
+<ul>
+<li>若辅助态为 $|0\\rangle$：可无错误判定原态为 $|\\psi_1\\rangle$ 或 $|\\psi_2\\rangle$</li>
+<li>若辅助态为 $|1\\rangle$：无结论结果，概率为 $\\sqrt{\\cos\\theta}$（符合 IDP 极限）</li>
+</ul>`},
+      {id:'la-k3-15', name:'光的偏振作为量子比特', tags:['exa','app'], brief:'偏振态的量子比特对应关系。',
+        body:`<p>光的偏振可以用单光子偏振态实现量子比特：</p>
+<ul>
+<li>水平偏振 $\\leftrightarrow |0\\rangle$</li>
+<li>垂直偏振 $\\leftrightarrow |1\\rangle$</li>
+<li>对角向上 $\\leftrightarrow \\frac{1}{\\sqrt{2}}(|0\\rangle + |1\\rangle)$</li>
+<li>对角向下 $\\leftrightarrow \\frac{1}{\\sqrt{2}}(|0\\rangle - |1\\rangle)$</li>
+<li>左旋圆偏振 $\\leftrightarrow \\frac{1}{\\sqrt{2}}(|0\\rangle + i|1\\rangle)$</li>
+<li>右旋圆偏振 $\\leftrightarrow \\frac{1}{\\sqrt{2}}(|0\\rangle - i|1\\rangle)$</li>
+</ul>
+<p>参考：Barnett and Croke, Advances in Optics and Photonics <strong>1</strong>, 238 (2009)。</p>`},
+      {id:'la-k3-16', name:'量子态区分的经典文献', tags:['his','app'], brief:'IDP 相关工作与实验实现。',
+        body:`<p><strong>经典理论文献</strong></p>
+<ul>
+<li>I. D. Ivanovic, "How to differentiate between non-orthogonal states", Phys. Lett. A <strong>123</strong>, 257 (1987)</li>
+<li>D. Dieks, "Overlap and distinguishability of quantum states", Phys. Lett. A <strong>126</strong>, 303 (1988)</li>
+<li>A. Peres, "How to differentiate between non-orthogonal states", Phys. Lett. A <strong>128</strong>, 19 (1988)</li>
+<li>S. M. Barnett and S. Croke, "Quantum state discrimination", Advances in Optics and Photonics <strong>1</strong>, 238 (2009)</li>
+</ul>
+<p><strong>实验实现文献</strong></p>
+<ul>
+<li>B. Huttner et al., Phys. Rev. A <strong>54</strong>, 3783 (1996)</li>
+<li>R. B. M. Clarke et al., Phys. Rev. A <strong>63</strong>, 040305 (2001)</li>
+<li>M. Mohseni et al., Phys. Rev. Lett. <strong>93</strong>, 200403 (2004)</li>
+</ul>`}
+    ]},
+    {name:'3.4 联合可测性', color:'#0d9488', desc:'POVM 之间的相容性', items:[
+      {id:'la-k3-17', name:'联合可测性的定义', tags:['def','thm'], brief:'两个 POVM 相容当且仅当存在联合 POVM。',
+        fig:'jointMeas', figCap:'图 3.2　联合可测性示意',
+        body:`<p><strong>定义</strong>　两个 POVM $\\{M_\\mu\\}$ 和 $\\{N_\\nu\\}$ 是相容的，当且仅当存在另一个 POVM $\\{M_{\\mu\\nu}\\}$ 使得</p>
+<div class="la-fml">$$M_\\mu = \\sum_\\nu M_{\\mu\\nu},\\qquad N_\\nu = \\sum_\\mu M_{\\mu\\nu}$$</div>
+<p>等价地，存在 POVM $\\{K_\\alpha\\}$ 和两组概率分布 $\\{\\Gamma_{\\mu\\alpha}\\}, \\{\\Gamma_{\\nu\\alpha}\\}$ 使得</p>
+<div class="la-fml">$$M_\\mu = \\sum_\\alpha \\Gamma_{\\mu\\alpha} K_\\alpha,\\qquad N_\\nu = \\sum_\\alpha \\Gamma_{\\nu\\alpha} K_\\alpha$$</div>
+<div class="la-callout la-his">注记　两两相容 $\\neq$ 整体相容。联合可测性是量子力学统计结构自然导出的概念。</div>
+<p>参考：Tero Heinomäki et al., "Notes on Joint Measurability of Quantum Observables", 2008。</p>`},
+      {id:'la-k3-18', name:'不可联合测量的典型示例', tags:['exa','der'], brief:'Z 基与 X 基投影不可联合测量。',
+        body:`<p><strong>示例</strong>　设 $M = \\{M_0, M_1\\}$（$Z$ 基投影），$N = \\{N_+, N_-\\}$（$X$ 基投影）：</p>
+<div class="la-fml">$$M_0 = |0\\rangle\\langle0|,\\quad M_1 = |1\\rangle\\langle1|;\\qquad N_+ = \\frac{1}{2}(I + X),\\quad N_- = \\frac{1}{2}(I - X)$$</div>
+<p>假设存在联合 POVM $P = \\{P_{0+}, P_{0-}, P_{1+}, P_{1-}\\}$，则</p>
+<div class="la-fml">$$P_{0+} + P_{0-} = M_0,\\quad P_{1+} + P_{1-} = M_1,\\quad P_{0+} + P_{1+} = N_+,\\quad P_{0-} + P_{1-} = N_-$$</div>
+<p><strong>证明思路</strong></p>
+<ol>
+<li>令 $P = P_{0+}$，则 $P_{0-} = M_0 - P$，$P_{1+} = N_+ - P$，$P_{1-} = M_1 - N_+ + P$</li>
+<li>分析 $P_{1+} = N_+ - P \\geq 0$：取 $|\\psi\\rangle = |-\\rangle$，得 $\\langle -|P|-\\rangle = 0$，即 $P$ 仅在 $|+\\rangle$ 方向有非零分量，$P = a|+\\rangle\\langle+|$，$a \\geq 0$</li>
+<li>分析 $P_{0-} = M_0 - P \\geq 0$：由西尔维斯特准则得 $a \\leq 0$，与 $a \\geq 0$ 矛盾</li>
+<li>结论：不存在联合 POVM，$Z$ 基与 $X$ 基投影不可联合测量</li>
+</ol>`},
+      {id:'la-k3-19', name:'可联合测量的典型示例', tags:['exa','app'], brief:'有噪声的 POVM 可联合测量。',
+        body:`<p><strong>示例 2：可联合测量的 POVM（有噪声）</strong></p>
+<p>量子比特有噪声 $Z$ 基 POVM：</p>
+<div class="la-fml">$$M_0^\\epsilon = (1-\\epsilon)|0\\rangle\\langle0| + \\frac{\\epsilon}{2}I,\\qquad M_1^\\epsilon = (1-\\epsilon)|1\\rangle\\langle1| + \\frac{\\epsilon}{2}I$$</div>
+<p>取联合 POVM $P_{ij} = \\delta_{ij}M_i^\\epsilon$，满足</p>
+<div class="la-fml">$$\\sum_j P_{ij} = M_i^\\epsilon,\\qquad \\sum_i P_{ij} = M_j^\\epsilon$$</div>
+<p>故可联合测量。噪声减弱非相容性，即噪声越大，联合可测性越强。</p>`},
+      {id:'la-k3-20', name:'量子比特 POVM 联合可测性定理', tags:['thm','der'], brief:'$|\\vec{m}+\\vec{n}| + |\\vec{m}-\\vec{n}| \\leq 2$。',
+        body:`<p><strong>定理</strong>　量子比特的两个 POVM</p>
+<div class="la-fml">$$\\{M_\\mu = \\frac{1 + \\vec{m}_\\mu\\cdot\\vec{\\sigma}}{2}\\},\\qquad \\{N_\\nu = \\frac{1 + \\vec{n}_\\nu\\cdot\\vec{\\sigma}}{2}\\}$$</div>
+<p>相容当且仅当</p>
+<div class="la-fml">$$|\\vec{m} + \\vec{n}| + |\\vec{m} - \\vec{n}| \\leq 2$$</div>
+<p><strong>证明</strong>　最一般的 4 输出 POVM 形式为</p>
+<div class="la-fml">$$M_{\\mu\\nu} = \\frac{1 + \\mu\\nu b + (\\mu m + \\nu n + \\mu\\nu z)\\cdot\\vec{\\sigma}}{4}$$</div>
+<p>由约束 $M_{\\mu\\nu} \\geq 0$ 得 $1 + \\mu\\nu b \\geq |\\mu m + \\nu n + \\mu\\nu z|$。若联合可测性条件满足，则 $z = 0$，$b = |\\vec{m} + \\vec{n}| - 1$。</p>
+<p><strong>特殊情况</strong></p>
+<ul>
+<li>两个无偏量子比特可观测量</li>
+<li>两个一般量子比特可观测量</li>
+</ul>`}
+    ]}
+  ]
+},
+
+/* ================= 第四章 量子信道与 Kraus 算子 ================= */
+{
+  id:'la-ch4', num:'第四章', title:'量子信道与 Kraus 算子表示', en:'QUANTUM CHANNELS & KRAUS OPERATORS',
+  sub:'CPTP 映射、Kraus 表示、典型信道',
+  desc:'本章介绍描述量子系统演化的一般框架——量子信道，即完全正定保迹（CPTP）映射，并给出其 Kraus 算符表示。量子信道是封闭系统幺正演化在开放系统下的自然推广，包含退极化信道、振幅衰减信道等典型实例。',
+  sections:[
+    {name:'4.1 从幺正演化到量子信道', color:'#0d9488', desc:'封闭与开放的演化', items:[
+      {id:'la-k4-1', name:'幺正信道', tags:['def','thm'], brief:'闭合系统演化由幺正算符描述。',
+        body:`<p><strong>幺正演化的定义</strong>　闭合系统（无环境干扰）的演化由幺正算符 $U$ 描述</p>
+<div class="la-fml">$$\\rho \\mapsto U\\rho U^\\dagger$$</div>
+<p>对应的映射称为<strong>幺正信道</strong>，记为 $\\mathcal{E}_U(\\rho) = U\\rho U^\\dagger$。</p>
+<p><strong>核心性质</strong></p>
+<ul>
+<li><strong>保迹性</strong>：$\\operatorname{Tr}[\\mathcal{E}_U(\\rho)] = \\operatorname{Tr}[\\rho] = 1$（概率守恒）</li>
+<li><strong>完全正定性</strong>：扩展映射 $\\mathcal{E}_U \\otimes \\mathcal{I}$ 保持正定性</li>
+<li><strong>可逆性</strong>：存在逆信道 $\\mathcal{E}_{U^\\dagger}$（因 $U^\\dagger = U^{-1}$）</li>
+</ul>`},
+      {id:'la-k4-2', name:'随机量子信道', tags:['def','thm'], brief:'幺正信道的经典概率混合。',
+        body:`<p><strong>示例</strong>　以概率 $p_i$（$p_i \\geq 0$，$\\sum p_i = 1$）随机选择幺正算符 $U_i$，总演化</p>
+<div class="la-fml">$$\\rho \\mapsto \\sum_i p_i U_i\\rho U_i^\\dagger$$</div>
+<p>称为<strong>随机量子信道</strong>，是幺正信道的凸组合。</p>
+<p><strong>性质</strong>（继承自幺正算符）</p>
+<ul>
+<li>线性性</li>
+<li>保迹性</li>
+<li>完全正定性</li>
+</ul>`},
+      {id:'la-k4-3', name:'量子信道的公理化定义', tags:['def','thm'], brief:'CPTP 映射。',
+        fig:'krausChannel', figCap:'图 4.1　量子信道示意',
+        body:`<p>满足以下条件的线性映射 $\\mathcal{E}: \\rho \\mapsto \\rho'$ 称为<strong>量子信道</strong>：</p>
+<ul>
+<li><strong>完全正定性（CP）</strong>：对任意辅助系统密度矩阵 $\\sigma$，扩展映射 $\\mathcal{E}\\otimes\\mathcal{I}(\\rho\\otimes\\sigma)$ 仍为正半定</li>
+<li><strong>保迹性（TP）</strong>：$\\operatorname{Tr}[\\mathcal{E}(\\rho)] = \\operatorname{Tr}[\\rho] = 1$</li>
+</ul>
+<p>因此，量子信道也称为 <strong>CPTP 映射</strong>（Completely Positive Trace-Preserving Map）。</p>
+<p><strong>三项性质</strong></p>
+<ul>
+<li><strong>线性性</strong>：$\\mathcal{E}(\\lambda_1\\rho_1 + \\lambda_2\\rho_2) = \\lambda_1\\mathcal{E}(\\rho_1) + \\lambda_2\\mathcal{E}(\\rho_2)$</li>
+<li><strong>保迹性（TP）</strong>：$\\operatorname{Tr}[\\mathcal{E}(\\rho)] = \\operatorname{Tr}[\\rho] = 1$</li>
+<li><strong>完全正定性（CP）</strong>：扩展映射保持正定性，避免系统与其他系统纠缠时出现"负概率"</li>
+</ul>
+<div class="la-callout la-his">总结　量子信道 $\\iff$ CPTP 映射（线性性由 CP 和 TP 自然保证）。</div>`},
+      {id:'la-k4-4', name:'超算符', tags:['def','his'], brief:'作用于算子空间的线性映射。',
+        body:`<p><strong>定义</strong>　超算符是作用在"算子空间"（量子系统所有线性算子构成的空间）上的线性映射。</p>
+<ul>
+<li>普通算符作用于量子态（向量）</li>
+<li>超算符作用于算符（如密度矩阵）</li>
+</ul>
+<p><strong>与量子信道的关系</strong>　量子信道是超算符的子集：满足完全正定性和保迹性的超算符。</p>
+<p>超算符的一般形式（算子和表示）</p>
+<div class="la-fml">$$\\mathcal{E}(X) = \\sum_{a,b}A_{ab}XB_{ab}^\\dagger$$</div>
+<p>量子信道可简化为 Kraus 形式（由 Kraus 表示定理保证）。</p>`}
+    ]},
+    {name:'4.2 Kraus 表示定理', color:'#7c3aed', desc:'量子信道的算符和表示', items:[
+      {id:'la-k4-5', name:'Kraus 表示定理', tags:['thm','der'], brief:'$\\mathcal{E}(\\rho) = \\sum_i K_i\\rho K_i^\\dagger$。',
+        body:`<p><strong>Kraus 表示定理</strong>　量子信道（CPTP 映射）可表示为 Kraus 算符的加权和</p>
+<div class="la-fml">$$\\mathcal{E}(\\rho) = \\sum_{i=1}^{n}K_i\\rho K_i^\\dagger$$</div>
+<p>其中：</p>
+<ul>
+<li>$\\mathcal{E}$：量子信道（完全正定且保迹的线性映射）</li>
+<li>$\\rho$：输入密度矩阵</li>
+<li>$\\{K_i\\}$：Kraus 算符组（系统维度内的线性算子）</li>
+<li>$K_i^\\dagger$：Kraus 算符的共轭转置</li>
+</ul>
+<p><strong>约束（保迹性保证）</strong></p>
+<div class="la-fml">$$\\sum_{i=1}^{n}K_i^\\dagger K_i = \\mathcal{I}$$</div>
+<p>由此保迹性：</p>
+<div class="la-fml">$$\\operatorname{Tr}[\\mathcal{E}(\\rho)] = \\operatorname{Tr}\\left[\\sum_i K_i\\rho K_i^\\dagger\\right] = \\operatorname{Tr}\\left[\\rho\\sum_i K_i^\\dagger K_i\\right] = \\operatorname{Tr}[\\rho] = 1$$</div>`},
+      {id:'la-k4-6', name:'随机量子信道的 Kraus 表示', tags:['der','thm'], brief:'$K_i = \\sqrt{p_i}U_i$。',
+        body:`<p>引入 Kraus 算符 $K_i = \\sqrt{p_i}U_i$，则信道可改写为</p>
+<div class="la-fml">$$\\mathcal{E}(\\rho) = \\sum_i K_i\\rho K_i^\\dagger$$</div>
+<p>且满足归一化条件</p>
+<div class="la-fml">$$\\sum_i K_i^\\dagger K_i = \\sum_i p_i U_i^\\dagger U_i = \\sum_i p_i I = I$$</div>
+<p><strong>与一般量子信道的关系</strong></p>
+<ul>
+<li>随机量子信道是量子信道的特殊子集（Kraus 算子为 $\\sqrt{p_i}U_i$）</li>
+<li>一般量子信道的 Kraus 算子可为任意满足 $\\sum K_i^\\dagger K_i = I$ 的算子</li>
+<li>其他量子信道例子：幺正信道、退极化信道、振幅衰减信道等</li>
+</ul>`},
+      {id:'la-k4-7', name:'Kraus 算符的非唯一性', tags:['thm','his'], brief:'酉等价性——同一演化可有多组 Kraus 算符。',
+        body:`<p><strong>核心问题</strong>　同一演化是否对应唯一 Kraus 算符集？</p>
+<p><strong>答案</strong>　否。同一开放系统演化可由多组 Kraus 算符描述，这些算符集满足"酉等价"关系。</p>
+<p><strong>酉等价性的数学表述</strong>　设 $\\{M_\\mu\\}$ 和 $\\{N_\\nu\\}$ 描述同一演化，则存在酉矩阵 $U = [U_{\\nu\\mu}]$（满足 $U^\\dagger U = I$），使得</p>
+<div class="la-fml">$$N_\\nu = \\sum_\\mu U_{\\nu\\mu} M_\\mu\\quad\\forall\\nu$$</div>
+<p><strong>证明思路</strong></p>
+<ol>
+<li>构造"超算符" $\\mathcal{E}(\\rho) = \\sum_\\mu M_\\mu\\rho M_\\mu^\\dagger = \\sum_\\nu N_\\nu\\rho N_\\nu^\\dagger$</li>
+<li>将 Kraus 算符视为"算子空间"的向量，酉矩阵 $U$ 是该空间的酉变换，不改变超算符的作用效果</li>
+</ol>
+<p><strong>物理意义</strong>　Kraus 算符的非唯一性反映了"环境作用路径"的描述自由度——不同的路径分解，最终对系统的整体演化效果一致。</p>`},
+      {id:'la-k4-8', name:'Kraus 表示与 PVM/POVM 的关联', tags:['thm','app'], brief:'投影测量与广义测量均可由 Kraus 表示。',
+        body:`<p><strong>投影测量（PVM）的 Kraus 表示</strong>　取 $M_m = \\Pi_m$（投影算符），则</p>
+<div class="la-fml">$$\\sum_m M_m^\\dagger M_m = \\sum_m \\Pi_m = I_A$$</div>
+<p>演化效果 $\\sum_m \\Pi_m\\rho\\Pi_m$ 与投影测量的"未归一化后态"一致。投影测量是 Kraus 表示的特殊情形。</p>
+<p><strong>POVM 的 Kraus 表示</strong>　由正算符极分解定理 $F_m = M_m^\\dagger M_m$，则</p>
+<div class="la-fml">$$p_m = \\operatorname{tr}\\{F_m\\rho\\} = \\operatorname{tr}\\{M_m\\rho M_m^\\dagger\\}$$</div>
+<p>测量后态</p>
+<div class="la-fml">$$\\rho' = \\sum_m \\frac{M_m\\rho M_m^\\dagger}{p_m}$$</div>
+<div class="la-callout la-his">结论　广义测量可通过 Kraus 表示完整描述，Kraus 算符是连接 POVM 与后态演化的桥梁。</div>`}
+    ]},
+    {name:'4.3 典型量子信道', color:'#c2410c', desc:'退极化、相位衰减与振幅衰减', items:[
+      {id:'la-k4-9', name:'退极化信道', tags:['def','exa'], brief:'以概率 $p$ 完全随机化。',
+        body:`<p><strong>Kraus 算符</strong></p>
+<div class="la-fml">$$K_0 = \\sqrt{1-p}\\,I,\\quad K_1 = \\sqrt{p/3}\\,X,\\quad K_2 = \\sqrt{p/3}\\,Y,\\quad K_3 = \\sqrt{p/3}\\,Z$$</div>
+<p>（$p$ 为噪声概率，$X, Y, Z$ 为泡利算子）</p>
+<p><strong>完备性验证</strong></p>
+<div class="la-fml">$$\\sum_i K_i^\\dagger K_i = (1-p)I + pI = I$$</div>
+<p><strong>极限情况</strong></p>
+<ul>
+<li>$p = 0$：无噪声，$\\mathcal{E}(\\rho) = \\rho$</li>
+<li>$p = 1$：输出为最大混态 $I/2$，完全失去量子信息</li>
+</ul>`},
+      {id:'la-k4-10', name:'相位衰减信道', tags:['def','exa'], brief:'仅丢失相位信息，布居数不变。',
+        body:`<p><strong>物理背景</strong>　相位衰减是量子比特常见的退相干过程：仅丢失相位信息（相干项衰减），不改变粒子数（基态 $|0\\rangle$ 和激发态 $|1\\rangle$ 的布居数不变），如光子在光纤中传播的相位噪声。</p>
+<p><strong>Kraus 算符</strong></p>
+<div class="la-fml">$$M_0 = \\sqrt{1-\\gamma/2}\\,I,\\qquad M_1 = \\sqrt{\\gamma/2}\\,(|0\\rangle\\langle0| - |1\\rangle\\langle1|)$$</div>
+<p>验证完备性条件：$M_0^\\dagger M_0 + M_1^\\dagger M_1 = (1-\\gamma/2)I + (\\gamma/2)I = I$。</p>
+<p><strong>演化后态</strong>　初始态 $\\rho = \\alpha|0\\rangle\\langle0| + \\beta|0\\rangle\\langle1| + \\beta^*|1\\rangle\\langle0| + \\delta|1\\rangle\\langle1|$，则</p>
+<div class="la-fml">$$\\rho' = \\alpha|0\\rangle\\langle0| + \\beta(1-\\gamma)|0\\rangle\\langle1| + \\beta^*(1-\\gamma)|1\\rangle\\langle0| + \\delta|1\\rangle\\langle1|$$</div>
+<p><strong>结论</strong>　相干项 $\\beta, \\beta^*$ 随衰减系数 $\\gamma$ 衰减（$1-\\gamma$），布居数 $\\alpha, \\delta$ 不变，符合相位衰减的物理特征。</p>`},
+      {id:'la-k4-11', name:'振幅衰减信道', tags:['def','exa'], brief:'能量耗散，$|1\\rangle \\to |0\\rangle$。',
+        body:`<p><strong>物理背景</strong>　振幅衰减是量子比特的能量耗散过程：激发态 $|1\\rangle$ 以概率 $\\gamma$ 跃迁到基态 $|0\\rangle$（释放能量到环境），同时丢失相干信息，如原子的自发辐射。</p>
+<p><strong>Kraus 算符</strong></p>
+<div class="la-fml">$$M_0 = |0\\rangle\\langle0| + \\sqrt{1-\\gamma}|1\\rangle\\langle1|,\\qquad M_1 = \\sqrt{\\gamma}|0\\rangle\\langle1|$$</div>
+<p><strong>完备性验证</strong></p>
+<div class="la-fml">$$M_0^\\dagger M_0 = |0\\rangle\\langle0| + (1-\\gamma)|1\\rangle\\langle1|,\\qquad M_1^\\dagger M_1 = \\gamma|1\\rangle\\langle1|$$</div>
+<div class="la-fml">$$M_0^\\dagger M_0 + M_1^\\dagger M_1 = |0\\rangle\\langle0| + |1\\rangle\\langle1| = I_A$$</div>
+<p><strong>演化后态</strong>（初始纯态 $|\\omega\\rangle = \\alpha|0\\rangle + \\beta|1\\rangle$）</p>
+<div class="la-fml">$$\\rho' = (|\\alpha|^2 + \\gamma|\\beta|^2)|0\\rangle\\langle0| + \\alpha\\beta^*\\sqrt{1-\\gamma}|0\\rangle\\langle1| + \\alpha^*\\beta\\sqrt{1-\\gamma}|1\\rangle\\langle0| + |\\beta|^2(1-\\gamma)|1\\rangle\\langle1|$$</div>
+<p><strong>关键特征</strong></p>
+<ul>
+<li><strong>布居数变化</strong>：基态布居 $|0\\rangle\\langle0|$ 从 $|\\alpha|^2$ 增至 $|\\alpha|^2 + \\gamma|\\beta|^2$，激发态布居 $|1\\rangle\\langle1|$ 从 $|\\beta|^2$ 减至 $|\\beta|^2(1-\\gamma)$——体现能量耗散</li>
+<li><strong>相干项变化</strong>：$|0\\rangle\\langle1|$ 与 $|1\\rangle\\langle0|$ 从 $\\alpha\\beta^*, \\alpha^*\\beta$ 衰减为 $\\alpha\\beta^*\\sqrt{1-\\gamma}, \\alpha^*\\beta\\sqrt{1-\\gamma}$——相干性随 $\\gamma$ 增大而减弱</li>
+<li><strong>纯态 → 混态</strong>：若初始为纯态，演化后 $\\det\\rho'(t) = \\gamma(1-\\gamma)|\\beta|^4 \\geq 0$，符合混态密度矩阵正定的性质</li>
+</ul>
+<p><strong>特殊情形</strong>　$|\\omega\\rangle = |1\\rangle$ 时，$\\rho' = \\gamma|0\\rangle\\langle0| + (1-\\gamma)|1\\rangle\\langle1|$。物理意义：激发态 $|1\\rangle$ 以概率 $\\gamma$ 自发跃迁到基态 $|0\\rangle$，以概率 $1-\\gamma$ 保持在激发态。</p>
+<p><strong>应用场景</strong>　量子通信（如光纤传输）、量子计算（如超导量子比特能量损耗）中最常见的噪声模型。</p>`},
+      {id:'la-k4-12', name:'量子信道小结', tags:['his','def'], brief:'CPTP 映射与 Kraus 表示。',
+        body:`<p><strong>核心要点</strong></p>
+<ul>
+<li>量子信道是描述所有合法量子演化的框架，等价于 CPTP 映射</li>
+<li>CPTP 映射需满足：完全正定性（CP）、保迹性（TP）</li>
+<li>数学上用超算符表示，具体形式为 Kraus 算符的加权和</li>
+</ul>
+<div class="la-fml">$$\\mathcal{E}(\\rho) = \\sum_i K_i\\rho K_i^\\dagger\\quad\\left(\\sum_i K_i^\\dagger K_i = \\mathcal{I}\\right)$$</div>
+<p><strong>Kraus 算符保证密度矩阵合法性</strong></p>
+<ul>
+<li><strong>厄米性</strong>：若 $\\rho$ 厄米，则 $\\mathcal{E}(\\rho)$ 厄米</li>
+<li><strong>半正定性</strong>：对任意 $|\\omega\\rangle$，$\\langle\\omega|\\mathcal{E}(\\rho)|\\omega\\rangle = \\sum_\\mu\\langle\\phi_\\mu|\\rho|\\phi_\\mu\\rangle \\geq 0$</li>
+<li><strong>归一性</strong>：由完备性条件 $\\sum_\\mu M_\\mu^\\dagger M_\\mu = I_A$ 保证</li>
+</ul>`}
+    ]}
+  ]
+},
+
+/* ================= 第五章 复合系统与量子纠缠 ================= */
+{
+  id:'la-ch5', num:'第五章', title:'复合系统的量子力学表示', en:'COMPOSITE SYSTEMS & ENTANGLEMENT',
+  sub:'张量积、纠缠、施密特分解、联合测量、Neumark 定理',
+  desc:'本章介绍复合系统的量子力学描述，包括张量积空间、可分离态与纠缠态、贝尔态、施密特分解、约化密度矩阵、混态纯化、复合系统的测量与演化、Neumark 定理等内容。',
+  sections:[
+    {name:'5.1 复合系统的量子态', color:'#7c3aed', desc:'张量积空间与可分离态', items:[
+      {id:'la-k5-1', name:'张量积空间', tags:['def','thm'], brief:'$\\mathcal{H}_{AB} = \\mathcal{H}_A \\otimes \\mathcal{H}_B$。',
+        body:`<p><strong>两体系状态空间</strong>　设子系统 A 的 Hilbert 空间为 $\\mathcal{H}_A$，子系统 B 的为 $\\mathcal{H}_B$，则联合系统的态空间</p>
+<div class="la-fml">$$\\mathcal{H}_{AB} = \\mathcal{H}_A \\otimes \\mathcal{H}_B$$</div>
+<p><strong>核心性质</strong></p>
+<ul>
+<li><strong>维度关系</strong>：$\\dim\\mathcal{H}_{AB} = \\dim\\mathcal{H}_A \\times \\dim\\mathcal{H}_B$（例：两量子比特系统 $\\dim = 2\\times2 = 4$）</li>
+<li><strong>基矢形式</strong>：若 $\\mathcal{H}_A$ 的正交归一基为 $\\{|i\\rangle_A\\}$，$\\mathcal{H}_B$ 的为 $\\{|j\\rangle_B\\}$，则 $\\mathcal{H}_{AB}$ 的正交归一基为 $\\{|i\\rangle_A\\otimes|j\\rangle_B\\}$（简记为 $|ij\\rangle$）</li>
+</ul>`},
+      {id:'la-k5-2', name:'可分离纯态的直积表示', tags:['def','der'], brief:'$|\\Psi\\rangle_{AB} = |\\psi\\rangle_A \\otimes |\\phi\\rangle_B$。',
+        body:`<p>当两子系统 A 和 B 无关联、独立演化时，其联合纯态可通过"子系统纯态的张量积"描述</p>
+<div class="la-fml">$$|\\Psi\\rangle_{AB} = |\\psi\\rangle_A\\otimes|\\phi\\rangle_B$$</div>
+<p>其中 $|\\psi\\rangle_A\\in\\mathcal{H}_A$，$|\\phi\\rangle_B\\in\\mathcal{H}_B$。</p>
+<p><strong>示例</strong></p>
+<ul>
+<li>A 处于 $|0\\rangle_A$，B 处于 $|0\\rangle_B$，则 $|00\\rangle_{AB} = |0\\rangle_A\\otimes|0\\rangle_B$</li>
+<li>A 处于 $|1\\rangle_A$，B 处于 $|0\\rangle_B$，则 $|10\\rangle_{AB} = |1\\rangle_A\\otimes|0\\rangle_B$</li>
+</ul>
+<p><strong>密度矩阵直积表示</strong></p>
+<div class="la-fml">$$\\rho_{AB} = |\\Psi\\rangle_{AB}\\langle\\Psi|_{AB} = (|\\psi\\rangle_A\\langle\\psi|_A)\\otimes(|\\phi\\rangle_B\\langle\\phi|_B) = \\rho_A\\otimes\\rho_B$$</div>
+<p>利用了张量积外积的分配律：$(|a\\rangle\\otimes|b\\rangle)(\\langle c|\\otimes\\langle d|) = (|a\\rangle\\langle c|)\\otimes(|b\\rangle\\langle d|)$。</p>
+<p><strong>验证</strong>　$\\operatorname{Tr}(\\rho_{AB}) = \\operatorname{Tr}(\\rho_A\\otimes\\rho_B) = \\operatorname{Tr}(\\rho_A)\\operatorname{Tr}(\\rho_B) = 1\\times1 = 1$。</p>`},
+      {id:'la-k5-3', name:'量子纠缠的定义', tags:['def','thm'], brief:'不能写成直积形式的纯态。',
+        body:`<p><strong>定义</strong>　对两体纯态 $|\\Psi\\rangle_{AB}\\in\\mathcal{H}_A\\otimes\\mathcal{H}_B$，若不存在子系统纯态 $|\\psi\\rangle_A$ 和 $|\\phi\\rangle_B$ 使得</p>
+<div class="la-fml">$$|\\Psi\\rangle_{AB} = |\\psi\\rangle_A\\otimes|\\phi\\rangle_B$$</div>
+<p>则称 $|\\Psi\\rangle_{AB}$ 为<strong>纠缠纯态</strong>；否则为<strong>可分离纯态</strong>。</p>
+<div class="la-callout la-his">本质　纠缠是两体系统特有的"非局域关联"，无法通过经典概率解释。</div>`},
+      {id:'la-k5-4', name:'贝尔态', tags:['def','exa'], brief:'两量子比特最大纠缠态。',
+        fig:'bellState', figCap:'图 5.1　两体纠缠关联示意',
+        body:`<p>两量子比特系统中，4 个正交归一的纠缠纯态构成"贝尔基"：</p>
+<div class="la-fml">$$\\begin{cases}
+|\\Phi^+\\rangle = \\frac{1}{\\sqrt{2}}(|00\\rangle + |11\\rangle)\\\\
+|\\Phi^-\\rangle = \\frac{1}{\\sqrt{2}}(|00\\rangle - |11\\rangle)\\\\
+|\\Psi^+\\rangle = \\frac{1}{\\sqrt{2}}(|01\\rangle + |10\\rangle)\\\\
+|\\Psi^-\\rangle = \\frac{1}{\\sqrt{2}}(|01\\rangle - |10\\rangle)
+\\end{cases}$$</div>
+<p><strong>关键性质</strong></p>
+<ul>
+<li><strong>正交归一性</strong>：$\\langle\\Phi^+|\\Phi^-\\rangle = 0$，$\\langle\\Psi^+|\\Psi^-\\rangle = 0$，$\\langle\\Phi^+|\\Phi^+\\rangle = 1$</li>
+<li><strong>不可分离性</strong>：以 $|\\Phi^+\\rangle$ 为例，假设其可分离，则 $|\\Phi^+\\rangle = (a|0\\rangle + b|1\\rangle)\\otimes(c|0\\rangle + d|1\\rangle)$，展开后系数矛盾，故为纠缠态</li>
+</ul>`},
+      {id:'la-k5-5', name:'纠缠态：子系统无法用纯态描述', tags:['exa','der'], brief:'贝尔态子系统的测量坍缩。',
+        body:`<p>以贝尔态 $|\\Phi^+\\rangle = \\frac{1}{\\sqrt{2}}(|00\\rangle + |11\\rangle)$ 为例，对子系统 $A$ 进行不同基测量，观察子系统 $B$ 的状态：</p>
+<p><strong>对 $A$ 做 $Z$ 基测量</strong>　$\\{|0\\rangle, |1\\rangle\\}$</p>
+<ul>
+<li>若测量结果为 $|0\\rangle_A$，则 $B$ 坍缩到 $|0\\rangle_B$</li>
+<li>若测量结果为 $|1\\rangle_A$，则 $B$ 坍缩到 $|1\\rangle_B$</li>
+</ul>
+<p><strong>对 $A$ 做 $X$ 基测量</strong>　$\\{|+\\rangle, |-\\rangle\\}$，其中 $|\\pm\\rangle = \\frac{1}{\\sqrt{2}}(|0\\rangle\\pm|1\\rangle)$。先改写 $|\\Phi^+\\rangle = \\frac{1}{\\sqrt{2}}(|++\\rangle + |--\\rangle)$，则</p>
+<ul>
+<li>若测量结果为 $|+\\rangle_A$，则 $B$ 坍缩到 $|+\\rangle_B$</li>
+<li>若测量结果为 $|-\\rangle_A$，则 $B$ 坍缩到 $|-\\rangle_B$</li>
+</ul>`}
+    ]},
+    {name:'5.2 施密特分解与纠缠量化', color:'#059669', desc:'纠缠程度的度量', items:[
+      {id:'la-k5-6', name:'施密特分解定理', tags:['thm','der'], brief:'$|\\Psi\\rangle = \\sum_i \\sqrt{p_i}|\\phi_i\\rangle_A|\\psi_i\\rangle_B$。',
+        fig:'schmidt', figCap:'图 5.2　施密特分解',
+        body:`<p><strong>定理</strong>　对任意两体纯态 $|\\Psi\\rangle_{AB}\\in\\mathcal{H}_A\\otimes\\mathcal{H}_B$，必存在</p>
+<ul>
+<li>子系统 A 的正交归一基 $\\{|\\phi_i\\rangle_A\\}$</li>
+<li>子系统 B 的正交归一基 $\\{|\\psi_i\\rangle_B\\}$</li>
+<li>概率分布 $\\{p_i\\}$（$p_i \\geq 0$，$\\sum p_i = 1$）</li>
+</ul>
+<p>使得</p>
+<div class="la-fml">$$|\\Psi\\rangle_{AB} = \\sum_{i=1}^{r}\\sqrt{p_i}|\\phi_i\\rangle_A\\otimes|\\psi_i\\rangle_B$$</div>
+<p>其中 $r$ 称为<strong>施密特数</strong>，$r \\leq \\min\\{\\dim\\mathcal{H}_A, \\dim\\mathcal{H}_B\\}$。</p>
+<p><strong>证明思路</strong>（$\\dim\\mathcal{H}_A = \\dim\\mathcal{H}_B$）</p>
+<ol>
+<li><strong>任意展开</strong>：取 $\\mathcal{H}_A$ 基 $\\{|j\\rangle_A\\}$、$\\mathcal{H}_B$ 基 $\\{|k\\rangle_B\\}$，得 $|\\Psi\\rangle_{AB} = \\sum_{j,k}a_{jk}|j\\rangle\\otimes|k\\rangle$（系数构成矩阵 $A = (a_{jk})$）</li>
+<li><strong>奇异值分解</strong>：对矩阵 $A$ 做 SVD $A = UDV^\\dagger$（$U, V$ 为幺正矩阵，$D$ 为对角矩阵，对角元 $d_{ii} = \\sqrt{p_i}$）</li>
+<li><strong>定义新基</strong>：令 $|\\phi_i\\rangle_A = \\sum_j U_{ji}|j\\rangle_A$，$|\\psi_i\\rangle_B = \\sum_k V_{ik}|k\\rangle_B$，代入即得施密特分解式</li>
+</ol>`},
+      {id:'la-k5-7', name:'施密特数与纠缠程度', tags:['thm','app'], brief:'$r=1$ 可分离，$r>1$ 纠缠。',
+        body:`<p>施密特数是两体纯态纠缠程度的量化指标：</p>
+<ul>
+<li><strong>$r = 1$</strong>：$|\\Psi\\rangle_{AB} = \\sqrt{p_1}|\\phi_1\\rangle_A\\otimes|\\psi_1\\rangle_B$（可分离态，无纠缠）</li>
+<li><strong>$r > 1$</strong>：不可分离态（存在纠缠），$r$ 越大，纠缠程度越高</li>
+<li><strong>贝尔态</strong>：$r = 2$（两量子比特系统的最大纠缠纯态）</li>
+</ul>`}
+    ]},
+    {name:'5.3 约化密度矩阵与混态纯化', color:'#c2410c', desc:'偏迹与纯化', items:[
+      {id:'la-k5-8', name:'偏迹操作', tags:['def','thm'], brief:'$\\rho_A = \\operatorname{Tr}_B(\\rho_{AB})$。',
+        fig:'partialTrace', figCap:'图 5.3　偏迹操作',
+        body:`<p><strong>定义</strong>　对两体系统的密度矩阵 $\\rho_{AB}$，若要获取子系统 A 的状态，需"忽略子系统 B 的信息"，即对 B 求偏迹，记为 $\\operatorname{Tr}_B(\\rho_{AB})$；同理，子系统 B 的状态为 $\\operatorname{Tr}_A(\\rho_{AB})$。</p>
+<p><strong>计算规则</strong>　设 $\\rho_{AB} = \\sum_{j,k,l,m}c_{jklm}|j\\rangle\\langle k|_A\\otimes|l\\rangle\\langle m|_B$，则偏迹操作收缩 B 的指标：</p>
+<div class="la-fml">$$\\operatorname{Tr}_B(\\rho_{AB}) = \\sum_{j,k,l}c_{jklk}|j\\rangle\\langle k|_A,\\qquad \\operatorname{Tr}_A(\\rho_{AB}) = \\sum_{l,m,j}c_{jljm}|l\\rangle\\langle m|_B$$</div>
+<p><strong>物理意义</strong>　偏迹是"对辅助系统求统计平均"，得到子系统的有效状态。</p>
+<p><strong>示例 1：贝尔态的约化密度矩阵</strong></p>
+<div class="la-fml">$$\\rho_{AB} = |\\Phi^+\\rangle\\langle\\Phi^+| = \\frac{1}{2}(|00\\rangle\\langle00| + |00\\rangle\\langle11| + |11\\rangle\\langle00| + |11\\rangle\\langle11|)$$</div>
+<div class="la-fml">$$\\rho_A = \\operatorname{Tr}_B(\\rho_{AB}) = \\frac{1}{2}(|0\\rangle\\langle0| + |1\\rangle\\langle1|) = \\frac{1}{2}I$$</div>
+<p>同理 $\\rho_B = I/2$，这是混态（非纯态）。</p>
+<p><strong>示例 2</strong>　$|\\Psi\\rangle_{AB} = a|0\\rangle_A|0\\rangle_B + b|1\\rangle_A|1\\rangle_B$，则</p>
+<div class="la-fml">$$\\rho_A = |a|^2|0\\rangle\\langle0| + |b|^2|1\\rangle\\langle1|$$</div>`},
+      {id:'la-k5-9', name:'混态纯化定理', tags:['thm','der'], brief:'任意混态可扩展为联合纯态。',
+        fig:'purification', figCap:'图 5.4　混态纯化',
+        body:`<p><strong>定理</strong>　对任意量子系统 A 的混合态 $\\rho_A$，必存在辅助系统 B（称为"纯化系统"）和联合系统 AB 的纯态 $|\\Psi\\rangle_{AB}$，使得</p>
+<div class="la-fml">$$\\rho_A = \\operatorname{Tr}_B(|\\Psi\\rangle_{AB}\\langle\\Psi|_{AB})$$</div>
+<p>其中 $\\dim\\mathcal{H}_B \\geq \\operatorname{rank}(\\rho_A)$（最小纯化系统的维度等于 $\\rho_A$ 的秩）。</p>
+<p><strong>构造步骤</strong>　设 $\\rho_A = \\sum_{i=1}^r p_i|\\phi_i\\rangle\\langle\\phi_i|_A$（$\\{|\\phi_i\\rangle_A\\}$ 为 $\\mathcal{H}_A$ 的正交归一基）</p>
+<ol>
+<li><strong>选择辅助系统 B</strong>：取 $\\mathcal{H}_B$ 的维度为 $r$，正交归一基为 $\\{|\\psi_i\\rangle_B\\}_{i=1}^r$（与 $\\rho_A$ 的本征基一一对应）</li>
+<li><strong>构造联合纯态</strong>：定义
+<div class="la-fml">$$|\\Psi\\rangle_{AB} = \\sum_{i=1}^{r}\\sqrt{p_i}|\\phi_i\\rangle_A\\otimes|\\psi_i\\rangle_B$$</div></li>
+<li><strong>验证偏迹结果</strong>：利用 $\\operatorname{Tr}(|\\psi_i\\rangle\\langle\\psi_j|_B) = \\delta_{ij}$，得
+<div class="la-fml">$$\\operatorname{Tr}_B(|\\Psi\\rangle_{AB}\\langle\\Psi|_{AB}) = \\sum_i p_i|\\phi_i\\rangle\\langle\\phi_i|_A = \\rho_A$$</div></li>
+</ol>
+<p><strong>非唯一性与等价性</strong></p>
+<ul>
+<li><strong>非唯一性</strong>：若 $|\\Psi\\rangle_{AB}$ 是一个纯化态，对辅助系统 B 施加任意幺正变换 $U_B$，则 $(I_A\\otimes U_B)|\\Psi\\rangle_{AB}$ 也是 $\\rho_A$ 的纯化态</li>
+<li><strong>等价性</strong>：所有纯化态均可通过辅助系统的幺正变换关联</li>
+</ul>
+<p><strong>典型示例</strong>　最大混态 $\\rho_A = I/2$ 的纯化：$|\\Psi\\rangle_{AB} = \\frac{1}{\\sqrt{2}}(|00\\rangle + |11\\rangle) = |\\Phi^+\\rangle$。</p>`},
+      {id:'la-k5-10', name:'约化密度矩阵与混态纯化的关联', tags:['his','app'], brief:'完整关系图。',
+        body:`<p>量子纠缠纯态 → 约化密度矩阵（偏迹操作） → 发现纠缠态子系统为混合态 → 混态纯化（扩展系统） → 联合纯态的约化密度矩阵回到原混合态。</p>
+<p><strong>混态纯化的物理意义</strong></p>
+<ul>
+<li>混合态的"随机性"并非量子态的内禀属性，而是观测者"仅关注子系统 A、忽略辅助系统 B"导致的信息局限</li>
+<li>从更大的联合系统视角，整体仍为纯态，符合量子力学幺正演化的封闭性</li>
+</ul>`}
+    ]},
+    {name:'5.4 复合系统的测量与演化', color:'#be123c', desc:'直积测量与联合测量', items:[
+      {id:'la-k5-11', name:'直积可观测量', tags:['def','thm'], brief:'$O_{AB} = O_A \\otimes O_B$。',
+        body:`<p><strong>定义</strong>　设子系统 A 的态空间为 $\\mathcal{H}_{d_A}$，可观测量为 $O_A$（厄米算符），谱分解为 $O_A = \\sum_k \\lambda_k P_k^A$；子系统 B 的可观测量为 $O_B = \\sum_l \\mu_l P_l^B$。则复合系统 AB 的直积可观测量为</p>
+<div class="la-fml">$$O_{AB} = O_A\\otimes O_B$$</div>
+<p><strong>性质</strong></p>
+<ul>
+<li><strong>厄米性</strong>：$(O_A\\otimes O_B)^\\dagger = O_A^\\dagger\\otimes O_B^\\dagger = O_A\\otimes O_B$</li>
+<li><strong>本征态与本征值</strong>：对 $O_A$ 的本征态 $|\\phi_k\\rangle^A$ 和 $O_B$ 的本征态 $|\\psi_l\\rangle^B$，有
+<div class="la-fml">$$O_{AB}(|\\phi_k\\rangle^A\\otimes|\\psi_l\\rangle^B) = (\\lambda_k\\mu_l)(|\\phi_k\\rangle^A\\otimes|\\psi_l\\rangle^B)$$</div></li>
+<li><strong>完备性</strong>：$\\sum_{k,l}\\lambda_k\\mu_l P_k^A\\otimes P_l^B = O_A\\otimes O_B$</li>
+</ul>
+<p><strong>示例</strong>　qubit 与 qutrit 的直积可观测量：$O_A = \\sigma_z$（$d_A = 2$），$O_B = \\text{diag}(0,1,2)$（$d_B = 3$），则 $\\sigma_z\\otimes O_B$ 的本征值为 $0, \\pm1, \\pm2$。</p>`},
+      {id:'la-k5-12', name:'直积 PVM', tags:['def','thm'], brief:'$P_{kl}^{AB} = P_k^A \\otimes P_l^B$。',
+        body:`<p><strong>定义</strong>　设子系统 A 的 PVM 为 $\\{P_k^A\\}$，子系统 B 的 PVM 为 $\\{P_l^B\\}$，则复合系统的直积 PVM 为</p>
+<div class="la-fml">$$P_{kl}^{AB} = P_k^A\\otimes P_l^B$$</div>
+<p><strong>性质验证</strong></p>
+<ul>
+<li><strong>投影性</strong>：$(P_k^A\\otimes P_l^B)^2 = P_k^{A2}\\otimes P_l^{B2} = P_k^A\\otimes P_l^B$</li>
+<li><strong>正交性</strong>：$P_{kl}^{AB}P_{k'l'}^{AB} = \\delta_{kk'}\\delta_{ll'}P_{kl}^{AB}$</li>
+<li><strong>完备性</strong>：$\\sum_k\\sum_l P_{kl}^{AB} = (\\sum_k P_k^A)\\otimes(\\sum_l P_l^B) = I_{d_A}\\otimes I_{d_B} = I_{d_Ad_B}$</li>
+</ul>
+<p><strong>示例</strong>　两 qubit 的直积 PVM（计算基测量）：$P_{00}^{AB} = |0\\rangle\\langle0|_A\\otimes|0\\rangle\\langle0|_B$，$P_{01}^{AB}$，$P_{10}^{AB}$，$P_{11}^{AB}$。对联合态 $\\rho_{AB} = |0\\rangle\\langle0|_A\\otimes|1\\rangle\\langle1|_B$，测量概率 $p(01) = \\operatorname{Tr}(\\rho_{AB}P_{01}^{AB}) = 1$。</p>`},
+      {id:'la-k5-13', name:'直积 POVM', tags:['def','thm'], brief:'$E_{mn}^{AB} = E_m^A \\otimes E_n^B$。',
+        body:`<p><strong>定义</strong>　设子系统 A 的 POVM 为 $\\{E_m^A\\}$，子系统 B 的 POVM 为 $\\{E_n^B\\}$，则复合系统的直积 POVM 为</p>
+<div class="la-fml">$$E_{mn}^{AB} = E_m^A\\otimes E_n^B$$</div>
+<p><strong>直积测量算符</strong></p>
+<div class="la-fml">$$M_{mn}^{AB} = M_m^A\\otimes M_n^B$$</div>
+<p>完备性验证：$\\sum_{m,n}M_{mn}^{AB\\dagger}M_{mn}^{AB} = (\\sum_m M_m^{A\\dagger}M_m^A)\\otimes(\\sum_n M_n^{B\\dagger}M_n^B) = I_{d_A}\\otimes I_{d_B}$。</p>
+<p><strong>性质</strong></p>
+<ul>
+<li><strong>半正定性</strong>：对任意联合态 $|\\Psi\\rangle_{AB} = \\sum_{ij}c_{ij}|i\\rangle_A\\otimes|j\\rangle_B$，$\\langle\\Psi|_{AB}E_{mn}^{AB}|\\Psi\\rangle_{AB}\\geq0$</li>
+<li><strong>完备性</strong>：$\\sum_{m,n}E_{mn}^{AB} = I_{d_A}\\otimes I_{d_B}$</li>
+<li><strong>概率公式</strong>：$p(mn) = \\operatorname{Tr}(\\rho_{AB}E_{mn}^{AB})$</li>
+</ul>
+<p><strong>示例</strong>　两 qubit 的直积 POVM：$E_0^A = \\frac{1}{2}(I + 0.8\\sigma_z)$，$E_0^B = \\frac{1}{2}(I + 0.8\\sigma_x)$，则 $E_{00}^{AB} = \\frac{1}{4}(I + 0.8\\sigma_z)\\otimes(I + 0.8\\sigma_x)$，本征值为 $0.81, 0.09, 0.09, 0.01 \\geq 0$。</p>`},
+      {id:'la-k5-14', name:'量子联合测量', tags:['def','thm'], brief:'无法写成直积形式的测量。',
+        body:`<p><strong>定义</strong>　若复合系统 $AB$ 的测量算符集合（PVM 或 POVM）$\\{M_X\\}$ 无法表示为子系统测量算符的张量积形式（即不存在 $\\{M_m^A\\}, \\{M_n^B\\}$ 使得 $M_X = M_m^A\\otimes M_n^B$），则称该测量为<strong>量子联合测量</strong>。</p>
+<p>数学本质：测量算符作用于联合系统的"关联自由度"，可提取子系统间的量子关联（含纠缠信息）。</p>
+<p><strong>必要性：直积测量的局限性</strong></p>
+<p>对 $d_Ad_B$ 维联合系统中的纠缠纯态（施密特数 $>1$），直积测量无法区分其量子关联。通用示例：设两体纠缠纯态 $|\\Psi\\rangle_{AB} = \\sum_{k=0}^{d-1}\\frac{1}{\\sqrt{d}}|kk\\rangle_{AB}$（最大纠缠态），直积 PVM 测量（如计算基 $\\{P_{kl}^{AB}\\}$）的测量概率 $p(kl) = |\\langle kl|\\Psi\\rangle_{AB}|^2 = \\frac{1}{d}\\delta_{kl}$，仅能确定"$k = l$"，无法区分不同最大纠缠态（如 $|\\Psi\\rangle_{AB}$ 与 $|\\Psi'\\rangle_{AB} = \\sum_k\\frac{1}{\\sqrt{d}}(-1)^k|kk\\rangle_{AB}$）。</p>
+<p>需联合测量提取"关联相位"，才能完整区分纠缠态。</p>`},
+      {id:'la-k5-15', name:'贝尔态测量（BSM）', tags:['exa','app'], brief:'典型联合 PVM。',
+        fig:'cnotGate', figCap:'图 5.5　贝尔态测量的量子电路（H + CNOT）',
+        body:`<p><strong>两 qubit 的贝尔基</strong>（4 个正交纠缠态）</p>
+<div class="la-fml">$$|\\Phi^{\\pm}\\rangle = \\frac{1}{\\sqrt{2}}(|00\\rangle \\pm |11\\rangle),\\qquad |\\Psi^{\\pm}\\rangle = \\frac{1}{\\sqrt{2}}(|01\\rangle \\pm |10\\rangle)$$</div>
+<p>BSM 的 PVM 为 $\\{P_{\\Phi^+}, P_{\\Phi^-}, P_{\\Psi^+}, P_{\\Psi^-}\\}$（$P_{\\Psi} = |\\Psi\\rangle\\langle\\Psi|$）。对 $|\\Phi^+\\rangle$，测量概率 $p(\\Phi^+) = \\operatorname{Tr}(|\\Phi^+\\rangle\\langle\\Phi^+|P_{\\Phi^+}) = 1$，可唯一确定纠缠态类型，直积测量无法实现此功能。</p>
+<p><strong>BSM 的实现细节</strong></p>
+<ol>
+<li><strong>幺正变换</strong>：$U_{AB} = (H_A\\otimes I_B)\\circ\\text{CNOT}$，其中 $H_A$ 为 Hadamard 门，CNOT 为受控非门（A 控制，B 目标）</li>
+<li><strong>变换效果</strong>：$U_{AB}|\\Phi^+\\rangle = |00\\rangle$，$U_{AB}|\\Phi^-\\rangle = |10\\rangle$，$U_{AB}|\\Psi^+\\rangle = |01\\rangle$，$U_{AB}|\\Psi^-\\rangle = |11\\rangle$</li>
+<li><strong>直积测量</strong>：对变换后的态测量计算基 PVM，如测得 $|00\\rangle$ 则原态为 $|\\Phi^+\\rangle$</li>
+</ol>
+<p><strong>示例 2：两 qutrit 的联合测量（关联 parity 测量）</strong>　目标：测量两 qutrit 态 $|ij\\rangle$ 的"$i+j \\bmod 3$"关联，构造联合 PVM $P_0, P_1, P_2$，实现流程为幺正变换 + 直积测量 + 结果反推。</p>`},
+      {id:'la-k5-16', name:'Neumark 定理', tags:['thm','der'], brief:'任意 POVM 可通过扩展空间转化为 PVM。',
+        fig:'neumark', figCap:'图 5.6　Neumark 定理：POVM 到 PVM 的扩展',
+        body:`<p><strong>Neumark 定理</strong>　对任意 Hilbert 空间 $\\mathcal{H}$ 上的 POVM $\\{F_\\alpha\\}$（满足 $F_\\alpha \\geq 0$ 且 $\\sum_\\alpha F_\\alpha = I_\\mathcal{H}$），存在：</p>
+<ul>
+<li>更大的 Hilbert 空间 $\\mathcal{K}\\supseteq\\mathcal{H}$（拓展空间）</li>
+<li>$\\mathcal{K}$ 上的正交投影测量（PVM）$\\{E_\\alpha\\}$（满足 $E_\\alpha = E_\\alpha^\\dagger = E_\\alpha^2$ 且 $\\sum_\\alpha E_\\alpha = I_\\mathcal{K}$）</li>
+<li>嵌入映射 $V:\\mathcal{H}\\to\\mathcal{K}$（等距算子，$V^\\dagger V = I_\\mathcal{H}$）</li>
+</ul>
+<p>使得</p>
+<div class="la-fml">$$F_\\alpha = V^\\dagger E_\\alpha V\\quad\\forall\\alpha$$</div>
+<p>即：总可通过将原态空间拓展到更大的 Hilbert 空间，在该空间中执行正交测量，实现原空间中任意给定的 POVM。</p>
+<p><strong>证明过程</strong></p>
+<ol>
+<li><strong>POVM 的分解</strong>：利用正算子平方根，每个 $F_\\alpha$ 可表示为 $F_\\alpha = |\\tilde{u}_\\alpha\\rangle\\langle\\tilde{u}_\\alpha|$，$|\\tilde{u}_\\alpha\\rangle\\in\\mathcal{H}$，矩阵元满足 $(F_\\alpha)_{ij} = \\tilde{u}_{\\alpha i}\\tilde{u}_{\\alpha j}^*$</li>
+<li><strong>完备性条件</strong>：由 $\\sum_\\alpha F_\\alpha = I_\\mathcal{H}$，得 $\\sum_{\\alpha=1}^n \\tilde{u}_{\\alpha i}\\tilde{u}_{\\alpha j}^* = \\delta_{ij}$</li>
+<li><strong>构造拓展空间</strong>：取 $\\mathcal{K} = \\mathcal{H}\\oplus\\mathcal{H}^\\perp$（$\\dim\\mathcal{K} = n$），补充 $\\mathcal{H}^\\perp$ 中的正交矢量 $\\{|\\tilde{\\phi}_\\alpha\\rangle\\}$，使 $|u_\\alpha\\rangle = \\begin{pmatrix}|\\tilde{u}_\\alpha\\rangle\\\\|\\tilde{\\phi}_\\alpha\\rangle\\end{pmatrix}\\in\\mathcal{K}$ 构成 $\\mathcal{K}$ 的正交归一基</li>
+<li><strong>定义正交测量</strong>：在 $\\mathcal{K}$ 上构造 PVM $E_\\alpha = |u_\\alpha\\rangle\\langle u_\\alpha|$，取嵌入算子 $V:|\\omega\\rangle\\mapsto\\begin{pmatrix}|\\omega\\rangle\\\\0\\end{pmatrix}$，则 $F_\\alpha = V^\\dagger E_\\alpha V$，定理得证</li>
+</ol>`},
+      {id:'la-k5-17', name:'直和空间示例：Qubit 到 Qutrit 的拓展', tags:['exa','der'], brief:'三元 POVM 的直和实现。',
+        body:`<p><strong>三元 POVM 的实现</strong>　考虑 2 维 qubit 空间的 POVM</p>
+<div class="la-fml">$$F_\\alpha = \\frac{2}{3}|n_\\alpha\\rangle\\langle n_\\alpha|\\quad(\\alpha = 1, 2, 3)$$</div>
+<p>其中 $|n_1\\rangle = |0\\rangle$，$|n_2\\rangle = \\frac{1}{2}|0\\rangle + \\frac{\\sqrt{3}}{2}|1\\rangle$，$|n_3\\rangle = \\frac{1}{2}|0\\rangle - \\frac{\\sqrt{3}}{2}|1\\rangle$，满足 $\\sum_\\alpha F_\\alpha = I$。</p>
+<p><strong>实现步骤</strong></p>
+<ol>
+<li>构造未归一态 $|\\tilde{u}_\\alpha\\rangle = \\sqrt{2/3}|n_\\alpha\\rangle$</li>
+<li>直和拓展为 3 维 qutrit 空间 $\\mathcal{K} = \\mathbb{C}^2\\oplus\\mathbb{C}^1$</li>
+<li>补充第三维分量，形成正交基
+<div class="la-fml">$$|u_1\\rangle = \\begin{pmatrix}\\sqrt{2/3}\\\\0\\\\\\sqrt{1/3}\\end{pmatrix},\\quad |u_2\\rangle = \\begin{pmatrix}\\sqrt{1/6}\\\\\\sqrt{1/2}\\\\-\\sqrt{1/3}\\end{pmatrix},\\quad |u_3\\rangle = \\begin{pmatrix}-\\sqrt{1/6}\\\\\\sqrt{1/2}\\\\\\sqrt{1/3}\\end{pmatrix}$$</div></li>
+<li>测量 PVM $\\{E_\\alpha = |u_\\alpha\\rangle\\langle u_\\alpha|\\}$，投影回 qubit 空间即得原 POVM 结果</li>
+</ol>`},
+      {id:'la-k5-18', name:'直积空间示例：引入辅助 Qubit', tags:['exa','der'], brief:'三元 POVM 的直积实现。',
+        body:`<p>对上述 qubit 的三元 POVM，采用直积空间 $\\mathcal{K} = \\mathbb{C}^2\\otimes\\mathbb{C}^2$（原 qubit + 辅助 qubit）：</p>
+<ol>
+<li><strong>定义直积空间正交基</strong>
+<div class="la-fml">$$|\\Phi_\\alpha\\rangle = \\sqrt{\\frac{2}{3}}|n_\\alpha\\rangle_A|0\\rangle_B + \\sqrt{\\frac{1}{3}}|0\\rangle_A|1\\rangle_B\\quad(\\alpha = 1, 2, 3)$$</div>
+及 $|\\Phi_0\\rangle = |1\\rangle_A|1\\rangle_B$（满足 $\\sum_{\\alpha=0}^3|\\Phi_\\alpha\\rangle\\langle\\Phi_\\alpha| = I_\\mathcal{K}$）</li>
+<li><strong>初态制备</strong>：$\\rho_\\mathcal{K} = \\rho_A\\otimes|0\\rangle_B\\langle0|_B$</li>
+<li><strong>测量概率</strong>：$\\langle\\Phi_\\alpha|\\rho_\\mathcal{K}|\\Phi_\\alpha\\rangle = \\frac{2}{3}\\langle n_\\alpha|\\rho_A|n_\\alpha\\rangle = \\operatorname{tr}(F_\\alpha\\rho_A)$，即等价于原空间 POVM 测量</li>
+</ol>
+<p><strong>两种拓展方式对比</strong></p>
+<ul>
+<li><strong>直和拓展</strong>：将原空间嵌入单系统高维空间（如 $\\mathbb{C}^2\\to\\mathbb{C}^3$），结构紧凑，维度为 $n$（POVM 元素数）</li>
+<li><strong>直积拓展</strong>：通过引入辅助系统构建复合空间（如 $\\mathbb{C}^2\\otimes\\mathbb{C}^2$），维度通常更高（$N\\times M$），但物理实现中更易通过多体系统操作</li>
+</ul>
+<p>共性：均通过高维正交测量等价实现原空间 POVM。</p>`}
+    ]},
+    {name:'5.5 复合系统的量子演化', color:'#0f766e', desc:'直积局域量子门与纠缠量子操作', items:[
+      {id:'la-k5-19', name:'直积局域量子门操作', tags:['def','thm'], brief:'$U_{AB} = U_A \\otimes U_B$。',
+        body:`<p><strong>定义</strong>　直积局域量子门由"子系统 A 的局域门 $U_A$"和"子系统 B 的局域门 $U_B$"通过直积运算构成</p>
+<div class="la-fml">$$U_{AB} = U_A\\otimes U_B$$</div>
+<p>其中 $U_A\\in SU(d_A)$，$U_B\\in SU(d_B)$，直积矩阵的维度为 $d_A\\times d_B$。</p>
+<p><strong>单量子比特门的直积示例</strong>（两量子比特系统）</p>
+<div class="la-fml">$$X\\otimes Z = \\begin{pmatrix}0\\cdot Z & 1\\cdot Z\\\\1\\cdot Z & 0\\cdot Z\\end{pmatrix} = \\begin{pmatrix}0&0&1&0\\\\0&0&0&-1\\\\1&0&0&0\\\\0&-1&0&0\\end{pmatrix}$$</div>
+<p><strong>性质：不产生纠缠</strong>　对任意分离态 $\\rho_{AB} = \\rho_A\\otimes\\rho_B$，经直积局域量子门作用后</p>
+<div class="la-fml">$$U_{AB}\\rho_{AB}(U_{AB}^\\dagger) = (U_A\\rho_A U_A^\\dagger)\\otimes(U_B\\rho_B U_B^\\dagger)$$</div>
+<p>结果仍为分离态，无法将分离态转化为纠缠态。</p>
+<p><strong>对基矢的作用效果</strong>　以 $H\\otimes I$ 为例：$(H\\otimes I)|00\\rangle = \\frac{1}{\\sqrt{2}}(|00\\rangle + |10\\rangle)$，局域门仅改变对应子系统的态，另一子系统的态保持不变。</p>`},
+      {id:'la-k5-20', name:'纠缠量子操作——CNOT 门', tags:['def','exa'], brief:'最基础的纠缠门。',
+        fig:'cnotGate', figCap:'图 5.7　CNOT 门：控制比特与目标比特',
+        body:`<p><strong>定义</strong>　纠缠量子操作是作用于复合量子系统（如 $\\mathcal{H}_A\\otimes\\mathcal{H}_B$）的量子操作，无法表示为两个子系统量子操作的直积形式（$\\mathcal{E}\\neq\\mathcal{E}_A\\otimes\\mathcal{E}_B$）。其本质是通过量子操作在子系统间引入非局域关联。</p>
+<p><strong>CNOT 门</strong>　包含"控制比特（Control）"和"目标比特（Target）"：若控制比特为 $|1\\rangle$，则翻转目标比特（施加 X 门）；若控制比特为 $|0\\rangle$，则目标比特保持不变。</p>
+<p><strong>矩阵形式</strong>（基矢顺序 $|00\\rangle, |01\\rangle, |10\\rangle, |11\\rangle$）</p>
+<div class="la-fml">$$\\text{CNOT}_{A\\to B} = \\begin{pmatrix}1&0&0&0\\\\0&1&0&0\\\\0&0&0&1\\\\0&0&1&0\\end{pmatrix}$$</div>
+<p>结构解析：前两行（控制比特 $|0\\rangle$）对应单位矩阵块，后两行（控制比特 $|1\\rangle$）对应 X 门矩阵块。</p>
+<p><strong>产生纠缠态</strong>　对分离态 $|\\omega_{AB}\\rangle = \\frac{1}{\\sqrt{2}}(|0\\rangle_A + |1\\rangle_A)\\otimes|0\\rangle_B$ 作用 CNOT 门：</p>
+<div class="la-fml">$$\\text{CNOT}|\\omega_{AB}\\rangle = \\frac{1}{\\sqrt{2}}(|00\\rangle + |11\\rangle)$$</div>
+<p>结果为 Bell 纠缠态，证明 CNOT 门可产生纠缠。</p>
+<p><strong>解除纠缠</strong>　对 Bell 态 $|\\Phi^+\\rangle = \\frac{1}{\\sqrt{2}}(|00\\rangle + |11\\rangle)$ 作用 CNOT：$\\text{CNOT}|\\Phi^+\\rangle = \\frac{1}{\\sqrt{2}}(|00\\rangle + |10\\rangle) = |+\\rangle_A\\otimes|0\\rangle_B$（分离态）。</p>`},
+      {id:'la-k5-21', name:'直积门与 CNOT 门的对比', tags:['thm','app'], brief:'矩阵可分解性与操作独立性。',
+        body:`<p><strong>矩阵结构的分解性差异</strong></p>
+<ul>
+<li><strong>直积局域量子门</strong>（$U_A\\otimes U_B$）：矩阵具有可分解性，可明确拆分为两个子系统局域门矩阵的直积</li>
+<li><strong>CNOT 门</strong>：矩阵无分解性，无法拆分为两个子系统独立矩阵的直积</li>
+</ul>
+<p><strong>操作独立性的关联差异</strong></p>
+<ul>
+<li><strong>直积局域量子门</strong>：子系统操作完全独立，对一个子系统的局域门作用不影响另一个子系统的状态</li>
+<li><strong>CNOT 门</strong>：子系统操作强关联，目标比特状态由控制比特状态决定</li>
+</ul>
+<p><strong>应用总结</strong></p>
+<ul>
+<li><strong>直积局域量子门</strong>：量子计算中的"并行初始化"、量子通信中的"单量子比特编码"、量子测量前的"局域旋转"</li>
+<li><strong>CNOT 门</strong>：纠缠态制备（与 Hadamard 门配合）、量子纠错（表面码、Steane 码）、量子算法（Deutsch-Jozsa、Grover）</li>
+</ul>`}
+    ]}
+  ]
+},
+
+/* ================= 第六章 开放系统与 Lindblad 方程 ================= */
+{
+  id:'la-ch6', num:'第六章', title:'开放系统与 Lindblad 主方程', en:'OPEN SYSTEMS & LINDBLAD EQUATION',
+  sub:'系统-环境耦合、Kraus 表示与主方程',
+  desc:'本章从复合系统角度描述开放系统，将系统与环境整体视为更大的封闭系统，通过部分迹得到系统演化。从 Kraus 表示出发推导 Lindblad 主方程，得到开放系统连续时间演化的标准形式。',
+  sections:[
+    {name:'6.1 封闭系统与开放系统', color:'#be123c', desc:'理想场景与实际场景', items:[
+      {id:'la-k6-1', name:'封闭系统的幺正演化', tags:['def','thm'], brief:'可逆、保纯态、保相干性。',
+        body:`<p><strong>数学表达</strong>　薛定谔绘景下</p>
+<div class="la-fml">$$\\rho(t) = U(t)\\rho(0)U^\\dagger(t),\\qquad U(t) = e^{-iHt/\\hbar}$$</div>
+<p><strong>关键特征</strong></p>
+<ul>
+<li><strong>可逆性</strong>：存在 $U^\\dagger(t)$ 使 $\\rho(0) = U^\\dagger(t)\\rho(t)U(t)$</li>
+<li><strong>保纯态性</strong>：若 $\\rho(0) = |\\omega\\rangle\\langle\\omega|$（纯态），则 $\\rho(t) = |U\\omega\\rangle\\langle U\\omega|$（仍为纯态）</li>
+<li><strong>保相干性</strong>：密度矩阵非对角元（相干项）仅相位变化，幅度不变</li>
+</ul>`},
+      {id:'la-k6-2', name:'实际场景的挑战：开放系统噪声', tags:['def','app'], brief:'环境噪声破坏幺正演化。',
+        body:`<p><strong>实际场景</strong>　真实量子系统（如量子比特、量子通信链路）必然是开放系统，会与环境（如热库、电磁场）发生不可避免的相互作用，导致：</p>
+<ul>
+<li><strong>幺正演化被破坏</strong>：无法用单一幺正门描述系统状态变化（如量子比特的相位衰减、能量弛豫）</li>
+<li><strong>量子信息受损</strong>：纠缠态可能退化为分离态，叠加态可能变为混态（如光纤传输中的光子损耗）</li>
+</ul>
+<p><strong>示例</strong>　两量子比特经 CNOT 门制备的 Bell 态，在环境噪声作用下，会逐渐退化为无纠缠的混态</p>
+<div class="la-fml">$$\\rho = \\frac{1}{2}(|00\\rangle\\langle00| + |11\\rangle\\langle11|)$$</div>`},
+      {id:'la-k6-3', name:'系统-环境复合系统', tags:['def','der'], brief:'将系统与环境视为更大的封闭系统。',
+        body:`<p><strong>复合系统构成</strong></p>
+<ul>
+<li>系统 A：关注的量子系统（如单量子比特），Hilbert 空间 $\\mathcal{H}_A$</li>
+<li>环境 E：与系统耦合的外部自由度（如热库），Hilbert 空间 $\\mathcal{H}_E$</li>
+<li>复合系统：$A\\otimes E$，$\\mathcal{H}_{AE} = \\mathcal{H}_A\\otimes\\mathcal{H}_E$</li>
+</ul>
+<p><strong>复合系统的幺正演化</strong>　复合系统是"更大的封闭系统"，满足幺正演化</p>
+<div class="la-fml">$$\\rho_{AE}(t) = U_{AE}\\rho_{AE}(0)U_{AE}^\\dagger$$</div>
+<p><strong>系统 A 的约化密度矩阵</strong>　仅关注系统 A 时，需剔除环境自由度（部分迹操作）</p>
+<div class="la-fml">$$\\rho_A(t) = \\operatorname{tr}_E\\{\\rho_{AE}(t)\\}$$</div>
+<p>部分迹定义：$\\operatorname{tr}_E\\{|\\omega_A\\rangle\\langle\\varphi_A|\\otimes|\\omega_E\\rangle\\langle\\varphi_E|\\} = |\\omega_A\\rangle\\langle\\varphi_A|\\cdot\\operatorname{tr}\\{|\\omega_E\\rangle\\langle\\varphi_E|\\}$。</p>`},
+      {id:'la-k6-4', name:'环境的初始态假设', tags:['def','der'], brief:'环境初始态为纯态。',
+        body:`<p>实际中环境初始态通常是平衡态（如热库的玻尔兹曼态），但为简化 Kraus 算符引入，先假设</p>
+<div class="la-fml">$$\\rho_{AE}(0) = \\rho_A(0)\\otimes|0_E\\rangle\\langle0_E|$$</div>
+<p>即：</p>
+<ul>
+<li>系统初始态：任意合法密度矩阵 $\\rho_A(0)$</li>
+<li>环境初始态：归一化纯态 $|0_E\\rangle$（称为"环境基态"）</li>
+</ul>
+<p>环境希尔伯特空间 $\\mathcal{H}_E$ 的正交归一基为 $\\{|\\mu_E\\rangle\\}$，满足 $\\langle\\mu_E|\\nu_E\\rangle = \\delta_{\\mu\\nu}$，$\\sum_\\mu|\\mu_E\\rangle\\langle\\mu_E| = I_E$。</p>`}
+    ]},
+    {name:'6.2 Kraus 表示定理', color:'#7c3aed', desc:'从系统-环境幺正演化到系统演化', items:[
+      {id:'la-k6-5', name:'Kraus 算符的构造', tags:['def','der'], brief:'$M_\\mu = \\langle\\mu_E|U_{AE}|0_E\\rangle$。',
+        body:`<p><strong>Kraus 算符的构造式</strong>　由复合系统幺正算符 $U_{AE}$ 和环境基矢 $\\{|\\mu_E\\rangle\\}$，定义作用于系统 A 的算符</p>
+<div class="la-fml">$$M_\\mu = \\langle\\mu_E|U_{AE}|0_E\\rangle$$</div>
+<p><strong>Kraus 算符的物理意义</strong>　环境作用路径：$|0_E\\rangle\\xrightarrow{U_{AE}}U_{AE}|0_E\\rangle\\xrightarrow{\\langle\\mu_E|}M_\\mu$（对系统 A 的等效作用）。</p>
+<p>每一个 $M_\\mu$ 对应一条"环境跃迁路径"：</p>
+<ul>
+<li>环境从初始基态 $|0_E\\rangle$，经幺正演化后跃迁至基矢 $|\\mu_E\\rangle$</li>
+<li>该跃迁对系统 A 的影响被"压缩"到算符 $M_\\mu$ 中，无需再追踪环境状态</li>
+</ul>
+<p>$M_\\mu$ 的作用空间：仅系统 A 的 Hilbert 空间 $\\mathcal{H}_A$；维度：若 $\\mathcal{H}_A$ 是 $d$ 维，则 $M_\\mu$ 是 $d\\times d$ 矩阵。</p>`},
+      {id:'la-k6-6', name:'Kraus 表示定理', tags:['thm','der'], brief:'$\\rho_A(t) = \\sum_\\mu M_\\mu\\rho_A(0)M_\\mu^\\dagger$。',
+        body:`<p><strong>定理</strong>　若系统 A 初始态为 $\\rho_A(0)$，环境初始态为 $|0_E\\rangle\\langle0_E|$，则系统 A 的演化可表示为</p>
+<div class="la-fml">$$\\rho_A(t) = \\sum_\\mu M_\\mu\\rho_A(0)M_\\mu^\\dagger$$</div>
+<p>且 Kraus 算符集合 $\\{M_\\mu\\}$ 满足完备性条件</p>
+<div class="la-fml">$$\\sum_\\mu M_\\mu^\\dagger M_\\mu = I_A$$</div>
+<p><strong>证明步骤</strong></p>
+<ol>
+<li><strong>写出复合系统初始态</strong>：$\\rho_{AE}(0) = \\rho_A(0)\\otimes|0_E\\rangle\\langle0_E|$</li>
+<li><strong>复合系统的幺正演化</strong>：$\\rho_{AE}(t) = U_{AE}\\rho_{AE}(0)U_{AE}^\\dagger$</li>
+<li><strong>部分迹剔除环境</strong>：$\\rho_A(t) = \\operatorname{tr}_E\\{\\rho_{AE}(t)\\}$，代入环境基的完备性 $\\sum_\\mu|\\mu_E\\rangle\\langle\\mu_E| = I_E$</li>
+<li><strong>分离系统与环境算符</strong>：$\\langle\\mu_E|U_{AE}(\\rho_A(0)\\otimes|0_E\\rangle\\langle0_E|)U_{AE}^\\dagger|\\mu_E\\rangle = M_\\mu\\rho_A(0)M_\\mu^\\dagger$，其中 $M_\\mu = \\langle\\mu_E|U_{AE}|0_E\\rangle$</li>
+<li><strong>完备性条件</strong>：由密度矩阵的归一性 $\\operatorname{tr}\\{\\rho_A(t)\\} = 1$，对任意 $\\rho_A(0)$ 成立，得 $\\sum_\\mu M_\\mu^\\dagger M_\\mu = I_A$</li>
+</ol>
+<p><strong>定理核心价值</strong></p>
+<ul>
+<li><strong>简化性</strong>：仅用系统 A 上的算符描述演化，无需处理环境自由度</li>
+<li><strong>普适性</strong>：适用于所有满足"完全正定性"的开放系统演化</li>
+<li><strong>实用性</strong>：可直接计算退相干、测量等过程的态演化</li>
+</ul>`},
+      {id:'la-k6-7', name:'Kraus 算符保证密度矩阵合法性', tags:['thm','der'], brief:'厄米性、半正定性、归一性。',
+        body:`<p><strong>厄米性</strong>　若 $\\rho_A(0)$ 厄米，则</p>
+<div class="la-fml">$$\\rho_A^\\dagger(t) = \\left(\\sum_\\mu M_\\mu\\rho_A(0)M_\\mu^\\dagger\\right)^\\dagger = \\sum_\\mu M_\\mu\\rho_A(0)M_\\mu^\\dagger = \\rho_A(t)$$</div>
+<p>（利用厄米共轭的运算规则：$(XY)^\\dagger = Y^\\dagger X^\\dagger$）</p>
+<p><strong>半正定性</strong>　对任意系统 A 的量子态 $|\\omega_A\\rangle$，$\\langle\\omega_A|\\rho_A(t)|\\omega_A\\rangle$ 表示"在 $\\rho_A(t)$ 中测量到 $|\\omega_A\\rangle$ 的概率密度"，故必须满足 $\\geq 0$。证明：令 $|\\phi_\\mu\\rangle = M_\\mu^\\dagger|\\omega_A\\rangle$，则</p>
+<div class="la-fml">$$\\langle\\omega_A|\\rho_A(t)|\\omega_A\\rangle = \\sum_\\mu\\langle\\phi_\\mu|\\rho_A(0)|\\phi_\\mu\\rangle \\geq 0$$</div>
+<p>由于初始态 $\\rho_A(0)$ 半正定，对任意 $|\\phi_\\mu\\rangle$ 均有 $\\langle\\phi_\\mu|\\rho_A(0)|\\phi_\\mu\\rangle \\geq 0$。</p>
+<p><strong>归一性</strong>　对 Kraus 表示取迹，利用迹的循环不变性 $\\operatorname{tr}\\{XY\\} = \\operatorname{tr}\\{YX\\}$：</p>
+<div class="la-fml">$$\\operatorname{tr}\\{\\rho_A(t)\\} = \\sum_\\mu\\operatorname{tr}\\{M_\\mu\\rho_A(0)M_\\mu^\\dagger\\} = \\sum_\\mu\\operatorname{tr}\\{\\rho_A(0)M_\\mu^\\dagger M_\\mu\\} = \\operatorname{tr}\\{\\rho_A(0)I_A\\} = 1$$</div>
+<p>由完备性条件 $\\sum_\\mu M_\\mu^\\dagger M_\\mu = I_A$ 直接保证。</p>`}
+    ]},
+    {name:'6.3 从 Kraus 表示到 Lindblad 主方程', color:'#c2410c', desc:'连续时间演化的微分形式', items:[
+      {id:'la-k6-8', name:'短时间 Kraus 算符展开', tags:['der','thm'], brief:'$M_0(dt)$ 和 $M_\\mu(dt)$ 的展开式。',
+        body:`<p><strong>衔接思路</strong>　Kraus 表示描述离散演化，但主方程需要连续时间的微分形式。取短时间极限 $t\\to dt$，将 Kraus 算符展开为 $dt$ 的一阶小量。</p>
+<p><strong>短时间幺正演化</strong></p>
+<div class="la-fml">$$U_{AE}(dt) = I_{AE} - \\frac{i}{\\hbar}H\\cdot dt$$</div>
+<p>其中 $H = H_A + H_E + H_{AE}$ 为总哈密顿量。</p>
+<p><strong>Kraus 算符的短时间形式</strong></p>
+<p>当 $\\mu = 0$（环境保持基态）：</p>
+<div class="la-fml">$$M_0(dt) = I_A + \\left(-\\frac{i}{\\hbar}H_A + K_A\\right)dt$$</div>
+<p>其中 $H_A$ 是系统自由哈密顿量，$K_A$ 是实数算符（描述环境导致的耗散）。</p>
+<p>当 $\\mu > 0$（环境跃迁至激发态）：</p>
+<div class="la-fml">$$M_\\mu(dt) = -iL_{A,\\mu}\\sqrt{dt}$$</div>
+<p>其中 $L_{A,\\mu}$ 是"量子跳变算符"，$\\sqrt{dt}$ 保证 Kraus 双线性性的量纲一致。</p>`},
+      {id:'la-k6-9', name:'密度矩阵时间变化率', tags:['der','thm'], brief:'$d\\rho/dt$ 的初步形式。',
+        body:`<p><strong>Kraus 表示的短时间形式</strong></p>
+<div class="la-fml">$$\\rho_A(dt) = M_0\\rho_A(0)M_0^\\dagger + \\sum_{\\mu>0}M_\\mu\\rho_A(0)M_\\mu^\\dagger$$</div>
+<p><strong>第一项展开（$\\mu = 0$）</strong></p>
+<div class="la-fml">$$M_0\\rho M_0^\\dagger \\approx \\rho + \\left(-\\frac{i}{\\hbar}H_A + K_A\\right)\\rho\\,dt + \\rho\\left(\\frac{i}{\\hbar}H_A + K_A\\right)dt$$</div>
+<p><strong>第二项展开（$\\mu > 0$）</strong></p>
+<div class="la-fml">$$\\sum_{\\mu>0}M_\\mu\\rho M_\\mu^\\dagger = \\sum_{\\mu>0}L_{A,\\mu}\\rho L_{A,\\mu}^\\dagger\\,dt$$</div>
+<p><strong>时间导数</strong></p>
+<div class="la-fml">$$\\frac{\\mathrm{d}\\rho_A}{\\mathrm{d}t}\\bigg|_{t=0} = -\\frac{i}{\\hbar}[H_A, \\rho] + K_A\\rho + \\rho K_A + \\sum_{\\mu>0}L_{A,\\mu}\\rho L_{A,\\mu}^\\dagger$$</div>`},
+      {id:'la-k6-10', name:'Lindblad 主方程', tags:['thm','der'], brief:'开放系统演化的标准方程。',
+        fig:'lindblad', figCap:'图 6.1　Lindblad 主方程的两项结构',
+        body:`<p><strong>完备性条件确定 $K_A$ 与 $L_{A,\\mu}$ 的关系</strong></p>
+<p>由 $\\sum_{\\mu=0}M_\\mu^\\dagger M_\\mu = I_A$，展开到 $dt$ 一阶，得</p>
+<div class="la-fml">$$K_A = -\\frac{1}{2}\\sum_{\\mu>0}L_{A,\\mu}^\\dagger L_{A,\\mu}$$</div>
+<p><strong>最终推导结果</strong>（略去脚标 A）</p>
+<div class="la-fml">$$\\frac{\\mathrm{d}\\rho(t)}{\\mathrm{d}t} = -\\frac{i}{\\hbar}[H,\\rho(t)] + \\sum_{\\mu>0}\\left(L_\\mu\\rho(t)L_\\mu^\\dagger - \\frac{1}{2}\\{L_\\mu^\\dagger L_\\mu, \\rho(t)\}\\right)$$</div>
+<p>其中 $\\{X, Y\\} = XY + YX$ 为反对易子。这就是 <strong>Lindblad 主方程</strong>（开放系统主方程的标准形式）。</p>
+<p><strong>各项物理意义</strong></p>
+<ul>
+<li><strong>相干项</strong>：$-\\frac{i}{\\hbar}[H, \\rho]$，描述系统自由演化，保持量子相干性</li>
+<li><strong>耗散项</strong>：$\\sum_\\mu(L_\\mu\\rho L_\\mu^\\dagger - \\frac{1}{2}\\{L_\\mu^\\dagger L_\\mu, \\rho\\})$，描述系统与环境的相互作用，导致退相干、弛豫等不可逆过程</li>
+<li><strong>$L_\\mu$</strong>：Lindblad 算符（量子跳变算符），表征系统与环境的具体耦合模式（如自发辐射、相位衰减等）</li>
+</ul>`},
+      {id:'la-k6-11', name:'从 Kraus 表示到 Lindblad 主方程：小结', tags:['his','def'], brief:'推导思路与主要结论。',
+        body:`<p><strong>主要思路</strong></p>
+<ol>
+<li>以 Kraus 表示为起点——Kraus 表示描述开放系统的离散时间演化</li>
+<li>取短时间极限——为得到连续时间的微分方程，考虑极短时间间隔 $dt$（从 $t = 0$ 到 $t = dt$），将 Kraus 算符 $M_\\mu(dt)$ 展开为 $dt$ 的一阶小量，区分"环境保持基态"和"环境跃迁至激发态"两类 Kraus 算符</li>
+<li>代入 Kraus 表示计算状态变化——进而得到密度矩阵的变化量 $\\rho(dt) - \\rho(0)$</li>
+<li>求时间导数得到初步微分方程——根据导数的定义得到密度矩阵随时间变化的初步微分方程</li>
+<li>利用 Kraus 完备性条件化简——结合 Kraus 算符的完备性条件确定初步微分方程中未知算符的表达式，最终化简得到 Lindblad 主方程</li>
+</ol>
+<p><strong>主要结论</strong></p>
+<ul>
+<li>主方程是 Kraus 表示的连续时间极限——Kraus 表示描述"离散跳变"，主方程描述"连续变化"，二者本质一致，主方程继承了 Kraus 表示的完全正定性（保证密度矩阵物理合法）和保迹性（保证总概率守恒）</li>
+<li>Lindblad 算符 $L_\\mu$ 由系统-环境耦合决定——每个 $L_\\mu$ 对应一种具体的系统-环境相互作用模式（如能量弛豫对应 $L = \\sqrt{\\gamma}\\sigma_-$），是刻画耗散过程的核心物理量</li>
+<li>主方程同时包含两类演化——方程中"$-\\frac{i}{\\hbar}[H, \\rho]$"项描述系统的相干演化（如自由振荡），"$\\sum_\\mu(L_\\mu\\rho L_\\mu^\\dagger - \\frac{1}{2}\\{L_\\mu^\\dagger L_\\mu, \\rho\\})$"项描述环境导致的耗散演化（如退相干），是分析开放系统量子动力学的基础方程</li>
+</ul>
+<p><strong>与 Kraus 表示的关联</strong></p>
+<ul>
+<li><strong>适用场景差异</strong>：Kraus 表示适用于任意时间尺度的演化，无需依赖 Markov 近似（可描述有记忆的非 Markov 过程）；主方程适用于连续时间演化，且必须依赖 Markov 近似（假设系统演化无记忆，仅依赖当前状态）</li>
+<li><strong>等价性体现</strong>：短时间内，Kraus 表示的离散演化可近似为主方程的连续演化；长时间演化时，通过对主方程积分求解，得到的结果与 Kraus 表示在 Markov 近似下的结果一致</li>
+</ul>`}
+    ]}
+  ]
+}
+];
+
+/* =========================================================
+   渲染
+   ========================================================= */
+const LA_KP = {};
+
+function laBuildCard(item){
+  const tags = item.tags.map(t =>
+    `<span class="la-arc-badge la-arc-${t}">${LA_TAG_LABEL[t]}</span>`
+  ).join('');
+  return `<div class="la-course-card" onclick="showLaItem('${item.id}')">
+    <div class="la-arc-badges">${tags}</div>
+    <h4>${item.name}</h4>
+    <p>${item.brief}</p>
+  </div>`;
+}
+
+function renderLa(){
+  const root = document.getElementById('laRoadmap');
+  let html = '';
+  LA_DATA.forEach(ch => {
+    html += `<h2 class="la-phase-title ${ch.id}" id="${ch.id}">${ch.num} · ${ch.title}</h2>`;
+    html += `<div class="la-phase-en">${ch.en}</div>`;
+    html += `<p class="la-phase-desc">${ch.desc}</p>`;
+    ch.sections.forEach(sec => {
+      html += `<div class="la-domain" style="--domain-color:${sec.color};">
+        <div class="la-domain-header">
+          <h3>${sec.name}</h3>
+          <span class="la-domain-count">${sec.items.length} 个知识点</span>
+          <span class="la-domain-desc">${sec.desc}</span>
+        </div>
+        <div class="la-domain-grid">`;
+      sec.items.forEach(it => {
+        html += laBuildCard(it);
+        LA_KP[it.id] = {item: it, section: sec.name, chapter: `${ch.num} · ${ch.title}`};
+      });
+      html += `</div></div>`;
+    });
+  });
+  root.innerHTML = html;
+
+  const kCount = Object.keys(LA_KP).length;
+  const fCount = (root.innerHTML.match(/\$\$/g) || []).length;
+  document.getElementById('laKCount').textContent = kCount;
+  document.getElementById('laFCount').textContent = Math.round(fCount / 2);
+}
+
+function showLaItem(id){
+  const rec = LA_KP[id];
+  if(!rec) return;
+  const it = rec.item;
+
+  document.getElementById('laCrumbs').textContent = rec.chapter + ' ／ ' + rec.section;
+  document.getElementById('laTitle').textContent = it.name;
+  document.getElementById('laTags').innerHTML = it.tags.map(t =>
+    `<span class="la-arc-badge la-arc-${t}">${LA_TAG_LABEL[t]}</span>`
+  ).join('');
+
+  let bodyHtml = it.body;
+  if (it.fig && LA_FIG[it.fig]) {
+    const figHtml = `<div class="la-fig">${LA_FIG[it.fig]}<div class="la-fig-cap">${it.figCap || ''}</div></div>`;
+    bodyHtml = figHtml + bodyHtml;
+  }
+  document.getElementById('laBody').innerHTML = bodyHtml;
+
+  document.getElementById('laOverlay').classList.add('show');
+  document.querySelector('.la-modal').scrollTop = 0;
+
+  if (window.MathJax && window.MathJax.typesetPromise) {
+    window.MathJax.typesetPromise([document.getElementById('laBody')]).catch(()=>{});
+  }
+}
+
+function hideLaInfo(){
+  document.getElementById('laOverlay').classList.remove('show');
+}
+function closeLaInfo(e){
+  if(e.target.id === 'laOverlay') hideLaInfo();
+}
+document.addEventListener('keydown', e => {
+  if(e.key === 'Escape') hideLaInfo();
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  renderLa();
+  if (window.MathJax && window.MathJax.typesetPromise) {
+    window.MathJax.typesetPromise([document.getElementById('laRoadmap')]).catch(()=>{});
+  }
+});
+</script>
+
+</body>
+</html>
