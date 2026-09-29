@@ -6,7 +6,6 @@
 <meta name="description" content="映像光学 · 知识体系（理想光学系统 + 实际光学系统 + 衍射映像 + 傅里叶光学 + 全息术 + 光子互连与光计算）">
 <title>映像光学 · 知识体系</title>
 
-<!-- MathJax -->
 <script>
 window.MathJax = {
   tex: {
@@ -143,6 +142,7 @@ window.MathJax = {
   .la-modal-body strong{color:#0f172a}
   .la-modal-body ul{margin:0 0 12px;padding-left:22px}
   .la-modal-body li{margin-bottom:6px}
+  .la-modal-body ol{margin:0 0 12px;padding-left:22px}
 
   .la-fml{
     margin:16px 0;padding:14px 18px;
@@ -152,19 +152,15 @@ window.MathJax = {
     overflow-x:auto;
     font-size:16px;
   }
-  .la-fml .note{
-    display:block;font-size:12.5px;color:#8496ad;margin-top:8px;
-    line-height:1.6;font-family:system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
-  }
   .la-fml mjx-container[display="true"]{margin:0 !important}
 
   .la-fig{
     margin:18px auto;padding:14px 16px 10px;
     background:#fafcff;border:1px solid #e2ebf7;border-radius:14px;
     display:flex;flex-direction:column;align-items:center;
-    max-width:600px;
+    max-width:620px;
   }
-  .la-fig svg{display:block;width:100%;height:auto;max-width:560px}
+  .la-fig svg{display:block;width:100%;height:auto;max-width:580px}
   .la-fig .la-fig-cap{font-size:12px;color:#8496ad;margin-top:8px;text-align:center;letter-spacing:.02em}
 
   .la-callout{margin:14px 0;padding:12px 16px;background:#fffbeb;border-left:3px solid #fbbf24;
@@ -249,18 +245,18 @@ window.MathJax = {
 
 <script>
 /* =========================================================
-   SVG 图库 —— 教材插图与示意图
+   SVG 图库 —— 教材插图与示意图（全部内联）
    ========================================================= */
 const LA_FIG = {
-  /* 系统算符 */
+  /* 1. 系统算符 */
   systemOp: `<svg viewBox="0 0 400 180" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif">
   <defs>
     <marker id="eo-s1" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><polygon points="0 0, 9 4.5, 0 9" fill="#2563eb"/></marker>
     <marker id="eo-s2" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><polygon points="0 0, 9 4.5, 0 9" fill="#dc2626"/></marker>
   </defs>
   <rect x="150" y="40" width="100" height="100" fill="#dbeafe" stroke="#2563eb" stroke-width="2" rx="10"/>
-  <text x="182" y="85" fill="#1e40af" font-size="15" font-weight="800" font-style="italic">系统</text>
-  <text x="182" y="112" fill="#1e40af" font-size="13" font-style="italic">{·}</text>
+  <text x="188" y="88" fill="#1e40af" font-size="15" font-weight="800" font-style="italic">系统</text>
+  <text x="188" y="112" fill="#1e40af" font-size="13" font-style="italic">{·}</text>
   <line x1="40" y1="90" x2="145" y2="90" stroke="#2563eb" stroke-width="2.2" marker-end="url(#eo-s1)"/>
   <line x1="255" y1="90" x2="360" y2="90" stroke="#dc2626" stroke-width="2.2" marker-end="url(#eo-s2)"/>
   <text x="52" y="78" fill="#2563eb" font-size="14" font-weight="700" font-style="italic">输入 f</text>
@@ -269,7 +265,7 @@ const LA_FIG = {
   <text x="288" y="140" fill="#475569" font-size="11">响应</text>
 </svg>`,
 
-  /* 平移不变 */
+  /* 2. 平移不变 */
   shiftInv: `<svg viewBox="0 0 440 220" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif">
   <defs><marker id="eo-si" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><polygon points="0 0, 8 4, 0 8" fill="#94a3b8"/></marker></defs>
   <line x1="20" y1="100" x2="200" y2="100" stroke="#94a3b8" stroke-width="1.2" marker-end="url(#eo-si)"/>
@@ -290,7 +286,7 @@ const LA_FIG = {
   <text x="320" y="145" fill="#dc2626" font-size="12" font-weight="700" font-style="italic">g(x−x₀)</text>
 </svg>`,
 
-  /* 牛顿公式 */
+  /* 3. 牛顿公式 */
   newton: `<svg viewBox="0 0 460 200" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif">
   <defs><marker id="eo-n1" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><polygon points="0 0, 8 4, 0 8" fill="#94a3b8"/></marker></defs>
   <line x1="30" y1="110" x2="440" y2="110" stroke="#94a3b8" stroke-width="1.4" marker-end="url(#eo-n1)"/>
@@ -313,7 +309,7 @@ const LA_FIG = {
   <text x="144" y="150" fill="#475569" font-size="11">xx′ = ff′</text>
 </svg>`,
 
-  /* 4f系统 */
+  /* 4. 4f 系统 */
   fourF: `<svg viewBox="0 0 480 220" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif">
   <defs><marker id="eo-f1" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><polygon points="0 0, 8 4, 0 8" fill="#94a3b8"/></marker></defs>
   <line x1="20" y1="120" x2="460" y2="120" stroke="#94a3b8" stroke-width="1.2" marker-end="url(#eo-f1)"/>
@@ -335,7 +331,7 @@ const LA_FIG = {
   <text x="180" y="20" fill="#7c3aed" font-size="13" font-weight="700">4f 傅里叶变换图像处理系统</text>
 </svg>`,
 
-  /* 望远镜 */
+  /* 5. 望远镜 */
   telescope: `<svg viewBox="0 0 460 220" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif">
   <defs><marker id="eo-t1" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><polygon points="0 0, 8 4, 0 8" fill="#2563eb"/></marker></defs>
   <path d="M 160 40 Q 180 110 160 180 Q 140 110 160 40 Z" fill="#dbeafe" stroke="#2563eb" stroke-width="1.6"/>
@@ -356,7 +352,7 @@ const LA_FIG = {
   <text x="380" y="55" fill="#059669" font-size="11">平行光出射</text>
 </svg>`,
 
-  /* 显微镜 */
+  /* 6. 显微镜 */
   microscope: `<svg viewBox="0 0 480 200" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif">
   <path d="M 130 30 Q 150 100 130 170 Q 110 100 130 30 Z" fill="#dbeafe" stroke="#2563eb" stroke-width="1.6"/>
   <text x="114" y="190" fill="#2563eb" font-size="12" font-weight="700">物镜</text>
@@ -374,7 +370,7 @@ const LA_FIG = {
   <text x="370" y="60" fill="#f59e0b" font-size="11">虚像（供眼观察）</text>
 </svg>`,
 
-  /* 摄影物镜 */
+  /* 7. 摄影物镜 */
   camera: `<svg viewBox="0 0 440 180" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif">
   <defs><marker id="eo-c1" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><polygon points="0 0, 8 4, 0 8" fill="#94a3b8"/></marker></defs>
   <line x1="20" y1="100" x2="420" y2="100" stroke="#94a3b8" stroke-width="1.2" marker-end="url(#eo-c1)"/>
@@ -391,7 +387,7 @@ const LA_FIG = {
   <text x="26" y="90" fill="#475569" font-size="11">光轴</text>
 </svg>`,
 
-  /* 相界面 */
+  /* 8. 相界面光线追迹 */
   rayTrace: `<svg viewBox="0 0 440 200" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif">
   <defs>
     <marker id="eo-r1" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><polygon points="0 0, 8 4, 0 8" fill="#dc2626"/></marker>
@@ -413,7 +409,7 @@ const LA_FIG = {
   <text x="226" y="180" fill="#94a3b8" font-size="10">法线</text>
 </svg>`,
 
-  /* 球差 */
+  /* 9. 球差 */
   sphericalAb: `<svg viewBox="0 0 460 220" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif">
   <defs><marker id="eo-sa1" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><polygon points="0 0, 8 4, 0 8" fill="#dc2626"/></marker></defs>
   <line x1="20" y1="110" x2="440" y2="110" stroke="#94a3b8" stroke-width="1.2"/>
@@ -435,7 +431,7 @@ const LA_FIG = {
   <text x="24" y="125" fill="#7c3aed" font-size="10">近轴光</text>
 </svg>`,
 
-  /* 色差 */
+  /* 10. 色差 */
   chromatic: `<svg viewBox="0 0 460 220" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif">
   <line x1="20" y1="110" x2="440" y2="110" stroke="#94a3b8" stroke-width="1.2"/>
   <path d="M 220 30 Q 240 110 220 190 Q 200 110 220 30 Z" fill="#dbeafe" stroke="#2563eb" stroke-width="1.6"/>
@@ -455,7 +451,7 @@ const LA_FIG = {
   <text x="42" y="100" fill="#2563eb" font-size="10">C 光</text>
 </svg>`,
 
-  /* 波前 */
+  /* 11. 波前 */
   wavefront: `<svg viewBox="0 0 440 220" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif">
   <path d="M 60 30 Q 130 70 60 110 Q 130 150 60 190" fill="none" stroke="#dc2626" stroke-width="2"/>
   <path d="M 160 20 Q 240 60 160 110 Q 240 160 160 200" fill="none" stroke="#dc2626" stroke-width="2" stroke-dasharray="6,4"/>
@@ -467,7 +463,7 @@ const LA_FIG = {
   <text x="260" y="220" fill="#16a34a" font-size="11" font-style="italic">W = 0</text>
 </svg>`,
 
-  /* 衍射 */
+  /* 12. 衍射 */
   diffraction: `<svg viewBox="0 0 460 220" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif">
   <line x1="80" y1="30" x2="80" y2="190" stroke="#0f172a" stroke-width="2.4"/>
   <rect x="74" y="80" width="12" height="60" fill="white" stroke="#0f172a" stroke-width="1.6"/>
@@ -488,31 +484,31 @@ const LA_FIG = {
   <text x="380" y="220" fill="#0f172a" font-size="11">衍射图样</text>
 </svg>`,
 
-  /* 傅里叶变换 */
+  /* 13. 傅里叶变换 */
   fourierTrans: `<svg viewBox="0 0 480 240" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif">
   <defs>
     <marker id="eo-ft1" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><polygon points="0 0, 9 4.5, 0 9" fill="#2563eb"/></marker>
     <marker id="eo-ft2" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><polygon points="0 0, 9 4.5, 0 9" fill="#7c3aed"/></marker>
   </defs>
   <rect x="40" y="40" width="100" height="80" fill="#dbeafe" stroke="#2563eb" stroke-width="1.6" rx="6"/>
-  <text x="58" y="85" fill="#1e40af" font-size="14" font-weight="700" font-style="italic">f(x,y)</text>
+  <text x="56" y="88" fill="#1e40af" font-size="14" font-weight="700" font-style="italic">f(x,y)</text>
   <text x="60" y="140" fill="#2563eb" font-size="11">物函数</text>
   <line x1="148" y1="80" x2="200" y2="80" stroke="#2563eb" stroke-width="2" marker-end="url(#eo-ft1)"/>
   <text x="154" y="72" fill="#2563eb" font-size="12" font-weight="700" font-style="italic">F</text>
   <rect x="210" y="40" width="100" height="80" fill="#f3e8ff" stroke="#7c3aed" stroke-width="1.6" rx="6"/>
-  <text x="228" y="85" fill="#5b21b6" font-size="14" font-weight="700" font-style="italic">F(u,v)</text>
+  <text x="226" y="88" fill="#5b21b6" font-size="14" font-weight="700" font-style="italic">F(u,v)</text>
   <text x="228" y="140" fill="#7c3aed" font-size="11">频谱</text>
   <line x1="318" y1="80" x2="370" y2="80" stroke="#7c3aed" stroke-width="2" marker-end="url(#eo-ft2)"/>
   <text x="324" y="72" fill="#7c3aed" font-size="12" font-weight="700" font-style="italic">H(u,v)</text>
   <rect x="380" y="40" width="80" height="80" fill="#fce7f3" stroke="#db2777" stroke-width="1.6" rx="6"/>
-  <text x="396" y="85" fill="#9d174d" font-size="14" font-weight="700" font-style="italic">F′</text>
+  <text x="398" y="88" fill="#9d174d" font-size="14" font-weight="700" font-style="italic">F′</text>
   <text x="396" y="140" fill="#db2777" font-size="11">像频谱</text>
   <line x1="380" y1="170" x2="60" y2="170" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4,4"/>
   <text x="200" y="190" fill="#94a3b8" font-size="11">传递函数滤波</text>
   <text x="180" y="220" fill="#1e293b" font-size="12" font-weight="700">f′(x,y) = f(x,y) ∗ h(x,y)</text>
 </svg>`,
 
-  /* 全息记录 */
+  /* 14. 全息记录 */
   hologram: `<svg viewBox="0 0 460 240" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif">
   <defs>
     <marker id="eo-h1" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><polygon points="0 0, 8 4, 0 8" fill="#dc2626"/></marker>
@@ -532,7 +528,7 @@ const LA_FIG = {
   <text x="120" y="220" fill="#475569" font-size="11">I = |O+R|² = |O|² + |R|² + O*R + OR*</text>
 </svg>`,
 
-  /* 全息再现 */
+  /* 15. 全息再现 */
   hologramRep: `<svg viewBox="0 0 460 200" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif">
   <defs><marker id="eo-hr1" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><polygon points="0 0, 8 4, 0 8" fill="#7c3aed"/></marker></defs>
   <circle cx="60" cy="40" r="6" fill="#fbbf24" stroke="#d97706" stroke-width="1.4"/>
@@ -548,7 +544,7 @@ const LA_FIG = {
   <text x="340" y="94" fill="#0f172a" font-size="10">0级</text>
 </svg>`,
 
-  /* 光子互连 */
+  /* 16. 光子互连 */
   photoInterconnect: `<svg viewBox="0 0 460 240" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif">
   <defs>
     <marker id="eo-pi1" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto"><polygon points="0 0, 7 3.5, 0 7" fill="#7c3aed"/></marker>
@@ -571,15 +567,15 @@ const LA_FIG = {
   <text x="160" y="230" fill="#475569" font-size="11">自由空间光互连网络</text>
 </svg>`,
 
-  /* 光计算 */
+  /* 17. 光计算 */
   opticalCompute: `<svg viewBox="0 0 460 220" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif">
   <defs><marker id="eo-oc1" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><polygon points="0 0, 8 4, 0 8" fill="#2563eb"/></marker></defs>
   <rect x="30" y="40" width="100" height="60" fill="#dbeafe" stroke="#2563eb" stroke-width="1.6" rx="6"/>
-  <text x="52" y="78" fill="#1e40af" font-size="13" font-weight="700" font-style="italic">A</text>
+  <text x="70" y="80" fill="#1e40af" font-size="14" font-weight="700" font-style="italic">A</text>
   <rect x="180" y="40" width="100" height="60" fill="#fef3c7" stroke="#d97706" stroke-width="1.6" rx="6"/>
-  <text x="202" y="78" fill="#b45309" font-size="13" font-weight="700" font-style="italic">B</text>
+  <text x="220" y="80" fill="#b45309" font-size="14" font-weight="700" font-style="italic">B</text>
   <rect x="330" y="40" width="100" height="60" fill="#dcfce7" stroke="#16a34a" stroke-width="1.6" rx="6"/>
-  <text x="356" y="78" fill="#15803d" font-size="13" font-weight="700" font-style="italic">A ⊕ B</text>
+  <text x="356" y="80" fill="#15803d" font-size="13" font-weight="700" font-style="italic">A ⊕ B</text>
   <line x1="130" y1="70" x2="175" y2="70" stroke="#2563eb" stroke-width="2" marker-end="url(#eo-oc1)"/>
   <line x1="280" y1="70" x2="325" y2="70" stroke="#2563eb" stroke-width="2" marker-end="url(#eo-oc1)"/>
   <text x="140" y="130" fill="#475569" font-size="11">输入A</text>
@@ -588,7 +584,7 @@ const LA_FIG = {
   <text x="40" y="210" fill="#7c3aed" font-size="11">并行光信号处理，二维运算</text>
 </svg>`,
 
-  /* 空间滤波 */
+  /* 18. 空间滤波 */
   spatialFilter: `<svg viewBox="0 0 480 220" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif">
   <line x1="20" y1="110" x2="460" y2="110" stroke="#94a3b8" stroke-width="1.2"/>
   <line x1="60" y1="30" x2="60" y2="190" stroke="#dc2626" stroke-width="2"/>
@@ -603,16 +599,73 @@ const LA_FIG = {
   <line x1="430" y1="30" x2="430" y2="190" stroke="#dc2626" stroke-width="2"/>
   <text x="412" y="206" fill="#dc2626" font-size="12" font-weight="700">像面</text>
   <text x="180" y="20" fill="#7c3aed" font-size="12" font-weight="700">4f 空间滤波系统</text>
+</svg>`,
+
+  /* 19. 变焦系统 */
+  zoom: `<svg viewBox="0 0 480 240" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif">
+  <defs><marker id="eo-z1" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><polygon points="0 0, 8 4, 0 8" fill="#94a3b8"/></marker></defs>
+  <line x1="20" y1="120" x2="460" y2="120" stroke="#94a3b8" stroke-width="1.2"/>
+  <path d="M 100 40 Q 118 120 100 200 Q 82 120 100 40 Z" fill="#dbeafe" stroke="#2563eb" stroke-width="1.6"/>
+  <text x="86" y="220" fill="#2563eb" font-size="11" font-weight="700">前固定组</text>
+  <path d="M 200 40 Q 218 120 200 200 Q 182 120 200 40 Z" fill="#fef3c7" stroke="#d97706" stroke-width="1.6"/>
+  <text x="180" y="220" fill="#b45309" font-size="11" font-weight="700">变倍组</text>
+  <line x1="180" y1="220" x2="240" y2="220" stroke="#d97706" stroke-width="1.8"/>
+  <polygon points="180,220 186,216 186,224" fill="#d97706"/>
+  <polygon points="240,220 234,216 234,224" fill="#d97706"/>
+  <path d="M 300 40 Q 318 120 300 200 Q 282 120 300 40 Z" fill="#fce7f3" stroke="#db2777" stroke-width="1.6"/>
+  <text x="280" y="220" fill="#db2777" font-size="11" font-weight="700">补偿组</text>
+  <line x1="280" y1="230" x2="330" y2="230" stroke="#db2777" stroke-width="1.8"/>
+  <path d="M 400 40 Q 418 120 400 200 Q 382 120 400 40 Z" fill="#dcfce7" stroke="#16a34a" stroke-width="1.6"/>
+  <text x="386" y="220" fill="#16a34a" font-size="11" font-weight="700">后固定组</text>
+  <text x="150" y="20" fill="#0f172a" font-size="12" font-weight="700">变焦系统（机械补偿型）</text>
+</svg>`,
+
+  /* 20. 光纤/波导 */
+  fiber: `<svg viewBox="0 0 460 200" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif">
+  <defs><marker id="eo-fb1" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><polygon points="0 0, 8 4, 0 8" fill="#dc2626"/></marker></defs>
+  <rect x="40" y="40" width="380" height="20" fill="#dbeafe" stroke="#2563eb" stroke-width="1.4"/>
+  <rect x="40" y="90" width="380" height="20" fill="#dbeafe" stroke="#2563eb" stroke-width="1.4"/>
+  <rect x="40" y="140" width="380" height="20" fill="#dbeafe" stroke="#2563eb" stroke-width="1.4"/>
+  <line x1="20" y1="50" x2="40" y2="50" stroke="#dc2626" stroke-width="2" marker-end="url(#eo-fb1)"/>
+  <line x1="20" y1="100" x2="40" y2="100" stroke="#dc2626" stroke-width="2" marker-end="url(#eo-fb1)"/>
+  <line x1="20" y1="150" x2="40" y2="150" stroke="#dc2626" stroke-width="2" marker-end="url(#eo-fb1)"/>
+  <text x="160" y="180" fill="#2563eb" font-size="12" font-weight="700">光纤 / 集成光波导</text>
+  <text x="20" y="190" fill="#dc2626" font-size="11">输入光</text>
+</svg>`,
+
+  /* 21. 神经网络 */
+  neural: `<svg viewBox="0 0 480 220" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif">
+  <g fill="#fbbf24" stroke="#d97706" stroke-width="1.2">
+    <circle cx="60" cy="50" r="10"/><circle cx="60" cy="110" r="10"/><circle cx="60" cy="170" r="10"/>
+  </g>
+  <g fill="#7c3aed" stroke="#5b21b6" stroke-width="1.2">
+    <circle cx="200" cy="40" r="10"/><circle cx="200" cy="90" r="10"/><circle cx="200" cy="140" r="10"/><circle cx="200" cy="190" r="10"/>
+  </g>
+  <g fill="#16a34a" stroke="#15803d" stroke-width="1.2">
+    <circle cx="380" cy="70" r="10"/><circle cx="380" cy="150" r="10"/>
+  </g>
+  <g stroke="#94a3b8" stroke-width="0.8" fill="none">
+    <line x1="70" y1="50" x2="190" y2="40"/><line x1="70" y1="50" x2="190" y2="90"/><line x1="70" y1="50" x2="190" y2="140"/><line x1="70" y1="50" x2="190" y2="190"/>
+    <line x1="70" y1="110" x2="190" y2="40"/><line x1="70" y1="110" x2="190" y2="90"/><line x1="70" y1="110" x2="190" y2="140"/><line x1="70" y1="110" x2="190" y2="190"/>
+    <line x1="70" y1="170" x2="190" y2="40"/><line x1="70" y1="170" x2="190" y2="90"/><line x1="70" y1="170" x2="190" y2="140"/><line x1="70" y1="170" x2="190" y2="190"/>
+    <line x1="210" y1="40" x2="370" y2="70"/><line x1="210" y1="40" x2="370" y2="150"/>
+    <line x1="210" y1="90" x2="370" y2="70"/><line x1="210" y1="90" x2="370" y2="150"/>
+    <line x1="210" y1="140" x2="370" y2="70"/><line x1="210" y1="140" x2="370" y2="150"/>
+    <line x1="210" y1="190" x2="370" y2="70"/><line x1="210" y1="190" x2="370" y2="150"/>
+  </g>
+  <text x="30" y="30" fill="#b45309" font-size="11" font-weight="700">输入层</text>
+  <text x="170" y="30" fill="#5b21b6" font-size="11" font-weight="700">隐层</text>
+  <text x="360" y="30" fill="#15803d" font-size="11" font-weight="700">输出层</text>
 </svg>`
 };
 
 /* =========================================================
-   数据
+   数据（已修正全部语法错误）
    ========================================================= */
 const LA_TAG_LABEL = {def:'定 义', thm:'定 理', der:'推 导', exa:'例 子', app:'应 用', his:'注 记'};
 
 const LA_DATA = [
-/* ================= 第一章 理想光学系统及其变换 ================= */
+/* ================= 第一章 ================= */
 {
   id:'la-ch1', num:'第一章', title:'理想光学系统及其变换', en:'IDEAL OPTICAL SYSTEMS & TRANSFORMATIONS',
   sub:'系统、共线变换、物像关系、组合系统与信息能量传输',
@@ -649,7 +702,7 @@ const LA_DATA = [
 <li><strong>灰箱系统</strong>：介于黑箱和白箱之间</li>
 </ul>
 <div class="la-callout la-app">日常应用　买电视时通电看图像、买西瓜时敲拍听声，都是典型的黑箱方法。</div>`},
-      {id:'la-k1-4', name:'数学算符表示系统', tags:['def','der'], brief:'用算符 $\\mathcal{A}\\{\\cdot\\}$ 表示系统对输入的变换。',
+      {id:'la-k1-4', name:'数学算符表示系统', tags:['def','der'], brief:'用算符 A{·} 表示系统对输入的变换。',
         body:`<p>用数学算符（算子）表示系统对输入函数和输出函数间的变换关系。</p>
 <div class="la-fml">$$\\mathcal{A}\\{f_i(x)\\} = g_i(x),\\quad i = 1,2,\\dots,n$$</div>
 <p>例如，傅里叶变换系统可以表示为</p>
@@ -684,7 +737,7 @@ const LA_DATA = [
 <p>共线变换的解析式（$x,y,z$ 为物点坐标，$x',y',z'$ 为像点坐标）：</p>
 <div class="la-fml">$$x' = \\frac{a_1x + b_1y + c_1z + d_1}{ax + by + cz + d},\\quad y' = \\frac{a_2x + b_2y + c_2z + d_2}{ax + by + cz + d},\\quad z' = \\frac{a_3x + b_3y + c_3z + d_3}{ax + by + cz + d}$$</div>
 <p>当分母为零时，对应点位于物方焦面或像方焦面。</p>`},
-      {id:'la-k1-8', name:'轴对称系统的物像变换关系', tags:'thm', tags:['thm','der'], brief:'牛顿公式、高斯公式、主面、节点、放大率。',
+      {id:'la-k1-8', name:'轴对称系统的物像变换关系', tags:['thm','der'], brief:'牛顿公式、高斯公式、主面、节点、放大率。',
         fig:'newton', figCap:'图 1.3　导出牛顿公式的坐标系关系图',
         body:`<p>光学系统多对光轴旋转对称，因此研究子午面内的物像关系即可。</p>
 <p><strong>牛顿公式</strong>　以焦点为原点：</p>
@@ -702,7 +755,7 @@ const LA_DATA = [
 <div class="la-fml">$$\\alpha = -\\beta^2\\frac{f'}{f} = \\beta^2\\frac{n'}{n}$$</div>
 <p><strong>三者关系</strong></p>
 <div class="la-fml">$$\\alpha\\gamma = \\beta,\\qquad \\beta\\gamma = \\frac{n}{n'}$$</div>`},
-      {id:'la-k1-9', name:'拉格朗日不变量', tags:['thm','app'], brief:'$nuy = n′u′y′$，与信息容量和传能特性相关。',
+      {id:'la-k1-9', name:'拉格朗日不变量', tags:['thm','app'], brief:'nuy = n′u′y′，与信息容量和传能特性相关。',
         body:`<p><strong>拉氏不变量</strong></p>
 <div class="la-fml">$$j = nuy = n'u'y'$$</div>
 <p>或写成角度形式：</p>
@@ -711,7 +764,7 @@ const LA_DATA = [
 <div class="la-fml">$$j = nuy = n'u'y'$$</div>
 <p>拉氏不变量在物、像共轭面上的任何点都相同，是光学系统的基本恒等式。</p>
 <div class="la-callout la-app">物理意义　拉氏不变量表征了系统的信息容量（空间带宽积）和能量传递特性。它既描述了光束的几何结构，也反映了光能量的传输规律。</div>`},
-      {id:'la-k1-10', name:'傍轴近似下的变换公式', tags:['thm','der'], brief:'$\\sin x \\approx \\tan x \\approx x$，$\\cos x \\approx 1$。',
+      {id:'la-k1-10', name:'傍轴近似下的变换公式', tags:['thm','der'], brief:'sin x ≈ tan x ≈ x，cos x ≈ 1。',
         body:`<p>傍轴条件下（$\\sin x \\approx \\tan x \\approx x$，$\\cos x \\approx 1$），公式大大简化：</p>
 <p><strong>焦距与光焦度</strong></p>
 <div class="la-fml">$$f' = h/u_F',\\quad f = h/u_F,\\qquad \\Phi = n'/f' = -n/f$$</div>
@@ -745,7 +798,7 @@ const LA_DATA = [
 <div class="la-fml">$$l_F' = f'(1 - d/f_1'),\\qquad l_F = f(1 + d/f_2)$$</div>
 <p><strong>放大率乘积关系</strong></p>
 <div class="la-fml">$$\\beta = \\beta_1\\beta_2\\cdots\\beta_k,\\quad \\gamma = \\gamma_1\\gamma_2\\cdots\\gamma_k,\\quad \\alpha = \\alpha_1\\alpha_2\\cdots\\alpha_k$$</div>`},
-      {id:'la-k1-13', name:'单透镜的基本要素', tags:['der','exa'], brief:'$\\Phi = (n-1)(c_1-c_2) + \\frac{(n-1)^2}{n}dc_1c_2$。',
+      {id:'la-k1-13', name:'单透镜的基本要素', tags:['der','exa'], brief:'Φ = (n-1)(c₁-c₂) + (n-1)²/n·d·c₁c₂。',
         body:`<p>单透镜可看作两个折射球面的组合。设两面曲率 $c_1 = 1/r_1, c_2 = 1/r_2$，中心厚度 $d$，折射率 $n$，则</p>
 <div class="la-fml">$$\\Phi = (n-1)(c_1 - c_2) + \\frac{(n-1)^2}{n}dc_1c_2$$</div>
 <p>薄透镜（$d \\to 0$）：$\\Phi = (n-1)(c_1 - c_2)$。</p>
@@ -754,7 +807,7 @@ const LA_DATA = [
 <p>对于双凸、双凹透镜，$l_H' > 0$，主面在透镜内部；对于弯月透镜，主面可能在透镜外部。</p>`}
     ]},
     {name:'1.4 典型组合系统', color:'#0f766e', desc:'无焦系统、定焦系统与变焦系统', items:[
-      {id:'la-k1-14', name:'无焦系统', tags:['def','app'], brief:'$\\Phi = 0$，平行光入射仍平行出射。',
+      {id:'la-k1-14', name:'无焦系统', tags:['def','app'], brief:'Φ = 0，平行光入射仍平行出射。',
         body:`<p><strong>无焦系统</strong>　$\\Phi = 0$，焦距无限大。平行光入射后仍以平行光出射。</p>
 <p><strong>基本关系</strong></p>
 <div class="la-fml">$$x_2' = \\frac{f_2f_2'}{f_1f_1'}x_1 = \\beta^2 x_1,\\qquad \\beta = \\frac{f_2}{f_1'},\\qquad \\gamma = \\frac{f_1}{f_2'},\\qquad \\alpha = \\frac{f_2f_2'}{f_1f_1'}$$</div>
@@ -805,6 +858,7 @@ const LA_DATA = [
 <div class="la-fml">$$\\Delta = \\frac{2f'^2 Z'}{f'^4/(p^2 F^{\\#}) - Z'^2 F^{\\#}}$$</div>
 <p>其中 $Z'$ 为像面允许弥散斑直径，$p$ 为对准平面距离。</p>`},
       {id:'la-k1-18', name:'变焦系统', tags:['def','app'], brief:'焦距可连续变化，像面保持稳定。',
+        fig:'zoom', figCap:'图 1.7　机械补偿型变焦系统',
         body:`<p><strong>变焦系统</strong>　焦距可在一定范围内连续变化，但相对孔径和像面位置保持不变。</p>
 <p><strong>变倍比</strong></p>
 <div class="la-fml">$$M = f_{max}'/f_{min}' = |\\beta|_{max}/|\\beta|_{min}$$</div>
@@ -828,7 +882,7 @@ const LA_DATA = [
 <div class="la-callout la-app">应用　显微镜、投影仪、放映机、放大机等。</div>`}
     ]},
     {name:'1.5 理想光学系统的相位变换特性', color:'#0d9488', desc:'光程、几何波前与非球面系统', items:[
-      {id:'la-k1-20', name:'光程与几何波前', tags:['def','thm'], brief:'$\\mathrm{OPL} = \\int n\\,\\mathrm{d}l$；几何波前为等光程面。',
+      {id:'la-k1-20', name:'光程与几何波前', tags:['def','thm'], brief:'OPL = ∫n dl；几何波前为等光程面。',
         body:`<p><strong>光程</strong>　光线在介质中经过的几何路程 $l$ 与该介质折射率 $n$ 的乘积：</p>
 <div class="la-fml">$$\\mathrm{OPL} = nl\\qquad \\text{或}\\qquad \\mathrm{OPL} = \\int_{a}^{b}n\\,\\mathrm{d}l$$</div>
 <p><strong>几何波前</strong>　距光源光程为常数的几何面。由马吕斯定律，光线束是几何波前的法线汇。</p>
@@ -857,7 +911,7 @@ const LA_DATA = [
 <p><strong>折射型等程面</strong>　$\\alpha = -n^2/n'^2$。$n < n'$ 时为椭球面，$n > n'$ 时为双曲面。</p>`}
     ]},
     {name:'1.6 光学系统对信息的变换特性', color:'#6d28d9', desc:'信息论基础、点源响应与频率响应', items:[
-      {id:'la-k1-23', name:'信息论基本概念', tags:['def','exa'], brief:'信息量 $I = -\\log_2 p$；熵 $H = -\\sum p_i\\log_2 p_i$。',
+      {id:'la-k1-23', name:'信息论基本概念', tags:['def','exa'], brief:'信息量 I = -log₂p；熵 H = -Σpᵢlog₂pᵢ。',
         body:`<p><strong>信息</strong>　可理解为对不确定性的测度，即信宿被消除了的不确定性。</p>
 <p><strong>信息量</strong>（单个消息）</p>
 <div class="la-fml">$$I(a) = \\log_2\\frac{1}{p(a)} = -\\log_2 p(a)$$</div>
@@ -868,7 +922,7 @@ const LA_DATA = [
 <p><strong>冗余度</strong></p>
 <div class="la-fml">$$\\gamma = 1 - \\frac{H}{H_{max}}$$</div>
 <p>英语字母表的熵约 4.14 bit，冗余度约 0.12。</p>`},
-      {id:'la-k1-24', name:'点源响应与卷积成像', tags:['thm','der'], brief:'$f′(y,z) = f(y,z) \\ast h(y,z)$。',
+      {id:'la-k1-24', name:'点源响应与卷积成像', tags:['thm','der'], brief:'f′(y,z) = f(y,z) ∗ h(y,z)。',
         body:`<p><strong>物函数分解</strong></p>
 <div class="la-fml">$$f(y,z) = \\iint f(y_0,z_0)\\delta(y-y_0,z-z_0)\\,\\mathrm{d}y_0\\,\\mathrm{d}z_0$$</div>
 <p><strong>点源响应函数</strong>　系统对 $\\delta$ 函数的输出：</p>
@@ -877,7 +931,7 @@ const LA_DATA = [
 <p><strong>卷积成像公式</strong></p>
 <div class="la-fml">$$f'(y,z) = \\iint f(y_0,z_0)h(y-y_0,z-z_0)\\,\\mathrm{d}y_0\\,\\mathrm{d}z_0 = f(y,z)\\ast h(y,z)$$</div>
 <p>理想成像系统 $h = \\delta$，则 $f' = f$。</p>`},
-      {id:'la-k1-25', name:'空间频率响应与传递函数', tags:['def','thm'], brief:'$H(u,v) = F′(u,v)/F(u,v)$。',
+      {id:'la-k1-25', name:'空间频率响应与传递函数', tags:['def','thm'], brief:'H(u,v) = F′(u,v)/F(u,v)。',
         body:`<p>物函数和像函数可分别进行傅里叶分解：</p>
 <div class="la-fml">$$F(u,v) = \\iint f(y,z)\\exp[-j2\\pi(uy+vz)]\\,\\mathrm{d}y\\,\\mathrm{d}z$$</div>
 <p><strong>传递函数</strong>　系统对空间频率的响应函数：</p>
@@ -911,7 +965,7 @@ const LA_DATA = [
 <p><strong>元光管中光通量守恒</strong></p>
 <div class="la-fml">$$\\mathrm{d}\\Phi = L\\cos\\theta\\,\\mathrm{d}A\\,\\mathrm{d}\\Omega$$</div>
 <p>自由传播中亮度守恒：$L_1 = L_2$。</p>`},
-      {id:'la-k1-29', name:'理想系统的传能规律', tags:['thm','der'], brief:'$L/n^2$ 守恒；像面照度与相对孔径平方成正比。',
+      {id:'la-k1-29', name:'理想系统的传能规律', tags:['thm','der'], brief:'L/n² 守恒；像面照度与相对孔径平方成正比。',
         body:`<p><strong>斯特劳贝尔定理</strong></p>
 <div class="la-fml">$$n^2\\cos\\varepsilon\\,\\mathrm{d}A\\,\\mathrm{d}\\Omega = n'^2\\cos\\varepsilon'\\,\\mathrm{d}A'\\,\\mathrm{d}\\Omega'$$</div>
 <p><strong>亮度变换</strong></p>
@@ -923,7 +977,7 @@ const LA_DATA = [
 <p><strong>轴外照度</strong></p>
 <div class="la-fml">$$E_\\omega = E_0\\cos^4\\omega'$$</div>
 <p>按视场角余弦四次方衰减。</p>`},
-      {id:'la-k1-30', name:'系统传光效率', tags:'def', tags:['def','app'], brief:'反射、吸收、总传光系数。',
+      {id:'la-k1-30', name:'系统传光效率', tags:['def','app'], brief:'反射、吸收、总传光系数。',
         body:`<p><strong>菲涅耳反射率</strong>（小角度）</p>
 <div class="la-fml">$$\\rho = \\left(\\frac{n' - n}{n' + n}\\right)^2$$</div>
 <p><strong>系统传光效率</strong></p>
@@ -940,7 +994,7 @@ const LA_DATA = [
   ]
 },
 
-/* ================= 第二章 实际光学系统的几何成像特性 ================= */
+/* ================= 第二章 ================= */
 {
   id:'la-ch2', num:'第二章', title:'实际光学系统的几何成像特性', en:'GEOMETRIC IMAGING OF REAL SYSTEMS',
   sub:'光学材料、光线光路计算与几何像差',
@@ -967,7 +1021,7 @@ const LA_DATA = [
 <li><strong>单色像差</strong>：球差、彗差、像散、场曲、畸变</li>
 <li><strong>色像差</strong>：位置色差、倍率色差</li>
 </ul>`},
-      {id:'la-k2-3', name:'典型光组的像差校正要求', tags:'app', tags:['app','exa'], brief:'不同系统需校正的主要像差不同。',
+      {id:'la-k2-3', name:'典型光组的像差校正要求', tags:['app','exa'], brief:'不同系统需校正的主要像差不同。',
         body:`<p><strong>望远物镜</strong>　小视场，主要校正球差、正弦差、色差。</p>
 <p><strong>显微物镜</strong>　小视场，主要校正球差、正弦差、色差。复消色物镜需校正二级光谱。平场物镜需校正场曲。</p>
 <p><strong>目镜</strong>　小孔径大视场，主要校正彗差、像散、场曲、倍率色差。</p>
@@ -998,7 +1052,7 @@ const LA_DATA = [
 <li><strong>入射窗、出射窗</strong>：视场光阑在物空间和像空间的像</li>
 </ul>
 <p><strong>子午面与弧矢面</strong>　包含物点和光轴的平面称子午面；包含主光线且垂直于子午面的平面称弧矢面。</p>`},
-      {id:'la-k2-6', name:'子午面三角描光路公式', tags:['der','thm'], brief:'$\\sin I = \\frac{L-r}{r}\\sin U$ 等。',
+      {id:'la-k2-6', name:'子午面三角描光路公式', tags:['der','thm'], brief:'sin I = (L-r)/r·sin U 等。',
         fig:'rayTrace', figCap:'图 2.1　导出三角描光路公式的几何图',
         body:`<p>单折射球面子午面三角光路计算公式：</p>
 <div class="la-fml">$$\\begin{aligned}
@@ -1022,7 +1076,7 @@ l' &= r + r\\frac{i'}{u'}
 <p>傍轴光路计算用于确定系统的理想参量：焦距、主面、焦点、理想像面等。</p>`}
     ]},
     {name:'2.3 球差', color:'#c2410c', desc:'轴上物点的单色像差', items:[
-      {id:'la-k2-8', name:'球差的定义与表示', tags:'def', tags:['def','der'], brief:'$LA\' = L\' - l\'$（轴向）；$TA\' = LA\'\\tan U\'$（垂轴）。',
+      {id:'la-k2-8', name:'球差的定义与表示', tags:['def','der'], brief:'LA′ = L′ - l′（轴向）；TA′ = LA′·tan U′（垂轴）。',
         fig:'sphericalAb', figCap:'图 2.2　球差示意图：不同孔径光线交光轴于不同位置',
         body:`<p><strong>球差</strong>　轴上物点发出的同心光束经系统后，不同孔径光线与光轴交于不同位置。</p>
 <p><strong>轴向球差</strong></p>
@@ -1031,7 +1085,7 @@ l' &= r + r\\frac{i'}{u'}
 <div class="la-fml">$$TA' = LA'\\tan U' = (L' - l')\\tan U'$$</div>
 <p>正单透镜产生负球差；负单透镜产生正球差。</p>
 <p><strong>球差曲线</strong>　$LA'$ 随入射高度 $h$（或 $U$）的变化曲线。由此可判断球差校正状况。</p>`},
-      {id:'la-k2-9', name:'球差的幂级数表示', tags:['der','thm'], brief:'$LA\' = A_1h^2 + A_2h^4 + \\cdots$。',
+      {id:'la-k2-9', name:'球差的幂级数表示', tags:['der','thm'], brief:'LA′ = A₁h² + A₂h⁴ + ⋯。',
         body:`<p>由轴对称性，球差可展开为孔径的偶次幂级数：</p>
 <div class="la-fml">$$LA' = A_1h^2 + A_2h^4 + A_3h^6 + \\cdots$$</div>
 <p>其中：</p>
@@ -1040,14 +1094,14 @@ l' &= r + r\\frac{i'}{u'}
 <li>第二项及以后：<strong>高级球差</strong>（二级、三级……）</li>
 </ul>
 <p>绝大多数系统取前两项即足够：$LA' = A_1h^2 + A_2h^4$。</p>`},
-      {id:'la-k2-10', name:'球差的校正与剩余带球差', tags:'thm', tags:['thm','app'], brief:'边缘球差为零时，0.707 带有最大剩余球差。',
+      {id:'la-k2-10', name:'球差的校正与剩余带球差', tags:['thm','app'], brief:'边缘球差为零时，0.707 带有最大剩余球差。',
         body:`<p>当系统只含初级和二级球差时，令边缘光线球差为零（$A_1 = -A_2$），则：</p>
 <div class="la-fml">$$LA' = A_1\\left[\\left(\\frac{h}{h_m}\\right)^2 - \\left(\\frac{h}{h_m}\\right)^4\\right]$$</div>
 <p>该式在 $h/h_m = 1/\\sqrt{2} = 0.707$ 处取得极值：</p>
 <div class="la-fml">$$LA'_{max} = A_1/4 = -A_2/4$$</div>
 <p>即：当边缘光线球差校为零时，0.707 带（即全孔径的 $1/\\sqrt{2}$）出现最大剩余球差，其值等于边缘带初级球差的 $1/4$。</p>
-<div class="la-callout la-app">工程实践　设计时常采用"边缘光校正、0.707 带剩余"的方案，以获得最佳综合性能。</div>`},
-      {id:'la-k2-11', name:'球差的分布', tags:'der', tags:['der','thm'], brief:'初级球差分布 $S_1 = lun\\,i(i-i′)(i′-u)$。',
+<div class="la-callout la-app">工程实践　设计时常采用“边缘光校正、0.707 带剩余”的方案，以获得最佳综合性能。</div>`},
+      {id:'la-k2-11', name:'球差的分布', tags:['der','thm'], brief:'初级球差分布 S₁ = lun·i(i-i′)(i′-u)。',
         body:`<p>系统总球差可由各面分布之和表示：</p>
 <div class="la-fml">$$LA'(\\text{初级}) = -\\frac{1}{2n_k'u_k'^2}\\sum_{1}^{k}S_1,\\qquad S_1 = lun\\,i(i-i')(i'-u)$$</div>
 <p><strong>不产生球差的条件</strong></p>
@@ -1057,7 +1111,7 @@ l' &= r + r\\frac{i'}{u'}
 <li>$i' = u$ 或 $i = u'$：$l = \\frac{n+n'}{n}r$，$l' = \\frac{n+n'}{n'}r$（不晕点）</li>
 </ul>
 <p><strong>单球面产生球差的大小与正负</strong>　$h/r$ 越小，高级球差越小；偏角不宜超过 0.25，对高质量系统不宜超过 0.15。</p>`},
-      {id:'la-k2-12', name:'单透镜的球差特性', tags:'thm','exa', brief:'最佳弯曲形状使球差最小；反射镜比透镜球差小 8 倍。',
+      {id:'la-k2-12', name:'单透镜的球差特性', tags:['thm','exa'], brief:'最佳弯曲形状使球差最小；反射镜比透镜球差小 8 倍。',
         body:`<p><strong>不晕透镜</strong>　对特殊物点不产生球差的透镜，如正弯月、负弯月、同心球面透镜。</p>
 <p><strong>薄单透镜初级球差</strong></p>
 <div class="la-fml">$$LA' = -\\frac{h^4}{2u_2'^2}\\left[\\frac{n+2}{n}qc_1^2 - \\cdots\\right]$$</div>
@@ -1068,12 +1122,12 @@ l' &= r + r\\frac{i'}{u'}
 <p><strong>与球面反射镜对比</strong>　反射镜的球差比最佳弯曲单透镜小 8 倍。</p>`}
     ]},
     {name:'2.4 正弦差与等晕条件', color:'#7c3aed', desc:'近轴物点宽光束成像', items:[
-      {id:'la-k2-13', name:'正弦差的定义与计算', tags:['def','der'], brief:'$OSC\' = y_s\'/h_p\' - 1$。',
+      {id:'la-k2-13', name:'正弦差的定义与计算', tags:['def','der'], brief:'OSC′ = yₛ′/hₚ′ - 1。',
         body:`<p><strong>正弦差</strong>　描述近轴物点用单色宽光束成像时，光束在垂轴方向的失对称性。</p>
 <div class="la-fml">$$OSC' = \\frac{y_s'}{h_p'} - 1 = \\frac{u'}{u}\\cdot\\frac{\\sin U}{\\sin U'}\\cdot\\frac{l' - l_p'}{L' - l_p'} - 1$$</div>
 <p>无量纲量。对于物在无限远：</p>
 <div class="la-fml">$$OSC' = \\frac{h}{f'\\sin U'}\\cdot\\frac{l' - l_p'}{L' - l_p'} - 1$$</div>`},
-      {id:'la-k2-14', name:'等晕成像与不晕成像', tags:'thm', tags:['thm','app'], brief:'$OSC\' = 0$ 时等晕；$LA\' = 0, OSC\' = 0$ 时不晕。',
+      {id:'la-k2-14', name:'等晕成像与不晕成像', tags:['thm','app'], brief:'OSC′ = 0 时等晕；LA′ = 0, OSC′ = 0 时不晕。',
         body:`<p><strong>等晕成像</strong>　$OSC' = 0$，轴外点与轴上点成像质量相同。此时对垂轴小面元的成像称为等晕成像。</p>
 <p><strong>等晕条件</strong>（物在有限距离）</p>
 <div class="la-fml">$$\\frac{\\Delta\\beta}{\\beta} = \\frac{LA'}{l' - l_p'}$$</div>
@@ -1086,7 +1140,7 @@ l' &= r + r\\frac{i'}{u'}
 <li>$l = l' = r$（物像在球心）</li>
 <li>$l = \\frac{n+n'}{n}r$，$l' = \\frac{n+n'}{n'}r$</li>
 </ul>`},
-      {id:'la-k2-15', name:'正弦差的幂级数与分布', tags:['der','thm'], brief:'$OSC\' = a_1h^2 + a_2h^4 + \\cdots$。',
+      {id:'la-k2-15', name:'正弦差的幂级数与分布', tags:['der','thm'], brief:'OSC′ = a₁h² + a₂h⁴ + ⋯。',
         body:`<p><strong>级数表示</strong></p>
 <div class="la-fml">$$OSC' = a_1h^2 + a_2h^4 + a_3h^6 + \\cdots$$</div>
 <p><strong>初级正弦差分布</strong></p>
@@ -1094,17 +1148,17 @@ l' &= r + r\\frac{i'}{u'}
 <p>其中 $J$ 是拉氏不变量，$\\sum S_1$ 称为初级彗差系数。正弦差与光阑位置有关。</p>`}
     ]},
     {name:'2.5 轴外物点成像的单色光线像差', color:'#c2410c', desc:'像散、场曲、畸变、彗差', items:[
-      {id:'la-k2-16', name:'像散与场曲', tags:['def','der'], brief:'$\\Delta x\'_{ts} = x_t\' - x_s\'$；平面物成曲面像。',
+      {id:'la-k2-16', name:'像散与场曲', tags:['def','der'], brief:'Δx′ₜₛ = xₜ′ - xₛ′；平面物成曲面像。',
         body:`<p><strong>像散</strong>　轴外物点用细光束成像时，子午像点 $B_t'$ 与弧矢像点 $B_s'$ 不重合。表示式：</p>
 <div class="la-fml">$$\\Delta x_{ts}' = x_t' - x_s'$$</div>
 <p><strong>场曲</strong>　当像散消失但仍偏离理想平面，平面物成曲面像。</p>
 <p><strong>幂级数</strong></p>
 <div class="la-fml">$$x = a y^2 + b y^4 + \\cdots$$</div>
 <p><strong>初级分布</strong></p>
-<div class="la-fml">$$x_t'(\\text{初级}) = -\\frac{1}{2n_k'u_k'^2}\\sum(3S_\\text{Ⅲ} + S_\\text{Ⅳ})$$</div>
-<div class="la-fml">$$x_s'(\\text{初级}) = -\\frac{1}{2n_k'u_k'^2}\\sum(S_\\text{Ⅲ} + S_\\text{Ⅳ})$$</div>
-<p>其中 $S_\\text{Ⅲ} = S_1(i_p/i)^2$ 是像散分布系数，$S_\\text{Ⅳ} = J^2\\frac{n'-n}{n'nr}$ 是场曲分布系数。</p>`},
-      {id:'la-k2-17', name:'畸变', tags:'def', tags:['def','der'], brief:'只改变几何形状，不影响清晰度。',
+<div class="la-fml">$$x_t'(\\text{初级}) = -\\frac{1}{2n_k'u_k'^2}\\sum(3S_{\\text{Ⅲ}} + S_{\\text{Ⅳ}})$$</div>
+<div class="la-fml">$$x_s'(\\text{初级}) = -\\frac{1}{2n_k'u_k'^2}\\sum(S_{\\text{Ⅲ}} + S_{\\text{Ⅳ}})$$</div>
+<p>其中 $S_{\\text{Ⅲ}} = S_1(i_p/i)^2$ 是像散分布系数，$S_{\\text{Ⅳ}} = J^2\\frac{n'-n}{n'nr}$ 是场曲分布系数。</p>`},
+      {id:'la-k2-17', name:'畸变', tags:['def','der'], brief:'只改变几何形状，不影响清晰度。',
         body:`<p><strong>畸变</strong>　轴外点细光束成像时，实际像点偏离理想像点的垂轴距离。</p>
 <div class="la-fml">$$dy' = Y_p' - y',\\qquad dist = \\frac{dy'}{y'} = \\frac{Y_p' - y'}{y'}$$</div>
 <p><strong>幂级数</strong></p>
@@ -1115,7 +1169,7 @@ l' &= r + r\\frac{i'}{u'}
 <li>正畸变（枕形）：$dy' > 0$</li>
 <li>负畸变（桶形）：$dy' < 0$</li>
 </ul>`},
-      {id:'la-k2-18', name:'彗差', tags:'def', tags:['def','der'], brief:'轴外宽光束的失对称成像，形成彗星状光斑。',
+      {id:'la-k2-18', name:'彗差', tags:['def','der'], brief:'轴外宽光束的失对称成像，形成彗星状光斑。',
         body:`<p><strong>子午彗差</strong></p>
 <div class="la-fml">$$K_T' = \\frac{1}{2}(Y_\\perp' + Y_\\mp') - Y_p'$$</div>
 <p><strong>弧矢彗差</strong></p>
@@ -1123,7 +1177,7 @@ l' &= r + r\\frac{i'}{u'}
 <p><strong>幂级数</strong></p>
 <div class="la-fml">$$\\text{coma} = a_1h^2y + a_2h^4y + \\cdots + b_1h^2y^3 + \\cdots$$</div>
 <p>初级彗差与正弦差的关系：$K_T' \\approx 3y'OSC'$，$K_S' \\approx y'OSC'$。</p>`},
-      {id:'la-k2-19', name:'轴外宽光束场曲与轴外球差', tags:'def', tags:['def','der'], brief:'$X_T\'$、$X_s\'$、$LA_T\'$、$LA_s\'$。',
+      {id:'la-k2-19', name:'轴外宽光束场曲与轴外球差', tags:['def','der'], brief:'X_T′、Xₛ′、LA_T′、LAₛ′。',
         body:`<p><strong>宽光束子午场曲 $X_T'$</strong>　子午面内上下孔径光线对交点 $B_T'$ 到理想像面的距离。</p>
 <p><strong>宽光束弧矢场曲 $X_s'$</strong>　弧矢光线对交点 $B_s'$ 到理想像面的距离。</p>
 <p><strong>轴外球差</strong>　子午轴外球差 $LA_T'$ 和弧矢轴外球差 $LA_s'$：</p>
@@ -1131,7 +1185,7 @@ l' &= r + r\\frac{i'}{u'}
 <p>轴外球差也是孔径和视场的函数。</p>`}
     ]},
     {name:'2.6 复色光成像的几何像差', color:'#be123c', desc:'位置色差与倍率色差', items:[
-      {id:'la-k2-20', name:'位置色差', tags:'def', tags:['def','der'], brief:'$\\Delta L\'_{FC} = L\'_F - L\'_C$。',
+      {id:'la-k2-20', name:'位置色差', tags:['def','der'], brief:'ΔL′_FC = L′_F - L′_C。',
         fig:'chromatic', figCap:'图 2.3　位置色差：不同色光交光轴于不同位置',
         body:`<p><strong>位置色差（轴向色差）</strong>　轴上物点复色光成像时，不同颜色光线交光轴于不同位置：</p>
 <div class="la-fml">$$\\Delta L_{FC}' = L_F' - L_C'$$</div>
@@ -1144,7 +1198,7 @@ l' &= r + r\\frac{i'}{u'}
 <p>正透镜产生负色差，负透镜产生正色差。</p>
 <p><strong>平行平板色差</strong></p>
 <div class="la-fml">$$\\Delta l_{FC}' = \\frac{(n-1)d}{\\nu n^2}$$</div>`},
-      {id:'la-k2-21', name:'位置色差的校正', tags:'thm', tags:['thm','app'], brief:'通常校正 0.707 带色差，使剩余色差最小。',
+      {id:'la-k2-21', name:'位置色差的校正', tags:['thm','app'], brief:'通常校正 0.707 带色差，使剩余色差最小。',
         body:`<p>仅含初级和二级位置色差时：</p>
 <div class="la-fml">$$\\Delta L_{FC}' = \\Delta L_{FC} + a_1h^2$$</div>
 <p>令边缘带色差与初级色差反号：$\\Delta L_{FC}'(h_m) = -\\Delta L_{FC}$，则</p>
@@ -1152,14 +1206,14 @@ l' &= r + r\\frac{i'}{u'}
 <p>令 $\\Delta L_{FC}' = 0$，得 $h = 0.707h_m$。即<strong>校正 0.707 带色差</strong>时，剩余色差最小。</p>
 <p><strong>初级位置色差分布</strong></p>
 <div class="la-fml">$$\\Delta L_{FC}' = -\\frac{1}{n_k'u_k'}\\sum_{1}^{k}C_1,\\qquad C_1 = lun\\,i\\left(\\frac{\\Delta n'}{n'} - \\frac{\\Delta n}{n}\\right)$$</div>`},
-      {id:'la-k2-22', name:'倍率色差', tags:'def', tags:['def','der'], brief:'$\\Delta y\'_{FC} = y_F\' - y_C\'$。',
+      {id:'la-k2-22', name:'倍率色差', tags:['def','der'], brief:'Δy′_FC = y′_F - y′_C。',
         body:`<p><strong>倍率色差（垂轴色差）</strong>　不同色光的成像高度不同：</p>
 <div class="la-fml">$$\\Delta y_{FC}' = y_F' - y_C'$$</div>
 <p>相对值：$\\Delta y_{FC}'/y' = (y_F' - y_C')/y'$。</p>
 <p>倍率色差与视场一次方成正比，与光阑位置有关。可通过对称结构、胶合透镜、改变光阑位置校正。</p>
 <p><strong>初级倍率色差分布</strong></p>
-<div class="la-fml">$$\\Delta y_{FC}'(\\text{初级}) = -\\frac{1}{2n_k'u_k'}\\sum_{1}^{k}C_\\text{Ⅱ}$$</div>`},
-      {id:'la-k2-23', name:'二级光谱与复消色差', tags:'def', tags:['def','app'], brief:'F、C 光校正后剩余的残余色差。',
+<div class="la-fml">$$\\Delta y_{FC}'(\\text{初级}) = -\\frac{1}{2n_k'u_k'}\\sum_{1}^{k}C_{\\text{Ⅱ}}$$</div>`},
+      {id:'la-k2-23', name:'二级光谱与复消色差', tags:['def','app'], brief:'F、C 光校正后剩余的残余色差。',
         body:`<p><strong>二级光谱</strong>　F 和 C 光位置色差校正后，D 或 e 光焦点仍与它们的公共焦点存在残余偏离。</p>
 <p><strong>复消色差</strong>　同时校正 F、D、C（或更多波长）色差，使剩余二级光谱很小。常用特种玻璃（萤石、镧冕玻璃）实现。</p>
 <div class="la-callout la-app">应用　高级显微物镜、天文望远镜、长焦距平行光管等对色差要求极高的系统。</div>`}
@@ -1173,20 +1227,20 @@ l' &= r + r\\frac{i'}{u'}
 <div class="la-fml">$$W = -\\frac{1}{2}\\int LA'\\,u'^2\\,\\mathrm{d}u' \\quad\\text{或}\\quad LA' = -\\frac{1}{n'u'}\\frac{\\mathrm{d}W}{\\mathrm{d}u'}$$</div>
 <p>轴外物点：</p>
 <div class="la-fml">$$\\frac{\\partial W}{\\partial y} = -n'TA_y',\\qquad \\frac{\\partial W}{\\partial z} = -n'TA_z'$$</div>`},
-      {id:'la-k2-25', name:'焦深与参考点移动产生的波差', tags:['thm','app'], brief:'离焦产生的波像差 $W = \\frac{1}{2}n′\\Delta′ u′^2$。',
+      {id:'la-k2-25', name:'焦深与参考点移动产生的波差', tags:['thm','app'], brief:'离焦产生的波像差 W = ½·n′·Δ′·u′²。',
         body:`<p><strong>轴向离焦</strong>　当像面偏离理想像面 $\\Delta'$ 时，产生的波像差：</p>
 <div class="la-fml">$$W = \\frac{1}{2}n'\\Delta' u'^2$$</div>
 <p><strong>焦深</strong>　当波像差小于 $\\lambda/4$（瑞利判据）时，仍认为成像清晰。由此得到几何焦深：</p>
 <div class="la-fml">$$2\\Delta' = 2Z'F^{\\#}\\qquad\\text{或}\\qquad \\Delta' = \\pm Z'F^{\\#}$$</div>
 <p>其中 $Z'$ 为允许弥散斑直径，$F^{\\#} = f'/D$ 为光圈数。</p>
 <p><strong>垂轴离焦</strong>　参考点垂轴移动产生的波像差为线性的倾斜项。</p>`},
-      {id:'la-k2-26', name:'波色差与波像差计算', tags:'def', tags:['def','der'], brief:'波色差 $W_{FC} = W_F - W_C$。',
+      {id:'la-k2-26', name:'波色差与波像差计算', tags:['def','der'], brief:'波色差 W_FC = W_F - W_C。',
         body:`<p><strong>波色差</strong>　不同色光波像差之差：</p>
 <div class="la-fml">$$W_{FC} = W_F - W_C$$</div>
 <p><strong>波像差的计算</strong>　通过对各个面的光程差贡献求和：</p>
 <div class="la-fml">$$W = \\sum_{i=1}^{k}W_i$$</div>
 <p>每个面的贡献 $W_i = n_i\\,\\overline{AM_i} - n_{i-1}\\,\\overline{AM_{i-1}} - \\text{常量}$。</p>`},
-      {id:'la-k2-27', name:'像质评价方法', tags:'def', tags:['def','app'], brief:'瑞利判据、分辨率、点列图、OTF。',
+      {id:'la-k2-27', name:'像质评价方法', tags:['def','app'], brief:'瑞利判据、分辨率、点列图、OTF。',
         body:`<p><strong>瑞利判据</strong>　波像差小于 $\\lambda/4$ 时，成像质量接近理想（Strehl 比大于 0.8）。</p>
 <p><strong>分辨率</strong>　能分辨的最小间隔或每毫米线对数。</p>
 <p><strong>星点法</strong>　观察点光源的衍射图样，判断像差类型和大小。</p>
@@ -1197,25 +1251,25 @@ l' &= r + r\\frac{i'}{u'}
   ]
 },
 
-/* ================= 第三章 衍射映像原理及像质评价 ================= */
+/* ================= 第三章 ================= */
 {
   id:'la-ch3', num:'第三章', title:'光学系统的衍射映像原理及像质评价方法', en:'DIFFRACTION IMAGING & IMAGE QUALITY',
   sub:'光波场描述、衍射积分与像质评价',
   desc:'本章从光波场的数学描述开始，讨论光波场的叠加特性、衍射积分变换，建立光学系统的衍射映像理论，并介绍像质评价标准和测试方法。',
   sections:[
     {name:'3.1 光波场的数学描述', color:'#059669', desc:'波场复振幅、平面波、球面波与高斯束', items:[
-      {id:'la-k3-1', name:'单色稳态光波场', tags:'def', tags:['def','exa'], brief:'复振幅 $U = A\\exp(j\\varphi)$。',
+      {id:'la-k3-1', name:'单色稳态光波场', tags:['def','exa'], brief:'复振幅 U = A·exp(jφ)。',
         body:`<p><strong>波场的复振幅</strong></p>
 <div class="la-fml">$$U(P,t) = U(P)\\exp(-j\\omega t),\\qquad U(P) = A(P)\\exp[j\\varphi(P)]$$</div>
 <p>光强：$I = |U|^2 = U U^*$。</p>
 <p><strong>功率与能量</strong>　$\\Phi = \\iint I\\,\\mathrm{d}A$。</p>
 <p><strong>光屏函数（光瞳函数）</strong></p>
 <div class="la-fml">$$P(x,y) = \\begin{cases}1 & \\text{透过}\\\\ 0 & \\text{不透过}\\end{cases}$$</div>`},
-      {id:'la-k3-2', name:'平面波场与空间频率', tags:'def', tags:['def','thm'], brief:'复振幅 $U = A\\exp[j2\\pi(ux+vy)]$。',
+      {id:'la-k3-2', name:'平面波场与空间频率', tags:['def','thm'], brief:'复振幅 U = A·exp[j2π(ux+vy)]。',
         body:`<p>沿方向余弦 $(\\cos\\alpha,\\cos\\beta)$ 传播的平面波：</p>
 <div class="la-fml">$$U(x,y) = A\\exp[jk(x\\cos\\alpha + y\\cos\\beta)] = A\\exp[j2\\pi(ux + vy)]$$</div>
-<p>其中空间频率 $u = \\cos\\alpha/\\lambda$，$v = \\cos\\beta/\\lambda$。空间频率与传播方向对应，是高空间频率对应大角度传播。</p>`},
-      {id:'la-k3-3', name:'球面波场与高斯束', tags:'def', tags:['def','der'], brief:'球面波近场近似与远场近似；高斯束的传播。',
+<p>其中空间频率 $u = \\cos\\alpha/\\lambda$，$v = \\cos\\beta/\\lambda$。空间频率与传播方向对应，高空间频率对应大角度传播。</p>`},
+      {id:'la-k3-3', name:'球面波场与高斯束', tags:['def','der'], brief:'球面波近场近似与远场近似；高斯束的传播。',
         body:`<p><strong>球面波</strong>　从点源发出的波，其波面为球面：</p>
 <div class="la-fml">$$U(P) = \\frac{A}{r}\\exp(jkr)$$</div>
 <p><strong>菲涅耳近似</strong>（傍轴）</p>
@@ -1225,7 +1279,7 @@ l' &= r + r\\frac{i'}{u'}
 <p>束腰 $w_0$，发散角 $\\theta = \\lambda/(\\pi w_0)$。</p>`}
     ]},
     {name:'3.2 光波场的叠加特性', color:'#0d9488', desc:'相干性、叠加与线性系统', items:[
-      {id:'la-k3-4', name:'光波场的叠加', tags:'def','thm', brief:'相干场：复振幅叠加；非相干场：强度叠加。',
+      {id:'la-k3-4', name:'光波场的叠加', tags:['def','thm'], brief:'相干场：复振幅叠加；非相干场：强度叠加。',
         body:`<p><strong>两波场叠加</strong>　$U = U_1 + U_2$，强度：</p>
 <div class="la-fml">$$I = |U_1 + U_2|^2 = I_1 + I_2 + 2\\sqrt{I_1I_2}\\cos\\delta$$</div>
 <p>其中 $\\delta$ 为相位差。</p>
@@ -1236,7 +1290,7 @@ l' &= r + r\\frac{i'}{u'}
 <li><strong>部分相干</strong>：由互强度描述</li>
 </ul>
 <p><strong>复相干度</strong>　$\\gamma_{12}(\\tau) = \\Gamma_{12}(\\tau)/\\sqrt{I_1I_2}$，$0 \\leq |\\gamma| \\leq 1$。</p>`},
-      {id:'la-k3-5', name:'相干性与相关函数', tags:'def', tags:['def','thm'], brief:'互相干函数与复相干度。',
+      {id:'la-k3-5', name:'相干性与相关函数', tags:['def','thm'], brief:'互相干函数与复相干度。',
         body:`<p><strong>互相干函数</strong></p>
 <div class="la-fml">$$\\Gamma_{12}(\\tau) = \\langle U_1(t+\\tau)U_2^*(t)\\rangle$$</div>
 <p><strong>复相干度</strong></p>
@@ -1245,14 +1299,14 @@ l' &= r + r\\frac{i'}{u'}
 <p><strong>相干时间与相干长度</strong>　$\\tau_c = 1/\\Delta\\nu$，$l_c = c\\tau_c$。</p>`}
     ]},
     {name:'3.3 受限波场的衍射积分变换', color:'#7c3aed', desc:'衍射积分公式与菲涅耳、夫琅和费近似', items:[
-      {id:'la-k3-6', name:'衍射积分公式', tags:'thm', tags:['thm','der'], brief:'瑞利-索末菲公式与菲涅耳-基尔霍夫公式。',
+      {id:'la-k3-6', name:'衍射积分公式', tags:['thm','der'], brief:'瑞利-索末菲公式与菲涅耳-基尔霍夫公式。',
         fig:'diffraction', figCap:'图 3.1　单缝衍射：波前受限后重新分布',
         body:`<p><strong>瑞利-索末菲衍射积分</strong></p>
 <div class="la-fml">$$U(P) = \\frac{1}{j\\lambda}\\iint_{\\Sigma}U(P_0)\\frac{\\exp(jkr)}{r}\\cos\\theta\\,\\mathrm{d}S$$</div>
 <p><strong>菲涅耳-基尔霍夫衍射积分</strong></p>
 <div class="la-fml">$$U(P) = \\frac{1}{j\\lambda}\\iint_{\\Sigma}U(P_0)\\frac{\\exp(jkr)}{r}\\cdot\\frac{1+\\cos\\chi}{2}\\,\\mathrm{d}S$$</div>
 <p>两式在傍轴条件下结果相同。</p>`},
-      {id:'la-k3-7', name:'菲涅耳变换与夫琅和费变换', tags:'thm', tags:['thm','der'], brief:'近场与远场衍射的简化表达式。',
+      {id:'la-k3-7', name:'菲涅耳变换与夫琅和费变换', tags:['thm','der'], brief:'近场与远场衍射的简化表达式。',
         body:`<p><strong>菲涅耳衍射（近场）</strong></p>
 <div class="la-fml">$$U(x,y) = \\frac{\\exp(jkz)}{j\\lambda z}\\iint U_0(x_0,y_0)\\exp\\left\\{j\\frac{k}{2z}\\left[(x-x_0)^2+(y-y_0)^2\\right]\\right\\}\\,\\mathrm{d}x_0\\,\\mathrm{d}y_0$$</div>
 <p><strong>夫琅和费衍射（远场）</strong></p>
@@ -1260,7 +1314,7 @@ l' &= r + r\\frac{i'}{u'}
 <p>即远场衍射是物函数的傅里叶变换。</p>`}
     ]},
     {name:'3.4 光学系统的衍射映像', color:'#0f766e', desc:'逐次衍射积分与光瞳函数', items:[
-      {id:'la-k3-8', name:'光学系统的衍射成像', tags:'thm', tags:['thm','der'], brief:'薄透镜的傅里叶变换性质与光瞳函数。',
+      {id:'la-k3-8', name:'光学系统的衍射成像', tags:['thm','der'], brief:'薄透镜的傅里叶变换性质与光瞳函数。',
         body:`<p><strong>逐次利用衍射积分</strong>　逐面进行衍射计算，精确但繁琐。</p>
 <p><strong>几何光学等效一次衍射积分</strong>　用几何光学确定光程，做一次积分。</p>
 <p><strong>薄透镜的傍轴衍射成像</strong>　透镜的相位变换因子：</p>
@@ -1273,12 +1327,12 @@ l' &= r + r\\frac{i'}{u'}
         body:`<p><strong>星点检验</strong>　观察点光源的衍射图样，判断像差类型。理想系统的星点图为艾里斑。</p>
 <p><strong>瑞利判据</strong>　当最大波像差不超过 $\\lambda/4$ 时，系统成像质量接近理想。</p>
 <p><strong>波前变形测量</strong>　用干涉仪（如 Twyman-Green、剪切干涉仪）测量波前，直接得到波像差。</p>`},
-      {id:'la-k3-10', name:'分辨率及其测量', tags:'def','app', brief:'能分辨的最小间隔；用分辨率板测量。',
+      {id:'la-k3-10', name:'分辨率及其测量', tags:['def','app'], brief:'能分辨的最小间隔；用分辨率板测量。',
         body:`<p><strong>分辨率</strong>　系统能分辨的最小细节。用分辨率板（如 USAF 1951 板）测量。</p>
 <p><strong>理论分辨率</strong>（瑞利判据）</p>
 <div class="la-fml">$$\\delta = \\frac{0.61\\lambda}{NA}\\quad\\text{（显微物镜）},\\qquad \\delta = \\frac{1.22\\lambda}{D}\\quad\\text{（望远物镜）}$$</div>
 <p><strong>极限分辨率</strong>　受衍射限制。</p>`},
-      {id:'la-k3-11', name:'光学传递函数（OTF）', tags:'def','thm', brief:'系统对空间频率的传递特性。',
+      {id:'la-k3-11', name:'光学传递函数（OTF）', tags:['def','thm'], brief:'系统对空间频率的传递特性。',
         body:`<p><strong>光学传递函数</strong>定义：</p>
 <div class="la-fml">$$H(u,v) = \\frac{F'(u,v)}{F(u,v)} = |H(u,v)|\\exp[j\\varphi(u,v)]$$</div>
 <p>其中 $|H|$ 为调制传递函数（MTF），$\\varphi$ 为相位传递函数（PTF）。</p>
@@ -1291,7 +1345,7 @@ l' &= r + r\\frac{i'}{u'}
 </ul>
 <p><strong>截止频率</strong></p>
 <div class="la-fml">$$u_c = \\frac{D}{\\lambda f'} = \\frac{2NA}{\\lambda}$$</div>`},
-      {id:'la-k3-12', name:'OTF 与其它像质评价的关系', tags:'thm','app', brief:'与分辨率、星点法、点列图的关系。',
+      {id:'la-k3-12', name:'OTF 与其它像质评价的关系', tags:['thm','app'], brief:'与分辨率、星点法、点列图的关系。',
         body:`<p><strong>OTF 与分辨率</strong>　当 MTF 降至 0 时，对应的空间频率为截止频率，与分辨率对应。</p>
 <p><strong>OTF 与星点法</strong>　$H(u,v)$ 的傅里叶逆变换即点扩散函数 $h(x,y)$。</p>
 <p><strong>OTF 与点列图</strong>　几何光学近似下，点列图的傅里叶变换给出几何 OTF。</p>
@@ -1300,33 +1354,33 @@ l' &= r + r\\frac{i'}{u'}
   ]
 },
 
-/* ================= 第四章 傅里叶光学映像与传递函数 ================= */
+/* ================= 第四章 ================= */
 {
   id:'la-ch4', num:'第四章', title:'傅里叶光学映像原理和传递函数', en:'FOURIER OPTICS & TRANSFER FUNCTIONS',
   sub:'傅里叶分析、透镜变换、传递函数与级联系统',
   desc:'本章介绍光信号的傅里叶分析方法，利用透镜实现傅里叶变换，建立相干和非相干成像系统的传递函数理论，讨论传递函数的计算与测量以及级联系统的传递函数。',
   sections:[
     {name:'4.1 光信号的傅里叶分析', color:'#c2410c', desc:'时变与空变光信号的傅里叶分解', items:[
-      {id:'la-k4-1', name:'二维傅里叶分解', tags:'def','thm', brief:'物函数可分解为不同空间频率的复指数基元函数。',
+      {id:'la-k4-1', name:'二维傅里叶分解', tags:['def','thm'], brief:'物函数可分解为不同空间频率的复指数基元函数。',
         body:`<p><strong>二维傅里叶变换</strong></p>
 <div class="la-fml">$$F(u,v) = \\iint_{-\\infty}^{\\infty}f(x,y)\\exp[-j2\\pi(ux+vy)]\\,\\mathrm{d}x\\,\\mathrm{d}y$$</div>
 <p><strong>逆变换</strong></p>
 <div class="la-fml">$$f(x,y) = \\iint_{-\\infty}^{\\infty}F(u,v)\\exp[j2\\pi(ux+vy)]\\,\\mathrm{d}u\\,\\mathrm{d}v$$</div>
 <p>物理意义：$f(x,y)$ 可视为各种空间频率的复指数基元函数 $\\exp[j2\\pi(ux+vy)]$ 的线性组合，$F(u,v)$ 是各分量的权重。</p>
 <p><strong>实函数的傅里叶分解</strong>　对实函数 $f(x,y)$，有 $F(-u,-v) = F^*(u,v)$。</p>`},
-      {id:'la-k4-2', name:'空变信号的复解析表示', tags:'def','exa', brief:'复振幅与实信号的对应关系。',
+      {id:'la-k4-2', name:'空变信号的复解析表示', tags:['def','exa'], brief:'复振幅与实信号的对应关系。',
         body:`<p>实空变信号 $f(x,y)$ 可表示为两个共轭复指数信号的叠加：</p>
 <div class="la-fml">$$f(x,y) = \\frac{1}{2}\\left[f_a(x,y) + f_a^*(x,y)\\right]$$</div>
 <p>其中 $f_a(x,y)$ 为复解析信号。</p>
 <p>对于单色光波场，通常只使用复振幅表示，不必写出实部（因为光频率极高，探测器只响应时间平均强度）。</p>`}
     ]},
     {name:'4.2 光学系统的傅里叶变换性质', color:'#7c3aed', desc:'自由空间与透镜的傅里叶变换', items:[
-      {id:'la-k4-3', name:'自由空间的傅里叶变换性质', tags:'thm','der', brief:'远场衍射实现傅里叶变换。',
+      {id:'la-k4-3', name:'自由空间的傅里叶变换性质', tags:['thm','der'], brief:'远场衍射实现傅里叶变换。',
         body:`<p><strong>平面波谱的传播</strong>　在角谱（傅里叶变换）表示中，自由空间传播对应乘以相位因子 $\\exp[jk_z z]$，$k_z = \\sqrt{k^2 - k_x^2 - k_y^2}$。</p>
 <p><strong>远场衍射</strong>　在夫琅和费近似下，光场的远场分布与物函数的傅里叶变换成正比：</p>
 <div class="la-fml">$$U(x,y) \\propto F\\left(\\frac{x}{\\lambda z}, \\frac{y}{\\lambda z}\\right)$$</div>
 <p>即：足够远距离的衍射场就是物函数的傅里叶频谱。</p>`},
-      {id:'la-k4-4', name:'透镜的傅里叶变换性质', tags:'thm','app', brief:'后焦面上的光场分布是物函数的傅里叶变换。',
+      {id:'la-k4-4', name:'透镜的傅里叶变换性质', tags:['thm','app'], brief:'后焦面上的光场分布是物函数的傅里叶变换。',
         fig:'fourierTrans', figCap:'图 4.1　傅里叶变换的物理实现',
         body:`<p><strong>透镜的二维傅里叶变换性质</strong>　物在透镜前焦面时，透镜后焦面上的光场分布为物函数的傅里叶变换：</p>
 <div class="la-fml">$$U_f(u,v) = \\frac{1}{j\\lambda f'}\\iint U_0(x,y)\\exp\\left[-j\\frac{2\\pi}{\\lambda f'}(ux + vy)\\right]\\,\\mathrm{d}x\\,\\mathrm{d}y$$</div>
@@ -1337,7 +1391,7 @@ l' &= r + r\\frac{i'}{u'}
 <li>小像差（保证频谱准确）</li>
 <li>平场（后焦面为平面）</li>
 </ul>`},
-      {id:'la-k4-5', name:'两次傅里叶变换成像', tags:'thm','app'], brief:'4f 系统：傅里叶变换 + 傅里叶逆变换 = 成像。',
+      {id:'la-k4-5', name:'两次傅里叶变换成像', tags:['thm','app'], brief:'4f 系统：傅里叶变换 + 傅里叶逆变换 = 成像。',
         fig:'fourF', figCap:'图 4.2　4f 傅里叶变换图像处理系统',
         body:`<p><strong>单透镜两次傅里叶变换</strong>　物在透镜前焦面时，前焦面到后焦面经过两次傅里叶变换（一次正变换、一次逆变换），得到倒像。</p>
 <p><strong>双子共焦系统（4f）</strong>　$L_1$ 后焦面得到频谱，$L_2$ 完成逆变换，在后焦面得到像。物面与像面关于系统共轭，$\\beta = -1$。</p>
@@ -1345,7 +1399,7 @@ l' &= r + r\\frac{i'}{u'}
 <div class="la-fml">$$f'(x,y) = \\mathcal{F}^{-1}\\{F(u,v)H(u,v)\\}$$</div>`}
     ]},
     {name:'4.3 光学系统的传递函数', color:'#0f766e', desc:'相干与非相干传递函数', items:[
-      {id:'la-k4-6', name:'传递函数的定义', tags:'def','thm', brief:'$H(u,v) = F′(u,v)/F(u,v)$。',
+      {id:'la-k4-6', name:'传递函数的定义', tags:['def','thm'], brief:'H(u,v) = F′(u,v)/F(u,v)。',
         body:`<p><strong>传递函数（光学传递函数 OTF）</strong>　系统对空间频谱的滤波特性：</p>
 <div class="la-fml">$$H(u,v) = \\frac{F'(u,v)}{F(u,v)} = |H(u,v)|\\exp[j\\varphi(u,v)]$$</div>
 <p>$|H|$ 为调制传递函数 MTF，$\\varphi$ 为相位传递函数 PTF。</p>
@@ -1355,25 +1409,25 @@ l' &= r + r\\frac{i'}{u'}
 <li>$|H(u,v)| \\leq 1$</li>
 <li>$H(-u,-v) = H^*(u,v)$（实点扩散函数）</li>
 </ul>`},
-      {id:'la-k4-7', name:'自由空间传播的传递函数', tags:'thm','der', brief:'$H(u,v) = \\exp[jkz\\sqrt{1 - (\\lambda u)^2 - (\\lambda v)^2}]$。',
+      {id:'la-k4-7', name:'自由空间传播的传递函数', tags:['thm','der'], brief:'H(u,v) = exp[jkz√(1-(λu)²-(λv)²)]。',
         body:`<p><strong>平面波谱传播</strong>　自由空间传播距离 $z$ 后：</p>
 <div class="la-fml">$$H(u,v) = \\exp\\left[jkz\\sqrt{1 - (\\lambda u)^2 - (\\lambda v)^2}\\right]$$</div>
 <p>傍轴近似：$H(u,v) \\approx \\exp[jkz]\\exp\\left[-j\\pi\\lambda z(u^2+v^2)\\right]$。</p>
 <p><strong>光栅衍射自成像（Talbot 效应）</strong>　周期物体在自由空间传播时，在 $z = 2d^2/\\lambda$ 等距离处成自像。</p>`},
-      {id:'la-k4-8', name:'相干成像系统的传递函数', tags:'thm','der', brief:'$H(u,v) = P(\\lambda d_iu, \\lambda d_iv)$。',
+      {id:'la-k4-8', name:'相干成像系统的传递函数', tags:['thm','der'], brief:'H(u,v) = P(λdᵢu, λdᵢv)。',
         body:`<p><strong>相干传递函数</strong>（CTF）</p>
 <div class="la-fml">$$H_c(u,v) = P(\\lambda d_i u, \\lambda d_i v)$$</div>
 <p>其中 $P$ 为光瞳函数，$d_i$ 为出瞳到像面的距离。</p>
 <p>无像差圆形光瞳系统：</p>
 <div class="la-fml">$$H_c(u,v) = \\begin{cases}1 & \\sqrt{u^2+v^2} \\leq \\frac{D}{2\\lambda d_i}\\\\ 0 & \\text{其它}\\end{cases}$$</div>
 <p>即相干系统是理想的低通滤波器。</p>`},
-      {id:'la-k4-9', name:'非相干成像系统的传递函数', tags:'thm','der', brief:'$H(u,v) = \\frac{P \\star P}{\\iint |P|^2}$。',
+      {id:'la-k4-9', name:'非相干成像系统的传递函数', tags:['thm','der'], brief:'H(u,v) = P⋆P / ∬|P|²。',
         body:`<p><strong>非相干传递函数</strong>（OTF）是光瞳函数的归一化自相关：</p>
 <div class="la-fml">$$H(u,v) = \\frac{\\iint P(x,y)P^*(x - \\lambda d_iu, y - \\lambda d_iv)\\,\\mathrm{d}x\\,\\mathrm{d}y}{\\iint |P(x,y)|^2\\,\\mathrm{d}x\\,\\mathrm{d}y}$$</div>
 <p>无像差圆形光瞳的 OTF：</p>
 <div class="la-fml">$$H(\\rho) = \\frac{2}{\\pi}\\left[\\arccos\\left(\\frac{\\rho}{\\rho_c}\\right) - \\frac{\\rho}{\\rho_c}\\sqrt{1 - \\left(\\frac{\\rho}{\\rho_c}\\right)^2}\\right]$$</div>
 <p>其中 $\\rho_c = D/(\\lambda d_i)$ 为截止频率。非相干系统的截止频率是相干系统的 2 倍。</p>`},
-      {id:'la-k4-10', name:'相干与非相干成像的比较', tags:'thm','app', brief:'截止频率、分辨率、边缘响应不同。',
+      {id:'la-k4-10', name:'相干与非相干成像的比较', tags:['thm','app'], brief:'截止频率、分辨率、边缘响应不同。',
         body:`<p><strong>传递函数的关系</strong></p>
 <div class="la-fml">$$H_{incoh}(u,v) = H_{coh}(u,v) \\star H_{coh}(u,v)$$</div>
 <p><strong>分辨率</strong>　相干照明时，截止频率为 $D/(\\lambda d_i)$；非相干照明时为 $2D/(\\lambda d_i)$。因此非相干系统分辨率更高。</p>
@@ -1381,21 +1435,21 @@ l' &= r + r\\frac{i'}{u'}
 <p><strong>直边衍射像</strong>　相干照明时直边衍射呈现明暗条纹，非相干照明时边缘平滑过渡。</p>`}
     ]},
     {name:'4.4 OTF 的计算与测量', color:'#c2410c', desc:'几何 OTF、波动 OTF 与测量方法', items:[
-      {id:'la-k4-11', name:'OTF 的计算', tags:'thm','der', brief:'几何 OTF、波动 OTF 与多色 OTF。',
+      {id:'la-k4-11', name:'OTF 的计算', tags:['thm','der'], brief:'几何 OTF、波动 OTF 与多色 OTF。',
         body:`<p><strong>几何光学传递函数</strong>　当像差较大、衍射可忽略时，OTF 由点列图的傅里叶变换决定：</p>
 <div class="la-fml">$$H_g(u,v) = \\mathcal{F}\\{h_g(x,y)\\}$$</div>
 <p><strong>波动光学传递函数</strong>　由光瞳函数的自相关得到。</p>
 <p><strong>多色 OTF</strong>　对不同波长 OTF 加权平均：</p>
 <div class="la-fml">$$H(u,v) = \\frac{\\int H_\\lambda(u,v)S(\\lambda)\\,\\mathrm{d}\\lambda}{\\int S(\\lambda)\\,\\mathrm{d}\\lambda}$$</div>
 <p>$S(\\lambda)$ 为光源和探测器的综合光谱响应。</p>`},
-      {id:'la-k4-12', name:'OTF 的测量', tags:'def','app'], brief:'正弦光栅法、干涉法、扫描法。',
+      {id:'la-k4-12', name:'OTF 的测量', tags:['def','app'], brief:'正弦光栅法、干涉法、扫描法。',
         body:`<p><strong>正弦光栅法</strong>　用不同空间频率的正弦光栅作为物，测量像的对比度变化。</p>
 <p><strong>干涉法</strong>　用干涉仪测量波前，直接得到光瞳函数。</p>
 <p><strong>扫描法</strong>　用刀口或狭缝扫描星点像，得到线扩散函数，再作傅里叶变换。</p>
 <p><strong>互相关法</strong>　利用随机目标或边缘目标，计算相关函数。</p>`}
     ]},
     {name:'4.5 级联系统的传递函数', color:'#7c3aed', desc:'多子系统与不同类型子系统', items:[
-      {id:'la-k4-13', name:'级联系统的传递函数', tags:'thm','app', brief:'各子系统 OTF 的乘积。',
+      {id:'la-k4-13', name:'级联系统的传递函数', tags:['thm','app'], brief:'各子系统 OTF 的乘积。',
         body:`<p><strong>双子系统的级联</strong></p>
 <div class="la-fml">$$H(u,v) = H_1(u,v)H_2(u,v)$$</div>
 <p><strong>多子级联系统</strong>（前提：各子系统之间无相干耦合，中间无光阑限制）</p>
@@ -1413,14 +1467,14 @@ l' &= r + r\\frac{i'}{u'}
   ]
 },
 
-/* ================= 第五章 光全息映像术 ================= */
+/* ================= 第五章 ================= */
 {
   id:'la-ch5', num:'第五章', title:'光全息映像术', en:'HOLOGRAPHY',
   sub:'波前记录、再现与全息应用',
   desc:'本章介绍全息术的基本原理——波前的空间编码记录与解码再现，讨论全息成像的几何分析、像差、各种类型全息图（面全息、体全息、彩色全息、计算全息）以及全息术在显示、存储、干涉计量等方面的应用。',
   sections:[
     {name:'5.1 全息基本原理', color:'#be123c', desc:'波前编码记录与解码再现', items:[
-      {id:'la-k5-1', name:'全息记录与再现', tags:'def','thm', brief:'用干涉记录波前，用衍射再现波前。',
+      {id:'la-k5-1', name:'全息记录与再现', tags:['def','thm'], brief:'用干涉记录波前，用衍射再现波前。',
         fig:'hologram', figCap:'图 5.1　全息记录：物光与参考光干涉',
         body:`<p><strong>全息术</strong>　记录并再现光波的全部信息（振幅和相位）。由伽博（Gabor）于 1948 年提出。</p>
 <p><strong>记录</strong>　物光 $O$ 与参考光 $R$ 在感光介质上干涉，形成全息图。干涉场强分布：</p>
@@ -1429,7 +1483,7 @@ l' &= r + r\\frac{i'}{u'}
 <p><strong>再现</strong>　用与参考光相同的光 $R$ 照射全息图，透过光：</p>
 <div class="la-fml">$$t \\propto I \\cdot R = R|O|^2 + R|R|^2 + O|R|^2 + O^*R^2$$</div>
 <p>第三项正比于 $O$，即再现原始物光波前。</p>`},
-      {id:'la-k5-2', name:'全息图的分类', tags:'def','exa', brief:'面全息、体全息、像全息、傅里叶变换全息、计算全息。',
+      {id:'la-k5-2', name:'全息图的分类', tags:['def','exa'], brief:'面全息、体全息、像全息、傅里叶变换全息、计算全息。',
         body:`<p>按不同方式分类：</p>
 <ul>
 <li><strong>面全息 / 体全息</strong>：按乳胶厚度与条纹间距的比例</li>
@@ -1441,7 +1495,7 @@ l' &= r + r\\frac{i'}{u'}
 </ul>
 <p><strong>体全息的布拉格条件</strong></p>
 <div class="la-fml">$$2\\Lambda\\sin\\theta = \\lambda$$</div>`},
-      {id:'la-k5-3', name:'全息图的体视效应与空间频谱', tags:'def','thm', brief:'三维显示；离轴全息图的最小参考角。',
+      {id:'la-k5-3', name:'全息图的体视效应与空间频谱', tags:['def','thm'], brief:'三维显示；离轴全息图的最小参考角。',
         body:`<p><strong>体视效应</strong>　全息图可再现三维图像，观察者有真实的立体感。这是全息显示的最大特点。</p>
 <p><strong>空间频谱</strong>　全息图的空间频谱由物光频谱和参考光频谱的卷积构成。为避免再现时原始像、共轭像和零级相互重叠，需采用<strong>离轴全息</strong>。最小参考角：</p>
 <div class="la-fml">$$\\sin\\theta_{min} = \\frac{3\\lambda B}{2}$$</div>
@@ -1449,7 +1503,7 @@ l' &= r + r\\frac{i'}{u'}
 <p><strong>信息存储容量</strong>　全息图的二维空间带宽积可达 $10^6\\sim10^8$，是海量存储的理想载体。</p>`}
     ]},
     {name:'5.2 理想全息映像规律的几何分析', color:'#7c3aed', desc:'点源全息成像与物像共轭', items:[
-      {id:'la-k5-4', name:'点源全息成像', tags:'thm','der', brief:'物像位置满足类似透镜的成像公式。',
+      {id:'la-k5-4', name:'点源全息成像', tags:['thm','der'], brief:'物像位置满足类似透镜的成像公式。',
         fig:'hologramRep', figCap:'图 5.2　全息再现：原始像与共轭像',
         body:`<p><strong>基元全息图</strong>　两个点源（物点 $O$ 与参考点 $R$）形成的干涉图样。</p>
 <p><strong>点源全息成像公式</strong>　设物点、参考点、再现光源坐标分别为 $(x_o,y_o,z_o), (x_r,y_r,z_r), (x_c,y_c,z_c)$，再现像点坐标 $(x_i,y_i,z_i)$，则：</p>
@@ -1457,7 +1511,7 @@ l' &= r + r\\frac{i'}{u'}
 <div class="la-fml">$$\\frac{x_i}{z_i} = \\frac{x_c}{z_c} \\pm \\mu\\left(\\frac{x_o}{z_o} - \\frac{x_r}{z_r}\\right)$$</div>
 <p>其中 $\\mu = \\lambda/\\lambda_0$ 为再现光与记录光的波长比。</p>
 <p>正号对应原始像，负号对应共轭像。</p>`},
-      {id:'la-k5-5', name:'全息图的物像共轭映射', tags:'thm','der', brief:'类似透镜的成像规律。',
+      {id:'la-k5-5', name:'全息图的物像共轭映射', tags:['thm','der'], brief:'类似透镜的成像规律。',
         body:`<p>全息图可以看作是一种特殊的光学元件（全息透镜），具有类似透镜的成像规律。</p>
 <p><strong>傍轴近似下的成像公式</strong></p>
 <div class="la-fml">$$\\frac{1}{z_i} = \\frac{1}{z_c} \\mp \\frac{\\mu}{f_h}$$</div>
@@ -1470,7 +1524,7 @@ l' &= r + r\\frac{i'}{u'}
 </ul>`}
     ]},
     {name:'5.3 全息成像的像差', color:'#0f766e', desc:'单色像差与色差', items:[
-      {id:'la-k5-6', name:'点源全息成像的波像差', tags:'der','thm'], brief:'波像差的幂级数展开与初级像差。',
+      {id:'la-k5-6', name:'点源全息成像的波像差', tags:['der','thm'], brief:'波像差的幂级数展开与初级像差。',
         body:`<p>全息成像的波像差可用球面波前相位差的幂级数展开表示：</p>
 <div class="la-fml">$$W = \\sum_{i,j,k}a_{ijk}x^iy^jz^k$$</div>
 <p>各项分别对应：</p>
@@ -1480,7 +1534,7 @@ l' &= r + r\\frac{i'}{u'}
 <li>高次项：高级像差</li>
 </ul>
 <p><strong>不产生单色像差的条件</strong>　记录与再现波长相同、参考光与再现光位置相同、物点在轴上的特殊情况。</p>`},
-      {id:'la-k5-7', name:'全息成像的色差', tags:'def','der'], brief:'由于波长变化引起的像差。',
+      {id:'la-k5-7', name:'全息成像的色差', tags:['def','der'], brief:'由于波长变化引起的像差。',
         body:`<p>全息成像的色差是由于记录波长与再现波长不同（$\\mu \\neq 1$）引起的：</p>
 <div class="la-fml">$$\\Delta z_i = z_i(\\mu - 1)\\left(\\frac{1}{z_o} - \\frac{1}{z_r}\\right)$$</div>
 <p>色差使不同波长的像点位置不同，造成彩色模糊。</p>
@@ -1492,17 +1546,17 @@ l' &= r + r\\frac{i'}{u'}
 </ul>`}
     ]},
     {name:'5.4 全息术的类型', color:'#be123c', desc:'面全息、体全息、彩色全息与计算全息', items:[
-      {id:'la-k5-8', name:'面全息与体全息', tags:'def','app', brief:'平面型与体积型全息图。',
+      {id:'la-k5-8', name:'面全息与体全息', tags:['def','app'], brief:'平面型与体积型全息图。',
         body:`<p><strong>面全息</strong>　乳胶厚度远小于条纹间距，可视为二维。衍射效率较低（一般 < 10%）。</p>
 <p><strong>体全息</strong>　乳胶厚度远大于条纹间距，具有角度选择性。衍射效率理论上可达 100%。</p>
 <p><strong>布拉格条件</strong>　体全息再现必须满足：</p>
 <div class="la-fml">$$2\\Lambda\\sin\\theta = \\lambda$$</div>
 <p><strong>角度选择性</strong>　再现角度偏离布拉格角时，衍射效率急剧下降。这使体全息具有很高的角度选择性，是实现高密度存储的基础。</p>`},
-      {id:'la-k5-9', name:'傅里叶变换全息术与像面全息术', tags:'def','thm', brief:'记录位置不同，再现特性不同。',
+      {id:'la-k5-9', name:'傅里叶变换全息术与像面全息术', tags:['def','thm'], brief:'记录位置不同，再现特性不同。',
         body:`<p><strong>傅里叶变换全息术</strong>　物在透镜前焦面，全息图记录在后焦面，记录的是物函数的傅里叶频谱。再现时用透镜作逆变换即可恢复物。</p>
 <p>优点：频谱集中，存储密度高；对底片位移不敏感（傅里叶变换的平移不变性）。</p>
 <p><strong>像面全息术</strong>　物像成在全息记录面上，再现时可用扩展光源（白光）照明。是白光再现的常用方法。</p>`},
-      {id:'la-k5-10', name:'彩色全息与计算全息', tags:'def','app', brief:'多波长记录与计算机生成全息图。',
+      {id:'la-k5-10', name:'彩色全息与计算全息', tags:['def','app'], brief:'多波长记录与计算机生成全息图。',
         body:`<p><strong>彩色全息</strong>　用三种波长（红、绿、蓝）分别记录三张全息图，再现时用对应波长照明，叠加形成彩色图像。</p>
 <p>困难：假像（串扰）问题。解决方法：</p>
 <ul>
@@ -1520,7 +1574,7 @@ l' &= r + r\\frac{i'}{u'}
 <div class="la-callout la-app">应用　全息光学元件、光学测试、三维显示、光互连等。</div>`}
     ]},
     {name:'5.5 全息术的应用', color:'#7c3aed', desc:'显示、存储、干涉计量与全息光学元件', items:[
-      {id:'la-k5-11', name:'全息显示与全息存储', tags:'app','def', brief:'三维显示；海量存储。',
+      {id:'la-k5-11', name:'全息显示与全息存储', tags:['app','def'], brief:'三维显示；海量存储。',
         body:`<p><strong>全息显示</strong></p>
 <ul>
 <li>反射全息：白光再现，立体感强</li>
@@ -1534,12 +1588,12 @@ l' &= r + r\\frac{i'}{u'}
 <li>冗余度高（局部破损不影响整体）</li>
 <li>记录和读出速度快</li>
 </ul>`},
-      {id:'la-k5-12', name:'全息干涉计量', tags:'app','thm', brief:'单次曝光、双次曝光、时间平均法。',
+      {id:'la-k5-12', name:'全息干涉计量', tags:['app','thm'], brief:'单次曝光、双次曝光、时间平均法。',
         body:`<p><strong>单次曝光法（实时法）</strong>　先记录一张全息图，然后使物体变形，通过再现时的干涉条纹测量变形。</p>
 <p><strong>双次曝光法</strong>　在同一底片上对变形前后各曝光一次，再现时两波前干涉，条纹直接反映变形量。</p>
 <p><strong>时间平均法</strong>　对振动物体长时间曝光，得到振动模式的等幅线。</p>
 <p><strong>应用</strong>　无损检测、应力分析、振动分析、微小位移测量。</p>`},
-      {id:'la-k5-13', name:'全息光学元件', tags:'def','app', brief:'全息透镜、色散元件、平视显示器。',
+      {id:'la-k5-13', name:'全息光学元件', tags:['def','app'], brief:'全息透镜、色散元件、平视显示器。',
         body:`<p><strong>全息光学元件（HOE）</strong>　用全息方法制作的具有特定光学功能的元件。</p>
 <p><strong>类型</strong></p>
 <ul>
@@ -1558,14 +1612,14 @@ l' &= r + r\\frac{i'}{u'}
   ]
 },
 
-/* ================= 第六章 光子互连、光计算和光信息处理 ================= */
+/* ================= 第六章 ================= */
 {
   id:'la-ch6', num:'第六章', title:'光子互连、光计算和光信息处理', en:'PHOTONIC INTERCONNECTION, OPTICAL COMPUTING & INFORMATION PROCESSING',
   sub:'光子开关、光互连、光计算与光学信息处理',
   desc:'本章介绍光子开关、光学双稳态器件、光子互连网络、光计算、光学频谱分析与空间滤波、光学图像处理、光学目标识别、多色光信号处理、综合孔径雷达处理以及光学人工神经网络等内容。',
   sections:[
     {name:'6.1 光子开关和光学双稳态器件', color:'#be123c', desc:'开关、双稳态与光逻辑', items:[
-      {id:'la-k6-1', name:'光子开关器件', tags:'def','app', brief:'机-光、电-光、声-光、磁-光、光-光开关。',
+      {id:'la-k6-1', name:'光子开关器件', tags:['def','app'], brief:'机-光、电-光、声-光、磁-光、光-光开关。',
         body:`<p><strong>光子开关</strong>　控制光信号通断的器件。</p>
 <p><strong>类型</strong></p>
 <ul>
@@ -1576,7 +1630,7 @@ l' &= r + r\\frac{i'}{u'}
 <li><strong>光-光开关</strong>：利用光控光（如非线性光学效应），全光开关</li>
 </ul>
 <p><strong>光学双稳态</strong>　系统在同样输入下有两个稳定输出状态，是光开关、光存储、光逻辑的基础。</p>`},
-      {id:'la-k6-2', name:'光学双稳态器件', tags:'def','thm', brief:'非线性介质 + 反馈 = 双稳态。',
+      {id:'la-k6-2', name:'光学双稳态器件', tags:['def','thm'], brief:'非线性介质 + 反馈 = 双稳态。',
         body:`<p><strong>光学双稳态的定义</strong>　对于一个光学系统，在给定的输入光强下，存在两个稳定的输出光强状态。</p>
 <p><strong>基本结构</strong>　非线性介质 + 反馈（通常是 F-P 腔）。</p>
 <p><strong>类型</strong></p>
@@ -1593,7 +1647,7 @@ l' &= r + r\\frac{i'}{u'}
 </ul>`}
     ]},
     {name:'6.2 光子互连网络', color:'#7c3aed', desc:'互连概念、特点与实现', items:[
-      {id:'la-k6-3', name:'互连的基本概念与特点', tags:'def','thm', brief:'互连和自连；电子互连的局限与光子互连的优势。',
+      {id:'la-k6-3', name:'互连的基本概念与特点', tags:['def','thm'], brief:'互连和自连；电子互连的局限与光子互连的优势。',
         fig:'photoInterconnect', figCap:'图 6.1　自由空间光互连网络示意',
         body:`<p><strong>互连和自连</strong>　互连指系统各部分之间的连接；自连指同一部分的反馈连接。</p>
 <p><strong>电子互连的局限</strong></p>
@@ -1611,21 +1665,22 @@ l' &= r + r\\frac{i'}{u'}
 <li>可实现自由空间三维互连</li>
 <li>功耗低</li>
 </ul>`},
-      {id:'la-k6-4', name:'基本的光子互连网络', tags:'def','exa', brief:'一对一、一对多、多对多、纵横互连。',
+      {id:'la-k6-4', name:'基本的光子互连网络', tags:['def','exa'], brief:'一对一、一对多、多对多、纵横互连。',
         body:`<p><strong>一对一互连</strong>　最简单的互连形式。</p>
 <p><strong>一对多互连</strong>　一个光源连接到多个探测器，如分束器、星形耦合器。</p>
 <p><strong>多对多互连</strong>　多个光源与多个探测器之间的全互连。是光互连的核心优势。</p>
 <p><strong>纵横互连网络</strong>　利用二维光调制器实现任意通道之间的连接。</p>
 <p><strong>多级互连网络</strong>　Clos 网络、Crossover 网络、蝶式网络、多级 PS 网络等。</p>`},
-      {id:'la-k6-5', name:'光子互连网络的实现方法', tags:'app','def', brief:'自由空间、光纤/波导、光电混合。',
+      {id:'la-k6-5', name:'光子互连网络的实现方法', tags:['app','def'], brief:'自由空间、光纤/波导、光电混合。',
+        fig:'fiber', figCap:'图 6.2　光纤 / 集成光波导互连',
         body:`<p><strong>自由空间光互连</strong>　利用透镜、棱镜、全息元件等实现光束的三维空间连接。优点：并行性高，可实现多级互连。</p>
 <p><strong>光纤和集成光波导互连</strong>　利用光纤或平面光波导实现连接。优点：稳定性好，与现有光通信技术兼容。</p>
 <p><strong>光电混合互连</strong>　光互连与电互连结合，发挥各自优势。是目前实用化的主要方向。</p>
 <div class="la-callout la-app">应用　高性能计算机、光交换、光神经网络、光计算系统。</div>`}
     ]},
     {name:'6.3 光计算', color:'#0f766e', desc:'数字与模拟光计算', items:[
-      {id:'la-k6-6', name:'数字光计算与模拟光计算', tags:'def','app', brief:'数字逻辑运算与模拟运算。',
-        fig:'opticalCompute', figCap:'图 6.2　光计算基本元件示意',
+      {id:'la-k6-6', name:'数字光计算与模拟光计算', tags:['def','app'], brief:'数字逻辑运算与模拟运算。',
+        fig:'opticalCompute', figCap:'图 6.3　光计算基本元件示意',
         body:`<p><strong>数字光计算</strong>　用光信号实现二进制逻辑运算。优点：并行性高、速度快。困难：光学逻辑门不够成熟、集成度低。</p>
 <p><strong>模拟光计算</strong>　用光信号的连续变化实现数学运算。</p>
 <ul>
@@ -1633,7 +1688,7 @@ l' &= r + r\\frac{i'}{u'}
 <li><strong>代数运算</strong>：积分、微分、微分方程求解</li>
 <li><strong>变换运算</strong>：傅里叶变换、菲涅耳变换、梅林变换、哈夫变换、拉冬变换、子波变换等</li>
 </ul>`},
-      {id:'la-k6-7', name:'典型的光学变换', tags:'def','app', brief:'傅里叶变换、菲涅耳变换、哈夫变换、子波变换等。',
+      {id:'la-k6-7', name:'典型的光学变换', tags:['def','app'], brief:'傅里叶变换、菲涅耳变换、哈夫变换、子波变换等。',
         body:`<p><strong>傅里叶变换</strong>　透镜后焦面实现，是光计算的核心。</p>
 <p><strong>菲涅耳变换</strong>　近场衍射实现。</p>
 <p><strong>梅林变换</strong>　$M(f) = \\int_0^\\infty f(x)x^{s-1}\\,\\mathrm{d}x$，具有尺度不变性。</p>
@@ -1643,12 +1698,12 @@ l' &= r + r\\frac{i'}{u'}
 <div class="la-callout la-app">应用　图像处理、模式识别、雷达信号处理、医学成像。</div>`}
     ]},
     {name:'6.4 光学频谱分析与空间滤波', color:'#c2410c', desc:'频谱分析系统与空间滤波', items:[
-      {id:'la-k6-8', name:'光学频谱分析系统', tags:'def','app', brief:'空间信号和时间信号的频谱分析。',
+      {id:'la-k6-8', name:'光学频谱分析系统', tags:['def','app'], brief:'空间信号和时间信号的频谱分析。',
         body:`<p><strong>空间信号频谱分析仪</strong>　4f 系统，用傅里叶变换透镜实现图像频谱分析。</p>
 <p><strong>时间信号频谱分析仪</strong>　将时间信号记录在底片上，用光学系统作傅里叶变换，得到时间信号的频谱。</p>
 <p><strong>阿贝-波特实验</strong>　用光栅作物体，观察频谱面上的衍射级以及挡掉某些级后的像。</p>`},
-      {id:'la-k6-9', name:'空间滤波与信息综合', tags:'def','app', brief:'阿贝-波特实验、相衬显微镜、瞳面滤波。',
-        fig:'spatialFilter', figCap:'图 6.3　4f 空间滤波系统',
+      {id:'la-k6-9', name:'空间滤波与信息综合', tags:['def','app'], brief:'阿贝-波特实验、相衬显微镜、瞳面滤波。',
+        fig:'spatialFilter', figCap:'图 6.4　4f 空间滤波系统',
         body:`<p><strong>空间滤波</strong>　在频谱面上插入滤波器，改变物频谱。</p>
 <p><strong>典型滤波器</strong></p>
 <ul>
@@ -1661,13 +1716,13 @@ l' &= r + r\\frac{i'}{u'}
 <p><strong>相衬显微镜</strong>　泽尼克（Zernike）发明，用相位滤波器将透明样品的相位变化转换为强度变化，获 1953 年诺贝尔物理学奖。</p>`}
     ]},
     {name:'6.5 光学图像的加工处理', color:'#7c3aed', desc:'对比度增强、信噪比提高、边缘增强与模糊改善', items:[
-      {id:'la-k6-10', name:'提高图像对比度与信噪比', tags:'app','def', brief:'衰减零频、维纳滤波与消除相乘噪音。',
+      {id:'la-k6-10', name:'提高图像对比度与信噪比', tags:['app','def'], brief:'衰减零频、维纳滤波与消除相乘噪音。',
         body:`<p><strong>具有周期结构像的恢复</strong>　用方向滤波挡掉周期噪音的频谱。</p>
 <p><strong>衰减零频滤波</strong>　在频谱面挡掉零频或减弱零频，可提高图像的对比度。</p>
 <p><strong>维纳滤波</strong>　最佳线性滤波，使均方误差最小：</p>
 <div class="la-fml">$$H(u,v) = \\frac{P_s(u,v)}{P_s(u,v) + P_n(u,v)}$$</div>
 <p><strong>消除相乘噪音</strong>　相乘噪音在频谱上表现为卷积，可用对数变换和逆滤波处理。</p>`},
-      {id:'la-k6-11', name:'图像边缘增强', tags:'def','app', brief:'微分运算、差分运算、偏振滤波。',
+      {id:'la-k6-11', name:'图像边缘增强', tags:['def','app'], brief:'微分运算、差分运算、偏振滤波。',
         body:`<p><strong>图像微分运算</strong>　用微分滤波器（如 $j2\\pi u$）增强边缘。</p>
 <p><strong>光学差分运算</strong>　用干涉或剪切方法实现图像微分。</p>
 <p><strong>偏振滤波实现边缘增强</strong>　利用偏振调制实现微分运算。</p>
@@ -1679,12 +1734,12 @@ l' &= r + r\\frac{i'}{u'}
 </ul>`}
     ]},
     {name:'6.6 光学图像相减和目标识别', color:'#0f766e', desc:'图像相减、相关运算与匹配滤波', items:[
-      {id:'la-k6-12', name:'光学图像相减', tags:'def','app', brief:'复振幅相减、强度相减、彩色相减。',
+      {id:'la-k6-12', name:'光学图像相减', tags:['def','app'], brief:'复振幅相减、强度相减、彩色相减。',
         body:`<p><strong>复振幅相减</strong>　利用干涉方法实现两幅图像的复振幅相减。</p>
 <p><strong>强度相减</strong>　利用光强叠加实现两幅图像的相减。</p>
 <p><strong>彩色图像相减</strong>　利用彩色编码实现彩色图像的相减。</p>
 <p>应用：变化检测、运动目标检测。</p>`},
-      {id:'la-k6-13', name:'相关运算与匹配滤波', tags:'thm','app', brief:'$f \\star g$；匹配滤波器 $H = G^*$。',
+      {id:'la-k6-13', name:'相关运算与匹配滤波', tags:['thm','app'], brief:'f ⋆ g；匹配滤波器 H = G*。',
         body:`<p><strong>相关运算</strong></p>
 <div class="la-fml">$$f(x,y) \\star g(x,y) = \\iint f^*(\\xi,\\eta)g(x+\\xi,y+\\eta)\\,\\mathrm{d}\\xi\\,\\mathrm{d}\\eta$$</div>
 <p><strong>匹配滤波器</strong>　对目标 $g$，匹配滤波器为 $H(u,v) = G^*(u,v)$。</p>
@@ -1698,7 +1753,7 @@ l' &= r + r\\frac{i'}{u'}
 <p>优点：结构简单，可实时更新。</p>`}
     ]},
     {name:'6.7 多色光信号处理', color:'#c2410c', desc:'空间编码与假彩色显示', items:[
-      {id:'la-k6-14', name:'多色光信号处理', tags:'def','app', brief:'θ 调制、密度假彩色、频率假彩色与相位编码。',
+      {id:'la-k6-14', name:'多色光信号处理', tags:['def','app'], brief:'θ 调制、密度假彩色、频率假彩色与相位编码。',
         body:`<p><strong>θ 调制实现彩色显示</strong>　用不同的空间方位角表示不同的颜色。</p>
 <p><strong>黑白底片的密度假彩色显示</strong></p>
 <ul>
@@ -1718,13 +1773,13 @@ l' &= r + r\\frac{i'}{u'}
 <li>相位光栅编码片的衍射特性</li>
 <li>不同衍射级输出彩色像的色度计算</li>
 </ul>`},
-      {id:'la-k6-15', name:'黑白胶片的彩色摄影', tags:'def','app', brief:'三色光栅编码与解码。',
+      {id:'la-k6-15', name:'黑白胶片的彩色摄影', tags:['def','app'], brief:'三色光栅编码与解码。',
         body:`<p><strong>三色光栅的制备</strong>　制备具有三种取向或三种频率的光栅。</p>
 <p><strong>彩色编码摄影</strong>　在黑白胶片前放置三色光栅，不同颜色光对应不同取向/频率的条纹。</p>
 <p><strong>彩色像的解码重现</strong>　用对应波长的光照射编码片，通过衍射将不同颜色分离，叠加形成彩色像。</p>`}
     ]},
     {name:'6.8 综合孔径信号处理', color:'#7c3aed', desc:'综合孔径雷达与光学数据处理', items:[
-      {id:'la-k6-16', name:'综合孔径雷达（SAR）', tags:'def','app', brief:'侧视雷达的发射、回收与光学处理。',
+      {id:'la-k6-16', name:'综合孔径雷达（SAR）', tags:['def','app'], brief:'侧视雷达的发射、回收与光学处理。',
         body:`<p><strong>综合孔径概念</strong>　用小天线合成大孔径，提高分辨率。</p>
 <p><strong>侧视雷达扫描</strong>　雷达侧视地面，记录回波信号的幅度和相位。</p>
 <p><strong>回波信号的空间编码记录</strong>　将回波信号记录在胶片上，形成全息图式的编码透明片。</p>
@@ -1737,7 +1792,8 @@ l' &= r + r\\frac{i'}{u'}
 </ul>`}
     ]},
     {name:'6.9 光学人工神经网络', color:'#be123c', desc:'神经网络模型与光学实现', items:[
-      {id:'la-k6-17', name:'神经网络基础', tags:'def','his', brief:'神经元模型、Hopfield 网络。',
+      {id:'la-k6-17', name:'神经网络基础', tags:['def','his'], brief:'神经元模型、Hopfield 网络。',
+        fig:'neural', figCap:'图 6.5　人工神经网络结构（输入层、隐层、输出层）',
         body:`<p><strong>神经元数学模型</strong></p>
 <div class="la-fml">$$y_i = f\\left(\\sum_j w_{ij}x_j - \\theta_i\\right)$$</div>
 <p>其中 $w_{ij}$ 为连接权重，$f$ 为非线性激活函数。</p>
@@ -1750,7 +1806,7 @@ l' &= r + r\\frac{i'}{u'}
 </ul>
 <p><strong>Hopfield 网络</strong>　反馈型网络，用于联想记忆和优化计算。</p>
 <p>权重矩阵：外积法 $w_{ij} = \\sum_s x_i^{(s)}x_j^{(s)}$；内积法（伪逆法）。</p>`},
-      {id:'la-k6-18', name:'光学神经网络', tags:'app','def', brief:'外积算法、内积算法与可编程网络。',
+      {id:'la-k6-18', name:'光学神经网络', tags:['app','def'], brief:'外积算法、内积算法与可编程网络。',
         body:`<p><strong>光学实现神经网络的优势</strong></p>
 <ul>
 <li>二维并行连接</li>
@@ -1850,7 +1906,13 @@ document.addEventListener('keydown', e => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-  renderLa();
+  try {
+    renderLa();
+  } catch(err) {
+    console.error('渲染出错:', err);
+    document.getElementById('laRoadmap').innerHTML =
+      '<p style="color:#dc2626;padding:20px;">内容加载出错，请检查控制台日志。</p>';
+  }
   if (window.MathJax && window.MathJax.typesetPromise) {
     window.MathJax.typesetPromise([document.getElementById('laRoadmap')]).catch(()=>{});
   }
