@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="光学知识体系：几何光学、干涉、衍射、偏振、傅里叶光学">
+<meta name="description" content="光学知识体系：几何光学、费马原理、干涉、衍射、偏振、傅里叶光学、激光">
 <title>光学 · 知识体系</title>
 <script>
 window.MathJax = {
@@ -114,9 +114,9 @@ window.MathJax = {
   <header class="la-header">
     <div class="la-eyebrow">OPTICS · KNOWLEDGE MAP</div>
     <h1>光学 · 知识体系</h1>
-    <p class="la-subtitle">几何光学 · 干涉 · 衍射 · 偏振 · 傅里叶光学</p>
+    <p class="la-subtitle">几何光学 · 干涉 · 衍射 · 偏振 · 傅里叶光学 · 激光</p>
     <div class="back-bar"><a class="back-btn" href="index.html">← 返回总览</a></div>
-    <div class="la-nav-tabs"><a class="la-nav-tab c1" href="#la-ch1">第一章 · 几何光学</a><a class="la-nav-tab c2" href="#la-ch2">第二章 · 波动光学</a></div>
+    <div class="la-nav-tabs"><a class="la-nav-tab c1" href="#la-ch1">第一章 · 几何光学</a><a class="la-nav-tab c2" href="#la-ch2">第二章 · 光的干涉</a><a class="la-nav-tab c3" href="#la-ch3">第三章 · 光的衍射</a><a class="la-nav-tab c4" href="#la-ch4">第四章 · 光的偏振</a><a class="la-nav-tab c5" href="#la-ch5">第五章 · 傅里叶光学与激光</a></div>
     <div class="la-toolbar">
       <button onclick="window.scrollTo({top:0,behavior:'smooth'})">回到顶部</button>
     </div>
@@ -153,8 +153,11 @@ window.MathJax = {
 const LA_FIG = {  };
 const LA_TAG_LABEL = {def:'定 义', thm:'定 理', der:'推 导', exa:'例 子', app:'应 用', his:'注 记'};
 const LA_DATA = [
-{id:'la-ch1',num:'第一章',title:'几何光学',en:'GEOMETRICAL OPTICS',sub:'折射、反射、成像',desc:'光在波长可忽略时沿直线传播。本章讨论反射折射定律与成像。',sections:[{name:'1.1 基本定律',color:'#2563eb',desc:'费马原理',items:[{id:'la-k1-1',name:'反射与折射定律',tags:["def", "thm"],brief:'$n_1\\sin\\theta_1=n_2\\sin\\theta_2$（斯涅尔定律）。',body:`<p>费马原理：光沿光程极值路径传播。反射角等于入射角。</p>`}]}]},
-{id:'la-ch2',num:'第二章',title:'波动光学',en:'WAVE OPTICS',sub:'干涉、衍射、偏振',desc:'光的波动性在干涉、衍射、偏振中显现。',sections:[{name:'2.1 干涉与衍射',color:'#7c3aed',desc:'相干叠加',items:[{id:'la-k2-1',name:'双缝干涉',tags:["def", "thm"],brief:'明纹 $d\\sin\\theta=m\\lambda$，暗纹 $(m+1/2)\\lambda$。',body:`<p>两相干光叠加产生明暗条纹。杨氏双缝证明光的波动性。</p>`},{id:'la-k2-2',name:'单缝衍射',tags:["def", "thm"],brief:'暗纹 $a\\sin\\theta=m\\lambda$，中央明纹最亮。',body:`<p>夫琅禾费衍射用惠更斯-菲涅耳原理分析。圆孔衍射产生艾里斑，决定光学仪器分辨率。</p>`}]},{name:'2.2 偏振',color:'#0f766e',desc:'横波特性',items:[{id:'la-k2-3',name:'马吕斯定律',tags:["def", "thm"],brief:'$I=I_0\\cos^2\\theta$。',body:`<p>线偏振光通过检偏器后强度按马吕斯定律变化。布儒斯特角下反射光完全偏振。</p>`}]}]}
+{id:'la-ch1',num:'第一章',title:'几何光学',en:'GEOMETRICAL OPTICS',sub:'折射、反射、成像',desc:'光在波长可忽略时沿直线传播。本章讨论反射折射定律与透镜成像。',sections:[{name:'1.1 基本定律',color:'#2563eb',desc:'费马原理、斯涅尔定律',items:[{id:'la-k1-1',name:'反射与折射定律',tags:["def", "thm"],brief:'$n_1\\sin\\theta_1=n_2\\sin\\theta_2$（斯涅尔定律）；反射角=入射角。',body:`<p>费马原理：光沿光程极值路径传播。由费马原理可导出反射和折射定律。全反射：$n_1>n_2$ 且 $\\theta_1>\\theta_c=\\arcsin(n_2/n_1)$ 时无折射光，应用于光纤通信。</p>`},{id:'la-k1-2',name:'薄透镜成像',tags:["def", "thm", "app"],brief:'$\\frac1s+\\frac1{s'}=\\frac1f$，横向放大率 $m=-s'/s$。',body:`<p>薄透镜公式（高斯形式）。凸透镜 $f>0$，凹透镜 $f<0$。透镜制造者公式 $1/f=(n-1)(1/R_1-1/R_2)$。组合透镜 $1/f=\\sum1/f_i$。</p>`}]}]},
+{id:'la-ch2',num:'第二章',title:'光的干涉',en:'INTERFERENCE',sub:'相干叠加、分波前/分振幅',desc:'两束或多束相干光叠加产生明暗相间的干涉条纹。',sections:[{name:'2.1 双缝与薄膜干涉',color:'#7c3aed',desc:'杨氏实验、牛顿环',items:[{id:'la-k2-1',name:'杨氏双缝干涉',tags:["def", "thm", "his"],brief:'明纹 $d\\sin\\theta=m\\lambda$，暗纹 $d\\sin\\theta=(m+1/2)\\lambda$。',body:`<p>杨氏双缝实验（1801）首次证明光的波动性。条纹间距 $\\Delta y=\\lambda D/d$。需相干光源，光程差决定明暗。时间相干性（相干长度）和空间相干性限制可见度。</p>`},{id:'la-k2-2',name:'薄膜干涉',tags:["thm", "app"],brief:'光程差 $\\Delta=2nd\\cos\\theta+\\lambda/2$（半波损失）。',body:`<p>薄膜上下表面反射光干涉。增透膜利用相消干涉减少反射。牛顿环是等厚干涉，可测量透镜曲率半径。迈克尔逊干涉仪用分振幅法实现精密测量。</p>`}]}]},
+{id:'la-ch3',num:'第三章',title:'光的衍射',en:'DIFFRACTION',sub:'菲涅耳、夫琅禾费',desc:'光绕过障碍物偏离直线传播的现象。本章讨论夫琅禾费衍射和衍射光栅。',sections:[{name:'3.1 单缝与圆孔衍射',color:'#0f766e',desc:'惠更斯-菲涅耳原理',items:[{id:'la-k3-1',name:'单缝夫琅禾费衍射',tags:["def", "thm"],brief:'暗纹 $a\\sin\\theta=m\\lambda$，光强 $I=I_0(\\sin\\alpha/\\alpha)^2$。',body:`<p>衍射是光的波动性的体现。中央明纹最亮最宽，为两侧明纹宽度的两倍。缝越窄，衍射越显著。圆孔衍射产生艾里斑，角半径 $\\theta=1.22\\lambda/D$，决定光学仪器分辨率。</p>`},{id:'la-k3-2',name:'衍射光栅',tags:["def", "thm", "app"],brief:'主极大 $d\\sin\\theta=m\\lambda$，光栅方程。',body:`<p>光栅由大量等间距狭缝组成。主极大位置由光栅方程决定。光栅色散 $D=d\\theta/d\\lambda=m/(d\\cos\\theta)$，分辨本领 $R=mN$。光栅光谱仪用于光谱分析。</p>`}]}]},
+{id:'la-ch4',num:'第四章',title:'光的偏振',en:'POLARIZATION',sub:'横波特性、偏振器件',desc:'光是横波，电场矢量的振动方向即偏振方向。本章讨论偏振态和偏振器件。',sections:[{name:'4.1 偏振态与马吕斯定律',color:'#c2410c',desc:'线/圆/椭圆偏振',items:[{id:'la-k4-1',name:'马吕斯定律',tags:["def", "thm"],brief:'$I=I_0\\cos^2\\theta$。',body:`<p>线偏振光通过检偏器后强度按马吕斯定律变化。自然光通过偏振片后强度减半。布儒斯特角 $\\theta_B=\\arctan(n_2/n_1)$ 下反射光完全线偏振（s 偏振）。</p>`},{id:'la-k4-2',name:'波片与圆偏振',tags:["def", "app"],brief:'$\\lambda/4$ 波片将线偏振转为圆偏振。',body:`<p>波片利用晶体双折射产生 o 光和 e 光的相位差。$\\lambda/4$ 波片产生 $\\pi/2$ 相位差，$\\lambda/2$ 波片产生 $\\pi$ 相位差。圆偏振光由两束等幅垂直线偏振光相位差 $\\pi/2$ 合成。</p>`}]}]},
+{id:'la-ch5',num:'第五章',title:'傅里叶光学与激光',en:'FOURIER OPTICS & LASER',sub:'空间滤波、受激辐射',desc:'用傅里叶变换分析光学系统；激光基于受激辐射放大。',sections:[{name:'5.1 傅里叶光学',color:'#2563eb',desc:'阿贝成像理论',items:[{id:'la-k5-1',name:'阿贝成像原理',tags:["thm", "his"],brief:'透镜后焦面为物的空间频谱，两次傅里叶变换完成成像。',body:`<p>阿贝（1873）指出成像分两步：物光波在透镜后焦面形成空间频谱（衍射），各频谱分量再叠加（干涉）形成像。$\\lambda/4$ 显微镜分辨率极限由数值孔径决定。空间滤波可改变像的结构。</p>`}]},{name:'5.2 激光原理',color:'#7c3aed',desc:'受激辐射、谐振腔',items:[{id:'la-k5-2',name:'激光产生条件',tags:["def", "thm", "app"],brief:'粒子数反转 + 光学谐振腔 + 增益大于损耗。',body:`<p>爱因斯坦受激辐射理论预言激光。粒子数反转使受激辐射超过吸收。谐振腔提供正反馈和选模。激光特性：高单色性、高方向性、高亮度、高相干性。</p>`}]}]}
 ];
 const LA_KP = {};
 function laBuildCard(item){

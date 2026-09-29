@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="原子核物理知识体系：核结构、核力、衰变、裂变聚变、核模型">
+<meta name="description" content="原子核物理知识体系：核的基本性质、结合能、核力、放射性衰变、裂变聚变、核结构模型">
 <title>原子核物理 · 知识体系</title>
 <script>
 window.MathJax = {
@@ -116,7 +116,7 @@ window.MathJax = {
     <h1>原子核物理 · 知识体系</h1>
     <p class="la-subtitle">核结构 · 核力 · 衰变 · 裂变聚变 · 核模型</p>
     <div class="back-bar"><a class="back-btn" href="index.html">← 返回总览</a></div>
-    <div class="la-nav-tabs"><a class="la-nav-tab c1" href="#la-ch1">第一章 · 原子核的基本性质</a><a class="la-nav-tab c2" href="#la-ch2">第二章 · 核衰变与核反应</a></div>
+    <div class="la-nav-tabs"><a class="la-nav-tab c1" href="#la-ch1">第一章 · 原子核的基本性质</a><a class="la-nav-tab c2" href="#la-ch2">第二章 · 放射性衰变</a><a class="la-nav-tab c3" href="#la-ch3">第三章 · 核裂变与核聚变</a><a class="la-nav-tab c4" href="#la-ch4">第四章 · 核结构模型</a></div>
     <div class="la-toolbar">
       <button onclick="window.scrollTo({top:0,behavior:'smooth'})">回到顶部</button>
     </div>
@@ -153,8 +153,10 @@ window.MathJax = {
 const LA_FIG = {  };
 const LA_TAG_LABEL = {def:'定 义', thm:'定 理', der:'推 导', exa:'例 子', app:'应 用', his:'注 记'};
 const LA_DATA = [
-{id:'la-ch1',num:'第一章',title:'原子核的基本性质',en:'NUCLEAR PROPERTIES',sub:'大小、质量、结合能',desc:'原子核由质子和中子组成。本章讨论核的大小、质量与结合能。',sections:[{name:'1.1 结合能',color:'#2563eb',desc:'质量亏损',items:[{id:'la-k1-1',name:'结合能',tags:["def", "thm"],brief:'$B=(Zm_p+Nm_n-M)c^2$，比结合能 $B/A$ 衡量核稳定性。',body:`<p>质量亏损转化为结合能。铁 56 比结合能最大（约 8.8 MeV），是裂变与聚变的能量来源。</p>`}]}]},
-{id:'la-ch2',num:'第二章',title:'核衰变与核反应',en:'DECAY & REACTIONS',sub:'α/β/γ 衰变、裂变聚变',desc:'不稳定核通过衰变释放能量。裂变与聚变释放巨大核能。',sections:[{name:'2.1 衰变',color:'#7c3aed',desc:'放射性衰变',items:[{id:'la-k2-1',name:'衰变定律',tags:["def", "thm"],brief:'$N(t)=N_0e^{-\\lambda t}$，半衰期 $T_{1/2}=\\ln2/\\lambda$。',body:`<p>α 衰变放出氦核，β 衰变中子转质子（或反之）并放出电子/正电子与中微子，γ 退激发射光子。</p>`},{id:'la-k2-2',name:'裂变与聚变',tags:["def", "thm", "app"],brief:'重核裂变释放约 200 MeV；轻核聚变释放约 17.6 MeV（D-T）。',body:`<p>裂变用于核电站与原子弹；聚变是太阳能量来源，可控聚变是能源前沿。</p>`}]}]}
+{id:'la-ch1',num:'第一章',title:'原子核的基本性质',en:'NUCLEAR PROPERTIES',sub:'大小、质量、结合能、核力',desc:'原子核由质子和中子组成。本章讨论核的大小、质量、结合能与核力。',sections:[{name:'1.1 结合能与核力',color:'#2563eb',desc:'质量亏损、强相互作用',items:[{id:'la-k1-1',name:'结合能',tags:["def", "thm"],brief:'$B=(Zm_p+Nm_n-M_{核})c^2$，比结合能 $B/A$ 衡量核稳定性。',body:`<p>质量亏损 $\\Delta m=Zm_p+Nm_n-M_{核}$ 转化为结合能。比结合能曲线在 $A\\approx56$（铁）处最大，约 8.8 MeV。比结合能大的核更稳定。重核裂变和轻核聚变都向比结合能更大的方向进行，释放能量。</p>`},{id:'la-k1-2',name:'核力',tags:["def", "thm"],brief:'短程、强吸引、电荷无关、饱和性。',body:`<p>核力是强相互作用的剩余效应，力程约 2 fm。核力比电磁力强约 100 倍，但仅在核子间极短距离内起作用。核力具有饱和性（每个核子只与邻近核子作用），这解释了结合能近似正比于 $A$。</p>`}]}]},
+{id:'la-ch2',num:'第二章',title:'放射性衰变',en:'RADIOACTIVE DECAY',sub:'α/β/γ 衰变、衰变定律',desc:'不稳定核通过衰变释放能量，转变为更稳定的核。',sections:[{name:'2.1 衰变类型与规律',color:'#7c3aed',desc:'三种主要衰变',items:[{id:'la-k2-1',name:'衰变定律',tags:["def", "thm"],brief:'$N(t)=N_0e^{-\\lambda t}$，半衰期 $T_{1/2}=\\ln2/\\lambda$，平均寿命 $\\tau=1/\\lambda$。',body:`<p>放射性衰变是统计过程，单个核的衰变时刻随机，但大量核的衰变服从指数规律。衰变常数 $\\lambda$ 与外界条件（温度、压力等）无关，由核内部结构决定。</p>`},{id:'la-k2-2',name:'α、β、γ 衰变',tags:["def", "thm", "app"],brief:'α：$^4_2$He；β：$n\\to p+e^-+\\bar\\nu_e$；γ：核退激发射光子。',body:`<p>α 衰变放出氦核，发生在重核（$A>140$）。β 衰变中中子转为质子（β⁻）或质子转为中子（β⁺/电子俘获），并放出中微子。γ 衰变是激发态核跃迁到低能态，放出光子，不改变核素。</p>`}]}]},
+{id:'la-ch3',num:'第三章',title:'核裂变与核聚变',en:'FISSION & FUSION',sub:'核能释放',desc:'重核裂变和轻核聚变都释放巨大能量，是核能利用的基础。',sections:[{name:'3.1 裂变与聚变',color:'#0f766e',desc:'核能应用',items:[{id:'la-k3-1',name:'核裂变',tags:["def", "thm", "app"],brief:'重核（如 U-235）裂变为两个中等质量核，释放约 200 MeV。',body:`<p>裂变由中子诱发，产生 2-3 个中子，可引发链式反应。核电站利用可控链式反应发电（$E=mc^2$，质量亏损约 0.1%）。原子弹使用临界质量实现不可控裂变。</p>`},{id:'la-k3-2',name:'核聚变',tags:["def", "thm", "app"],brief:'轻核（D+T）聚变为较重核，释放约 17.6 MeV。',body:`<p>聚变是太阳和恒星的能量来源。D-T 反应：$^2_1$H+$^3_1$H$\\to^4_2$He+n+17.6 MeV。可控核聚变需高温（>10⁸ K）、高密度和约束（劳森判据），是未来清洁能源的希望。</p>`}]}]},
+{id:'la-ch4',num:'第四章',title:'核结构模型',en:'NUCLEAR MODELS',sub:'液滴模型、壳模型',desc:'核结构模型从不同角度描述原子核的性质。',sections:[{name:'4.1 核模型',color:'#c2410c',desc:'集体与单粒子模型',items:[{id:'la-k4-1',name:'液滴模型',tags:["def", "thm", "app"],brief:'结合能半经验公式 $B=a_V A-a_S A^{2/3}-a_C Z^2/A^{1/3}-a_A(A-2Z)^2/A+\\delta$。',body:`<p>液滴模型将核视为带电液滴，解释了结合能的整体趋势和裂变的发生。魏扎克半经验公式较好地拟合了核素结合能。</p>`},{id:'la-k4-2',name:'壳模型',tags:["def", "thm", "app"],brief:'核子在平均势场中独立运动，存在幻数（2,8,20,28,50,82,126）。',body:`<p>壳模型类比原子的电子壳层，核子在平均场中填充能级。幻数对应的核特别稳定。壳模型成功解释了核的自旋和宇称，以及幻数的存在。</p>`}]}]}
 ];
 const LA_KP = {};
 function laBuildCard(item){

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="低温物理知识体系：液氦、超流、玻色爱因斯坦凝聚、极低温技术">
+<meta name="description" content="低温物理知识体系：液氦相变、超流He II、二流体模型、玻色-爱因斯坦凝聚、极低温制冷技术">
 <title>低温物理 · 知识体系</title>
 <script>
 window.MathJax = {
@@ -116,7 +116,7 @@ window.MathJax = {
     <h1>低温物理 · 知识体系</h1>
     <p class="la-subtitle">液氦 · 超流 · 玻色-爱因斯坦凝聚 · 极低温技术</p>
     <div class="back-bar"><a class="back-btn" href="index.html">← 返回总览</a></div>
-    <div class="la-nav-tabs"><a class="la-nav-tab c1" href="#la-ch1">第一章 · 液氦与超流</a></div>
+    <div class="la-nav-tabs"><a class="la-nav-tab c1" href="#la-ch1">第一章 · 液氦与超流</a><a class="la-nav-tab c2" href="#la-ch2">第二章 · 玻色-爱因斯坦凝聚与制冷技术</a></div>
     <div class="la-toolbar">
       <button onclick="window.scrollTo({top:0,behavior:'smooth'})">回到顶部</button>
     </div>
@@ -153,7 +153,8 @@ window.MathJax = {
 const LA_FIG = {  };
 const LA_TAG_LABEL = {def:'定 义', thm:'定 理', der:'推 导', exa:'例 子', app:'应 用', his:'注 记'};
 const LA_DATA = [
-{id:'la-ch1',num:'第一章',title:'液氦与超流',en:'HELIUM & SUPERFLUIDITY',sub:'相变、超流',desc:'液氦在低温下发生超流相变，展现宏观量子现象。',sections:[{name:'1.1 超流',color:'#2563eb',desc:'He II',items:[{id:'la-k1-1',name:'超流 He II',tags:["def", "thm"],brief:'$T<2.17$ K 时 He-4 超流，零粘滞、熵为零。',body:`<p>超流是玻色-爱因斯坦凝聚的宏观表现。二流体模型：正常流体 + 超流体组分。</p>`}]}]}
+{id:'la-ch1',num:'第一章',title:'液氦与超流',en:'HELIUM & SUPERFLUIDITY',sub:'λ相变、超流、二流体',desc:'液氦在低温下发生超流相变，展现宏观量子现象。超流是玻色-爱因斯坦凝聚的直接体现。',sections:[{name:'1.1 超流 He II',color:'#2563eb',desc:'零粘滞、量子化涡旋',items:[{id:'la-k1-1',name:'超流 He II 与二流体模型',tags:["def", "thm", "his"],brief:'$T<T_\\lambda=2.17$ K 时 He-4 超流，零粘滞、熵为零。',body:`<p>He-4 在 $T_\\lambda$ 发生二级相变（λ 相变），从正常流体 He I 变为超流体 He II。Tisza-Landau 二流体模型：He II 由正常流体（$\\rho_n$，携带熵）和超流体（$\\rho_s$，零熵零粘滞）组成。超流组分可无摩擦流动，表现为爬膜效应、喷泉效应。</p>`},{id:'la-k1-2',name:'量子化涡旋与 He-3 超流',tags:["def", "thm"],brief:'环流量子 $\\kappa=h/(2m_4)$；He-3 有超流 A/B 相。',body:`<p>超流 He II 中的涡旋环流量子化 $\\oint\\mathbf{v}\\cdot d\\mathbf{l}=n\\kappa$。He-3（费米子）在 mK 温度下通过 Cooper 配对发生超流，有 A 相（各向异性 p 波）和 B 相（各向同性），是拓扑超流候选。Kapitza 因发现超流获 1978 年诺贝尔奖。</p>`}]}]},
+{id:'la-ch2',num:'第二章',title:'玻色-爱因斯坦凝聚与制冷技术',en:'BEC & REFRIGERATION',sub:'BEC、激光冷却、稀释制冷',desc:'冷原子气体可实现玻色-爱因斯坦凝聚。极低温技术是现代凝聚态物理的基础。',sections:[{name:'2.1 BEC 与制冷',color:'#7c3aed',desc:'激光冷却、稀释制冷机',items:[{id:'la-k2-1',name:'玻色-爱因斯坦凝聚（BEC）',tags:["def", "thm", "his"],brief:'$T<T_c$ 时宏观数目的玻色子占据基态。',body:`<p>玻色-爱因斯坦凝聚是玻色子在低温下发生的相变，宏观数目粒子占据单粒子基态。Cornell、Wieman、Ketterle（1995）在铷原子气中首次实现 BEC，获 2001 年诺贝尔奖。BEC 是研究量子多体物理的理想平台，可实现原子激光、超冷分子等。</p>`},{id:'la-k2-2',name:'极低温制冷技术',tags:["def", "app"],brief:'激光冷却 $\\sim\\mu$K，稀释制冷机 $\\sim$mK。',body:`<p>激光冷却（Doppler 冷却、偏振梯度冷却）将原子冷却到 $\\mu$K 量级。磁光阱（MOT）俘获冷原子。稀释制冷机利用 He-3/He-4 混合物相变，可达 ~10 mK，是量子计算和超导实验的核心设备。绝热去磁制冷可达更低温度。</p>`}]}]}
 ];
 const LA_KP = {};
 function laBuildCard(item){

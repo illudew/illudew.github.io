@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="流体力学知识体系：连续性方程、欧拉方程、Navier-Stokes、伯努利、湍流">
+<meta name="description" content="流体力学知识体系：连续性方程、欧拉方程、Navier-Stokes方程、伯努利定理、势流、边界层、湍流">
 <title>流体力学 · 知识体系</title>
 <script>
 window.MathJax = {
@@ -114,9 +114,9 @@ window.MathJax = {
   <header class="la-header">
     <div class="la-eyebrow">FLUID MECHANICS · KNOWLEDGE MAP</div>
     <h1>流体力学 · 知识体系</h1>
-    <p class="la-subtitle">连续性方程 · 欧拉方程 · Navier-Stokes · 伯努利 · 湍流</p>
+    <p class="la-subtitle">连续性方程 · 欧拉方程 · Navier-Stokes · 伯努利 · 势流 · 湍流</p>
     <div class="back-bar"><a class="back-btn" href="index.html">← 返回总览</a></div>
-    <div class="la-nav-tabs"><a class="la-nav-tab c1" href="#la-ch1">第一章 · 流体基本方程</a><a class="la-nav-tab c2" href="#la-ch2">第二章 · 伯努利与湍流</a></div>
+    <div class="la-nav-tabs"><a class="la-nav-tab c1" href="#la-ch1">第一章 · 流体基本方程</a><a class="la-nav-tab c2" href="#la-ch2">第二章 · 伯努利方程与势流</a><a class="la-nav-tab c3" href="#la-ch3">第三章 · 边界层与湍流</a></div>
     <div class="la-toolbar">
       <button onclick="window.scrollTo({top:0,behavior:'smooth'})">回到顶部</button>
     </div>
@@ -153,8 +153,9 @@ window.MathJax = {
 const LA_FIG = {  };
 const LA_TAG_LABEL = {def:'定 义', thm:'定 理', der:'推 导', exa:'例 子', app:'应 用', his:'注 记'};
 const LA_DATA = [
-{id:'la-ch1',num:'第一章',title:'流体基本方程',en:'FLUID EQUATIONS',sub:'连续性、欧拉、NS',desc:'流体作为连续介质，其运动由质量、动量、能量守恒方程描述。',sections:[{name:'1.1 连续性与欧拉方程',color:'#2563eb',desc:'理想流体',items:[{id:'la-k1-1',name:'连续性方程',tags:["def", "thm"],brief:'$\\partial_t\\rho+\\nabla\\cdot(\\rho\\boldsymbol{v})=0$。',body:`<p>质量守恒的微分形式。不可压缩流体 $\\nabla\\cdot\\boldsymbol{v}=0$。</p>`},{id:'la-k1-2',name:'欧拉方程',tags:["def", "thm"],brief:'$\\rho(\\partial_t\\boldsymbol{v}+\\boldsymbol{v}\\cdot\\nabla\\boldsymbol{v})=-\\nabla p+\\rho\\boldsymbol{f}$。',body:`<p>理想流体（无粘）的动量方程。对流项 $\\boldsymbol{v}\\cdot\\nabla\\boldsymbol{v}$ 使方程非线性。</p>`}]},{name:'1.2 Navier-Stokes 方程',color:'#7c3aed',desc:'粘性流体',items:[{id:'la-k1-3',name:'NS 方程',tags:["def", "thm"],brief:'$\\rho(\\partial_t\\boldsymbol{v}+\\boldsymbol{v}\\cdot\\nabla\\boldsymbol{v})=-\\nabla p+\\mu\\nabla^2\\boldsymbol{v}+\\rho\\boldsymbol{f}$。',body:`<p>引入粘性应力 $\\mu\\nabla^2\\boldsymbol{v}$。NS 方程的解析解极少，千禧年难题之一。</p>`}]}]},
-{id:'la-ch2',num:'第二章',title:'伯努利与湍流',en:'BERNOULLI & TURBULENCE',sub:'能量积分、雷诺数',desc:'伯努利方程是定常无粘流的能量积分；湍流由雷诺数表征。',sections:[{name:'2.1 伯努利方程',color:'#0f766e',desc:'沿流线守恒',items:[{id:'la-k2-1',name:'伯努利方程',tags:["thm", "der"],brief:'$\\frac12\\rho v^2+p+\\rho gz=\\text{常数}$（沿流线）。',body:`<p>定常、无粘、不可压缩、沿流线成立。动能+压强能+势能守恒。</p>`}]},{name:'2.2 湍流',color:'#c2410c',desc:'雷诺数与雷诺平均',items:[{id:'la-k2-2',name:'雷诺数',tags:["def", "thm", "app"],brief:'$Re=\\rho vL/\\mu$，$Re>Re_c$ 转捩湍流。',body:`<p>雷诺数是惯性力与粘性力之比。湍流需用雷诺平均 NS（RANS）或大涡模拟（LES）处理。</p>`}]}]}
+{id:'la-ch1',num:'第一章',title:'流体基本方程',en:'FLUID FUNDAMENTALS',sub:'连续性、欧拉、NS',desc:'流体作为连续介质，其运动由质量、动量、能量守恒方程描述。本章建立流体力学的基本方程组。',sections:[{name:'1.1 连续性方程',color:'#2563eb',desc:'质量守恒',items:[{id:'la-k1-1',name:'连续性方程',tags:["def", "thm"],brief:'$\\frac{\\partial\\rho}{\\partial t}+\\nabla\\cdot(\\rho\\boldsymbol v)=0$。',body:`<p>质量守恒的微分形式。对控制体 $V$，流入质量等于质量增加率。不可压缩流体 $\\rho=$ 常数，方程简化为 $\\nabla\\cdot\\boldsymbol v=0$（速度场无散）。</p>`},{id:'la-k1-2',name:'物质导数',tags:["def", "thm"],brief:'$\\frac{D}{Dt}=\\frac{\\partial}{\\partial t}+\\boldsymbol v\\cdot\\nabla$。',body:`<p>物质导数（随体导数）= 局部导数 + 对流导数。描述随流体微团运动时物理量的变化率，是拉格朗日观点与欧拉观点的桥梁。</p>`}]},{name:'1.2 运动方程',color:'#7c3aed',desc:'欧拉方程与NS方程',items:[{id:'la-k1-3',name:'欧拉方程',tags:["def", "thm"],brief:'$\\rho\\frac{D\\boldsymbol v}{Dt}=-\\nabla p+\\rho\\boldsymbol f$。',body:`<p>理想流体（无粘）的动量方程。展开为：$\\rho(\\partial_t\\boldsymbol v+\\boldsymbol v\\cdot\\nabla\\boldsymbol v)=-\\nabla p+\\rho\\boldsymbol f$。对流项 $\\boldsymbol v\\cdot\\nabla\\boldsymbol v$ 使方程非线性。</p>`},{id:'la-k1-4',name:'Navier-Stokes 方程',tags:["def", "thm"],brief:'$\\rho\\frac{D\\boldsymbol v}{Dt}=-\\nabla p+\\mu\\nabla^2\\boldsymbol v+\\rho\\boldsymbol f$。',body:`<p>引入粘性应力 $\\mu\\nabla^2\\boldsymbol v$（牛顿流体）。NS 方程是流体力学的核心。其解析解极少，三维光滑解的存在性是千禧年难题之一。</p>`}]}]},
+{id:'la-ch2',num:'第二章',title:'伯努利方程与势流',en:'BERNOULLI & POTENTIAL FLOW',sub:'能量积分、无旋流动',desc:'伯努利方程是定常无粘流的能量积分；势流理论给出无旋流动的解析解法。',sections:[{name:'2.1 伯努利方程',color:'#0f766e',desc:'沿流线守恒',items:[{id:'la-k2-1',name:'伯努利方程',tags:["thm", "der"],brief:'$\\frac12\\rho v^2+p+\\rho gz=\\text{const}$（沿流线）。',body:`<p>定常、无粘、不可压缩、沿流线成立。三项分别为动能、压强能、势能。应用：文丘里管、皮托管、喷雾器。</p><div class="la-fml">$$\\frac{v^2}{2g}+\\frac{p}{\\rho g}+z=H$$</div>`},{id:'la-k2-2',name:'托里拆利定律',tags:["exa", "app"],brief:'小孔出流速度 $v=\\sqrt{2gh}$。',body:`<p>伯努利方程的直接应用。大容器液面下 $h$ 处小孔出流速度等于自由下落 $h$ 的速度。实际有收缩系数和流量系数修正。</p>`}]},{name:'2.2 势流理论',color:'#c2410c',desc:'无旋流动、速度势',items:[{id:'la-k2-3',name:'速度势与流函数',tags:"def",brief:'$\\boldsymbol v=\\nabla\\phi$，$\\nabla^2\\phi=0$（拉普拉斯方程）。',body:`<p>无旋流动 $\\nabla\\times\\boldsymbol v=0$ 时存在速度势 $\\phi$。二维流动还可引入流函数 $\\psi$，与 $\\phi$ 构成共轭调和函数（复变函数方法）。</p>`},{id:'la-k2-4',name:'基本解与叠加',tags:"thm",brief:'点源、点涡、偶极子等基本解可叠加构造复杂流动。',body:`<p>拉普拉斯方程线性，基本解可叠加。均匀流+偶极子=绕圆柱无环量流动（达朗贝尔佯谬：阻力为零）。加环量后产生升力（库塔-儒可夫斯基定理）。</p>`}]}]},
+{id:'la-ch3',num:'第三章',title:'边界层与湍流',en:'BOUNDARY LAYER & TURBULENCE',sub:'雷诺数、湍流模型',desc:'粘性在边界层内起重要作用；高雷诺数时流动转捩为湍流。',sections:[{name:'3.1 边界层理论',color:'#2563eb',desc:'普朗特边界层',items:[{id:'la-k3-1',name:'边界层厚度',tags:["def", "thm"],brief:'$\\delta\\sim\\sqrt{\\nu x/U_0}$（层流），$\\delta\\sim x(Re_x)^{-1/5}$（湍流）。',body:`<p>高雷诺数时粘性仅在物面附近薄边界层内重要。层内速度从物面零值迅速增至外流值。边界层方程由普朗特提出，是NS方程的近似。</p>`},{id:'la-k3-2',name:'边界层分离',tags:"app",brief:'逆压梯度导致边界层分离，形成尾涡区。',body:`<p>当 $dp/dx>0$（逆压梯度），流体动能不足以克服压强升高，边界层脱离物面。分离后阻力剧增（压差阻力），升力下降（失速）。</p>`}]},{name:'3.2 湍流',color:'#7c3aed',desc:'雷诺数与湍流模型',items:[{id:'la-k3-3',name:'雷诺数',tags:["def", "thm", "app"],brief:'$Re=\\frac{\\rho vL}{\\mu}=\\frac{\\text{惯性力}}{\\text{粘性力}}$。',body:`<p>雷诺数是流动相似的关键参数。$Re<Re_c$ 层流，$Re>Re_c$ 湍流。圆管 $Re_c\\approx2300$，平板 $Re_c\\approx5\\times10^5$。湍流需用雷诺平均（RANS）、大涡模拟（LES）或直接数值模拟（DNS）。</p>`},{id:'la-k3-4',name:'雷诺平均NS方程',tags:"thm",brief:'$\\overline{\\rho\\frac{D\\bar v_i}{Dt}}=-\\partial_i\\bar p+\\mu\\nabla^2\\bar v_i-\\partial_j(\\overline{\\rho v_i'v_j'})$。',body:`<p>将速度分解为平均加脉动，对NS方程取平均得RANS。多出的雷诺应力项 $-\\rho\\overline{v_i'v_j'}$ 需用湍流模型封闭（$k-\\varepsilon$、SST 等）。</p>`}]}]}
 ];
 const LA_KP = {};
 function laBuildCard(item){

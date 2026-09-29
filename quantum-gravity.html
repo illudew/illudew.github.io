@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="量子引力知识体系：圈量子引力、自旋网络、渐近安全、正则量子化">
+<meta name="description" content="量子引力知识体系：圈量子引力、自旋网络与自旋泡沫、渐近安全、正则量子引力、全息原理">
 <title>量子引力 · 知识体系</title>
 <script>
 window.MathJax = {
@@ -114,9 +114,9 @@ window.MathJax = {
   <header class="la-header">
     <div class="la-eyebrow">QUANTUM GRAVITY · KNOWLEDGE MAP</div>
     <h1>量子引力 · 知识体系</h1>
-    <p class="la-subtitle">圈量子引力 · 自旋网络 · 渐近安全 · 正则量子化</p>
+    <p class="la-subtitle">圈量子引力 · 自旋网络 · 渐近安全 · 正则量子化 · 全息</p>
     <div class="back-bar"><a class="back-btn" href="index.html">← 返回总览</a></div>
-    <div class="la-nav-tabs"><a class="la-nav-tab c1" href="#la-ch1">第一章 · 量子引力途径</a></div>
+    <div class="la-nav-tabs"><a class="la-nav-tab c1" href="#la-ch1">第一章 · 量子引力的主要途径</a><a class="la-nav-tab c2" href="#la-ch2">第二章 · 全息原理与量子引力</a></div>
     <div class="la-toolbar">
       <button onclick="window.scrollTo({top:0,behavior:'smooth'})">回到顶部</button>
     </div>
@@ -153,7 +153,8 @@ window.MathJax = {
 const LA_FIG = {  };
 const LA_TAG_LABEL = {def:'定 义', thm:'定 理', der:'推 导', exa:'例 子', app:'应 用', his:'注 记'};
 const LA_DATA = [
-{id:'la-ch1',num:'第一章',title:'量子引力途径',en:'APPROACHES',sub:'圈量子引力',desc:'统一量子力学与广义相对论是物理学终极问题。',sections:[{name:'1.1 圈量子引力',color:'#2563eb',desc:'背景无关量子化',items:[{id:'la-k1-1',name:'自旋网络',tags:["def", "thm"],brief:'空间由自旋网络描述，面积与体积离散。',body:`<p>圈量子引力以联络为基本变量，用自旋网络离散几何。预言普朗克尺度的时空量子结构，大爆炸可能为大反弹。</p>`}]}]}
+{id:'la-ch1',num:'第一章',title:'量子引力的主要途径',en:'APPROACHES TO QUANTUM GRAVITY',sub:'圈量子引力、弦论、渐近安全',desc:'统一量子力学与广义相对论是物理学终极问题。主要途径包括圈量子引力、弦论、渐近安全等。',sections:[{name:'1.1 圈量子引力',color:'#2563eb',desc:'背景无关量子化',items:[{id:'la-k1-1',name:'自旋网络与自旋泡沫',tags:["def", "thm"],brief:'空间由自旋网络描述，面积与体积算子离散化。',body:`<p>圈量子引力（LQG）以 Ashtekar 联络为基本变量，背景无关地量子化引力。自旋网络是态的基，面积与体积算子有离散谱（面积隙 ~普朗克面积）。自旋泡沫描述自旋网络的时间演化。预言大爆炸奇点可能被大反弹取代。</p>`},{id:'la-k1-2',name:'其他量子引力途径',tags:["def", "app"],brief:'渐近安全、因果集、因果动力学三角剖分。',body:`<p>渐近安全（Weinberg）假设引力耦合常数在紫外有非高斯不动点，从而可量子化。因果集理论将时空建模为离散因果偏序集。因果动力学三角剖分用数值方法模拟时空量子涨落。这些途径都尚缺实验验证。</p>`}]}]},
+{id:'la-ch2',num:'第二章',title:'全息原理与量子引力',en:'HOLOGRAPHIC PRINCIPLE',sub:'AdS/CFT、黑洞熵',desc:'全息原理：$D$ 维量子引力理论等价于 $D-1$ 维边界上的量子场论。',sections:[{name:'2.1 全息原理',color:'#7c3aed',desc:'信息与面积',items:[{id:'la-k2-1',name:'全息原理',tags:["def", "thm"],brief:'区域内最大信息熵与边界面积成正比：$S\\leq A/(4l_P^2)$。',body:`<p>'t Hooft 和 Susskind 提出全息原理：$D$ 维空间中区域的信息可完全编码在其 $D-1$ 维边界上。贝肯斯坦界和黑洞熵是其物理基础。AdS/CFT 对偶是全息原理最严格的实现。</p>`}]}]}
 ];
 const LA_KP = {};
 function laBuildCard(item){

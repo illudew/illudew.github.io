@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="共形场论知识体系：共形对称性、算子积展开、中心荷、临界点">
+<meta name="description" content="共形场论知识体系：共形对称性、Virasoro 代数、算子积展开 OPE、中心荷、临界现象、二维 CFT">
 <title>共形场论 · 知识体系</title>
 <script>
 window.MathJax = {
@@ -114,9 +114,9 @@ window.MathJax = {
   <header class="la-header">
     <div class="la-eyebrow">CONFORMAL FIELD THEORY · KNOWLEDGE MAP</div>
     <h1>共形场论 · 知识体系</h1>
-    <p class="la-subtitle">共形对称性 · 算子积展开 · 中心荷 · 临界点</p>
+    <p class="la-subtitle">共形对称性 · 算子积展开 · 中心荷 · 临界点 · 2D CFT</p>
     <div class="back-bar"><a class="back-btn" href="index.html">← 返回总览</a></div>
-    <div class="la-nav-tabs"><a class="la-nav-tab c1" href="#la-ch1">第一章 · 共形对称性</a></div>
+    <div class="la-nav-tabs"><a class="la-nav-tab c1" href="#la-ch1">第一章 · 共形对称性与二维 CFT</a><a class="la-nav-tab c2" href="#la-ch2">第二章 · CFT 与临界现象</a></div>
     <div class="la-toolbar">
       <button onclick="window.scrollTo({top:0,behavior:'smooth'})">回到顶部</button>
     </div>
@@ -153,7 +153,8 @@ window.MathJax = {
 const LA_FIG = {  };
 const LA_TAG_LABEL = {def:'定 义', thm:'定 理', der:'推 导', exa:'例 子', app:'应 用', his:'注 记'};
 const LA_DATA = [
-{id:'la-ch1',num:'第一章',title:'共形对称性',en:'CONFORMAL SYMMETRY',sub:'标度不变、共形群',desc:'共形场论在标度变换下不变，描述临界现象。',sections:[{name:'1.1 二维 CFT',color:'#2563eb',desc:'Virasoro 代数',items:[{id:'la-k1-1',name:'中心荷',tags:["def", "thm"],brief:'Virasoro 代数 $[L_m,L_n]=(m-n)L_{m+n}+\\frac c{12}m(m^2-1)\\delta_{m+n}$。',body:`<p>二维共形群无限维，给出严格约束。中心荷 $c$ 是 CFT 的基本参数，自由玻色子 $c=1$。</p>`}]}]}
+{id:'la-ch1',num:'第一章',title:'共形对称性与二维 CFT',en:'CONFORMAL SYMMETRY & 2D CFT',sub:'标度不变、共形群、Virasoro',desc:'共形场论在标度变换下不变，描述连续相变和 AdSCFT 边界。二维共形群无限维，给出极强约束。',sections:[{name:'1.1 二维 CFT 结构',color:'#2563eb',desc:'Virasoro 代数、OPE',items:[{id:'la-k1-1',name:'共形群与 Virasoro 代数',tags:["def", "thm"],brief:'$[L_m,L_n]=(m-n)L_{m+n}+\\frac{c}{12}m(m^2-1)\\delta_{m+n,0}$。',body:`<p>二维共形变换分解为全纯与反全纯两部分，生成无限维 Virasoro 代数。中心荷 $c$ 是 CFT 的基本参数：自由玻色子 $c=1$，Ising 模型 $c=1/2$。应力张量 $T(z)$ 是共形对称性的生成元。</p>`},{id:'la-k1-2',name:'初级场与 OPE',tags:["def", "thm"],brief:'初级场按 $(h,\\bar{h})$ 变换；算子积展开 $\\phi_i\\phi_j\\sim\\sum_k C_{ijk}z^{h_k-h_i-h_j}\\phi_k$。',body:`<p>初级场（primary fields）在共形变换下有简单变换性质。算子积展开（OPE）将两算子的乘积展开为局域算子之和。共形维度 $h,\\bar{h}$ 决定关联函数形式。CFT 的所有信息编码在 $c$、初级场谱和 OPE 系数中。</p>`}]}]},
+{id:'la-ch2',num:'第二章',title:'CFT 与临界现象',en:'CFT & CRITICAL PHENOMENA',sub:'临界指数、标度律',desc:'连续相变的临界点由共形场论描述，临界指数与共形维度对应。',sections:[{name:'2.1 临界现象的 CFT 描述',color:'#7c3aed',desc:'标度不变、临界指数',items:[{id:'la-k2-1',name:'临界现象与标度律',tags:["def", "thm", "app"],brief:'临界点处关联长度发散，系统标度不变。',body:`<p>在连续相变的临界点，关联长度 $\\xi\\to\\infty$，系统具有标度不变性，即共形对称性。临界指数（$\\alpha,\\beta,\\gamma,\\delta,\\eta,\\nu$）满足标度律。二维 Ising、Potts、XY 模型等可用 CFT 精确求解，给出普适类。</p>`}]}]}
 ];
 const LA_KP = {};
 function laBuildCard(item){

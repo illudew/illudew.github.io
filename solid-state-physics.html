@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="固体物理知识体系：晶体结构、倒易空间、声子、能带理论、费米面">
+<meta name="description" content="固体物理知识体系：晶体结构、倒易空间与衍射、晶格振动与声子、能带理论、费米面、金属与半导体输运">
 <title>固体物理 · 知识体系</title>
 <script>
 window.MathJax = {
@@ -114,9 +114,9 @@ window.MathJax = {
   <header class="la-header">
     <div class="la-eyebrow">SOLID STATE PHYSICS · KNOWLEDGE MAP</div>
     <h1>固体物理 · 知识体系</h1>
-    <p class="la-subtitle">晶体结构 · 倒易空间 · 声子 · 能带理论 · 费米面</p>
+    <p class="la-subtitle">晶体结构 · 倒易空间 · 声子 · 能带理论 · 费米面 · 输运</p>
     <div class="back-bar"><a class="back-btn" href="index.html">← 返回总览</a></div>
-    <div class="la-nav-tabs"><a class="la-nav-tab c1" href="#la-ch1">第一章 · 晶体结构与倒易空间</a><a class="la-nav-tab c2" href="#la-ch2">第二章 · 晶格振动与声子</a><a class="la-nav-tab c3" href="#la-ch3">第三章 · 能带理论</a></div>
+    <div class="la-nav-tabs"><a class="la-nav-tab c1" href="#la-ch1">第一章 · 晶体结构与倒易空间</a><a class="la-nav-tab c2" href="#la-ch2">第二章 · 晶格振动与声子</a><a class="la-nav-tab c3" href="#la-ch3">第三章 · 能带理论</a><a class="la-nav-tab c4" href="#la-ch4">第四章 · 固体输运性质</a></div>
     <div class="la-toolbar">
       <button onclick="window.scrollTo({top:0,behavior:'smooth'})">回到顶部</button>
     </div>
@@ -153,9 +153,10 @@ window.MathJax = {
 const LA_FIG = {  };
 const LA_TAG_LABEL = {def:'定 义', thm:'定 理', der:'推 导', exa:'例 子', app:'应 用', his:'注 记'};
 const LA_DATA = [
-{id:'la-ch1',num:'第一章',title:'晶体结构与倒易空间',en:'CRYSTAL STRUCTURE',sub:'布拉维格子、倒格子',desc:'晶体由原子周期性排列构成。本章讨论晶体结构与倒易空间。',sections:[{name:'1.1 晶体结构',color:'#2563eb',desc:'周期性',items:[{id:'la-k1-1',name:'布拉维格子',tags:["def", "thm"],brief:'14 种布拉维格子，原胞体积 $\\Omega=\\boldsymbol a_1\\cdot(\\boldsymbol a_2\\times\\boldsymbol a_3)$。',body:`<p>晶体结构 = 布拉维格子 + 基元。简单立方、体心立方、面心立方是常见结构。</p>`},{id:'la-k1-2',name:'倒易空间',tags:["def", "thm"],brief:'倒格矢 $\\boldsymbol b_i=2\\pi\\boldsymbol a_j\\times\\boldsymbol a_k/\\Omega$。',body:`<p>倒格子与正格子互为傅里叶对偶。布里渊区是倒空间的 Wigner-Seitz 原胞。X 射线衍射条件 $\\Delta\\boldsymbol k=\\boldsymbol G$。</p>`}]}]},
-{id:'la-ch2',num:'第二章',title:'晶格振动与声子',en:'PHONONS',sub:'简谐近似、色散关系',desc:'原子在平衡位置附近振动，量子化为声子。',sections:[{name:'2.1 声子',color:'#7c3aed',desc:'玻色子',items:[{id:'la-k2-1',name:'声子色散',tags:["def", "thm"],brief:'$\\omega(\\boldsymbol q)$，声学支与光学支。',body:`<p>单原子链色散 $\\omega=\\sqrt{4K/m}|\\sin(qa/2)|$。声子是玻色子，服从玻色-爱因斯坦分布。</p>`}]}]},
-{id:'la-ch3',num:'第三章',title:'能带理论',en:'BAND THEORY',sub:'布洛赫定理、自由电子',desc:'周期势中电子形成能带。本章讨论能带的形成与导体绝缘体分类。',sections:[{name:'3.1 布洛赫定理',color:'#0f766e',desc:'周期势中的电子',items:[{id:'la-k3-1',name:'布洛赫定理',tags:["def", "thm"],brief:'$\\psi_{\\boldsymbol k}(\\boldsymbol r)=e^{i\\boldsymbol k\\cdot\\boldsymbol r}u_{\\boldsymbol k}(\\boldsymbol r)$，$u$ 周期性。',body:`<p>周期势中电子波函数为调幅平面波。能带 $E_n(\\boldsymbol k)$ 在布里渊区内连续，带间有能隙。</p>`},{id:'la-k3-2',name:'导体与绝缘体',tags:["def", "thm"],brief:'能带填充决定导电性。',body:`<p>价带全满 + 带隙大 = 绝缘体；带隙小 = 半导体；价带半满 = 导体。费米能级位置是关键。</p>`}]}]}
+{id:'la-ch1',num:'第一章',title:'晶体结构与倒易空间',en:'CRYSTAL STRUCTURE & RECIPROCAL SPACE',sub:'布拉维格子、倒格子、衍射',desc:'晶体由原子周期性排列构成。本章讨论晶体结构、倒易空间和 X 射线衍射。',sections:[{name:'1.1 晶体结构',color:'#2563eb',desc:'周期性、布拉维格子',items:[{id:'la-k1-1',name:'布拉维格子与基元',tags:["def", "thm"],brief:'14 种布拉维格子，原胞体积 $\\Omega=\\boldsymbol a_1\\cdot(\\boldsymbol a_2\\times\\boldsymbol a_3)$。',body:`<p>晶体结构 = 布拉维格子 + 基元。常见结构：简单立方(SC)、体心立方(BCC)、面心立方(FCC)、密排六方(HCP)。配位数：SC=6，BCC=8，FCC=12。堆积密度 FCC/HCP=74% 最密排。</p>`},{id:'la-k1-2',name:'倒易空间与衍射',tags:["def", "thm"],brief:'倒格矢 $\\boldsymbol b_i=2\\pi\\boldsymbol a_j\\times\\boldsymbol a_k/\\Omega$。',body:`<p>倒格子与正格子互为傅里叶对偶。第一布里渊区是倒空间的 Wigner-Seitz 原胞。X 射线衍射条件（劳厄条件）$\\Delta\\boldsymbol k=\\boldsymbol G$，等价于布拉格方程 $2d\\sin\\theta=n\\lambda$。衍射实验测定晶体结构。</p>`}]}]},
+{id:'la-ch2',num:'第二章',title:'晶格振动与声子',en:'LATTICE VIBRATIONS & PHONONS',sub:'简谐近似、色散关系',desc:'原子在平衡位置附近振动，量子化为声子。声子决定热学性质。',sections:[{name:'2.1 声子色散',color:'#7c3aed',desc:'声学支与光学支',items:[{id:'la-k2-1',name:'一维单原子链',tags:["def", "thm", "der"],brief:'色散 $\\omega=\\sqrt{4K/m}|\\sin(qa/2)|$。',body:`<p>简谐近似下，原子链振动形成格波。色散关系在布里渊区边界 $q=\\pi/a$ 处最大，长波极限 $\\omega=v_s q$（声学波，声速 $v_s=a\\sqrt{K/m}$）。量子化后称为声子，是玻色子。</p>`},{id:'la-k2-2',name:'声子统计与热容',tags:["thm", "app"],brief:'德拜模型 $C_V=9Nk_B(T/\\Theta_D)^3\\int_0^{x_D}\\frac{x^4e^x}{(e^x-1)^2}dx$。',body:`<p>声子服从玻色-爱因斯坦分布。爱因斯坦模型假设单一频率，德拜模型用连续介质近似。高温 $C_V\\to3R$（杜隆-珀替定律），低温 $C_V\\propto T^3$（德拜 $T^3$ 定律）。</p>`}]}]},
+{id:'la-ch3',num:'第三章',title:'能带理论',en:'BAND THEORY',sub:'布洛赫定理、近自由电子、紧束缚',desc:'周期势中电子形成能带。能带理论是固体电子学的基础。',sections:[{name:'3.1 布洛赫定理',color:'#0f766e',desc:'周期势中的电子',items:[{id:'la-k3-1',name:'布洛赫定理',tags:["def", "thm"],brief:'$\\psi_{\\boldsymbol k}(\\boldsymbol r)=e^{i\\boldsymbol k\\cdot\\boldsymbol r}u_{\\boldsymbol k}(\\boldsymbol r)$，$u_{\\boldsymbol k}$ 具有晶格周期性。',body:`<p>周期势中电子波函数为调幅平面波（布洛赫波）。能量 $E_n(\\boldsymbol k)$ 形成能带，在布里渊区内连续，带间有能隙。近自由电子近似在弱周期势下给出带隙；紧束缚近似从原子轨道线性组合出发。</p>`},{id:'la-k3-2',name:'导体、半导体、绝缘体',tags:["def", "thm", "app"],brief:'能带填充决定导电性。',body:`<p>价带全满且带隙大（>3eV）= 绝缘体；带隙小（~1eV）= 半导体；价带半满或导带有电子 = 导体。费米能级 $E_F$ 位于带隙中（半导体/绝缘体）或带内（导体）。</p>`}]},{name:'3.2 费米面与有效质量',color:'#c2410c',desc:'$k$ 空间等能面',items:[{id:'la-k3-3',name:'费米面',tags:["def", "thm"],brief:'$E(\\boldsymbol k)=E_F$ 在 $k$ 空间的等能面。',body:`<p>费米面是 $T=0$ 时电子占据态与空态的分界。金属费米面的形状决定输运性质（如德哈斯-范阿尔芬效应可测量费米面）。有效质量 $m^*=\\hbar^2/(d^2E/dk^2)$ 描述电子对外力的响应。</p>`}]}]},
+{id:'la-ch4',num:'第四章',title:'固体输运性质',en:'TRANSPORT PROPERTIES',sub:'电导率、热导率',desc:'电子和声子的输运决定固体的导电和导热性质。',sections:[{name:'4.1 金属导电',color:'#2563eb',desc:'德鲁德模型、玻尔兹曼输运',items:[{id:'la-k4-1',name:'德鲁德模型',tags:["def", "thm", "app"],brief:'$\\sigma=ne^2\\tau/m^*$，电流密度 $\\boldsymbol j=\\sigma\\boldsymbol E$。',body:`<p>经典自由电子气模型。电子在外电场下加速，被散射（平均自由时间 $\\tau$）。欧姆定律的微观解释。维德曼-弗兰兹定律 $\\kappa/\\sigma=LT$，洛伦兹数 $L=\\pi^2k_B^2/(3e^2)$。</p>`},{id:'la-k4-2',name:'霍尔效应',tags:["def", "thm", "app"],brief:'霍尔电压 $V_H=IB/(nqd)$，霍尔系数 $R_H=1/(nq)$。',body:`<p>载流子在磁场中受洛伦兹力偏转，形成横向电场。霍尔系数符号确定载流子类型（电子/空穴），大小确定载流子浓度。量子霍尔效应 $R_H=h/(\\nu e^2)$ 是拓扑态的标志。</p>`}]}]}
 ];
 const LA_KP = {};
 function laBuildCard(item){

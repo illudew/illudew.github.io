@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="粒子物理知识体系：夸克、轻子、规范玻色子、标准模型、希格斯">
+<meta name="description" content="粒子物理知识体系：三代费米子、规范玻色子、标准模型、希格斯机制、电弱统一、量子色动力学、中微子振荡">
 <title>粒子物理 · 知识体系</title>
 <script>
 window.MathJax = {
@@ -114,9 +114,9 @@ window.MathJax = {
   <header class="la-header">
     <div class="la-eyebrow">PARTICLE PHYSICS · KNOWLEDGE MAP</div>
     <h1>粒子物理 · 知识体系</h1>
-    <p class="la-subtitle">夸克 · 轻子 · 规范玻色子 · 标准模型 · 希格斯</p>
+    <p class="la-subtitle">夸克 · 轻子 · 规范玻色子 · 标准模型 · 希格斯 · 中微子</p>
     <div class="back-bar"><a class="back-btn" href="index.html">← 返回总览</a></div>
-    <div class="la-nav-tabs"><a class="la-nav-tab c1" href="#la-ch1">第一章 · 基本粒子</a><a class="la-nav-tab c2" href="#la-ch2">第二章 · 相互作用</a></div>
+    <div class="la-nav-tabs"><a class="la-nav-tab c1" href="#la-ch1">第一章 · 基本粒子与标准模型</a><a class="la-nav-tab c2" href="#la-ch2">第二章 · 基本相互作用</a><a class="la-nav-tab c3" href="#la-ch3">第三章 · 中微子与超出标准模型</a></div>
     <div class="la-toolbar">
       <button onclick="window.scrollTo({top:0,behavior:'smooth'})">回到顶部</button>
     </div>
@@ -153,8 +153,9 @@ window.MathJax = {
 const LA_FIG = {  };
 const LA_TAG_LABEL = {def:'定 义', thm:'定 理', der:'推 导', exa:'例 子', app:'应 用', his:'注 记'};
 const LA_DATA = [
-{id:'la-ch1',num:'第一章',title:'基本粒子',en:'FUNDAMENTAL PARTICLES',sub:'三代费米子',desc:'物质由三代夸克与轻子构成，相互作用由规范玻色子传递。',sections:[{name:'1.1 标准模型粒子',color:'#2563eb',desc:'费米子与玻色子',items:[{id:'la-k1-1',name:'标准模型',tags:["def", "thm"],brief:'6 夸克 + 6 轻子 + 4 规范玻色子 + 希格斯。',body:`<p>三代夸克（u/d, c/s, t/b）与三代轻子（e/νe, μ/νμ, τ/ντ）。光子、W/Z、胶子传递电磁、弱、强相互作用。</p>`}]}]},
-{id:'la-ch2',num:'第二章',title:'相互作用',en:'INTERACTIONS',sub:'电弱统一、QCD',desc:'四种基本相互作用中，电磁与弱力已统一为电弱相互作用。',sections:[{name:'2.1 电弱与强相互作用',color:'#7c3aed',desc:'规范理论',items:[{id:'la-k2-1',name:'希格斯机制',tags:["def", "thm", "his"],brief:'自发对称破缺赋予 W/Z 质量。',body:`<p>希格斯场真空期望值破缺 $SU(2)_L\\times U(1)_Y\\to U(1)_{EM}$，使 W/Z 获得质量，光子保持无质量。2012 年 LHC 发现希格斯玻色子。</p>`}]}]}
+{id:'la-ch1',num:'第一章',title:'基本粒子与标准模型',en:'STANDARD MODEL',sub:'三代费米子、规范玻色子',desc:'物质由三代夸克与轻子构成，相互作用由规范玻色子传递。标准模型是粒子物理的核心。',sections:[{name:'1.1 标准模型粒子',color:'#2563eb',desc:'费米子与玻色子',items:[{id:'la-k1-1',name:'标准模型粒子谱',tags:["def", "thm"],brief:'6 夸克 + 6 轻子 + 规范玻色子 + 希格斯玻色子。',body:`<p>三代夸克（u/d, c/s, t/b）与三代轻子（e/$\\nu_e$, $\\mu$/$\\nu_\\mu$, $\\tau$/$\\nu_\\tau$）。规范玻色子：光子 $\\gamma$（电磁）、$W^\\pm/Z^0$（弱）、胶子 $g$（强）。希格斯玻色子赋予质量。所有粒子已被实验发现（2012 年发现希格斯）。</p>`},{id:'la-k1-2',name:'夸克与色荷',tags:["def", "thm"],brief:'夸克有 3 色，禁闭在强子中。',body:`<p>夸克带分数电荷（u 型 +2/3e，d 型 -1/3e）和色荷（红、绿、蓝）。由于色禁闭，自由夸克无法直接观测，只能以介子（qq̄）或重子（qqq）形式存在。质子=uud，中子=udd。</p>`}]}]},
+{id:'la-ch2',num:'第二章',title:'基本相互作用',en:'FUNDAMENTAL INTERACTIONS',sub:'电弱统一、QCD',desc:'四种基本相互作用中，电磁与弱力已统一为电弱相互作用，强力由 QCD 描述。',sections:[{name:'2.1 电弱统一与希格斯机制',color:'#7c3aed',desc:'自发对称破缺',items:[{id:'la-k2-1',name:'希格斯机制',tags:["def", "thm", "his"],brief:'自发对称破缺赋予 W/Z 质量，光子保持无质量。',body:`<p>希格斯场真空期望值破缺 $SU(2)_L\\times U(1)_Y\\to U(1)_{EM}$。$W^\\pm$ 和 $Z^0$ 获得质量（约 80/91 GeV），光子无质量。温伯格角 $\\theta_W$ 联系电磁与弱作用耦合常数。2012 年 LHC 发现希格斯玻色子（125 GeV）。</p>`},{id:'la-k2-2',name:'量子色动力学（QCD）',tags:["def", "thm"],brief:'$SU(3)_C$ 规范理论，渐近自由与色禁闭。',body:`<p>QCD 是强相互作用的规范理论。渐近自由：高能（短程）下耦合变弱，可用微扰论（如深度非弹性散射）。色禁闭：低能下耦合变强，夸克禁闭在强子内。格点 QCD 用数值方法处理非微扰区域。</p>`}]}]},
+{id:'la-ch3',num:'第三章',title:'中微子与超出标准模型',en:'NEUTRINOS & BEYOND SM',sub:'中微子振荡、新物理',desc:'中微子振荡表明中微子有质量，超出标准模型。暗物质、暗能量等也需要新物理。',sections:[{name:'3.1 中微子与新物理',color:'#0f766e',desc:'中微子振荡、B 物理',items:[{id:'la-k3-1',name:'中微子振荡',tags:["def", "thm", "his"],brief:'$\\nu_\\alpha\\leftrightarrow\\nu_\\beta$ 振荡，证明中微子有质量。',body:`<p>中微子味本征态与质量本征态不重合，导致振荡。振荡概率由混合角（PMNS 矩阵）和质量平方差决定。大气中微子、太阳中微子、反应堆中微子实验证实了振荡现象。标准模型需扩展以容纳中微子质量。</p>`},{id:'la-k3-2',name:'超出标准模型的线索',tags:["def", "app"],brief:'暗物质、暗能量、正反物质不对称、引力量子化。',body:`<p>标准模型无法解释：暗物质、暗能量、宇宙中正反物质不对称、引力的量子化、中微子质量起源。候选理论：超对称（SUSY）、大统一理论（GUT）、弦论等。LHC 正在寻找新物理的迹象。</p>`}]}]}
 ];
 const LA_KP = {};
 function laBuildCard(item){

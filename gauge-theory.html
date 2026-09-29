@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="规范场论知识体系：规范对称性、Yang-Mills、自发破缺、重整化">
+<meta name="description" content="规范场论知识体系：局域规范对称性、杨-米尔斯理论、规范协变导数、自发对称破缺、重整化、手征反常">
 <title>规范场论 · 知识体系</title>
 <script>
 window.MathJax = {
@@ -114,9 +114,9 @@ window.MathJax = {
   <header class="la-header">
     <div class="la-eyebrow">GAUGE THEORY · KNOWLEDGE MAP</div>
     <h1>规范场论 · 知识体系</h1>
-    <p class="la-subtitle">规范对称性 · Yang-Mills · 自发破缺 · 重整化</p>
+    <p class="la-subtitle">规范对称性 · Yang-Mills · 自发破缺 · 重整化 · 反常</p>
     <div class="back-bar"><a class="back-btn" href="index.html">← 返回总览</a></div>
-    <div class="la-nav-tabs"><a class="la-nav-tab c1" href="#la-ch1">第一章 · 规范对称性</a></div>
+    <div class="la-nav-tabs"><a class="la-nav-tab c1" href="#la-ch1">第一章 · 规范对称性与 Yang-Mills 理论</a><a class="la-nav-tab c2" href="#la-ch2">第二章 · 自发对称破缺与重整化</a></div>
     <div class="la-toolbar">
       <button onclick="window.scrollTo({top:0,behavior:'smooth'})">回到顶部</button>
     </div>
@@ -153,7 +153,8 @@ window.MathJax = {
 const LA_FIG = {  };
 const LA_TAG_LABEL = {def:'定 义', thm:'定 理', der:'推 导', exa:'例 子', app:'应 用', his:'注 记'};
 const LA_DATA = [
-{id:'la-ch1',num:'第一章',title:'规范对称性',en:'GAUGE SYMMETRY',sub:'局域对称、规范场',desc:'规范场论以局域对称性为基础，杨-米尔斯理论是非阿贝尔规范场的核心。',sections:[{name:'1.1 Yang-Mills 理论',color:'#2563eb',desc:'非阿贝尔规范场',items:[{id:'la-k1-1',name:'规范协变导数',tags:["def", "thm"],brief:'$D_\\mu=\\partial_\\mu-ig A_\\mu^a T^a$，场强 $F_{\\mu\\nu}^a=\\partial_\\mu A_\\nu^a-\\partial_\\nu A_\\mu^a+gf^{abc}A_\\mu^bA_\\nu^c$。',body:`<p>要求拉氏量在局域规范变换 $\\psi\\to U\\psi$ 下不变，需引入规范场 $A_\\mu$。非阿贝尔项 $f^{abc}A^bA^c$ 使规范场自相互作用。</p>`}]}]}
+{id:'la-ch1',num:'第一章',title:'规范对称性与 Yang-Mills 理论',en:'GAUGE SYMMETRY & YANG-MILLS',sub:'局域对称、规范场、场强',desc:'规范场论以局域对称性为基础，杨-米尔斯理论是非阿贝尔规范场的核心，是标准模型的数学框架。',sections:[{name:'1.1 规范协变导数与场强',color:'#2563eb',desc:'非阿贝尔规范场',items:[{id:'la-k1-1',name:'规范协变导数',tags:["def", "thm"],brief:'$D_\\mu=\\partial_\\mu-ig A_\\mu^a T^a$，场强 $F_{\\mu\\nu}^a=\\partial_\\mu A_\\nu^a-\\partial_\\nu A_\\mu^a+gf^{abc}A_\\mu^bA_\\nu^c$。',body:`<p>要求拉氏量在局域规范变换 $\\psi(x)\\to U(x)\\psi(x)$ 下不变，需引入规范场 $A_\\mu=A_\\mu^aT^a$。非阿贝尔群（$[T^a,T^b]=if^{abc}T^c$）的场强含自相互作用项 $gf^{abc}A^bA^c$，这是 QCD 渐近自由和色禁闭的根源。</p>`},{id:'la-k1-2',name:'Yang-Mills 拉氏量',tags:["def", "thm"],brief:'$\\mathcal{L}_{YM}=-\\frac14 F_{\\mu\\nu}^aF^{a\\mu\\nu}$。',body:`<p>杨-米尔斯拉氏量是非阿贝尔规范场的动能项。在阿贝尔情况（QED）退化为 $-\\frac14 F_{\\mu\\nu}F^{\\mu\\nu}$。规范场 $A_\\mu$ 无质量项（显式质量项破坏规范不变性），需通过希格斯机制获得质量。</p>`}]}]},
+{id:'la-ch2',num:'第二章',title:'自发对称破缺与重整化',en:'SSB & RENORMALIZATION',sub:'希格斯机制、可重整性',desc:'自发对称破缺通过希格斯机制赋予规范场质量；'t Hooft 证明规范理论可重整化。',sections:[{name:'2.1 希格斯机制与重整化',color:'#7c3aed',desc:'质量产生、可重整',items:[{id:'la-k2-1',name:'希格斯机制',tags:["def", "thm", "app"],brief:'标量场真空期望值破缺规范对称，规范场获得质量。',body:`<p>引入标量场 $\\phi$，其势 $V(\\phi)$ 在非零 $\\phi_0$ 处取极小值（真空期望值）。规范场吃掉 Goldstone 模获得质量（$M_A=g\\phi_0$）。这是电弱统一中 W/Z 质量的来源，不破坏规范不变性。</p>`},{id:'la-k2-2',name:'规范理论的可重整化',tags:["thm", "his"],brief:''t Hooft（1971）证明自发破缺的规范理论可重整化。',body:`<p>可重整化意味着紫外发散可用有限个裸参数吸收，预言有限。这证明了标准模型的量子自洽性。't Hooft 因此获 1999 年诺贝尔奖。反常自由（各代费米子贡献相消）是规范理论量子自洽的必要条件。</p>`}]}]}
 ];
 const LA_KP = {};
 function laBuildCard(item){

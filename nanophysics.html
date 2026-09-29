@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="纳米物理知识体系：量子限域、量子点、碳纳米管、石墨烯、纳米器件">
+<meta name="description" content="纳米物理知识体系：量子限域效应、量子点与态密度、碳纳米管、纳米器件、近场光学">
 <title>纳米物理 · 知识体系</title>
 <script>
 window.MathJax = {
@@ -116,7 +116,7 @@ window.MathJax = {
     <h1>纳米物理 · 知识体系</h1>
     <p class="la-subtitle">量子限域 · 量子点 · 碳纳米管 · 石墨烯 · 纳米器件</p>
     <div class="back-bar"><a class="back-btn" href="index.html">← 返回总览</a></div>
-    <div class="la-nav-tabs"><a class="la-nav-tab c1" href="#la-ch1">第一章 · 量子限域效应</a></div>
+    <div class="la-nav-tabs"><a class="la-nav-tab c1" href="#la-ch1">第一章 · 量子限域与低维体系</a><a class="la-nav-tab c2" href="#la-ch2">第二章 · 碳纳米材料与纳米器件</a></div>
     <div class="la-toolbar">
       <button onclick="window.scrollTo({top:0,behavior:'smooth'})">回到顶部</button>
     </div>
@@ -153,7 +153,8 @@ window.MathJax = {
 const LA_FIG = {  };
 const LA_TAG_LABEL = {def:'定 义', thm:'定 理', der:'推 导', exa:'例 子', app:'应 用', his:'注 记'};
 const LA_DATA = [
-{id:'la-ch1',num:'第一章',title:'量子限域效应',en:'QUANTUM CONFINEMENT',sub:'低维材料、态密度',desc:'当材料尺寸缩小到纳米量级，量子效应主导性质。',sections:[{name:'1.1 低维体系',color:'#2563eb',desc:'0D、1D、2D',items:[{id:'la-k1-1',name:'量子限域',tags:["def", "thm"],brief:'能隙随尺寸减小而增大，$\\Delta E\\propto1/L^2$。',body:`<p>三维块体→二维量子阱→一维量子线→零维量子点。态密度从连续变为离散。</p>`}]}]}
+{id:'la-ch1',num:'第一章',title:'量子限域与低维体系',en:'QUANTUM CONFINEMENT & LOW-DIMENSIONAL',sub:'0D、1D、2D、态密度',desc:'当材料尺寸缩小到纳米量级（~德布罗意波长或激子玻尔半径），量子效应主导性质。',sections:[{name:'1.1 量子限域效应',color:'#2563eb',desc:'态密度离散化',items:[{id:'la-k1-1',name:'量子限域与态密度',tags:["def", "thm"],brief:'能隙随尺寸减小而增大，$\\Delta E\\propto1/L^2$；态密度随维度变化。',body:`<p>三维块体（DOS $\\propto\\sqrt{E}$）→二维量子阱（台阶型）→一维量子线（$\\propto1/\\sqrt{E}$ 奇点）→零维量子点（离散 $\\delta$ 函数）。量子限域使能带变为离散能级，量子点因此被称为"人造原子"。</p>`},{id:'la-k1-2',name:'量子点与应用',tags:["def", "app"],brief:'量子点荧光发射波长由尺寸调控；用于显示、生物标记、单光子源。',body:`<p>量子点的荧光波长随尺寸减小而蓝移（量子限域效应）。CdSe、InP 量子点广泛用于 QLED 显示。量子点还可作为单光子源用于量子通信，以及量子比特用于量子计算。</p>`}]}]},
+{id:'la-ch2',num:'第二章',title:'碳纳米材料与纳米器件',en:'CARBON NANOMATERIALS & DEVICES',sub:'碳纳米管、纳米器件',desc:'碳纳米管、富勒烯等纳米碳材料具有独特的力学和电学性质。',sections:[{name:'2.1 碳纳米管与纳米器件',color:'#7c3aed',desc:'手性、场效应',items:[{id:'la-k2-1',name:'碳纳米管',tags:["def", "thm", "app"],brief:'单层石墨烯卷成管，导电性由手性指数 $(n,m)$ 决定。',body:`<p>碳纳米管（CNT）按手性分为金属型（$n-m$ 为 3 的倍数）或半导体型。单壁 CNT 力学强度极高（杨氏模量 ~1 TPa），电学性能优异，可用于场效应晶体管、复合材料、透明电极。</p>`},{id:'la-k2-2',name:'纳米器件与近场效应',tags:["def", "app"],brief:'单电子晶体管、纳米线器件、近场光学。',body:`<p>纳米尺度器件出现库仑阻塞（单电子晶体管）、弹道输运、量子干涉等效应。近场扫描光学显微镜（NSOM）突破衍射极限，分辨率达 ~10 nm。纳米机电系统（NEMS）用于超高灵敏度传感。</p>`}]}]}
 ];
 const LA_KP = {};
 function laBuildCard(item){

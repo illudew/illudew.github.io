@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="热学知识体系：温度、热力学定律、气体动理论、相变">
+<meta name="description" content="热学知识体系：温度与热平衡、热力学四大定律、理想气体、麦克斯韦分布、相变、热传导">
 <title>热学 · 知识体系</title>
 <script>
 window.MathJax = {
@@ -114,9 +114,9 @@ window.MathJax = {
   <header class="la-header">
     <div class="la-eyebrow">THERMAL PHYSICS · KNOWLEDGE MAP</div>
     <h1>热学 · 知识体系</h1>
-    <p class="la-subtitle">温度 · 热力学定律 · 气体动理论 · 相变</p>
+    <p class="la-subtitle">温度 · 热力学定律 · 气体动理论 · 相变 · 输运过程</p>
     <div class="back-bar"><a class="back-btn" href="index.html">← 返回总览</a></div>
-    <div class="la-nav-tabs"><a class="la-nav-tab c1" href="#la-ch1">第一章 · 温度与热力学定律</a><a class="la-nav-tab c2" href="#la-ch2">第二章 · 气体动理论</a></div>
+    <div class="la-nav-tabs"><a class="la-nav-tab c1" href="#la-ch1">第一章 · 温度与热力学定律</a><a class="la-nav-tab c2" href="#la-ch2">第二章 · 热力学势与过程</a><a class="la-nav-tab c3" href="#la-ch3">第三章 · 气体动理论</a><a class="la-nav-tab c4" href="#la-ch4">第四章 · 相变与输运</a></div>
     <div class="la-toolbar">
       <button onclick="window.scrollTo({top:0,behavior:'smooth'})">回到顶部</button>
     </div>
@@ -153,8 +153,10 @@ window.MathJax = {
 const LA_FIG = {  };
 const LA_TAG_LABEL = {def:'定 义', thm:'定 理', der:'推 导', exa:'例 子', app:'应 用', his:'注 记'};
 const LA_DATA = [
-{id:'la-ch1',num:'第一章',title:'温度与热力学定律',en:'TEMPERATURE & LAWS',sub:'热平衡、四大定律',desc:'热学研究热现象的宏观规律。本章从温度出发，讨论热力学四大定律。',sections:[{name:'1.1 温度与热平衡',color:'#2563eb',desc:'热力学第零定律',items:[{id:'la-k1-1',name:'热力学第零定律',tags:["def", "thm"],brief:'两系统分别与第三系统热平衡，则彼此热平衡。',body:`<p>这为温度的定义提供了依据。温度是决定系统是否热平衡的状态函数。</p>`},{id:'la-k1-2',name:'热力学第一定律',tags:["def", "thm"],brief:'$\\Delta U=Q+W$，能量守恒。',body:`<p>系统内能增量等于吸收的热量与外界对系统做功之和。$Q$ 吸热为正，$W$ 外界对系统做功为正。</p>`}]},{name:'1.2 第二与第三定律',color:'#7c3aed',desc:'熵与绝对零度',items:[{id:'la-k1-3',name:'热力学第二定律',tags:["def", "thm"],brief:'克劳修斯/开尔文表述，熵增原理 $dS\\ge\\delta Q/T$。',body:`<p>孤立系统熵不减。熵 $S=k_B\\ln\\Omega$（玻尔兹曼关系）连接宏观与微观。</p>`},{id:'la-k1-4',name:'热力学第三定律',tags:["def", "thm"],brief:'绝对零度不可达到。',body:`<p>能斯特定理：$T\\to0$ 时熵变 $\\Delta S\\to0$。绝对零度只能无限趋近。</p>`}]}]},
-{id:'la-ch2',num:'第二章',title:'气体动理论',en:'KINETIC THEORY',sub:'理想气体、麦克斯韦分布',desc:'从微观分子运动解释宏观热性质。',sections:[{name:'2.1 理想气体',color:'#0f766e',desc:'状态方程与微观解释',items:[{id:'la-k2-1',name:'理想气体状态方程',tags:["def", "thm"],brief:'$PV=nRT$，分子平均动能 $\\bar\\varepsilon=\\frac32 k_B T$。',body:`<p>压强来源于分子碰撞器壁。$P=\\frac13 nm\\bar{v^2}$。温度是分子平均平动动能的度量。</p>`},{id:'la-k2-2',name:'麦克斯韦速率分布',tags:["def", "thm"],brief:'$f(v)=4\\pi\\left(\\frac{m}{2\\pi kT}\\right)^{3/2}v^2 e^{-mv^2/2kT}$。',body:`<p>最概然速率 $v_p=\\sqrt{2kT/m}$，方均根速率 $v_{rms}=\\sqrt{3kT/m}$。</p>`}]}]}
+{id:'la-ch1',num:'第一章',title:'温度与热力学定律',en:'TEMPERATURE & THERMODYNAMIC LAWS',sub:'热平衡、四大定律',desc:'热学研究热现象的宏观规律。本章从温度出发，讨论热力学四大定律及其应用。',sections:[{name:'1.1 温度与热平衡',color:'#2563eb',desc:'热力学第零定律、温标',items:[{id:'la-k1-1',name:'热力学第零定律',tags:["def", "thm"],brief:'两系统分别与第三系统热平衡，则彼此热平衡。',body:`<p>第零定律为温度的定义提供了依据：温度是决定系统是否热平衡的状态函数。热平衡时两系统温度相等。温标的建立需要测温物质和测温属性。</p>`},{id:'la-k1-2',name:'热力学第一定律',tags:["def", "thm"],brief:'$\\Delta U=Q+W$，能量守恒与转化。',body:`<p>系统内能增量等于吸收的热量 $Q$ 与外界对系统做功 $W$ 之和。符号约定：$Q>0$ 吸热，$W>0$ 外界对系统做功。第一定律表明第一类永动机不可能实现。</p>`}]},{name:'1.2 第二与第三定律',color:'#7c3aed',desc:'熵、熵增原理',items:[{id:'la-k1-3',name:'热力学第二定律',tags:["def", "thm", "his"],brief:'克劳修斯/开尔文表述，熵增原理 $dS\\ge\\delta Q/T$。',body:`<p>克劳修斯表述：热量不能自发从低温传到高温。开尔文表述：不可能从单一热源吸热完全变成功。熵增原理：孤立系统熵不减 $\\Delta S\\ge0$。熵 $S=k_B\\ln\\Omega$ 连接宏观与微观。第二类永动机不可能。</p>`},{id:'la-k1-4',name:'热力学第三定律',tags:["def", "thm"],brief:'绝对零度不可达到，$\\lim_{T\\to0}\\Delta S=0$。',body:`<p>能斯特定理：温度趋于绝对零度时，等温过程的熵变趋于零。绝对零度只能无限趋近而不能达到。第三定律给出了熵的零点。</p>`}]}]},
+{id:'la-ch2',num:'第二章',title:'热力学势与过程',en:'THERMODYNAMIC POTENTIALS',sub:'自由能、吉布斯函数',desc:'引入热力学势，方便处理不同约束下的热力学过程。',sections:[{name:'2.1 热力学势',color:'#0f766e',desc:'F、G、H',items:[{id:'la-k2-1',name:'自由能与吉布斯函数',tags:["def", "thm"],brief:'$F=U-TS$，$G=H-TS=U-TS+PV$。',body:`<p>等温等容过程中平衡态对应自由能极小；等温等压过程对应吉布斯函数极小。焓 $H=U+PV$ 用于等压过程。这些势是勒让德变换的结果。</p>`},{id:'la-k2-2',name:'麦克斯韦关系',tags:["thm", "der"],brief:'由 $dU=TdS-PdV$ 等全微分条件导出。',body:`<p>麦克斯韦关系将可测量（如 $\\partial P/\\partial T|_V$）与不可直接测量联系起来。例如 $(\\partial S/\\partial V)_T=(\\partial P/\\partial T)_V$。共有四组关系。</p>`}]}]},
+{id:'la-ch3',num:'第三章',title:'气体动理论',en:'KINETIC THEORY OF GASES',sub:'理想气体、麦克斯韦分布',desc:'从微观分子运动解释宏观热性质，建立宏观量与微观量的联系。',sections:[{name:'3.1 理想气体',color:'#2563eb',desc:'状态方程与微观解释',items:[{id:'la-k3-1',name:'理想气体状态方程',tags:["def", "thm"],brief:'$PV=nRT$，分子平均平动动能 $\\bar\\varepsilon_k=\\frac32 k_B T$。',body:`<p>压强来源于分子对器壁的碰撞：$P=\\frac13 nm\\bar{v^2}$。温度是分子平均平动动能的度量。理想气体内能仅与温度有关 $U=\\frac{i}{2}nRT$（$i$ 为自由度）。</p>`},{id:'la-k3-2',name:'能量均分定理',tags:["thm", "der"],brief:'每个自由度平均动能 $\\frac12 k_B T$。',body:`<p>在温度 $T$ 的热平衡下，分子每个平方自由度（平动、转动）的平均能量为 $\\frac12 k_B T$。单原子分子 $i=3$，双原子分子常温 $i=5$（3 平动+2 转动）。</p>`}]},{name:'3.2 麦克斯韦速率分布',color:'#7c3aed',desc:'速率分布律',items:[{id:'la-k3-3',name:'麦克斯韦速率分布律',tags:["def", "thm", "der"],brief:'$f(v)=4\\pi\\left(\\frac{m}{2\\pi k_B T}\\right)^{3/2}v^2 e^{-mv^2/(2k_B T)}$。',body:`<p>平衡态下气体分子速率分布。最概然速率 $v_p=\\sqrt{2k_B T/m}$，平均速率 $\\bar v=\\sqrt{8k_B T/\\pi m}$，方均根速率 $v_{rms}=\\sqrt{3k_B T/m}$。三者之比 $1:1.128:1.225$。</p>`}]}]},
+{id:'la-ch4',num:'第四章',title:'相变与输运',en:'PHASE TRANSITIONS & TRANSPORT',sub:'相图、热传导',desc:'物质不同相之间的转变，以及非平衡态的输运过程。',sections:[{name:'4.1 相变',color:'#c2410c',desc:'相图、克拉珀龙方程',items:[{id:'la-k4-1',name:'相变与相图',tags:"def",brief:'$P-T$ 相图上，三相点、临界点、相平衡曲线。',body:`<p>一级相变有潜热和体积突变（固-液-气）。二级相变无潜热，比热等发散（如铁磁-顺磁、超导）。临界点附近出现临界乳光等临界现象。</p>`},{id:'la-k4-2',name:'克拉珀龙方程',tags:["thm", "der"],brief:'$\\frac{dP}{dT}=\\frac{L}{T\\Delta V}$。',body:`<p>相平衡曲线的斜率由相变潜热 $L$ 和体积变化 $\\Delta V$ 决定。水的固-液平衡线斜率为负（冰融化体积减小），这是冰刀滑冰的原理。</p>`}]},{name:'4.2 输运过程',color:'#0f766e',desc:'热传导、粘滞、扩散',items:[{id:'la-k4-3',name:'热传导定律',tags:["def", "app"],brief:'傅里叶定律 $q=-\\kappa\\nabla T$。',body:`<p>热流密度与温度梯度成正比，负号表示热量从高温流向低温。热导率 $\\kappa$ 取决于材料。气体 $\\kappa\\propto\\sqrt{T}$，金属热导率与电导率满足维德曼-弗兰兹定律。</p>`}]}]}
 ];
 const LA_KP = {};
 function laBuildCard(item){

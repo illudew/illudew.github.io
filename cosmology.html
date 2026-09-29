@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="宇宙学知识体系：大爆炸、膨胀、CMB、暗物质、暗能量">
+<meta name="description" content="宇宙学知识体系：哈勃定律、弗里德曼方程、热大爆炸、宇宙微波背景、原初核合成、暗物质、暗能量、暴涨">
 <title>宇宙学 · 知识体系</title>
 <script>
 window.MathJax = {
@@ -114,9 +114,9 @@ window.MathJax = {
   <header class="la-header">
     <div class="la-eyebrow">COSMOLOGY · KNOWLEDGE MAP</div>
     <h1>宇宙学 · 知识体系</h1>
-    <p class="la-subtitle">大爆炸 · 膨胀 · CMB · 暗物质 · 暗能量</p>
+    <p class="la-subtitle">大爆炸 · 膨胀 · CMB · 暗物质 · 暗能量 · 暴涨</p>
     <div class="back-bar"><a class="back-btn" href="index.html">← 返回总览</a></div>
-    <div class="la-nav-tabs"><a class="la-nav-tab c1" href="#la-ch1">第一章 · 膨胀宇宙</a><a class="la-nav-tab c2" href="#la-ch2">第二章 · 热大爆炸</a></div>
+    <div class="la-nav-tabs"><a class="la-nav-tab c1" href="#la-ch1">第一章 · 膨胀宇宙</a><a class="la-nav-tab c2" href="#la-ch2">第二章 · 热大爆炸</a><a class="la-nav-tab c3" href="#la-ch3">第三章 · 暗物质与暗能量</a></div>
     <div class="la-toolbar">
       <button onclick="window.scrollTo({top:0,behavior:'smooth'})">回到顶部</button>
     </div>
@@ -153,8 +153,9 @@ window.MathJax = {
 const LA_FIG = {  };
 const LA_TAG_LABEL = {def:'定 义', thm:'定 理', der:'推 导', exa:'例 子', app:'应 用', his:'注 记'};
 const LA_DATA = [
-{id:'la-ch1',num:'第一章',title:'膨胀宇宙',en:'EXPANDING UNIVERSE',sub:'哈勃定律、弗里德曼方程',desc:'宇宙在膨胀，起源于大爆炸。本章讨论宇宙学基本方程。',sections:[{name:'1.1 弗里德曼方程',color:'#2563eb',desc:'宇宙动力学',items:[{id:'la-k1-1',name:'弗里德曼方程',tags:["def", "thm"],brief:'$\\left(\\frac{\\dot a}{a}\\right)^2=\\frac{8\\pi G}{3}\\rho-\\frac{kc^2}{a^2}+\\frac{\\Lambda c^2}{3}$。',body:`<p>尺度因子 $a(t)$ 描述宇宙膨胀。$\\rho$ 为物质能量密度，$k$ 为空间曲率，$\\Lambda$ 为宇宙学常数（暗能量）。</p>`}]}]},
-{id:'la-ch2',num:'第二章',title:'热大爆炸',en:'HOT BIG BANG',sub:'CMB、核合成',desc:'早期宇宙炽热致密，经历核合成与复合，留下微波背景辐射。',sections:[{name:'2.1 CMB 与核合成',color:'#7c3aed',desc:'早期宇宙遗迹',items:[{id:'la-k2-1',name:'宇宙微波背景',tags:["def", "thm", "his"],brief:'$T\\approx2.725$ K 黑体谱，各向异性 $\\sim10^{-5}$。',body:`<p>CMB 是复合期（$z\\sim1100$）光子自由传播至今的遗迹，是大爆炸的直接证据。原初核合成预言轻元素丰度与观测一致。</p>`}]}]}
+{id:'la-ch1',num:'第一章',title:'膨胀宇宙',en:'EXPANDING UNIVERSE',sub:'哈勃定律、弗里德曼方程',desc:'宇宙在膨胀，起源于大爆炸。本章讨论宇宙学基本方程和宇宙学原理。',sections:[{name:'1.1 弗里德曼方程',color:'#2563eb',desc:'宇宙动力学',items:[{id:'la-k1-1',name:'弗里德曼方程',tags:["def", "thm"],brief:'$\\left(\\frac{\\dot a}{a}\\right)^2=\\frac{8\\pi G}{3}\\rho-\\frac{kc^2}{a^2}+\\frac{\\Lambda c^2}{3}$。',body:`<p>基于宇宙学原理（均匀各向同性）和广义相对论。尺度因子 $a(t)$ 描述宇宙膨胀。$\\rho$ 为物质能量密度，$k$ 为空间曲率（$k=0$ 平坦，$k=\\pm1$ 弯曲），$\\Lambda$ 为宇宙学常数（暗能量）。哈勃参数 $H=\\dot a/a$。</p>`},{id:'la-k1-2',name:'哈勃定律',tags:["def", "thm", "his"],brief:'$v=H_0 d$，星系退行速度与距离成正比。',body:`<p>哈勃（1929）发现星系光谱红移与距离成正比，表明宇宙在膨胀。当前哈勃常数 $H_0\\approx70\\,\\text{km/s/Mpc}$。哈勃时间 $1/H_0\\approx140$ 亿年，与宇宙年龄 138 亿年接近。</p>`}]}]},
+{id:'la-ch2',num:'第二章',title:'热大爆炸',en:'HOT BIG BANG',sub:'CMB、核合成、暴涨',desc:'早期宇宙炽热致密，经历核合成与复合，留下微波背景辐射。',sections:[{name:'2.1 CMB 与原初核合成',color:'#7c3aed',desc:'早期宇宙遗迹',items:[{id:'la-k2-1',name:'宇宙微波背景辐射',tags:["def", "thm", "his"],brief:'$T\\approx2.725$ K 黑体谱，各向异性 $\\sim10^{-5}$。',body:`<p>CMB 是复合期（$z\\sim1100$，$T\\sim3000$ K）光子与物质脱耦后自由传播至今的遗迹，是大爆炸的直接证据。COBE、WMAP、Planck 卫星精确测量了 CMB 的各向异性，支持 $\\Lambda$CDM 模型。</p>`},{id:'la-k2-2',name:'原初核合成',tags:["thm", "der", "app"],brief:'大爆炸后 3 分钟内形成 H、He、Li 等轻元素。',body:`<p>宇宙温度降至 1 MeV 以下时，中子和质子结合形成轻核。预言的 He-4 丰度（~25%）、氘、Li-7 与观测一致，是大爆炸理论的关键证据。</p>`}]},{name:'2.2 暴涨理论',color:'#0f766e',desc:'指数膨胀',items:[{id:'la-k2-3',name:'宇宙暴涨',tags:["def", "thm"],brief:'极早期宇宙经历 $a\\propto e^{Ht}$ 的指数膨胀。',body:`<p>古斯（1981）提出暴涨理论，解释了视界问题（为何宇宙均匀）和平性问题（为何 $k\\approx0$）。暴涨期间量子涨落被拉伸为宇宙大尺度结构的种子。暴涨预言近标度不变的原初功率谱，与 CMB 观测一致。</p>`}]}]},
+{id:'la-ch3',num:'第三章',title:'暗物质与暗能量',en:'DARK MATTER & DARK ENERGY',sub:'未知成分',desc:'宇宙中约 95% 的能量由不发光的暗物质和暗能量构成。',sections:[{name:'3.1 暗物质与暗能量',color:'#c2410c',desc:'宇宙主要成分',items:[{id:'la-k3-1',name:'暗物质',tags:["def", "thm", "app"],brief:'占宇宙约 27%，引力效应明显但不发光。',body:`<p>暗物质证据：星系旋转曲线、引力透镜、星系团动力学。冷暗物质（CDM）模型成功解释大尺度结构。候选者：WIMP、轴子等，但尚未直接探测到。</p>`},{id:'la-k3-2',name:'暗能量',tags:["def", "thm", "his"],brief:'占宇宙约 68%，驱动宇宙加速膨胀。',body:`<p>1998 年 Ia 型超新星观测发现宇宙加速膨胀，暗示存在负压的暗能量。最简单的解释是宇宙学常数 $\\Lambda$。暗能量本质未知，是物理学最大谜团之一。</p>`}]}]}
 ];
 const LA_KP = {};
 function laBuildCard(item){

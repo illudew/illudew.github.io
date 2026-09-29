@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="天体物理学知识体系：恒星结构、恒星演化、星系动力学、活动星系核">
+<meta name="description" content="天体物理学知识体系：恒星结构方程、恒星演化、主序、红巨星、超新星、白矮星中子星黑洞、星系动力学、活动星系核">
 <title>天体物理学 · 知识体系</title>
 <script>
 window.MathJax = {
@@ -114,9 +114,9 @@ window.MathJax = {
   <header class="la-header">
     <div class="la-eyebrow">ASTROPHYSICS · KNOWLEDGE MAP</div>
     <h1>天体物理学 · 知识体系</h1>
-    <p class="la-subtitle">恒星结构 · 恒星演化 · 星系动力学 · 活动星系核</p>
+    <p class="la-subtitle">恒星结构 · 恒星演化 · 星系动力学 · 致密星 · 活动星系核</p>
     <div class="back-bar"><a class="back-btn" href="index.html">← 返回总览</a></div>
-    <div class="la-nav-tabs"><a class="la-nav-tab c1" href="#la-ch1">第一章 · 恒星结构与演化</a><a class="la-nav-tab c2" href="#la-ch2">第二章 · 恒星演化</a></div>
+    <div class="la-nav-tabs"><a class="la-nav-tab c1" href="#la-ch1">第一章 · 恒星结构与演化</a><a class="la-nav-tab c2" href="#la-ch2">第二章 · 恒星演化终点与致密星</a><a class="la-nav-tab c3" href="#la-ch3">第三章 · 星系与活动星系核</a></div>
     <div class="la-toolbar">
       <button onclick="window.scrollTo({top:0,behavior:'smooth'})">回到顶部</button>
     </div>
@@ -153,8 +153,9 @@ window.MathJax = {
 const LA_FIG = {  };
 const LA_TAG_LABEL = {def:'定 义', thm:'定 理', der:'推 导', exa:'例 子', app:'应 用', his:'注 记'};
 const LA_DATA = [
-{id:'la-ch1',num:'第一章',title:'恒星结构与演化',en:'STELLAR STRUCTURE',sub:'流体静力学平衡、核反应',desc:'恒星是自引力流体球，核反应提供能量。本章讨论恒星结构方程与演化。',sections:[{name:'1.1 恒星结构方程',color:'#2563eb',desc:'流体静力学平衡',items:[{id:'la-k1-1',name:'流体静力学平衡',tags:["def", "thm"],brief:'$\\frac{dP}{dr}=-\\frac{GM(r)\\rho}{r^2}$。',body:`<p>压强梯度抵抗引力。质量连续性 $dM/dr=4\\pi r^2\\rho$。能量传输有辐射与对流两种。</p>`}]}]},
-{id:'la-ch2',num:'第二章',title:'恒星演化',en:'STELLAR EVOLUTION',sub:'主序、红巨星、超新星',desc:'恒星一生由质量决定，从原恒星到主序，最终白矮星/中子星/黑洞。',sections:[{name:'2.1 演化终点',color:'#7c3aed',desc:'致密星',items:[{id:'la-k2-1',name:'钱德拉塞卡极限',tags:["def", "thm"],brief:'白矮星最大质量 $\\sim1.4M_\\odot$，中子星约 $2-3M_\\odot$。',body:`<p>超过钱德拉塞卡极限电子简并压不足以支撑，形成中子星或黑洞。超新星爆发是大质量恒星的壮丽终局。</p>`}]}]}
+{id:'la-ch1',num:'第一章',title:'恒星结构与演化',en:'STELLAR STRUCTURE & EVOLUTION',sub:'流体静力学平衡、核反应、演化轨迹',desc:'恒星是自引力流体球，核反应提供能量。恒星结构方程与演化轨迹是天体物理的基础。',sections:[{name:'1.1 恒星结构方程',color:'#2563eb',desc:'流体静力学平衡、能量传输',items:[{id:'la-k1-1',name:'流体静力学平衡',tags:["def", "thm"],brief:'$\\frac{dP}{dr}=-\\frac{GM(r)\\rho}{r^2}$，$\\frac{dM}{dr}=4\\pi r^2\\rho$。',body:`<p>压强梯度抵抗引力收缩。四个恒星结构方程：质量连续、流体静力学平衡、能量守恒、能量传输（辐射扩散或对流）。状态方程和不透明度使方程组闭合。主序星靠氢聚变维持平衡。</p>`},{id:'la-k1-2',name:'核反应与能量产生',tags:["def", "thm", "app"],brief:'pp 链与 CNO 循环将氢聚变为氦。',body:`<p>低质量恒星以质子-质子链为主：$4p\\to ^4\\text{He}+2e^++2\\nu_e+2\\gamma$。大质量恒星以 CNO 循环为主。氦燃烧（三α过程）产生碳和氧。更高质量恒星逐级聚变直至铁，铁之后聚变吸热，导致核心坍缩。</p>`}]}]},
+{id:'la-ch2',num:'第二章',title:'恒星演化终点与致密星',en:'STELLAR ENDPOINTS & COMPACT OBJECTS',sub:'白矮星、中子星、黑洞、超新星',desc:'恒星最终命运由质量决定：白矮星、中子星或黑洞。超新星是大质量恒星的壮丽终局。',sections:[{name:'2.1 致密星与超新星',color:'#7c3aed',desc:'简并压、坍缩',items:[{id:'la-k2-1',name:'钱德拉塞卡极限与白矮星',tags:["def", "thm", "his"],brief:'白矮星最大质量 $M_{Ch}\\simeq1.44M_\\odot$。',body:`<p>白矮星靠电子简并压支撑。超过钱德拉塞卡极限，电子简并压不足，恒星坍缩。Ia 型超新星即白矮星达钱德拉塞卡极限后的热核爆炸，是标准烛光，用于测距（暗能量发现）。</p>`},{id:'la-k2-2',name:'中子星与黑洞',tags:["def", "thm", "app"],brief:'中子星由中子简并压支撑；更大质量坍缩为黑洞。',body:`<p>核心坍缩超新星（II 型）留下中子星或黑洞。中子星密度达核密度，半径约 10 km，强磁场产生脉冲星。质量约 $2-3M_\\odot$ 以上形成黑洞。中子星并合产生引力波和短伽马暴（GW170817）。</p>`}]}]},
+{id:'la-ch3',num:'第三章',title:'星系与活动星系核',en:'GALAXIES & AGN',sub:'星系动力学、超大质量黑洞',desc:'星系由恒星、气体和暗物质构成。活动星系核由中心超大质量黑洞吸积驱动。',sections:[{name:'3.1 星系动力学与 AGN',color:'#0f766e',desc:'旋转曲线、吸积盘',items:[{id:'la-k3-1',name:'星系旋转曲线与暗物质',tags:["def", "thm", "his"],brief:'观测到平坦旋转曲线，暗示暗物质晕的存在。',body:`<p>星系旋转曲线在可见物质外应按 $v\\propto r^{-1/2}$ 下降，但观测到几乎平坦。这表明存在不可见的暗物质晕提供额外引力。暗物质占宇宙物质约 85%。</p>`},{id:'la-k3-2',name:'活动星系核（AGN）',tags:["def", "thm", "app"],brief:'超大质量黑洞吸积产生强烈辐射与喷流。',body:`<p>AGN 由中心超大质量黑洞（$10^6-10^{10}M_\\odot$）吸积气体驱动，吸积盘将引力能转化为辐射。类星体是最亮的 AGN。射电星系有相对论性喷流。AGN 反馈调节星系演化。</p>`}]}]}
 ];
 const LA_KP = {};
 function laBuildCard(item){

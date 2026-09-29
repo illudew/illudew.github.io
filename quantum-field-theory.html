@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="量子场论知识体系：正则量子化、路径积分、费曼图、重整化">
+<meta name="description" content="量子场论知识体系：正则量子化、路径积分、费曼图与费曼规则、重整化、有效场论、QED精确检验">
 <title>量子场论 · 知识体系</title>
 <script>
 window.MathJax = {
@@ -114,9 +114,9 @@ window.MathJax = {
   <header class="la-header">
     <div class="la-eyebrow">QUANTUM FIELD THEORY · KNOWLEDGE MAP</div>
     <h1>量子场论 · 知识体系</h1>
-    <p class="la-subtitle">正则量子化 · 路径积分 · 费曼图 · 重整化</p>
+    <p class="la-subtitle">正则量子化 · 路径积分 · 费曼图 · 重整化 · 有效场论</p>
     <div class="back-bar"><a class="back-btn" href="index.html">← 返回总览</a></div>
-    <div class="la-nav-tabs"><a class="la-nav-tab c1" href="#la-ch1">第一章 · 场的量子化</a><a class="la-nav-tab c2" href="#la-ch2">第二章 · 费曼图与重整化</a></div>
+    <div class="la-nav-tabs"><a class="la-nav-tab c1" href="#la-ch1">第一章 · 场的量子化</a><a class="la-nav-tab c2" href="#la-ch2">第二章 · 费曼图与重整化</a><a class="la-nav-tab c3" href="#la-ch3">第三章 · 有效场论</a></div>
     <div class="la-toolbar">
       <button onclick="window.scrollTo({top:0,behavior:'smooth'})">回到顶部</button>
     </div>
@@ -153,8 +153,9 @@ window.MathJax = {
 const LA_FIG = {  };
 const LA_TAG_LABEL = {def:'定 义', thm:'定 理', der:'推 导', exa:'例 子', app:'应 用', his:'注 记'};
 const LA_DATA = [
-{id:'la-ch1',num:'第一章',title:'场的量子化',en:'QUANTIZATION',sub:'正则、路径积分',desc:'将场视为无穷多简谐振子的集合并量子化。',sections:[{name:'1.1 正则量子化',color:'#2563eb',desc:'产生湮灭算符',items:[{id:'la-k1-1',name:'标量场量子化',tags:["def", "thm"],brief:'$\\phi(\\boldsymbol x,t)=\\int\\frac{d^3k}{(2\\pi)^3}\\frac1{\\sqrt{2\\omega_k}}(a_ke^{-ikx}+a_k^\\dagger e^{ikx})$。',body:`<p>$a_k$ 湮灭一个动量 $\\boldsymbol k$ 的粒子，$a_k^\\dagger$ 产生。对易关系 $[a_k,a_{k'}^\\dagger]=(2\\pi)^3\\delta^3(\\boldsymbol k-\\boldsymbol k')$。</p>`}]}]},
-{id:'la-ch2',num:'第二章',title:'费曼图与重整化',en:'FEYNMAN & RENORMALIZATION',sub:'微扰论、紫外发散',desc:'用费曼图计算散射振幅，重整化消除紫外发散。',sections:[{name:'2.1 费曼图',color:'#7c3aed',desc:'微扰展开',items:[{id:'la-k2-1',name:'费曼规则',tags:["def", "thm", "app"],brief:'每个顶点对应耦合常数，内线对应传播子。',body:`<p>S 矩阵 $\\langle f|S|i\\rangle$ 展开为费曼图级数。费曼图是直观的微扰计算工具，QED 计算精度达 $10^{-10}$。</p>`}]}]}
+{id:'la-ch1',num:'第一章',title:'场的量子化',en:'QUANTIZATION OF FIELDS',sub:'正则量子化、路径积分',desc:'将场视为无穷多简谐振子的集合并量子化。路径积分提供了另一种量子化方式。',sections:[{name:'1.1 正则量子化',color:'#2563eb',desc:'产生湮灭算符',items:[{id:'la-k1-1',name:'标量场量子化',tags:["def", "thm"],brief:'$\\phi(\\boldsymbol x,t)=\\int\\frac{d^3k}{(2\\pi)^3}\\frac1{\\sqrt{2\\omega_k}}(a_ke^{-ikx}+a_k^\\dagger e^{ikx})$。',body:`<p>实标量场展开为产生/湮灭算符。$a_k^\\dagger$ 产生动量 $\\boldsymbol k$、能量 $\\omega_k=\\sqrt{k^2+m^2}$ 的粒子。对易关系 $[a_k,a_{k'}^\\dagger]=(2\\pi)^3\\delta^3(\\boldsymbol k-\\boldsymbol k')$。真空态 $|0\\rangle$ 被所有 $a_k$ 湮灭。</p>`},{id:'la-k1-2',name:'路径积分量子化',tags:["def", "thm"],brief:'$Z=\\int\\mathcal{D}\\phi\\,e^{iS[\\phi]/\\hbar}$，$S=\\int\\mathcal{L}\\,d^4x$。',body:`<p>费曼路径积分：所有场构型的加权求和。关联函数由路径积分直接计算。路径积分自然处理规范对称性（Faddeev-Popov）和约束，比正则量子化更方便，是现代量子场论的标准框架。</p>`}]}]},
+{id:'la-ch2',num:'第二章',title:'费曼图与重整化',en:'FEYNMAN DIAGRAMS & RENORMALIZATION',sub:'微扰论、紫外发散',desc:'用费曼图计算散射振幅，重整化消除紫外发散，得到有限的物理预言。',sections:[{name:'2.1 费曼规则',color:'#7c3aed',desc:'微扰展开',items:[{id:'la-k2-1',name:'费曼图与 S 矩阵',tags:["def", "thm", "app"],brief:'顶点~耦合常数，内线~传播子，外线~偏振矢量。',body:`<p>S 矩阵 $\\langle f|S|i\\rangle$ 展开为费曼图级数。每个图对应一个解析表达式（费曼规则）。QED 中电子反常磁矩的计算精度达 $10^{-10}$，与实验高度吻合，是物理学最精确的预言。</p>`},{id:'la-k2-2',name:'重整化',tags:["def", "thm"],brief:'抵消紫外发散，用有限个裸参数吸收发散。',body:`<p>圈图积分在高动量（紫外）发散。可重整化理论中发散可吸收进裸质量、裸耦合等，物理量有限。重整化群（Wilson）研究耦合常数随能标的跑动。QCD 的渐近自由 $\\alpha_s(\\mu)\\to0$ as $\\mu\\to\\infty$ 即由重整化群方程描述。</p>`}]}]},
+{id:'la-ch3',num:'第三章',title:'有效场论',en:'EFFECTIVE FIELD THEORY',sub:'低能有效描述',desc:'有效场论在某能标下描述物理，忽略更高能标自由度。',sections:[{name:'3.1 有效场论方法',color:'#0f766e',desc:'Wilson 有效作用量',items:[{id:'la-k3-1',name:'有效场论',tags:["def", "thm", "app"],brief:'拉氏量含所有对称性允许的算符，按维度排序。',body:`<p>有效场论（EFT）思想：不必知道完整理论，在某能标下用最一般的有效拉氏量描述物理。算符系数由低能实验拟合。费米弱作用理论是 EFT 的经典例子，高能下被电弱理论取代。手征微扰论是 QCD 的低能 EFT。</p>`}]}]}
 ];
 const LA_KP = {};
 function laBuildCard(item){

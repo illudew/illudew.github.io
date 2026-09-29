@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="黑洞物理知识体系：事件视界、史瓦西解、霍金辐射、黑洞热力学">
+<meta name="description" content="黑洞物理知识体系：事件视界、史瓦西解、克尔黑洞、霍金辐射、贝肯斯坦-霍金熵、信息悖论">
 <title>黑洞物理 · 知识体系</title>
 <script>
 window.MathJax = {
@@ -114,9 +114,9 @@ window.MathJax = {
   <header class="la-header">
     <div class="la-eyebrow">BLACK HOLE PHYSICS · KNOWLEDGE MAP</div>
     <h1>黑洞物理 · 知识体系</h1>
-    <p class="la-subtitle">事件视界 · 史瓦西解 · 霍金辐射 · 黑洞热力学</p>
+    <p class="la-subtitle">事件视界 · 史瓦西解 · 克尔黑洞 · 霍金辐射 · 黑洞热力学</p>
     <div class="back-bar"><a class="back-btn" href="index.html">← 返回总览</a></div>
-    <div class="la-nav-tabs"><a class="la-nav-tab c1" href="#la-ch1">第一章 · 黑洞解</a><a class="la-nav-tab c2" href="#la-ch2">第二章 · 霍金辐射与热力学</a></div>
+    <div class="la-nav-tabs"><a class="la-nav-tab c1" href="#la-ch1">第一章 · 经典黑洞解</a><a class="la-nav-tab c2" href="#la-ch2">第二章 · 霍金辐射与黑洞热力学</a></div>
     <div class="la-toolbar">
       <button onclick="window.scrollTo({top:0,behavior:'smooth'})">回到顶部</button>
     </div>
@@ -153,8 +153,8 @@ window.MathJax = {
 const LA_FIG = {  };
 const LA_TAG_LABEL = {def:'定 义', thm:'定 理', der:'推 导', exa:'例 子', app:'应 用', his:'注 记'};
 const LA_DATA = [
-{id:'la-ch1',num:'第一章',title:'黑洞解',en:'BLACK HOLE SOLUTIONS',sub:'史瓦西、克尔',desc:'广义相对论预言黑洞。本章讨论经典黑洞解与事件视界。',sections:[{name:'1.1 史瓦西黑洞',color:'#2563eb',desc:'球对称黑洞',items:[{id:'la-k1-1',name:'史瓦西半径',tags:["def", "thm"],brief:'$r_s=\\frac{2GM}{c^2}$，事件视界。',body:`<p>史瓦西度规在 $r=r_s$ 处坐标奇异性即视界。黑洞无毛：仅由质量、电荷、角动量描述。</p>`}]}]},
-{id:'la-ch2',num:'第二章',title:'霍金辐射与热力学',en:'HAWKING & THERMODYNAMICS',sub:'量子黑洞',desc:'黑洞具有温度与熵，通过霍金辐射蒸发。',sections:[{name:'2.1 霍金辐射',color:'#7c3aed',desc:'量子效应',items:[{id:'la-k2-1',name:'霍金温度',tags:["def", "thm"],brief:'$T_H=\\frac{\\hbar c^3}{8\\pi GMk_B}$，黑洞熵 $S=\\frac{k_B c^3 A}{4\\hbar G}$。',body:`<p>视界附近虚粒子对中负能粒子落入黑洞，正能粒子逃逸形成热辐射。贝肯斯坦-霍金熵与视界面积成正比。</p>`}]}]}
+{id:'la-ch1',num:'第一章',title:'经典黑洞解',en:'CLASSICAL BLACK HOLES',sub:'史瓦西、克尔、RN',desc:'广义相对论预言黑洞。本章讨论经典黑洞解与事件视界。',sections:[{name:'1.1 黑洞解',color:'#2563eb',desc:'球对称与旋转黑洞',items:[{id:'la-k1-1',name:'史瓦西黑洞',tags:["def", "thm", "his"],brief:'$r_s=\\frac{2GM}{c^2}$，事件视界。',body:`<p>史瓦西（1916）求得球对称真空解。在 $r=r_s$ 处坐标奇异性即事件视界，任何物质（包括光）一旦越过视界无法逃逸。奇点在 $r=0$。黑洞无毛定理：稳态黑洞仅由质量 $M$、电荷 $Q$、角动量 $J$ 三个参数描述。</p>`},{id:'la-k1-2',name:'克尔黑洞',tags:["def", "thm"],brief:'旋转黑洞，$a=J/(Mc)$，内外视界。',body:`<p>克尔（1963）求得旋转黑洞解。旋转黑洞有能层（ergosphere），其内粒子必须随黑洞旋转。彭罗斯过程可从克尔黑洞提取旋转能。最大旋转 $a=GM/c^2$（极端克尔黑洞）。</p>`}]}]},
+{id:'la-ch2',num:'第二章',title:'霍金辐射与黑洞热力学',en:'HAWKING RADIATION & THERMODYNAMICS',sub:'量子黑洞',desc:'黑洞具有温度与熵，通过霍金辐射蒸发。这是量子引力的重要窗口。',sections:[{name:'2.1 霍金辐射与熵',color:'#7c3aed',desc:'量子效应',items:[{id:'la-k2-1',name:'霍金辐射',tags:["def", "thm", "his"],brief:'$T_H=\\frac{\\hbar c^3}{8\\pi GMk_B}$，$S_{BH}=\\frac{k_B c^3 A}{4\\hbar G}$。',body:`<p>霍金（1974）证明黑洞并非完全黑，而是以温度 $T_H$ 辐射热谱。视界附近虚粒子对中负能粒子落入黑洞，正能粒子逃逸。贝肯斯坦-霍金熵与视界面积 $A$ 成正比，是信息论与引力的深刻联系。</p>`},{id:'la-k2-2',name:'黑洞热力学与信息悖论',tags:["thm", "der"],brief:'黑洞力学四定律类比热力学四定律。',body:`<p>视界面积不减类比熵增（热力学第二定律）。霍金辐射使黑洞蒸发，若蒸发完全则信息丢失，与量子力学幺正性矛盾（信息悖论）。候选解决方案：全息原理、AdS/CFT 对偶、火墙假说等。</p>`}]}]}
 ];
 const LA_KP = {};
 function laBuildCard(item){

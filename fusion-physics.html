@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="核聚变物理知识体系：聚变反应、劳逊判据、托卡马克、仿星器、惯性约束">
+<meta name="description" content="核聚变物理知识体系：聚变反应、库仑势垒、劳逊判据、三重积、托卡马克、仿星器、惯性约束聚变、等离子体约束">
 <title>核聚变物理 · 知识体系</title>
 <script>
 window.MathJax = {
@@ -116,7 +116,7 @@ window.MathJax = {
     <h1>核聚变物理 · 知识体系</h1>
     <p class="la-subtitle">聚变反应 · 劳逊判据 · 托卡马克 · 仿星器 · 惯性约束</p>
     <div class="back-bar"><a class="back-btn" href="index.html">← 返回总览</a></div>
-    <div class="la-nav-tabs"><a class="la-nav-tab c1" href="#la-ch1">第一章 · 聚变原理</a></div>
+    <div class="la-nav-tabs"><a class="la-nav-tab c1" href="#la-ch1">第一章 · 聚变原理</a><a class="la-nav-tab c2" href="#la-ch2">第二章 · 磁约束与惯性约束</a></div>
     <div class="la-toolbar">
       <button onclick="window.scrollTo({top:0,behavior:'smooth'})">回到顶部</button>
     </div>
@@ -153,7 +153,8 @@ window.MathJax = {
 const LA_FIG = {  };
 const LA_TAG_LABEL = {def:'定 义', thm:'定 理', der:'推 导', exa:'例 子', app:'应 用', his:'注 记'};
 const LA_DATA = [
-{id:'la-ch1',num:'第一章',title:'聚变原理',en:'FUSION PRINCIPLES',sub:'D-T反应、劳逊判据',desc:'轻核聚变释放巨大能量，是太阳的能量来源。本章讨论聚变原理与约束方案。',sections:[{name:'1.1 聚变反应与条件',color:'#2563eb',desc:'高温、高密度、长约束',items:[{id:'la-k1-1',name:'劳逊判据',tags:["def", "thm"],brief:'$n\\tau_E\\ge 10^{14}\\,\\text{cm}^{-3}\\cdot\\text{s}$（D-T，$T\\sim10^8$ K）。',body:`<p>D-T 反应 $\\text{D}+\\text{T}\\to\\alpha(3.5\\text{MeV})+n(14.1\\text{MeV})$。劳逊判据给出能量得失相当的密度-约束时间乘积。三重积 $nT\\tau_E$ 是聚变装置的核心指标。</p>`}]}]}
+{id:'la-ch1',num:'第一章',title:'聚变原理',en:'FUSION PRINCIPLES',sub:'D-T反应、库仑势垒、劳逊判据',desc:'轻核聚变释放巨大能量，是太阳的能量来源。本章讨论聚变反应、条件与功率平衡。',sections:[{name:'1.1 聚变反应与条件',color:'#2563eb',desc:'高温、高密度、长约束',items:[{id:'la-k1-1',name:'聚变反应与库仑势垒',tags:["def", "thm"],brief:'D-T：$\\text{D}+\\text{T}\\to\\alpha(3.5\\text{MeV})+n(14.1\\text{MeV})$，$Q=17.6$ MeV。',body:`<p>轻核需克服库仑势垒才能聚变，量子隧穿使聚变在低于势垒能量下发生。反应率 $\\langle\\sigma v\\rangle$ 在 $T\\sim10-20$ keV 时最大。D-T 是最易实现的反应，D-D、D-He³ 是先进燃料。质量亏损转化为能量（$E=\\Delta mc^2$）。</p>`},{id:'la-k1-2',name:'劳逊判据与三重积',tags:["def", "thm"],brief:'$n\\tau_E\\ge 10^{14}\\,\\text{cm}^{-3}\\cdot\\text{s}$（D-T，$T\\sim10^8$ K）。',body:`<p>劳逊判据给出聚变能量得失相当的密度-约束时间乘积。三重积 $nT\\tau_E$ 是聚变装置的核心指标，需达到 $\\sim10^{21}\\,\\text{keV}\\cdot\\text{s}/\\text{m}^3$。ITER 目标实现 $Q>10$（聚变功率/输入功率）。</p>`}]}]},
+{id:'la-ch2',num:'第二章',title:'磁约束与惯性约束',en:'MAGNETIC & INERTIAL CONFINEMENT',sub:'托卡马克、仿星器、激光聚变',desc:'实现受控聚变需约束高温等离子体。磁约束（托卡马克、仿星器）和惯性约束（激光）是两大途径。',sections:[{name:'2.1 约束方案',color:'#7c3aed',desc:'托卡马克、仿星器、ICF',items:[{id:'la-k2-1',name:'托卡马克与仿星器',tags:["def", "thm", "app"],brief:'托卡马克用环向场+极向场约束；仿星器用非轴对称线圈。',body:`<p>托卡马克（Tokamak）是最先进的磁约束方案，环形真空室加环向磁场，等离子体电流产生极向磁场形成嵌套磁面。ITER 是国际热核聚变实验堆。仿星器（Stellarator，如 W7-X）用外部线圈产生全部磁场，无等离子体电流，稳态运行。</p>`},{id:'la-k2-2',name:'惯性约束聚变（ICF）',tags:["def", "thm", "app"],brief:'激光压缩靶丸实现聚变，NIF 2022 年实现点火。',body:`<p>惯性约束用高能激光（或离子束）瞬间压缩氘氚靶丸，靠惯性在飞散前完成聚变。2022 年美国国家点火装置（NIF）首次实现科学点火（输出能量>输入聚变能）。快点火（fast ignition）是改进方案。</p>`}]}]}
 ];
 const LA_KP = {};
 function laBuildCard(item){

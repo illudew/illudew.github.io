@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="拓扑物态知识体系：拓扑绝缘体、拓扑半金属、陈数、边缘态">
+<meta name="description" content="拓扑物态知识体系：拓扑绝缘体、陈数与Z2不变量、边缘态、拓扑半金属、量子反常霍尔效应">
 <title>拓扑物态 · 知识体系</title>
 <script>
 window.MathJax = {
@@ -114,9 +114,9 @@ window.MathJax = {
   <header class="la-header">
     <div class="la-eyebrow">TOPOLOGICAL MATTER · KNOWLEDGE MAP</div>
     <h1>拓扑物态 · 知识体系</h1>
-    <p class="la-subtitle">拓扑绝缘体 · 拓扑半金属 · 陈数 · 边缘态</p>
+    <p class="la-subtitle">拓扑绝缘体 · 拓扑半金属 · 陈数 · 边缘态 · 量子反常霍尔</p>
     <div class="back-bar"><a class="back-btn" href="index.html">← 返回总览</a></div>
-    <div class="la-nav-tabs"><a class="la-nav-tab c1" href="#la-ch1">第一章 · 拓扑绝缘体</a></div>
+    <div class="la-nav-tabs"><a class="la-nav-tab c1" href="#la-ch1">第一章 · 拓扑绝缘体</a><a class="la-nav-tab c2" href="#la-ch2">第二章 · 拓扑半金属与量子反常霍尔</a></div>
     <div class="la-toolbar">
       <button onclick="window.scrollTo({top:0,behavior:'smooth'})">回到顶部</button>
     </div>
@@ -153,7 +153,8 @@ window.MathJax = {
 const LA_FIG = {  };
 const LA_TAG_LABEL = {def:'定 义', thm:'定 理', der:'推 导', exa:'例 子', app:'应 用', his:'注 记'};
 const LA_DATA = [
-{id:'la-ch1',num:'第一章',title:'拓扑绝缘体',en:'TOPOLOGICAL INSULATORS',sub:'体绝缘、表面金属',desc:'拓扑绝缘体体内绝缘，表面存在受拓扑保护的金属态。',sections:[{name:'1.1 拓扑不变量',color:'#2563eb',desc:'陈数、Z2 不变量',items:[{id:'la-k1-1',name:'陈数',tags:["def", "thm"],brief:'$C=\\frac1{2\\pi}\\int_{BZ}\\boldsymbol F\\cdot d\\boldsymbol S$，整数。',body:`<p>陈数刻画能带的拓扑性质。非零陈数对应量子霍尔态，边缘态数目等于陈数。</p>`}]}]}
+{id:'la-ch1',num:'第一章',title:'拓扑绝缘体',en:'TOPOLOGICAL INSULATORS',sub:'体绝缘、表面金属、陈数',desc:'拓扑绝缘体体内绝缘，表面存在受拓扑保护的金属态，是凝聚态物理的重大突破。',sections:[{name:'1.1 拓扑不变量与量子霍尔',color:'#2563eb',desc:'陈数、Z2、边缘态',items:[{id:'la-k1-1',name:'陈数与 TKNN 不变量',tags:["def", "thm"],brief:'$C=\\frac1{2\\pi}\\int_{BZ}\\boldsymbol F\\cdot d\\boldsymbol S$，整数拓扑不变量。',body:`<p>陈数刻画能带的拓扑性质。Thouless-Kohmoto-Nightingale-den Nijs（TKNN）证明整数量子霍尔效应的霍尔电导 $\\sigma_H=Ce^2/h$ 由陈数 $C$ 决定。非零陈数对应无能隙边缘态，边缘态数目等于陈数。</p>`},{id:'la-k1-2',name:'拓扑绝缘体与 Z2 不变量',tags:["def", "thm", "his"],brief:'Z2 不变量区分时间反演不变的拓扑平庸与非平庸绝缘体。',body:`<p>二维拓扑绝缘体（量子自旋霍尔态）具有一对自旋相反的边缘态，由 Z2 拓扑不变量刻画。三维拓扑绝缘体（如 Bi₂Se₃）具有单个狄拉克锥型表面态。时间反演对称性保护这些态不受非磁性杂质散射。</p>`}]}]},
+{id:'la-ch2',num:'第二章',title:'拓扑半金属与量子反常霍尔',en:'TOPOLOGICAL SEMIMETALS & QAH',sub:'外尔半金属、狄拉克半金属',desc:'拓扑半金属在能带交叉点处具有受拓扑保护的表面态（费米弧）。',sections:[{name:'2.1 拓扑半金属',color:'#7c3aed',desc:'外尔点、费米弧',items:[{id:'la-k2-1',name:'外尔半金属与狄拉克半金属',tags:["def", "thm", "app"],brief:'外尔点是动量空间的磁单极子，表面有费米弧。',body:`<p>外尔半金属（如 TaAs）的能带在动量空间外尔点处交叉，低能激发为外尔费米子。外尔点成对出现（手性相反），对应表面态费米弧。狄拉克半金属（如 Cd₃As₂）有四重简并狄拉克点。这些材料可实现手征反常等新奇输运效应。</p>`},{id:'la-k2-2',name:'量子反常霍尔效应',tags:["def", "thm", "his"],brief:'磁性掺杂拓扑绝缘体实现零磁场下量子化霍尔电导。',body:`<p>量子反常霍尔效应（QAHE）在无外磁场时实现 $\\sigma_H=ne^2/h$。薛其坤团队（2013）在 Cr 掺杂 (Bi,Sb)₂Te₃ 薄膜中首次观测到 QAHE。QAHE 是无耗散边缘态的体现，有望用于低功耗电子学和拓扑量子计算。</p>`}]}]}
 ];
 const LA_KP = {};
 function laBuildCard(item){

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="计算流体力学知识体系：有限差分、有限体积、有限元、谱方法、湍流模型">
+<meta name="description" content="计算流体力学知识体系：有限差分法、有限体积法、有限元法、谱方法、湍流模型、网格生成">
 <title>计算流体力学 · 知识体系</title>
 <script>
 window.MathJax = {
@@ -114,9 +114,9 @@ window.MathJax = {
   <header class="la-header">
     <div class="la-eyebrow">COMPUTATIONAL FLUID DYNAMICS · KNOWLEDGE MAP</div>
     <h1>计算流体力学 · 知识体系</h1>
-    <p class="la-subtitle">有限差分 · 有限体积 · 有限元 · 谱方法 · 湍流模型</p>
+    <p class="la-subtitle">有限差分 · 有限体积 · 有限元 · 谱方法 · 湍流模型 · 网格生成</p>
     <div class="back-bar"><a class="back-btn" href="index.html">← 返回总览</a></div>
-    <div class="la-nav-tabs"><a class="la-nav-tab c1" href="#la-ch1">第一章 · 离散化方法</a><a class="la-nav-tab c2" href="#la-ch2">第二章 · 湍流模型</a></div>
+    <div class="la-nav-tabs"><a class="la-nav-tab c1" href="#la-ch1">第一章 · 离散化方法</a><a class="la-nav-tab c2" href="#la-ch2">第二章 · 时间推进与稳定性</a><a class="la-nav-tab c3" href="#la-ch3">第三章 · 湍流模型</a></div>
     <div class="la-toolbar">
       <button onclick="window.scrollTo({top:0,behavior:'smooth'})">回到顶部</button>
     </div>
@@ -153,8 +153,9 @@ window.MathJax = {
 const LA_FIG = {  };
 const LA_TAG_LABEL = {def:'定 义', thm:'定 理', der:'推 导', exa:'例 子', app:'应 用', his:'注 记'};
 const LA_DATA = [
-{id:'la-ch1',num:'第一章',title:'离散化方法',en:'DISCRETIZATION',sub:'FDM、FVM、FEM',desc:'将 NS 方程在空间离散为代数方程组。本章介绍三大离散方法。',sections:[{name:'1.1 有限体积法',color:'#2563eb',desc:'守恒性最好',items:[{id:'la-k1-1',name:'有限体积法',tags:["def", "thm"],brief:'对控制体积分，数值通量 $F_{i+1/2}$ 近似面通量。',body:`<p>FVM 天然满足守恒律，是 CFD 主流方法。关键是数值通量格式（Roe、HLLC 等）。</p>`}]},{name:'1.2 时间推进',color:'#7c3aed',desc:'显式与隐式',items:[{id:'la-k1-2',name:'CFL 条件',tags:["def", "thm"],brief:'$\\Delta t\\le C\\Delta x/|v|$，显式格式稳定性条件。',body:`<p>CFL 数限制显式格式时间步。隐式格式（如 LU-SGS）可放大步长但每步更贵。</p>`}]}]},
-{id:'la-ch2',num:'第二章',title:'湍流模型',en:'TURBULENCE MODELING',sub:'RANS、LES、DNS',desc:'湍流计算需建模。RANS 用雷诺平均，LES 解大涡模小涡。',sections:[{name:'2.1 RANS 模型',color:'#0f766e',desc:'$k-\\epsilon$、$k-\\omega$',items:[{id:'la-k2-1',name:'$k-\epsilon$ 模型',tags:["def", "app"],brief:'两方程模型，$\\mu_t=\\rho C_\\mu k^2/\\epsilon$。',body:`<p>工业界最常用的湍流模型。$k$ 为湍动能，$\\epsilon$ 为耗散率。SST $k-\\omega$ 在近壁更优。</p>`}]}]}
+{id:'la-ch1',num:'第一章',title:'离散化方法',en:'DISCRETIZATION METHODS',sub:'FDM、FVM、FEM、谱方法',desc:'将 NS 方程在空间和时间上离散为代数方程组。本章介绍四大离散方法。',sections:[{name:'1.1 有限差分法',color:'#2563eb',desc:'导数的差商近似',items:[{id:'la-k1-1',name:'有限差分格式',tags:["def", "thm"],brief:'$\\partial_x u\\approx(u_{i+1}-u_{i-1})/(2\\Delta x)$（中心差分）。',body:`<p>FDM 用差商近似偏导数。前向/后向差分一阶精度，中心差分二阶精度。高阶格式（紧致差分、WENO）精度更高但更复杂。需处理边界条件。</p>`},{id:'la-k1-2',name:'有限体积法',tags:["def", "thm", "app"],brief:'对控制体积分，数值通量 $F_{i+1/2}$ 近似面通量。',body:`<p>FVM 天然满足守恒律，是 CFD 主流方法。关键是数值通量格式：中心格式需人工粘性，迎风格式（Roe、HLLC、AUSM）自动捕捉激波。</p>`}]},{name:'1.2 有限元与谱方法',color:'#7c3aed',desc:'加权余量法',items:[{id:'la-k1-3',name:'有限元法',tags:["def", "thm"],brief:'加权余量法，Galerkin 法取权函数=形函数。',body:`<p>FEM 用分片多项式近似解，对非结构网格适应性好。稳定化 FEM（SUPG、Galerkin 最小二乘）可处理对流占优问题。谱元法是高阶 FEM。</p>`},{id:'la-k1-4',name:'谱方法',tags:"def",brief:'全局光滑基函数（傅里叶、切比雪夫），指数收敛。',body:`<p>谱方法对光滑解有指数收敛精度，但对复杂几何和间断解适应性差。常用于湍流 DNS 和地球物理流体。伪谱法用物理空间计算非线性项，避免卷积。</p>`}]}]},
+{id:'la-ch2',num:'第二章',title:'时间推进与稳定性',en:'TIME INTEGRATION',sub:'显式、隐式、CFL',desc:'时间离散方法及其稳定性条件。',sections:[{name:'2.1 时间离散格式',color:'#0f766e',desc:'显式与隐式',items:[{id:'la-k2-1',name:'CFL 条件',tags:["def", "thm"],brief:'$\\Delta t\\le C\\Delta x/|v|$，显式格式稳定性条件。',body:`<p>CFL 数限制显式格式时间步长。显式格式（Runge-Kutta）每步便宜但步长受 CFL 限制。隐式格式（LU-SGS、Newton-Krylov）可放大步长但每步更贵，适合定常问题。</p>`},{id:'la-k2-2',name:'Runge-Kutta 方法',tags:"thm",brief:'显式 RK4 四阶精度，每步四次函数求值。',body:`<p>多阶段 RK 方法通过组合多个斜率获得高阶精度。TVD-RK（保总变差衰减）用于双曲型方程，避免振荡。隐式 RK 用于刚性问题。</p>`}]}]},
+{id:'la-ch3',num:'第三章',title:'湍流模型',en:'TURBULENCE MODELING',sub:'RANS、LES、DNS',desc:'湍流计算需建模。RANS 用雷诺平均，LES 解大涡模小涡，DNS 直接求解。',sections:[{name:'3.1 RANS 模型',color:'#2563eb',desc:'$k-\\varepsilon$、$k-\\omega$、SST',items:[{id:'la-k3-1',name:'$k-\varepsilon$ 模型',tags:["def", "app"],brief:'两方程模型，$\\mu_t=\\rho C_\\mu k^2/\\epsilon$。',body:`<p>工业界最常用的湍流模型。$k$ 为湍动能，$\\varepsilon$ 为耗散率。标准 $k-\\varepsilon$ 对充分发展湍流效果好，对近壁和分离流精度差。RNG $k-\\varepsilon$ 改善了旋转和分离流。</p>`},{id:'la-k3-2',name:'SST $k-\omega$ 模型',tags:["app"],brief:'近壁用 $k-\\omega$，远场用 $k-\\varepsilon$，混合函数过渡。',body:`<p>SST 模型结合了 $k-\\omega$（近壁好）和 $k-\\varepsilon$（远场好）的优点，对边界层分离和逆压梯度预测准确，是航空航天 CFD 的首选。</p>`}]},{name:'3.2 LES 与 DNS',color:'#7c3aed',desc:'大涡模拟与直接数值模拟',items:[{id:'la-k3-3',name:'大涡模拟（LES）',tags:["def", "app"],brief:'直接解大尺度涡，亚格子尺度用 SGS 模型（Smagorinsky、WALE）。',body:`<p>LES 过滤掉小尺度涡，对大涡直接求解。比 RANS 精度高，比 DNS 便宜。壁面附近需壁模（WMLES）或解析壁面（WRLES）。</p>`},{id:'la-k3-4',name:'直接数值模拟（DNS）',tags:["thm"],brief:'不建模，直接求解所有尺度湍流，$\\Delta x<\\eta$（Kolmogorov 尺度）。',body:`<p>DNS 不引入湍流模型，直接求解 NS 方程所有尺度。网格数 $N\\sim Re^{9/4}$，计算量极大，仅用于低雷诺数基础研究和模型验证。</p>`}]}]}
 ];
 const LA_KP = {};
 function laBuildCard(item){

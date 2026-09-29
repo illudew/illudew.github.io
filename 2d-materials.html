@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="二维材料知识体系：石墨烯、MoS2、黑磷、异质结、器件">
+<meta name="description" content="二维材料知识体系：石墨烯狄拉克锥、过渡金属硫化物MoS2、黑磷、范德华异质结、二维器件">
 <title>二维材料 · 知识体系</title>
 <script>
 window.MathJax = {
@@ -116,7 +116,7 @@ window.MathJax = {
     <h1>二维材料 · 知识体系</h1>
     <p class="la-subtitle">石墨烯 · MoS2 · 黑磷 · 异质结 · 器件</p>
     <div class="back-bar"><a class="back-btn" href="index.html">← 返回总览</a></div>
-    <div class="la-nav-tabs"><a class="la-nav-tab c1" href="#la-ch1">第一章 · 石墨烯</a></div>
+    <div class="la-nav-tabs"><a class="la-nav-tab c1" href="#la-ch1">第一章 · 石墨烯与类石墨烯材料</a><a class="la-nav-tab c2" href="#la-ch2">第二章 · 范德华异质结与二维器件</a></div>
     <div class="la-toolbar">
       <button onclick="window.scrollTo({top:0,behavior:'smooth'})">回到顶部</button>
     </div>
@@ -153,7 +153,8 @@ window.MathJax = {
 const LA_FIG = {  };
 const LA_TAG_LABEL = {def:'定 义', thm:'定 理', der:'推 导', exa:'例 子', app:'应 用', his:'注 记'};
 const LA_DATA = [
-{id:'la-ch1',num:'第一章',title:'石墨烯',en:'GRAPHENE',sub:'零带隙半导体、相对论性电子',desc:'石墨烯是单层碳原子构成的二维材料，电子呈狄拉克费米子行为。',sections:[{name:'1.1 石墨烯电子结构',color:'#2563eb',desc:'狄拉克锥',items:[{id:'la-k1-1',name:'石墨烯能带',tags:["def", "thm"],brief:'线性色散 $E=\\pm\\hbar v_F|\\boldsymbol k|$，$v_F\\approx c/300$。',body:`<p>K 点附近电子行为如无质量狄拉克费米子。载流子迁移率极高，室温弹道输运。</p>`}]}]}
+{id:'la-ch1',num:'第一章',title:'石墨烯与类石墨烯材料',en:'GRAPHENE & BEYOND',sub:'狄拉克锥、MoS₂、黑磷',desc:'二维材料是单原子层厚度的材料，具有块体不具备的新奇性质。Geim 和 Novoselov 于 2004 年剥离出石墨烯。',sections:[{name:'1.1 石墨烯',color:'#2563eb',desc:'线性色散、零带隙',items:[{id:'la-k1-1',name:'石墨烯电子结构',tags:["def", "thm"],brief:'线性色散 $E=\\pm\\hbar v_F|\\boldsymbol k|$，$v_F\\approx c/300$。',body:`<p>石墨烯是单层碳原子构成的蜂窝晶格。K 点附近电子行为如无质量狄拉克费米子，导带与价带在狄拉克点接触（零带隙）。载流子迁移率极高（$>10^5\\,\\text{cm}^2/\\text{Vs}$），室温弹道输运，热导率极高。</p>`},{id:'la-k1-2',name:'过渡金属硫化物与黑磷',tags:["def", "app"],brief:'MoS₂ 单层为直接带隙半导体；黑磷有可调直接带隙。',body:`<p>MoS₂、WSe₂ 等过渡金属硫化物（TMDC）单层从体相间接带隙变为直接带隙（~1.8 eV），适于光电器件。黑磷（磷烯）具有面内各向异性和可由层数调节的直接带隙（0.3-2 eV），填补石墨烯与 TMDC 之间的能隙空白。</p>`}]}]},
+{id:'la-ch2',num:'第二章',title:'范德华异质结与二维器件',en:'VDW HETEROSTRUCTURES & DEVICES',sub:'莫尔超晶格、器件',desc:'通过层间堆垛不同二维材料可构建范德华异质结，出现莫尔超晶格与强关联效应。',sections:[{name:'2.1 异质结与器件',color:'#7c3aed',desc:'莫尔、扭转电子学',items:[{id:'la-k2-1',name:'范德华异质结与莫尔超晶格',tags:["def", "thm", "his"],brief:'不同层间堆垛形成莫尔条纹，产生平带与强关联效应。',body:`<p>二维材料通过范德华力结合，可任意堆垛构建异质结。两层石墨烯以小角度扭转（魔角 ~1.1°）形成莫尔超晶格，出现平带，实现超导与关联绝缘态（曹原等，2018）。扭转电子学（twistronics）成为新研究方向。</p>`},{id:'la-k2-2',name:'二维器件应用',tags:["def", "app"],brief:'场效应晶体管、光电器件、柔性电子。',body:`<p>二维材料薄、透明、柔性，适于下一代电子学。MoS₂ 晶体管可实现 1 nm 沟道。二维材料光探测器响应快、灵敏度高。石墨烯用于透明电极、高频晶体管、传感器。异质结太阳能电池和发光二极管也被广泛研究。</p>`}]}]}
 ];
 const LA_KP = {};
 function laBuildCard(item){

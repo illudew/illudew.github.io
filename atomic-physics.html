@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="原子物理学知识体系：原子模型、玻尔理论、量子数、精细结构、塞曼效应">
+<meta name="description" content="原子物理知识体系：卢瑟福模型、玻尔理论、量子数、自旋轨道耦合、精细结构、塞曼效应、跃迁选择定则">
 <title>原子物理学 · 知识体系</title>
 <script>
 window.MathJax = {
@@ -114,9 +114,9 @@ window.MathJax = {
   <header class="la-header">
     <div class="la-eyebrow">ATOMIC PHYSICS · KNOWLEDGE MAP</div>
     <h1>原子物理学 · 知识体系</h1>
-    <p class="la-subtitle">原子模型 · 玻尔理论 · 量子数 · 精细结构 · 塞曼效应</p>
+    <p class="la-subtitle">原子模型 · 玻尔理论 · 量子数 · 精细结构 · 塞曼效应 · 跃迁</p>
     <div class="back-bar"><a class="back-btn" href="index.html">← 返回总览</a></div>
-    <div class="la-nav-tabs"><a class="la-nav-tab c1" href="#la-ch1">第一章 · 原子结构</a><a class="la-nav-tab c2" href="#la-ch2">第二章 · 量子数与精细结构</a><a class="la-nav-tab c3" href="#la-ch3">第三章 · 塞曼效应与跃迁</a></div>
+    <div class="la-nav-tabs"><a class="la-nav-tab c1" href="#la-ch1">第一章 · 原子结构与玻尔模型</a><a class="la-nav-tab c2" href="#la-ch2">第二章 · 量子数与精细结构</a><a class="la-nav-tab c3" href="#la-ch3">第三章 · 塞曼效应与跃迁</a></div>
     <div class="la-toolbar">
       <button onclick="window.scrollTo({top:0,behavior:'smooth'})">回到顶部</button>
     </div>
@@ -153,9 +153,9 @@ window.MathJax = {
 const LA_FIG = {  };
 const LA_TAG_LABEL = {def:'定 义', thm:'定 理', der:'推 导', exa:'例 子', app:'应 用', his:'注 记'};
 const LA_DATA = [
-{id:'la-ch1',num:'第一章',title:'原子结构',en:'ATOMIC STRUCTURE',sub:'玻尔模型、量子数',desc:'从卢瑟福散射到玻尔模型，建立原子的量子化描述。',sections:[{name:'1.1 玻尔模型',color:'#2563eb',desc:'氢原子能级',items:[{id:'la-k1-1',name:'玻尔假设',tags:["def", "thm"],brief:'定态、角动量量子化 $L=n\\hbar$、跃迁辐射 $h\\nu=E_m-E_n$。',body:`<p>氢原子能级 $E_n=-\\frac{me^4}{8\\varepsilon_0^2 h^2 n^2}=-\\frac{13.6}{n^2}$ eV。玻尔半径 $a_0=0.529\\,\\text{\\AA}$。</p>`}]}]},
-{id:'la-ch2',num:'第二章',title:'量子数与精细结构',en:'QUANTUM NUMBERS',sub:'n,l,m,s 与自旋轨道耦合',desc:'原子状态由四个量子数描述。自旋轨道耦合产生精细结构。',sections:[{name:'2.1 量子数',color:'#7c3aed',desc:'n,l,m_l,m_s',items:[{id:'la-k2-1',name:'四个量子数',tags:["def", "thm"],brief:'主量子数 $n$、角量子数 $l$、磁量子数 $m_l$、自旋 $m_s=\\pm1/2$。',body:`<p>$l=0,1,\\dots,n-1$（s,p,d,f...），$m_l=-l,\\dots,l$。泡利不相容：每个量子态最多两个电子。</p>`},{id:'la-k2-2',name:'自旋轨道耦合',tags:["def", "thm"],brief:'$\\Delta E\\propto\\boldsymbol{L}\\cdot\\boldsymbol{S}$，产生精细结构。',body:`<p>电子自旋磁矩与轨道磁场相互作用，使能级分裂为 $j=l\\pm1/2$ 两条。钠黄线双线即源于此。</p>`}]}]},
-{id:'la-ch3',num:'第三章',title:'塞曼效应与跃迁',en:'ZEEMAN & TRANSITIONS',sub:'外场分裂、选择定则',desc:'外磁场下原子能级进一步分裂，产生塞曼效应。',sections:[{name:'3.1 塞曼效应',color:'#0f766e',desc:'磁场中的分裂',items:[{id:'la-k3-1',name:'塞曼效应',tags:["def", "thm"],brief:'$\\Delta E=m_j g_j\\mu_B B$，谱线分裂。',body:`<p>正常塞曼效应（单态，$g=1$）分裂为三条；反常塞曼效应（$S\\neq0$）分裂更复杂，需朗德 $g$ 因子。</p>`}]}]}
+{id:'la-ch1',num:'第一章',title:'原子结构与玻尔模型',en:'ATOMIC STRUCTURE & BOHR MODEL',sub:'卢瑟福散射、玻尔假设',desc:'从卢瑟福散射实验到玻尔量子化模型，建立原子的量子化描述。',sections:[{name:'1.1 玻尔模型',color:'#2563eb',desc:'氢原子能级',items:[{id:'la-k1-1',name:'玻尔假设',tags:["def", "thm", "his"],brief:'定态假设、角动量量子化 $L=n\\hbar$、跃迁辐射 $h\\nu=E_m-E_n$。',body:`<p>玻尔（1913）提出三条假设，成功解释氢原子光谱。氢原子能级 $E_n=-\\frac{me^4}{8\\varepsilon_0^2h^2n^2}=-\\frac{13.6}{n^2}$ eV。玻尔半径 $a_0=\\frac{4\\pi\\varepsilon_0\\hbar^2}{me^2}\\approx0.529\\,\\text{\\AA}$。里德伯公式 $1/\\lambda=R(1/n_1^2-1/n_2^2)$。</p>`},{id:'la-k1-2',name:'弗兰克-赫兹实验',tags:["def", "thm", "his"],brief:'汞原子能级量子化，电流随加速电压周期性下降。',body:`<p>弗兰克-赫兹实验（1914）直接证实了原子能级的量子化：电子与汞原子碰撞只损失 4.9 eV，证明原子内部能量是量子化的。这是玻尔理论的第一个实验验证。</p>`}]}]},
+{id:'la-ch2',num:'第二章',title:'量子数与精细结构',en:'QUANTUM NUMBERS & FINE STRUCTURE',sub:'n,l,m,s 与自旋轨道耦合',desc:'原子状态由四个量子数描述。自旋轨道耦合产生精细结构。',sections:[{name:'2.1 四个量子数',color:'#7c3aed',desc:'n,l,m_l,m_s',items:[{id:'la-k2-1',name:'量子数与壳层结构',tags:["def", "thm"],brief:'主量子数 $n$、角量子数 $l$、磁量子数 $m_l$、自旋 $m_s=\\pm1/2$。',body:`<p>$l=0,1,2,3\\dots$ 对应 s,p,d,f 轨道。$m_l=-l,-l+1,\\dots,l$。泡利不相容原理：每个量子态最多容纳一个电子（考虑自旋则两个）。壳层按 $n$ 划分，子壳层按 $l$ 划分，决定元素周期表。</p>`},{id:'la-k2-2',name:'自旋轨道耦合',tags:["def", "thm"],brief:'$\\Delta E_{SO}\\propto\\boldsymbol L\\cdot\\boldsymbol S$，产生精细结构。',body:`<p>电子自旋磁矩与轨道运动产生的磁场相互作用。$\\boldsymbol J=\\boldsymbol L+\\boldsymbol S$，$j=l\\pm1/2$。精细结构使能级分裂为两条。钠黄线（589nm）双线（D1=589.6nm, D2=589.0nm）即源于此。</p>`}]}]},
+{id:'la-ch3',num:'第三章',title:'塞曼效应与跃迁',en:'ZEEMAN EFFECT & TRANSITIONS',sub:'外场分裂、选择定则',desc:'外磁场下原子能级进一步分裂，产生塞曼效应。跃迁满足选择定则。',sections:[{name:'3.1 塞曼效应',color:'#0f766e',desc:'磁场中的能级分裂',items:[{id:'la-k3-1',name:'塞曼效应',tags:["def", "thm", "his"],brief:'$\\Delta E=m_j g_j\\mu_B B$，谱线分裂。',body:`<p>外磁场中原子磁矩与磁场相互作用使能级分裂。朗德 $g$ 因子 $g=1+\\frac{j(j+1)+s(s+1)-l(l+1)}{2j(j+1)}$。正常塞曼效应（单态，$S=0,g=1$）谱线分裂为三条；反常塞曼效应（$S\\neq0$）分裂更复杂。</p>`}]},{name:'3.2 辐射跃迁选择定则',color:'#c2410c',desc:'电偶极跃迁',items:[{id:'la-k3-2',name:'选择定则',tags:["def", "thm", "der"],brief:'$\\Delta l=\\pm1$，$\\Delta j=0,\\pm1$（$j=0\\to j=0$ 禁戒），$\\Delta m_j=0,\\pm1$。',body:`<p>电偶极跃迁的选择定则由角动量守恒和宇称守恒决定。违反选择定则的跃迁称为禁戒跃迁，概率极小。原子光谱的谱线结构由能级和选择定则共同决定。</p>`}]}]}
 ];
 const LA_KP = {};
 function laBuildCard(item){

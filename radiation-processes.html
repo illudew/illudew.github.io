@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="辐射过程知识体系：同步辐射、轫致辐射、切伦科夫辐射、黑体辐射">
+<meta name="description" content="辐射过程知识体系：李纳-维谢尔势、同步辐射、轫致辐射、切伦科夫辐射、逆康普顿散射、黑体辐射">
 <title>辐射过程 · 知识体系</title>
 <script>
 window.MathJax = {
@@ -114,9 +114,9 @@ window.MathJax = {
   <header class="la-header">
     <div class="la-eyebrow">RADIATION PROCESSES · KNOWLEDGE MAP</div>
     <h1>辐射过程 · 知识体系</h1>
-    <p class="la-subtitle">同步辐射 · 轫致辐射 · 切伦科夫辐射 · 黑体辐射</p>
+    <p class="la-subtitle">同步辐射 · 轫致辐射 · 切伦科夫辐射 · 黑体辐射 · 逆康普顿</p>
     <div class="back-bar"><a class="back-btn" href="index.html">← 返回总览</a></div>
-    <div class="la-nav-tabs"><a class="la-nav-tab c1" href="#la-ch1">第一章 · 带电粒子辐射</a></div>
+    <div class="la-nav-tabs"><a class="la-nav-tab c1" href="#la-ch1">第一章 · 带电粒子辐射</a><a class="la-nav-tab c2" href="#la-ch2">第二章 · 主要辐射机制</a></div>
     <div class="la-toolbar">
       <button onclick="window.scrollTo({top:0,behavior:'smooth'})">回到顶部</button>
     </div>
@@ -153,7 +153,8 @@ window.MathJax = {
 const LA_FIG = {  };
 const LA_TAG_LABEL = {def:'定 义', thm:'定 理', der:'推 导', exa:'例 子', app:'应 用', his:'注 记'};
 const LA_DATA = [
-{id:'la-ch1',num:'第一章',title:'带电粒子辐射',en:'RADIATION BY CHARGES',sub:'加速电荷辐射',desc:'加速的带电粒子必然辐射电磁波。本章讨论各种辐射机制。',sections:[{name:'1.1 辐射机制',color:'#2563eb',desc:'同步、轫致、切伦科夫',items:[{id:'la-k1-1',name:'同步辐射',tags:["def", "thm"],brief:'相对论电子在磁场中做圆周运动发出的辐射。',body:`<p>同步辐射高亮度、宽谱、高偏振，是重要光源。轫致辐射是带电粒子在库仑场中减速产生。切伦科夫辐射是粒子超介质光速时的锥形辐射。</p>`}]}]}
+{id:'la-ch1',num:'第一章',title:'带电粒子辐射',en:'RADIATION BY CHARGED PARTICLES',sub:'李纳-维谢尔势、辐射功率',desc:'加速的带电粒子必然辐射电磁波。本章从李纳-维谢尔势出发讨论各种辐射机制。',sections:[{name:'1.1 辐射基本理论',color:'#2563eb',desc:'加速电荷辐射',items:[{id:'la-k1-1',name:'李纳-维谢尔势与辐射场',tags:["def", "thm"],brief:'$\\mathbf{E}_{rad}\\propto \\mathbf{n}\\times(\\mathbf{n}\\times\\dot\\boldsymbol\\beta)$，辐射场 $\\propto1/r$。',body:`<p>加速电荷的电磁场分为速度场（$\\propto1/r^2$，非辐射）和加速度场（$\\propto1/r$，辐射）。李纳-维谢尔势给出推迟势。辐射方向图由加速度决定：非相对论为 $\\sin^2\\theta$ 分布，相对论集中于前向锥角 $1/\\gamma$。</p>`},{id:'la-k1-2',name:'拉莫尔公式与相对论推广',tags:["def", "thm"],brief:'$P=\\frac{q^2a^2}{6\\pi\\varepsilon_0 c^3}$（非相对论），$P=\\frac{q^2\\gamma^4}{6\\pi\\varepsilon_0 c}(\\dot\\beta^2+\\gamma^2(\\boldsymbol\\beta\\cdot\\dot\\boldsymbol\\beta)^2)$。',body:`<p>拉莫尔公式给出非相对论加速电荷的总辐射功率。相对论推广中，横向加速度辐射功率 $\\propto\\gamma^4$，纵向 $\\propto\\gamma^6$。同步辐射即相对论电子在磁场中做圆周运动（横向加速）的辐射。</p>`}]}]},
+{id:'la-ch2',num:'第二章',title:'主要辐射机制',en:'MAJOR RADIATION MECHANISMS',sub:'同步、轫致、切伦科夫、逆康普顿',desc:'天体物理和实验室中常见的辐射机制包括同步辐射、轫致辐射、切伦科夫辐射和逆康普顿散射。',sections:[{name:'2.1 各类辐射机制',color:'#7c3aed',desc:'天体辐射、光源',items:[{id:'la-k2-1',name:'同步辐射',tags:["def", "thm", "app"],brief:'相对论电子在磁场中辐射，功率 $P\\propto\\gamma^2B^2\\sin^2\\alpha$。',body:`<p>同步辐射谱宽、高偏振、高亮度，是重要的第三代光源（如上海光源）。在天体物理中，射电星系、超新星遗迹的射电辐射即同步辐射。曲率辐射是类似机制（沿弯曲磁力线运动）。</p>`},{id:'la-k2-2',name:'轫致辐射与切伦科夫辐射',tags:["def", "thm"],brief:'轫致：电荷在库仑场中减速；切伦科夫：$v>c/n$ 时的锥形辐射。',body:`<p>轫致辐射（制动辐射）是带电粒子经过原子核库仑场时减速产生的连续谱，X 射线管的主要机制。切伦科夫辐射是粒子在介质中超光速（$v>c/n$）时产生的锥形辐射，角度 $\\cos\\theta_c=1/(\\beta n)$，用于粒子探测（如中微子探测器）。</p>`},{id:'la-k2-3',name:'逆康普顿散射与黑体辐射',tags:["def", "thm"],brief:'光子被相对论电子散射获得能量 $\\sim\\gamma^2$；黑体辐射由普朗克定律描述。',body:`<p>逆康普顿散射：低能光子被相对论电子散射后能量提升 $\\sim\\gamma^2$，是天体 X 射线/伽马射线的重要来源。黑体辐射谱由普朗克公式 $B_\\nu(T)=\\frac{2h\\nu^3}{c^2}\\frac1{e^{h\\nu/kT}-1}$ 描述，宇宙微波背景是完美黑体谱。</p>`}]}]}
 ];
 const LA_KP = {};
 function laBuildCard(item){

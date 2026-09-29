@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="等离子体物理知识体系：等离子体、德拜屏蔽、朗缪尔波、磁约束、不稳定性">
+<meta name="description" content="等离子体物理知识体系：德拜长度、等离子体频率、朗缪尔波、阿尔文波、磁约束、等离子体不稳定性、聚变等离子体">
 <title>等离子体物理 · 知识体系</title>
 <script>
 window.MathJax = {
@@ -116,7 +116,7 @@ window.MathJax = {
     <h1>等离子体物理 · 知识体系</h1>
     <p class="la-subtitle">等离子体 · 德拜屏蔽 · 朗缪尔波 · 磁约束 · 不稳定性</p>
     <div class="back-bar"><a class="back-btn" href="index.html">← 返回总览</a></div>
-    <div class="la-nav-tabs"><a class="la-nav-tab c1" href="#la-ch1">第一章 · 等离子体基本性质</a></div>
+    <div class="la-nav-tabs"><a class="la-nav-tab c1" href="#la-ch1">第一章 · 等离子体基本性质</a><a class="la-nav-tab c2" href="#la-ch2">第二章 · 磁化等离子体与不稳定性</a></div>
     <div class="la-toolbar">
       <button onclick="window.scrollTo({top:0,behavior:'smooth'})">回到顶部</button>
     </div>
@@ -153,7 +153,8 @@ window.MathJax = {
 const LA_FIG = {  };
 const LA_TAG_LABEL = {def:'定 义', thm:'定 理', der:'推 导', exa:'例 子', app:'应 用', his:'注 记'};
 const LA_DATA = [
-{id:'la-ch1',num:'第一章',title:'等离子体基本性质',en:'PLASMA BASICS',sub:'德拜长度、等离子体频率',desc:'等离子体是电离气体，是物质第四态。本章讨论其集体行为。',sections:[{name:'1.1 德拜屏蔽与振荡',color:'#2563eb',desc:'集体效应',items:[{id:'la-k1-1',name:'德拜长度',tags:["def", "thm"],brief:'$\\lambda_D=\\sqrt{\\varepsilon_0 kT_e/(ne^2)}$，屏蔽外部电场。',body:`<p>等离子体在大于德拜长度的尺度上呈准中性。等离子体频率 $\\omega_p=\\sqrt{ne^2/(\\varepsilon_0 m_e)}$ 是高频静电振荡频率。</p>`}]}]}
+{id:'la-ch1',num:'第一章',title:'等离子体基本性质',en:'PLASMA BASICS',sub:'德拜长度、等离子体频率、准中性',desc:'等离子体是电离气体，是物质第四态，占宇宙可见物质 99%。本章讨论其集体行为与基本参数。',sections:[{name:'1.1 德拜屏蔽与等离子体振荡',color:'#2563eb',desc:'集体效应',items:[{id:'la-k1-1',name:'德拜长度与准中性',tags:["def", "thm"],brief:'$\\lambda_D=\\sqrt{\\varepsilon_0 kT_e/(ne^2)}$，$\\lambda_D\\ll L$ 为准中性条件。',body:`<p>等离子体在大于德拜长度的尺度上呈准中性（$n_e\\approx Zn_i$）。单个电荷被屏蔽，库仑势变为 Yukawa 型 $\\propto e^{-r/\\lambda_D}/r$。德拜球内含大量粒子（$n\\lambda_D^3\\gg1$）是等离子体判据之一。</p>`},{id:'la-k1-2',name:'等离子体频率与朗缪尔波',tags:["def", "thm"],brief:'$\\omega_p=\\sqrt{ne^2/(\\varepsilon_0 m_e)}$，朗缪尔波色散 $\\omega^2=\\omega_p^2+3k^2v_{Te}^2$。',body:`<p>等离子体频率是高频静电振荡频率。电子密度扰动产生朗缪尔波（电子等离子体波）。离子等离子体振荡频率为 $\\omega_{pi}=\\sqrt{Zn_ie^2/(\\varepsilon_0 m_i)}$。电磁波在等离子体中传播需 $\\omega>\\omega_p$（截止频率）。</p>`}]}]},
+{id:'la-ch2',num:'第二章',title:'磁化等离子体与不稳定性',en:'MAGNETIZED PLASMA & INSTABILITIES',sub:'磁流体力学、阿尔文波、不稳定性',desc:'磁化等离子体中电磁与流体耦合，产生丰富的波动与不稳定性。磁流体力学（MHD）是核心框架。',sections:[{name:'2.1 MHD 与等离子体不稳定性',color:'#7c3aed',desc:'阿尔文波、撕裂模',items:[{id:'la-k2-1',name:'磁流体力学与阿尔文波',tags:["def", "thm"],brief:'阿尔文速度 $v_A=B/\\sqrt{\\mu_0\\rho}$，阿尔文波沿磁场传播。',body:`<p>MHD 方程将等离子体视为导电流体，耦合 Navier-Stokes 与 Maxwell 方程。阿尔文波是磁场张力驱动的横波，沿磁力线传播。磁声波是快/慢模式。MHD 在托卡马克和空间等离子体中广泛应用。</p>`},{id:'la-k2-2',name:'等离子体不稳定性',tags:["def", "thm", "app"],brief:'撕裂模、漂移波、气球模等约束等离子体的主要挑战。',body:`<p>等离子体中存在多种不稳定性：撕裂模破坏磁面形成磁岛；漂移波由密度梯度驱动，是反常输运的主因；气球模在坏曲率区增长。控制不稳定性是磁约束聚变的核心难题。</p>`}]}]}
 ];
 const LA_KP = {};
 function laBuildCard(item){

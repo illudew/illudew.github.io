@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="半导体材料知识体系：硅、锗、砷化镓、氮化镓、碳化硅">
+<meta name="description" content="半导体材料知识体系：元素半导体Si/Ge、化合物半导体GaAs/InP、宽禁带GaN/SiC、有机半导体、氧化物半导体">
 <title>半导体材料 · 知识体系</title>
 <script>
 window.MathJax = {
@@ -116,7 +116,7 @@ window.MathJax = {
     <h1>半导体材料 · 知识体系</h1>
     <p class="la-subtitle">硅 · 锗 · 砷化镓 · 氮化镓 · 碳化硅</p>
     <div class="back-bar"><a class="back-btn" href="index.html">← 返回总览</a></div>
-    <div class="la-nav-tabs"><a class="la-nav-tab c1" href="#la-ch1">第一章 · 半导体材料分类</a></div>
+    <div class="la-nav-tabs"><a class="la-nav-tab c1" href="#la-ch1">第一章 · 半导体材料分类</a><a class="la-nav-tab c2" href="#la-ch2">第二章 · 半导体物性与缺陷</a></div>
     <div class="la-toolbar">
       <button onclick="window.scrollTo({top:0,behavior:'smooth'})">回到顶部</button>
     </div>
@@ -153,7 +153,8 @@ window.MathJax = {
 const LA_FIG = {  };
 const LA_TAG_LABEL = {def:'定 义', thm:'定 理', der:'推 导', exa:'例 子', app:'应 用', his:'注 记'};
 const LA_DATA = [
-{id:'la-ch1',num:'第一章',title:'半导体材料分类',en:'SEMICONDUCTOR MATERIALS',sub:'元素、化合物、宽禁带',desc:'半导体材料分元素半导体与化合物半导体。',sections:[{name:'1.1 元素与化合物半导体',color:'#2563eb',desc:'Si、GaAs、GaN',items:[{id:'la-k1-1',name:'材料代际',tags:["def", "thm", "app"],brief:'Si 第一代，GaAs 第二代，GaN/SiC 第三代（宽禁带）。',body:`<p>Si 工艺成熟用于逻辑；GaAs 高频高速；GaN/SiC 宽禁带用于大功率、高频、光电器件。</p>`}]}]}
+{id:'la-ch1',num:'第一章',title:'半导体材料分类',en:'SEMICONDUCTOR MATERIALS',sub:'元素、化合物、宽禁带',desc:'半导体材料分元素半导体与化合物半导体，是电子工业的基石。',sections:[{name:'1.1 元素与化合物半导体',color:'#2563eb',desc:'Si、GaAs、GaN',items:[{id:'la-k1-1',name:'材料代际与特性',tags:["def", "thm", "app"],brief:'Si 第一代，GaAs 第二代，GaN/SiC 第三代（宽禁带）。',body:`<p>Si（$E_g=1.12$ eV）工艺成熟，用于逻辑与存储集成电路。GaAs（$E_g=1.42$ eV）电子迁移率高，用于高频、微波、光电器件。InP 用于长波长光通信激光器。GaN/SiC 宽禁带（3.4/3.3 eV）用于大功率、高频、高温器件和蓝光 LED。</p>`},{id:'la-k1-2',name:'有机与氧化物半导体',tags:["def", "app"],brief:'有机半导体柔性透明；氧化物半导体高迁移率。',body:`<p>有机半导体（如 P3HT、ITIC）用于有机发光二极管（OLED）、有机太阳能电池（OPV）、有机场效应晶体管（OFET），具有柔性、可印刷等优势。氧化物半导体（如 a-IGZO）高迁移率、低关断电流，用于平板显示背板和透明电子学。</p>`}]}]},
+{id:'la-ch2',num:'第二章',title:'半导体物性与缺陷',en:'MATERIAL PROPERTIES & DEFECTS',sub:'能带、迁移率、缺陷',desc:'半导体的电学、光学性质由能带结构和缺陷决定。',sections:[{name:'2.1 物性与缺陷工程',color:'#7c3aed',desc:'迁移率、载流子、缺陷',items:[{id:'la-k2-1',name:'载流子输运与迁移率',tags:["def", "thm"],brief:'$\\mu=q\\tau/m^*$，受晶格散射和电离杂质散射限制。',body:`<p>载流子迁移率 $\\mu$ 决定器件速度。散射机制：声学声子散射（$\\mu\\propto T^{-3/2}$）、电离杂质散射（$\\mu\\propto T^{3/2}$）、光学声子散射等。GaN/AlGaN 异质结的二维电子气迁移率极高，用于 HEMT。</p>`},{id:'la-k2-2',name:'半导体缺陷与掺杂',tags:["def", "app"],brief:'点缺陷、位错、掺杂调控载流子。',body:`<p>半导体缺陷包括点缺陷（空位、间隙、反位）、线缺陷（位错）、面缺陷（晶界、堆垛层错）。缺陷作为深能级俘获载流子，降低寿命和迁移率。掺杂（施主/受主）精确调控载流子浓度。半绝缘 GaAs 利用 EL2 深能级实现高阻。</p>`}]}]}
 ];
 const LA_KP = {};
 function laBuildCard(item){

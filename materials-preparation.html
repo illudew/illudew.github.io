@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="材料制备技术知识体系：烧结、薄膜沉积、单晶生长、CVD、MBE">
+<meta name="description" content="材料制备技术知识体系：粉末冶金与烧结、化学气相沉积CVD、物理气相沉积PVD、分子束外延MBE、单晶生长">
 <title>材料制备技术 · 知识体系</title>
 <script>
 window.MathJax = {
@@ -116,7 +116,7 @@ window.MathJax = {
     <h1>材料制备技术 · 知识体系</h1>
     <p class="la-subtitle">烧结 · 薄膜沉积 · 单晶生长 · CVD · MBE</p>
     <div class="back-bar"><a class="back-btn" href="index.html">← 返回总览</a></div>
-    <div class="la-nav-tabs"><a class="la-nav-tab c1" href="#la-ch1">第一章 · 薄膜与单晶生长</a></div>
+    <div class="la-nav-tabs"><a class="la-nav-tab c1" href="#la-ch1">第一章 · 薄膜与单晶生长</a><a class="la-nav-tab c2" href="#la-ch2">第二章 · 烧结与单晶生长</a></div>
     <div class="la-toolbar">
       <button onclick="window.scrollTo({top:0,behavior:'smooth'})">回到顶部</button>
     </div>
@@ -153,7 +153,8 @@ window.MathJax = {
 const LA_FIG = {  };
 const LA_TAG_LABEL = {def:'定 义', thm:'定 理', der:'推 导', exa:'例 子', app:'应 用', his:'注 记'};
 const LA_DATA = [
-{id:'la-ch1',num:'第一章',title:'薄膜与单晶生长',en:'THIN FILMS & CRYSTALS',sub:'CVD、PVD、MBE',desc:'薄膜制备是半导体与材料科学的核心工艺。',sections:[{name:'1.1 气相沉积',color:'#2563eb',desc:'CVD 与 MBE',items:[{id:'la-k1-1',name:'化学气相沉积 CVD',tags:["def", "app"],brief:'气相化学反应在基片上沉积薄膜。',body:`<p>CVD 利用前驱体气体在加热基片上反应沉积。分子束外延 MBE 精度达单原子层，用于高质量半导体异质结。</p>`}]}]}
+{id:'la-ch1',num:'第一章',title:'薄膜与单晶生长',en:'THIN FILMS & CRYSTAL GROWTH',sub:'CVD、PVD、MBE',desc:'薄膜制备是半导体与材料科学的核心工艺，决定器件性能。',sections:[{name:'1.1 气相沉积技术',color:'#2563eb',desc:'CVD、PVD、MBE',items:[{id:'la-k1-1',name:'化学气相沉积（CVD）',tags:["def", "app"],brief:'气相前驱体在基片上反应沉积薄膜。',body:`<p>CVD 利用前驱体气体在加热基片上发生化学反应沉积薄膜。包括常压 CVD（APCVD）、低压 CVD（LPCVD）、等离子体增强 CVD（PECVD）、金属有机 CVD（MOCVD）。CVD 适合台阶覆盖好的薄膜，如 SiO₂、Si₃N₄、多晶硅。</p>`},{id:'la-k1-2',name:'分子束外延（MBE）与 PVD',tags:["def", "app"],brief:'MBE 精度达单原子层；PVD 包括溅射和蒸发。',body:`<p>MBE 在超高真空下蒸发源形成分子束，逐层外延生长，精度达单原子层，用于高质量半导体异质结（如 GaAs/AlGaAs）和量子阱。PVD 包括磁控溅射（高沉积率、低损伤）和电子束蒸发，用于金属薄膜和介质薄膜。</p>`}]}]},
+{id:'la-ch2',num:'第二章',title:'烧结与单晶生长',en:'SINTERING & SINGLE CRYSTAL GROWTH',sub:'陶瓷烧结、提拉法',desc:'粉末冶金烧结制备块体材料；单晶生长获得高质量晶体。',sections:[{name:'2.1 烧结与单晶',color:'#7c3aed',desc:'致密化、晶体生长',items:[{id:'la-k2-1',name:'粉末冶金与烧结',tags:["def", "app"],brief:'粉末压实后高温烧结实现致密化。',body:`<p>粉末冶金包括混粉、成型（压制）、烧结。烧结通过扩散、蒸发-凝聚、粘性流动等机制使粉末颗粒结合、致密化。热压烧结、放电等离子烧结（SPS）可加速致密化。广泛用于陶瓷、硬质合金、粉末冶金零件。</p>`},{id:'la-k2-2',name:'单晶生长技术',tags:["def", "app"],brief:'提拉法（Czochralski）、区熔法、布里奇曼法。',body:`<p>Czochralski 提拉法生长大尺寸单晶（如 Si 锭、蓝宝石、LiNbO₃）。区熔法（FZ）制备高纯硅单晶。布里奇曼法用于化合物半导体（GaAs、CdTe）。水热法生长 ZnO、石英单晶。单晶质量直接影响器件性能。</p>`}]}]}
 ];
 const LA_KP = {};
 function laBuildCard(item){

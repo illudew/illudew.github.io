@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="材料测试技术知识体系：XRD、SEM、TEM、AFM、XPS、Raman">
+<meta name="description" content="材料测试技术知识体系：X射线衍射XRD、扫描电镜SEM、透射电镜TEM、原子力显微镜AFM、XPS、拉曼光谱">
 <title>材料测试技术 · 知识体系</title>
 <script>
 window.MathJax = {
@@ -116,7 +116,7 @@ window.MathJax = {
     <h1>材料测试技术 · 知识体系</h1>
     <p class="la-subtitle">XRD · SEM · TEM · AFM · XPS · Raman</p>
     <div class="back-bar"><a class="back-btn" href="index.html">← 返回总览</a></div>
-    <div class="la-nav-tabs"><a class="la-nav-tab c1" href="#la-ch1">第一章 · 结构表征</a></div>
+    <div class="la-nav-tabs"><a class="la-nav-tab c1" href="#la-ch1">第一章 · 结构表征</a><a class="la-nav-tab c2" href="#la-ch2">第二章 · 成分、表面与光谱分析</a></div>
     <div class="la-toolbar">
       <button onclick="window.scrollTo({top:0,behavior:'smooth'})">回到顶部</button>
     </div>
@@ -153,7 +153,8 @@ window.MathJax = {
 const LA_FIG = {  };
 const LA_TAG_LABEL = {def:'定 义', thm:'定 理', der:'推 导', exa:'例 子', app:'应 用', his:'注 记'};
 const LA_DATA = [
-{id:'la-ch1',num:'第一章',title:'结构表征',en:'STRUCTURAL',sub:'XRD、TEM',desc:'X 射线衍射与电子显微术分析材料结构。',sections:[{name:'1.1 XRD 与电子显微',color:'#2563eb',desc:'晶体结构与形貌',items:[{id:'la-k1-1',name:'X 射线衍射',tags:["def", "thm", "app"],brief:'布拉格方程 $2d\\sin\\theta=n\\lambda$。',body:`<p>XRD 测定晶体结构、晶格常数、物相。TEM 可达原子分辨率，分析形貌与晶体结构。SEM 观察表面形貌。</p>`}]}]}
+{id:'la-ch1',num:'第一章',title:'结构表征',en:'STRUCTURAL CHARACTERIZATION',sub:'XRD、TEM、SEM',desc:'X 射线衍射与电子显微术分析材料晶体结构与形貌。',sections:[{name:'1.1 XRD 与电子显微',color:'#2563eb',desc:'晶体结构、形貌',items:[{id:'la-k1-1',name:'X 射线衍射（XRD）',tags:["def", "thm", "app"],brief:'布拉格方程 $2d\\sin\\theta=n\\lambda$。',body:`<p>XRD 通过衍射花样测定晶体结构、晶格常数、物相、晶粒尺寸、应变。粉末 XRD 用于物相定性定量分析；高分辨 XRD 用于外延薄膜应变分析。Scherrer 公式 $D=K\\lambda/(\\beta\\cos\\theta)$ 估算晶粒尺寸。</p>`},{id:'la-k1-2',name:'电子显微镜（SEM/TEM）',tags:["def", "app"],brief:'TEM 原子分辨率；SEM 表面形貌。',body:`<p>扫描电镜（SEM）用聚焦电子束扫描样品，二次电子/背散射电子成像，观察表面形貌与成分分布，分辨率 ~1 nm。透射电镜（TEM）电子穿透薄样品成像，可达原子分辨率（~0.1 nm），可分析晶体结构、缺陷、成分（EDS、EELS）。球差校正 TEM 进一步提升分辨率。</p>`}]}]},
+{id:'la-ch2',num:'第二章',title:'成分、表面与光谱分析',en:'COMPOSITION, SURFACE & SPECTROSCOPY',sub:'XPS、AFM、Raman',desc:'X 射线光电子能谱分析成分与化学态；拉曼光谱分析振动模式；AFM 表征表面形貌。',sections:[{name:'2.1 表面与光谱分析',color:'#7c3aed',desc:'化学态、形貌、振动',items:[{id:'la-k2-1',name:'XPS 与 AFM',tags:["def", "app"],brief:'XPS 分析表面元素与化学态；AFM 测量表面形貌。',body:`<p>X 射线光电子能谱（XPS/ESCA）利用光电效应测量电子结合能，分析表面（~10 nm）元素组成与化学态（价态）。原子力显微镜（AFM）用微悬臂探针扫描表面，可获得原子级分辨率形貌，也可测量力学、电学、磁学性质。</p>`},{id:'la-k2-2',name:'拉曼光谱与其他谱学',tags:["def", "app"],brief:'拉曼散射分析分子振动；紫外-可见-红外光谱分析能带。',body:`<p>拉曼光谱基于非弹性散射，提供分子振动、晶体结构、应力、缺陷信息，是二维材料（石墨烯、MoS₂）的重要表征手段。紫外-可见吸收光谱确定带隙；红外光谱分析化学键；光致发光（PL）光谱研究载流子复合与缺陷态。</p>`}]}]}
 ];
 const LA_KP = {};
 function laBuildCard(item){

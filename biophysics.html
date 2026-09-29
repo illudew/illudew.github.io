@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="生物物理知识体系：蛋白质折叠、DNA力学、分子马达、膜生物物理">
+<meta name="description" content="生物物理知识体系：蛋白质折叠与能量地形、DNA弹性与拓扑、分子马达与布朗棘轮、生物膜与离子通道">
 <title>生物物理 · 知识体系</title>
 <script>
 window.MathJax = {
@@ -116,7 +116,7 @@ window.MathJax = {
     <h1>生物物理 · 知识体系</h1>
     <p class="la-subtitle">蛋白质折叠 · DNA力学 · 分子马达 · 膜生物物理</p>
     <div class="back-bar"><a class="back-btn" href="index.html">← 返回总览</a></div>
-    <div class="la-nav-tabs"><a class="la-nav-tab c1" href="#la-ch1">第一章 · 生物大分子物理</a></div>
+    <div class="la-nav-tabs"><a class="la-nav-tab c1" href="#la-ch1">第一章 · 生物大分子物理</a><a class="la-nav-tab c2" href="#la-ch2">第二章 · 分子马达与生物膜</a></div>
     <div class="la-toolbar">
       <button onclick="window.scrollTo({top:0,behavior:'smooth'})">回到顶部</button>
     </div>
@@ -153,7 +153,8 @@ window.MathJax = {
 const LA_FIG = {  };
 const LA_TAG_LABEL = {def:'定 义', thm:'定 理', der:'推 导', exa:'例 子', app:'应 用', his:'注 记'};
 const LA_DATA = [
-{id:'la-ch1',num:'第一章',title:'生物大分子物理',en:'BIOMACROMOLECULES',sub:'蛋白质、DNA',desc:'用物理方法研究生物大分子的结构与功能。',sections:[{name:'1.1 蛋白质折叠',color:'#2563eb',desc:'能量地形',items:[{id:'la-k1-1',name:'蛋白质折叠',tags:["def", "thm"],brief:'氨基酸序列决定三维结构（Anfinsen 原理）。',body:`<p>蛋白质从随机卷曲折叠到天然态，遵循能量地形漏斗模型。分子伴侣协助折叠，错误折叠导致神经退行性疾病。</p>`}]}]}
+{id:'la-ch1',num:'第一章',title:'生物大分子物理',en:'BIOMACROMOLECULES',sub:'蛋白质、DNA、RNA',desc:'用物理方法研究生物大分子的结构、动力学与功能。生物物理是物理与生命科学的交叉。',sections:[{name:'1.1 蛋白质折叠',color:'#2563eb',desc:'能量地形、Anfinsen',items:[{id:'la-k1-1',name:'蛋白质折叠与能量地形',tags:["def", "thm", "his"],brief:'氨基酸序列决定三维结构（Anfinsen 原理）；折叠沿能量漏斗进行。',body:`<p>蛋白质从随机卷曲折叠到天然态。能量地形漏斗模型：大量构象态汇聚到低能天然态。折叠是热力学（疏水作用、氢键）与动力学协同的过程。分子伴侣协助折叠，错误折叠（如淀粉样蛋白）导致阿尔茨海默病等。</p>`},{id:'la-k1-2',name:'DNA 力学与拓扑',tags:["def", "thm", "app"],brief:'持久长度 $\\xi_p\\approx50$ nm；扭转与超螺旋。',body:`<p>DNA 是半柔性聚合物，蠕虫链模型（WLC）描述其弹性。DNA 双螺旋的扭转导致超螺旋，拓扑异构酶调节超螺旋度。单分子技术（光镊、磁镊）可测量 DNA 的拉伸和扭转响应。</p>`}]}]},
+{id:'la-ch2',num:'第二章',title:'分子马达与生物膜',en:'MOLECULAR MOTORS & MEMBRANES',sub:'布朗棘轮、脂质双层',desc:'分子马达将化学能转化为机械功；生物膜是选择性渗透的脂质双层。',sections:[{name:'2.1 分子马达与膜',color:'#7c3aed',desc:'ATP 酶、离子通道',items:[{id:'la-k2-1',name:'分子马达与布朗棘轮',tags:["def", "thm", "app"],brief:'马达蛋白沿轨道定向运动，将 ATP 水解能转化为功。',body:`<p>分子马达（如肌球蛋白、驱动蛋白、动力蛋白）在热噪声背景下实现定向运动。布朗棘轮模型用非对称势与能量输入解释定向输运。F₁F₀-ATP 合酶是旋转马达，效率近 100%。</p>`},{id:'la-k2-2',name:'生物膜与离子通道',tags:["def", "thm"],brief:'脂质双层流动性；离子通道实现选择性跨膜运输。',body:`<p>生物膜由磷脂双分子层构成，具有流动性（Singer-Nicolson 流体镶嵌模型）。膜蛋白（离子通道、泵）维持跨膜电位。Hodgkin-Huxley 模型描述神经动作电位。膜融合与囊泡运输是细胞生物学核心过程。</p>`}]}]}
 ];
 const LA_KP = {};
 function laBuildCard(item){

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="拓扑量子场论知识体系：拓扑不变量、TQFT、拓扑序、量子计算">
+<meta name="description" content="拓扑量子场论知识体系：TQFT 公理、Chern-Simons 理论、纽结不变量、拓扑序、任意子与拓扑量子计算">
 <title>拓扑量子场论 · 知识体系</title>
 <script>
 window.MathJax = {
@@ -114,9 +114,9 @@ window.MathJax = {
   <header class="la-header">
     <div class="la-eyebrow">TOPOLOGICAL QFT · KNOWLEDGE MAP</div>
     <h1>拓扑量子场论 · 知识体系</h1>
-    <p class="la-subtitle">拓扑不变量 · TQFT · 拓扑序 · 量子计算</p>
+    <p class="la-subtitle">拓扑不变量 · Chern-Simons · 拓扑序 · 量子计算</p>
     <div class="back-bar"><a class="back-btn" href="index.html">← 返回总览</a></div>
-    <div class="la-nav-tabs"><a class="la-nav-tab c1" href="#la-ch1">第一章 · TQFT 基础</a></div>
+    <div class="la-nav-tabs"><a class="la-nav-tab c1" href="#la-ch1">第一章 · TQFT 与 Chern-Simons 理论</a><a class="la-nav-tab c2" href="#la-ch2">第二章 · 拓扑序与拓扑量子计算</a></div>
     <div class="la-toolbar">
       <button onclick="window.scrollTo({top:0,behavior:'smooth'})">回到顶部</button>
     </div>
@@ -153,7 +153,8 @@ window.MathJax = {
 const LA_FIG = {  };
 const LA_TAG_LABEL = {def:'定 义', thm:'定 理', der:'推 导', exa:'例 子', app:'应 用', his:'注 记'};
 const LA_DATA = [
-{id:'la-ch1',num:'第一章',title:'TQFT 基础',en:'TQFT BASICS',sub:'流形不变量',desc:'拓扑量子场论的相关函数只依赖流形拓扑。',sections:[{name:'1.1 拓扑不变量',color:'#2563eb',desc:'与度量无关',items:[{id:'la-k1-1',name:'TQFT 定义',tags:["def", "thm"],brief:'配分函数 $Z(M)$ 是流形 $M$ 的拓扑不变量。',body:`<p>TQFT 的作用量不含度规，关联函数在同胚下不变。Chern-Simons 理论是典型三维 TQFT，与纽结不变量（Jones 多项式）相关。</p>`}]}]}
+{id:'la-ch1',num:'第一章',title:'TQFT 与 Chern-Simons 理论',en:'TQFT & CHERN-SIMONS',sub:'拓扑不变量、纽结',desc:'拓扑量子场论的相关函数只依赖流形拓扑。Chern-Simons 理论是三维 TQFT 的核心。',sections:[{name:'1.1 TQFT 与 Chern-Simons',color:'#2563eb',desc:'与度量无关',items:[{id:'la-k1-1',name:'TQFT 定义',tags:["def", "thm"],brief:'配分函数 $Z(M)$ 是流形 $M$ 的拓扑不变量。',body:`<p>TQFT 的作用量不含度规，关联函数在同胚下不变。Atiyah 给出 TQFT 的公理化定义：从配边范畴到向量空间范畴的函子。TQFT 为拓扑不变量（如 Donaldson 不变量、Seiberg-Witten 不变量）提供场论描述。</p>`},{id:'la-k1-2',name:'Chern-Simons 理论',tags:["def", "thm"],brief:'$S=\\frac{k}{4\\pi}\\int_M \\mathrm{Tr}(A\\wedge dA+\\frac23 A\\wedge A\\wedge A)$，与纽结的 Jones 多项式相关。',body:`<p>三维 Chern-Simons 理论是最著名的 TQFT。Witten 证明带 Wilson 线的 Chern-Simons 配分函数给出纽结的 Jones 多项式。规范群 $G$ 与等级 $k$ 决定理论。Chern-Simons 也出现在分数霍尔效应的有效描述中。</p>`}]}]},
+{id:'la-ch2',num:'第二章',title:'拓扑序与拓扑量子计算',en:'TOPOLOGICAL ORDER & QUANTUM COMPUTING',sub:'任意子、容错量子计算',desc:'拓扑序是超越 Landau 对称破缺的新物态。任意子可用于拓扑量子计算，具有天然容错性。',sections:[{name:'2.1 拓扑序与任意子',color:'#7c3aed',desc:'分数统计、辫子群',items:[{id:'la-k2-1',name:'拓扑序与任意子',tags:["def", "thm", "app"],brief:'拓扑序由长程纠缠刻画；任意子分数统计，交换由辫子群描述。',body:`<p>拓扑序（Wen）是超越 Landau 对称破缺范式的新物态分类，由基态简并度与边界态表征。二维系统中的任意子（anyon）具有介于玻色与费米之间的分数统计，交换相位由辫子群表示给出。阿贝尔与非阿贝尔任意子均可实现。</p>`},{id:'la-k2-2',name:'拓扑量子计算',tags:["def", "thm"],brief:'非阿贝尔任意子的编织操作实现容错量子门。',body:`<p>非阿贝尔任意子的世界线编织对应酉变换，可实现量子门。由于信息存储在拓扑非平凡的编织中，局域噪声不影响计算结果，提供天然容错性。$\\nu=5/2$ 分数量子霍尔态中的 Majorana 零模是候选非阿贝尔任意子。</p>`}]}]}
 ];
 const LA_KP = {};
 function laBuildCard(item){

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="半导体器件知识体系：二极管、BJT、MOSFET、HEMT、光电探测器">
+<meta name="description" content="半导体器件知识体系：PN结二极管、BJT双极型晶体管、MOSFET场效应晶体管、HEMT高电子迁移率晶体管、光电探测器、太阳能电池">
 <title>半导体器件 · 知识体系</title>
 <script>
 window.MathJax = {
@@ -116,7 +116,7 @@ window.MathJax = {
     <h1>半导体器件 · 知识体系</h1>
     <p class="la-subtitle">二极管 · BJT · MOSFET · HEMT · 光电探测器</p>
     <div class="back-bar"><a class="back-btn" href="index.html">← 返回总览</a></div>
-    <div class="la-nav-tabs"><a class="la-nav-tab c1" href="#la-ch1">第一章 · 晶体管器件</a></div>
+    <div class="la-nav-tabs"><a class="la-nav-tab c1" href="#la-ch1">第一章 · 晶体管器件</a><a class="la-nav-tab c2" href="#la-ch2">第二章 · 光电器件与新兴器件</a></div>
     <div class="la-toolbar">
       <button onclick="window.scrollTo({top:0,behavior:'smooth'})">回到顶部</button>
     </div>
@@ -153,7 +153,8 @@ window.MathJax = {
 const LA_FIG = {  };
 const LA_TAG_LABEL = {def:'定 义', thm:'定 理', der:'推 导', exa:'例 子', app:'应 用', his:'注 记'};
 const LA_DATA = [
-{id:'la-ch1',num:'第一章',title:'晶体管器件',en:'TRANSISTORS',sub:'BJT、MOSFET',desc:'晶体管是电子电路的核心放大与开关器件。',sections:[{name:'1.1 MOSFET',color:'#2563eb',desc:'场效应晶体管',items:[{id:'la-k1-1',name:'MOSFET 工作原理',tags:["def", "thm"],brief:'栅压调制沟道，$I_D$ 分线性区与饱和区。',body:`<p>MOSFET 是数字集成电路的基本单元。亚阈值摆幅 S 决定关断电流，是低功耗设计关键。</p>`}]}]}
+{id:'la-ch1',num:'第一章',title:'晶体管器件',en:'TRANSISTORS',sub:'BJT、MOSFET、HEMT',desc:'晶体管是电子电路的核心放大与开关器件，是信息时代的基础。',sections:[{name:'1.1 场效应与双极型晶体管',color:'#2563eb',desc:'MOSFET、BJT、HEMT',items:[{id:'la-k1-1',name:'MOSFET 工作原理',tags:["def", "thm"],brief:'栅压调制沟道，$I_D$ 分线性区与饱和区。',body:`<p>MOSFET 是数字集成电路的基本单元。栅压控制半导体表面反型层形成沟道。线性区 $I_D\\approx\\mu C_{ox}\\frac{W}{L}[(V_{GS}-V_{TH})V_{DS}-\\frac12 V_{DS}^2]$；饱和区 $I_D\\approx\\frac12\\mu C_{ox}\\frac{W}{L}(V_{GS}-V_{TH})^2$。亚阈值摆幅 $S$ 决定关断电流，是低功耗设计关键。</p>`},{id:'la-k1-2',name:'BJT 与 HEMT',tags:["def", "thm", "app"],brief:'BJT 电流放大；HEMT 利用二维电子气实现高频。',body:`<p>双极型晶体管（BJT）利用少数载流子注入实现电流放大（$\\beta=I_C/I_B$），用于模拟电路。高电子迁移率晶体管（HEMT）利用调制掺杂异质结（如 AlGaN/GaN）形成高迁移率二维电子气，用于毫米波、太赫兹高频放大和功率器件。</p>`}]}]},
+{id:'la-ch2',num:'第二章',title:'光电器件与新兴器件',en:'OPTOELECTRONIC & EMERGING DEVICES',sub:'LED、激光器、探测器、太阳能电池',desc:'半导体光电器件实现光电转换，包括 LED、激光器、光电探测器和太阳能电池。',sections:[{name:'2.1 光电器件',color:'#7c3aed',desc:'发光、探测、光伏',items:[{id:'la-k2-1',name:'LED 与半导体激光器',tags:["def", "thm", "app"],brief:'PN 结注入载流子复合发光；激光器有谐振腔实现受激辐射。',body:`<p>发光二极管（LED）利用 PN 结注入电子-空穴对，辐射复合发光。GaN 基蓝光 LED（2014 诺奖）使白光 LED 成为主流照明。半导体激光器（LD）在 LED 基础上加入光学谐振腔，实现受激辐射，用于光通信、光盘、激光加工。</p>`},{id:'la-k2-2',name:'光电探测器与太阳能电池',tags:["def", "thm", "app"],brief:'光生伏特效应；光伏效率受 Shockley-Queisser 极限限制。',body:`<p>光电探测器（PD）吸收光子产生电子-空穴对，在内建电场下分离形成光电流。PIN、APD、SPAD 用于不同灵敏度需求。太阳能电池利用光伏效应发电，单结效率受 Shockley-Queisser 极限（~33%）限制。多结、钙钛矿、量子点电池提升效率。</p>`}]}]}
 ];
 const LA_KP = {};
 function laBuildCard(item){

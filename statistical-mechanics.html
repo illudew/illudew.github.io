@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="热力学与统计物理知识体系：系综、玻尔兹曼、配分函数、玻色费米统计、相变">
+<meta name="description" content="统计物理知识体系：微正则/正则/巨正则系综、配分函数、玻尔兹曼分布、玻色-爱因斯坦与费米-狄拉克统计、相变理论">
 <title>热力学与统计物理 · 知识体系</title>
 <script>
 window.MathJax = {
@@ -114,9 +114,9 @@ window.MathJax = {
   <header class="la-header">
     <div class="la-eyebrow">STATISTICAL MECHANICS · KNOWLEDGE MAP</div>
     <h1>热力学与统计物理 · 知识体系</h1>
-    <p class="la-subtitle">系综 · 玻尔兹曼 · 配分函数 · 玻色-费米统计 · 相变</p>
+    <p class="la-subtitle">系综理论 · 玻尔兹曼统计 · 配分函数 · 玻色-费米统计 · 相变</p>
     <div class="back-bar"><a class="back-btn" href="index.html">← 返回总览</a></div>
-    <div class="la-nav-tabs"><a class="la-nav-tab c1" href="#la-ch1">第一章 · 系综理论</a><a class="la-nav-tab c2" href="#la-ch2">第二章 · 量子统计</a></div>
+    <div class="la-nav-tabs"><a class="la-nav-tab c1" href="#la-ch1">第一章 · 系综理论</a><a class="la-nav-tab c2" href="#la-ch2">第二章 · 玻尔兹曼统计</a><a class="la-nav-tab c3" href="#la-ch3">第三章 · 量子统计</a><a class="la-nav-tab c4" href="#la-ch4">第四章 · 相变理论</a></div>
     <div class="la-toolbar">
       <button onclick="window.scrollTo({top:0,behavior:'smooth'})">回到顶部</button>
     </div>
@@ -153,8 +153,10 @@ window.MathJax = {
 const LA_FIG = {  };
 const LA_TAG_LABEL = {def:'定 义', thm:'定 理', der:'推 导', exa:'例 子', app:'应 用', his:'注 记'};
 const LA_DATA = [
-{id:'la-ch1',num:'第一章',title:'系综理论',en:'ENSEMBLE THEORY',sub:'微正则、正则、巨正则',desc:'统计物理用系综描述系统的微观状态分布。本章介绍三大系综。',sections:[{name:'1.1 系综与配分函数',color:'#2563eb',desc:'统计分布',items:[{id:'la-k1-1',name:'微正则系综',tags:["def", "thm"],brief:'等概率原理，孤立系统各微观态等概率。',body:`<p>孤立系统（$N,V,E$ 固定）所有可达微观态等概率出现。熵 $S=k_B\\ln\\Omega(E,V,N)$。</p>`},{id:'la-k1-2',name:'正则系综',tags:["def", "thm"],brief:'$P_s\\propto e^{-\\beta E_s}$，配分函数 $Z=\\sum e^{-\\beta E_s}$。',body:`<p>与热源接触的系统（$N,V,T$ 固定）。自由能 $F=-k_BT\\ln Z$，内能 $U=-\\partial\\ln Z/\\partial\\beta$。</p>`}]}]},
-{id:'la-ch2',num:'第二章',title:'量子统计',en:'QUANTUM STATISTICS',sub:'玻色、费米',desc:'全同粒子的统计：玻色-爱因斯坦与费米-狄拉克。',sections:[{name:'2.1 量子分布',color:'#7c3aed',desc:'BE 与 FD 分布',items:[{id:'la-k2-1',name:'玻色与费米分布',tags:["def", "thm"],brief:'$f_{BE}=\\frac1{e^{\\beta(\\varepsilon-\\mu)}-1}$，$f_{FD}=\\frac1{e^{\\beta(\\varepsilon-\\mu)}+1}$。',body:`<p>玻色子（整数自旋）服从 BE 分布，可发生玻色-爱因斯坦凝聚。费米子（半整数自旋）服从 FD 分布，满足泡利不相容。</p>`}]}]}
+{id:'la-ch1',num:'第一章',title:'系综理论',en:'ENSEMBLE THEORY',sub:'微正则、正则、巨正则',desc:'统计物理用系综描述系统的微观状态分布。本章介绍三大系综及其配分函数。',sections:[{name:'1.1 系综与配分函数',color:'#2563eb',desc:'统计分布、热力学量',items:[{id:'la-k1-1',name:'微正则系综',tags:["def", "thm"],brief:'等概率原理，孤立系统各微观态等概率。',body:`<p>孤立系统（$N,V,E$ 固定）所有可达微观态等概率出现。熵 $S=k_B\\ln\\Omega(E,V,N)$，其中 $\\Omega$ 为微观态数。这是统计物理的基本假设（等概率原理）。</p>`},{id:'la-k1-2',name:'正则系综',tags:["def", "thm"],brief:'$P_s\\propto e^{-\\beta E_s}$，配分函数 $Z=\\sum_s e^{-\\beta E_s}$。',body:`<p>与热源接触的系统（$N,V,T$ 固定），玻尔兹曼分布。自由能 $F=-k_BT\\ln Z$。内能 $U=-\\partial\\ln Z/\\partial\\beta$，压强 $P=k_BT\\partial\\ln Z/\\partial V$，熵 $S=(U-F)/T$。</p>`},{id:'la-k1-3',name:'巨正则系综',tags:["def", "thm"],brief:'$P_{N,s}\\propto e^{-\\beta(E_s-\\mu N)}$，巨配分函数 $\\Xi=\\sum_N e^{\\beta\\mu N}Z_N$。',body:`<p>与热源和粒子源接触的开放系统（$V,T,\\mu$ 固定）。巨势 $\\Omega=-k_BT\\ln\\Xi=-PV$。平均粒子数 $\\bar N=k_BT\\partial\\ln\\Xi/\\partial\\mu$。巨正则系综在处理量子统计时最方便。</p>`}]}]},
+{id:'la-ch2',num:'第二章',title:'玻尔兹曼统计',en:'BOLTZMANN STATISTICS',sub:'近独立粒子、麦克斯韦-玻尔兹曼分布',desc:'经典可分辨粒子（近独立）的统计，适用于高温低密度情形。',sections:[{name:'2.1 近独立粒子系统',color:'#7c3aed',desc:'MB 分布、配分函数',items:[{id:'la-k2-1',name:'麦克斯韦-玻尔兹曼分布',tags:["def", "thm", "der"],brief:'$n_i=g_i e^{-\\beta(\\varepsilon_i-\\mu)}$，配分函数 $Z_1=\\sum_i g_i e^{-\\beta\\varepsilon_i}$。',body:`<p>经典可分辨粒子在能级上的分布。单粒子配分函数 $Z_1$，系统配分函数 $Z=Z_1^N/N!$（修正全同性）。经典极限条件：$e^\\alpha=e^{-\\beta\\mu}\\gg1$ 即热德布罗意波长远小于粒子间距。</p>`},{id:'la-k2-2',name:'理想气体的配分函数',tags:["thm", "der", "app"],brief:'$Z_1=V(2\\pi mk_BT/h^2)^{3/2}$，$PV=nRT$。',body:`<p>由配分函数可导出理想气体状态方程、内能 $U=\\frac32 Nk_BT$、熵（萨库尔-泰特洛德公式）。配分函数是连接微观与宏观的桥梁。</p>`}]}]},
+{id:'la-ch3',num:'第三章',title:'量子统计',en:'QUANTUM STATISTICS',sub:'玻色-爱因斯坦、费米-狄拉克',desc:'全同粒子的统计：玻色子服从玻色-爱因斯坦分布，费米子服从费米-狄拉克分布。',sections:[{name:'3.1 量子分布函数',color:'#0f766e',desc:'BE 与 FD 分布',items:[{id:'la-k3-1',name:'玻色-爱因斯坦分布',tags:["def", "thm"],brief:'$f_{BE}(\\varepsilon)=\\frac{1}{e^{\\beta(\\varepsilon-\\mu)}-1}$。',body:`<p>玻色子（整数自旋）不满足泡利不相容，同一态可容纳任意粒子数。低温下发生玻色-爱因斯坦凝聚（BEC），大量粒子占据基态。光子和声子化学势 $\\mu=0$，服从普朗克分布。</p>`},{id:'la-k3-2',name:'费米-狄拉克分布',tags:["def", "thm"],brief:'$f_{FD}(\\varepsilon)=\\frac{1}{e^{\\beta(\\varepsilon-\\mu)}+1}$。',body:`<p>费米子（半整数自旋）满足泡利不相容，每个态最多一个粒子。$T=0$ 时 $\\mu=\\varepsilon_F$（费米能），$f=1$（$\\varepsilon<\\varepsilon_F$）或 $0$（$\\varepsilon>\\varepsilon_F$）。费米面概念是金属电子论的基础。</p>`}]},{name:'3.2 量子统计应用',color:'#c2410c',desc:'黑体辐射、电子气',items:[{id:'la-k3-3',name:'黑体辐射（普朗克公式）',tags:["thm", "his", "app"],brief:'$u(\\omega,T)=\\frac{\\hbar\\omega^3}{\\pi^2 c^3}\\frac{1}{e^{\\hbar\\omega/k_BT}-1}$。',body:`<p>光子气体的统计。普朗克公式成功解释了黑体辐射谱，标志着量子论的诞生。高频（$\\hbar\\omega\\gg k_BT$）维恩位移，低频（$\\hbar\\omega\\ll k_BT$）瑞利-金斯。斯特藩-玻尔兹曼定律 $U\\propto T^4$。</p>`},{id:'la-k3-4',name:'自由电子气',tags:["thm", "app"],brief:'费米能 $\\varepsilon_F=\\frac{\\hbar^2}{2m}(3\\pi^2 n)^{2/3}$。',body:`<p>金属中自由电子形成简并费米气体。$T=0$ 时电子填满至费米面。比热 $C_V\\propto T$（而非经典的 $\\frac32 k_B$ 常数），因只有费米面附近 $k_BT$ 范围内电子可被激发。泡利顺磁与朗道抗磁性。</p>`}]}]},
+{id:'la-ch4',num:'第四章',title:'相变理论',en:'PHASE TRANSITION THEORY',sub:'伊辛模型、临界现象',desc:'相变是合作现象，统计物理提供了微观解释。本章介绍伊辛模型和临界现象。',sections:[{name:'4.1 伊辛模型',color:'#2563eb',desc:'合作现象',items:[{id:'la-k4-1',name:'伊辛模型',tags:["def", "thm", "app"],brief:'$H=-J\\sum_{\\langle ij\\rangle}\\sigma_i\\sigma_j-h\\sum_i\\sigma_i$。',body:`<p>伊辛模型描述自旋 $\\sigma_i=\\pm1$ 的合作系统。一维无有限温度相变，二维（昂萨格解）有相变，三维需数值方法。临界点附近出现自发磁化，描述铁磁-顺磁相变。</p>`},{id:'la-k4-2',name:'临界指数与标度律',tags:["thm", "der"],brief:'$\\chi\\propto|T-T_c|^{-\\gamma}$，$M\\propto(T_c-T)^{\\beta}$。',body:`<p>临界点附近热力学量呈幂律行为，由临界指数刻画。标度律将各指数联系起来（如 $\\alpha+2\\beta+\\gamma=2$）。普适性：临界指数仅取决于空间维数和序参量分量数，与微观细节无关。</p>`}]}]}
 ];
 const LA_KP = {};
 function laBuildCard(item){

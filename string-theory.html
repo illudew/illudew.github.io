@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="弦理论知识体系：弦振动、10维时空、超对称、D膜、M理论">
+<meta name="description" content="弦理论知识体系：弦的振动谱、玻色弦与超弦、10维时空、D膜、M理论、AdS/CFT对偶">
 <title>弦理论 · 知识体系</title>
 <script>
 window.MathJax = {
@@ -114,9 +114,9 @@ window.MathJax = {
   <header class="la-header">
     <div class="la-eyebrow">STRING THEORY · KNOWLEDGE MAP</div>
     <h1>弦理论 · 知识体系</h1>
-    <p class="la-subtitle">弦振动 · 10维时空 · 超对称 · D膜 · M理论</p>
+    <p class="la-subtitle">弦振动 · 10维时空 · 超对称 · D膜 · M理论 · AdS/CFT</p>
     <div class="back-bar"><a class="back-btn" href="index.html">← 返回总览</a></div>
-    <div class="la-nav-tabs"><a class="la-nav-tab c1" href="#la-ch1">第一章 · 玻色弦与超弦</a></div>
+    <div class="la-nav-tabs"><a class="la-nav-tab c1" href="#la-ch1">第一章 · 玻色弦与超弦</a><a class="la-nav-tab c2" href="#la-ch2">第二章 · D膜、M理论与对偶</a></div>
     <div class="la-toolbar">
       <button onclick="window.scrollTo({top:0,behavior:'smooth'})">回到顶部</button>
     </div>
@@ -153,7 +153,8 @@ window.MathJax = {
 const LA_FIG = {  };
 const LA_TAG_LABEL = {def:'定 义', thm:'定 理', der:'推 导', exa:'例 子', app:'应 用', his:'注 记'};
 const LA_DATA = [
-{id:'la-ch1',num:'第一章',title:'玻色弦与超弦',en:'BOSONIC & SUPERSTRINGS',sub:'弦的量子化',desc:'基本粒子是一维弦的不同振动模式。',sections:[{name:'1.1 弦的振动谱',color:'#2563eb',desc:'质量来自振动',items:[{id:'la-k1-1',name:'弦量子化',tags:["def", "thm"],brief:'自洽要求 $D=26$（玻色弦）或 $D=10$（超弦）。',body:`<p>弦的不同振动模式对应不同粒子。量子反常相消要求特定时空维数。超弦引入超对称，消除快子。</p>`}]}]}
+{id:'la-ch1',num:'第一章',title:'玻色弦与超弦',en:'BOSONIC & SUPERSTRINGS',sub:'弦的量子化、时空维数',desc:'基本粒子是一维弦的不同振动模式。弦理论是量子引力的主要候选。',sections:[{name:'1.1 弦的量子化',color:'#2563eb',desc:'振动谱、反常相消',items:[{id:'la-k1-1',name:'弦的振动模式',tags:["def", "thm"],brief:'弦的不同振动模式对应不同质量/自旋的粒子。',body:`<p>弦是一维延展物体，其振动产生无穷多粒子态。最低能模式对应无质量粒子（引力子、规范玻色子等）和有质量激发态。弦的张力 $T=1/(2\\pi\\alpha')$，$\\sqrt{\\alpha'}$ 为弦长标度（~普朗克长度）。</p>`},{id:'la-k1-2',name:'时空维数与超对称',tags:["def", "thm"],brief:'自洽要求 $D=26$（玻色弦）或 $D=10$（超弦）。',body:`<p>量子反常相消要求特定时空维数。玻色弦 $D=26$，但含快子（质量虚数，不稳定）。超弦引入超对称，$D=10$，消除快子并包含费米子。五种超弦理论：I、IIA、IIB、SO(32) 杂弦、$E_8\\times E_8$ 杂弦。</p>`}]}]},
+{id:'la-ch2',num:'第二章',title:'D膜、M理论与对偶',en:'D-BRANES, M-THEORY & DUALITIES',sub:'对偶性、统一',desc:'D膜是弦的端点附着的物体。M理论统一五种超弦。AdS/CFT 对偶是弦论最重要的成果。',sections:[{name:'2.1 D膜与M理论',color:'#7c3aed',desc:'非微扰对象、11维统一',items:[{id:'la-k2-1',name:'D膜',tags:["def", "thm", "app"],brief:'开弦端点附着的 $p$ 维超曲面。',body:`<p>D膜（Dirichlet 膜）是非微扰对象，开弦端点被限制在其上。D膜上的低能理论是超对称规范理论。D膜是弦论与规范理论的桥梁，也用于构造粒子物理模型和黑洞熵的微观计算。</p>`},{id:'la-k2-2',name:'M理论与弦对偶',tags:["def", "thm"],brief:'11 维 M 理论统一五种超弦；S/T/U 对偶。',body:`<p>五种超弦通过对偶性联系：S 对偶（强弱耦合互换）、T 对偶（大小半径互换）、U 对偶（S+T）。强耦合下 IIA 弦论展现第 11 维，即 M 理论。M 理论的低能极限是 11 维超引力。所有弦论可能是同一理论的不同相。</p>`}]},{name:'2.2 AdS/CFT 对偶',color:'#0f766e',desc:'全息原理',items:[{id:'la-k2-3',name:'AdS/CFT 对应',tags:["def", "thm", "his"],brief:'$AdS_5\\times S^5$ 上 IIB 弦论 = 4 维 $\\mathcal{N}=4$ SYM。',body:`<p>马尔达西那（1997）发现：反德西特空间上的引力理论与其边界上的共形场论等价。这是全息原理的具体实现，提供了用规范理论研究量子引力的工具，也用于研究强耦合 QCD（ AdS/QCD）和凝聚态（AdS/CMT）。</p>`}]}]}
 ];
 const LA_KP = {};
 function laBuildCard(item){

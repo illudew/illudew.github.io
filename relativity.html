@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="相对论知识体系：狭义相对论、时空图、广义相对论、引力波">
+<meta name="description" content="相对论知识体系：狭义相对论基本原理、洛伦兹变换、钟慢尺缩、质能关系、闵可夫斯基时空、广义相对论、爱因斯坦场方程、引力波">
 <title>相对论 · 知识体系</title>
 <script>
 window.MathJax = {
@@ -114,9 +114,9 @@ window.MathJax = {
   <header class="la-header">
     <div class="la-eyebrow">RELATIVITY · KNOWLEDGE MAP</div>
     <h1>相对论 · 知识体系</h1>
-    <p class="la-subtitle">狭义相对论 · 时空图 · 广义相对论 · 引力波</p>
+    <p class="la-subtitle">狭义相对论 · 洛伦兹变换 · 时空结构 · 广义相对论 · 引力波</p>
     <div class="back-bar"><a class="back-btn" href="index.html">← 返回总览</a></div>
-    <div class="la-nav-tabs"><a class="la-nav-tab c1" href="#la-ch1">第一章 · 狭义相对论</a><a class="la-nav-tab c2" href="#la-ch2">第二章 · 广义相对论</a></div>
+    <div class="la-nav-tabs"><a class="la-nav-tab c1" href="#la-ch1">第一章 · 狭义相对论</a><a class="la-nav-tab c2" href="#la-ch2">第二章 · 闵可夫斯基时空</a><a class="la-nav-tab c3" href="#la-ch3">第三章 · 广义相对论</a></div>
     <div class="la-toolbar">
       <button onclick="window.scrollTo({top:0,behavior:'smooth'})">回到顶部</button>
     </div>
@@ -153,8 +153,9 @@ window.MathJax = {
 const LA_FIG = {  };
 const LA_TAG_LABEL = {def:'定 义', thm:'定 理', der:'推 导', exa:'例 子', app:'应 用', his:'注 记'};
 const LA_DATA = [
-{id:'la-ch1',num:'第一章',title:'狭义相对论',en:'SPECIAL RELATIVITY',sub:'洛伦兹变换、时空',desc:'狭义相对论基于光速不变与相对性原理，统一时空。',sections:[{name:'1.1 洛伦兹变换',color:'#2563eb',desc:'时空坐标变换',items:[{id:'la-k1-1',name:'洛伦兹变换',tags:["def", "thm"],brief:'$x'=\\gamma(x-vt)$，$t'=\\gamma(t-vx/c^2)$，$\\gamma=1/\\sqrt{1-v^2/c^2}$。',body:`<p>同时性相对。钟慢效应 $\\Delta t'=\\gamma\\Delta t$，尺缩效应 $L'=L/\\gamma$。质能关系 $E=mc^2$。</p>`}]}]},
-{id:'la-ch2',num:'第二章',title:'广义相对论',en:'GENERAL RELATIVITY',sub:'时空弯曲、爱因斯坦方程',desc:'引力是时空弯曲的几何效应。',sections:[{name:'2.1 爱因斯坦场方程',color:'#7c3aed',desc:'几何即引力',items:[{id:'la-k2-1',name:'场方程',tags:["def", "thm"],brief:'$G_{\\mu\\nu}+\\Lambda g_{\\mu\\nu}=\\frac{8\\pi G}{c^4}T_{\\mu\\nu}$。',body:`<p>左边爱因斯坦张量 $G_{\\mu\\nu}=R_{\\mu\\nu}-\\frac12 Rg_{\\mu\\nu}$ 描述时空曲率，右边能量动量张量描述物质。物质告诉时空如何弯曲，时空告诉物质如何运动。</p>`}]}]}
+{id:'la-ch1',num:'第一章',title:'狭义相对论',en:'SPECIAL RELATIVITY',sub:'基本原理、洛伦兹变换',desc:'狭义相对论基于光速不变原理与相对性原理，统一了时间和空间。',sections:[{name:'1.1 基本原理与洛伦兹变换',color:'#2563eb',desc:'光速不变、时空变换',items:[{id:'la-k1-1',name:'洛伦兹变换',tags:["def", "thm", "his"],brief:'$x'=\\gamma(x-vt)$，$t'=\\gamma(t-vx/c^2)$，$\\gamma=1/\\sqrt{1-v^2/c^2}$。',body:`<p>爱因斯坦（1905）基于两条基本假设：①相对性原理（物理定律在所有惯性系中形式相同）；②光速不变原理（真空中光速在所有惯性系中相同）。洛伦兹变换取代伽利略变换。逆变换只需将 $v\\to-v$。</p>`},{id:'la-k1-2',name:'相对论效应',tags:["thm", "der", "app"],brief:'钟慢 $\\Delta t'=\\gamma\\Delta\\tau$，尺缩 $L=L_0/\\gamma$。',body:`<p>运动时钟变慢（时间膨胀），$\\Delta\\tau$ 为固有时间。运动物体沿运动方向收缩（长度收缩），$L_0$ 为固有长度。同时性是相对的：在一个参考系中同时的事件，在另一参考系中可能不同时。</p>`}]},{name:'1.2 相对论动力学',color:'#7c3aed',desc:'质能关系、四维动量',items:[{id:'la-k1-3',name:'质能关系',tags:["def", "thm", "his"],brief:'$E=mc^2$，$E^2=(pc)^2+(m_0c^2)^2$。',body:`<p>相对论能量 $E=\\gamma m_0 c^2$，动量 $p=\\gamma m_0 v$。静能 $E_0=m_0c^2$。质能等价是核能利用的理论基础。无质量粒子（光子）$E=pc$。四维动量 $p^\\mu=(E/c,\\boldsymbol p)$，模长不变 $p^\\mu p_\\mu=m_0^2c^2$。</p>`}]}]},
+{id:'la-ch2',num:'第二章',title:'闵可夫斯基时空',en:'MINKOWSKI SPACETIME',sub:'时空图、光锥、因果性',desc:'闵可夫斯基将时间和空间统一为四维时空，用几何方式描述相对论。',sections:[{name:'2.1 时空结构',color:'#0f766e',desc:'时空间隔、光锥',items:[{id:'la-k2-1',name:'时空间隔',tags:["def", "thm"],brief:'$ds^2=c^2dt^2-dx^2-dy^2-dz^2$，洛伦兹不变量。',body:`<p>时空间隔在洛伦兹变换下不变。$ds^2>0$ 类时（有因果关系），$ds^2=0$ 类光（光锥上），$ds^2<0$ 类空（无因果关系）。光锥将时空分为因果关联区和非关联区。</p>`}]}]},
+{id:'la-ch3',num:'第三章',title:'广义相对论',en:'GENERAL RELATIVITY',sub:'等效原理、爱因斯坦方程',desc:'引力是时空弯曲的几何效应，由物质和能量的分布决定。',sections:[{name:'3.1 等效原理与场方程',color:'#2563eb',desc:'引力即几何',items:[{id:'la-k3-1',name:'等效原理',tags:["def", "thm", "his"],brief:'局部引力场与加速参考系等效（弱等效原理）。',body:`<p>爱因斯坦等效原理：在足够小的时空区域内，引力效应与加速度效应不可区分。自由下落参考系中引力消失。这将引力几何化，是广义相对论的基石。</p>`},{id:'la-k3-2',name:'爱因斯坦场方程',tags:["def", "thm", "his"],brief:'$G_{\\mu\\nu}+\\Lambda g_{\\mu\\nu}=\\frac{8\\pi G}{c^4}T_{\\mu\\nu}$。',body:`<p>左边爱因斯坦张量 $G_{\\mu\\nu}=R_{\\mu\\nu}-\\frac12 Rg_{\\mu\\nu}$ 描述时空曲率，右边能量动量张量 $T_{\\mu\\nu}$ 描述物质分布。惠勒："物质告诉时空如何弯曲，时空告诉物质如何运动。"$\\Lambda$ 为宇宙学常数。</p>`}]},{name:'3.2 广义相对论的检验',color:'#7c3aed',desc:'经典检验、引力波',items:[{id:'la-k3-3',name:'经典实验验证',tags:["thm", "his", "app"],brief:'水星近日点进动、光线引力偏折、引力红移。',body:`<p>广义相对论的三大经典检验：①水星近日点每百年进动 43"；②日食时星光在太阳附近偏折 1.75"；③引力红移（庞德-雷布卡实验）。2015 年 LIGO 首次直接探测到引力波，验证了广义相对论的预言。</p>`}]}]}
 ];
 const LA_KP = {};
 function laBuildCard(item){

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="半导体工艺知识体系：光刻、刻蚀、离子注入、薄膜沉积、CMP、封装">
+<meta name="description" content="半导体工艺知识体系：光刻EUV、干法刻蚀、离子注入、薄膜沉积CVD/PVD/ALD、化学机械抛光CMP、封装测试">
 <title>半导体工艺 · 知识体系</title>
 <script>
 window.MathJax = {
@@ -116,7 +116,7 @@ window.MathJax = {
     <h1>半导体工艺 · 知识体系</h1>
     <p class="la-subtitle">光刻 · 刻蚀 · 离子注入 · 薄膜沉积 · CMP · 封装</p>
     <div class="back-bar"><a class="back-btn" href="index.html">← 返回总览</a></div>
-    <div class="la-nav-tabs"><a class="la-nav-tab c1" href="#la-ch1">第一章 · 前道工艺</a></div>
+    <div class="la-nav-tabs"><a class="la-nav-tab c1" href="#la-ch1">第一章 · 前道工艺</a><a class="la-nav-tab c2" href="#la-ch2">第二章 · 薄膜、平坦化与后道封装</a></div>
     <div class="la-toolbar">
       <button onclick="window.scrollTo({top:0,behavior:'smooth'})">回到顶部</button>
     </div>
@@ -153,7 +153,8 @@ window.MathJax = {
 const LA_FIG = {  };
 const LA_TAG_LABEL = {def:'定 义', thm:'定 理', der:'推 导', exa:'例 子', app:'应 用', his:'注 记'};
 const LA_DATA = [
-{id:'la-ch1',num:'第一章',title:'前道工艺',en:'FRONT-END',sub:'光刻、刻蚀、注入',desc:'前道工艺在晶圆上制造晶体管。',sections:[{name:'1.1 光刻与刻蚀',color:'#2563eb',desc:'图形转移',items:[{id:'la-k1-1',name:'光刻',tags:["def", "app"],brief:'曝光+显影将掩模图形转移到光刻胶。',body:`<p>EUV 光刻（13.5 nm）是先进节点关键。刻蚀（干法/湿法）将图形转移到薄膜。</p>`}]}]}
+{id:'la-ch1',num:'第一章',title:'前道工艺',en:'FRONT-END OF LINE',sub:'光刻、刻蚀、离子注入',desc:'前道工艺在晶圆上制造晶体管，是集成电路制造的核心。',sections:[{name:'1.1 光刻与刻蚀',color:'#2563eb',desc:'图形转移',items:[{id:'la-k1-1',name:'光刻技术',tags:["def", "app"],brief:'曝光+显影将掩模图形转移到光刻胶。',body:`<p>光刻是图形转移的核心。光源从 g 线（436 nm）、i 线（365 nm）、KrF（248 nm）、ArF（193 nm）到 EUV（13.5 nm）。分辨率 $R=k_1\\lambda/NA$。浸没式光刻增加 NA。EUV 是 7 nm 及以下先进节点的关键技术，采用激光等离子体光源。</p>`},{id:'la-k1-2',name:'刻蚀与离子注入',tags:["def", "app"],brief:'干法刻蚀各向异性；离子注入精确掺杂。',body:`<p>刻蚀将光刻胶图形转移到下层薄膜。湿法刻蚀各向同性，用于去除；干法（反应离子刻蚀 RIE、ICP）各向异性，用于精细图形。离子注入将掺杂离子加速注入半导体，精确控制剂量和深度，注入后退火激活掺杂并修复损伤。</p>`}]}]},
+{id:'la-ch2',num:'第二章',title:'薄膜、平坦化与后道封装',en:'FILMS, CMP & BACK-END',sub:'ALD、CMP、互连、封装',desc:'薄膜沉积、化学机械抛光、金属互连和封装测试构成完整工艺链。',sections:[{name:'2.1 后道工艺与封装',color:'#7c3aed',desc:'ALD、CMP、Cu互连',items:[{id:'la-k2-1',name:'薄膜沉积与平坦化',tags:["def", "app"],brief:'ALD 原子级精度；CMP 全局平坦化。',body:`<p>原子层沉积（ALD）通过自限制表面反应实现单原子层精度沉积，台阶覆盖极佳，用于高 k 介质（HfO₂）和阻挡层。化学机械抛光（CMP）结合化学腐蚀和机械研磨实现晶圆全局平坦化，是多层互连工艺的基础。</p>`},{id:'la-k2-2',name:'金属互连与封装测试',tags:["def", "app"],brief:'Cu 互连低阻；先进封装提升集成度。',body:`<p>金属互连从 Al 发展到 Cu（大马士革工艺），降低电阻。低 k 介质降低互连电容。后道工艺（BEOL）构建多层金属互连。封装包括传统引线键合、倒装焊、硅通孔（TSV）、晶圆级封装（WLP）、扇出型封装（FOWLP）、Chiplet 等，提升集成度与性能。</p>`}]}]}
 ];
 const LA_KP = {};
 function laBuildCard(item){

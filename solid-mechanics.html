@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="固体力学知识体系：应力、应变、胡克定律、本构关系、有限元">
+<meta name="description" content="固体力学知识体系：应力张量、应变张量、胡克定律、梁弯曲理论、本构关系、有限元方法">
 <title>固体力学 · 知识体系</title>
 <script>
 window.MathJax = {
@@ -114,9 +114,9 @@ window.MathJax = {
   <header class="la-header">
     <div class="la-eyebrow">SOLID MECHANICS · KNOWLEDGE MAP</div>
     <h1>固体力学 · 知识体系</h1>
-    <p class="la-subtitle">应力 · 应变 · 胡克定律 · 本构关系 · 有限元</p>
+    <p class="la-subtitle">应力 · 应变 · 胡克定律 · 梁弯曲 · 本构关系 · 有限元</p>
     <div class="back-bar"><a class="back-btn" href="index.html">← 返回总览</a></div>
-    <div class="la-nav-tabs"><a class="la-nav-tab c1" href="#la-ch1">第一章 · 应力与应变</a><a class="la-nav-tab c2" href="#la-ch2">第二章 · 本构关系与有限元</a></div>
+    <div class="la-nav-tabs"><a class="la-nav-tab c1" href="#la-ch1">第一章 · 应力与应变</a><a class="la-nav-tab c2" href="#la-ch2">第二章 · 本构关系</a><a class="la-nav-tab c3" href="#la-ch3">第三章 · 梁弯曲理论</a><a class="la-nav-tab c4" href="#la-ch4">第四章 · 有限元方法</a></div>
     <div class="la-toolbar">
       <button onclick="window.scrollTo({top:0,behavior:'smooth'})">回到顶部</button>
     </div>
@@ -153,8 +153,10 @@ window.MathJax = {
 const LA_FIG = {  };
 const LA_TAG_LABEL = {def:'定 义', thm:'定 理', der:'推 导', exa:'例 子', app:'应 用', his:'注 记'};
 const LA_DATA = [
-{id:'la-ch1',num:'第一章',title:'应力与应变',en:'STRESS & STRAIN',sub:'张量描述',desc:'固体在外力下的变形用应力张量和应变张量描述。',sections:[{name:'1.1 应力张量',color:'#2563eb',desc:'面力与应力',items:[{id:'la-k1-1',name:'应力张量',tags:["def", "thm"],brief:'$\\sigma_{ij}$ 为二阶对称张量，$\\sigma_{ij}=\\sigma_{ji}$。',body:`<p>应力 $\\sigma_{ij}$ 表示 $j$ 方向面元上 $i$ 方向的力。平衡方程：$\\partial_j\\sigma_{ij}+f_i=0$。</p>`}]},{name:'1.2 应变张量',color:'#7c3aed',desc:'小变形',items:[{id:'la-k1-2',name:'应变张量',tags:["def", "thm"],brief:'$\\varepsilon_{ij}=\\frac12(\\partial_i u_j+\\partial_j u_i)$。',body:`<p>小变形下应变是位移梯度的对称部分。体积应变 $\\varepsilon_{kk}=\\nabla\\cdot\\boldsymbol{u}$。</p>`}]}]},
-{id:'la-ch2',num:'第二章',title:'本构关系与有限元',en:'CONSTITUTIVE & FEM',sub:'胡克定律、数值方法',desc:'线弹性本构关系与有限元离散方法。',sections:[{name:'2.1 胡克定律',color:'#0f766e',desc:'线弹性',items:[{id:'la-k2-1',name:'广义胡克定律',tags:["def", "thm"],brief:'$\\sigma_{ij}=C_{ijkl}\\varepsilon_{kl}$，各向同性简化为 $\\lambda,\\mu$。',body:`<p>各向同性弹性体仅需两个独立常数（拉梅常数 $\\lambda,\\mu$）。杨氏模量 $E$、泊松比 $\\nu$ 可与之换算。</p>`}]},{name:'2.2 有限元方法',color:'#c2410c',desc:'离散化求解',items:[{id:'la-k2-2',name:'有限元原理',tags:["def", "app"],brief:'变分形式 + 分片多项式插值，求解 $K\\boldsymbol{u}=\\boldsymbol{F}$。',body:`<p>将连续体离散为有限单元，在单元内用形函数插值位移，组装整体刚度矩阵求解。工程仿真的核心方法。</p>`}]}]}
+{id:'la-ch1',num:'第一章',title:'应力与应变',en:'STRESS & STRAIN',sub:'张量描述、主应力',desc:'固体在外力下的变形用应力张量和应变张量描述，它们是二阶对称张量。',sections:[{name:'1.1 应力张量',color:'#2563eb',desc:'面力与应力、主应力',items:[{id:'la-k1-1',name:'应力张量',tags:["def", "thm"],brief:'$\\sigma_{ij}$ 为二阶对称张量，$\\sigma_{ij}=\\sigma_{ji}$。',body:`<p>应力 $\\sigma_{ij}$ 表示 $j$ 方向面元单位面积上 $i$ 方向的力。正应力 $\\sigma_{ii}$，剪应力 $\\sigma_{ij}(i\\neq j)$。平衡方程：$\\partial_j\\sigma_{ij}+f_i=0$。</p>`},{id:'la-k1-2',name:'主应力与应力不变量',tags:["thm", "der"],brief:'$\\det(\\sigma_{ij}-\\sigma\\delta_{ij})=0$ 解出主应力 $\\sigma_1,\\sigma_2,\\sigma_3$。',body:`<p>应力张量可通过正交变换对角化，得到三个主应力（无剪应力方向）。三个应力不变量 $I_1=\\sigma_{kk}$，$I_2=\\frac12(\\sigma_{ii}\\sigma_{jj}-\\sigma_{ij}\\sigma_{ij})$，$I_3=\\det\\sigma$ 与坐标选择无关。</p>`}]},{name:'1.2 应变张量',color:'#7c3aed',desc:'小变形、应变协调',items:[{id:'la-k1-3',name:'应变张量',tags:["def", "thm"],brief:'$\\varepsilon_{ij}=\\frac12(\\partial_i u_j+\\partial_j u_i)$。',body:`<p>小变形下应变是位移梯度的对称部分。正应变 $\\varepsilon_{ii}$，剪应变 $\\varepsilon_{ij}(i\\neq j)$。体积应变 $\\varepsilon_{kk}=\\nabla\\cdot\\boldsymbol u$（膨胀率）。转动张量 $\\omega_{ij}=\\frac12(\\partial_i u_j-\\partial_j u_i)$。</p>`},{id:'la-k1-4',name:'应变协调方程',tags:["thm", "der"],brief:'$\\partial_{kl}\\varepsilon_{ij}+\\partial_{ij}\\varepsilon_{kl}-\\partial_{ik}\\varepsilon_{jl}-\\partial_{jl}\\varepsilon_{ik}=0$。',body:`<p>六个应变分量由三个位移分量导出，需满足协调方程（Saint-Venant 条件），否则对应位移场不存在。</p>`}]}]},
+{id:'la-ch2',num:'第二章',title:'本构关系',en:'CONSTITUTIVE RELATIONS',sub:'胡克定律、弹性常数',desc:'应力与应变的关系由本构方程描述。线弹性体满足广义胡克定律。',sections:[{name:'2.1 广义胡克定律',color:'#0f766e',desc:'各向同性弹性',items:[{id:'la-k2-1',name:'广义胡克定律',tags:["def", "thm"],brief:'$\\sigma_{ij}=C_{ijkl}\\varepsilon_{kl}$，各向同性：$\\sigma_{ij}=\\lambda\\varepsilon_{kk}\\delta_{ij}+2\\mu\\varepsilon_{ij}$。',body:`<p>各向同性弹性体仅需两个独立常数：拉梅常数 $\\lambda,\\mu$（$\\mu$ 即剪切模量 $G$）。杨氏模量 $E=\\mu(3\\lambda+2\\mu)/(\\lambda+\\mu)$，泊松比 $\\nu=\\lambda/(2(\\lambda+\\mu))$。体积模量 $K=\\lambda+2\\mu/3$。</p>`},{id:'la-k2-2',name:'应力-应变关系换算',tags:["thm", "der"],brief:'$E=2G(1+\\nu)=3K(1-2\\nu)$。',body:`<p>弹性常数之间的关系。$\\nu$ 取值范围 $[-1,0.5]$，$\\nu=0.5$ 为不可压缩。金属 $\\nu\\approx0.3$，橡胶 $\\nu\\approx0.49$。</p>`}]}]},
+{id:'la-ch3',num:'第三章',title:'梁弯曲理论',en:'BEAM BENDING',sub:'欧拉-伯努利梁',desc:'梁的弯曲是工程结构的基本问题，用欧拉-伯努利梁理论描述。',sections:[{name:'3.1 欧拉-伯努利梁',color:'#2563eb',desc:'梁弯曲微分方程',items:[{id:'la-k3-1',name:'梁弯曲方程',tags:["def", "thm"],brief:'$EI\\frac{d^4w}{dx^4}=q(x)$。',body:`<p>小挠度梁的控制方程。$EI$ 为抗弯刚度，$w(x)$ 为挠度，$q(x)$ 为分布载荷。边界条件：简支 $w=M=0$，固支 $w=\\theta=0$，自由 $M=V=0$。</p>`},{id:'la-k3-2',name:'弯曲正应力',tags:["thm", "der"],brief:'$\\sigma=-\\frac{My}{I}$，最大应力在离中性轴最远处。',body:`<p>弯曲时正应力沿截面线性分布，中性轴处为零。矩形截面最大应力 $\\sigma_{max}=6M/(bh^2)$。设计梁截面时应增大截面模量 $W=I/y_{max}$。</p>`}]}]},
+{id:'la-ch4',num:'第四章',title:'有限元方法',en:'FINITE ELEMENT METHOD',sub:'变分原理、离散化',desc:'有限元法将连续体离散为单元，在单元内插值，组装刚度矩阵求解。',sections:[{name:'4.1 有限元原理',color:'#7c3aed',desc:'弱形式与形函数',items:[{id:'la-k4-1',name:'变分原理',tags:["thm", "der"],brief:'最小势能原理：$\\delta\\Pi=0$，$\\Pi=U-W$。',body:`<p>总势能 $\\Pi$=应变能 $U$ - 外力功 $W$。真实位移使总势能取极小值。这是有限元法的理论基础，也可由虚功原理导出。</p>`},{id:'la-k4-2',name:'有限元离散',tags:["def", "app"],brief:'$\\boldsymbol u=N\\boldsymbol u_e$，组装 $K\\boldsymbol u=\\boldsymbol F$。',body:`<p>单元内位移用形函数 $N$ 插值，节点位移 $\\boldsymbol u_e$ 为未知量。单元刚度矩阵 $K_e=\\int B^T DB\\,dV$，整体刚度矩阵由单元刚度组装。解方程得位移，再求应力。</p>`}]}]}
 ];
 const LA_KP = {};
 function laBuildCard(item){
