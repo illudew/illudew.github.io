@@ -421,11 +421,13 @@ ch2_sections = [
 "color": "#c2410c",
 "desc": "正则变换的定义、充分条件、辛变换",
 "items": [
-{"id":"tm-c2s4-1","name":"正则变换的概念","tags":["def","thm"],"brief":"保持正则方程形式的变换。",
+{"id":"tm-c2s4-1","name":"正则变换的概念","tags":["def","thm","app"],"brief":"保持正则方程形式的变换，哈密顿力学中的对称性变换。",
  "body": wrap(
     defn("正则变换", p("若变换 $(q,p)\\to(Q,P)$ 使正则方程形式不变，即存在新哈密顿量 $K(Q,P,t)$ 使")+
     fml("\\dot Q_\\alpha = \\frac{\\partial K}{\\partial P_\\alpha},\\qquad \\dot P_\\alpha = -\\frac{\\partial K}{\\partial Q_\\alpha}",
-        "则称该变换为正则变换。正则变换是哈密顿力学中的对称性变换。"))
+        "则称该变换为正则变换。正则变换是哈密顿力学中的对称性变换，相当于在相空间中做坐标变换。"))
+    + thm("正则变换的意义", p("正则变换的目的是通过选择合适的变量，使新哈密顿量 $K$ 更简单（如 $K=0$ 或 $K$ 仅含部分变量），从而简化求解。若 $K\\equiv 0$，则 $\\dot Q=\\dot P=0$，新变量全部为常数，运动方程立即解出。"))
+    + app(p("正则变换保持相空间体积不变（刘维尔定理），保持泊松括号不变，保持辛形式不变。它是哈密顿-雅可比理论的基础。"))
 )},
 {"id":"tm-c2s4-2","name":"正则变换的充分条件","tags":["thm","der"],"brief":"母函数与全微分条件。",
  "body": wrap(
@@ -569,13 +571,16 @@ ch3_sections = [
         "即势能在平衡位置处取极值。"))
     + der(p("<strong>推导：</strong>对不显含时系统，约束不含时故 $\\vec r_i=\\vec r_i(\\vec q)$（不含 $t$），速度 $\\dot{\\vec r}_i=\\sum_\\alpha\\frac{\\partial\\vec r_i}{\\partial q_\\alpha}\\dot q_\\alpha$，动能为 $T=\\frac{1}{2}\\sum_{\\alpha\\beta}A_{\\alpha\\beta}(\\vec q)\\dot q_\\alpha\\dot q_\\beta$（纯二次型，无一次项和零次项）。<br>欧拉-拉格朗日方程：$\\frac{d}{dt}\\frac{\\partial T}{\\partial\\dot q_\\alpha}-\\frac{\\partial T}{\\partial q_\\alpha}=-\\frac{\\partial U}{\\partial q_\\alpha}$。<br><strong>必要性：</strong>若 $\\vec q_0$ 为平衡位置，则 $\\dot q=0$，故 $\\frac{\\partial T}{\\partial\\dot q_\\alpha}={\\sum_\\beta A_{\\alpha\\beta}\\dot q_\\beta}=0$，$\\frac{d}{dt}\\frac{\\partial T}{\\partial\\dot q_\\alpha}=0$。又 $\\frac{\\partial T}{\\partial q_\\alpha}=\\frac{1}{2}\\sum_{\\beta\\gamma}\\frac{\\partial A_{\\beta\\gamma}}{\\partial q_\\alpha}\\dot q_\\beta\\dot q_\\gamma=0$。故 $\\frac{\\partial U}{\\partial q_\\alpha}=0$。<br><strong>充分性：</strong>若 $\\frac{\\partial U}{\\partial q_\\alpha}|_{\\vec q_0}=0$，则 $\\vec q(t)=\\vec q_0$（$\\dot q=0$）满足方程，故为平衡位置。$\\blacksquare$"))
 )},
-{"id":"tm-c3s1-2","name":"平衡的分类","tags":["def","thm"],"brief":"稳定、不稳定、随遇平衡。",
+{"id":"tm-c3s1-2","name":"平衡的分类","tags":["def","thm","der"],"brief":"稳定、不稳定、随遇平衡及稳定条件推导。",
  "body": wrap(
     defn("稳定平衡", p("对处于平衡位置的系统，若经历任意小扰动后运动完全局限于平衡位置附近，则称稳定平衡。严格定义：$\\forall\\varepsilon>0,\\exists\\delta>0$，使初始 $|\\vec q(t_0)-\\vec q_0|<\\delta$ 且 $|\\vec p(t_0)|<\\delta$ 时，恒有 $|\\vec q(t)-\\vec q_0|<\\varepsilon$。"))
-    + thm("稳定平衡的条件", p("保守系统在平衡位置 $\\vec q_0$ 处稳定的充分条件是势能取严格极小值：")+
-    fml("U(\\vec q_0) \\text{ 为严格极小值 } \\Rightarrow \\text{ 稳定平衡}",
-        "由能量守恒，扰动后动能 $T=E-U\\le\\varepsilon$，若 $U$ 极小则 $\\vec q$ 不会远离。"))
-    + defn("不稳定与随遇平衡", p("<strong>不稳定平衡：</strong>小扰动后系统远离平衡位置（势能极大值）。<br><strong>随遇平衡：</strong>扰动后系统处于新的平衡位置（势能平台，$U$ 在某方向为常数）。"))
+    + thm("稳定平衡的充分条件", p("保守系统在平衡位置 $\\vec q_0$ 处稳定的充分条件是势能取严格极小值：")+
+    fml("U(\\vec q_0) \\text{ 为严格极小值 } \\Rightarrow \\text{ 稳定平衡}"))
+    + der(p("<strong>推导：</strong>由能量守恒 $E=T+U$。初始时刻系统在 $\\vec q_0$ 附近，$T(t_0)\\le\\frac{1}{2}\delta^2$（动能有界），$U(\\vec q(t_0))\\ge U(\vec q_0)$（$\\vec q_0$ 为极小值）。故 $E\\ge U(\vec q_0)$。<br>设 $U$ 在 $\\vec q_0$ 处严格极小，则在 $\\vec q_0$ 的某邻域外 $U>U(\vec q_0)+\\eta$（$\\eta>0$）。<br>若 $T(t_0)<\\eta/2$，则 $E<U(\vec q_0)+\\eta$。运动过程中 $T=E-U\\ge 0$，故 $U\\le E<U(\vec q_0)+\\eta$，即 $\\vec q$ 不会离开 $\\vec q_0$ 的邻域。故稳定。"))
+    + der(p("<strong>小振动近似的依据：</strong>在稳定平衡处 $\\frac{\\partial U}{\\partial q_\\alpha}|_{\\vec q_0}=0$，将 $U$ 在 $\\vec q_0$ 处泰勒展开：")+
+    fml("U(\\vec q) = U(\\vec q_0) + \\frac{1}{2}\\sum_{\\alpha\\beta}V_{\\alpha\\beta}\\eta_\\alpha\\eta_\\beta + O(\\eta^3)",
+        "其中 $V_{\\alpha\\beta}=\\frac{\\partial^2 U}{\\partial q_\\alpha\\partial q_\\beta}|_{\\vec q_0}$ 为势能 Hessian 矩阵。$U$ 取极小值要求 $V_{\\alpha\\beta}$ 正定，这保证简正频率 $\\omega_i^2>0$（实频率），系统做稳定的小振动。"))
+    + defn("不稳定与随遇平衡", p("<strong>不稳定平衡：</strong>$V_{\\alpha\\beta}$ 有负本征值（势能极大值方向），扰动后系统远离平衡位置。<br><strong>随遇平衡：</strong>势能在某方向为常数（$V$ 有零本征值），扰动后系统处于新的平衡位置。"))
 )},
 {"id":"tm-c3s1-3","name":"小振动方程","tags":["def","thm","der"],"brief":"在稳定平衡附近的线性化运动。",
  "body": wrap(
@@ -717,12 +722,20 @@ ch3_sections = [
 "color": "#c2410c",
 "desc": "转动惯量张量、惯量主轴、欧拉动力学方程、陀螺",
 "items": [
-{"id":"tm-c3s4-1","name":"转动惯量张量","tags":["def","thm"],"brief":"描述刚体转动惯性的二阶张量。",
+{"id":"tm-c3s4-1","name":"转动惯量张量","tags":["def","thm","der"],"brief":"描述刚体转动惯性的二阶张量，从角动量导出。",
  "body": wrap(
-    defn("转动惯量张量", p("刚体的转动动能 $T=\\frac{1}{2}\\vec\\omega^T I\\vec\\omega$，其中 $I$ 为转动惯量张量")+
-    fml("I_{ij} = \\int\\rho(\\vec r)(r^2\\delta_{ij}-x_i x_j)\\,dV",
-        "对角元 $I_{xx}=\\int\\rho(y^2+z^2)dV$ 等为转动惯量，非对角元 $I_{xy}=-\\int\\rho xy\\,dV$ 等为惯量积。"))
-    + thm("角动量", p("刚体的角动量 $\\vec L=I\\vec\\omega$，即 $L_i=\\sum_j I_{ij}\\omega_j$。对于定点转动，动能 $T=\\frac{1}{2}\\vec\\omega\\cdot\\vec L$。"))
+    defn("转动惯量张量", p("刚体绕定点 $O$ 转动，$\\vec r_i$ 为第 $i$ 个质点相对 $O$ 的位矢。角速度 $\\vec\\omega$，速度 $\\vec v_i=\\vec\\omega\\times\\vec r_i$。总角动量为")+
+    fml("\\vec L = \\sum_i \\vec r_i\\times m_i\\vec v_i = \\sum_i m_i\\vec r_i\\times(\\vec\\omega\\times\\vec r_i)",
+        "利用矢量叉积恒等式推导。"))
+    + der(p("<strong>推导：</strong>利用矢量叉积恒等式 $\\vec A\\times(\\vec B\\times\\vec C)=(\\vec A\\cdot\\vec C)\\vec B-(\\vec A\\cdot\\vec B)\\vec C$，有")+
+    fml("\\vec r_i\\times(\\vec\\omega\\times\\vec r_i) = (\\vec r_i\\cdot\\vec r_i)\\vec\\omega - (\\vec r_i\\cdot\\vec\\omega)\\vec r_i = r_i^2\\vec\\omega - (\\vec r_i\\cdot\\vec\\omega)\\vec r_i",
+        "写成矩阵形式：$r_i^2\\vec\\omega-(\\vec r_i\\cdot\\vec\\omega)\\vec r_i=(r_i^2 I_3-\\vec r_i\\vec r_i^T)\\vec\\omega$，其中 $I_3$ 为 $3\\times3$ 单位矩阵，$\\vec r_i\\vec r_i^T$ 为外积（并矢）。")+
+    fml("\\vec L = \\sum_i m_i(r_i^2 I_3 - \\vec r_i\\vec r_i^T)\\vec\\omega = I\\vec\\omega",
+        "定义<strong>转动惯量张量</strong> $I=\\sum_i m_i(r_i^2 I_3-\\vec r_i\\vec r_i^T)$，连续情形 $I=\\int\\rho(\\vec r)(r^2I_3-\\vec r\\vec r^T)\\,dV$。"))
+    + thm("张量分量", p("展开各分量，$I$ 为 $3\\times3$ 实对称矩阵：")+
+    fml("I = \\begin{pmatrix}\\sum m(y^2+z^2) & -\\sum mxy & -\\sum mxz \\\\ -\\sum mxy & \\sum m(z^2+x^2) & -\\sum myz \\\\ -\\sum mxz & -\\sum myz & \\sum m(x^2+y^2)\\end{pmatrix}",
+        "对角元 $I_{xx}=\\sum m(y^2+z^2)$ 为绕 $x$ 轴的转动惯量，非对角元 $I_{xy}=-\\sum mxy$ 为惯量积。由 $I_{ij}=I_{ji}$ 知 $I$ 实对称。"))
+    + thm("动能与角动量", p("转动动能 $T=\\frac{1}{2}\\vec\\omega^T I\\vec\\omega=\\frac{1}{2}\\vec\\omega\\cdot\\vec L$。角动量 $\\vec L=I\\vec\\omega$。一般情况下 $\\vec L$ 与 $\\vec\\omega$ 不同向（仅当 $\\vec\\omega$ 沿惯量主轴时二者同向）。"))
 )},
 {"id":"tm-c3s4-2","name":"惯量主轴","tags":["def","thm","der"],"brief":"使惯量张量对角化的坐标系。",
  "body": wrap(
@@ -783,12 +796,23 @@ ch3_sections = [
 "color": "#be185d",
 "desc": "广义势能、洛伦兹力的拉格朗日表述、规范变换",
 "items": [
-{"id":"tm-c3s5-1","name":"广义势能","tags":["def","thm"],"brief":"含速度的势能推广。",
+{"id":"tm-c3s5-1","name":"广义势能","tags":["def","thm","der"],"brief":"含速度的势能推广，从洛伦兹力导出。",
  "body": wrap(
     defn("广义势能", p("若存在函数 $U(q,\\dot q,t)$ 使得广义力可写为")+
     fml("Q_\\alpha = -\\frac{\\partial U}{\\partial q_\\alpha} + \\frac{d}{dt}\\frac{\\partial U}{\\partial\\dot q_\\alpha}",
         "则 $U$ 称为广义势能（速度相关势能）。此时拉格朗日函数仍为 $L=T-U$，拉格朗日方程形式不变。"))
     + thm("与保守力的关系", p("当 $U$ 不含 $\\dot q$ 时，$\\frac{\\partial U}{\\partial\\dot q_\\alpha}=0$，广义力退化为 $Q_\\alpha=-\\frac{\\partial U}{\\partial q_\\alpha}$，即保守力情形。"))
+    + der(p("<strong>从洛伦兹力导出广义势能：</strong>洛伦兹力 $\\vec F=q(\\vec E+\\vec v\\times\\vec B)$ 显含速度，不能写成通常势能的负梯度。引入标势 $\\phi$ 和矢势 $\\vec A$：")+
+    fml("\\vec E = -\\nabla\\phi - \\frac{\\partial\\vec A}{\\partial t},\\qquad \\vec B = \\nabla\\times\\vec A",
+        "则洛伦兹力可写为 $\\vec F=q(-\\nabla\\phi-\\frac{\\partial\\vec A}{\\partial t}+\\vec v\\times(\\nabla\\times\\vec A))$。")+
+    fml("\\vec v\\times(\\nabla\\times\\vec A) = \\nabla(\\vec v\\cdot\\vec A) - (\\vec v\\cdot\\nabla)\\vec A",
+        "（关键恒等式，其中 $\\nabla$ 对空间求导，$\\vec v$ 是独立变量），代入洛伦兹力：")+
+    fml("\\vec F = q\\left[-\\nabla\\phi - \\frac{\\partial\\vec A}{\\partial t} + \\nabla(\\vec v\\cdot\\vec A) - (\\vec v\\cdot\\nabla)\\vec A\\right]",
+        "注意 $\\nabla\\phi$ 和 $\\nabla(\\vec v\\cdot\\vec A)$ 都是对 $\\vec r$ 求梯度（固定 $\\vec v$），故合并：")+
+    fml("\\vec F = q\\left[-\\nabla(\\phi - \\vec v\\cdot\\vec A) - \\frac{\\partial\\vec A}{\\partial t} - (\\vec v\\cdot\\nabla)\\vec A\\right]",
+        "而 $\\frac{d\\vec A}{dt}=\\frac{\\partial\\vec A}{\\partial t}+(\\vec v\\cdot\\nabla)\\vec A$（全导数），故 $-\\frac{\\partial\\vec A}{\\partial t}-(\\vec v\\cdot\\nabla)\\vec A=-\\frac{d\\vec A}{dt}$。又 $\\frac{\\partial}{\\partial\\vec v}(\\vec v\\cdot\\vec A)=\\vec A$，$\\frac{d}{dt}\\frac{\\partial}{\\partial\\vec v}(\\vec v\\cdot\\vec A)=\\frac{d\\vec A}{dt}$。重新整理得：")+
+    fml("\\vec F = -\\nabla(q\\phi - q\\vec v\\cdot\\vec A) + \\frac{d}{dt}\\frac{\\partial}{\\partial\\vec v}(q\\vec v\\cdot\\vec A)",
+        "即 $\\vec F=-\\nabla U+\\frac{d}{dt}\\frac{\\partial U}{\\partial\\vec v}$，其中广义势能为 $U=q\\phi-q\\vec v\\cdot\\vec A$。$\\blacksquare$"))
 )},
 {"id":"tm-c3s5-2","name":"带电粒子在电磁场中的拉格朗日函数","tags":["def","thm","der","app"],"brief":"洛伦兹力的拉格朗日表述。",
  "body": wrap(
@@ -833,12 +857,20 @@ ch3_sections = [
     + p("对位置矢量 $\\vec r$ 应用：$\\vec v_{in}=\\vec v'+\\vec\\omega\\times\\vec r'$。<br>对速度矢量再应用一次：$\\vec a_{in}=(\\frac{d\\vec v'}{dt})_{rot}+\\vec\\omega\\times\\vec v'+\\vec\\omega\\times(\\vec v'+\\vec\\omega\\times\\vec r')+\\dot{\\vec\\omega}\\times\\vec r'$<br>$=\\vec a'+2\\vec\\omega\\times\\vec v'+\\vec\\omega\\times(\\vec\\omega\\times\\vec r')+\\dot{\\vec\\omega}\\times\\vec r'$。"))
     + app(p("由此得两种主要惯性力：<strong>科里奥利力</strong> $\\vec F_C=-2m\\vec\\omega\\times\\vec v'$，<strong>离心力</strong> $\\vec F_{cf}=-m\\vec\\omega\\times(\\vec\\omega\\times\\vec r')$。"))
 )},
-{"id":"tm-c3s6-3","name":"科里奥利力与离心力","tags":["def","thm","app"],"brief":"转动参考系中的两个惯性力。",
+{"id":"tm-c3s6-3","name":"科里奥利力与离心力","tags":["def","thm","der","app"],"brief":"转动参考系中的两个惯性力及其推导。",
  "body": wrap(
-    defn("科里奥利力", p("$\\vec F_C=-2m\\vec\\omega\\times\\vec v'$，与质点相对速度成正比，只改变速度方向不改变大小，对运动物体不做功。"))
-    + defn("离心力", p("$\\vec F_{cf}=-m\\vec\\omega\\times(\\vec\\omega\\times\\vec r')$，沿径向外指，大小 $m\\omega^2 r\\sin\\theta$（$\\theta$ 为 $\\vec r$ 与转轴夹角）。"))
-    + thm("重力的修正", p("地球表面的有效重力 $\\vec g$ 是真实引力 $\\vec g_0$ 与离心力的合力：$\\vec g=\\vec g_0-\\vec\\omega\\times(\\vec\\omega\\times\\vec R)$。赤道处离心力最大，故赤道处重力略小于两极；地球形状也因离心力呈椭球形。"))
-    + app(p("地球自转导致：北半球河流右岸冲刷严重、气旋逆时针旋转；傅科摆的进动；赤道处重力略小于两极；大气环流的形成。"))
+    thm("转动参考系的运动方程", p("在转动参考系中，质点的运动方程为")+
+    fml("m\\vec a' = \\vec F_{real} - 2m\\vec\\omega\\times\\vec v' - m\\vec\\omega\\times(\\vec\\omega\\times\\vec r') - m\\dot{\\vec\\omega}\\times\\vec r'",
+        "右边第一项为真实力，后三项为惯性力。"))
+    + der(p("<strong>推导（从转动系导数关系出发）：</strong>对任意矢量 $\\vec A$，惯性系与转动系中的时间导数关系为 $\\left(\\frac{d\\vec A}{dt}\\right)_{in}=\\left(\\frac{d\\vec A}{dt}\\right)_{rot}+\\vec\\omega\\times\\vec A$。<br><strong>第一次应用</strong>（位置 $\\vec r$）：$\\vec v_{in}=\\vec v'+\\vec\\omega\\times\\vec r'$，即惯性系中的速度 = 转动系中速度 + 牵连速度。<br><strong>第二次应用</strong>（速度 $\\vec v_{in}$）：")+
+    fml("\\vec a_{in} = \\left(\\frac{d\\vec v_{in}}{dt}\\right)_{rot} + \\vec\\omega\\times\\vec v_{in} = \\vec a' + \\vec\\omega\\times\\vec v' + \\vec\\omega\\times(\\vec v' + \\vec\\omega\\times\\vec r') + \\dot{\\vec\\omega}\\times\\vec r'",
+        "其中 $\\left(\\frac{d\\vec v'}{dt}\\right)_{rot}=\\vec a'$ 为转动系中加速度，$\\vec\\omega\\times\\vec v'$ 出现两次（一次来自对 $\\vec v'$ 的导数变换，一次来自对 $\\vec\\omega\\times\\vec r'$ 的导数变换），合并为 $2\\vec\\omega\\times\\vec v'$。故")+
+    fml("\\vec a_{in} = \\vec a' + 2\\vec\\omega\\times\\vec v' + \\vec\\omega\\times(\\vec\\omega\\times\\vec r') + \\dot{\\vec\\omega}\\times\\vec r'",
+        "代入 $m\\vec a_{in}=\\vec F_{real}$，移项得 $m\\vec a'=\\vec F_{real}-2m\\vec\\omega\\times\\vec v'-m\\vec\\omega\\times(\\vec\\omega\\times\\vec r')-m\\dot{\\vec\\omega}\\times\\vec r'$。"))
+    + defn("科里奥利力", p("$\\vec F_C=-2m\\vec\\omega\\times\\vec v'$，与质点相对速度成正比。<br>由于 $\\vec F_C\\perp\\vec v'$，科里奥利力对运动物体不做功，只改变速度方向不改变大小。"))
+    + defn("离心力", p("$\\vec F_{cf}=-m\\vec\\omega\\times(\\vec\\omega\\times\\vec r')$。利用 $\\vec\\omega\\times(\\vec\\omega\\times\\vec r')=\\vec\\omega(\\vec\\omega\\cdot\\vec r')-\\omega^2\\vec r'$，当 $\\vec r'\\perp\\vec\\omega$ 时，$\\vec F_{cf}=m\\omega^2\\vec r'$（沿径向外指）。"))
+    + thm("重力的修正", p("地球表面有效重力 $\\vec g$ 是真实引力 $\\vec g_0$ 与离心力的合力：$\\vec g=\\vec g_0-\\vec\\omega\\times(\\vec\\omega\\times\\vec R)$。赤道处离心力最大（$\\omega^2 R$），故赤道重力略小于两极。"))
+    + app(p("地球自转导致：北半球河流右岸冲刷严重、气旋逆时针旋转；傅科摆进动；赤道处重力略小于两极；大气环流的形成。"))
 )},
 {"id":"tm-c3s6-4","name":"傅科摆","tags":["exa","der","app"],"brief":"验证地球自转的经典实验。",
  "body": wrap(
