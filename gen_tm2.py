@@ -68,21 +68,16 @@ CORE_FORMULAS = [
     ("勒让德变换", "H = \\sum_\\alpha p_\\alpha \\dot q_\\alpha - L,\\qquad p_\\alpha = \\frac{\\partial L}{\\partial\\dot q_\\alpha}", "从拉格朗日到哈密顿的桥梁"),
     ("哈密顿正则方程", "\\dot q_\\alpha = \\frac{\\partial H}{\\partial p_\\alpha},\\qquad \\dot p_\\alpha = -\\frac{\\partial H}{\\partial q_\\alpha}", "哈密顿力学的运动方程"),
     ("泊松括号", "\\{f,g\\} = \\sum_\\alpha\\left(\\frac{\\partial f}{\\partial q_\\alpha}\\frac{\\partial g}{\\partial p_\\alpha} - \\frac{\\partial f}{\\partial p_\\alpha}\\frac{\\partial g}{\\partial q_\\alpha}\\right)", "李代数结构的基础"),
-    ("辛形式", "\\dot\\xi = J\\nabla H,\\qquad J = \\begin{pmatrix}0 & I \\\\ -I & 0\\end{pmatrix}", "哈密顿方程的几何表达"),
     ("守恒判据", "\\frac{df}{dt} = \\{f,H\\} + \\frac{\\partial f}{\\partial t},\\qquad f\\text{ 守恒} \\Leftrightarrow \\{f,H\\}=0", "泊松括号判断守恒量"),
     ("哈密顿-雅可比方程", "H\\!\\left(q,\\frac{\\partial S}{\\partial q},t\\right) + \\frac{\\partial S}{\\partial t} = 0", "化偏微分方程为常微分方程"),
     ("正则变换条件", "\\sum p_\\alpha\\,dq_\\alpha - H\\,dt = \\sum P_\\alpha\\,dQ_\\alpha - K\\,dt + dF", "母函数生成正则变换"),
     ("小振动本征值方程", "\\det(V - \\omega^2 A) = 0", "简正频率的广义本征值问题"),
-    ("比耐公式", "\\frac{d^2u}{d\\theta^2} + u = -\\frac{F(1/u)}{mh^2u^2}", "中心力场轨道方程"),
-    ("开普勒第三定律", "T^2 = \\frac{4\\pi^2}{GM}\\,a^3", "行星运动周期的普适规律"),
     ("欧拉动力学方程", "I_1\\dot\\omega_1 - (I_2-I_3)\\omega_2\\omega_3 = N_1", "刚体定点转动的基本方程"),
     ("广义势能（电磁场）", "U = q\\phi - q\\vec v\\cdot\\vec A", "洛伦兹力的速度相关势能"),
     ("科里奥利力", "\\vec F_C = -2m\\,\\vec\\omega\\times\\vec v'", "转动参考系中的惯性力"),
     ("傅科摆进动角速度", "\\Omega = \\omega\\sin\\lambda", "纬度 $\\lambda$ 处的进动速率"),
     ("拉格朗日函数不唯一性", "L' = L + \\frac{df}{dt} \\quad\\Rightarrow\\quad \\text{运动方程不变}", "规范不变性"),
     ("龙格-楞次矢量", "\\vec A = \\vec p\\times\\vec L - mk\\,\\hat r = \\text{常数}", "开普勒问题的隐藏对称性（$SO(4)$）"),
-    ("作用量-角变量", "J_i = \\oint p_i\\,dq_i,\\qquad \\nu_i = \\frac{\\partial H}{\\partial J_i}", "周期运动频率与绝热不变量"),
-    ("引潮力（一阶近似）", "\\vec f_{tide} \\approx \\frac{GM}{D^3}(2x,\\,-y,\\,-z)", "潮汐成因的力学解释"),
 ]
 
 def js_escape(s):
@@ -147,6 +142,20 @@ ch1_sections = [
     fml("\\vec F_{N1}\\cdot\\delta\\vec r_1+\\vec F_{N2}\\cdot\\delta\\vec r_2 = \\lambda(\\vec r_1-\\vec r_2)\\cdot(\\delta\\vec r_1-\\delta\\vec r_2) = \\frac{\\lambda}{2}\\delta[(\\vec r_1-\\vec r_2)^2] = 0",
         "最后一步利用了刚性约束 $|\\vec r_1-\\vec r_2|=$ 常数，故其变分为零。"))
     + exa(p("理想约束实例：光滑曲面（约束力法向，虚位移切向）、刚性轻杆、刚体（内力虚功和为零）、光滑接触表面、纯滚动（完全粗糙）接触。"))
+)},
+{"id":"tm-c1s1-6","name":"约束力与拉格朗日乘子法","tags":["thm","der","app","exa"],"brief":"求非理想约束或约束力的方法。",
+ "body": wrap(
+    thm("拉格朗日乘子法", p("若需求约束力，或约束为非完整约束（不能消去坐标），可使用拉格朗日乘子法。设约束方程为 $f_j(q,t)=0$（$j=1,\\dots,k$），引入 $k$ 个拉格朗日乘子 $\\lambda_j$，构造修正的拉格朗日函数")+
+    fml("\\tilde L = L + \\sum_{j=1}^{k}\\lambda_j f_j(q,t)",
+        "此时将 $q_\\alpha$ 和 $\\lambda_j$ 都视为独立变量，对它们应用欧拉-拉格朗日方程。"))
+    + der(p("<strong>推导：</strong>对 $q_\\alpha$ 的欧拉-拉格朗日方程：")+
+    fml("\\frac{d}{dt}\\frac{\\partial L}{\\partial\\dot q_\\alpha}-\\frac{\\partial L}{\\partial q_\\alpha} = \\sum_j\\lambda_j\\frac{\\partial f_j}{\\partial q_\\alpha}",
+        "右边 $\\sum_j\\lambda_j\\frac{\\partial f_j}{\\partial q_\\alpha}$ 即为约束力的广义分量。<br>对 $\\lambda_j$ 的欧拉-拉格朗日方程（注意 $\\lambda_j$ 不含 $\\dot q$）：$\\frac{\\partial\\tilde L}{\\partial\\lambda_j}=f_j=0$，即恢复约束方程。<br>这样共有 $s+k$ 个方程，可同时解出 $s$ 个 $q_\\alpha(t)$ 和 $k$ 个 $\\lambda_j(t)$。"))
+    + der(p("<strong>约束力的物理意义：</strong>对完整约束 $f_j(q,t)=0$，约束力沿约束曲面法向，其大小由 $\\lambda_j$ 给出。具体地，约束力对第 $i$ 个质点的分量为")+
+    fml("\\vec F_{Ni} = \\sum_j \\lambda_j\\nabla_i f_j",
+        '其中 $\\nabla_i$ 为对 $\\vec r_i$ 的梯度。<br>对粒子被限制在曲面 $f(\\vec r)=0$ 上的情形，$\\nabla f$ 沿曲面法向，约束力 $\\vec F_N=\\lambda\\nabla f$ 也沿法向，与"约束力沿约束面法向"的几何图像一致。'))
+    + exa(p("<strong>单摆（求张力）：</strong>约束 $f=x^2+y^2-L^2=0$，引入乘子 $\\lambda$。修正拉氏量 $\\tilde L=\\frac{1}{2}m(\\dot x^2+\\dot y^2)+mgy+\\lambda(x^2+y^2-L^2)$。<br>对 $\\lambda$：$x^2+y^2=L^2$（约束）。<br>对 $x$：$m\\ddot x=2\\lambda x$。对 $y$：$m\\ddot y=mg+2\\lambda y$。<br>用极坐标 $x=L\\sin\\theta$，$y=-L\\cos\\theta$，代入得 $\\lambda=\\frac{m}{2L}(g\\cos\\theta-L\\dot\\theta^2)$。<br>张力 $T=-2\\lambda L=m(L\\dot\\theta^2-g\\cos\\theta)=mg\\cos\\theta+mL\\dot\\theta^2$（向心分量 + 切向重力分量），与牛顿法分析一致。"))
+    + app(p("拉格朗日乘子法的优点：<br>(1) 不必显式消去约束，可用于任意约束（包括非完整约束）；<br>(2) 可同时求运动和约束力；<br>(3) 在电磁场、流体力学、相对论中均有应用（如规范场的乘子法）。"))
 )},
 ],
 },
@@ -355,6 +364,19 @@ ch2_sections = [
     fml("H = p\\dot x - L = \\frac{p^2}{m} - \\left(\\frac{p^2}{2m}-\\frac{1}{2}m\\omega^2 x^2\\right) = \\frac{p^2}{2m} + \\frac{1}{2}m\\omega^2 x^2 = T+V = E"))
     + exa(p("<strong>单摆：</strong>$L=\\frac{1}{2}mR^2\\dot\\theta^2+mgR\\cos\\theta$，$p_\\theta=mR^2\\dot\\theta$，故 $H=\\frac{p_\\theta^2}{2mR^2}-mgR\\cos\\theta$，正则动量 $p_\\theta$ 为角动量。"))
     + app(p("当 $L$ 不显含时间且势能不含速度时，$H=T+V=E$ 即为总能量。但当 $L$ 显含时间或坐标变换显含时间时，$H$ 不一定等于总机械能。"))
+)},
+{"id":"tm-c2s1-4","name":"哈密顿量与总能量的关系","tags":["thm","der","app","note"],"brief":"$H$ 何时等于总机械能的判据与推导。",
+ "body": wrap(
+    thm("判据", p("哈密顿量 $H$ 等于总机械能 $E=T+V$ 当且仅当：(1) 拉格朗日函数不显含时间 $\\frac{\\partial L}{\\partial t}=0$；(2) 约束方程不含时间（即坐标变换 $\\vec r_i=\\vec r_i(q)$ 不显含 $t$）。"))
+    + der(p("<strong>推导：</strong>由动能定义 $T=\\frac{1}{2}\\sum_i m_i\\dot{\\vec r}_i^2$，对完整稳定约束 $\\vec r_i=\\vec r_i(q_1,\\dots,q_s)$（不含 $t$），速度 $\\dot{\\vec r}_i=\\sum_\\alpha\\frac{\\partial\\vec r_i}{\\partial q_\\alpha}\\dot q_\\alpha$，故")+
+    fml("T = \\frac{1}{2}\\sum_{\\alpha,\\beta}\\left(\\sum_i m_i\\frac{\\partial\\vec r_i}{\\partial q_\\alpha}\\cdot\\frac{\\partial\\vec r_i}{\\partial q_\\beta}\\right)\\dot q_\\alpha\\dot q_\\beta = \\frac{1}{2}\\sum_{\\alpha\\beta}A_{\\alpha\\beta}(q)\\dot q_\\alpha\\dot q_\\beta",
+        "即 $T$ 是广义速度的<strong>二次齐次函数</strong>（仅含 $\\dot q^2$ 项，无常数项和一次项）。由欧拉齐次函数定理："))
+    + der(fml("\\sum_\\alpha \\dot q_\\alpha\\frac{\\partial T}{\\partial\\dot q_\\alpha} = 2T",
+        "由于 $V$ 不含 $\\dot q$，$\\frac{\\partial L}{\\partial\\dot q_\\alpha}=\\frac{\\partial T}{\\partial\\dot q_\\alpha}$，故")+
+    fml("H = \\sum_\\alpha p_\\alpha\\dot q_\\alpha - L = \\sum_\\alpha\\dot q_\\alpha\\frac{\\partial T}{\\partial\\dot q_\\alpha} - (T-V) = 2T - (T-V) = T + V = E",
+        "故 $H$ 即为总机械能。<br><strong>反之</strong>，若约束显含时间 $\\vec r_i=\\vec r_i(q,t)$，则 $\\dot{\\vec r}_i=\\sum_\\alpha\\frac{\\partial\\vec r_i}{\\partial q_\\alpha}\\dot q_\\alpha+\\frac{\\partial\\vec r_i}{\\partial t}$，动能含 $\\dot q$ 的一次项和常数项，不再是齐次函数，$H\\neq T+V$。"))
+    + app(p("<strong>电磁场中带电粒子：</strong>$L=\\frac{1}{2}m\\vec v^2-q\\phi+q\\vec A\\cdot\\vec v$，$\\sum p_\\alpha\\dot q_\\alpha=m\\vec v^2+q\\vec A\\cdot\\vec v$，故 $H=m\\vec v^2+q\\vec A\\cdot\\vec v-\\frac{1}{2}m\\vec v^2+q\\phi-q\\vec A\\cdot\\vec v=\\frac{1}{2}m\\vec v^2+q\\phi$。机械能 $E=\\frac{1}{2}m\\vec v^2+q\\phi$，故 $H=E$，但此时势能含速度。<br><strong>转动参考系：</strong>坐标变换含时间，$H\\neq T+V$。"))
+    + note(p("$H$ 守恒要求 $\\frac{\\partial L}{\\partial t}=0$；$H=E$（总机械能）要求约束不含时间。两者是<strong>不同的条件</strong>：可出现 $H$ 守恒但 $H\\neq E$（含时约束），或 $H=E$ 但 $H$ 不守恒（$L$ 显含时间）。"))
 )},
 ],
 },
