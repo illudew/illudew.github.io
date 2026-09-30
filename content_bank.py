@@ -43,9 +43,6 @@ def build_kp(prefix, idx, name, formula="", explain="", deriv="",
     # 推导
     parts.append(sec("der", "推 导", p(deriv) if deriv else ""))
 
-    # 例题
-    parts.append(sec("exa", "例 题", p(ex) if ex else ""))
-
     # 应用
     parts.append(sec("app", "应 用", p(app) if app else ""))
 
@@ -67,7 +64,6 @@ def build_kp(prefix, idx, name, formula="", explain="", deriv="",
     if explain: tags.append("def")
     if formula: tags.append("thm")
     if deriv: tags.append("der")
-    if ex: tags.append("exa")
     if app: tags.append("app")
     if note: tags.append("note")
 
