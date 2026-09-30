@@ -365,11 +365,22 @@ ch2_sections = [
     fml("\\frac{df}{dt} = \\frac{\\partial f}{\\partial t} + \\{f,H\\}",
         "推导：$\\frac{df}{dt}=\\frac{\\partial f}{\\partial t}+\\sum_\\alpha(\\frac{\\partial f}{\\partial q_\\alpha}\\dot q_\\alpha+\\frac{\\partial f}{\\partial p_\\alpha}\\dot p_\\alpha)=\\frac{\\partial f}{\\partial t}+\\sum_\\alpha(\\frac{\\partial f}{\\partial q_\\alpha}\\frac{\\partial H}{\\partial p_\\alpha}-\\frac{\\partial f}{\\partial p_\\alpha}\\frac{\\partial H}{\\partial q_\\alpha})=\\frac{\\partial f}{\\partial t}+\\{f,H\\}$。<br>特别地，$\\dot q_\\alpha=\\{q_\\alpha,H\\}$，$\\dot p_\\alpha=\\{p_\\alpha,H\\}$。"))
 )},
-{"id":"tm-c2s3-2","name":"泊松括号的性质","tags":["thm","der"],"brief":"双线性、反对称、雅可比恒等式。",
+{"id":"tm-c2s3-2","name":"泊松括号的性质","tags":["thm","der"],"brief":"双线性、反对称、莱布尼茨法则、雅可比恒等式及其证明。",
  "body": wrap(
-    thm("基本性质", p("<strong>双线性：</strong>$\\{af+bg,h\\}=a\\{f,h\\}+b\\{g,h\\}$<br><strong>反对称性：</strong>$\\{f,g\\}=-\\{g,f\\}$<br><strong>莱布尼茨法则：</strong>$\\{fg,h\\}=f\\{g,h\\}+\\{f,h\\}g$<br><strong>雅可比恒等式：</strong>$\\{f,\\{g,h\\}\\}+\\{g,\\{h,f\\}\\}+\\{h,\\{f,g\\}\\}=0$"))
+    thm("泊松括号的四条基本性质", p("<strong>1. 反对称性：</strong>$\\{f,g\\}=-\\{g,f\\}$<br><strong>2. 双线性：</strong>$\\{af+bg,h\\}=a\\{f,h\\}+b\\{g,h\\}$<br><strong>3. 莱布尼茨法则：</strong>$\\{fg,h\\}=f\\{g,h\\}+\\{f,h\\}g$<br><strong>4. 雅可比恒等式：</strong>$\\{f,\\{g,h\\}\\}+\\{g,\\{h,f\\}\\}+\\{h,\\{f,g\\}\\}=0$"))
     + thm("基本泊松括号", p("$\\{q_\\alpha,q_\\beta\\}=0$，$\\{p_\\alpha,p_\\beta\\}=0$，$\\{q_\\alpha,p_\\beta\\}=\\delta_{\\alpha\\beta}$。"))
-    + der(p("由定义直接计算可验证双线性、反对称性和莱布尼茨法则。雅可比恒等式可通过直接展开验证（计算较繁），它是泊松括号最重要的代数性质，保证了相空间上的函数在泊松括号下构成李代数。"))
+    + der(p("<strong>反对称性的证明（用辛形式）：</strong>由 $\\{g,f\\}=(\\nabla g)^T J(\\nabla f)$，取转置得 $\\{g,f\\}=(\\nabla g)^T J(\\nabla f)=((\\nabla f)^T J^T(\\nabla g))^T$。由于 $J^T=-J$（辛矩阵反对称），故 $\\{g,f\\}=-(\\nabla f)^T J(\\nabla g)=-\\{f,g\\}$。"))
+    + der(p("<strong>莱布尼茨法则的证明：</strong>由 $\\{fg,h\\}=(\\nabla(fg))^T J(\\nabla h)$，利用 $\\nabla(fg)=f\\nabla g+g\\nabla f$（乘积的梯度分解），得")+
+    fml("\\{fg,h\\} = (f\\nabla g + g\\nabla f)^T J\\nabla h = f(\\nabla g)^T J\\nabla h + g(\\nabla f)^T J\\nabla h = f\\{g,h\\} + g\\{f,h\\}",
+        "即 $\\{fg,h\\}=f\\{g,h\\}+g\\{f,h\\}=f\\{g,h\\}+\\{f,h\\}g$（最后一步用反对称性）。"))
+    + der(p("<strong>雅可比恒等式的证明（用辛形式 $J$）：</strong>记 $\\xi_a$（$1\\le a\\le 2s$）为统一正则坐标，则 $\\{f,g\\}=(\\nabla f)^T J(\\nabla g)=\\sum_{a,b}J_{ab}\\frac{\\partial f}{\\partial\\xi_a}\\frac{\\partial g}{\\partial\\xi_b}$。对嵌套泊松括号展开：")+
+    fml("\\{f,\\{g,h\\}\\} = \\sum_{a,b}J_{ab}\\frac{\\partial f}{\\partial\\xi_a}\\frac{\\partial}{\\partial\\xi_b}\\left(\\sum_{c,d}J_{cd}\\frac{\\partial g}{\\partial\\xi_c}\\frac{\\partial h}{\\partial\\xi_d}\\right)",
+        "展开后分为两类项：一类对 $g$ 求导（$\\frac{\\partial^2 g}{\\partial\\xi_b\\partial\\xi_c}$），一类对 $h$ 求导（$\\frac{\\partial^2 h}{\\partial\\xi_b\\partial\\xi_d}$）：")+
+    fml("\\{f,\\{g,h\\}\\} = \\sum_{a,b,c,d}J_{ab}J_{cd}\\frac{\\partial f}{\\partial\\xi_a}\\frac{\\partial^2 g}{\\partial\\xi_b\\partial\\xi_c}\\frac{\\partial h}{\\partial\\xi_d} + \\sum_{a,b,c,d}J_{ab}J_{cd}\\frac{\\partial f}{\\partial\\xi_a}\\frac{\\partial g}{\\partial\\xi_c}\\frac{\\partial^2 h}{\\partial\\xi_b\\partial\\xi_d}",
+        "将雅可比恒等式左端的三项全部展开，第一类（含 $\\partial^2 g$ 的项）合并后利用 $J_{ab}J_{cd}+J_{ac}J_{db}+J_{ad}J_{bc}$ 的对称性可以证明恒等于零。具体地，含 $\\frac{\\partial^2 g}{\\partial\\xi_b\\partial\\xi_c}\\frac{\\partial f}{\\partial\\xi_a}\\frac{\\partial h}{\\partial\\xi_d}$ 的项来自三个嵌套括号，其系数之和为 $J_{ab}J_{cd}+J_{bc}J_{ad}+J_{ca}J_{bd}$。")+
+    fml("J_{ab}J_{cd} + J_{bc}J_{ad} + J_{ca}J_{bd} = 0",
+        "上式利用了 $J$ 的反对称性 $J_{ab}=-J_{ba}$ 和分量指标的重排。同理含 $\\frac{\\partial^2 h}{\\partial\\xi_b\\partial\\xi_d}$ 的项也合并为零。故雅可比恒等式成立。$\\blacksquare$"))
+    + thm("李代数结构", p("泊松括号满足反对称性、双线性和雅可比恒等式，故相空间上的光滑函数在泊松括号下构成<strong>李代数</strong>（Lie algebra）。莱布尼茨法则进一步说明它是一个<strong>泊松代数</strong>。这一代数结构是经典力学与量子力学的共同基础。"))
 )},
 {"id":"tm-c2s3-3","name":"辛形式","tags":["def","thm","der"],"brief":"泊松括号的几何表述与辛矩阵。",
  "body": wrap(
@@ -550,13 +561,13 @@ ch3_sections = [
 "color": "#2563eb",
 "desc": "平衡位置、稳定平衡、小振动方程、简正坐标",
 "items": [
-{"id":"tm-c3s1-1","name":"平衡位置","tags":["def","thm","der"],"brief":"广义力为零的位置。",
+{"id":"tm-c3s1-1","name":"平衡位置","tags":["def","thm","der"],"brief":"广义力为零的位置，含充要条件推导。",
  "body": wrap(
     defn("平衡位置", p("若 $\\vec q(t)=\\vec q_0$ 是系统动力学方程的解（即系统静止于 $\\vec q_0$），则 $\\vec q_0$ 称为系统的一个平衡位置。"))
     + thm("平衡位置的充要条件", p("对于约束和势能均不显含时间的系统，$\\vec q_0$ 为平衡位置的充要条件是广义力为零：")+
     fml("\\frac{\\partial U}{\\partial q_\\alpha}\\bigg|_{\\vec q=\\vec q_0} = 0,\\qquad \\alpha=1,\\dots,s",
         "即势能在平衡位置处取极值。"))
-    + der(p("由欧拉-拉格朗日方程，平衡时 $\\dot q=\\ddot q=0$，故 $\\frac{\\partial L}{\\partial q_\\alpha}=-\\frac{\\partial U}{\\partial q_\\alpha}=0$。反之若广义力为零，$\\vec q(t)=\\vec q_0$ 满足方程。"))
+    + der(p("<strong>推导：</strong>对不显含时系统，约束不含时故 $\\vec r_i=\\vec r_i(\\vec q)$（不含 $t$），速度 $\\dot{\\vec r}_i=\\sum_\\alpha\\frac{\\partial\\vec r_i}{\\partial q_\\alpha}\\dot q_\\alpha$，动能为 $T=\\frac{1}{2}\\sum_{\\alpha\\beta}A_{\\alpha\\beta}(\\vec q)\\dot q_\\alpha\\dot q_\\beta$（纯二次型，无一次项和零次项）。<br>欧拉-拉格朗日方程：$\\frac{d}{dt}\\frac{\\partial T}{\\partial\\dot q_\\alpha}-\\frac{\\partial T}{\\partial q_\\alpha}=-\\frac{\\partial U}{\\partial q_\\alpha}$。<br><strong>必要性：</strong>若 $\\vec q_0$ 为平衡位置，则 $\\dot q=0$，故 $\\frac{\\partial T}{\\partial\\dot q_\\alpha}={\\sum_\\beta A_{\\alpha\\beta}\\dot q_\\beta}=0$，$\\frac{d}{dt}\\frac{\\partial T}{\\partial\\dot q_\\alpha}=0$。又 $\\frac{\\partial T}{\\partial q_\\alpha}=\\frac{1}{2}\\sum_{\\beta\\gamma}\\frac{\\partial A_{\\beta\\gamma}}{\\partial q_\\alpha}\\dot q_\\beta\\dot q_\\gamma=0$。故 $\\frac{\\partial U}{\\partial q_\\alpha}=0$。<br><strong>充分性：</strong>若 $\\frac{\\partial U}{\\partial q_\\alpha}|_{\\vec q_0}=0$，则 $\\vec q(t)=\\vec q_0$（$\\dot q=0$）满足方程，故为平衡位置。$\\blacksquare$"))
 )},
 {"id":"tm-c3s1-2","name":"平衡的分类","tags":["def","thm"],"brief":"稳定、不稳定、随遇平衡。",
  "body": wrap(
@@ -576,7 +587,7 @@ ch3_sections = [
         "这是一个二阶线性齐次常微分方程组，可写为矩阵形式 $A\\ddot{\\eta}+V\\eta=0$。"))
     + der(p("由 $L=T-V$ 代入欧拉-拉格朗日方程：$\\frac{d}{dt}\\frac{\\partial T}{\\partial\\dot\\eta_\\alpha}-\\frac{\\partial T}{\\partial\\eta_\\alpha}=-\\frac{\\partial V}{\\partial\\eta_\\alpha}$。由于 $T$ 关于 $\\dot\\eta$ 二次且系数在平衡附近取常数，$\\frac{\\partial T}{\\partial\\eta_\\alpha}\\approx 0$，故得 $\\sum_\\beta A_{\\alpha\\beta}\\ddot\\eta_\\beta=-\\sum_\\beta V_{\\alpha\\beta}\\eta_\\beta$。"))
 )},
-{"id":"tm-c3s1-4","name":"简正频率与简正坐标","tags":["def","thm","der"],"brief":"广义本征值问题。",
+{"id":"tm-c3s1-4","name":"简正频率与简正坐标","tags":["def","thm","der","app"],"brief":"广义本征值问题与简正坐标的求解步骤。",
  "body": wrap(
     defn("简正频率", p("设简谐解形式 $\\eta_\\alpha=a_\\alpha\\cos(\\omega t+\\phi)$，代入小振动方程得广义本征值问题")+
     fml("\\det(V - \\omega^2 A) = 0",
@@ -584,7 +595,11 @@ ch3_sections = [
     + thm("简正坐标", p("通过线性变换 $\\eta_\\alpha=\\sum_i C_{\\alpha i}Q_i$（其中 $C$ 的列为本征矢量，并归一化使 $C^T A C=I$），可将运动方程解耦为")+
     fml("\\ddot Q_i + \\omega_i^2 Q_i = 0,\\qquad i=1,\\dots,s",
         "$Q_i$ 称为简正坐标，每个简正坐标以单一频率 $\\omega_i$ 做简谐振动。"))
-    + der(p("由于 $A$ 和 $V$ 均为实对称矩阵且 $A$ 正定，可通过广义本征值问题同时对角化 $A$ 和 $V$：$C^T A C=I$，$C^T V C=\\Omega^2=\\text{diag}(\\omega_1^2,\\dots,\\omega_s^2)$。<br>代入 $A\\ddot\\eta+V\\eta=0$，左乘 $C^T$ 得 $C^T A C\\ddot Q+C^T V C Q=\\ddot Q+\\Omega^2 Q=0$，即各 $Q_i$ 独立振动。"))
+    + der(p("<strong>推导：</strong>由于 $A$ 和 $V$ 均为实对称矩阵且 $A$ 正定，可通过广义本征值问题同时对角化 $A$ 和 $V$：$C^T A C=I$，$C^T V C=\\Omega^2=\\text{diag}(\\omega_1^2,\\dots,\\omega_s^2)$。<br>代入 $A\\ddot\\eta+V\\eta=0$，左乘 $C^T$ 得 $C^T A C\\ddot Q+C^T V C Q=\\ddot Q+\\Omega^2 Q=0$，即各 $Q_i$ 独立振动。"))
+    + der(p("<strong>寻找简正坐标的一般方法（四步法）：</strong><br><strong>第一步：</strong>利用小振动近似，将动能与势能写为二次型形式：$T=\\frac{1}{2}\\dot\\eta^T A\\dot\\eta$，$V=\\frac{1}{2}\\eta^T B\\eta$（$B=V$ 为势能矩阵）。<br><strong>第二步：</strong>用正交矩阵 $C_1$ 将势能矩阵对角化：$B=C_1 D_1 C_1^T$，其中 $D_1=\\text{diag}(\\lambda_1,\\dots,\\lambda_s)$。定义新坐标 $\\vec x=C_1^T\\vec\\eta$，则 $V=\\frac{1}{2}\\vec x^T D_1\\vec x$。<br><strong>第三步：</strong>进一步用对角矩阵 $D_1^{-1/2}=\\text{diag}(1/\\sqrt{\\lambda_1},\\dots,1/\\sqrt{\\lambda_s})$ 变换 $\\vec y=D_1^{-1/2}\\vec x$，使 $V=\\frac{1}{2}\\vec y^T\\vec y$（势能化为平方和），此时 $T=\\frac{1}{2}\\dot{\\vec y}^T E\\dot{\\vec y}$（$E$ 仍为一般对称矩阵）。<br><strong>第四步：</strong>用正交矩阵 $C_2$ 将动能矩阵 $E$ 对角化：$E=C_2 D_2 C_2^T$，定义简正坐标 $\\vec z=C_2^T\\vec y$。则")+
+    fml("T = \\frac{1}{2}\\dot{\\vec z}^T D_2\\dot{\\vec z},\\qquad V = \\frac{1}{2}\\vec z^T\\vec z",
+        "拉格朗日量 $L=\\sum_i\\frac{1}{2}(\\mu_i\\dot z_i^2-z_i^2)$，方程 $\\mu_i\\ddot z_i+z_i=0$，频率 $\\omega_i=1/\\sqrt{\\mu_i}$。"))
+    + app(p("<strong>物理意义：</strong>简正坐标使耦合的微分方程完全解耦，每个简正模式是独立的简谐振动。一般运动为各简正模式的线性叠加：$\\eta_\\alpha(t)=\\sum_i C_{\\alpha i}A_i\\sin(\\omega_i t+\\alpha_i)$。广义坐标到简正坐标的总变换为 $\\vec\\eta=C_1 D_1^{-1/2} C_2\\,\\vec z$。"))
 )},
 {"id":"tm-c3s1-5","name":"双单摆","tags":["exa","der"],"brief":"两个自由度耦合振动的经典例子。",
  "body": wrap(
