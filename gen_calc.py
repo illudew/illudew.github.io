@@ -699,6 +699,7 @@ ch6_sections = [
     + thm("极坐标变换", p("令 $x=r\\cos\\theta$，$y=r\\sin\\theta$，面积元素 $d\\sigma=r\\,dr\\,d\\theta$（雅可比 $J=r$），则")+
     fml("\\iint_D f(x,y)\\,d\\sigma = \\int_\\alpha^\\beta\\int_{r_1(\\theta)}^{r_2(\\theta)} f(r\\cos\\theta,r\\sin\\theta)\\,r\\,dr\\,d\\theta",
         "极坐标适用于圆形、扇形、环形区域或被积函数含 $x^2+y^2$ 的情形。"))
+    + der(p("<strong>面积元素 $d\\sigma=r\\,dr\\,d\\theta$ 的推导：</strong>在极坐标下，用 $r=$ 常数（同心圆）和 $\\theta=$ 常数（射线）分割区域。小区域近似为矩形，其径向边长为 $dr$，切向边长为 $r\\,d\\theta$（弧长 = 半径 × 圆心角），故面积 $d\\sigma=dr\\cdot r\\,d\\theta=r\\,dr\\,d\\theta$。<br>用雅可比验证：$J=\\frac{\\partial(x,y)}{\\partial(r,\\theta)}=\\begin{vmatrix}\\cos\\theta & -r\\sin\\theta \\\\ \\sin\\theta & r\\cos\\theta\\end{vmatrix}=r\\cos^2\\theta+r\\sin^2\\theta=r$，故 $d\\sigma=|J|\\,dr\\,d\\theta=r\\,dr\\,d\\theta$。"))
     + exa(p("<strong>例（高斯积分）：</strong>$I=\\iint_D e^{-x^2-y^2}\\,d\\sigma$，$D:x^2+y^2\\le a^2$。极坐标下 $I=\\int_0^{2\\pi}d\\theta\\int_0^a e^{-r^2}r\\,dr=2\\pi\\cdot\\frac{1}{2}(1-e^{-a^2})=\\pi(1-e^{-a^2})$。<br>令 $a\\to\\infty$，全平面积分为 $\\pi$，而它又等于 $\\left(\\int_{-\\infty}^{\\infty}e^{-x^2}dx\\right)^2$，故得著名的<strong>高斯积分</strong> $\\int_{-\\infty}^{\\infty}e^{-x^2}dx=\\sqrt{\\pi}$。"))
 )},
 ]
@@ -715,6 +716,9 @@ ch6_sections = [
     + thm("直角坐标", p("$dV=dx\\,dy\\,dz$，可化为先一后二（先 $z$ 后 $xy$）或先二后一的累次积分。"))
     + thm("柱坐标变换", p("$x=r\\cos\\theta$，$y=r\\sin\\theta$，$z=z$，$dV=r\\,dr\\,d\\theta\\,dz$。雅可比 $J=r$。适用于圆柱对称区域。"))
     + thm("球坐标变换", p("$x=r\\sin\\varphi\\cos\\theta$，$y=r\\sin\\varphi\\sin\\theta$，$z=r\\cos\\varphi$，$dV=r^2\\sin\\varphi\\,dr\\,d\\varphi\\,d\\theta$。雅可比 $J=r^2\\sin\\varphi$。适用于球对称区域。"))
+    + der(p("<strong>球坐标体积元素推导：</strong>球坐标中，用 $r,\\varphi,\\theta$ 三组坐标面分割空间，小区域近似为长方体：径向边长 $dr$，纬度方向弧长 $r\\,d\\varphi$，经度方向弧长 $r\\sin\\varphi\\,d\\theta$，故")+
+    fml("dV = dr\\cdot r\\,d\\varphi\\cdot r\\sin\\varphi\\,d\\theta = r^2\\sin\\varphi\\,dr\\,d\\varphi\\,d\\theta",
+        "雅可比验证：$J=\\frac{\\partial(x,y,z)}{\\partial(r,\\varphi,\\theta)}=r^2\\sin\\varphi$（计算行列式可得）。"))
     + exa(p("<strong>例（球体体积）：</strong>$\\Omega:x^2+y^2+z^2\\le R^2$。球坐标下 $V=\\int_0^{2\\pi}d\\theta\\int_0^\\pi\\sin\\varphi\\,d\\varphi\\int_0^R r^2\\,dr=2\\pi\\cdot 2\\cdot\\frac{R^3}{3}=\\frac{4}{3}\\pi R^3$。"))
 )},
 ]
@@ -822,6 +826,9 @@ ch6_sections = [
     defn("Γ函数与Β函数", p("")+
     fml("\\Gamma(s) = \\int_0^{+\\infty} x^{s-1}e^{-x}\\,dx\\quad (s>0),\\qquad B(p,q) = \\int_0^1 x^{p-1}(1-x)^{q-1}\\,dx\\quad (p,q>0)"))
     + thm("Γ函数性质", p("(1) 递推：$\\Gamma(s+1)=s\\Gamma(s)$；(2) $\\Gamma(n+1)=n!$（$n$ 为正整数），故 Γ 函数是阶乘的解析延拓；(3) $\\Gamma(\\frac{1}{2})=\\sqrt{\\pi}$；(4) 余元公式：$\\Gamma(s)\\Gamma(1-s)=\\frac{\\pi}{\\sin\\pi s}$。"))
+    + der(p("<strong>递推公式推导：</strong>对 $\\Gamma(s+1)=\\int_0^{+\\infty}x^s e^{-x}\\,dx$ 分部积分，取 $u=x^s$，$dv=e^{-x}dx$：")+
+    fml("\\Gamma(s+1) = \\left[-x^s e^{-x}\\right]_0^{+\\infty} + s\\int_0^{+\\infty}x^{s-1}e^{-x}\\,dx = 0 + s\\Gamma(s) = s\\Gamma(s)",
+        "其中 $\\left[-x^s e^{-x}\\right]_0^{+\\infty}=0$（$x\\to+\\infty$ 时 $e^{-x}$ 衰减快于任何多项式；$x\\to 0^+$ 时 $x^s\\to 0$）。<br>由此 $\\Gamma(n+1)=n\\Gamma(n)=n(n-1)\\cdots 1\\cdot\\Gamma(1)=n!$（因 $\\Gamma(1)=\\int_0^\\infty e^{-x}dx=1$）。"))
     + thm("Γ与Β的关系", p("$B(p,q)=\\frac{\\Gamma(p)\\Gamma(q)}{\\Gamma(p+q)}$。")+
     fml("\\Gamma(s+1) = s\\Gamma(s),\\quad \\Gamma\\left(\\frac{1}{2}\\right)=\\sqrt{\\pi}",
         "例：$\\int_0^{+\\infty}e^{-x^2}\\,dx=\\frac{1}{2}\\Gamma(\\frac{1}{2})=\\frac{\\sqrt{\\pi}}{2}$，即高斯积分。"))
@@ -846,7 +853,9 @@ ch7_sections = [
  "body": wrap(
     thm("格林公式", p("设 $D$ 为平面有界闭区域，边界 $L$ 为分段光滑曲线，取正向（逆时针）。若 $P,Q$ 在 $D$ 上有一阶连续偏导数，则")+
     fml("\\oint_L P\\,dx+Q\\,dy = \\iint_D\\left(\\frac{\\partial Q}{\\partial x}-\\frac{\\partial P}{\\partial y}\\right)d\\sigma"))
-    + der(p("<strong>证明思路：</strong>先对 X 型区域证明 $\\oint_L P\\,dx=-\\iint_D\\frac{\\partial P}{\\partial y}\\,d\\sigma$，再对 Y 型区域证明 $\\oint_L Q\\,dy=\\iint_D\\frac{\\partial Q}{\\partial x}\\,d\\sigma$，合并即得。一般区域可分割为若干 X/Y 型区域。"))
+    + der(p("<strong>证明：</strong>只需证 $\\oint_L P\\,dx=-\\iint_D\\frac{\\partial P}{\\partial y}\\,d\\sigma$，另一式类似。<br>设 $D$ 为 X 型区域：$a\\le x\\le b$，$y_1(x)\\le y\\le y_2(x)$。则")+
+    fml("\\iint_D\\frac{\\partial P}{\\partial y}\\,d\\sigma = \\int_a^b\\left[\\int_{y_1(x)}^{y_2(x)}\\frac{\\partial P}{\\partial y}\\,dy\\right]dx = \\int_a^b [P(x,y_2(x))-P(x,y_1(x))]\\,dx",
+        "而曲线积分 $\\oint_L P\\,dx$ 沿下边界 $y=y_1(x)$（$x$ 从 $a$ 到 $b$）为 $\\int_a^b P(x,y_1(x))\\,dx$，沿上边界 $y=y_2(x)$（$x$ 从 $b$ 到 $a$）为 $\\int_b^a P(x,y_2(x))\\,dx=-\\int_a^b P(x,y_2(x))\\,dx$，左右边界 $dx=0$。<br>故 $\\oint_L P\\,dx=\\int_a^b P(x,y_1)\\,dx-\\int_a^b P(x,y_2)\\,dx=-\\int_a^b[P(x,y_2)-P(x,y_1)]\\,dx=-\\iint_D\\frac{\\partial P}{\\partial y}\\,d\\sigma$。一般区域可分割为若干 X 型区域，相邻边界线积分抵消。$\\blacksquare$"))
     + app(p("<strong>面积公式：</strong>取 $P=-y,Q=x$，得 $A=\\frac{1}{2}\\oint_L x\\,dy-y\\,dx$。这是用曲线积分计算区域面积的方法。"))
 )},
 {"id":"c7s1-2","name":"平面曲线积分与路径无关","tags":["thm","der","app"],"brief":"四个等价条件与原函数。",
@@ -896,7 +905,7 @@ ch7_sections = [
     thm("斯托克斯公式", p("设 $\\Sigma$ 为光滑有界曲面，边界 $\\Gamma$ 为分段光滑闭曲线，$\\Gamma$ 的正向与 $\\Sigma$ 的侧符合右手定则。若 $P,Q,R$ 有一阶连续偏导数，则")+
     fml("\\oint_\\Gamma P\\,dx+Q\\,dy+R\\,dz = \\iint_\\Sigma\\begin{vmatrix}dy\\,dz & dz\\,dx & dx\\,dy \\\\ \\frac{\\partial}{\\partial x} & \\frac{\\partial}{\\partial y} & \\frac{\\partial}{\\partial z} \\\\ P & Q & R\\end{vmatrix}",
         "用旋度表示：$\\oint_\\Gamma\\vec F\\cdot d\\vec r=\\iint_\\Sigma(\\nabla\\times\\vec F)\\cdot d\\vec S$。"))
-    + der(p("<strong>证明思路：</strong>先对特殊曲面（$z=z(x,y)$ 型）证明 $\\oint_\\Gamma P\\,dx=\\iint_\\Sigma(\\frac{\\partial P}{\\partial z}dz\\,dx-\\frac{\\partial P}{\\partial y}dx\\,dy)$，利用格林公式将边界线积分化为投影区域上的二重积分，再还原为曲面积分。对 $Q,R$ 同理，合并即得。一般曲面可分割为若干此类曲面片。"))
+    + der(p("<strong>证明思路：</strong>先对特殊曲面（$z=z(x,y)$ 型）证明 $\\oint_\\Gamma P\\,dx=\\iint_\\Sigma(\\frac{\\partial P}{\\partial z}dz\\,dx-\\frac{\\partial P}{\\partial y}dx\\,dy)$，利用格林公式将边界线积分化为投影区域上的二重积分，再还原为曲面积分。对 $Q,R$ 同理，合并即得。一般曲面可分割为若干此类曲面片，相邻边界线积分抵消。<br><strong>格林公式是特例：</strong>当 $\\Sigma$ 为 $xy$ 平面上的区域 $D$（$z=0$，$d\\vec S=dx\\,dy\\,\\vec k$），斯托克斯公式退化为 $\\oint_{\\partial D}P\\,dx+Q\\,dy=\\iint_D(\\frac{\\partial Q}{\\partial x}-\\frac{\\partial P}{\\partial y})d\\sigma$，即格林公式。"))
     + app(p("<strong>几何/物理意义：</strong>沿闭曲线的<strong>环量</strong>等于穿过以该曲线为边界的曲面的<strong>旋度通量</strong>。格林公式是斯托克斯公式在 $z=0$ 平面的特例。"))
 )},
 {"id":"c7s3-2","name":"旋度的物理意义","tags":["def","thm","app"],"brief":"环量密度与无旋场。",
@@ -998,6 +1007,9 @@ ch8_sections = [
  "body": wrap(
     defn("傅里叶系数", p("设 $f(x)$ 以 $2\\pi$ 为周期，则其傅里叶级数为 $\\frac{a_0}{2}+\\sum_{n=1}^\\infty(a_n\\cos nx+b_n\\sin nx)$，其中系数")+
     fml("a_n = \\frac{1}{\\pi}\\int_{-\\pi}^{\\pi}f(x)\\cos nx\\,dx,\\quad b_n = \\frac{1}{\\pi}\\int_{-\\pi}^{\\pi}f(x)\\sin nx\\,dx"))
+    + der(p("<strong>系数公式推导（利用三角函数系正交性）：</strong>三角函数系 $\\{1,\\cos x,\\sin x,\\cos 2x,\\sin 2x,\\dots\\}$ 在 $[-\\pi,\\pi]$ 上正交，即任意两个不同函数的乘积积分为零：")+
+    fml("\\int_{-\\pi}^{\\pi}\\cos mx\\cos nx\\,dx = \\begin{cases}0, & m\\ne n \\\\ \\pi, & m=n\\ge 1 \\\\ 2\\pi, & m=n=0\\end{cases},\\quad \\int_{-\\pi}^{\\pi}\\sin mx\\sin nx\\,dx = \\begin{cases}0, & m\\ne n \\\\ \\pi, & m=n\\end{cases}",
+        "且 $\\int_{-\\pi}^{\\pi}\\cos mx\\sin nx\\,dx=0$。将 $f(x)\\sim\\frac{a_0}{2}+\\sum(a_n\\cos nx+b_n\\sin nx)$ 两边乘 $\\cos mx$ 并在 $[-\\pi,\\pi]$ 积分，由正交性，右端仅 $n=m$ 项非零：$\\int f(x)\\cos mx\\,dx=a_m\\pi$，故 $a_m=\\frac{1}{\\pi}\\int f(x)\\cos mx\\,dx$。同理得 $b_m$。"))
     + thm("收敛定理（狄利克雷条件）", p("若 $f$ 在 $[-\\pi,\\pi]$ 满足：(1) 连续或只有有限个第一类间断点；(2) 只有有限个极值点，则傅里叶级数收敛，且和为")+
     fml("S(x) = \\frac{f(x^-)+f(x^+)}{2}",
         "在连续点处 $S(x)=f(x)$；在间断点处 $S(x)$ 为左右极限的平均值。"))
@@ -1275,7 +1287,11 @@ window.MathJax = {{
     inlineMath: [['$','$'], ['\\\\(','\\\\)']],
     displayMath: [['$$','$$'], ['\\\\[','\\\\]']],
     processEscapes: true,
-    packages: {{'[+]': ['ams','boldsymbol']}}
+    packages: {{'[+]': ['ams','boldsymbol']}},
+    macros: {{
+      oiint: '\\mathop{{\\circ\\!\\!\\!\\!\\!\\!\\!\\!\\!\\!\\iint}}',
+      oiiint: '\\mathop{{\\circ\\!\\!\\!\\!\\!\\!\\!\\!\\!\\!\\!\\!\\iiint}}'
+    }}
   }},
   options: {{
     skipHtmlTags: ['script','noscript','style','textarea','pre','code'],
