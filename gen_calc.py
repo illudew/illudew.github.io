@@ -81,6 +81,9 @@ CORE_FORMULAS = [
     ("二阶常系数齐次方程解", "y''+py'+qy=0 \\Rightarrow \\text{由特征方程 } r^2+pr+q=0 \\text{ 决定}", "常微分方程基础解法"),
     ("全微分条件", "\\frac{\\partial P}{\\partial y} = \\frac{\\partial Q}{\\partial x} \\Leftrightarrow P\\,dx+Q\\,dy \\text{ 为全微分}", "曲线积分与路径无关的判据"),
     ("幂级数收敛半径", "R = \\lim_{n\\to\\infty}\\left|\\frac{a_n}{a_{n+1}}\\right|", "幂级数收敛域的确定"),
+    ("旋转体体积（圆盘法）", "V = \\pi\\int_a^b f^2(x)\\,dx", "曲线绕 x 轴旋转的体积"),
+    ("曲面面积", "S = \\iint_D\\sqrt{1+z_x^2+z_y^2}\\,d\\sigma", "曲面 z=z(x,y) 的面积"),
+    ("曲线弧长", "s = \\int_a^b\\sqrt{1+y'^2}\\,dx", "平面曲线的长度"),
 ]
 
 # ---------- helper functions ----------
@@ -248,13 +251,14 @@ ch2_sections = [
     fml("f(b)-f(a) = f'(\\xi)(b-a) \\quad\\Longleftrightarrow\\quad f'(\\xi)=\\frac{f(b)-f(a)}{b-a}"))
     + der(p("<strong>证明（构造辅助函数）：</strong>设辅助函数 $\\varphi(x)=f(x)-\\frac{f(b)-f(a)}{b-a}(x-a)$。<br>验证 $\\varphi(a)=f(a)$，$\\varphi(b)=f(a)$，故 $\\varphi(a)=\\varphi(b)$。$\\varphi$ 在 $[a,b]$ 连续、$(a,b)$ 可导。<br>由罗尔定理，存在 $\\xi$ 使 $\\varphi'(\\xi)=0$，即 $f'(\\xi)-\\frac{f(b)-f(a)}{b-a}=0$。$\\blacksquare$"))
     + app(p("<strong>推论1：</strong>若 $f$ 在区间 $I$ 上 $f'\\equiv 0$，则 $f$ 在 $I$ 上为常数。<br><strong>推论2：</strong>若 $f,g$ 在 $I$ 上 $f'=g'$，则 $f(x)=g(x)+C$。<br><strong>单调性判据：</strong>$f$ 在 $I$ 上单调递增 $\\Leftrightarrow$ $f'\\ge 0$；严格递增 $\\Leftarrow$ $f'>0$。"))
+    + note(p("<strong>几何意义：</strong>拉格朗日中值定理表明：连接曲线两端点 $(a,f(a))$ 与 $(b,f(b))$ 的<strong>割线斜率</strong> $\\frac{f(b)-f(a)}{b-a}$，必等于曲线在某点 $\\xi$ 处的<strong>切线斜率</strong> $f'(\\xi)$。即曲线上至少存在一点，其切线与两端点连线平行。"))
 )},
 {"id":"c2s1-3","name":"柯西中值定理","tags":["thm","der","note"],"brief":"两个函数的中值定理，洛必达法则的基础。",
  "body": wrap(
     thm("柯西中值定理", p("若 $f,g$ 在 $[a,b]$ 连续、$(a,b)$ 可导，且 $g'(x)\\ne 0$（$x\\in(a,b)$），则存在 $\\xi\\in(a,b)$ 使得")+
     fml("\\frac{f(b)-f(a)}{g(b)-g(a)} = \\frac{f'(\\xi)}{g'(\\xi)}"))
     + der(p("<strong>证明：</strong>构造辅助函数 $\\varphi(x)=f(x)-\\frac{f(b)-f(a)}{g(b)-g(a)}g(x)$。<br>验证 $\\varphi(a)=\\varphi(b)=\\frac{f(a)g(b)-f(b)g(a)}{g(b)-g(a)}$，由罗尔定理得证。<br>注意 $g(b)-g(a)\\ne 0$（否则由罗尔定理 $g'$ 有零点，矛盾）。"))
-    + note(p("拉格朗日中值定理是柯西中值定理取 $g(x)=x$ 的特例。柯西定理是洛必达法则的理论基础。"))
+    + note(p("拉格朗日中值定理是柯西中值定理取 $g(x)=x$ 的特例。柯西定理是洛必达法则的理论基础。<br><strong>几何意义：</strong>将 $(g(t),f(t))$ 视为参数方程表示的曲线，则 $\\frac{f(b)-f(a)}{g(b)-g(a)}$ 是两端点连线的斜率，$\\frac{f'(\\xi)}{g'(\\xi)}$ 是曲线上某点切线的斜率——二者相等。"))
 )},
 ]
 },
@@ -403,19 +407,60 @@ ch3_sections = [
 )},
 ]
 },
-# ---- 3.4 反常积分 ----
+# ---- 3.4 定积分的几何应用 ----
 {
-"name": "3.4 反常积分",
+"name": "3.4 定积分的几何应用",
+"color": "#14b8a6",
+"desc": "平面图形面积、旋转体体积、弧长、旋转体侧面积",
+"items": [
+{"id":"c3s4-1","name":"平面图形的面积","tags":["thm","der","exa"],"brief":"直角坐标与极坐标下的面积公式。",
+ "body": wrap(
+    thm("直角坐标下的面积", p("<strong>X 型：</strong>由 $y=f_1(x),y=f_2(x)$（$f_2\\ge f_1$）及 $x=a,x=b$ 围成的面积")+
+    fml("A = \\int_a^b [f_2(x)-f_1(x)]\\,dx",
+        "<strong>Y 型：</strong>$A=\\int_c^d [\\varphi_2(y)-\\varphi_1(y)]\\,dy$。"))
+    + thm("极坐标下的面积", p("由曲线 $r=r(\\theta)$ 及射线 $\\theta=\\alpha,\\theta=\\beta$ 围成的曲边扇形面积")+
+    fml("A = \\frac{1}{2}\\int_\\alpha^\\beta r^2(\\theta)\\,d\\theta"))
+    + der(p("<strong>极坐标面积公式推导：</strong>将 $[\\alpha,\\beta]$ 分割，第 $i$ 个小曲边扇形用半径为 $r(\\theta_i)$、圆心角为 $\\Delta\\theta_i$ 的圆扇形近似，面积 $\\Delta A_i\\approx\\frac{1}{2}r^2(\\theta_i)\\Delta\\theta_i$。取极限即得 $A=\\frac{1}{2}\\int_\\alpha^\\beta r^2(\\theta)\\,d\\theta$。"))
+    + exa(p("<strong>例：</strong>求心形线 $r=a(1+\\cos\\theta)$ 围成的面积。$A=\\frac{1}{2}\\int_0^{2\\pi}a^2(1+\\cos\\theta)^2\\,d\\theta=\\frac{a^2}{2}\\int_0^{2\\pi}(1+2\\cos\\theta+\\cos^2\\theta)\\,d\\theta=\\frac{a^2}{2}\\cdot 3\\pi=\\frac{3\\pi a^2}{2}$。"))
+)},
+{"id":"c3s4-2","name":"旋转体的体积","tags":["thm","der","exa"],"brief":"圆盘法与柱壳法。",
+ "body": wrap(
+    thm("圆盘法（绕 $x$ 轴）", p("曲线 $y=f(x)$（$a\\le x\\le b$）绕 $x$ 轴旋转一周的体积")+
+    fml("V = \\pi\\int_a^b f^2(x)\\,dx",
+        "若在两条曲线 $y=f_1(x),y=f_2(x)$ 之间，则 $V=\\pi\\int_a^b[f_2^2(x)-f_1^2(x)]\\,dx$。"))
+    + der(p("<strong>圆盘法推导：</strong>垂直于 $x$ 轴切取厚度为 $dx$ 的薄片，近似为半径 $f(x)$、高 $dx$ 的圆柱，体积 $dV=\\pi f^2(x)\\,dx$，积分得总体积。"))
+    + thm("柱壳法（绕 $y$ 轴）", p("曲线 $y=f(x)$（$a\\le x\\le b$）绕 $y$ 轴旋转的体积")+
+    fml("V = 2\\pi\\int_a^b x\\,f(x)\\,dx",
+        "柱壳半径为 $x$，高度为 $f(x)$，厚度 $dx$，侧面积 $2\\pi x\\cdot f(x)$，体积 $dV=2\\pi x f(x)\\,dx$。"))
+    + exa(p("<strong>例：</strong>求 $y=x^2$，$x=0,1$，$y=0$ 围成图形绕 $x$ 轴旋转的体积。$V=\\pi\\int_0^1 x^4\\,dx=\\frac{\\pi}{5}$。<br>绕 $y$ 轴旋转（柱壳法）：$V=2\\pi\\int_0^1 x\\cdot x^2\\,dx=2\\pi\\cdot\\frac{1}{4}=\\frac{\\pi}{2}$。"))
+)},
+{"id":"c3s4-3","name":"平面曲线的弧长与旋转体侧面积","tags":["thm","der","exa"],"brief":"弧长公式与旋转曲面面积公式。",
+ "body": wrap(
+    thm("弧长公式", p("")+
+    fml("\\text{参数方程 }x=\\varphi(t),y=\\psi(t):\\quad s = \\int_\\alpha^\\beta\\sqrt{\\varphi'(t)^2+\\psi'(t)^2}\\,dt",
+        "直角坐标 $y=y(x)$：$s=\\int_a^b\\sqrt{1+y'^2}\\,dx$；极坐标 $r=r(\\theta)$：$s=\\int_\\alpha^\\beta\\sqrt{r^2+r'^2}\\,d\\theta$。"))
+    + der(p("<strong>弧长公式推导：</strong>弧微分 $ds=\\sqrt{(dx)^2+(dy)^2}$。参数方程下 $dx=\\varphi'(t)dt$，$dy=\\psi'(t)dt$，故 $ds=\\sqrt{\\varphi'(t)^2+\\psi'(t)^2}\\,dt$。弧长是弧微分的积分。"))
+    + thm("旋转体侧面积", p("曲线 $y=f(x)$（$a\\le x\\le b$，$f(x)\\ge 0$）绕 $x$ 轴旋转所得曲面的面积")+
+    fml("S = 2\\pi\\int_a^b f(x)\\sqrt{1+f'^2(x)}\\,dx",
+        "参数方程形式：$S=2\\pi\\int_\\alpha^\\beta \\psi(t)\\sqrt{\\varphi'(t)^2+\\psi'(t)^2}\\,dt$。"))
+    + der(p("<strong>侧面积公式推导：</strong>在弧长 $ds$ 上截取一小段，绕 $x$ 轴旋转得圆台侧面，侧面积近似为 $2\\pi f(x)\\cdot ds$（圆台侧面积 $=\\pi(r_1+r_2)l\\approx 2\\pi f(x)ds$），故 $dS=2\\pi f(x)\\sqrt{1+f'^2(x)}\\,dx$。"))
+    + exa(p("<strong>例：</strong>求半径为 $R$ 的球面面积。上半圆 $y=\\sqrt{R^2-x^2}$ 绕 $x$ 轴旋转。$y'=-\\frac{x}{y}$，$\\sqrt{1+y'^2}=\\frac{R}{y}$。$S=2\\pi\\int_{-R}^R y\\cdot\\frac{R}{y}\\,dx=2\\pi R\\int_{-R}^R dx=4\\pi R^2$。"))
+)},
+]
+},
+# ---- 3.5 反常积分 ----
+{
+"name": "3.5 反常积分",
 "color": "#14b8a6",
 "desc": "无穷限与无界函数反常积分，收敛判别",
 "items": [
-{"id":"c3s4-1","name":"反常积分的定义","tags":["def","thm","exa"],"brief":"无穷限与瑕积分。",
+{"id":"c3s5-1","name":"反常积分的定义","tags":["def","thm","exa"],"brief":"无穷限与瑕积分。",
  "body": wrap(
     defn("无穷限反常积分", p("$\\int_a^{+\\infty}f(x)\\,dx=\\lim_{b\\to+\\infty}\\int_a^b f(x)\\,dx$，若极限存在则称反常积分收敛，否则发散。类似定义 $\\int_{-\\infty}^b$ 和 $\\int_{-\\infty}^{+\\infty}$。"))
     + defn("无界函数反常积分（瑕积分）", p("若 $f$ 在 $x=a$ 无界（瑕点），则 $\\int_a^b f(x)\\,dx=\\lim_{\\varepsilon\\to 0^+}\\int_{a+\\varepsilon}^b f(x)\\,dx$。"))
     + exa(p("<strong>p 积分：</strong>$\\int_1^{+\\infty}\\frac{dx}{x^p}$ 当 $p>1$ 收敛，$p\\le 1$ 发散。<br>$\\int_0^1\\frac{dx}{x^p}$ 当 $p<1$ 收敛，$p\\ge 1$ 发散。"))
 )},
-{"id":"c3s4-2","name":"反常积分收敛判别法","tags":["thm","app"],"brief":"比较判别法、狄利克雷与阿贝尔判别。",
+{"id":"c3s5-2","name":"反常积分收敛判别法","tags":["thm","app"],"brief":"比较判别法、狄利克雷与阿贝尔判别。",
  "body": wrap(
     thm("比较判别法", p("设 $0\\le f(x)\\le g(x)$（$x\\ge a$）。若 $\\int_a^{+\\infty}g\\,dx$ 收敛，则 $\\int_a^{+\\infty}f\\,dx$ 收敛；若 $\\int_a^{+\\infty}f\\,dx$ 发散，则 $\\int_a^{+\\infty}g\\,dx$ 发散。<br><strong>极限形式：</strong>若 $\\lim_{x\\to+\\infty}\\frac{f(x)}{g(x)}=l$（$0<l<\\infty$），则两积分同敛散。"))
     + thm("狄利克雷判别法", p("若 $F(A)=\\int_a^A f(x)\\,dx$ 有界，$g(x)$ 单调趋于 0（$x\\to+\\infty$），则 $\\int_a^{+\\infty}f(x)g(x)\\,dx$ 收敛。"))
@@ -444,18 +489,21 @@ ch4_sections = [
         "得到隐式通解。若 $g(y_0)=0$，则 $y=y_0$ 也是解（可能不在通解中）。"))
     + exa(p("<strong>例：</strong>$\\frac{dy}{dx}=\\frac{y}{x}$。分离变量 $\\frac{dy}{y}=\\frac{dx}{x}$，积分得 $\\ln|y|=\\ln|x|+C_1$，即 $y=Cx$。"))
 )},
-{"id":"c4s1-2","name":"一阶线性微分方程","tags":["thm","der","exa"],"brief":"y'+P(x)y=Q(x) 的通解公式。",
+{"id":"c4s1-2","name":"一阶线性微分方程","tags":["def","thm","der","exa"],"brief":"y'+P(x)y=Q(x) 的通解公式。",
  "body": wrap(
-    thm("一阶线性方程通解", p("方程 $y'+P(x)y=Q(x)$ 的通解为")+
+    defn("一阶线性微分方程", p("形如 $y'+P(x)y=Q(x)$ 的方程称为一阶线性微分方程。当 $Q(x)\\equiv 0$ 时称为齐次线性方程，否则称为非齐次线性方程。$P(x),Q(x)$ 为已知连续函数。"))
+    + thm("一阶线性方程通解公式", p("方程 $y'+P(x)y=Q(x)$ 的通解为")+
     fml("y = e^{-\\int P(x)\\,dx}\\left(\\int Q(x)e^{\\int P(x)\\,dx}\\,dx + C\\right)"))
     + der(p("<strong>推导（常数变易法）：</strong>先解齐次方程 $y'+P(x)y=0$，得 $y=Ce^{-\\int P(x)\\,dx}$。<br>将常数 $C$ 变易为函数 $C(x)$，代入非齐次方程：")+
     fml("C'(x)e^{-\\int P\\,dx} - C(x)P(x)e^{-\\int P\\,dx} + P(x)C(x)e^{-\\int P\\,dx} = Q(x)",
         "化简得 $C'(x)=Q(x)e^{\\int P(x)\\,dx}$，积分得 $C(x)=\\int Q(x)e^{\\int P\\,dx}\\,dx+C$，代回即得通解。"))
 )},
-{"id":"c4s1-3","name":"齐次方程与伯努利方程","tags":["thm","exa"],"brief":"可化为变量分离或线性的方程。",
+{"id":"c4s1-3","name":"齐次方程与伯努利方程","tags":["def","thm","exa"],"brief":"可化为变量分离或线性的方程。",
  "body": wrap(
-    thm("齐次方程", p("形如 $\\frac{dy}{dx}=\\varphi\\left(\\frac{y}{x}\\right)$ 的方程。令 $u=\\frac{y}{x}$（即 $y=ux$），则 $\\frac{dy}{dx}=u+x\\frac{du}{dx}$，代入得 $x\\frac{du}{dx}=\\varphi(u)-u$，化为可分离变量方程。"))
-    + thm("伯努利方程", p("形如 $y'+P(x)y=Q(x)y^n$（$n\\ne 0,1$）的方程。令 $z=y^{1-n}$，则 $z'=(1-n)y^{-n}y'$，方程化为一阶线性方程：")+
+    defn("齐次方程", p("形如 $\\frac{dy}{dx}=\\varphi\\left(\\frac{y}{x}\\right)$ 的一阶方程称为<strong>齐次方程</strong>。其右端是以 $\\frac{y}{x}$ 为变量的函数。"))
+    + thm("齐次方程的解法", p("令 $u=\\frac{y}{x}$（即 $y=ux$），则 $\\frac{dy}{dx}=u+x\\frac{du}{dx}$，代入原方程得 $x\\frac{du}{dx}=\\varphi(u)-u$，这是可分离变量方程。解出 $u(x)$ 后回代 $y=xu(x)$ 即得通解。"))
+    + defn("伯努利方程", p("形如 $y'+P(x)y=Q(x)y^n$（$n\\ne 0,1$）的方程称为<strong>伯努利方程</strong>。当 $n=0$ 时为线性方程，$n=1$ 时为可分离变量方程。"))
+    + thm("伯努利方程的解法", p("令 $z=y^{1-n}$，则 $z'=(1-n)y^{-n}y'$，方程两边乘 $(1-n)y^{-n}$ 后化为一阶线性方程：")+
     fml("z' + (1-n)P(x)z = (1-n)Q(x)"))
     + exa(p("<strong>例：</strong>$y'-y=xy^2$。令 $z=y^{-1}$，则 $z'=-y^{-2}y'$，方程化为 $-z'-z=x$，即 $z'+z=-x$。由通解公式 $z=e^{-x}(\\int -xe^x dx+C)=e^{-x}(-xe^x+e^x+C)=-x+1+Ce^{-x}$，故 $y=\\frac{1}{1-x+Ce^{-x}}$。"))
 )},
@@ -467,11 +515,14 @@ ch4_sections = [
 "color": "#ea580c",
 "desc": "不显含 y、不显含 x 的高阶方程",
 "items": [
-{"id":"c4s2-1","name":"可降阶的高阶方程","tags":["thm","exa"],"brief":"三种特殊类型的降阶方法。",
+{"id":"c4s2-1","name":"可降阶的高阶方程","tags":["def","thm","exa"],"brief":"三种特殊类型的降阶方法。",
  "body": wrap(
-    thm("类型一：$y^{(n)}=f(x)$", p("直接积分 $n$ 次，每次积分引入一个常数。"))
-    + thm("类型二：$y''=f(x,y')$（不显含 $y$）", p("令 $p=y'$，则 $y''=p'$，方程化为一阶方程 $p'=f(x,p)$。解出 $p$ 后再积分得 $y$。"))
-    + thm("类型三：$y''=f(y,y')$（不显含 $x$）", p("令 $p=y'$，视 $p$ 为 $y$ 的函数，则 $y''=\\frac{dp}{dx}=\\frac{dp}{dy}\\cdot\\frac{dy}{dx}=p\\frac{dp}{dy}$，方程化为 $p\\frac{dp}{dy}=f(y,p)$。"))
+    defn("类型一：$y^{(n)}=f(x)$", p("右端仅含自变量 $x$ 的 $n$ 阶方程。"))
+    + thm("类型一解法", p("直接积分 $n$ 次，每次积分引入一个任意常数。"))
+    + defn("类型二：$y''=f(x,y')$（不显含 $y$）", p("方程中不显含未知函数 $y$。"))
+    + thm("类型二解法", p("令 $p=y'$，则 $y''=p'$，方程化为一阶方程 $p'=f(x,p)$。解出 $p(x)$ 后再积分得 $y=\\int p(x)\\,dx+C$。"))
+    + defn("类型三：$y''=f(y,y')$（不显含 $x$）", p("方程中不显含自变量 $x$。"))
+    + thm("类型三解法", p("令 $p=y'$，视 $p$ 为 $y$ 的函数，则 $y''=\\frac{dp}{dx}=\\frac{dp}{dy}\\cdot\\frac{dy}{dx}=p\\frac{dp}{dy}$，方程化为一阶方程 $p\\frac{dp}{dy}=f(y,p)$。"))
     + exa(p("<strong>例（类型三）：</strong>$y''+\\omega^2 y=0$。令 $p=y'$，则 $y''=p\\frac{dp}{dy}$，方程为 $p\\frac{dp}{dy}+\\omega^2 y=0$，即 $p\\,dp=-\\omega^2 y\\,dy$。积分得 $\\frac{1}{2}p^2=-\\frac{1}{2}\\omega^2 y^2+C_1$，即 $p=\\pm\\sqrt{C_1-\\omega^2 y^2}$。分离变量积分：$\\frac{dy}{\\sqrt{C_1-\\omega^2 y^2}}=\\pm dx$，得 $\\arcsin(\\frac{\\omega y}{\\sqrt{C_1}})=\\pm\\omega x+C_2$，即 $y=A\\sin(\\omega x+\\varphi)$。"))
 )},
 ]
@@ -569,6 +620,9 @@ ch5_sections = [
     + thm("可微的必要与充分条件", p("<strong>必要条件：</strong>若 $f$ 可微，则 $f_x,f_y$ 存在，且 $dz=f_x\\,dx+f_y\\,dy$。<br><strong>充分条件：</strong>若 $f_x,f_y$ 在 $(x,y)$ 连续，则 $f$ 在 $(x,y)$ 可微。"))
     + der(p("<strong>必要条件证明：</strong>在 $\\Delta z=A\\Delta x+B\\Delta y+o(\\rho)$ 中令 $\\Delta y=0$，得 $\\Delta z_x=A\\Delta x+o(|\\Delta x|)$，故 $f_x=\\lim_{\\Delta x\\to 0}\\frac{\\Delta z_x}{\\Delta x}=A$。同理 $f_y=B$。"))
     + note(p("多元函数中，偏导数存在不能推出连续，也不能推出可微；偏导数连续才能推出可微。这是与一元函数（可导$\\Rightarrow$连续，可导$\\Leftrightarrow$可微）的重要区别。"))
+    + note(p("<strong>几何意义：</strong>若 $z=f(x,y)$ 在 $(x_0,y_0)$ 可微，则曲面 $z=f(x,y)$ 在点 $(x_0,y_0,f(x_0,y_0))$ 处存在<strong>切平面</strong>，其方程为")+
+    fml("z - z_0 = f_x(x_0,y_0)(x-x_0) + f_y(x_0,y_0)(y-y_0)",
+        "全微分 $dz=f_x\\,dx+f_y\\,dy$ 正是切平面上的增量，是曲面增量 $\\Delta z$ 的线性主部（最佳线性逼近）。"))
 )},
 ]
 },
@@ -621,30 +675,31 @@ ch5_sections = [
 print(f"Ch5: {sum(len(s['items']) for s in ch5_sections)} items")
 
 # =====================================================
-#  CHAPTER 6: 重积分
+#  CHAPTER 6: 多元积分
 # =====================================================
 ch6_sections = [
 # ---- 6.1 二重积分 ----
 {
 "name": "6.1 二重积分",
 "color": "#0891b2",
-"desc": "定义、性质、直角坐标与极坐标计算",
+"desc": "定义、几何意义、直角坐标与极坐标计算",
 "items": [
-{"id":"c6s1-1","name":"二重积分的概念","tags":["def","thm","note"],"brief":"曲顶柱体体积与二重积分。",
+{"id":"c6s1-1","name":"二重积分的概念与几何意义","tags":["def","thm","note"],"brief":"曲顶柱体体积与二重积分。",
  "body": wrap(
     defn("二重积分", p("将区域 $D$ 任意分割为 $n$ 个小区域 $\\Delta\\sigma_i$，在每个小区域取点 $(\\xi_i,\\eta_i)$，作和 $\\sum f(\\xi_i,\\eta_i)\\Delta\\sigma_i$。若当各小区域直径最大值 $\\lambda\\to 0$ 时极限存在，则称此极限为 $f$ 在 $D$ 上的二重积分：")+
     fml("\\iint_D f(x,y)\\,d\\sigma = \\lim_{\\lambda\\to 0}\\sum_{i=1}^n f(\\xi_i,\\eta_i)\\Delta\\sigma_i"))
-    + thm("可积条件", p("$f$ 在有界闭区域 $D$ 上连续 $\\Rightarrow$ $f$ 在 $D$ 上可积。几何意义：当 $f\\ge 0$ 时，二重积分表示以 $D$ 为底、$z=f(x,y)$ 为顶的曲顶柱体体积。"))
+    + thm("几何意义", p("当 $f(x,y)\\ge 0$ 时，$\\iint_D f(x,y)\\,d\\sigma$ 表示以 $D$ 为底、曲面 $z=f(x,y)$ 为顶的<strong>曲顶柱体体积</strong>。<br>当 $f\\equiv 1$ 时，$\\iint_D d\\sigma$ 表示区域 $D$ 的<strong>面积</strong>。<br>当 $f$ 变号时，积分表示 $xOy$ 面上下方体积的代数和。"))
+    + thm("可积条件", p("$f$ 在有界闭区域 $D$ 上连续 $\\Rightarrow$ $f$ 在 $D$ 上可积。"))
 )},
 {"id":"c6s1-2","name":"二重积分的计算","tags":["thm","der","exa"],"brief":"化为累次积分，极坐标变换。",
  "body": wrap(
     thm("直角坐标下化为累次积分", p("<strong>X 型区域</strong>（$a\\le x\\le b$，$\\varphi_1(x)\\le y\\le\\varphi_2(x)$）：")+
     fml("\\iint_D f(x,y)\\,d\\sigma = \\int_a^b\\left[\\int_{\\varphi_1(x)}^{\\varphi_2(x)} f(x,y)\\,dy\\right]dx",
         "<strong>Y 型区域</strong>（$c\\le y\\le d$，$\\psi_1(y)\\le x\\le\\psi_2(y)$）：$\\iint_D f\\,d\\sigma=\\int_c^d\\int_{\\psi_1(y)}^{\\psi_2(y)}f\\,dx\\,dy$。"))
-    + thm("极坐标变换", p("令 $x=r\\cos\\theta$，$y=r\\sin\\theta$，$d\\sigma=r\\,dr\\,d\\theta$，则")+
+    + thm("极坐标变换", p("令 $x=r\\cos\\theta$，$y=r\\sin\\theta$，面积元素 $d\\sigma=r\\,dr\\,d\\theta$（雅可比 $J=r$），则")+
     fml("\\iint_D f(x,y)\\,d\\sigma = \\int_\\alpha^\\beta\\int_{r_1(\\theta)}^{r_2(\\theta)} f(r\\cos\\theta,r\\sin\\theta)\\,r\\,dr\\,d\\theta",
         "极坐标适用于圆形、扇形、环形区域或被积函数含 $x^2+y^2$ 的情形。"))
-    + exa(p("<strong>例：</strong>$\\iint_D e^{-x^2-y^2}\\,d\\sigma$，$D:x^2+y^2\\le a^2$。极坐标下 $\\int_0^{2\\pi}d\\theta\\int_0^a e^{-r^2}r\\,dr=2\\pi\\cdot\\frac{1}{2}(1-e^{-a^2})=\\pi(1-e^{-a^2})$。令 $a\\to\\infty$ 得著名的高斯积分 $\\int_{-\\infty}^{\\infty}e^{-x^2}dx=\\sqrt{\\pi}$。"))
+    + exa(p("<strong>例（高斯积分）：</strong>$I=\\iint_D e^{-x^2-y^2}\\,d\\sigma$，$D:x^2+y^2\\le a^2$。极坐标下 $I=\\int_0^{2\\pi}d\\theta\\int_0^a e^{-r^2}r\\,dr=2\\pi\\cdot\\frac{1}{2}(1-e^{-a^2})=\\pi(1-e^{-a^2})$。<br>令 $a\\to\\infty$，全平面积分为 $\\pi$，而它又等于 $\\left(\\int_{-\\infty}^{\\infty}e^{-x^2}dx\\right)^2$，故得著名的<strong>高斯积分</strong> $\\int_{-\\infty}^{\\infty}e^{-x^2}dx=\\sqrt{\\pi}$。"))
 )},
 ]
 },
@@ -652,49 +707,117 @@ ch6_sections = [
 {
 "name": "6.2 三重积分",
 "color": "#06b6d4",
-"desc": "直角坐标、柱坐标、球坐标",
+"desc": "定义、几何意义、直角/柱/球坐标",
 "items": [
-{"id":"c6s2-1","name":"三重积分的计算","tags":["thm","exa"],"brief":"三种坐标系下的计算。",
+{"id":"c6s2-1","name":"三重积分的概念与计算","tags":["def","thm","exa"],"brief":"体积元素与三种坐标系。",
  "body": wrap(
-    thm("直角坐标", p("$\\iiint_\\Omega f(x,y,z)\\,dV=\\int\\int\\int f(x,y,z)\\,dx\\,dy\\,dz$，可化为先一后二或先二后一的累次积分。"))
-    + thm("柱坐标", p("$x=r\\cos\\theta$，$y=r\\sin\\theta$，$z=z$，$dV=r\\,dr\\,d\\theta\\,dz$。适用于圆柱对称区域。"))
-    + thm("球坐标", p("$x=r\\sin\\varphi\\cos\\theta$，$y=r\\sin\\varphi\\sin\\theta$，$z=r\\cos\\varphi$，$dV=r^2\\sin\\varphi\\,dr\\,d\\varphi\\,d\\theta$。适用于球对称区域。"))
-    + exa(p("<strong>例（球坐标）：</strong>求球体 $x^2+y^2+z^2\\le R^2$ 的体积。$V=\\int_0^{2\\pi}d\\theta\\int_0^\\pi\\sin\\varphi\\,d\\varphi\\int_0^R r^2\\,dr=2\\pi\\cdot 2\\cdot\\frac{R^3}{3}=\\frac{4}{3}\\pi R^3$。"))
+    defn("三重积分", p("$\\iiint_\\Omega f(x,y,z)\\,dV=\\lim_{\\lambda\\to 0}\\sum f(\\xi_i,\\eta_i,\\zeta_i)\\Delta V_i$。<br>几何意义：当 $f\\equiv 1$ 时表示空间区域 $\\Omega$ 的<strong>体积</strong>；当 $f=\\rho(x,y,z)$ 为体密度时表示物体的<strong>质量</strong>。"))
+    + thm("直角坐标", p("$dV=dx\\,dy\\,dz$，可化为先一后二（先 $z$ 后 $xy$）或先二后一的累次积分。"))
+    + thm("柱坐标变换", p("$x=r\\cos\\theta$，$y=r\\sin\\theta$，$z=z$，$dV=r\\,dr\\,d\\theta\\,dz$。雅可比 $J=r$。适用于圆柱对称区域。"))
+    + thm("球坐标变换", p("$x=r\\sin\\varphi\\cos\\theta$，$y=r\\sin\\varphi\\sin\\theta$，$z=r\\cos\\varphi$，$dV=r^2\\sin\\varphi\\,dr\\,d\\varphi\\,d\\theta$。雅可比 $J=r^2\\sin\\varphi$。适用于球对称区域。"))
+    + exa(p("<strong>例（球体体积）：</strong>$\\Omega:x^2+y^2+z^2\\le R^2$。球坐标下 $V=\\int_0^{2\\pi}d\\theta\\int_0^\\pi\\sin\\varphi\\,d\\varphi\\int_0^R r^2\\,dr=2\\pi\\cdot 2\\cdot\\frac{R^3}{3}=\\frac{4}{3}\\pi R^3$。"))
 )},
 ]
 },
-# ---- 6.3 重积分应用 ----
+# ---- 6.3 曲线积分 ----
 {
-"name": "6.3 重积分应用",
+"name": "6.3 曲线积分",
+"color": "#0e7490",
+"desc": "第一类（对弧长）与第二类（对坐标）曲线积分",
+"items": [
+{"id":"c6s3-1","name":"第一类曲线积分（对弧长）","tags":["def","thm","exa"],"brief":"数量函数沿曲线的积分。",
+ "body": wrap(
+    defn("第一类曲线积分", p("设 $L$ 为光滑曲线，$f(x,y)$ 在 $L$ 上有界。定义")+
+    fml("\\int_L f(x,y)\\,ds = \\lim_{\\lambda\\to 0}\\sum_{i=1}^n f(\\xi_i,\\eta_i)\\Delta s_i",
+        "其中 $\\Delta s_i$ 为第 $i$ 小段弧长。<strong>几何/物理意义：</strong>线密度为 $f$ 的曲线形构件的质量；当 $f\\equiv 1$ 时为曲线 $L$ 的<strong>弧长</strong>。"))
+    + thm("计算公式", p("若 $L$ 由参数方程 $x=\\varphi(t),y=\\psi(t)$（$\\alpha\\le t\\le\\beta$）给出，则")+
+    fml("\\int_L f(x,y)\\,ds = \\int_\\alpha^\\beta f(\\varphi(t),\\psi(t))\\sqrt{\\varphi'(t)^2+\\psi'(t)^2}\\,dt",
+        "<strong>注意：</strong>对弧长积分的下限必须小于上限（$\\alpha<\\beta$），与曲线方向无关。若 $L:y=y(x)$（$a\\le x\\le b$），则 $\\int_L f\\,ds=\\int_a^b f(x,y(x))\\sqrt{1+y'^2}\\,dx$。"))
+    + exa(p("<strong>例：</strong>计算 $\\int_L x\\,ds$，$L$ 为 $y=x^2$ 上从 $(0,0)$ 到 $(1,1)$ 的弧。$ds=\\sqrt{1+4x^2}\\,dx$，故 $\\int_0^1 x\\sqrt{1+4x^2}\\,dx=\\frac{1}{12}(1+4x^2)^{3/2}\\big|_0^1=\\frac{1}{12}(5\\sqrt{5}-1)$。"))
+)},
+{"id":"c6s3-2","name":"第二类曲线积分（对坐标）","tags":["def","thm","exa"],"brief":"向量函数沿有向曲线的积分。",
+ "body": wrap(
+    defn("第二类曲线积分", p("设 $L$ 为有向光滑曲线，$P(x,y),Q(x,y)$ 在 $L$ 上有界。定义")+
+    fml("\\int_L P\\,dx+Q\\,dy = \\lim_{\\lambda\\to 0}\\sum_{i=1}^n [P(\\xi_i,\\eta_i)\\Delta x_i + Q(\\xi_i,\\eta_i)\\Delta y_i]",
+        "<strong>物理意义：</strong>力 $\\vec F=(P,Q)$ 沿有向曲线 $L$ 所做的功 $W=\\int_L P\\,dx+Q\\,dy$。"))
+    + thm("计算公式", p("若 $L$ 由参数方程 $x=\\varphi(t),y=\\psi(t)$ 给出，起点对应 $t=\\alpha$，终点对应 $t=\\beta$，则")+
+    fml("\\int_L P\\,dx+Q\\,dy = \\int_\\alpha^\\beta [P(\\varphi,\\psi)\\varphi'(t)+Q(\\varphi,\\psi)\\psi'(t)]\\,dt",
+        "<strong>注意：</strong>对坐标积分的上下限由曲线方向决定（起点到终点），下限可以大于上限。<strong>反向变号：</strong>$\\int_{L^-}P\\,dx+Q\\,dy=-\\int_L P\\,dx+Q\\,dy$。"))
+    + thm("两类曲线积分的关系", p("$\\int_L P\\,dx+Q\\,dy=\\int_L (P\\cos\\alpha+Q\\cos\\beta)\\,ds$，其中 $(\\cos\\alpha,\\cos\\beta)$ 为曲线 $L$ 在点处的单位切向量（指向曲线方向）。"))
+)},
+]
+},
+# ---- 6.4 曲面积分 ----
+{
+"name": "6.4 曲面积分",
+"color": "#0891b2",
+"desc": "第一类（对面积）与第二类（对坐标）曲面积分",
+"items": [
+{"id":"c6s4-1","name":"第一类曲面积分（对面积）","tags":["def","thm","exa"],"brief":"数量函数在曲面上的积分。",
+ "body": wrap(
+    defn("第一类曲面积分", p("设 $\\Sigma$ 为光滑曲面，$f(x,y,z)$ 在 $\\Sigma$ 上有界。定义")+
+    fml("\\iint_\\Sigma f(x,y,z)\\,dS = \\lim_{\\lambda\\to 0}\\sum_{i=1}^n f(\\xi_i,\\eta_i,\\zeta_i)\\Delta S_i",
+        "<strong>几何/物理意义：</strong>面密度为 $f$ 的曲面的质量；当 $f\\equiv 1$ 时为曲面 $\\Sigma$ 的<strong>面积</strong>。"))
+    + thm("计算公式", p("若 $\\Sigma:z=z(x,y)$，$(x,y)\\in D_{xy}$，则曲面面积元素")+
+    fml("dS = \\sqrt{1+z_x^2+z_y^2}\\,d\\sigma",
+        "故 $\\iint_\\Sigma f\\,dS=\\iint_{D_{xy}} f(x,y,z(x,y))\\sqrt{1+z_x^2+z_y^2}\\,d\\sigma$。"))
+    + exa(p("<strong>例（球面面积）：</strong>求半径为 $R$ 的球面面积。上半球面 $z=\\sqrt{R^2-x^2-y^2}$，$z_x=-\\frac{x}{z},z_y=-\\frac{y}{z}$，$\\sqrt{1+z_x^2+z_y^2}=\\frac{R}{z}=\\frac{R}{\\sqrt{R^2-x^2-y^2}}$。<br>$S=2\\iint_{x^2+y^2\\le R^2}\\frac{R}{\\sqrt{R^2-x^2-y^2}}d\\sigma=2R\\int_0^{2\\pi}d\\theta\\int_0^R\\frac{r}{\\sqrt{R^2-r^2}}dr=2R\\cdot 2\\pi\\cdot R=4\\pi R^2$。"))
+)},
+{"id":"c6s4-2","name":"第二类曲面积分（对坐标）","tags":["def","thm","exa"],"brief":"向量场穿过有向曲面的通量。",
+ "body": wrap(
+    defn("第二类曲面积分", p("设 $\\Sigma$ 为有向光滑曲面，$\\vec F=(P,Q,R)$。第二类曲面积分")+
+    fml("\\iint_\\Sigma P\\,dy\\,dz+Q\\,dz\\,dx+R\\,dx\\,dy",
+        "<strong>物理意义：</strong>向量场 $\\vec F$ 穿过有向曲面 $\\Sigma$ 的<strong>通量</strong>（如流量、电通量、磁通量）。"))
+    + thm("两类曲面积分的关系", p("")+
+    fml("\\iint_\\Sigma \\vec F\\cdot d\\vec S = \\iint_\\Sigma (P\\cos\\alpha+Q\\cos\\beta+R\\cos\\gamma)\\,dS",
+        "其中 $(\\cos\\alpha,\\cos\\beta,\\cos\\gamma)$ 为曲面 $\\Sigma$ 法向量的方向余弦，法向与曲面的侧一致。"))
+    + thm("计算（投影法）", p("若 $\\Sigma:z=z(x,y)$ 取上侧，则 $\\iint_\\Sigma R\\,dx\\,dy=\\iint_{D_{xy}}R(x,y,z(x,y))\\,d\\sigma$（取下侧则加负号）。类似处理 $P\\,dy\\,dz$ 和 $Q\\,dz\\,dx$。"))
+)},
+]
+},
+# ---- 6.5 多元积分的几何与物理应用 ----
+{
+"name": "6.5 多元积分的几何与物理应用",
 "color": "#22d3ee",
-"desc": "面积、体积、质心、转动惯量",
+"desc": "面积、体积、曲面面积、弧长、质心、转动惯量",
 "items": [
-{"id":"c6s3-1","name":"重积分的几何与物理应用","tags":["app","exa"],"brief":"面积、体积、质心、转动惯量、引力。",
+{"id":"c6s5-1","name":"几何量计算","tags":["thm","der","exa"],"brief":"面积、体积、曲面面积、弧长公式与推导。",
  "body": wrap(
-    app(p("<strong>面积：</strong>$A=\\iint_D d\\sigma$。<br><strong>体积：</strong>$V=\\iiint_\\Omega dV$ 或 $V=\\iint_D [f_2(x,y)-f_1(x,y)]\\,d\\sigma$。"))
-    + app(p("<strong>质心（重心）：</strong>设面密度 $\\rho(x,y)$，则")+
+    thm("平面区域面积", p("$A=\\iint_D d\\sigma$。极坐标下 $A=\\frac{1}{2}\\int_\\alpha^\\beta r^2(\\theta)\\,d\\theta$（极坐标扇形面积公式）。"))
+    + thm("空间立体体积", p("<strong>柱体法：</strong>$V=\\iint_D [f_2(x,y)-f_1(x,y)]\\,d\\sigma$（两曲面之间）；<br><strong>切片法：</strong>$V=\\iiint_\\Omega dV=\\int_{c}^{d} A(z)\\,dz$（$A(z)$ 为高度 $z$ 处截面面积）。"))
+    + der(p("<strong>曲面面积公式推导：</strong>设曲面 $\\Sigma:z=z(x,y)$，$(x,y)\\in D$。在点 $(x,y)$ 处，曲面的法向量为 $\\vec n=(-z_x,-z_y,1)$，其与 $z$ 轴夹角 $\\gamma$ 满足 $\\cos\\gamma=\\frac{1}{\\sqrt{1+z_x^2+z_y^2}}$。<br>小曲面块 $\\Delta S$ 在 $xOy$ 面上投影为 $\\Delta\\sigma$，由 $\\Delta\\sigma=\\Delta S\\cos\\gamma$ 得 $\\Delta S=\\frac{\\Delta\\sigma}{\\cos\\gamma}=\\sqrt{1+z_x^2+z_y^2}\\,\\Delta\\sigma$，故")+
+    fml("S = \\iint_D \\sqrt{1+z_x^2+z_y^2}\\,d\\sigma"))
+    + thm("曲线弧长", p("参数方程 $x=\\varphi(t),y=\\psi(t)$（$\\alpha\\le t\\le\\beta$）的弧长")+
+    fml("s = \\int_\\alpha^\\beta \\sqrt{\\varphi'(t)^2+\\psi'(t)^2}\\,dt",
+        "直角坐标 $y=y(x)$：$s=\\int_a^b\\sqrt{1+y'^2}\\,dx$；极坐标 $r=r(\\theta)$：$s=\\int_\\alpha^\\beta\\sqrt{r^2+r'^2}\\,d\\theta$。"))
+    + exa(p("<strong>例：</strong>求球面 $x^2+y^2+z^2=R^2$ 被柱面 $x^2+y^2=Rx$ 截下部分（维维安尼体）的表面积。由对称性只算上半部分并乘 2。$z=\\sqrt{R^2-x^2-y^2}$，$\\sqrt{1+z_x^2+z_y^2}=\\frac{R}{\\sqrt{R^2-x^2-y^2}}$。投影区域 $D:(x-R/2)^2+y^2\\le(R/2)^2$，极坐标 $r\\le R\\cos\\theta$。<br>$S=2\\iint_D\\frac{R}{\\sqrt{R^2-r^2}}r\\,dr\\,d\\theta=2R\\int_{-\\pi/2}^{\\pi/2}d\\theta\\int_0^{R\\cos\\theta}\\frac{r}{\\sqrt{R^2-r^2}}dr=2R\\int_{-\\pi/2}^{\\pi/2}R(1-\\sin\\theta)d\\theta=2R^2(\\pi-2)$。"))
+)},
+{"id":"c6s5-2","name":"物理量计算","tags":["thm","exa"],"brief":"质心、转动惯量、引力。",
+ "body": wrap(
+    thm("质心（重心）", p("设面密度 $\\rho(x,y)$，则平面薄板质心")+
     fml("\\bar x = \\frac{\\iint_D x\\rho\\,d\\sigma}{\\iint_D \\rho\\,d\\sigma},\\quad \\bar y = \\frac{\\iint_D y\\rho\\,d\\sigma}{\\iint_D \\rho\\,d\\sigma}",
-        "均匀物体质心即为形心，与密度无关。"))
-    + app(p("<strong>转动惯量：</strong>平面薄板对 $x$ 轴、$y$ 轴、原点的转动惯量")+
+        "空间物体质心：$\\bar x=\\frac{\\iiint_\\Omega x\\rho\\,dV}{\\iiint_\\Omega\\rho\\,dV}$，$\\bar y,\\bar z$ 类似。均匀物体质心即为形心。"))
+    + thm("转动惯量", p("平面薄板对 $x$ 轴、$y$ 轴、原点的转动惯量")+
     fml("I_x = \\iint_D y^2\\rho\\,d\\sigma,\\quad I_y = \\iint_D x^2\\rho\\,d\\sigma,\\quad I_O = \\iint_D (x^2+y^2)\\rho\\,d\\sigma = I_x+I_y",
-        "空间物体对 $z$ 轴：$I_z=\\iiint_\\Omega (x^2+y^2)\\rho\\,dV$。"))
+        "空间物体对 $z$ 轴：$I_z=\\iiint_\\Omega (x^2+y^2)\\rho\\,dV$；对 $x$ 轴：$I_x=\\iiint_\\Omega(y^2+z^2)\\rho\\,dV$。"))
+    + thm("引力", p("物体对单位质量质点的引力分量：$F_x=G\\iiint_\\Omega\\frac{(x-x_0)\\rho}{r^3}\\,dV$，$F_y,F_z$ 类似，其中 $r=\\sqrt{(x-x_0)^2+(y-y_0)^2+(z-z_0)^2}$，$G$ 为引力常数。"))
 )},
 ]
 },
-# ---- 6.4 含参积分与欧拉积分 ----
+# ---- 6.6 含参积分与欧拉积分 ----
 {
-"name": "6.4 含参积分与欧拉积分",
+"name": "6.6 含参积分与欧拉积分",
 "color": "#0e7490",
 "desc": "含参常义/反常积分，Γ函数与Β函数",
 "items": [
-{"id":"c6s4-1","name":"含参积分","tags":["def","thm","app"],"brief":"积分号下求导与求积分。",
+{"id":"c6s6-1","name":"含参积分","tags":["def","thm","app"],"brief":"积分号下求导与求积分。",
  "body": wrap(
     defn("含参积分", p("设 $I(x)=\\int_a^b f(x,t)\\,dt$，若 $f$ 及 $f_x$ 连续，则")+
     fml("I'(x) = \\int_a^b \\frac{\\partial f}{\\partial x}(x,t)\\,dt",
         "即<strong>积分号下求导</strong>。这是计算复杂积分的有力工具。"))
     + app(p("<strong>例（费曼积分法）：</strong>计算 $I=\\int_0^1\\frac{x^a-1}{\\ln x}\\,dx$。引入 $I(a)=\\int_0^1\\frac{x^a-1}{\\ln x}\\,dx$，则 $I'(a)=\\int_0^1 x^a\\,dx=\\frac{1}{a+1}$，故 $I(a)=\\ln(a+1)+C$。由 $I(0)=0$ 得 $C=0$，故 $I=\\ln(a+1)$。取 $a=1$ 得 $\\int_0^1\\frac{x-1}{\\ln x}\\,dx=\\ln 2$。"))
 )},
-{"id":"c6s4-2","name":"欧拉积分（Γ函数与Β函数）","tags":["def","thm","app"],"brief":"阶乘的解析延拓。",
+{"id":"c6s6-2","name":"欧拉积分（Γ函数与Β函数）","tags":["def","thm","app"],"brief":"阶乘的解析延拓。",
  "body": wrap(
     defn("Γ函数与Β函数", p("")+
     fml("\\Gamma(s) = \\int_0^{+\\infty} x^{s-1}e^{-x}\\,dx\\quad (s>0),\\qquad B(p,q) = \\int_0^1 x^{p-1}(1-x)^{q-1}\\,dx\\quad (p,q>0)"))
@@ -713,48 +836,20 @@ print(f"Ch6: {sum(len(s['items']) for s in ch6_sections)} items")
 #  CHAPTER 7: 积分定理
 # =====================================================
 ch7_sections = [
-# ---- 7.1 曲线积分 ----
+# ---- 7.1 格林公式 ----
 {
-"name": "7.1 曲线积分",
+"name": "7.1 格林公式",
 "color": "#be185d",
-"desc": "第一类与第二类曲线积分",
-"items": [
-{"id":"c7s1-1","name":"第一类曲线积分（对弧长）","tags":["def","thm","exa"],"brief":"数量函数沿曲线的积分。",
- "body": wrap(
-    defn("第一类曲线积分", p("设 $L$ 为光滑曲线，$f(x,y)$ 在 $L$ 上有界。定义")+
-    fml("\\int_L f(x,y)\\,ds = \\lim_{\\lambda\\to 0}\\sum_{i=1}^n f(\\xi_i,\\eta_i)\\Delta s_i",
-        "其中 $\\Delta s_i$ 为第 $i$ 小段弧长。物理意义：线密度为 $f$ 的曲线形构件的质量。"))
-    + thm("计算公式", p("若 $L$ 由参数方程 $x=\\varphi(t),y=\\psi(t)$（$\\alpha\\le t\\le\\beta$）给出，则")+
-    fml("\\int_L f(x,y)\\,ds = \\int_\\alpha^\\beta f(\\varphi(t),\\psi(t))\\sqrt{\\varphi'(t)^2+\\psi'(t)^2}\\,dt",
-        "<strong>注意：</strong>对弧长积分的下限必须小于上限（$\\alpha<\\beta$），与曲线方向无关。"))
-    + exa(p("<strong>例：</strong>计算 $\\int_L x\\,ds$，$L$ 为 $y=x^2$ 上从 $(0,0)$ 到 $(1,1)$ 的弧。$ds=\\sqrt{1+4x^2}\\,dx$，故 $\\int_0^1 x\\sqrt{1+4x^2}\\,dx=\\frac{1}{12}(1+4x^2)^{3/2}\\big|_0^1=\\frac{1}{12}(5\\sqrt{5}-1)$。"))
-)},
-{"id":"c7s1-2","name":"第二类曲线积分（对坐标）","tags":["def","thm","exa"],"brief":"向量函数沿曲线的积分。",
- "body": wrap(
-    defn("第二类曲线积分", p("设 $L$ 为有向光滑曲线，$P(x,y),Q(x,y)$ 在 $L$ 上有界。定义")+
-    fml("\\int_L P\\,dx+Q\\,dy = \\lim_{\\lambda\\to 0}\\sum_{i=1}^n [P(\\xi_i,\\eta_i)\\Delta x_i + Q(\\xi_i,\\eta_i)\\Delta y_i]",
-        "物理意义：力 $\\vec F=(P,Q)$ 沿曲线 $L$ 所做的功 $W=\\int_L P\\,dx+Q\\,dy$。"))
-    + thm("计算公式", p("若 $L$ 由参数方程 $x=\\varphi(t),y=\\psi(t)$ 给出，起点对应 $t=\\alpha$，终点对应 $t=\\beta$，则")+
-    fml("\\int_L P\\,dx+Q\\,dy = \\int_\\alpha^\\beta [P(\\varphi,\\psi)\\varphi'(t)+Q(\\varphi,\\psi)\\psi'(t)]\\,dt",
-        "<strong>注意：</strong>对坐标积分的上下限由曲线方向决定（起点到终点），下限可以大于上限。"))
-    + thm("两类曲线积分的关系", p("$\\int_L P\\,dx+Q\\,dy=\\int_L (P\\cos\\alpha+Q\\cos\\beta)\\,ds$，其中 $(\\cos\\alpha,\\cos\\beta)$ 为曲线 $L$ 在点处的单位切向量。"))
-)},
-]
-},
-# ---- 7.2 格林公式 ----
-{
-"name": "7.2 格林公式",
-"color": "#db2777",
 "desc": "平面曲线积分与二重积分的转化",
 "items": [
-{"id":"c7s2-1","name":"格林公式","tags":["thm","der","app"],"brief":"闭路曲线积分化为二重积分。",
+{"id":"c7s1-1","name":"格林公式","tags":["thm","der","app"],"brief":"闭路曲线积分化为二重积分。",
  "body": wrap(
     thm("格林公式", p("设 $D$ 为平面有界闭区域，边界 $L$ 为分段光滑曲线，取正向（逆时针）。若 $P,Q$ 在 $D$ 上有一阶连续偏导数，则")+
     fml("\\oint_L P\\,dx+Q\\,dy = \\iint_D\\left(\\frac{\\partial Q}{\\partial x}-\\frac{\\partial P}{\\partial y}\\right)d\\sigma"))
     + der(p("<strong>证明思路：</strong>先对 X 型区域证明 $\\oint_L P\\,dx=-\\iint_D\\frac{\\partial P}{\\partial y}\\,d\\sigma$，再对 Y 型区域证明 $\\oint_L Q\\,dy=\\iint_D\\frac{\\partial Q}{\\partial x}\\,d\\sigma$，合并即得。一般区域可分割为若干 X/Y 型区域。"))
     + app(p("<strong>面积公式：</strong>取 $P=-y,Q=x$，得 $A=\\frac{1}{2}\\oint_L x\\,dy-y\\,dx$。这是用曲线积分计算区域面积的方法。"))
 )},
-{"id":"c7s2-2","name":"平面曲线积分与路径无关","tags":["thm","der","app"],"brief":"四个等价条件与原函数。",
+{"id":"c7s1-2","name":"平面曲线积分与路径无关","tags":["thm","der","app"],"brief":"四个等价条件与原函数。",
  "body": wrap(
     thm("等价条件", p("设 $D$ 为单连通区域，$P,Q$ 在 $D$ 内有一阶连续偏导数，则下列四个条件等价：<br>(1) 对 $D$ 内任意闭曲线 $L$，$\\oint_L P\\,dx+Q\\,dy=0$；<br>(2) $\\int_L P\\,dx+Q\\,dy$ 在 $D$ 内与路径无关，只与起点终点有关；<br>(3) $P\\,dx+Q\\,dy$ 是某函数 $u(x,y)$ 的全微分，即 $du=P\\,dx+Q\\,dy$；<br>(4) 在 $D$ 内处处有 $\\frac{\\partial P}{\\partial y}=\\frac{\\partial Q}{\\partial x}$。"))
     + der(p("<strong>原函数求法：</strong>若 $P\\,dx+Q\\,dy$ 为全微分，则原函数")+
@@ -764,41 +859,74 @@ ch7_sections = [
 )},
 ]
 },
-# ---- 7.3 曲面积分 ----
+# ---- 7.2 高斯公式 ----
 {
-"name": "7.3 曲面积分",
-"color": "#ec4899",
-"desc": "第一类与第二类曲面积分、高斯公式",
+"name": "7.2 高斯公式（散度定理）",
+"color": "#db2777",
+"desc": "闭曲面积分与三重积分的转化，通量与散度",
 "items": [
-{"id":"c7s3-1","name":"曲面积分","tags":["def","thm","exa"],"brief":"对面积与对坐标的曲面积分。",
+{"id":"c7s2-1","name":"高斯公式","tags":["thm","der","exa"],"brief":"散度定理的完整表述与证明。",
  "body": wrap(
-    defn("第一类曲面积分（对面积）", p("$\\iint_\\Sigma f(x,y,z)\\,dS=\\lim\\sum f(\\xi_i,\\eta_i,\\zeta_i)\\Delta S_i$。若 $\\Sigma:z=z(x,y)$，则 $dS=\\sqrt{1+z_x^2+z_y^2}\\,d\\sigma$。"))
-    + defn("第二类曲面积分（对坐标）", p("$\\iint_\\Sigma P\\,dy\\,dz+Q\\,dz\\,dx+R\\,dx\\,dy$，表示向量场 $\\vec F=(P,Q,R)$ 穿过曲面 $\\Sigma$ 的通量。")+
-    fml("\\iint_\\Sigma \\vec F\\cdot d\\vec S = \\iint_\\Sigma (P\\cos\\alpha+Q\\cos\\beta+R\\cos\\gamma)\\,dS",
-        "其中 $(\\cos\\alpha,\\cos\\beta,\\cos\\gamma)$ 为曲面法向量的方向余弦。"))
-    + thm("高斯公式（散度定理）", p("设 $\\Omega$ 为空间有界闭区域，边界 $\\Sigma$ 为分片光滑闭曲面，取外侧。若 $P,Q,R$ 在 $\\Omega$ 上有一阶连续偏导数，则")+
-    fml("\\oiint_\\Sigma P\\,dy\\,dz+Q\\,dz\\,dx+R\\,dx\\,dy = \\iiint_\\Omega\\left(\\frac{\\partial P}{\\partial x}+\\frac{\\partial Q}{\\partial y}+\\frac{\\partial R}{\\partial z}\\right)dV"))
-    + app(p("高斯公式将闭曲面积分转化为三重积分，是计算通量的有力工具。物理上表示：穿出闭曲面的通量 = 内部散度的体积分。"))
+    thm("高斯公式", p("设 $\\Omega$ 为空间有界闭区域，边界 $\\Sigma$ 为分片光滑闭曲面，取外侧。若 $P,Q,R$ 在 $\\Omega$ 上有一阶连续偏导数，则")+
+    fml("\\oiint_\\Sigma P\\,dy\\,dz+Q\\,dz\\,dx+R\\,dx\\,dy = \\iiint_\\Omega\\left(\\frac{\\partial P}{\\partial x}+\\frac{\\partial Q}{\\partial y}+\\frac{\\partial R}{\\partial z}\\right)dV",
+        "用向量形式表示：$\\oiint_\\Sigma\\vec F\\cdot d\\vec S=\\iiint_\\Omega\\nabla\\cdot\\vec F\\,dV$，其中 $\\vec F=(P,Q,R)$，$\\nabla\\cdot\\vec F$ 为散度。"))
+    + der(p("<strong>证明：</strong>只需证 $\\oiint_\\Sigma R\\,dx\\,dy=\\iiint_\\Omega\\frac{\\partial R}{\\partial z}\\,dV$，其余两式类似。<br>设 $\\Omega$ 为 $xy$ 型区域（母线平行 $z$ 轴），其边界曲面分为上底 $\\Sigma_2:z=z_2(x,y)$（上侧）、下底 $\\Sigma_1:z=z_1(x,y)$（下侧）、侧面 $\\Sigma_3$。<br>对三重积分用先一后二：")+
+    fml("\\iiint_\\Omega\\frac{\\partial R}{\\partial z}\\,dV = \\iint_D\\left[\\int_{z_1(x,y)}^{z_2(x,y)}\\frac{\\partial R}{\\partial z}\\,dz\\right]d\\sigma = \\iint_D [R(x,y,z_2)-R(x,y,z_1)]\\,d\\sigma",
+        "而曲面积分中，侧面 $\\Sigma_3$ 的法向量垂直于 $z$ 轴，故 $\\iint_{\\Sigma_3}R\\,dx\\,dy=0$；上底取上侧为 $+\\iint_D R(x,y,z_2)\\,d\\sigma$，下底取下侧为 $-\\iint_D R(x,y,z_1)\\,d\\sigma$。<br>故 $\\oiint_\\Sigma R\\,dx\\,dy=\\iint_D[R(x,y,z_2)-R(x,y,z_1)]\\,d\\sigma$，与三重积分相等。一般区域可分割为若干 $xy$ 型区域。$\\blacksquare$"))
+    + exa(p("<strong>例：</strong>求 $\\oiint_\\Sigma x^3\\,dy\\,dz+y^3\\,dz\\,dx+z^3\\,dx\\,dy$，$\\Sigma$ 为球面 $x^2+y^2+z^2=R^2$ 外侧。<br>由高斯公式：$=\\iiint_\\Omega 3(x^2+y^2+z^2)\\,dV=3\\int_0^{2\\pi}d\\theta\\int_0^\\pi\\sin\\varphi\\,d\\varphi\\int_0^R r^2\\cdot r^2\\,dr=3\\cdot 2\\pi\\cdot 2\\cdot\\frac{R^5}{5}=\\frac{12\\pi R^5}{5}$。"))
+)},
+{"id":"c7s2-2","name":"散度的物理意义","tags":["def","thm","app"],"brief":"通量密度与无源场。",
+ "body": wrap(
+    defn("散度", p("向量场 $\\vec F=(P,Q,R)$ 在点 $M$ 处的散度")+
+    fml("\\mathrm{div}\\,\\vec F = \\nabla\\cdot\\vec F = \\frac{\\partial P}{\\partial x}+\\frac{\\partial Q}{\\partial y}+\\frac{\\partial R}{\\partial z}",
+        "散度是标量，表示单位体积内穿出的通量（通量密度）。$\\mathrm{div}\\,\\vec F>0$ 表示该点有源（流出），$<0$ 表示有汇（流入），$=0$ 表示无源。"))
+    + thm("散度的极限定义", p("$\\mathrm{div}\\,\\vec F(M)=\\lim_{\\Omega\\to M}\\frac{1}{V}\\oiint_{\\partial\\Omega}\\vec F\\cdot d\\vec S$，其中 $V$ 为包含 $M$ 的小区域 $\\Omega$ 的体积。"))
+    + app(p("<strong>无源场（螺线场）：</strong>若 $\\nabla\\cdot\\vec F\\equiv 0$，则穿出任意闭曲面的通量为零，场线闭合。稳恒磁场是无源场（$\\nabla\\cdot\\vec B=0$）。<br><strong>高斯公式的物理意义：</strong>穿出闭曲面的总通量等于内部所有源的散度之体积分——这正是静电学高斯定理和流体连续性方程的数学基础。"))
 )},
 ]
 },
-# ---- 7.4 斯托克斯公式与场论 ----
+# ---- 7.3 斯托克斯公式 ----
 {
-"name": "7.4 斯托克斯公式与场论",
-"color": "#f472b6",
-"desc": "斯托克斯公式、旋度、散度、势场",
+"name": "7.3 斯托克斯公式",
+"color": "#ec4899",
+"desc": "空间曲线积分与曲面积分的转化，环量与旋度",
 "items": [
-{"id":"c7s4-1","name":"斯托克斯公式","tags":["thm","app"],"brief":"空间曲线积分与曲面积分的转化。",
+{"id":"c7s3-1","name":"斯托克斯公式","tags":["thm","der","exa"],"brief":"旋度定理的完整表述。",
  "body": wrap(
     thm("斯托克斯公式", p("设 $\\Sigma$ 为光滑有界曲面，边界 $\\Gamma$ 为分段光滑闭曲线，$\\Gamma$ 的正向与 $\\Sigma$ 的侧符合右手定则。若 $P,Q,R$ 有一阶连续偏导数，则")+
-    fml("\\oint_\\Gamma P\\,dx+Q\\,dy+R\\,dz = \\iint_\\Sigma\\begin{vmatrix}dy\\,dz & dz\\,dx & dx\\,dy \\\\ \\frac{\\partial}{\\partial x} & \\frac{\\partial}{\\partial y} & \\frac{\\partial}{\\partial z} \\\\ P & Q & R\\end{vmatrix}"))
-    + app(p("格林公式是斯托克斯公式在 $z=0$ 平面的特例。斯托克斯公式将空间闭曲线积分化为曲面积分。"))
+    fml("\\oint_\\Gamma P\\,dx+Q\\,dy+R\\,dz = \\iint_\\Sigma\\begin{vmatrix}dy\\,dz & dz\\,dx & dx\\,dy \\\\ \\frac{\\partial}{\\partial x} & \\frac{\\partial}{\\partial y} & \\frac{\\partial}{\\partial z} \\\\ P & Q & R\\end{vmatrix}",
+        "用旋度表示：$\\oint_\\Gamma\\vec F\\cdot d\\vec r=\\iint_\\Sigma(\\nabla\\times\\vec F)\\cdot d\\vec S$。"))
+    + der(p("<strong>证明思路：</strong>先对特殊曲面（$z=z(x,y)$ 型）证明 $\\oint_\\Gamma P\\,dx=\\iint_\\Sigma(\\frac{\\partial P}{\\partial z}dz\\,dx-\\frac{\\partial P}{\\partial y}dx\\,dy)$，利用格林公式将边界线积分化为投影区域上的二重积分，再还原为曲面积分。对 $Q,R$ 同理，合并即得。一般曲面可分割为若干此类曲面片。"))
+    + app(p("<strong>几何/物理意义：</strong>沿闭曲线的<strong>环量</strong>等于穿过以该曲线为边界的曲面的<strong>旋度通量</strong>。格林公式是斯托克斯公式在 $z=0$ 平面的特例。"))
 )},
-{"id":"c7s4-2","name":"散度、旋度与势场","tags":["def","thm","app"],"brief":"nabla算子、保守场、调和场。",
+{"id":"c7s3-2","name":"旋度的物理意义","tags":["def","thm","app"],"brief":"环量密度与无旋场。",
  "body": wrap(
-    defn("梯度、散度、旋度", p("设 $\\vec F=(P,Q,R)$，$\\nabla=(\\frac{\\partial}{\\partial x},\\frac{\\partial}{\\partial y},\\frac{\\partial}{\\partial z})$：<br><strong>梯度</strong> $\\nabla u=(u_x,u_y,u_z)$；<br><strong>散度</strong> $\\nabla\\cdot\\vec F=\\frac{\\partial P}{\\partial x}+\\frac{\\partial Q}{\\partial y}+\\frac{\\partial R}{\\partial z}$；<br><strong>旋度</strong> $\\nabla\\times\\vec F=(R_y-Q_z,P_z-R_x,Q_x-P_y)$。"))
-    + thm("场论基本定理", p("<strong>高斯公式：</strong>$\\oiint_\\Sigma\\vec F\\cdot d\\vec S=\\iiint_\\Omega\\nabla\\cdot\\vec F\\,dV$；<br><strong>斯托克斯公式：</strong>$\\oint_\\Gamma\\vec F\\cdot d\\vec r=\\iint_\\Sigma(\\nabla\\times\\vec F)\\cdot d\\vec S$。"))
-    + app(p("<strong>保守场（势场）：</strong>若 $\\nabla\\times\\vec F=0$，则 $\\vec F$ 为保守场，存在势函数 $u$ 使 $\\vec F=\\nabla u$，曲线积分与路径无关。<br><strong>调和场：</strong>无源（$\\nabla\\cdot\\vec F=0$）且无旋（$\\nabla\\times\\vec F=0$）的场，此时势函数 $u$ 满足拉普拉斯方程 $\\Delta u=0$。"))
+    defn("旋度", p("向量场 $\\vec F=(P,Q,R)$ 的旋度")+
+    fml("\\mathrm{rot}\\,\\vec F = \\nabla\\times\\vec F = \\left(\\frac{\\partial R}{\\partial y}-\\frac{\\partial Q}{\\partial z},\\frac{\\partial P}{\\partial z}-\\frac{\\partial R}{\\partial x},\\frac{\\partial Q}{\\partial x}-\\frac{\\partial P}{\\partial y}\\right)",
+        "旋度是向量，方向为使环量密度最大的方向，大小为最大环量密度。"))
+    + thm("旋度与环量密度", p("在点 $M$ 处，沿方向 $\\vec n$ 的环量密度为 $(\\nabla\\times\\vec F)\\cdot\\vec n$。旋度方向即涡旋轴方向，大小表示旋转强度。"))
+    + app(p("<strong>无旋场（保守场）：</strong>若 $\\nabla\\times\\vec F\\equiv 0$，则沿任意闭曲线的环量为零，曲线积分与路径无关，存在势函数 $u$ 使 $\\vec F=\\nabla u$。引力场、静电场是无旋场。<br><strong>有旋场：</strong>如稳恒电流的磁场（$\\nabla\\times\\vec B=\\mu_0\\vec J$），存在涡旋结构。"))
+)},
+]
+},
+# ---- 7.4 场论：梯度、散度、旋度与势场 ----
+{
+"name": "7.4 场论：梯度、散度、旋度与势场",
+"color": "#f472b6",
+"desc": "nabla算子、三大积分定理统一、调和场",
+"items": [
+{"id":"c7s4-1","name":"梯度、散度、旋度的统一","tags":["def","thm","app"],"brief":"nabla算子与三大积分定理。",
+ "body": wrap(
+    defn("nabla 算子", p("$\\nabla=\\left(\\frac{\\partial}{\\partial x},\\frac{\\partial}{\\partial y},\\frac{\\partial}{\\partial z}\\right)$。对数量场 $u$：梯度 $\\nabla u$ 是向量；对向量场 $\\vec F$：散度 $\\nabla\\cdot\\vec F$ 是标量，旋度 $\\nabla\\times\\vec F$ 是向量。"))
+    + thm("三大积分定理的向量形式", p("<strong>高斯公式：</strong>$\\oiint_{\\partial\\Omega}\\vec F\\cdot d\\vec S=\\iiint_\\Omega\\nabla\\cdot\\vec F\\,dV$（通量=散度体积分）；<br><strong>斯托克斯公式：</strong>$\\oint_{\\partial\\Sigma}\\vec F\\cdot d\\vec r=\\iint_\\Sigma(\\nabla\\times\\vec F)\\cdot d\\vec S$（环量=旋度通量）；<br><strong>梯度定理：</strong>$\\int_A^B\\nabla u\\cdot d\\vec r=u(B)-u(A)$（曲线积分=端点势差）。"))
+    + app(p("三大定理揭示了微积分的统一结构：<strong>边界上的积分 = 内部微分运算的积分</strong>。这是微分流形上斯托克斯定理的特例，也是整个向量分析的核心。"))
+)},
+{"id":"c7s4-2","name":"势场与调和场","tags":["thm","app"],"brief":"保守场、无源场、调和场。",
+ "body": wrap(
+    thm("保守场（有势场）", p("若 $\\nabla\\times\\vec F=0$（无旋），则 $\\vec F$ 为保守场，存在势函数 $u$ 使 $\\vec F=\\nabla u$。曲线积分 $\\int_A^B\\vec F\\cdot d\\vec r=u(B)-u(A)$ 与路径无关。"))
+    + thm("无源场（管形场）", p("若 $\\nabla\\cdot\\vec F=0$，则 $\\vec F$ 为无源场，存在向量势 $\\vec A$ 使 $\\vec F=\\nabla\\times\\vec A$。穿出任意闭曲面的通量为零。"))
+    + thm("调和场", p("若 $\\vec F$ 既无源又无旋（$\\nabla\\cdot\\vec F=0$ 且 $\\nabla\\times\\vec F=0$），则 $\\vec F=\\nabla u$，且势函数 $u$ 满足拉普拉斯方程 $\\Delta u=\\nabla\\cdot\\nabla u=0$。$u$ 称为调和函数。"))
+    + app(p("<strong>调和函数的性质：</strong>调和函数在区域内部不能取到最大值（除非为常数），具有平均值性质。稳态温度分布、静电势、不可压缩无旋流体的速度势都是调和函数的实例。"))
 )},
 ]
 },
@@ -918,11 +1046,11 @@ CHAPTERS = [
     {"id":"c-ch5","num":"第五章","title":"多元微分","en":"MULTIVARIABLE DIFFERENTIAL CALCULUS",
      "desc":"将微分学推广到多元函数：重极限与累次极限、偏导数与全微分、复合函数链式法则、隐函数与雅可比行列式、多元极值与拉格朗日乘数法。",
      "sections": ch5_sections},
-    {"id":"c-ch6","num":"第六章","title":"重积分","en":"MULTIPLE INTEGRALS",
-     "desc":"二重积分与三重积分的计算（直角、极、柱、球坐标），重积分在面积、体积、质心、转动惯量中的应用，以及含参积分与欧拉积分（Γ、Β函数）。",
+    {"id":"c-ch6","num":"第六章","title":"多元积分","en":"MULTIPLE INTEGRALS",
+     "desc":"二重积分、三重积分、曲线积分、曲面积分的概念与计算，多元积分在面积、体积、曲面面积、弧长、质心、转动惯量中的应用，以及含参积分与欧拉积分（Γ、Β函数）。",
      "sections": ch6_sections},
     {"id":"c-ch7","num":"第七章","title":"积分定理","en":"INTEGRAL THEOREMS",
-     "desc":"曲线积分与曲面积分的概念与计算，格林公式、高斯公式、斯托克斯公式三大积分定理，以及梯度、散度、旋度与势场理论。",
+     "desc":"格林公式、高斯公式、斯托克斯公式三大积分定理的完整表述与证明，以及梯度、散度、旋度与势场理论。",
      "sections": ch7_sections},
     {"id":"c-ch8","num":"第八章","title":"无穷级数","en":"INFINITE SERIES",
      "desc":"数项级数的收敛判别（比较、比值、根值、莱布尼茨），幂级数的收敛半径与函数展开，傅里叶级数的三角展开，以及级数在近似计算、欧拉公式、微分方程中的应用。",
@@ -1048,9 +1176,13 @@ def gen_html():
   .la-modal-body strong{color:#0f172a}
   .la-modal-body ul{margin:0 0 12px;padding-left:22px}
   .la-modal-body li{margin-bottom:6px}
-  .la-fml{margin:16px 0;padding:14px 18px;background:linear-gradient(135deg,#f8fafc,#eef4fb);border-left:4px solid #93b4e8;border-radius:10px;overflow-x:auto;font-size:16px}
+  .la-fml{margin:16px 0;padding:14px 18px;background:linear-gradient(135deg,#f8fafc,#eef4fb);border-left:4px solid #93b4e8;border-radius:10px;overflow-x:auto;font-size:16px;color:#0f172a}
   .la-fml .note{display:block;font-size:12.5px;color:#8496ad;margin-top:8px;line-height:1.6;font-family:system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
   .la-fml mjx-container[display="true"]{margin:0 !important}
+  mjx-container, mjx-container *{color:#0f172a !important;opacity:1 !important}
+  mjx-mi{font-style:italic !important}
+  mjx-mo{color:#0f172a !important}
+  .la-modal-body mjx-container, .la-modal-body mjx-container *{color:#0f172a !important;opacity:1 !important}
   .la-fig{margin:18px auto;padding:14px 16px 10px;background:#fafcff;border:1px solid #e2ebf7;border-radius:14px;display:flex;flex-direction:column;align-items:center;max-width:600px}
   .la-fig svg{display:block;width:100%;height:auto;max-width:560px}
   .la-fig .la-fig-cap{font-size:12px;color:#8496ad;margin-top:8px;text-align:center;letter-spacing:.02em}
