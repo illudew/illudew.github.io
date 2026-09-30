@@ -256,11 +256,23 @@ ch1_sections = [
 )},
 {"id":"tm-c1s4-2","name":"诺特定理","tags":["def","thm","der","app"],"brief":"连续对称性对应守恒量。",
  "body": wrap(
-    defn("无穷小变换", p("考虑含参数的连续变换 $q_\\alpha\\to q_\\alpha+\\varepsilon\\eta_\\alpha(q,t)$，$t\\to t+\\varepsilon\\xi(q,t)$，其中 $\\varepsilon$ 为无穷小参数，$\\eta_\\alpha,\\xi$ 为生成函数。"))
-    + thm("诺特定理", p("若上述无穷小变换是系统的对称变换（即使作用量不变或差一边界项），则存在守恒量")+
-    fml("I = \\sum_\\alpha \\frac{\\partial L}{\\partial\\dot q_\\alpha}\\eta_\\alpha + \\left(L - \\sum_\\alpha\\frac{\\partial L}{\\partial\\dot q_\\alpha}\\dot q_\\alpha\\right)\\xi = \\text{常数}"))
-    + der(p("<strong>推导：</strong>考虑变换对作用量的影响。在无穷小变换下，$q_\\alpha(t)\\to q_\\alpha+\\varepsilon\\eta_\\alpha$，$t\\to t+\\varepsilon\\xi$。作用量的变化来自两部分：被积函数的变化和积分限的变化。<br>变换后 $L'\\approx L+\\varepsilon\\left(\\sum_\\alpha\\frac{\\partial L}{\\partial q_\\alpha}\\eta_\\alpha+\\sum_\\alpha\\frac{\\partial L}{\\partial\\dot q_\\alpha}\\dot\\eta_\\alpha+\\frac{\\partial L}{\\partial t}\\xi\\right)$。<br>积分限变化给出附加项 $L\\varepsilon\\xi|_{t_1}^{t_2}$。<br>由对称性，$\\delta S$ 应为边界项。利用欧拉-拉格朗日方程 $\\frac{\\partial L}{\\partial q_\\alpha}=\\frac{d}{dt}\\frac{\\partial L}{\\partial\\dot q_\\alpha}$，将体积分转化为全导数：<br>$\\sum_\\alpha\\frac{\\partial L}{\\partial q_\\alpha}\\eta_\\alpha+\\sum_\\alpha\\frac{\\partial L}{\\partial\\dot q_\\alpha}\\dot\\eta_\\alpha=\\frac{d}{dt}\\sum_\\alpha\\frac{\\partial L}{\\partial\\dot q_\\alpha}\\eta_\\alpha$。<br>故 $\\delta S=\\varepsilon\\left[\\sum_\\alpha\\frac{\\partial L}{\\partial\\dot q_\\alpha}\\eta_\\alpha+L\\xi\\right]_{t_1}^{t_2}$。<br>注意到 $\\dot q_\\alpha$ 的变换为 $\\dot q_\\alpha\\to\\dot q_\\alpha+\\varepsilon(\\dot\\eta_\\alpha-\\dot q_\\alpha\\dot\\xi)$，修正后守恒量为 $I=\\sum_\\alpha p_\\alpha\\eta_\\alpha+(L-\\sum p_\\alpha\\dot q_\\alpha)\\xi$。<br>由 $\\delta S=0$（对称变换），得 $\\frac{dI}{dt}=0$，即 $I$ 守恒。"))
-    + app(p("<strong>空间平移 $\\eta_\\alpha=1,\\xi=0$：</strong>$I=\\sum_\\alpha p_\\alpha=$ 总动量守恒。<br><strong>空间转动（绕 $z$ 轴）$\\eta_x=-y,\\eta_y=x,\\xi=0$：</strong>$I=xp_y-yp_x=L_z$ 角动量守恒。<br><strong>时间平移 $\\xi=1,\\eta=0$：</strong>$I=L-\\sum p_\\alpha\\dot q_\\alpha=-H$，能量守恒。<br>这三大守恒定律分别对应时空的均匀性和各向同性。"))
+    defn("对称性变换", p("考虑含连续参数 $\\varepsilon$ 的无穷小变换 $t\\to t'=t+\\varepsilon\\,\\Delta t(q,t)$，$q_\\alpha\\to q_\\alpha'=q_\\alpha+\\varepsilon\\,\\Delta q_\\alpha(q,t)$。若此变换使作用量不变或仅差一边界项，即")+
+    fml("S[q'(t')] = S[q(t)] + \\varepsilon\\left[F(q(t_f),t_f)-F(q(t_i),t_i)\\right]",
+        "则称该变换为系统的<strong>对称性变换</strong>，$F(q,t)$ 为相应的边界项函数。"))
+    + thm("诺特定理", p("系统的每一个连续对称性变换都对应一个守恒量：")+
+    fml("Q = \\sum_\\alpha \\frac{\\partial L}{\\partial\\dot q_\\alpha}\\left(\\Delta q_\\alpha - \\dot q_\\alpha\\,\\Delta t\\right) + L\\,\\Delta t - F = \\text{常数}",
+        "其中 $\\bar{\\Delta}q_\\alpha \\equiv \\Delta q_\\alpha - \\dot q_\\alpha\\,\\Delta t$ 称为<strong>演化变分</strong>，即在变换后的新时间处坐标的实质性变化。"))
+    + der(p("<strong>完整推导：</strong><br><strong>第一步：</strong>定义演化变分 $\\bar{\\Delta}q_\\alpha=\\Delta q_\\alpha-\\dot q_\\alpha\\Delta t$。它表示在固定时刻 $t'$ 处，新旧坐标之差中扣除时间变换带来的漂移后的实质变化。"))
+    + der(p("<strong>第二步：</strong>在无穷小变换下，作用量变为")+
+    fml("S[q'(t')] = \\int_{t_i}^{t_f}\\left[L + \\varepsilon\\left(\\sum_\\alpha\\frac{\\partial L}{\\partial q_\\alpha}\\bar{\\Delta}q_\\alpha + \\sum_\\alpha\\frac{\\partial L}{\\partial\\dot q_\\alpha}\\frac{d}{dt}\\bar{\\Delta}q_\\alpha + \\frac{d}{dt}(\\Delta t\\,L)\\right)\\right]dt",
+        "其中第一项 $\\sum\\frac{\\partial L}{\\partial q_\\alpha}\\bar{\\Delta}q_\\alpha+\\sum\\frac{\\partial L}{\\partial\\dot q_\\alpha}\\dot{\\bar{\\Delta}}q_\\alpha$ 为拉氏量在固定 $t$ 处的变化，第三项 $\\frac{d}{dt}(\\Delta t\\,L)$ 来自积分测度 $dt'=dt(1+\\varepsilon\\dot{\\Delta}t)$ 的变化。"))
+    + der(p("<strong>第三步：</strong>对真实运动，利用欧拉-拉格朗日方程 $\\frac{\\partial L}{\\partial q_\\alpha}=\\frac{d}{dt}\\frac{\\partial L}{\\partial\\dot q_\\alpha}$，将前两项合并为全导数：")+
+    fml("\\sum_\\alpha\\frac{\\partial L}{\\partial q_\\alpha}\\bar{\\Delta}q_\\alpha + \\sum_\\alpha\\frac{\\partial L}{\\partial\\dot q_\\alpha}\\dot{\\bar{\\Delta}}q_\\alpha = \\frac{d}{dt}\\sum_\\alpha\\frac{\\partial L}{\\partial\\dot q_\\alpha}\\bar{\\Delta}q_\\alpha",
+        "故 $\\delta S=\\varepsilon\\int\\frac{d}{dt}\\left[\\sum_\\alpha\\frac{\\partial L}{\\partial\\dot q_\\alpha}\\bar{\\Delta}q_\\alpha+\\Delta t\\,L\\right]dt=\\varepsilon\\left[\\sum_\\alpha p_\\alpha\\bar{\\Delta}q_\\alpha+\\Delta t\\,L\\right]_{t_i}^{t_f}$。"))
+    + der(p("<strong>第四步：</strong>由对称性假设 $\\delta S=\\varepsilon[F(t_f)-F(t_i)]$，比较得")+
+    fml("\\frac{d}{dt}\\left[\\sum_\\alpha p_\\alpha\\bar{\\Delta}q_\\alpha+\\Delta t\\,L-F\\right]=0",
+        "即 $Q=\\sum_\\alpha p_\\alpha(\\Delta q_\\alpha-\\dot q_\\alpha\\Delta t)+\\Delta t\\,L-F$ 为守恒量。$\\blacksquare$"))
+    + app(p("<strong>空间平移 $\\Delta\\vec r=\\vec\\varepsilon,\\Delta t=0$：</strong>$Q=\\sum\\vec p\\cdot\\vec\\varepsilon=\\vec\\varepsilon\\cdot\\vec P$，故 $\\vec P$ 守恒。<br><strong>空间转动（绕 $\\hat n$ 轴）$\\Delta\\vec r=\\varepsilon\\hat n\\times\\vec r,\\Delta t=0$：</strong>$Q=\\sum\\vec p\\cdot(\\hat n\\times\\vec r)=\\hat n\\cdot\\sum\\vec r\\times\\vec p=\\hat n\\cdot\\vec L$，故 $\\vec L$ 守恒。<br><strong>时间平移 $\\Delta t=1,\\Delta q=0$：</strong>$Q=L-\\sum p_\\alpha\\dot q_\\alpha=-H$，故 $H$（能量）守恒。<br>这三大守恒定律分别对应时空的均匀性和各向同性。"))
 )},
 ],
 },
@@ -286,6 +298,7 @@ ch2_sections = [
         "函数 $f(x)$ 到 $g(p)$ 的变换将自变量从 $x$ 变为 $p$，函数形式从 $f$ 变为 $g$。"))
     + thm("全微分与对合性", p("$g(p)$ 的全微分为 $dg = x\\,dp$。做两次勒让德变换回到原函数：$g^*(x)=f(x)$。"))
     + der(p("$dg=x\\,dp+p\\,dx-df=x\\,dp+p\\,dx-p\\,dx=x\\,dp$。<br>对 $g(p)$ 再做勒让德变换：令 $z=\\frac{dg}{dp}=x$，则 $h(z)=z\\cdot p-g(p)\\big|_{p=p(z)}=xp-(xp-f(x))=f(x)=f(z)$。故两次变换还原。"))
+    + thm("几何意义", p("$y=f(x)$ 的图像为曲线，$y=px$ 为过原点斜率为 $p$ 的直线。斜率为 $p$ 且与 $f(x)$ 相切的切线在纵轴上的截距为 $px(p)-f(x(p))=g(p)$。因此<strong>勒让德变换的几何意义是切线在纵轴上的截距</strong>。"))
 )},
 {"id":"tm-c2s1-2","name":"正则变量与哈密顿量","tags":["def","thm","der"],"brief":"从拉格朗日函数到哈密顿量。",
  "body": wrap(
@@ -654,16 +667,23 @@ ch3_sections = [
         "先绕固定 $z$ 轴转 $\\varphi$（进动角），再绕节线（$x'$ 轴）转 $\\theta$（章动角），最后绕刚体 $z''$ 轴转 $\\psi$（自转角）。"))
     + thm("适用范围", p("欧拉角在 $\\theta=0$ 或 $\\pi$ 处存在奇点（万向锁），此时 $\\varphi$ 和 $\\psi$ 不可区分。在这些奇异性附近需使用其他参数化（如四元数或罗德里格斯参数）。"))
 )},
-{"id":"tm-c3s3-3","name":"刚体的角速度","tags":["def","thm","der"],"brief":"欧拉角速率与角速度的关系。",
+{"id":"tm-c3s3-3","name":"刚体的角速度","tags":["def","thm","der"],"brief":"从转动矩阵导出角速度矢量。",
  "body": wrap(
-    defn("角速度矢量", p("刚体的角速度 $\\vec\\omega$ 可分解为三个欧拉角速率的贡献：")+
-    fml("\\vec\\omega = \\dot\\varphi\\,\\hat z + \\dot\\theta\\,\\hat n + \\dot\\psi\\,\\hat z''",
-        "其中 $\\hat z$ 为固定系 $z$ 轴，$\\hat n$ 为节线方向，$\\hat z''$ 为刚体 $z$ 轴。"))
-    + thm("刚体主轴坐标系下的分量", p("在刚体主轴坐标系中，角速度分量为")+
-    fml("\\omega_1 = \\dot\\varphi\\sin\\theta\\sin\\psi + \\dot\\theta\\cos\\psi")
-    + fml("\\omega_2 = \\dot\\varphi\\sin\\theta\\cos\\psi - \\dot\\theta\\sin\\psi")
-    + fml("\\omega_3 = \\dot\\varphi\\cos\\theta + \\dot\\psi"))
-    + der(p("将 $\\hat z,\\hat n,\\hat z''$ 分解到主轴坐标系：<br>$\\hat z''=(0,0,1)$（刚体 $z$ 轴即主轴3）。<br>$\\hat n=(\\cos\\psi,\\sin\\psi,0)$（节线在 $xy$ 平面内）。<br>$\\hat z=(\\sin\\theta\\sin\\psi,\\sin\\theta\\cos\\psi,\\cos\\theta)$（固定 $z$ 轴在主轴系的分量）。<br>代入 $\\vec\\omega=\\dot\\varphi\\hat z+\\dot\\theta\\hat n+\\dot\\psi\\hat z''$ 即得各分量。"))
+    defn("角速度矩阵", p("刚体定点转动由转动矩阵 $R(t)$ 描述，$R^TR=I$，$\\det R=1$。刚体上位矢 $\\vec r_i(t)=R(t)\\vec r_i(0)$。定义角速度矩阵")+
+    fml("\\Omega(t) = \\dot R(t)\\,R^{-1}(t) = \\dot R(t)\\,R^T(t)"))
+    + der(p("<strong>角速度矩阵的反对称性：</strong>由 $R^TR=I$，对时间求导得 $\\dot R^TR+R^T\\dot R=\\frac{d}{dt}(R^TR)=0$。故")+
+    fml("\\Omega + \\Omega^T = \\dot R R^T + (\\dot R R^T)^T = \\dot R R^T + R\\dot R^T = \\frac{d}{dt}(RR^T) = 0",
+        "故 $\\Omega$ 是<strong>反对称矩阵</strong>。"))
+    + der(p("<strong>从反对称矩阵到角速度矢量：</strong>任何 $3\\times 3$ 反对称矩阵可写为")+
+    fml("\\Omega = \\begin{pmatrix}0&-\\omega_3&\\omega_2\\\\\\omega_3&0&-\\omega_1\\\\-\\omega_2&\\omega_1&0\\end{pmatrix}",
+        "可直接验证 $\\Omega\\vec r=\\vec\\omega\\times\\vec r$，其中 $\\vec\\omega=(\\omega_1,\\omega_2,\\omega_3)^T$。<br>故 $\\dot{\\vec r}_i=\\dot R\\vec r_i(0)=\\dot R R^{-1}R\\vec r_i(0)=\\Omega\\vec r_i=\\vec\\omega\\times\\vec r_i$。<br>这就从转动矩阵导出了<strong>角速度矢量</strong> $\\vec\\omega$。"))
+    + thm("欧拉角分解", p("用欧拉角 $(\\varphi,\\theta,\\psi)$ 时，角速度可分解为三个转动贡献：")+
+    fml("\\vec\\omega = \\dot\\varphi\\,\\hat z_0 + \\dot\\theta\\,\\hat{ON} + \\dot\\psi\\,\\hat z",
+        "在<strong>刚体主轴坐标系</strong>中的分量为：")+
+    fml("\\omega_1 = \\dot\\varphi\\sin\\theta\\sin\\psi + \\dot\\theta\\cos\\psi")+
+    fml("\\omega_2 = \\dot\\varphi\\sin\\theta\\cos\\psi - \\dot\\theta\\sin\\psi")+
+    fml("\\omega_3 = \\dot\\varphi\\cos\\theta + \\dot\\psi",
+        "推导：$\\hat z''=(0,0,1)$，$\\hat{ON}=(\\cos\\psi,\\sin\\psi,0)$，$\\hat z_0=(\\sin\\theta\\sin\\psi,\\sin\\theta\\cos\\psi,\\cos\\theta)$。代入 $\\vec\\omega=\\dot\\varphi\\hat z_0+\\dot\\theta\\hat{ON}+\\dot\\psi\\hat z''$ 即得。"))
 )},
 {"id":"tm-c3s3-4","name":"欧拉运动学方程","tags":["thm","der"],"brief":"角速度到欧拉角速率的逆变换。",
  "body": wrap(
@@ -720,14 +740,24 @@ ch3_sections = [
     + thm("守恒量", p("拉格朗日陀螺有三个守恒量：<br><strong>能量：</strong>$E=\\frac{1}{2}I_1(\\dot\\theta^2+\\dot\\varphi^2\\sin^2\\theta)+\\frac{1}{2}I_3(\\dot\\psi+\\dot\\varphi\\cos\\theta)^2+Mgl\\cos\\theta$<br><strong>角动量 $z$ 分量：</strong>$p_\\varphi=I_1\\dot\\varphi\\sin^2\\theta+I_3(\\dot\\psi+\\dot\\varphi\\cos\\theta)\\cos\\theta=$ 常数<br><strong>角动量 $z''$ 分量：</strong>$p_\\psi=I_3(\\dot\\psi+\\dot\\varphi\\cos\\theta)=$ 常数"))
     + der(p("拉格朗日函数为")+
     fml("L = \\frac{1}{2}I_1(\\dot\\theta^2+\\dot\\varphi^2\\sin^2\\theta) + \\frac{1}{2}I_3(\\dot\\psi+\\dot\\varphi\\cos\\theta)^2 - Mgl\\cos\\theta")
-    + p("$\\varphi$ 和 $\\psi$ 为循环坐标，故 $p_\\varphi=L_z$ 和 $p_\\psi=L_{z''}$ 守恒。<br>由 $L$ 不显含 $t$，能量 $E$ 守恒。<br>利用守恒量消去 $\\dot\\varphi$ 和 $\\dot\\psi$，可得到关于 $\\theta$ 的一维有效势运动方程，从而求解章动。"))
+    + p("$\\varphi$ 和 $\\psi$ 为循环坐标，故 $p_\\varphi=L_z$ 和 $p_\\psi=L_{z''}=I_3(\\dot\\psi+\\dot\\varphi\\cos\\theta)$ 守恒。<br>由 $L$ 不显含 $t$，能量 $E$ 守恒。"))
+    + der(p("<strong>约化为有效一维问题：</strong>由 $p_\\psi=I_3(\\dot\\psi+\\dot\\varphi\\cos\\theta)=L_{z''}$，得 $\\dot\\psi=\\frac{L_{z''}}{I_3}-\\dot\\varphi\\cos\\theta$。代入 $p_\\varphi$ 表达式并解出 $\\dot\\varphi$：")+
+    fml("\\dot\\varphi = \\frac{L_z - L_{z''}\\cos\\theta}{I_1\\sin^2\\theta}",
+        "将 $\\dot\\varphi$ 和 $\\dot\\psi$ 用守恒量表示后，能量化为仅含 $\\theta,\\dot\\theta$ 的形式：")+
+    fml("E = \\frac{1}{2}I_1\\dot\\theta^2 + \\frac{(L_z-L_{z''}\\cos\\theta)^2}{2I_1\\sin^2\\theta} + \\frac{L_{z''}^2}{2I_3} + Mgl\\cos\\theta",
+        "定义有效势 $V_{eff}(\\theta)=\\frac{(L_z-L_{z''}\\cos\\theta)^2}{2I_1\\sin^2\\theta}+Mgl\\cos\\theta$，问题约化为 $\\theta$ 的有效一维运动。"))
     + app(p("拉格朗日陀螺的运动表现为进动（$\\varphi$ 变化）、章动（$\\theta$ 周期性变化）和自转（$\\psi$ 变化）的合成，是陀螺仪表和地球进动的理论基础。"))
 )},
-{"id":"tm-c3s4-6","name":"惯量椭球与潘索描述","tags":["def","thm","note"],"brief":"欧拉陀螺运动的几何描述。",
+{"id":"tm-c3s4-6","name":"惯量椭球与潘索描述","tags":["def","thm","der","note"],"brief":"欧拉陀螺运动的几何描述与证明。",
  "body": wrap(
-    defn("惯量椭球", p("在主轴坐标系中，由 $\\sum I_i x_i^2=1$ 定义的椭球称为惯量椭球。角速度矢量端点在惯量椭球上的运动轨迹称为本体极迹。"))
-    + thm("潘索描述", p("自由刚体（$\\vec N=0$）的运动等价于惯量椭球在固定平面（不变平面）上的无滑动滚动。椭球中心到不变平面的距离为 $\\sqrt{2T}/|\\vec L|$，角速度矢量端点在固定平面上的轨迹称为空间极迹。"))
-    + note(p("潘索描述给出了欧拉陀螺运动的直观几何图像：惯量椭球在不变平面上滚动，接触点的速度为零（无滑动），刚体的瞬时角速度沿接触点与椭球中心的连线方向。"))
+    defn("惯量椭球", p("在主轴坐标系中，由 $I_1x^2+I_2y^2+I_3z^2=1$ 定义的椭球称为惯量椭球。其物理意义：若将椭球面上的点视为角速度 $\\vec\\omega$，则对应能量 $T=\\frac{1}{2}(I_1\\omega_1^2+I_2\\omega_2^2+I_3\\omega_3^2)=\\frac{1}{2}$。惯量椭球与刚体位形一一对应，且形状与刚体形状相似。"))
+    + thm("潘索描述", p("自由刚体（$\\vec N=0$）的运动等价于惯量椭球在<strong>固定不变平面</strong>上的无滑动纯滚动。该平面垂直于角动量方向 $\\vec L$，距转动中心 $O$ 的距离为 $d=\\frac{\\sqrt{2E}}{|\\vec L|}$。"))
+    + der(p("<strong>潘索定理的证明：</strong>设惯量椭球与角速度方向在某时刻交于点 $P$（$\\overrightarrow{OP}$ 沿瞬时转轴方向），则 $P$ 点的瞬时速度为零（因为 $P$ 在转轴上）。<br><strong>(i) 切平面垂直于 $\\vec L$：</strong>令 $f=I_1x^2+I_2y^2+I_3z^2$，则 $\\nabla f=(2I_1x,2I_2y,2I_3z)$。在 $P$ 点（$\\overrightarrow{OP}=\\vec\\omega/\\sqrt{2E}$），$\\nabla f\\propto(I_1\\omega_1,I_2\\omega_2,I_3\\omega_3)=\\vec L$。故椭球在 $P$ 点的切平面法向平行于 $\\vec L$，即切平面 $\\perp\\vec L$。"))
+    + der(p("<strong>(ii) $P$ 到 $O$ 在 $\\vec L$ 方向的投影为常数：</strong>")+
+    fml("\\overrightarrow{OP}\\cdot\\frac{\\vec L}{|\\vec L|} = \\frac{\\vec\\omega}{\\sqrt{2E}}\\cdot\\frac{\\vec L}{|\\vec L|} = \\frac{\\vec\\omega\\cdot\\vec L}{\\sqrt{2E}\\,|\\vec L|} = \\frac{2E}{\\sqrt{2E}\\,|\\vec L|} = \\frac{\\sqrt{2E}}{|\\vec L|}",
+        "其中利用了 $E=\\frac{1}{2}\\vec\\omega\\cdot\\vec L$。由于 $E$ 和 $\\vec L$ 均为守恒量，此投影距离为常数 $d=\\frac{\\sqrt{2E}}{|\\vec L|}$。"))
+    + der(p("<strong>(iii) 纯滚动：</strong>由 (i)(ii) 知切平面垂直于 $\\vec L$ 且距 $O$ 为常数 $d$，故该平面在运动过程中固定不变。又因接触点 $P$ 在转轴上，其瞬时速度为零，故椭球在该固定平面上做无滑动纯滚动。$\\blacksquare$"))
+    + note(p("角速度矢量端点在惯量椭球上描出的曲线称为<strong>本体极迹</strong>（polhode），在不变平面上描出的曲线称为<strong>空间极迹</strong>（herpolhode）。本体极迹是封闭曲线，空间极迹通常不封闭。"))
 )},
 ],
 },
