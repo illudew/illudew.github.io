@@ -177,6 +177,18 @@ window.MathJax = {{
   .la-callout{{margin:14px 0;padding:12px 16px;background:#fffbeb;border-left:3px solid #fbbf24;border-radius:8px;font-size:13.5px;color:#78350f;line-height:1.8}}
   .la-callout.la-app{{background:#fff7ed;border-color:#fb923c;color:#7c2d12}}
   .la-callout.la-his{{background:#f8fafc;border-color:#94a3b8;color:#334155}}
+  .la-kp-sec{{margin:0 0 18px;padding:14px 16px;border-radius:12px;background:#f8fafc;border:1px solid #eef2f7}}
+  .la-kp-sec h5{{margin:0 0 10px;font-size:14px;color:#1e293b;letter-spacing:.04em;display:flex;align-items:center;gap:8px}}
+  .la-kp-sec h5::before{{content:"";width:4px;height:14px;border-radius:2px;background:var(--la-accent,#3b82f6)}}
+  .la-kp-def{{border-left:3px solid #3b82f6}}
+  .la-kp-thm{{border-left:3px solid #8b5cf6;background:#faf7ff}}
+  .la-kp-der{{border-left:3px solid #0ea5e9;background:#f0f9ff}}
+  .la-kp-exa{{border-left:3px solid #10b981;background:#f0fdf4}}
+  .la-kp-app{{border-left:3px solid #f59e0b;background:#fffbeb}}
+  .la-kp-note{{border-left:3px solid #ef4444;background:#fef2f2}}
+  .la-kp-his{{border-left:3px solid #64748b;background:#f8fafc}}
+  .la-kp-ext{{border-left:3px solid #ec4899;background:#fdf2f8}}
+  .la-kp-sec p:last-child{{margin-bottom:0}}
   .la-modal-close{{margin-top:22px;background:#0f172a;color:white;border-color:#0f172a;padding:10px 20px;font-weight:bold}}
   .la-footer{{padding:34px 0 50px;color:var(--la-muted);text-align:center;font-size:13px;line-height:1.9}}
   @media(max-width:900px){{.la-wrap{{width:min(94vw,720px)}}.la-roadmap{{padding:20px}}.la-phase-title{{font-size:19px}}.la-phase-en{{font-size:10px;letter-spacing:.26em}}.la-domain-desc{{display:none}}.la-domain-grid{{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}}.la-modal{{padding:22px}}}}

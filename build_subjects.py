@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
-"""构建脚本：将 content_topics.py 中的主题展开为完整学科数据，写入 gen_subjects.py。"""
-from content_bank import expand_topic, make_item, T
+"""构建脚本：将 content_topics.py 中的主题展开为完整学科数据。
+每个主题生成一个知识点（分组集中展示），不做数量膨胀。"""
+from content_bank import build_section, T
 from content_topics import *
 
-# 文件名到主题变量的映射（全部60个学科）
+# 文件名到主题变量的映射
 SUBJECT_MAP = {
     # 数学类 7
     "elementary-math.html": ELEMENTARY_MATH,
@@ -99,36 +100,14 @@ SUBJECT_MAP = {
     "quantum-information.html": QUANTUM_INFORMATION,
 }
 
-def augment_topics(topics):
-    """为每个主题衍生相关子主题，扩充知识点数量。"""
-    expanded = []
-    for t in topics:
-        expanded.append(t)
-        name = t["name"]
-        # 衍生子主题
-        expanded.append(T(f"{name}的适用条件", "", f"讨论{name}成立的前提条件、假设和适用范围，明确其局限性。"))
-        expanded.append(T(f"{name}的数学表达", t.get("formula",""), f"{name}的严格数学表述、符号约定与量纲分析。"))
-        expanded.append(T(f"{name}的物理意义", "", f"深入理解{name}的物理内涵，揭示其描述的自然规律本质。"))
-        expanded.append(T(f"{name}的实验验证", "", f"{name}的实验验证方法、关键实验及测量精度。"))
-        expanded.append(T(f"{name}与相关概念的联系", "", f"{name}与其他物理概念的联系、区别及统一性。"))
-    return expanded
-
 def expand_subject(filename, topic_data, prefix):
-    """将主题数据展开为章节结构"""
+    """将主题数据展开为章节结构。每个主题 = 一个知识点（分组展示）。"""
     chapters = []
     for ci, ch in enumerate(topic_data, 1):
         sections = []
         for si, sec in enumerate(ch["sections"], 1):
-            items = []
-            idx = 1
-            topics = augment_topics(sec["topics"])
-            for t in topics:
-                new_items = expand_topic(prefix, idx, t["name"], t.get("formula",""),
-                    t.get("explain",""), t.get("deriv",""), t.get("ex",""), t.get("app",""), t.get("note",""))
-                items.extend(new_items)
-                idx += 100
-            sections.append({"name": sec["name"], "color": sec["color"],
-                             "desc": sec.get("desc",""), "items": items})
+            sections.append(build_section(prefix, sec["name"], sec["color"],
+                             sec.get("desc",""), sec["topics"]))
         chapters.append({"id": f"{prefix}-ch{ci}", "num": ch["ch"], "title": ch["title"],
                          "en": ch["en"], "sub": ch["sub"], "desc": ch.get("desc",""),
                          "sections": sections})
