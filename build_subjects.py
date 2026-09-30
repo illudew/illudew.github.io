@@ -106,7 +106,8 @@ def expand_subject(filename, topic_data, prefix):
     for ci, ch in enumerate(topic_data, 1):
         sections = []
         for si, sec in enumerate(ch["sections"], 1):
-            sections.append(build_section(prefix, sec["name"], sec["color"],
+            sec_prefix = f"{prefix}-c{ci}s{si}"
+            sections.append(build_section(sec_prefix, sec["name"], sec["color"],
                              sec.get("desc",""), sec["topics"]))
         chapters.append({"id": f"{prefix}-ch{ci}", "num": ch["ch"], "title": ch["title"],
                          "en": ch["en"], "sub": ch["sub"], "desc": ch.get("desc",""),
