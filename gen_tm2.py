@@ -60,6 +60,31 @@ FIG = {
 
 TAG_LABEL = {"def":"定 义","thm":"定 理","der":"推 导","exa":"例 子","app":"应 用","his":"注 记","note":"备 注"}
 
+# 核心公式清单（从全部知识点中梳理）
+CORE_FORMULAS = [
+    ("欧拉-拉格朗日方程", "\\frac{d}{dt}\\frac{\\partial L}{\\partial\\dot q_\\alpha} - \\frac{\\partial L}{\\partial q_\\alpha} = 0", "第一章 · 拉格朗日力学的基本运动方程"),
+    ("最小作用量原理", "\\delta S = 0,\\qquad S = \\int_{t_1}^{t_2} L(q,\\dot q,t)\\,dt", "真实运动使作用量取极值"),
+    ("诺特定理", "Q = \\sum_\\alpha p_\\alpha(\\Delta q_\\alpha - \\dot q_\\alpha\\,\\Delta t) + L\\,\\Delta t - F = \\text{常数}", "连续对称性 $\\Leftrightarrow$ 守恒量"),
+    ("勒让德变换", "H = \\sum_\\alpha p_\\alpha \\dot q_\\alpha - L,\\qquad p_\\alpha = \\frac{\\partial L}{\\partial\\dot q_\\alpha}", "从拉格朗日到哈密顿的桥梁"),
+    ("哈密顿正则方程", "\\dot q_\\alpha = \\frac{\\partial H}{\\partial p_\\alpha},\\qquad \\dot p_\\alpha = -\\frac{\\partial H}{\\partial q_\\alpha}", "哈密顿力学的运动方程"),
+    ("泊松括号", "\\{f,g\\} = \\sum_\\alpha\\left(\\frac{\\partial f}{\\partial q_\\alpha}\\frac{\\partial g}{\\partial p_\\alpha} - \\frac{\\partial f}{\\partial p_\\alpha}\\frac{\\partial g}{\\partial q_\\alpha}\\right)", "李代数结构的基础"),
+    ("辛形式", "\\dot\\xi = J\\nabla H,\\qquad J = \\begin{pmatrix}0 & I \\\\ -I & 0\\end{pmatrix}", "哈密顿方程的几何表达"),
+    ("守恒判据", "\\frac{df}{dt} = \\{f,H\\} + \\frac{\\partial f}{\\partial t},\\qquad f\\text{ 守恒} \\Leftrightarrow \\{f,H\\}=0", "泊松括号判断守恒量"),
+    ("哈密顿-雅可比方程", "H\\!\\left(q,\\frac{\\partial S}{\\partial q},t\\right) + \\frac{\\partial S}{\\partial t} = 0", "化偏微分方程为常微分方程"),
+    ("正则变换条件", "\\sum p_\\alpha\\,dq_\\alpha - H\\,dt = \\sum P_\\alpha\\,dQ_\\alpha - K\\,dt + dF", "母函数生成正则变换"),
+    ("小振动本征值方程", "\\det(V - \\omega^2 A) = 0", "简正频率的广义本征值问题"),
+    ("比耐公式", "\\frac{d^2u}{d\\theta^2} + u = -\\frac{F(1/u)}{mh^2u^2}", "中心力场轨道方程"),
+    ("开普勒第三定律", "T^2 = \\frac{4\\pi^2}{GM}\\,a^3", "行星运动周期的普适规律"),
+    ("欧拉动力学方程", "I_1\\dot\\omega_1 - (I_2-I_3)\\omega_2\\omega_3 = N_1", "刚体定点转动的基本方程"),
+    ("广义势能（电磁场）", "U = q\\phi - q\\vec v\\cdot\\vec A", "洛伦兹力的速度相关势能"),
+    ("科里奥利力", "\\vec F_C = -2m\\,\\vec\\omega\\times\\vec v'", "转动参考系中的惯性力"),
+    ("傅科摆进动角速度", "\\Omega = \\omega\\sin\\lambda", "纬度 $\\lambda$ 处的进动速率"),
+    ("拉格朗日函数不唯一性", "L' = L + \\frac{df}{dt} \\quad\\Rightarrow\\quad \\text{运动方程不变}", "规范不变性"),
+    ("龙格-楞次矢量", "\\vec A = \\vec p\\times\\vec L - mk\\,\\hat r = \\text{常数}", "开普勒问题的隐藏对称性（$SO(4)$）"),
+    ("作用量-角变量", "J_i = \\oint p_i\\,dq_i,\\qquad \\nu_i = \\frac{\\partial H}{\\partial J_i}", "周期运动频率与绝热不变量"),
+    ("引潮力（一阶近似）", "\\vec f_{tide} \\approx \\frac{GM}{D^3}(2x,\\,-y,\\,-z)", "潮汐成因的力学解释"),
+]
+
 def js_escape(s):
     return s.replace("\\","\\\\").replace("`","\\`").replace("${","\\${")
 def defn(t, body): return f'<section class="la-kp-sec la-kp-def"><h5>定 义</h5><p><strong>{t}</strong></p>{body}</section>'
@@ -506,12 +531,33 @@ ch2_sections = [
     + der(p("由于 $K=0$，新正则变量 $Q_i=\\beta_i$（常数）和 $P_i=\\alpha_i$（常数）。<br>由 $Q_i=\\frac{\\partial F_2}{\\partial P_i}=\\frac{\\partial S}{\\partial\\alpha_i}=\\beta_i$，反解出 $q_i(t)$。<br>由 $p_i=\\frac{\\partial F_2}{\\partial q_i}=\\frac{\\partial S}{\\partial q_i}$，得到动量。<br>这样就将求解 $2s$ 个一阶常微分方程的问题转化为求解一个偏微分方程。"))
     + app(p("哈密顿-雅科比方程是求解力学系统最有力的方法之一，尤其适用于可分离变量的系统。"))
 )},
-{"id":"tm-c2s5-3","name":"分离变量法","tags":["thm","der","app"],"brief":"将HJ方程分解为常微分方程。",
+{"id":"tm-c2s5-3","name":"分离变量法","tags":["thm","der","app","exa"],"brief":"将HJ方程分解为常微分方程，含谐振子实例。",
  "body": wrap(
     thm("不含时哈密顿量的分离", p("若 $H$ 不显含时间，则 $S=-Et+W(q)$，其中 $E$ 为能量常数。$W$ 满足")+
     fml("H\\left(q,\\frac{\\partial W}{\\partial q}\\right) = E",
-        "$W(q)$ 称为哈密顿特征函数。若 $W$ 可分离为各坐标函数之和 $W=\\sum W_i(q_i)$，则方程分解为 $s$ 个常微分方程。"))
-    + app(p("中心力场中，$W(r,\\theta,\\varphi)=W_r(r)+W_\\theta(\\theta)+W_\\varphi(\\varphi)$，可分别求解各坐标的运动。分离常数对应角动量的各分量。"))
+        "$W(q)$ 称为哈密顿特征函数。若 $W$ 可分离为各坐标函数之和 $W=\\sum_i W_i(q_i)$，则方程分解为 $s$ 个常微分方程。"))
+    + der(p("<strong>可分离变量条件：</strong>HJ方程能否分离取决于坐标系选择。Stäckel 条件给出了一个系统在何种正交曲线坐标下可分离的判据：度量系数 $h_i$ 与势能 $V$ 满足特定的可分性条件。常见可分离坐标系：笛卡尔、极坐标、抛物坐标、椭圆坐标（对应不同的对称性）。"))
+    + der(p("<strong>谐振子的 HJ 解（一维）：</strong>$H=\\frac{p^2}{2m}+\\frac{1}{2}m\\omega^2 q^2$。设 $S=-Et+W(q)$，则 HJ 方程为")+
+    fml("\\frac{1}{2m}\\left(\\frac{dW}{dq}\\right)^2 + \\frac{1}{2}m\\omega^2 q^2 = E",
+        "解出 $\\frac{dW}{dq}=\\sqrt{2mE-m^2\\omega^2 q^2}=m\\omega\\sqrt{\\frac{2E}{m\\omega^2}-q^2}$。<br>令 $q_0=\\sqrt{\\frac{2E}{m\\omega^2}}$（振幅），则 $W(q)=\\int_0^q m\\omega\\sqrt{q_0^2-x^2}\\,dx=m\\omega\\int_0^q\\sqrt{q_0^2-x^2}\\,dx$。<br>代入 $x=q_0\\sin\\varphi$，$dx=q_0\\cos\\varphi\\,d\\varphi$：$\\sqrt{q_0^2-x^2}=q_0\\cos\\varphi$，故"))
+    + der(fml("W(q) = m\\omega q_0^2 \\int_0^{\\arcsin(q/q_0)}\\cos^2\\varphi\\,d\\varphi = \\frac{m\\omega q_0^2}{2}\\left[\\arcsin\\frac{q}{q_0}+\\frac{q}{q_0}\\sqrt{1-\\frac{q^2}{q_0^2}}\\right]",
+        "由 $\\beta=\\partial S/\\partial E=-t+\\partial W/\\partial E$。计算 $\\frac{\\partial W}{\\partial E}=\\frac{\\partial W}{\\partial q_0}\\frac{dq_0}{dE}=\\frac{1}{\\omega}\\arcsin\\frac{q}{q_0}$（利用 $q_0=\\sqrt{2E/m\\omega^2}$）。<br>故 $\\beta=-t+\\frac{1}{\\omega}\\arcsin\\frac{q}{q_0}$，反解得")+
+    fml("q(t) = q_0\\sin\\big[\\omega(t-\\beta)\\big] = \\sqrt{\\frac{2E}{m\\omega^2}}\\sin(\\omega t+\\delta)",
+        "其中 $\\delta=-\\omega\\beta$。这正是经典谐振子解，由 HJ 方程完整解出。同时 $p=\\partial S/\\partial q=m\\omega\\sqrt{q_0^2-q^2}=m\\omega q_0\\cos(\\omega t+\\delta)$，与 $\\dot q$ 一致。"))
+    + app(p("<strong>中心力场</strong>：$W(r,\\theta,\\varphi)=W_r(r)+W_\\theta(\\theta)+W_\\varphi(\\varphi)$ 可分别求解各坐标，分离常数对应角动量的各分量。<br><strong>抛物坐标</strong>：库仑势 $V=-k/r$ 在抛物坐标 $(\\xi,\\eta)$ 下可分离，用于研究氢原子和卢瑟福散射。<br><strong>椭圆坐标</strong>：双中心 $1/r$ 问题（如 $H_2^+$ 分子）在椭圆坐标下可分离。"))
+)},
+{"id":"tm-c2s5-4","name":"作用量-角变量","tags":["def","thm","der","app"],"brief":"周期运动的描述与量子化条件。",
+ "body": wrap(
+    defn("作用量-角变量", p("对周期运动系统，定义作用量变量")+
+    fml("J_i = \\oint p_i\\,dq_i = \\oint \\frac{\\partial W}{\\partial q_i}\\,dq_i",
+        "积分沿一个周期完成。由 HJ 理论，$J_i$ 是新动量（常数），对应的角变量 $w_i$ 以频率 $\\nu_i=\\dot w_i$ 线性增长。"))
+    + thm("频率公式", p("系统的振动频率由作用量给出：")+
+    fml("\\nu_i = \\dot w_i = \\frac{\\partial H}{\\partial J_i}",
+        "这是绝热不变量的核心结果，也是旧量子论的玻尔-索末菲量子化条件 $\\oint p_i\\,dq_i=n_i h$ 的来源。"))
+    + der(p("<strong>谐振子的作用量：</strong>由 $p=m\\omega\\sqrt{q_0^2-q^2}$，积分一个周期：")+
+    fml("J = \\oint p\\,dq = 2\\int_{-q_0}^{q_0} m\\omega\\sqrt{q_0^2-q^2}\\,dq = m\\omega\\pi q_0^2 = \\frac{2\\pi E}{\\omega}",
+        "（利用 $\\int_{-q_0}^{q_0}\\sqrt{q_0^2-q^2}\\,dq=\\frac{\\pi q_0^2}{2}$，且 $E=\\frac{1}{2}m\\omega^2 q_0^2$）。<br>由 $E=\\frac{\\omega J}{2\\pi}$，频率 $\\nu=\\partial H/\\partial J=\\omega/2\\pi$，与运动学结果一致。"))
+    + app(p("作用量-角变量方法是处理周期运动（行星轨道、谐振子、摆）的利器，也是绝热不变量和旧量子论的数学基础。在等离子体物理和加速器物理中仍有重要应用。"))
 )},
 ],
 },
@@ -683,6 +729,25 @@ ch3_sections = [
     exa(p("对于中心势场 $V(r)=-k/r$，哈密顿量为 $H=\\frac{1}{2\\mu}(p_r^2+\\frac{p_\\theta^2}{r^2}+\\frac{p_\\varphi^2}{r^2\\sin^2\\theta})-\\frac{k}{r}$。"))
     + der(p("HJ 方程可分离变量：$S=-Et+\\alpha_\\varphi\\varphi+W_r(r)+W_\\theta(\\theta)$。<br>代入 HJ 方程得三个分离方程：<br>(1) $p_\\varphi=\\alpha_\\varphi$（绕 $z$ 轴角动量守恒）<br>(2) $p_\\theta^2+\\frac{\\alpha_\\varphi^2}{\\sin^2\\theta}=\\alpha_\\theta^2$（总角动量平方）<br>(3) $\\frac{1}{2\\mu}(p_r^2+\\frac{\\alpha_\\theta^2}{r^2})-\\frac{k}{r}=E$<br>积分 $W_r=\\int\\sqrt{2\\mu(E+\\frac{k}{r})-\\frac{\\alpha_\\theta^2}{r^2}}\\,dr$，$W_\\theta=\\int\\sqrt{\\alpha_\\theta^2-\\frac{\\alpha_\\varphi^2}{\\sin^2\\theta}}\\,d\\theta$。<br>由 $\\beta_i=\\partial S/\\partial\\alpha_i$ 可求得运动方程的解，结果与拉格朗日方法一致，得到椭圆轨道和开普勒方程。"))
 )},
+{"id":"tm-c3s2-6","name":"龙格-楞次矢量","tags":["def","thm","der","app","note"],"brief":"开普勒问题的额外守恒量与隐藏对称性。",
+ "body": wrap(
+    defn("龙格-楞次矢量", p("对平方反比中心力场 $V(r)=-k/r$，存在一个额外的守恒矢量——龙格-楞次矢量：")+
+    fml("\\vec A = \\vec p\\times\\vec L - m k\\,\\hat r = \\vec p\\times\\vec L - m k\\,\\frac{\\vec r}{r}",
+        "$\\vec A$ 沿椭圆长轴方向，指向近日点，其大小 $|\\vec A|=mk\\,e$（$e$ 为偏心率）。"))
+    + thm("守恒性", p("对 $V(r)=-k/r$，$\\vec A$ 在运动过程中守恒：$\\frac{d\\vec A}{dt}=0$。"))
+    + der(p("<strong>推导（守恒性）：</strong>由 $\\vec A=\\vec p\\times\\vec L-mk\\hat r$，对 $t$ 求导：")+
+    fml("\\frac{d\\vec A}{dt} = \\dot{\\vec p}\\times\\vec L + \\vec p\\times\\dot{\\vec L} - mk\\frac{d\\hat r}{dt}",
+        "对中心力，$\\dot{\\vec L}=0$。又 $\\dot{\\vec p}=\\vec F=-\\frac{k}{r^2}\\hat r$（引力）。代入：")+
+    fml("\\dot{\\vec p}\\times\\vec L = -\\frac{k}{r^2}\\hat r\\times(\\vec r\\times\\vec p) = -\\frac{mk}{r^2}\\hat r\\times(\\vec r\\times\\dot{\\vec r})",
+        "由 $\\vec r\\times(\\vec r\\times\\dot{\\vec r})=\\vec r(\\vec r\\cdot\\dot{\\vec r})-\\dot{\\vec r}\\,r^2=\\vec r(r\\dot r)-r^2\\dot{\\vec r}$（利用 $\\vec r\\cdot\\dot{\\vec r}=r\\dot r$），故")+
+    fml("\\hat r\\times(\\vec r\\times\\dot{\\vec r}) = \\frac{1}{r}\\vec r(r\\dot r)-\\frac{r^2}{r}\\dot{\\vec r} = r\\dot r\\,\\hat r - r\\dot{\\vec r} = -r^2\\frac{d\\hat r}{dt}",
+        "（最后一步利用 $\\frac{d\\hat r}{dt}=\\frac{\\dot{\\vec r}}{r}-\\frac{\\vec r\\dot r}{r^2}$，故 $r\\frac{d\\hat r}{dt}=\\dot{\\vec r}-\\dot r\\hat r$，即 $-r^2\\frac{d\\hat r}{dt}=r\\dot r\\hat r-r\\dot{\\vec r}$。）<br>故 $\\dot{\\vec p}\\times\\vec L=-\\frac{mk}{r^2}(-r^2\\frac{d\\hat r}{dt})=mk\\frac{d\\hat r}{dt}$，正好抵消第三项 $-mk\\frac{d\\hat r}{dt}$。故 $\\frac{d\\vec A}{dt}=0$。$\\blacksquare$"))
+    + thm("轨道几何与 $\\vec A$ 的关系", p("利用 $\\vec A\\cdot\\vec r = (\\vec p\\times\\vec L)\\cdot\\vec r - mkr = (\\vec r\\times\\vec p)\\cdot\\vec L - mkr = L^2-mkr$，故")+
+    fml("r = \\frac{L^2}{mk+|\\vec A|\\cos\\theta} = \\frac{L^2/mk}{1+e\\cos\\theta}",
+        "其中 $e=|\\vec A|/(mk)$ 为偏心率，这正是圆锥曲线方程。$\\vec A$ 直接给出轨道参数。"))
+    + app(p('<strong>隐藏对称性：</strong>角动量 $\\vec L$ 给出 3 个守恒量，加上能量 $E$ 和 $\\vec A$ 的 3 个分量（受约束 $\\vec A\\cdot\\vec L=0$ 实际独立 2 个），共 7 个独立守恒量。这超出了"一般中心势场"应有的 5 个守恒量（$E$、$\\vec L$）。多出的 2 个守恒量对应于 $SO(4)$ 隐藏对称性，使所有椭圆轨道闭合（贝特朗定理），并解释氢原子能级的"偶然简并"。'))
+    + note(p("龙格-楞次矢量是 19 世纪由 Runge 和 Lenz 重新发现的经典结果，但其深层对称性意义直到 20 世纪 70 年代才被完全理解。它属于动力系统的隐藏对称性，类似规范势的几何相，是经典力学中深邃而优美的现象。"))
+)},
 ],
 },
 
@@ -806,6 +871,19 @@ ch3_sections = [
     + der(p("<strong>(iii) 纯滚动：</strong>由 (i)(ii) 知切平面垂直于 $\\vec L$ 且距 $O$ 为常数 $d$，故该平面在运动过程中固定不变。又因接触点 $P$ 在转轴上，其瞬时速度为零，故椭球在该固定平面上做无滑动纯滚动。$\\blacksquare$"))
     + note(p("角速度矢量端点在惯量椭球上描出的曲线称为<strong>本体极迹</strong>（polhode），在不变平面上描出的曲线称为<strong>空间极迹</strong>（herpolhode）。本体极迹是封闭曲线，空间极迹通常不封闭。"))
 )},
+{"id":"tm-c3s4-7","name":"刚体绕主轴转动的稳定性","tags":["thm","der","app","exa"],"brief":"中间轴定理（网球拍定理）及其推导。",
+ "body": wrap(
+    thm("主轴转动稳定性定理", p("自由刚体绕最大或最小主转动惯量轴的转动是稳定的，绕中间主转动惯量轴的转动是不稳定的。设 $I_1<I_2<I_3$，则绕 $I_1$ 或 $I_3$ 轴的小扰动稳定，绕 $I_2$ 轴不稳定。"))
+    + der(p("<strong>推导（线性稳定性分析）：</strong>考虑绕主轴 1 转动，初始角速度 $\\vec\\omega=(\\omega_{10},0,0)$。设小扰动 $\\omega_2,\\omega_3$ 为一阶小量，由欧拉方程（$\\vec N=0$）：")+
+    fml("I_1\\dot\\omega_1 + (I_3-I_2)\\omega_2\\omega_3 = 0,\\quad I_2\\dot\\omega_2 + (I_1-I_3)\\omega_3\\omega_1 = 0,\\quad I_3\\dot\\omega_3 + (I_2-I_1)\\omega_1\\omega_2 = 0",
+        "对绕轴 1 转动 $\\omega_1\\approx\\omega_{10}$（常数），第二第三式对 $\\omega_2,\\omega_3$ 线性化：")+
+    fml("I_2\\dot\\omega_2 = (I_3-I_1)\\omega_{10}\\omega_3,\\qquad I_3\\dot\\omega_3 = -(I_2-I_1)\\omega_{10}\\omega_2",
+        "两式消元得 $\\ddot\\omega_2 = -\\Omega_1^2\\omega_2$，其中")+
+    fml("\\Omega_1^2 = \\frac{(I_3-I_1)(I_2-I_1)}{I_2 I_3}\\omega_{10}^2",
+        "若 $I_1$ 为最小（$I_1<I_2<I_3$），则 $\\Omega_1^2>0$，扰动 $\\omega_2,\\omega_3$ 做简谐振动，绕轴 1 转动<strong>稳定</strong>。<br>同理对绕轴 3（最大惯量），$\\Omega_3^2>0$，转动<strong>稳定</strong>。<br>对绕轴 2（中间惯量），$\\Omega_2^2=\\frac{(I_1-I_2)(I_3-I_2)}{I_1 I_3}\\omega_{20}^2<0$（一个因子正一个负），特征值为实数，扰动指数增长，转动<strong>不稳定</strong>。$\\blacksquare$"))
+    + exa(p("<strong>网球拍定理：</strong>抛一网球拍到空中并令其绕长轴或短轴自转，运动稳定；若令其绕中间轴自转，运动剧烈翻转，绕轴方向不可预测。这是中间轴不稳定的直观演示。<br><strong>地球自转：</strong>地球近似扁椭球（$I_1=I_2<I_3$），绕最大惯量轴（自转轴）稳定，因此地球自转方向稳定不变。<br><strong>卫星姿态控制：</strong>卫星设计需使其自转轴为最大惯量轴，以保证姿态稳定。"))
+    + app(p("刚体转动的稳定性分析是天体力学（自转稳定）、航天器姿态控制、陀螺仪设计的基础。"))
+)},
 ],
 },
 
@@ -900,6 +978,31 @@ ch3_sections = [
     fml("\\Omega = \\omega\\sin\\lambda",
         "北半球从上往下看为顺时针，南半球为逆时针。"))
     + app(p("在巴黎（$\\lambda\\approx49^\\circ$），傅科摆约 32 小时转一圈；在北极（$\\lambda=90^\\circ$），周期为 24 小时；在赤道（$\\lambda=0$），不进动。"))
+)},
+{"id":"tm-c3s6-5","name":"落体偏东效应","tags":["exa","der","app"],"brief":"自由落体向东偏转，地球自转的实证。",
+ "body": wrap(
+    exa(p("在地球表面（纬度 $\\lambda$）从高 $h$ 处释放物体，物体落地时不正对正下方，而偏东一小段距离。这是科里奥利力的直接可观测效应之一。"))
+    + der(p("取当地坐标系：$x$ 向东、$y$ 向南、$z$ 向上。地球自转角速度 $\\vec\\omega=(0,\\omega\\cos\\lambda,\\omega\\sin\\lambda)$。自由落体初速 $\\vec v=(0,0,-gt)$，故科里奥利加速度为")+
+    fml("\\vec a_C = -2\\vec\\omega\\times\\vec v = (2\\omega g t\\cos\\lambda,\\,0,\\,0)",
+        "只考虑水平方向 $x$，物体从静止落下，$t$ 时刻东向加速度为 $2\\omega g t\\cos\\lambda$。<br>积分一次（初速为 0）：东向速度 $v_x=\\omega g t^2\\cos\\lambda$。<br>再积分：东向位移")+
+    fml("x(t) = \\frac{1}{3}\\omega g t^3\\cos\\lambda",
+        "落地时间 $t=\\sqrt{2h/g}$，故偏东距离为")+
+    fml("\\Delta x = \\frac{1}{3}\\omega g\\cos\\lambda\\left(\\frac{2h}{g}\\right)^{3/2} = \\frac{2\\sqrt{2}}{3}\\omega\\cos\\lambda\\,\\frac{h^{3/2}}{\\sqrt{g}}",
+        "注意：上述为最低阶近似。高阶项还包含向南的偏转（$\\sim\\omega^2$）和向东修正（$\\sim\\omega^3$）。"))
+    + app(p("<strong>数值：</strong>赤道处从 $h=100$ 米下落，$\\Delta x\\approx 2.2$ cm。1803 年德国汉堡实验（$h=76$ m）首次观测到偏东 $9$ mm，与理论一致。"))
+    + note(p('落体偏东的物理原因：高处物体随地球自转的线速度大于地面处，因此下落时由于惯性保持较大的东向速度，落到地面时已超前于正下方。这与"地球静止不动，物体受东向力"的解释等价。'))
+)},
+{"id":"tm-c3s6-6","name":"潮汐力","tags":["def","thm","der","app"],"brief":"引潮力的非惯性系解释与潮汐成因。",
+ "body": wrap(
+    defn("潮汐力", p("在天体力学中，由于引力场在空间各点的不均匀性引起的变形力称为潮汐力（引潮力）。在地球-月球系统中，地球表面的海水在月球引力与地心处引力的差作用下产生潮汐。"))
+    + thm("引潮力公式", p("取地球-月球连线为 $x$ 轴，地心为原点，月球位于 $(D,0,0)$。地球内一点 $\\vec r=(x,y,z)$ 处月球引力为 $\\vec F_g=-\\frac{Gm_1 M(\\vec r-\\vec D)}{|\\vec r-\\vec D|^3}$（$\\vec D=(D,0,0)$）。在随地球质心加速的平动非惯性系中，需加上惯性力 $-m_1\\vec a_{cm}=m_1\\frac{GM\\vec D}{D^3}$。"))
+    + der(p("<strong>推导（一阶近似）：</strong>地心处月球的引力为 $\\vec F_0=-\\frac{Gm_1 M}{D^2}\\hat x$，对应加速度 $\\vec a_{cm}=-\\frac{GM}{D^2}\\hat x$。在非惯性系中，单位质量海水受月球引力与惯性力之差（引潮力）为")+
+    fml("\\vec f_{tide} = -\\frac{GM(\\vec r-\\vec D)}{|\\vec r-\\vec D|^3} + \\frac{GM\\vec D}{D^3}",
+        "在 $r\\ll D$ 近似下展开，利用 $|\\vec r-\\vec D|^{-3}\\approx D^{-3}(1+3x/D)$，保留一阶：")+
+    fml("\\vec f_{tide} \\approx \\frac{GM}{D^3}\\,(2x,\\,-y,\\,-z)",
+        "可见：在 $x$ 方向（地月连线方向）引潮力为正且加倍，将海水拉离地球（涨潮）；在垂直方向 $y,z$ 引潮力为负且减半，将海水压向地球（落潮）。"))
+    + der(p("<strong>潮汐隆起的物理解释：</strong>在朝月侧，月球引力比地心处强（更靠近月球），海水被拉离地心；在背月侧，月球引力比地心处弱，地心-背月侧海水相对地心被甩出。两侧同时涨潮，地球自转使各地一日两次涨潮。"))
+    + app(p("<strong>太阳潮汐：</strong>太阳引潮力约为月球的一半（$\\frac{M_\\odot}{D_\\odot^3}/\\frac{M_M}{D_M^3}\\approx 0.46$），故朔望日大潮（日月合力），上下弦小潮。<br><strong>潮汐锁定：</strong>月球由于地球潮汐力矩的作用已锁定自转周期与公转周期一致（一面永远朝向地球）。<br><strong>潮汐耗散：</strong>地球潮汐摩擦使地球自转减慢（日长每世纪增加约 1.7 ms），地月距离增大。"))
 )},
 ],
 },
@@ -1058,6 +1161,16 @@ def gen_html():
   .la-kp-sec p:last-child{margin-bottom:0}
   .la-modal-close{margin-top:22px;background:#0f172a;color:white;border-color:#0f172a;padding:10px 20px;font-weight:bold}
   .la-footer{padding:34px 0 50px;color:var(--la-muted);text-align:center;font-size:13px;line-height:1.9}
+  .la-core-fmls{{margin:40px 0 20px;padding:28px 24px;background:linear-gradient(135deg,#f0f4ff,#faf7ff);border:1px solid #e0e7ff;border-radius:18px}}
+  .la-core-fmls h3{{font-size:18px;color:#1e293b;margin:0 0 20px;text-align:center;letter-spacing:.04em}}
+  .la-core-fmls h3 .la-core-count{{display:inline-block;background:#6366f1;color:#fff;font-size:13px;padding:2px 10px;border-radius:20px;margin-left:8px;vertical-align:middle}}
+  .la-core-item{{display:flex;gap:12px;margin:0 0 14px;padding:12px 16px;background:#fff;border-radius:12px;border-left:3px solid #6366f1;align-items:flex-start}}
+  .la-core-num{{flex-shrink:0;width:26px;height:26px;border-radius:50%;background:#6366f1;color:#fff;font-size:13px;display:flex;align-items:center;justify-content:center;font-weight:bold}}
+  .la-core-body{{flex:1;min-width:0}}
+  .la-core-body .la-core-name{{font-size:14px;font-weight:600;color:#1e293b;margin-bottom:4px}}
+  .la-core-body .la-fml{{margin:6px 0 0;padding:8px 14px;font-size:15px}}
+  .la-back-top{{display:inline-block;margin-top:20px;padding:10px 28px;background:#1e293b;color:#fff;border:none;border-radius:25px;font-size:14px;cursor:pointer;letter-spacing:.04em;transition:background .2s}}
+  .la-back-top:hover{{background:#334155}}
   @media(max-width:900px){.la-wrap{width:min(94vw,720px)}.la-roadmap{padding:20px}.la-phase-title{font-size:19px}.la-phase-en{font-size:10px;letter-spacing:.26em}.la-domain-desc{display:none}.la-domain-grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}.la-modal{padding:22px}}'''
 
     js = f'''const LA_DATA = {la_data};
@@ -1147,9 +1260,6 @@ window.MathJax = {{
     <p class="la-subtitle">拉格朗日力学 · 哈密顿力学 · 力学经典问题</p>
     <div class="back-bar"><a class="back-btn" href="index.html">← 返回总览</a></div>
     <div class="la-nav-tabs">{nav_tabs}</div>
-    <div class="la-toolbar">
-      <button onclick="window.scrollTo({{top:0,behavior:'smooth'}})">回到顶部</button>
-    </div>
     <div class="la-engagement-bar">
       <div class="la-stat-item"><span>📘</span><span class="la-stat-value" id="laKCount">--</span><span>个知识点</span></div>
       <div class="la-stat-item"><span>🧮</span><span class="la-stat-value" id="laFCount">--</span><span>条核心公式</span></div>
@@ -1165,9 +1275,14 @@ window.MathJax = {{
     <span class="la-arc-badge la-arc-note">备 注</span>
   </div>
   <main class="la-roadmap" id="laRoadmap"></main>
+  <section class="la-core-fmls" id="laCoreFmls">
+    <h3>核心公式速查 <span class="la-core-count">{len(CORE_FORMULAS)} 条</span></h3>
+{chr(10).join(f'    <div class="la-core-item"><div class="la-core-num">{i+1}</div><div class="la-core-body"><div class="la-core-name">{name}</div><div class="la-fml">$${latex}$$</div><div class="note" style="font-size:12px;color:#8496ad;margin-top:4px">{desc}</div></div></div>' for i,(name,latex,desc) in enumerate(CORE_FORMULAS))}
+  </section>
   <footer class="la-footer">
     <div>理论力学 · 知识体系可视化 · MathJax + SVG</div>
     <div style="margin-top:8px">基于南开大学物理学院理论力学讲义整理</div>
+    <button class="la-back-top" onclick="window.scrollTo({{top:0,behavior:'smooth'}})">↑ 回到顶部</button>
   </footer>
 </div>
 <div class="la-overlay" id="laOverlay" onclick="closeLaInfo(event)">
