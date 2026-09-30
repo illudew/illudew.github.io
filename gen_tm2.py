@@ -213,14 +213,25 @@ ch1_sections = [
     fml("\\delta J = \\int_{t_1}^{t_2}\\left(\\frac{\\partial F}{\\partial x} - \\frac{d}{dt}\\frac{\\partial F}{\\partial\\dot x}\\right)\\delta x\\,dt = 0")
     + p("由于 $\\delta x(t)$ 在 $(t_1,t_2)$ 内任意，由变分法基本引理，被积函数必须恒为零，即得欧拉-拉格朗日方程。"))
 )},
-{"id":"tm-c1s3-4","name":"最小作用量原理","tags":["def","thm","app"],"brief":"真实运动使作用量取极值。",
+{"id":"tm-c1s3-4","name":"最小作用量原理","tags":["def","thm","der","app"],"brief":"真实运动使作用量取极值。",
  "body": wrap(
     defn("哈密顿作用量", p("对于拉格朗日函数 $L(q,\\dot q,t)$，定义作用量泛函")+
-    fml("S[q(t)] = \\int_{t_1}^{t_2} L(q,\\dot q,t)\\,dt"))
-    + thm("哈密顿最小作用量原理", p("在位形空间中，体系在 $t_1$ 到 $t_2$ 时刻从 $q^{(1)}$ 到 $q^{(2)}$ 的真实运动，使作用量 $S$ 取极值（变分为零）：")+
+    fml("S[q(t)] = \\int_{t_1}^{t_2} L(q_\\alpha,\\dot q_\\alpha,t)\\,dt",
+        "其中 $q_\\alpha(t)$ 为真实运动的广义坐标。"))
+    + thm("哈密顿最小作用量原理", p("对于完整理想约束体系，在 $t_1$ 到 $t_2$ 时刻从位形 $q_\\alpha^{(1)}$ 到 $q_\\alpha^{(2)}$ 的所有可能运动中，真实运动使作用量取极值（变分为零）：")+
     fml("\\delta S = 0",
-        "由变分法的欧拉-拉格朗日方程，$\\delta S=0$ 等价于 $\\frac{d}{dt}\\frac{\\partial L}{\\partial\\dot q_\\alpha}-\\frac{\\partial L}{\\partial q_\\alpha}=0$。"))
-    + app(p("最小作用量原理是力学的第一性原理之一。它表明真实运动是所有可能运动中使作用量取极值的那个。这个原理可以推广到场论（如电磁场、量子场论）。"))
+        "边界条件：$\\delta q_\\alpha(t_1)=\\delta q_\\alpha(t_2)=0$。"))
+    + der(p("<strong>完整推导（变分 $\\delta S=0$ $\\Leftrightarrow$ 拉格朗日方程）：</strong><br>作用量变分为")+
+    fml("\\delta S = \\int_{t_1}^{t_2}\\left(\\frac{\\partial L}{\\partial q_\\alpha}\\delta q_\\alpha + \\frac{\\partial L}{\\partial\\dot q_\\alpha}\\delta\\dot q_\\alpha\\right)dt",
+        "对第二项分部积分：$\\int_{t_1}^{t_2}\\frac{\\partial L}{\\partial\\dot q_\\alpha}\\frac{d}{dt}\\delta q_\\alpha\\,dt = \\left[\\frac{\\partial L}{\\partial\\dot q_\\alpha}\\delta q_\\alpha\\right]_{t_1}^{t_2} - \\int_{t_1}^{t_2}\\frac{d}{dt}\\frac{\\partial L}{\\partial\\dot q_\\alpha}\\delta q_\\alpha\\,dt$。<br>由边界条件 $\\delta q(t_1)=\\delta q(t_2)=0$，边界项为零。")+
+    fml("\\delta S = \\int_{t_1}^{t_2}\\left(\\frac{\\partial L}{\\partial q_\\alpha} - \\frac{d}{dt}\\frac{\\partial L}{\\partial\\dot q_\\alpha}\\right)\\delta q_\\alpha\\,dt = 0",
+        "由于 $\\delta q_\\alpha(t)$ 在 $(t_1,t_2)$ 内任意，由变分法基本引理，被积函数恒为零：")+
+    fml("\\frac{d}{dt}\\frac{\\partial L}{\\partial\\dot q_\\alpha} - \\frac{\\partial L}{\\partial q_\\alpha} = 0",
+        "即拉格朗日方程。反之，若 $q(t)$ 满足拉格朗日方程，则 $\\delta S=0$。故最小作用量原理与拉格朗日方程等价。"))
+    + thm("拉格朗日函数的不唯一性", p("若 $L'=L+\\frac{dF(q,t)}{dt}$，则 $L'$ 与 $L$ 导出相同的拉格朗日方程。因为")+
+    fml("\\delta\\int_{t_1}^{t_2}\\frac{dF}{dt}\\,dt = \\delta F(q(t_2),t_2) - \\delta F(q(t_1),t_1) = 0",
+        "由边界条件 $\\delta q(t_1)=\\delta q(t_2)=0$，故附加全导数项不影响变分。"))
+    + app(p("最小作用量原理是力学的第一性原理。它表明真实运动是所有可能运动中使作用量取极值的那个。这个原理可以推广到场论（电磁场、引力场、量子场论），是现代物理学的基础。"))
 )},
 {"id":"tm-c1s3-5","name":"最速落径问题","tags":["exa","der"],"brief":"变分法的经典应用。",
  "body": wrap(
@@ -347,14 +358,20 @@ ch2_sections = [
     + thm("基本泊松括号", p("$\\{q_\\alpha,q_\\beta\\}=0$，$\\{p_\\alpha,p_\\beta\\}=0$，$\\{q_\\alpha,p_\\beta\\}=\\delta_{\\alpha\\beta}$。"))
     + der(p("由定义直接计算可验证双线性、反对称性和莱布尼茨法则。雅可比恒等式可通过直接展开验证（计算较繁），它是泊松括号最重要的代数性质，保证了相空间上的函数在泊松括号下构成李代数。"))
 )},
-{"id":"tm-c2s3-3","name":"辛形式","tags":["def","thm"],"brief":"泊松括号的几何表述。",
+{"id":"tm-c2s3-3","name":"辛形式","tags":["def","thm","der"],"brief":"泊松括号的几何表述与辛矩阵。",
  "body": wrap(
-    defn("辛形式", p("引入辛矩阵 $J=\\begin{pmatrix}0&I_s\\\\-I_s&0\\end{pmatrix}$，其中 $I_s$ 为 $s\\times s$ 单位矩阵。泊松括号可写为")+
-    fml("\\{f,g\\} = (\\nabla f)^T J (\\nabla g)",
-        "其中 $\\nabla f=(\\frac{\\partial f}{\\partial q_1},\\dots,\\frac{\\partial f}{\\partial q_s},\\frac{\\partial f}{\\partial p_1},\\dots,\\frac{\\partial f}{\\partial p_s})^T$。"))
-    + thm("正则方程的辛形式", p("令 $\\xi=(q_1,\\dots,q_s,p_1,\\dots,p_s)^T$，正则方程可写为")+
+    defn("辛矩阵与辛形式", p("引入 $2s\\times 2s$ 矩阵 $J=\\begin{pmatrix}0&I_s\\\\-I_s&0\\end{pmatrix}$，其中 $I_s$ 为 $s\\times s$ 单位矩阵。由 $J$ 可定义两个 $2s$ 维矢量 $u$ 与 $v$ 之间的<strong>辛形式</strong>（反对称内积）：")+
+    fml("\\omega(u,v) = u^T J v",
+        "由于 $J^T=-J$，有 $\\omega(u,v)=-\\omega(v,u)$，故 $\\omega$ 是反对称的。"))
+    + der(p("<strong>泊松括号的辛形式推导：</strong>统一记正则坐标为 $\\xi_a$（$1\\le a\\le s$ 时 $\\xi_a=q_a$，$s+1\\le a\\le 2s$ 时 $\\xi_a=p_{a-s}$），$\\nabla f=(\\frac{\\partial f}{\\partial\\xi_1},\\dots,\\frac{\\partial f}{\\partial\\xi_{2s}})^T$。展开辛形式：")+
+    fml("(\\nabla f)^T J (\\nabla g) = \\sum_{b,c=1}^{2s}\\frac{\\partial f}{\\partial\\xi_b}J_{bc}\\frac{\\partial g}{\\partial\\xi_c}",
+        "将 $b,c$ 按 $1\\le b,c\\le s$（$q$ 部分）和 $s+1\\le b,c\\le 2s$（$p$ 部分）分四种情况展开。由 $J$ 的结构，$J_{\\alpha,\\delta}=0$（$q$-$q$ 块），$J_{\\alpha,s+\\delta}=\\delta_{\\alpha\\delta}$（$q$-$p$ 块），$J_{s+\\alpha,\\delta}=-\\delta_{\\alpha\\delta}$（$p$-$q$ 块），$J_{s+\\alpha,s+\\delta}=0$（$p$-$p$ 块）。代入得：")+
+    fml("\\{f,g\\} = \\sum_{\\alpha=1}^{s}\\left(\\frac{\\partial f}{\\partial q_\\alpha}\\frac{\\partial g}{\\partial p_\\alpha} - \\frac{\\partial f}{\\partial p_\\alpha}\\frac{\\partial g}{\\partial q_\\alpha}\\right) = (\\nabla f)^T J (\\nabla g)",
+        "这正是泊松括号的定义。故<strong>泊松括号 = 辛形式下的内积</strong>。"))
+    + thm("正则方程的辛形式", p("令 $\\xi=(q_1,\\dots,q_s,p_1,\\dots,p_s)^T$，正则方程可写为紧凑形式")+
     fml("\\dot\\xi = J\\nabla H(\\xi)",
-        "这是哈密顿系统的紧凑形式。$J$ 满足 $J^T=-J$，$J^2=-I$，$J^T J=I$。"))
+        "即 $\\dot q_\\alpha=\\frac{\\partial H}{\\partial p_\\alpha}$，$\\dot p_\\alpha=-\\frac{\\partial H}{\\partial q_\\alpha}$。$J$ 满足 $J^T=-J$，$J^2=-I$，$\\det J=1$。"))
+    + app(p("辛形式是哈密顿力学的几何基础。相空间在辛形式下成为一个<strong>辛流形</strong>，哈密顿流是其上的哈密顿矢量场 $X_H=J\\nabla H$ 的积分曲线。这一观点是辛几何与辛拓扑的出发点。"))
 )},
 {"id":"tm-c2s3-4","name":"守恒量的判定","tags":["thm","app"],"brief":"用泊松括号判断守恒。",
  "body": wrap(
@@ -393,12 +410,14 @@ ch2_sections = [
         "即左边为某个函数 $F$ 的全微分。$F$ 称为正则变换的母函数（generating function）。"))
     + der(p("由哈密顿最小作用量原理，变换前后作用量的变分条件应等价。原作用量变分为 $\\delta\\int(\\sum p_\\alpha\\dot q_\\alpha-H)dt=0$，变换后为 $\\delta\\int(\\sum P_\\alpha\\dot Q_\\alpha-K)dt=0$。<br>两被积函数之差应为全导数 $\\frac{dF}{dt}$，即 $\\sum p_\\alpha\\dot q_\\alpha-H-(\\sum P_\\alpha\\dot Q_\\alpha-K)=\\frac{dF}{dt}$。<br>两边乘 $dt$ 得 $\\sum p_\\alpha dq_\\alpha-\\sum P_\\alpha dQ_\\alpha+(K-H)dt=dF$。"))
 )},
-{"id":"tm-c2s4-3","name":"辛变换","tags":["def","thm"],"brief":"正则变换的矩阵表述。",
+{"id":"tm-c2s4-3","name":"辛变换与辛矩阵","tags":["def","thm","der"],"brief":"正则变换的矩阵表述，保辛形式不变。",
  "body": wrap(
-    defn("辛变换", p("设变换 $\\xi\\to\\eta$ 的雅可比矩阵为 $M=\\frac{\\partial\\eta}{\\partial\\xi}$，若满足")+
-    fml("M^T J M = J",
-        "则称该变换为辛变换。$J=\\begin{pmatrix}0&I\\\\-I&0\\end{pmatrix}$ 为辛矩阵。"))
-    + thm("等价性", p("变换为正则变换当且仅当它是辛变换。辛变换保持泊松括号不变：$\\{f,g\\}_{q,p}=\\{f,g\\}_{Q,P}$。"))
+    defn("辛变换", p("设变换 $\\xi_a\\to\\eta_a$ 的雅可比矩阵为 $M_{ab}=\\frac{\\partial\\eta_a}{\\partial\\xi_b}$。若满足")+
+    fml("M J M^T = J \\quad\\text{即}\\quad \\sum_{b,c}M_{ab}J_{bc}M_{dc}=J_{ad}",
+        "则称该变换为<strong>辛变换</strong>，矩阵 $M$ 称为<strong>辛矩阵</strong>。"))
+    + thm("辛矩阵与正交矩阵的类比", p("<strong>正交矩阵</strong> $R$ 满足 $RR^T=I$，即 $RIR^T=I$，保持单位矩阵（欧氏度规）不变。<br><strong>辛矩阵</strong> $M$ 满足 $MJM^T=J$，保持辛形式 $J$ 不变。<br><strong>洛伦兹变换</strong> $\\Lambda$ 满足 $\\Lambda G\\Lambda^T=G$，保持闵氏度规 $G$ 不变。<br>这三类变换构成了统一的模式：保某度规不变的变换。"))
+    + der(p("<strong>辛变换 $\\Rightarrow$ 正则变换的推导：</strong>设变换保辛形式不变，即 $MJM^T=J$。将正则坐标与动量分开讨论辛变换等式的四个部分。<br><strong>(i)</strong> $1\\le a,d\\le s$（$q$-$q$）：$J_{ad}=0$，$\\xi_a=q_\\alpha$，$\\xi_d=q_\\beta$，故 $\\{Q_\\alpha,Q_\\beta\\}_{q,p}=0=\\{q_\\alpha,q_\\beta\\}$。<br><strong>(ii)</strong> $1\\le a\\le s$，$s+1\\le d\\le 2s$（$q$-$p$）：$J_{ad}=\\delta_{\\alpha\\beta}$，$\\xi_a=q_\\alpha$，$\\xi_d=p_\\beta$，故 $\\{Q_\\alpha,P_\\beta\\}_{q,p}=\\delta_{\\alpha\\beta}=\\{q_\\alpha,p_\\beta\\}$。<br><strong>(iii)</strong> $s+1\\le a\\le 2s$，$1\\le d\\le s$（$p$-$q$）：$J_{ad}=-\\delta_{\\alpha\\beta}$，故 $\\{P_\\alpha,Q_\\beta\\}=-\\delta_{\\alpha\\beta}$。<br><strong>(iv)</strong> $s+1\\le a,d\\le 2s$（$p$-$p$）：$J_{ad}=0$，故 $\\{P_\\alpha,P_\\beta\\}=0$。<br>这证明了辛变换保持基本泊松括号不变，即新变量 $(Q,P)$ 仍满足正则关系，故变换为正则变换。"))
+    + thm("辛矩阵的性质", p("辛矩阵构成一个群（辛群 $Sp(2s,\\mathbb{R})$）：<br>$\\det M=\\pm 1$，进一步可证 $\\det M=+1$。<br>$M_1,M_2$ 为辛矩阵，则 $M_1M_2$ 也是辛矩阵。<br>$M$ 为辛矩阵，则 $M^{-1}$ 也是辛矩阵。<br>辛变换保持相空间体积不变（刘维尔定理的矩阵表述）。"))
 )},
 {"id":"tm-c2s4-4","name":"正则变换的例子","tags":["exa","der"],"brief":"一维谐振子的作用量-角变量。",
  "body": wrap(
@@ -414,12 +433,22 @@ ch2_sections = [
 "color": "#be185d",
 "desc": "四类母函数、哈密顿-雅科比方程、分离变量法",
 "items": [
-{"id":"tm-c2s5-1","name":"四类母函数","tags":["def","thm","exa"],"brief":"四种形式的正则变换母函数。",
+{"id":"tm-c2s5-1","name":"四类母函数","tags":["def","thm","der","exa"],"brief":"四种形式的正则变换母函数及其推导。",
  "body": wrap(
-    thm("四类母函数", p("正则变换的母函数可取四种独立变量组合，对应四种基本形式：")+
-    fml("F_1(q,Q,t):\\; p_\\alpha=\\frac{\\partial F_1}{\\partial q_\\alpha},\\; P_\\alpha=-\\frac{\\partial F_1}{\\partial Q_\\alpha}",
-        "$F_2(q,P,t):\\; p_\\alpha=\\frac{\\partial F_2}{\\partial q_\\alpha},\\; Q_\\alpha=\\frac{\\partial F_2}{\\partial P_\\alpha}$<br>$F_3(p,Q,t):\\; q_\\alpha=-\\frac{\\partial F_3}{\\partial p_\\alpha},\\; P_\\alpha=-\\frac{\\partial F_3}{\\partial Q_\\alpha}$<br>$F_4(p,P,t):\\; q_\\alpha=-\\frac{\\partial F_4}{\\partial p_\\alpha},\\; Q_\\alpha=\\frac{\\partial F_4}{\\partial P_\\alpha}$"))
-    + exa(p("四类母函数之间通过勒让德变换相互联系。例如 $F_2(q,P,t)=F_1(q,Q,t)+\\sum P_\\alpha Q_\\alpha$，其中 $Q$ 通过 $P=-\\partial F_1/\\partial Q$ 反解。"))
+    thm("第一类母函数 $F_1(q,Q,t)$", p("由全微分条件 $\\sum p_\\alpha dq_\\alpha-\\sum P_\\alpha dQ_\\alpha+(\\tilde H-H)dt=dF_1$，若 $F_1$ 以 $q,Q,t$ 为自变量，则比较系数得：")+
+    fml("p_\\alpha=\\frac{\\partial F_1}{\\partial q_\\alpha},\\quad P_\\alpha=-\\frac{\\partial F_1}{\\partial Q_\\alpha},\\quad \\tilde H=H+\\frac{\\partial F_1}{\\partial t}",
+        "给定 $F_1(q,Q,t)$，由第一式可解出 $Q=Q(q,p,t)$，由第二式得 $P=P(q,Q,t)$，从而完成正则变换。"))
+    + der(p("<strong>勒让德变换导出其他三类母函数：</strong>对微分等式两边做勒让德变换，可替换自变量。<br><strong>第二类 $F_2(q,P,t)$：</strong>两端加 $d(\\sum P_\\alpha Q_\\alpha)$，得 $\\sum p_\\alpha dq_\\alpha+\\sum Q_\\alpha dP_\\alpha+(\\tilde H-H)dt=dF_2$，其中")+
+    fml("F_2(q,P,t)=F_1(q,Q,t)+\\sum_\\alpha P_\\alpha Q_\\alpha",
+        "$p_\\alpha=\\frac{\\partial F_2}{\\partial q_\\alpha},\\quad Q_\\alpha=\\frac{\\partial F_2}{\\partial P_\\alpha},\\quad \\tilde H=H+\\frac{\\partial F_2}{\\partial t}$"))
+    + der(p("<strong>第三类 $F_3(p,Q,t)$：</strong>对 $F_1$ 等式两端减 $d(\\sum p_\\alpha q_\\alpha)$，得 $-\\sum q_\\alpha dp_\\alpha-\\sum P_\\alpha dQ_\\alpha+(\\tilde H-H)dt=dF_3$，其中")+
+    fml("F_3(p,Q,t)=F_1(q,Q,t)-\\sum_\\alpha p_\\alpha q_\\alpha",
+        "$q_\\alpha=-\\frac{\\partial F_3}{\\partial p_\\alpha},\\quad P_\\alpha=-\\frac{\\partial F_3}{\\partial Q_\\alpha},\\quad \\tilde H=H+\\frac{\\partial F_3}{\\partial t}$"))
+    + der(p("<strong>第四类 $F_4(p,P,t)$：</strong>同时做勒让德变换 $q\\to p$ 和 $Q\\to P$，得 $-\\sum q_\\alpha dp_\\alpha+\\sum Q_\\alpha dP_\\alpha+(\\tilde H-H)dt=dF_4$，其中")+
+    fml("F_4(p,P,t)=F_1(q,Q,t)-\\sum_\\alpha p_\\alpha q_\\alpha+\\sum_\\alpha P_\\alpha Q_\\alpha",
+        "$q_\\alpha=-\\frac{\\partial F_4}{\\partial p_\\alpha},\\quad Q_\\alpha=\\frac{\\partial F_4}{\\partial P_\\alpha},\\quad \\tilde H=H+\\frac{\\partial F_4}{\\partial t}$"))
+    + thm("母函数存在的充要条件", p("<strong>定理：</strong>变换为正则变换 $\\Leftrightarrow$ 存在母函数。<br>充分性已由上述推导证明（给定母函数即可构造正则变换）。必要性需要高维斯托克斯公式，此处从略。<br>注意：四类母函数中 $\\tilde H$ 相同，因为勒让德变换只换了自变量，不改变 $\\tilde H$ 的值。"))
+    + exa(p("<strong>恒等变换：</strong>取 $F_2=\\sum q_\\alpha P_\\alpha$，则 $p_\\alpha=P_\\alpha$，$Q_\\alpha=q_\\alpha$，$\\tilde H=H$，即恒等变换。<br><strong>平移变换：</strong>取 $F_2=\\sum(q_\\alpha+a_\\alpha)P_\\alpha$，则 $Q_\\alpha=q_\\alpha+a_\\alpha$，$P_\\alpha=p_\\alpha$，即坐标平移。"))
 )},
 {"id":"tm-c2s5-2","name":"哈密顿-雅科比方程","tags":["def","thm","der","app"],"brief":"使新哈密顿量为零的正则变换。",
  "body": wrap(
@@ -473,6 +502,23 @@ ch2_sections = [
         "反之，若 $G$ 为守恒量（$\\{H,G\\}=0$），则 $G$ 生成的变换是对称性变换。对称性与守恒量一一对应。"))
     + der(p("由 $\\frac{dG}{dt}=\\frac{\\partial G}{\\partial t}+\\{G,H\\}$。若 $G$ 不显含时间，则 $\\frac{dG}{dt}=\\{G,H\\}=-\\{H,G\\}$。<br>对称性要求 $\\delta H=\\varepsilon\\{H,G\\}=0$，故 $\\{H,G\\}=0$，因此 $\\frac{dG}{dt}=0$，$G$ 守恒。"))
     + app(p("<strong>动量守恒：</strong>$G=p_x$ 生成 $x$ 方向平移 $\\delta x=\\varepsilon$，$\\{H,p_x\\}=-\\frac{\\partial H}{\\partial x}=0$（$H$ 不含 $x$）$\\Rightarrow$ 动量守恒。<br><strong>角动量守恒：</strong>$G=L_z$ 生成绕 $z$ 轴转动，$\\{H,L_z\\}=0$ $\\Rightarrow$ 角动量守恒。<br><strong>能量守恒：</strong>$G=H$ 生成时间平移，$\\{H,H\\}=0$ $\\Rightarrow$ 能量守恒。"))
+)},
+{"id":"tm-c2s6-4","name":"哈密顿最小作用量原理","tags":["def","thm","der"],"brief":"相空间中的作用量变分原理。",
+ "body": wrap(
+    defn("哈密顿作用量", p("在哈密顿力学中，作用量泛函为")+
+    fml("S[q(t),p(t)] = \\int_{t_i}^{t_f}\\left(\\sum_\\alpha p_\\alpha\\dot q_\\alpha - H(q,p,t)\\right)dt",
+        "注意自变量为正则坐标 $q(t)$ 和正则动量 $p(t)$，二者独立变分。"))
+    + thm("哈密顿最小作用量原理", p("在所有 $q_\\alpha(t_i)$ 和 $q_\\alpha(t_f)$ 固定的运动中，真实运动（满足正则方程的运动）使作用量取极值：")+
+    fml("\\delta S = 0",
+        "边界条件：$\\delta q_\\alpha(t_i)=\\delta q_\\alpha(t_f)=0$，但 $\\delta p_\\alpha(t_i)$ 和 $\\delta p_\\alpha(t_f)$ 可任意。"))
+    + der(p("<strong>完整推导：</strong>对 $S$ 取变分：")+
+    fml("\\delta S = \\int_{t_i}^{t_f}\\left(\\dot q_\\alpha\\,\\delta p_\\alpha + p_\\alpha\\,\\delta\\dot q_\\alpha - \\frac{\\partial H}{\\partial q_\\alpha}\\delta q_\\alpha - \\frac{\\partial H}{\\partial p_\\alpha}\\delta p_\\alpha\\right)dt",
+        "对 $p_\\alpha\\,\\delta\\dot q_\\alpha$ 分部积分：$\\int p_\\alpha\\frac{d}{dt}\\delta q_\\alpha\\,dt = [p_\\alpha\\delta q_\\alpha]_{t_i}^{t_f} - \\int\\dot p_\\alpha\\delta q_\\alpha\\,dt$。由边界条件 $\\delta q(t_i)=\\delta q(t_f)=0$，边界项为零。")+
+    fml("\\delta S = \\int_{t_i}^{t_f}\\left[\\left(\\dot q_\\alpha - \\frac{\\partial H}{\\partial p_\\alpha}\\right)\\delta p_\\alpha - \\left(\\dot p_\\alpha + \\frac{\\partial H}{\\partial q_\\alpha}\\right)\\delta q_\\alpha\\right]dt = 0",
+        "由于 $\\delta q_\\alpha(t)$ 和 $\\delta p_\\alpha(t)$ 在 $(t_i,t_f)$ 内任意独立取值，被积函数中两组系数必须分别为零：")+
+    fml("\\dot q_\\alpha = \\frac{\\partial H}{\\partial p_\\alpha},\\qquad \\dot p_\\alpha = -\\frac{\\partial H}{\\partial q_\\alpha}",
+        "这正是哈密顿正则方程。<br>反之，若 $q(t),p(t)$ 满足正则方程，则 $\\delta S=0$。故哈密顿最小作用量原理与正则方程等价。"))
+    + app(p("拉格朗日形式中 $S=\\int L\\,dt$ 仅对 $q(t)$ 变分，而哈密顿形式中 $p(t)$ 与 $q(t)$ 独立变分，体现了相空间的辛结构。两种形式通过勒让德变换 $H=\\sum p\\dot q - L$ 等价。"))
 )},
 ],
 },
