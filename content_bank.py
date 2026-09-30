@@ -28,15 +28,10 @@ def build_kp(prefix, idx, name, formula="", explain="", deriv="",
     """
     parts = []
 
-    # 定义
-    def_body = ""
-    if explain:
-        def_body += p(explain)
-    if formula:
-        def_body += fml(formula)
-    parts.append(sec("def", "定 义", def_body))
+    # 定义 —— 只放文字说明，避免与公式重复
+    parts.append(sec("def", "定 义", p(explain) if explain else ""))
 
-    # 定理 / 公式（与定义区分：突出公式本身）
+    # 定理 / 公式（独立分区，突出公式本身）
     if formula:
         parts.append(sec("thm", "定理 · 公式", fml(formula)))
 
