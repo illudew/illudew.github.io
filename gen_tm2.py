@@ -150,10 +150,13 @@ ch1_sections = [
     fml("\\dot{\\vec r}_i = \\sum_{\\alpha=1}^{s}\\frac{\\partial\\vec r_i}{\\partial q_\\alpha}\\dot q_\\alpha + \\frac{\\partial\\vec r_i}{\\partial t}",
         "对 $\\dot q_\\alpha$ 求偏导，右边只有第一项含 $\\dot q_\\alpha$，故 $\\frac{\\partial\\dot{\\vec r}_i}{\\partial\\dot q_\\alpha}=\\frac{\\partial\\vec r_i}{\\partial q_\\alpha}$。<br>对 $q_\\alpha$ 求偏导：$\\frac{\\partial\\dot{\\vec r}_i}{\\partial q_\\alpha}=\\sum_\\beta\\frac{\\partial^2\\vec r_i}{\\partial q_\\alpha\\partial q_\\beta}\\dot q_\\beta+\\frac{\\partial^2\\vec r_i}{\\partial q_\\alpha\\partial t}$。<br>另一方面，$\\frac{d}{dt}\\frac{\\partial\\vec r_i}{\\partial q_\\alpha}=\\sum_\\beta\\frac{\\partial}{\\partial q_\\beta}\\frac{\\partial\\vec r_i}{\\partial q_\\alpha}\\dot q_\\beta+\\frac{\\partial}{\\partial t}\\frac{\\partial\\vec r_i}{\\partial q_\\alpha}$。<br>由于混合偏导可交换（$\\frac{\\partial^2\\vec r_i}{\\partial q_\\alpha\\partial q_\\beta}=\\frac{\\partial^2\\vec r_i}{\\partial q_\\beta\\partial q_\\alpha}$），两式相等。"))
 )},
-{"id":"tm-c1s2-3","name":"广义力","tags":["def","thm"],"brief":"主动力在广义坐标方向的投影。",
+{"id":"tm-c1s2-3","name":"广义力","tags":["def","thm","der"],"brief":"主动力在广义坐标方向的投影，从达朗贝尔原理导出。",
  "body": wrap(
     defn("广义力", p("对应广义坐标 $q_\\alpha$ 的广义力定义为主动力在 $q_\\alpha$ 方向的投影：")+
     fml("Q_\\alpha = \\sum_{i=1}^{n} \\vec F_i \\cdot \\frac{\\partial\\vec r_i}{\\partial q_\\alpha}"))
+    + der(p("<strong>推导（从达朗贝尔原理出发）：</strong>达朗贝尔原理为 $\\sum_i(\\vec F_i-m_i\\ddot{\\vec r}_i)\\cdot\\delta\\vec r_i=0$。代入虚位移 $\\delta\\vec r_i=\\sum_\\alpha\\frac{\\partial\\vec r_i}{\\partial q_\\alpha}\\delta q_\\alpha$，交换求和顺序：")+
+    fml("\\sum_\\alpha\\left[\\sum_i(\\vec F_i - m_i\\ddot{\\vec r}_i)\\cdot\\frac{\\partial\\vec r_i}{\\partial q_\\alpha}\\right]\\delta q_\\alpha = 0",
+        "由于 $\\delta q_\\alpha$ 独立任意，故各系数分别为零：$\\sum_i\\vec F_i\\cdot\\frac{\\partial\\vec r_i}{\\partial q_\\alpha}-\\sum_i m_i\\ddot{\\vec r}_i\\cdot\\frac{\\partial\\vec r_i}{\\partial q_\\alpha}=0$。第一项即广义力 $Q_\\alpha=\\sum_i\\vec F_i\\cdot\\frac{\\partial\\vec r_i}{\\partial q_\\alpha}$。"))
     + thm("保守力的广义力", p("若所有主动力均为保守力，$\\vec F_i=-\\nabla_i V$，则")+
     fml("Q_\\alpha = -\\sum_i \\nabla_i V \\cdot \\frac{\\partial\\vec r_i}{\\partial q_\\alpha} = -\\frac{\\partial V}{\\partial q_\\alpha}",
         "这里利用了链式法则 $\\frac{\\partial V}{\\partial q_\\alpha}=\\sum_i\\nabla_i V\\cdot\\frac{\\partial\\vec r_i}{\\partial q_\\alpha}$。"))
@@ -174,12 +177,16 @@ ch1_sections = [
     thm("规范不变性", p("设 $L'=L+\\frac{df}{dt}$，其中 $f=f(q_1,\\dots,q_s,t)$ 为任意可微函数。若 $q_\\alpha(t)$ 是 $L$ 对应的欧拉-拉格朗日方程的解，则它也是 $L'$ 对应的方程的解。"))
     + der(p("计算全导数 $\\frac{df}{dt}=\\sum_\\alpha\\frac{\\partial f}{\\partial q_\\alpha}\\dot q_\\alpha+\\frac{\\partial f}{\\partial t}$。<br>对 $\\dot q_\\alpha$ 求偏导：$\\frac{\\partial}{\\partial\\dot q_\\alpha}\\frac{df}{dt}=\\frac{\\partial f}{\\partial q_\\alpha}$（因为 $\\frac{\\partial f}{\\partial q_\\alpha}$ 和 $\\frac{\\partial f}{\\partial t}$ 都不含 $\\dot q_\\alpha$）。<br>计算：$\\frac{d}{dt}\\frac{\\partial}{\\partial\\dot q_\\alpha}\\frac{df}{dt}-\\frac{\\partial}{\\partial q_\\alpha}\\frac{df}{dt}=\\frac{d}{dt}\\frac{\\partial f}{\\partial q_\\alpha}-\\left(\\sum_\\beta\\frac{\\partial^2 f}{\\partial q_\\alpha\\partial q_\\beta}\\dot q_\\beta+\\frac{\\partial^2 f}{\\partial q_\\alpha\\partial t}\\right)$。<br>而 $\\frac{d}{dt}\\frac{\\partial f}{\\partial q_\\alpha}=\\sum_\\beta\\frac{\\partial^2 f}{\\partial q_\\beta\\partial q_\\alpha}\\dot q_\\beta+\\frac{\\partial^2 f}{\\partial t\\partial q_\\alpha}$。<br>由于混合偏导可交换，两式相等，故 $\\frac{d}{dt}\\frac{\\partial}{\\partial\\dot q_\\alpha}\\frac{df}{dt}-\\frac{\\partial}{\\partial q_\\alpha}\\frac{df}{dt}=0$。因此 $L'$ 与 $L$ 给出相同的运动方程。"))
 )},
-{"id":"tm-c1s2-6","name":"循环坐标与守恒量","tags":["def","thm","app"],"brief":"拉格朗日函数中不显含的坐标对应守恒量。",
+{"id":"tm-c1s2-6","name":"循环坐标与守恒量","tags":["def","thm","der","app"],"brief":"拉格朗日函数中不显含的坐标对应守恒量。",
  "body": wrap(
     defn("循环坐标", p("若拉格朗日函数 $L$ 不显含某个广义坐标 $q_\\alpha$（即 $\\frac{\\partial L}{\\partial q_\\alpha}=0$），则称 $q_\\alpha$ 为循环坐标（cyclic coordinate）或可遗坐标。"))
     + thm("守恒定理", p("循环坐标对应的广义动量守恒：")+
     fml("p_\\alpha = \\frac{\\partial L}{\\partial\\dot q_\\alpha} = \\text{常数}",
         "由拉格朗日方程 $\\dot p_\\alpha=\\frac{\\partial L}{\\partial q_\\alpha}=0$，故 $p_\\alpha$ 不随时间变化。"))
+    + der(p("<strong>推导：</strong>由欧拉-拉格朗日方程 $\\frac{d}{dt}\\frac{\\partial L}{\\partial\\dot q_\\alpha}-\\frac{\\partial L}{\\partial q_\\alpha}=0$。若 $q_\\alpha$ 为循环坐标，则 $\\frac{\\partial L}{\\partial q_\\alpha}=0$，代入方程得 $\\frac{d}{dt}\\frac{\\partial L}{\\partial\\dot q_\\alpha}=0$，即 $\\frac{d}{dt}p_\\alpha=0$，故 $p_\\alpha$ 为常数。$\\blacksquare$"))
+    + der(p("<strong>能量守恒的推导：</strong>若 $L$ 不显含时间（$\\frac{\\partial L}{\\partial t}=0$），计算 $\\frac{dL}{dt}$：")+
+    fml("\\frac{dL}{dt} = \\sum_\\alpha\\frac{\\partial L}{\\partial q_\\alpha}\\dot q_\\alpha + \\sum_\\alpha\\frac{\\partial L}{\\partial\\dot q_\\alpha}\\ddot q_\\alpha + \\frac{\\partial L}{\\partial t}",
+        "由欧拉-拉格朗日方程 $\\frac{\\partial L}{\\partial q_\\alpha}=\\frac{d}{dt}\\frac{\\partial L}{\\partial\\dot q_\\alpha}=\\dot p_\\alpha$，代入得 $\\frac{dL}{dt}=\\sum_\\alpha\\dot p_\\alpha\\dot q_\\alpha+\\sum_\\alpha p_\\alpha\\ddot q_\\alpha=\\frac{d}{dt}\\sum_\\alpha p_\\alpha\\dot q_\\alpha$。故 $\\frac{d}{dt}(L-\\sum p_\\alpha\\dot q_\\alpha)=0$，即 $H=\\sum p_\\alpha\\dot q_\\alpha-L$ 守恒。"))
     + app(p("<strong>中心力场：</strong>$\\varphi$ 为循环坐标 $\\Rightarrow$ 角动量 $p_\\varphi=$ 常数。<br><strong>空间平移不变性：</strong>$x$ 为循环坐标 $\\Rightarrow$ 动量守恒。<br><strong>时间平移不变性：</strong>$L$ 不显含 $t$ $\\Rightarrow$ 能量守恒（见诺特定理）。"))
 )},
 ],
@@ -196,14 +203,17 @@ ch1_sections = [
     defn("泛函", p("设 $\\mathcal F$ 为某函数空间，泛函是从 $\\mathcal F$ 到 $\\mathbb R$ 的映射 $J: \\mathcal F\\to\\mathbb R$，即对每个函数 $x(t)$ 赋一个实数 $J[x(t)]$。泛函可视为多元函数在无穷维空间的推广。"))
     + exa(p("<strong>最速落径问题：</strong>求连接两点的曲线使质点沿其下滑时间最短，$T[y(x)]=\\int_{x_1}^{x_2}\\sqrt{\\frac{1+y'^2}{2gy}}\\,dx$。<br><strong>作用量泛函：</strong>$S[q(t)]=\\int_{t_1}^{t_2}L(q,\\dot q,t)\\,dt$，这是力学中最重要的泛函。<br><strong>弧长泛函：</strong>$L[y]=\\int_{x_1}^{x_2}\\sqrt{1+y'^2}\\,dx$，极值为直线。"))
 )},
-{"id":"tm-c1s3-2","name":"泛函的变分","tags":["def","thm"],"brief":"泛函增量的线性主部。",
+{"id":"tm-c1s3-2","name":"泛函的变分","tags":["def","thm","der"],"brief":"泛函增量的线性主部，含推导。",
  "body": wrap(
-    defn("变分", p("自变函数的增量 $\\delta x(t)=\\tilde x(t)-x(t)$。泛函的增量 $\\Delta J=J[x+\\delta x]-J[x]$ 可分解为线性主部与高阶小量")+
+    defn("变分", p("自变函数的增量 $\\delta x(t)=\\tilde x(t)-x(t)$，在端点处 $\\delta x(t_1)=\\delta x(t_2)=0$。泛函的增量 $\\Delta J=J[x+\\delta x]-J[x]$ 可分解为线性主部与高阶小量")+
     fml("\\Delta J = \\delta J + o(\\|\\delta x\\|)",
         "其中线性主部 $\\delta J$ 称为泛函的变分。$\\|\\delta x\\|$ 为函数空间中的范数。"))
-    + thm("变分的计算", p("若 $J[x]=\\int_{t_1}^{t_2}F(x,\\dot x,t)\\,dt$，则变分为")+
+    + thm("变分的计算公式", p("若 $J[x]=\\int_{t_1}^{t_2}F(x,\\dot x,t)\\,dt$，则变分为")+
     fml("\\delta J = \\int_{t_1}^{t_2}\\left(\\frac{\\partial F}{\\partial x}\\delta x + \\frac{\\partial F}{\\partial\\dot x}\\delta\\dot x\\right)dt",
         "变分与微分运算可交换：$\\delta\\dot x=\\frac{d}{dt}\\delta x$。"))
+    + der(p("<strong>推导：</strong>将 $x+\\delta x$ 和 $\\dot x+\\delta\\dot x$ 代入泛函，对 $F$ 在 $(x,\\dot x,t)$ 处泰勒展开：")+
+    fml("F(x+\\delta x,\\dot x+\\delta\\dot x,t) = F(x,\\dot x,t) + \\frac{\\partial F}{\\partial x}\\delta x + \\frac{\\partial F}{\\partial\\dot x}\\delta\\dot x + o(\\|\\delta x\\|)",
+        "积分后取线性主部（略去高阶项），即得 $\\delta J=\\int_{t_1}^{t_2}\\left(\\frac{\\partial F}{\\partial x}\\delta x+\\frac{\\partial F}{\\partial\\dot x}\\delta\\dot x\\right)dt$。$\\blacksquare$"))
 )},
 {"id":"tm-c1s3-3","name":"欧拉-拉格朗日方程（变分法）","tags":["thm","der"],"brief":"泛函取极值的必要条件。",
  "body": wrap(
@@ -249,10 +259,13 @@ ch1_sections = [
 "color": "#c2410c",
 "desc": "对称性与守恒量、动量/角动量/能量定理、诺特定理",
 "items": [
-{"id":"tm-c1s4-1","name":"对称性与守恒量","tags":["def","thm"],"brief":"诺特定理的前置概念。",
+{"id":"tm-c1s4-1","name":"对称性与守恒量","tags":["def","thm","der"],"brief":"诺特定理的前置概念，含三大守恒定律推导。",
  "body": wrap(
     defn("对称性变换", p("若变换 $q\\to q'$ 使拉格朗日函数不变（或差一全导数项），则称该变换为系统的对称性变换。对称性意味着系统在某种操作下具有不变性。"))
-    + thm("动量、角动量、能量定理", p("<strong>动量定理：</strong>$\\frac{d}{dt}\\sum_i m_i\\dot{\\vec r}_i=\\sum_i\\vec F_i$，外力和为零时总动量守恒。<br><strong>角动量定理：</strong>$\\frac{d}{dt}\\sum_i\\vec r_i\\times m_i\\dot{\\vec r}_i=\\sum_i\\vec r_i\\times\\vec F_i$，外力矩和为零时总角动量守恒。<br><strong>能量定理：</strong>$\\frac{dE}{dt}=-\\frac{\\partial L}{\\partial t}$，$L$ 不显含时间时能量守恒。"))
+    + thm("三大守恒定律", p("<strong>动量守恒：</strong>空间平移不变性 $\\Rightarrow$ 总动量守恒。<br><strong>角动量守恒：</strong>空间旋转不变性 $\\Rightarrow$ 总角动量守恒。<br><strong>能量守恒：</strong>时间平移不变性 $\\Rightarrow$ 能量守恒。"))
+    + der(p("<strong>动量守恒的推导：</strong>设 $L$ 在空间平移 $\\vec r_i\\to\\vec r_i+\\delta\\vec\\varepsilon$ 下不变。由 $\\frac{\\partial L}{\\partial\\vec r_i}=0$，欧拉-拉格朗日方程给出 $\\frac{d}{dt}\\frac{\\partial L}{\\partial\\dot{\\vec r}_i}=0$，即 $\\vec p_i$ 守恒，总动量 $\\vec P=\\sum_i\\vec p_i$ 守恒。"))
+    + der(p("<strong>角动量守恒的推导：</strong>设 $L$ 在绕 $\\hat n$ 轴旋转 $\\delta\\theta$ 下不变。$\\delta\\vec r_i=\\delta\\theta\\,\\hat n\\times\\vec r_i$，由 $\\frac{\\partial L}{\\partial\\vec r_i}\\cdot\\delta\\vec r_i=0$ 得 $\\sum_i\\vec p_i\\cdot(\\hat n\\times\\vec r_i)=0$，即 $\\hat n\\cdot\\sum_i\\vec r_i\\times\\vec p_i=\\hat n\\cdot\\vec L=0$ 的导数，故 $\\vec L$ 守恒。"))
+    + der(p("<strong>能量守恒的推导：</strong>设 $L$ 不显含时间。计算 $\\frac{d}{dt}\\left(\\sum_\\alpha p_\\alpha\\dot q_\\alpha - L\\right)$：由 $\\frac{dL}{dt}=\\sum\\dot p_\\alpha\\dot q_\\alpha+\\sum p_\\alpha\\ddot q_\\alpha=\\frac{d}{dt}\\sum p_\\alpha\\dot q_\\alpha$（详见循环坐标条目），故 $\\frac{dH}{dt}=0$，能量 $H$ 守恒。"))
 )},
 {"id":"tm-c1s4-2","name":"诺特定理","tags":["def","thm","der","app"],"brief":"连续对称性对应守恒量。",
  "body": wrap(
@@ -397,20 +410,26 @@ ch2_sections = [
         "即 $\\dot q_\\alpha=\\frac{\\partial H}{\\partial p_\\alpha}$，$\\dot p_\\alpha=-\\frac{\\partial H}{\\partial q_\\alpha}$。$J$ 满足 $J^T=-J$，$J^2=-I$，$\\det J=1$。"))
     + app(p("辛形式是哈密顿力学的几何基础。相空间在辛形式下成为一个<strong>辛流形</strong>，哈密顿流是其上的哈密顿矢量场 $X_H=J\\nabla H$ 的积分曲线。这一观点是辛几何与辛拓扑的出发点。"))
 )},
-{"id":"tm-c2s3-4","name":"守恒量的判定","tags":["thm","app"],"brief":"用泊松括号判断守恒。",
+{"id":"tm-c2s3-4","name":"守恒量的判定","tags":["thm","der","app"],"brief":"用泊松括号判断守恒，含推导。",
  "body": wrap(
-    thm("守恒判据", p("若力学量 $f$ 不显含时间（$\\frac{\\partial f}{\\partial t}=0$），则 $f$ 为守恒量当且仅当")+
+    thm("守恒判据", p("若力学量 $f(q,p,t)$ 不显含时间（$\\frac{\\partial f}{\\partial t}=0$），则 $f$ 为守恒量当且仅当")+
     fml("\\{f,H\\} = 0",
-        "即 $f$ 与哈密顿量的泊松括号为零。这由 $\\frac{df}{dt}=\\frac{\\partial f}{\\partial t}+\\{f,H\\}$ 直接得出。"))
+        "即 $f$ 与哈密顿量的泊松括号为零。"))
+    + der(p("<strong>推导：</strong>对 $f(q,p,t)$ 求全导数，由链式法则：")+
+    fml("\\frac{df}{dt} = \\sum_\\alpha\\frac{\\partial f}{\\partial q_\\alpha}\\dot q_\\alpha + \\sum_\\alpha\\frac{\\partial f}{\\partial p_\\alpha}\\dot p_\\alpha + \\frac{\\partial f}{\\partial t}",
+        "代入正则方程 $\\dot q_\\alpha=\\frac{\\partial H}{\\partial p_\\alpha}$，$\\dot p_\\alpha=-\\frac{\\partial H}{\\partial q_\\alpha}$：")+
+    fml("\\frac{df}{dt} = \\sum_\\alpha\\left(\\frac{\\partial f}{\\partial q_\\alpha}\\frac{\\partial H}{\\partial p_\\alpha} - \\frac{\\partial f}{\\partial p_\\alpha}\\frac{\\partial H}{\\partial q_\\alpha}\\right) + \\frac{\\partial f}{\\partial t} = \\{f,H\\} + \\frac{\\partial f}{\\partial t}",
+        "若 $\\frac{\\partial f}{\\partial t}=0$，则 $\\frac{df}{dt}=\\{f,H\\}$。故 $f$ 守恒 $\\Leftrightarrow$ $\\frac{df}{dt}=0$ $\\Leftrightarrow$ $\\{f,H\\}=0$。$\\blacksquare$"))
     + app(p("若 $H$ 不含时，则 $\\{H,H\\}=0$，故能量 $H$ 守恒。<br>角动量各分量满足 $\\{L_x,L_y\\}=L_z$，$\\{L_y,L_z\\}=L_x$，$\\{L_z,L_x\\}=L_y$，构成 $so(3)$ 李代数。<br>若 $\\{L_x,H\\}=0$，则 $L_x$ 守恒。"))
 )},
-{"id":"tm-c2s3-5","name":"正则量子化","tags":["app","note"],"brief":"从泊松括号到量子对易子。",
+{"id":"tm-c2s3-5","name":"正则量子化","tags":["thm","der","app","note"],"brief":"从泊松括号到量子对易子的对应，含推导。",
  "body": wrap(
     thm("正则量子化规则", p("量子力学中，经典泊松括号对应量子对易子：")+
     fml("\\{f,g\\}_{cl} \\longrightarrow \\frac{1}{i\\hbar}[\\hat f,\\hat g]",
         "其中 $[\\hat f,\\hat g]=\\hat f\\hat g-\\hat g\\hat f$ 为量子对易子。"))
+    + der(p("<strong>推导（对应关系的自洽性验证）：</strong>需要验证泊松括号的代数性质在量子层面被保持。<br><strong>（1）反对称性：</strong>$[\\hat f,\\hat g]=-\\hat g\\hat f+\\hat f\\hat g=-[\\hat g,\\hat f]$，与 $\\{f,g\\}=-\\{g,f\\}$ 对应。$\\surd$<br><strong>（2）双线性：</strong>对易子显然满足 $[a\\hat f+b\\hat g,\\hat h]=a[\\hat f,\\hat h]+b[\\hat g,\\hat h]$，与泊松括号双线性对应。$\\surd$<br><strong>（3）莱布尼茨法则：</strong>$[\\hat f\\hat g,\\hat h]=\\hat f[\\hat g,\\hat h]+[\\hat f,\\hat h]\\hat g$（直接展开即可验证），与 $\\{fg,h\\}=f\\{g,h\\}+\\{f,h\\}g$ 对应。$\\surd$<br><strong>（4）雅可比恒等式：</strong>对易子满足 $[\\hat f,[\\hat g,\\hat h]]+[\\hat g,[\\hat h,\\hat f]]+[\\hat h,[\\hat f,\\hat g]]=0$（直接展开可验证），与泊松括号的雅可比恒等式对应。$\\surd$<br>故对应 $\\{\\cdot,\\cdot\\}\\to\\frac{1}{i\\hbar}[\\cdot,\\cdot]$ 保持李代数结构。"))
     + app(p("基本泊松括号 $\\{q,p\\}=1$ 对应量子对易关系 $[\\hat q,\\hat p]=i\\hbar$，这是海森堡正则对易关系的来源。哈密顿正则方程 $\\dot f=\\{f,H\\}$ 对应海森堡方程 $\\frac{d\\hat f}{dt}=\\frac{1}{i\\hbar}[\\hat f,\\hat H]$。"))
-    + note(p("正则量子化是从经典力学到量子力学的桥梁，泊松括号的代数结构（李代数）在量子层面被保持为算子代数。"))
+    + note(p("正则量子化是从经典力学到量子力学的桥梁，泊松括号的代数结构（李代数）在量子层面被保持为算子代数。这一对应关系是狄拉克提出的，是量子力学形式化的重要支柱。"))
 )},
 ],
 },
@@ -576,7 +595,7 @@ ch3_sections = [
     defn("稳定平衡", p("对处于平衡位置的系统，若经历任意小扰动后运动完全局限于平衡位置附近，则称稳定平衡。严格定义：$\\forall\\varepsilon>0,\\exists\\delta>0$，使初始 $|\\vec q(t_0)-\\vec q_0|<\\delta$ 且 $|\\vec p(t_0)|<\\delta$ 时，恒有 $|\\vec q(t)-\\vec q_0|<\\varepsilon$。"))
     + thm("稳定平衡的充分条件", p("保守系统在平衡位置 $\\vec q_0$ 处稳定的充分条件是势能取严格极小值：")+
     fml("U(\\vec q_0) \\text{ 为严格极小值 } \\Rightarrow \\text{ 稳定平衡}"))
-    + der(p("<strong>推导：</strong>由能量守恒 $E=T+U$。初始时刻系统在 $\\vec q_0$ 附近，$T(t_0)\\le\\frac{1}{2}\delta^2$（动能有界），$U(\\vec q(t_0))\\ge U(\vec q_0)$（$\\vec q_0$ 为极小值）。故 $E\\ge U(\vec q_0)$。<br>设 $U$ 在 $\\vec q_0$ 处严格极小，则在 $\\vec q_0$ 的某邻域外 $U>U(\vec q_0)+\\eta$（$\\eta>0$）。<br>若 $T(t_0)<\\eta/2$，则 $E<U(\vec q_0)+\\eta$。运动过程中 $T=E-U\\ge 0$，故 $U\\le E<U(\vec q_0)+\\eta$，即 $\\vec q$ 不会离开 $\\vec q_0$ 的邻域。故稳定。"))
+    + der(p("<strong>推导：</strong>由能量守恒 $E=T+U$。初始时刻系统在 $\\vec q_0$ 附近，$T(t_0)\\le\\frac{1}{2}\\delta^2$（动能有界），$U(\\vec q(t_0))\\ge U(\\vec q_0)$（$\\vec q_0$ 为极小值）。故 $E\\ge U(\\vec q_0)$。<br>设 $U$ 在 $\\vec q_0$ 处严格极小，则在 $\\vec q_0$ 的某邻域外 $U>U(\\vec q_0)+\\eta$（$\\eta>0$）。<br>若 $T(t_0)<\\eta/2$，则 $E<U(\\vec q_0)+\\eta$。运动过程中 $T=E-U\\ge 0$，故 $U\\le E<U(\\vec q_0)+\\eta$，即 $\\vec q$ 不会离开 $\\vec q_0$ 的邻域。故稳定。"))
     + der(p("<strong>小振动近似的依据：</strong>在稳定平衡处 $\\frac{\\partial U}{\\partial q_\\alpha}|_{\\vec q_0}=0$，将 $U$ 在 $\\vec q_0$ 处泰勒展开：")+
     fml("U(\\vec q) = U(\\vec q_0) + \\frac{1}{2}\\sum_{\\alpha\\beta}V_{\\alpha\\beta}\\eta_\\alpha\\eta_\\beta + O(\\eta^3)",
         "其中 $V_{\\alpha\\beta}=\\frac{\\partial^2 U}{\\partial q_\\alpha\\partial q_\\beta}|_{\\vec q_0}$ 为势能 Hessian 矩阵。$U$ 取极小值要求 $V_{\\alpha\\beta}$ 正定，这保证简正频率 $\\omega_i^2>0$（实频率），系统做稳定的小振动。"))
