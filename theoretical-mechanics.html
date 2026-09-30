@@ -50,6 +50,9 @@ window.MathJax = {
   .la-engagement-bar{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:10px 0 0}
   .la-stat-item{display:inline-flex;align-items:center;gap:6px;padding:9px 18px;background:#fff;border:1px solid #d5deea;border-radius:999px;font-size:14px;font-weight:600;color:#475569}
   .la-stat-value{color:#2563eb;font-weight:800}
+  .la-stat-link{cursor:pointer;text-decoration:none;color:#475569;transition:.2s ease}
+  .la-stat-link:hover{background:#eef2ff;border-color:#c7d2fe;transform:translateY(-1px);box-shadow:0 8px 20px rgba(20,36,60,.08)}
+  .la-stat-link:hover .la-stat-value{color:#4f46e5}
   .la-legend{margin:26px auto 0;max-width:1100px;background:rgba(255,255,255,.8);border:1px solid #dde5ef;border-radius:20px;padding:16px 22px;display:flex;gap:14px;flex-wrap:wrap;justify-content:center;box-shadow:var(--la-shadow)}
   .la-legend-title{font-size:12px;font-weight:800;letter-spacing:.16em;color:#94a3b8;align-self:center;margin-right:6px}
   .la-arc-badge{display:inline-flex;align-items:center;font-size:10px;font-weight:800;padding:3px 8px;border-radius:6px;letter-spacing:.03em;white-space:nowrap}
@@ -140,7 +143,7 @@ window.MathJax = {
     <div class="la-nav-tabs"><a class="la-nav-tab c1" href="#tm-ch1">第一章 · 拉格朗日力学</a><a class="la-nav-tab c2" href="#tm-ch2">第二章 · 哈密顿力学</a><a class="la-nav-tab c3" href="#tm-ch3">第三章 · 力学经典问题</a></div>
     <div class="la-engagement-bar">
       <div class="la-stat-item"><span>📘</span><span class="la-stat-value" id="laKCount">--</span><span>个知识点</span></div>
-      <div class="la-stat-item"><span>🧮</span><span class="la-stat-value" id="laFCount">--</span><span>条核心公式</span></div>
+      <a class="la-stat-item la-stat-link" href="#laCoreFmls" onclick="event.preventDefault();document.getElementById('laCoreFmls').scrollIntoView({behavior:'smooth',block:'start'})"><span>🧮</span><span class="la-stat-value">16</span><span>条核心公式 · 点击速查</span></a>
     </div>
   </header>
   <div class="la-legend">
@@ -254,9 +257,7 @@ function renderLa(){
   });
   root.innerHTML = html;
   const kCount = Object.keys(LA_KP).length;
-  const fCount = (root.innerHTML.match(/\$\$/g) || []).length;
   document.getElementById('laKCount').textContent = kCount;
-  document.getElementById('laFCount').textContent = Math.round(fCount / 2);
 }
 function showLaItem(id){
   const rec = LA_KP[id];
