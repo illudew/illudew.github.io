@@ -63,6 +63,38 @@ FIG = {
 <ellipse cx="120" cy="80" rx="75" ry="22" fill="none" stroke="#8b5cf6" stroke-width="1.2" opacity="0.5"/>
 <ellipse cx="120" cy="80" rx="100" ry="30" fill="none" stroke="#8b5cf6" stroke-width="1.2" opacity="0.3"/>
 <text x="185" y="70" font-size="9" fill="#8b5cf6">辐射场</text></svg>''',
+"circular_pol": '''<svg viewBox="0 0 240 160" xmlns="http://www.w3.org/2000/svg">
+<line x1="10" y1="80" x2="230" y2="80" stroke="#cbd5e1" stroke-width="1"/>
+<ellipse cx="120" cy="80" rx="100" ry="30" fill="none" stroke="#3b82f6" stroke-width="1.5"/>
+<circle cx="120" cy="80" r="3" fill="#ef4444"/>
+<path d="M 20 80 Q 70 50 120 80 Q 170 110 220 80" fill="none" stroke="#3b82f6" stroke-width="2"/>
+<path d="M 20 80 Q 70 110 120 80 Q 170 50 220 80" fill="none" stroke="#ef4444" stroke-width="2" opacity="0.6"/>
+<text x="20" y="40" font-size="10" fill="#3b82f6">Ex</text>
+<text x="20" y="125" font-size="10" fill="#ef4444">Ey (相位 π/2)</text>
+<polygon points="220,80 210,74 210,86" fill="#10b981"/>
+<text x="195" y="70" font-size="10" fill="#10b981">k</text></svg>''',
+"cherenkov": '''<svg viewBox="0 0 240 160" xmlns="http://www.w3.org/2000/svg">
+<line x1="10" y1="80" x2="230" y2="80" stroke="#cbd5e1" stroke-width="1"/>
+<circle cx="120" cy="80" r="4" fill="#ef4444"/>
+<path d="M 120 80 L 40 30" stroke="#9333ea" stroke-width="2"/>
+<path d="M 120 80 L 40 130" stroke="#9333ea" stroke-width="2"/>
+<path d="M 120 80 L 60 50" stroke="#8b5cf6" stroke-width="1.5" opacity="0.6"/>
+<path d="M 120 80 L 60 110" stroke="#8b5cf6" stroke-width="1.5" opacity="0.6"/>
+<line x1="120" y1="80" x2="200" y2="80" stroke="#3b82f6" stroke-width="2" stroke-dasharray="4 3"/>
+<polygon points="200,80 190,74 190,86" fill="#3b82f6"/>
+<text x="170" y="70" font-size="10" fill="#3b82f6">v</text>
+<text x="60" y="55" font-size="10" fill="#9333ea">θ_C</text>
+<text x="125" y="95" font-size="10" fill="#9333ea">辐射锥</text></svg>''',
+"synchrotron": '''<svg viewBox="0 0 240 160" xmlns="http://www.w3.org/2000/svg">
+<circle cx="120" cy="80" r="50" fill="none" stroke="#475569" stroke-width="1.5" stroke-dasharray="4 3"/>
+<circle cx="170" cy="80" r="5" fill="#ef4444"/>
+<path d="M 170 80 Q 195 60 215 55" fill="none" stroke="#9333ea" stroke-width="2.5"/>
+<path d="M 170 80 Q 195 100 215 105" fill="none" stroke="#9333ea" stroke-width="2.5" opacity="0.4"/>
+<polygon points="215,55 207,58 210,64" fill="#9333ea"/>
+<text x="200" y="45" font-size="10" fill="#9333ea">辐射 (~1/γ)</text>
+<polygon points="170,80 163,74 163,86" fill="#3b82f6"/>
+<text x="150" y="65" font-size="10" fill="#3b82f6">v</text>
+<text x="100" y="140" font-size="10" fill="#64748b">相对论性圆周运动 → 同步辐射</text></svg>''',
 }
 
 TAG_LABEL = {"def":"定 义","thm":"定 理","der":"推 导","exa":"例 子","app":"应 用","his":"注 记","note":"备 注"}
@@ -89,6 +121,34 @@ CORE_FORMULAS = [
     ("复波矢", "k^2 = i\\omega\\mu\\sigma", "良导体中亥姆霍兹方程的色散关系"),
     ("磁偶极辐射场", "\\mathbf{E}=-\\frac{\\mu_0}{4\\pi c}\\frac{\\ddot{\\mathbf{m}}\\times\\hat{\\mathbf{r}}}{r}", "磁偶极辐射的电场"),
     ("磁偶极辐射功率", "P=\\frac{\\mu_0 m_0^2\\omega^4}{12\\pi c^3}", "磁偶极辐射的总功率"),
+    ("勒让德方程", "\\frac{1}{\\sin\\theta}\\frac{d}{d\\theta}(\\sin\\theta\\frac{d\\Theta}{d\\theta})+l(l+1)\\Theta=0", "球坐标轴对称拉普拉斯方程角向部分"),
+    ("球谐函数", "Y_{lm}=\\sqrt{\\frac{(2l+1)(l-m)!}{4\\pi(l+m)!}}P_l^m(\\cos\\theta)e^{im\\phi}", "球谐函数定义"),
+    ("格林函数", "\\nabla^2 G(\\mathbf{r},\\mathbf{r}')=-\\delta(\\mathbf{r}-\\mathbf{r}')", "格林函数满足的方程"),
+    ("导体球镜像电荷", "q'=-\\frac{a}{d}q,\\ r'=\\frac{a^2}{d}", "接地导体球外点电荷的镜像"),
+    ("电四极矩张量", "Q_{ij}=\\int\\rho(3x_i'x_j'-r'^2\\delta_{ij})dV'", "电四极矩张量定义"),
+    ("磁偶极矩", "\\mathbf{m}=\\frac{1}{2}\\int\\mathbf{r}'\\times\\mathbf{j}\\,dV'", "电流分布的磁偶极矩"),
+    ("AB 相位差", "\\Delta\\phi=\\frac{q}{\\hbar}\\oint\\mathbf{A}\\cdot d\\mathbf{l}", "阿哈罗诺夫-玻姆效应相位差"),
+    ("静电场能量密度", "w_e=\\frac{1}{2}\\varepsilon_0 E^2", "电场能量密度"),
+    ("麦克斯韦应力张量", "T_{ij}=\\varepsilon_0 E_i E_j+\\frac{1}{\\mu_0}B_i B_j-\\frac{1}{2}\\delta_{ij}(\\varepsilon_0 E^2+\\frac{B^2}{\\mu_0})", "电磁场动量流密度张量"),
+    ("毕奥-萨伐尔定律", "d\\mathbf{B}=\\frac{\\mu_0}{4\\pi}\\frac{I d\\mathbf{l}\\times\\hat{\\mathbf{r}}}{r^2}", "电流元产生的磁场"),
+    ("圆偏振", "\\mathbf{E}=E_0(\\hat{\\mathbf{x}}\\cos\\phi\\pm\\hat{\\mathbf{y}}\\sin\\phi)", "圆偏振光电场"),
+    ("坡印廷矢量", "\\mathbf{S}=\\mathbf{E}\\times\\mathbf{H}", "电磁能流密度"),
+    ("辐射压力", "P=2\\frac{\\langle S\\rangle}{c}", "完全反射面的辐射压力"),
+    ("群速度", "v_g=\\frac{d\\omega}{dk}", "波包传播的群速度"),
+    ("等离子体频率", "\\omega_p=\\sqrt{\\frac{n_e e^2}{\\varepsilon_0 m_e}}", "等离子体振荡频率"),
+    ("倏逝波", "\\mathbf{E}_t=\\mathbf{E}_{t0}e^{-\\kappa z}e^{i(k_x x-\\omega t)}", "全反射时的衰减表面波"),
+    ("谐振腔频率", "f_{mnp}=\\frac{c}{2}\\sqrt{(m/a)^2+(n/b)^2+(p/d)^2}", "矩形谐振腔固有频率"),
+    ("菲涅耳公式", "r_s=\\frac{n_1\\cos\\theta_1-n_2\\cos\\theta_2}{n_1\\cos\\theta_1+n_2\\cos\\theta_2}", "s 偏振反射系数"),
+    ("斯托克斯参量", "I=|E_x|^2+|E_y|^2,\\ Q=|E_x|^2-|E_y|^2", "偏振态的斯托克斯参量"),
+    ("李纳-维谢尔势", "\\varphi=\\frac{q}{4\\pi\\varepsilon_0}\\frac{1}{R-\\mathbf{v}\\cdot\\mathbf{R}/c}", "运动点电荷的推迟势"),
+    ("拉莫尔公式", "P=\\frac{e^2 a^2}{6\\pi\\varepsilon_0 c^3}", "加速电荷的辐射总功率"),
+    ("同步辐射临界频率", "\\omega_c=\\frac{3c\\gamma^3}{2\\rho}", "同步辐射特征频率"),
+    ("电四极辐射功率", "P=\\frac{\\mu_0}{1440\\pi c^3}\\sum|\\dddot{Q}_{ij}|^2", "电四极辐射总功率"),
+    ("瑞利散射截面", "\\sigma_s=\\frac{8\\pi}{3}k^4 a^6\\left(\\frac{n^2-1}{n^2+2}\\right)^2", "小粒子散射截面"),
+    ("切伦科夫辐射角", "\\cos\\theta_C=\\frac{c}{nv}", "切伦科夫辐射方向角"),
+    ("汤姆孙散射截面", "\\sigma_T=\\frac{8\\pi}{3}r_e^2", "自由电子散射总截面"),
+    ("光学定理", "\\sigma_e=\\frac{4\\pi}{k}\\text{Im}\\,f(0)", "散射截面与向前振幅关系"),
+    ("相对论多普勒效应", "\\omega=\\frac{\\omega_0}{\\gamma(1-\\beta\\cos\\theta)}", "运动波源的频移"),
 ]
 
 def js_escape(s):
@@ -176,6 +236,332 @@ ch1_sections = [
    note(p("磁标势仅在无传导电流的单连通区域有定义；与静电势不同，磁标势在多连通区域（如螺线管内部）可能多值。磁荷是等效概念，自然界不存在真实磁单极（至少尚未发现）。"))
  )},
 ]},
+{
+"name": "1.5 勒让德多项式",
+"color": "#0ea5e9",
+"desc": "球坐标下轴对称拉普拉斯方程的解",
+"items": [
+{"id":"d1s5-1","name":"勒让德多项式","tags":["thm","der"],"brief":"轴对称静电势的球谐展开",
+ "body": wrap(
+   defn("勒让德方程",p("轴对称（$\\partial/\\partial\\phi=0$）时，拉普拉斯方程在球坐标下分离变量 $\\varphi(r,\\theta)=R(r)\\Theta(\\theta)$，角向部分满足：")+
+   fml("\\frac{1}{\\sin\\theta}\\frac{d}{d\\theta}\\left(\\sin\\theta\\frac{d\\Theta}{d\\theta}\\right)+l(l+1)\\Theta=0"))+
+   der(p("<strong>求解：</strong>令 $x=\\cos\\theta$，方程化为 $(1-x^2)\\Theta''-2x\\Theta'+l(l+1)\\Theta=0$。在区间 $|x|\\le 1$ 上有界的解为勒让德多项式 $P_l(x)$，$l=0,1,2,\\cdots$。前几项为：")+
+   fml("P_0=1,\\ P_1=x,\\ P_2=\\tfrac{1}{2}(3x^2-1),\\ P_3=\\tfrac{1}{2}(5x^3-3x)")+
+   p("径向方程 $r^2R''+2rR'-l(l+1)R=0$ 的解为 $R=A_l r^l+B_l r^{-l-1}$，故轴对称通解：")+
+   fml("\\varphi(r,\\theta)=\\sum_{l=0}^{\\infty}\\left(A_l r^l+B_l r^{-l-1}\\right)P_l(\\cos\\theta)"))+
+   note(p("勒让德多项式正交性：$\\int_{-1}^1 P_l(x)P_{l'}(x)dx=\\frac{2}{2l+1}\\delta_{ll'}$，可由边界条件确定系数 $A_l,B_l$。"))
+ )}
+]},
+{
+"name": "1.6 球谐函数展开",
+"color": "#0ea5e9",
+"desc": "一般非轴对称问题的球谐函数解与多极矩",
+"items": [
+{"id":"d1s6-1","name":"球谐函数与多极展开","tags":["thm","der"],"brief":"拉普拉斯方程的一般球坐标解",
+ "body": wrap(
+   defn("球谐函数",p("当电势依赖方位角 $\\phi$ 时，分离变量得到角向解为球谐函数：")+
+   fml("Y_{lm}(\\theta,\\phi)=\\sqrt{\\frac{(2l+1)(l-m)!}{4\\pi(l+m)!}}P_l^m(\\cos\\theta)e^{im\\phi}")+
+   p("其中 $P_l^m$ 为关联勒让德函数，$m=-l,-l+1,\\dots,l$。"))+
+   der(p("<strong>通解形式：</strong>拉普拉斯方程在球坐标下的通解为：")+
+   fml("\\varphi(r,\\theta,\\phi)=\\sum_{l=0}^{\\infty}\\sum_{m=-l}^{l}\\left(A_{lm}r^l+B_{lm}r^{-l-1}\\right)Y_{lm}(\\theta,\\phi)")+
+   p("球谐函数正交归一：$\\int Y_{l'm'}^*Y_{lm}d\\Omega=\\delta_{ll'}\\delta_{mm'}$。电荷的 $2^l$ 极矩正对应于 $Y_{lm}$ 的展开系数。"))+
+   app(p("远场中 $B_{lm}$ 正比于体系的 $2^l$ 极矩，这是电多极展开的严格基础。"))
+ )}
+]},
+{
+"name": "1.7 格林函数法",
+"color": "#0ea5e9",
+"desc": "用格林函数求解一般泊松边值问题",
+"items": [
+{"id":"d1s7-1","name":"格林函数法","tags":["thm","der"],"brief":"边值问题的积分形式解",
+ "body": wrap(
+   defn("格林函数",p("区域 $V$ 的格林函数 $G(\\mathbf{r},\\mathbf{r}')$ 满足：")+
+   fml("\\nabla^2 G(\\mathbf{r},\\mathbf{r}')=-\\delta(\\mathbf{r}-\\mathbf{r}')")+
+   p("并满足与原问题相同的齐次边界条件（第一类 $G|_S=0$ 或第二类 $\\partial G/\\partial n|_S=0$）。"))+
+   der(p("<strong>解的积分表示：</strong>由格林第二恒等式：")+
+   fml("\\int_V(\\varphi\\nabla'^2 G-G\\nabla'^2\\varphi)dV'=\\oint_S\\left(\\varphi\\frac{\\partial G}{\\partial n'}-G\\frac{\\partial\\varphi}{\\partial n'}\\right)dS'")+
+   p("代入 $\\nabla'^2\\varphi=-\\rho/\\varepsilon_0$ 和 $\\nabla'^2G=-\\delta$，得：")+
+   fml("\\varphi(\\mathbf{r})=\\frac{1}{\\varepsilon_0}\\int_V\\rho G\\,dV'+\\oint_S\\left(\\varphi\\frac{\\partial G}{\\partial n'}-G\\frac{\\partial\\varphi}{\\partial n'}\\right)dS'")+
+   p("第一类边值 $G|_S=0$，第二项仅含 $\\varphi|_S$；第二类边值 $\\partial G/\\partial n'|_S=-1/S$。"))+
+   app(p("无界空间格林函数 $G=1/(4\\pi|\\mathbf{r}-\\mathbf{r}'|)$ 即对应库仑势。"))
+ )}
+]},
+{
+"name": "1.8 镜像法",
+"color": "#06b6d4",
+"desc": "用等效镜像电荷代替导体/介质边界",
+"items": [
+{"id":"d1s8-1","name":"导体平面的镜像法","tags":["thm","der"],"brief":"接地导体平面附近点电荷的等效镜像",
+ "body": wrap(
+   thm("导体平面镜像",p("点电荷 $q$ 位于接地无限大导体平面上方距离 $d$ 处，可用位于平面下方对称位置的镜像电荷 $-q$ 代替导体平面的感应电荷。"))+
+   der(p("<strong>验证：</strong>设平面为 $z=0$，电荷 $q$ 在 $(0,0,d)$，镜像 $-q$ 在 $(0,0,-d)$。空间电势：")+
+   fml("\\varphi=\\frac{q}{4\\pi\\varepsilon_0}\\left(\\frac{1}{\\sqrt{x^2+y^2+(z-d)^2}}-\\frac{1}{\\sqrt{x^2+y^2+(z+d)^2}}\\right)")+
+   p("在 $z=0$ 处 $\\varphi=0$，满足接地边界条件；且 $z>0$ 区域满足泊松方程。由唯一性定理，此即真实解。"))+
+   exa(p("感应电荷面密度 $\\sigma=-\\varepsilon_0\\partial\\varphi/\\partial z|_{z=0}=-qd/[2\\pi(x^2+y^2+d^2)^{3/2}]$，总感应电荷为 $-q$。"))
+ )},
+{"id":"d1s8-2","name":"导体球的镜像法","tags":["thm","der"],"brief":"接地导体球外点电荷的镜像电荷",
+ "body": wrap(
+   thm("导体球镜像",p("点电荷 $q$ 位于半径为 $a$ 的接地导体球外，距球心 $d$ 处。其场可由球内镜像电荷 $q'$ 等效：")+
+   fml("q'=-\\frac{a}{d}q,\\qquad \\text{位于 } r'=\\frac{a^2}{d} \\text{ 处}"))+
+   der(p("<strong>推导：</strong>设镜像电荷 $q'$ 在球内距球心 $b$ 处。球面上任一点 $P$，要求 $\\varphi|_S=0$：")+
+   fml("\\frac{q}{|\\mathbf{r}-\\mathbf{d}|}+\\frac{q'}{|\\mathbf{r}-\\mathbf{b}|}=0 \\quad (|\\mathbf{r}|=a)")+
+   p("由几何关系，当 $b=a^2/d$ 且 $q'=-qa/d$ 时，对所有球面点成立。故球外电势为原电荷与镜像电荷共同产生。"))+
+   note(p("若导体球不接地而带总电荷 $Q$，需再加一个位于球心的镜像电荷 $Q-q'$ 以满足总电荷条件并保持球面等势。"))
+ )}
+]},
+{
+"name": "1.9 电四极矩",
+"color": "#06b6d4",
+"desc": "电四极矩张量及其远场电势",
+"items": [
+{"id":"d1s9-1","name":"电四极矩","tags":["def","der"],"brief":"四极矩张量的定义与远场贡献",
+ "body": wrap(
+   defn("电四极矩张量",p("电荷分布的电四极矩张量定义为：")+
+   fml("Q_{ij}=\\int\\rho(\\mathbf{r}')(3x_i'x_j'-r'^2\\delta_{ij})dV'")+
+   p("它是无迹对称张量，独立分量有 5 个。"))+
+   der(p("<strong>四极势：</strong>电多极展开中四极项电势为：")+
+   fml("\\varphi_2(\\mathbf{r})=\\frac{1}{4\\pi\\varepsilon_0}\\frac{1}{2}\\frac{Q_{ij}n_i n_j}{r^3}")+
+   p("其中 $n_i=x_i/r$ 为单位矢量分量。例如沿 $z$ 轴对称四极子（$Q_{33}=2Q_0$，$Q_{11}=Q_{22}=-Q_0$）：")+
+   fml("\\varphi_2=\\frac{Q_0}{4\\pi\\varepsilon_0}\\frac{3\\cos^2\\theta-1}{2r^3}=\\frac{Q_0}{4\\pi\\varepsilon_0}\\frac{P_2(\\cos\\theta)}{r^3}"))+
+   app(p("原子核的电四极矩反映核的形变，是核物理重要观测量；分子的四极矩影响其光谱与相互作用。"))
+ )}
+]},
+{
+"name": "1.10 磁多极展开",
+"color": "#06b6d4",
+"desc": "局域电流分布的矢势多极展开",
+"items": [
+{"id":"d1s10-1","name":"磁多极展开","tags":["thm","der"],"brief":"电流体系的矢势远场展开",
+ "body": wrap(
+   thm("磁多极展开",p("局域稳恒电流分布的矢势远场展开为：")+
+   fml("\\mathbf{A}(\\mathbf{r})=\\frac{\\mu_0}{4\\pi}\\left[\\frac{\\dot{\\mathbf{p}}_m}{r}+\\frac{1}{2}\\frac{\\dot{\\mathbf{m}}\\times\\hat{\\mathbf{r}}}{r^2}+\\cdots\\right]")+
+   p("静磁情形下，单极项恒为零（$\\int\\mathbf{j}dV=0$），最低阶为磁偶极项。"))+
+   der(p("<strong>磁偶极矩：</strong>展开 $1/|\\mathbf{r}-\\mathbf{r}'|$ 保留到 $r^{-2}$ 阶：")+
+   fml("\\mathbf{A}(\\mathbf{r})=\\frac{\\mu_0}{4\\pi}\\frac{1}{r^2}\\int\\mathbf{j}(\\mathbf{r}')(\\hat{\\mathbf{r}}\\cdot\\mathbf{r}')dV'")+
+   p("利用矢量恒等式可证明该积分等于 $\\mathbf{m}\\times\\hat{\\mathbf{r}}$，其中磁偶极矩：")+
+   fml("\\mathbf{m}=\\frac{1}{2}\\int\\mathbf{r}'\\times\\mathbf{j}(\\mathbf{r}')dV'")+
+   p("故磁偶极矢势 $\\mathbf{A}=\\frac{\\mu_0}{4\\pi}\\frac{\\mathbf{m}\\times\\hat{\\mathbf{r}}}{r^2}$。"))
+ )}
+]},
+{
+"name": "1.11 阿哈罗诺夫-玻姆效应",
+"color": "#2563eb",
+"desc": "矢势环流的量子可观测效应",
+"items": [
+{"id":"d1s11-1","name":"阿哈罗诺夫-玻姆效应","tags":["def","der"],"brief":"场为零区域矢势仍产生物理效应",
+ "body": wrap(
+   defn("AB 效应",p("带电粒子在 $\\mathbf{B}=0$ 但 $\\mathbf{A}\\ne 0$ 的区域运动时，其量子相位依赖于矢势的环流 $\\oint\\mathbf{A}\\cdot d\\mathbf{l}$，从而产生可观测干涉。"))+
+   der(p("<strong>相位差：</strong>带电粒子沿两条路径从同一点到同一点的相位差为：")+
+   fml("\\Delta\\phi=\\frac{q}{\\hbar}\\oint\\mathbf{A}\\cdot d\\mathbf{l}=\\frac{q}{\\hbar}\\int_S\\mathbf{B}\\cdot d\\mathbf{S}=\\frac{q\\Phi}{\\hbar}")+
+   p("其中 $\\Phi$ 为被两条路径包围的磁通量。即使粒子路径上 $\\mathbf{B}=0$，只要包围区域有磁通，干涉条纹就会移动。"))+
+   note(p("AB 效应表明在量子力学中 $\\mathbf{A}$ 比 $\\mathbf{B}$ 更基本：$\\mathbf{A}$ 的环流（规范不变量）有直接观测意义。这是规范场论的重要实验基础。"))
+ )}
+]},
+{
+"name": "1.12 静电场能量",
+"color": "#2563eb",
+"desc": "静电场的总能量与能量密度",
+"items": [
+{"id":"d1s12-1","name":"静电场能量","tags":["thm","der"],"brief":"电场储能与能量密度",
+ "body": wrap(
+   thm("静电场能量",p("静电场总能量可表示为：")+
+   fml("W=\\frac{1}{2}\\int\\rho\\varphi\\,dV=\\frac{\\varepsilon_0}{2}\\int E^2 dV")+
+   p("能量密度 $w_e=\\frac{1}{2}\\varepsilon_0 E^2$。"))+
+   der(p("<strong>推导：</strong>由 $\\rho=\\varepsilon_0\\nabla\\cdot\\mathbf{E}$ 和 $\\mathbf{E}=-\\nabla\\varphi$：")+
+   fml("W=\\frac{\\varepsilon_0}{2}\\int\\varphi(\\nabla\\cdot\\mathbf{E})dV=-\\frac{\\varepsilon_0}{2}\\int\\varphi\\nabla\\cdot\\nabla\\varphi\\,dV")+
+   p("分部积分（无穷远边界项为零）：")+
+   fml("W=\\frac{\\varepsilon_0}{2}\\int(\\nabla\\varphi)^2dV=\\frac{\\varepsilon_0}{2}\\int E^2 dV")+
+   p("介质中 $w_e=\\frac{1}{2}\\mathbf{E}\\cdot\\mathbf{D}$。"))+
+   note(p("$W=\\frac{1}{2}\\int\\rho\\varphi dV$ 仅对线性介质成立，且只含相互作用能；而 $\\int\\frac{1}{2}\\varepsilon_0E^2dV$ 含总能量（包括自能）。"))
+ )}
+]},
+{
+"name": "1.13 电容与部分电容",
+"color": "#2563eb",
+"desc": "电容器电容与多导体部分电容",
+"items": [
+{"id":"d1s13-1","name":"电容","tags":["def","der"],"brief":"导体电容与储能",
+ "body": wrap(
+   defn("电容",p("两导体电容器，带等量异号电荷 $\\pm Q$，电势差 $U$，电容：")+
+   fml("C=\\frac{Q}{U}")+
+   p("储能 $W=\\frac{1}{2}CU^2=\\frac{Q^2}{2C}$。"))+
+   der(p("<strong>平行板电容：</strong>面积 $S$、间距 $d$，忽略边缘效应，$E=\\sigma/\\varepsilon_0=Q/(\\varepsilon_0 S)$，$U=Ed$，故：")+
+   fml("C=\\frac{Q}{U}=\\frac{\\varepsilon_0 S}{d}")+
+   p("球形电容（内球半径 $a$，外球半径 $b$）：$C=4\\pi\\varepsilon_0 ab/(b-a)$。"))+
+   app(p("部分电容用于多导体系统：$Q_i=\\sum_j C_{ij}(\\varphi_i-\\varphi_j)$，$C_{ij}$ 为部分电容，由几何决定。"))
+ )}
+]},
+{
+"name": "1.14 介质分界面的静电边界条件",
+"color": "#2563eb",
+"desc": "不同介质分界面上 $E,D,\\varphi$ 的跃变",
+"items": [
+{"id":"d1s14-1","name":"静电边界条件","tags":["thm","der"],"brief":"介质分界面的场量跃变关系",
+ "body": wrap(
+   thm("边界条件",p("在两介质分界面上，场量满足：")+
+   fml("\\mathbf{n}\\times(\\mathbf{E}_2-\\mathbf{E}_1)=0,\\qquad \\mathbf{n}\\cdot(\\mathbf{D}_2-\\mathbf{D}_1)=\\sigma_f")+
+   p("即 $E$ 切向连续，$D$ 法向跃变等于自由电荷面密度。"))+
+   der(p("<strong>由麦克斯韦方程推导：</strong>对 $\\nabla\\times\\mathbf{E}=0$ 在跨界面小矩形回路积分：")+
+   fml("\\oint\\mathbf{E}\\cdot d\\mathbf{l}=(E_{2t}-E_{1t})\\Delta l=0 \\implies E_{1t}=E_{2t}")+
+   p("对 $\\nabla\\cdot\\mathbf{D}=\\rho_f$ 在跨界面扁圆柱面积分：")+
+   fml("\\oint\\mathbf{D}\\cdot d\\mathbf{S}=(D_{2n}-D_{1n})\\Delta S=\\sigma_f\\Delta S \\implies D_{2n}-D_{1n}=\\sigma_f")+
+   p("电势连续 $\\varphi_1=\\varphi_2$（因 $E_t$ 连续），且 $\\varepsilon_2\\partial\\varphi_2/\\partial n-\\varepsilon_1\\partial\\varphi_1/\\partial n=-\\sigma_f$。"))
+ )}
+]},
+{
+"name": "1.15 静磁能量",
+"color": "#2563eb",
+"desc": "静磁场的能量与能量密度",
+"items": [
+{"id":"d1s15-1","name":"静磁能量","tags":["thm","der"],"brief":"磁场储能与自感",
+ "body": wrap(
+   thm("静磁能量",p("静磁场总能量：")+
+   fml("W=\\frac{1}{2}\\int\\mathbf{j}\\cdot\\mathbf{A}\\,dV=\\frac{1}{2\\mu_0}\\int B^2 dV")+
+   p("能量密度 $w_m=\\frac{1}{2}\\mathbf{B}\\cdot\\mathbf{H}$。"))+
+   der(p("<strong>推导：</strong>由 $\\nabla\\times\\mathbf{B}=\\mu_0\\mathbf{j}$ 和 $\\mathbf{B}=\\nabla\\times\\mathbf{A}$：")+
+   fml("W=\\frac{1}{2}\\int\\mathbf{j}\\cdot\\mathbf{A}dV=\\frac{1}{2\\mu_0}\\int(\\nabla\\times\\mathbf{B})\\cdot\\mathbf{A}dV")+
+   p("利用 $\\nabla\\cdot(\\mathbf{A}\\times\\mathbf{B})=\\mathbf{B}\\cdot(\\nabla\\times\\mathbf{A})-\\mathbf{A}\\cdot(\\nabla\\times\\mathbf{B})$，分部积分得：")+
+   fml("W=\\frac{1}{2\\mu_0}\\int\\mathbf{B}\\cdot(\\nabla\\times\\mathbf{A})dV=\\frac{1}{2\\mu_0}\\int B^2dV")+
+   p("单线圈自感 $L$：$W=\\frac{1}{2}LI^2$，故 $L=\\frac{1}{I^2}\\int B^2/\\mu_0 dV$。"))
+ )}
+]},
+{
+"name": "1.16 麦克斯韦应力张量",
+"color": "#2563eb",
+"desc": "电磁场动量与应力张量",
+"items": [
+{"id":"d1s16-1","name":"麦克斯韦应力张量","tags":["thm","der"],"brief":"电磁力的面积分表示",
+ "body": wrap(
+   defn("麦克斯韦应力张量",p("定义对称张量：")+
+   fml("T_{ij}=\\varepsilon_0 E_i E_j+\\frac{1}{\\mu_0}B_i B_j-\\frac{1}{2}\\delta_{ij}\\left(\\varepsilon_0 E^2+\\frac{1}{\\mu_0}B^2\\right)")+
+   p("则体积 $V$ 内电荷受电磁力可表为边界面积分：$F_i=\\oint_S T_{ij}n_j dS-\\frac{d}{dt}\\int g_i dV$，其中 $\\mathbf{g}=\\varepsilon_0\\mathbf{E}\\times\\mathbf{B}$ 为动量密度。"))+
+   der(p("<strong>推导：</strong>洛伦兹力密度 $\\mathbf{f}=\\rho\\mathbf{E}+\\mathbf{j}\\times\\mathbf{B}$，用麦克斯韦方程消去 $\\rho,\\mathbf{j}$：")+
+   fml("\\mathbf{f}=\\nabla\\cdot\\overleftrightarrow{T}-\\frac{\\partial\\mathbf{g}}{\\partial t}")+
+   p("积分即得力的表达式。静场下动量变化项为零，力等于应力张量的面积分。"))+
+   app(p("可用应力张量计算静电静磁作用力，如平行板电容极板间吸引力、两平行载流导线间作用力。"))
+ )}
+]},
+{
+"name": "1.17 毕奥-萨伐尔定律",
+"color": "#2563eb",
+"desc": "由电流分布直接计算磁场",
+"items": [
+{"id":"d1s17-1","name":"毕奥-萨伐尔定律","tags":["thm","der"],"brief":"电流元产生的磁场",
+ "body": wrap(
+   thm("毕奥-萨伐尔定律",p("电流元 $I d\\mathbf{l}$ 在 $\\mathbf{r}$ 处产生的磁感应强度：")+
+   fml("d\\mathbf{B}=\\frac{\\mu_0}{4\\pi}\\frac{I d\\mathbf{l}\\times\\hat{\\mathbf{r}}}{r^2}")+
+   p("积分形式：$\\mathbf{B}=\\frac{\\mu_0 I}{4\\pi}\\int\\frac{d\\mathbf{l}'\\times\\hat{\\mathbf{R}}}{R^2}$。"))+
+   der(p("<strong>由矢势推导：</strong>$\\mathbf{A}=\\frac{\\mu_0 I}{4\\pi}\\int\\frac{d\\mathbf{l}'}{R}$，取旋度（注意 $\\nabla$ 对场点作用）：")+
+   fml("\\mathbf{B}=\\nabla\\times\\mathbf{A}=\\frac{\\mu_0 I}{4\\pi}\\int\\nabla\\times\\frac{d\\mathbf{l}'}{R}=\\frac{\\mu_0 I}{4\\pi}\\int\\frac{d\\mathbf{l}'\\times\\hat{\\mathbf{R}}}{R^2}")+
+   p("其中用到 $\\nabla(1/R)=-\\hat{\\mathbf{R}}/R^2$。"))+
+   exa(p("无限长直导线磁场 $B=\\mu_0 I/(2\\pi r)$；圆电流轴线上 $B=\\mu_0 I R^2/[2(R^2+z^2)^{3/2}]$。"))
+ )}
+]},
+{
+"name": "1.18 磁介质的边界条件",
+"color": "#2563eb",
+"desc": "磁介质分界面 $B,H,M$ 的跃变",
+"items": [
+{"id":"d1s18-1","name":"磁介质边界条件","tags":["thm","der"],"brief":"磁介质分界面场量关系",
+ "body": wrap(
+   thm("边界条件",p("两磁介质分界面上：")+
+   fml("\\mathbf{n}\\times(\\mathbf{H}_2-\\mathbf{H}_1)=\\mathbf{K}_f,\\qquad \\mathbf{n}\\cdot(\\mathbf{B}_2-\\mathbf{B}_1)=0")+
+   p("$B$ 法向连续，$H$ 切向跃变等于自由电流面密度 $\\mathbf{K}_f$。"))+
+   der(p("<strong>推导：</strong>由 $\\nabla\\cdot\\mathbf{B}=0$ 得 $B_{1n}=B_{2n}$；由 $\\nabla\\times\\mathbf{H}=\\mathbf{j}_f$ 跨界面回线积分得 $H_{2t}-H_{1t}=K_f$。")+
+   p("对线性各向同性介质 $\\mathbf{B}=\\mu\\mathbf{H}$，折射定律：")+
+   fml("\\frac{\\tan\\theta_1}{\\tan\\theta_2}=\\frac{\\mu_1}{\\mu_2}")+
+   p("其中 $\\theta_1,\\theta_2$ 为磁场与法线夹角。"))+
+   note(p("在高磁导率（$\\mu_2\\gg\\mu_1$）界面，磁场几乎垂直于高磁导率表面，类似导体表面电场垂直。"))
+ )}
+]},
+{
+"name": "1.19 柱坐标分离变量法",
+"color": "#2563eb",
+"desc": "柱对称问题的贝塞尔函数解",
+"items": [
+{"id":"d1s19-1","name":"柱坐标拉普拉斯方程","tags":["thm","der"],"brief":"圆柱对称静电势的贝塞尔函数解",
+ "body": wrap(
+   der(p("<strong>分离变量：</strong>柱坐标 $(\\rho,\\phi,z)$ 下，设 $\\varphi=R(\\rho)\\Phi(\\phi)Z(z)$，拉普拉斯方程分离为：")+
+   fml("\\frac{d^2\\Phi}{d\\phi^2}+m^2\\Phi=0,\\quad \\frac{d^2Z}{dz^2}-k^2Z=0,\\quad \\rho^2R''+\\rho R'+(k^2\\rho^2-m^2)R=0")+
+   p("径向方程为贝塞尔方程，解为 $J_m(k\\rho)$（第一类贝塞尔函数）和 $N_m(k\\rho)$（第二类，含轴时舍去）。"))+
+   thm("通解",p("含 $z$ 方向的通解：")+
+   fml("\\varphi=\\sum_m\\int_0^\\infty[A(k)J_m(k\\rho)+B(k)N_m(k\\rho)][C(k)e^{kz}+D(k)e^{-kz}]e^{im\\phi}dk")+
+   p("对无限长圆柱（$z$ 无关，$k=0$），退化为 $R=\\rho^m+\\rho^{-m}$。"))+
+   app(p("用于圆柱形电容器、长直导线周围电场、波导等问题。"))
+ )}
+]},
+{
+"name": "1.20 均匀外场中的导体球",
+"color": "#2563eb",
+"desc": "导体球在均匀电场中的电势与感应电荷",
+"items": [
+{"id":"d1s20-1","name":"均匀外场中的导体球","tags":["thm","der"],"brief":"导体球对均匀电场的扰动",
+ "body": wrap(
+   thm("解",p("半径 $a$ 的接地导体球置于均匀电场 $E_0$（沿 $z$ 轴）中，球外电势：")+
+   fml("\\varphi=-E_0 r\\cos\\theta+E_0\\frac{a^3}{r^2}\\cos\\theta")+
+   p("第二项等效于球心处电偶极子 $\\mathbf{p}=4\\pi\\varepsilon_0 a^3\\mathbf{E}_0$ 的势。"))+
+   der(p("<strong>求解：</strong>轴对称，设 $\\varphi=\\sum(A_l r^l+B_l r^{-l-1})P_l(\\cos\\theta)$。边界条件：$r=a$ 时 $\\varphi=0$；$r\\to\\infty$ 时 $\\varphi\\to -E_0 r\\cos\\theta=-E_0 r P_1$。故仅 $l=1$ 项非零：")+
+   fml("\\varphi=(A_1 r+B_1 r^{-2})\\cos\\theta")+
+   p("由无穷远条件 $A_1=-E_0$；由 $\\varphi(a)=0$ 得 $B_1=E_0 a^3$。感应电荷面密度：")+
+   fml("\\sigma=-\\varepsilon_0\\frac{\\partial\\varphi}{\\partial r}\\bigg|_{r=a}=3\\varepsilon_0 E_0\\cos\\theta"))
+ )}
+]},
+{
+"name": "1.21 静电屏蔽",
+"color": "#2563eb",
+"desc": "导体壳对内外电场的隔离作用",
+"items": [
+{"id":"d1s21-1","name":"静电屏蔽","tags":["thm","der"],"brief":"导体壳的静电屏蔽效应",
+ "body": wrap(
+   thm("静电屏蔽",p("接地导体壳可屏蔽外部电场对内部的影响，也可屏蔽内部电荷对外部的影响。"))+
+   der(p("<strong>原理：</strong>导体内部电场为零，静电平衡时导体为等势体。对于空腔导体：若空腔内无电荷，腔内电场为零（外场被导体壳屏蔽）；若腔内有电荷 $q$，导体壳内表面感应 $-q$，外表面感应 $+q$。将外壳接地，则外表面电荷被中和，外部电场消失，实现完全屏蔽。"))+
+   app(p("静电屏蔽用于电子设备的金属外壳、屏蔽室、同轴电缆外导体等，防止电磁干扰。"))
+ )}
+]},
+{
+"name": "1.22 电偶极子在外场中的受力与力矩",
+"color": "#2563eb",
+"desc": "电偶极子与外电场的相互作用",
+"items": [
+{"id":"d1s22-1","name":"电偶极子的受力","tags":["thm","der"],"brief":"电偶极子在非均匀场中的受力",
+ "body": wrap(
+   thm("力矩与受力",p("电偶极矩 $\\mathbf{p}$ 在外电场 $\\mathbf{E}$ 中受力矩：")+
+   fml("\\boldsymbol{\\tau}=\\mathbf{p}\\times\\mathbf{E}")+
+   p("在非均匀电场中受力：$\\mathbf{F}=(\\mathbf{p}\\cdot\\nabla)\\mathbf{E}$。势能 $U=-\\mathbf{p}\\cdot\\mathbf{E}$。"))+
+   der(p("<strong>推导：</strong>偶极子由 $+q$ 与 $-q$ 相距 $\\mathbf{l}$ 构成，$\\mathbf{p}=q\\mathbf{l}$。两电荷受力之差：")+
+   fml("\\mathbf{F}=q\\mathbf{E}(\\mathbf{r}+\\mathbf{l})-q\\mathbf{E}(\\mathbf{r})\\approx q(\\mathbf{l}\\cdot\\nabla)\\mathbf{E}=(\\mathbf{p}\\cdot\\nabla)\\mathbf{E}")+
+   p("力矩 $\\boldsymbol{\\tau}=\\mathbf{r}_+\\times q\\mathbf{E}+\\mathbf{r}_-\\times(-q\\mathbf{E})=q\\mathbf{l}\\times\\mathbf{E}=\\mathbf{p}\\times\\mathbf{E}$。力矩使偶极子转向外场方向。"))+
+   app(p("电偶极子受力解释了中性原子分子在非均匀电场中的偏转（斯特恩-盖拉赫式实验的电学版）。"))
+ )}
+]},
+{
+"name": "1.23 磁偶极子在外场中的受力与力矩",
+"color": "#2563eb",
+"desc": "磁偶极矩与外磁场的相互作用",
+"items": [
+{"id":"d1s23-1","name":"磁偶极子的受力","tags":["thm","der"],"brief":"磁偶极子在磁场中的相互作用",
+ "body": wrap(
+   thm("力矩与受力",p("磁偶极矩 $\\mathbf{m}$ 在外磁场 $\\mathbf{B}$ 中受力矩：")+
+   fml("\\boldsymbol{\\tau}=\\mathbf{m}\\times\\mathbf{B}")+
+   p("受力：$\\mathbf{F}=\\nabla(\\mathbf{m}\\cdot\\mathbf{B})$。势能 $U=-\\mathbf{m}\\cdot\\mathbf{B}$。"))+
+   der(p("<strong>推导：</strong>载流线圈在磁场中受力 $\\mathbf{F}=I\\oint d\\mathbf{l}\\times\\mathbf{B}$。对小线圈展开 $\\mathbf{B}$ 为泰勒级数，保留一阶项，利用 $\\mathbf{m}=\\frac{1}{2}I\\oint\\mathbf{r}\\times d\\mathbf{l}$，可得 $\\mathbf{F}=\\nabla(\\mathbf{m}\\cdot\\mathbf{B})$（当 $\\nabla\\times\\mathbf{B}=0$ 时）。力矩 $\\boldsymbol{\\tau}=\\mathbf{m}\\times\\mathbf{B}$ 使磁矩转向磁场方向。"))+
+   app(p("磁偶极受力是磁阱、磁光陷阱、核磁共振（NMR）中射频场与核自旋相互作用的基础。"))
+ )}
+]},
+{
+"name": "1.24 介质中的泊松方程",
+"color": "#2563eb",
+"desc": "线性介质中电势满足的方程",
+"items": [
+{"id":"d1s24-1","name":"介质中的静电方程","tags":["thm","der"],"brief":"介质中电势的泊松方程",
+ "body": wrap(
+   thm("介质中的泊松方程",p("线性各向同性均匀介质中，$\\mathbf{D}=\\varepsilon\\mathbf{E}=-\\varepsilon\\nabla\\varphi$，代入 $\\nabla\\cdot\\mathbf{D}=\\rho_f$ 得：")+
+   fml("\\nabla^2\\varphi=-\\frac{\\rho_f}{\\varepsilon}")+
+   p("形式与真空相同，仅 $\\varepsilon_0\\to\\varepsilon$，$\\rho\\to\\rho_f$（自由电荷密度）。"))+
+   der(p("<strong>束缚电荷：</strong>介质极化产生束缚电荷 $\\rho_b=-\\nabla\\cdot\\mathbf{P}$。总电荷 $\\rho=\\rho_f+\\rho_b$。真空中泊松方程 $\\nabla^2\\varphi=-\\rho/\\varepsilon_0$，代入 $\\rho=\\rho_f-\\nabla\\cdot\\mathbf{P}$ 并利用 $\\mathbf{D}=\\varepsilon_0\\mathbf{E}+\\mathbf{P}$，可推导出介质中仅含自由电荷的形式。"))+
+   note(p("介质的存在等效于把真空介电常数增大为 $\\varepsilon$，束缚电荷自动包含在 $\\varepsilon$ 中。分界面处仍需用边界条件连接。"))
+ )}
+]},
 ]
 
 # =====================================================
@@ -250,6 +636,310 @@ ch2_sections = [
    p("例如铜（$\\sigma\\approx 5.8\\times10^7\\,\\text{S/m}$），$1\\,\\text{GHz}$ 时 $\\delta\\approx 2\\,\\mu\\text{m}$。"))+
    note(p("趋肤效应使高频电流集中于导体表面薄层，导致交流电阻大于直流电阻，也用于电磁屏蔽（屏蔽层厚度须大于 $\\delta$）。表面阻抗 $Z_s=(1+i)/\\sigma\\delta$。"))
  )},
+]},
+{
+"name": "2.5 圆偏振与椭圆偏振",
+"color": "#14b8a6",
+"desc": "平面波的偏振态：线偏振、圆偏振、椭圆偏振",
+"items": [
+{"id":"d2s5-1","name":"圆偏振","tags":["def","der"],"brief":"电场矢量端点做圆周运动的偏振态",
+ "body": wrap(
+   defn("圆偏振",p("沿 $z$ 方向传播的平面波，若 $E_x$ 与 $E_y$ 振幅相等、相位差 $\\pm\\pi/2$：")+
+   fml("\\mathbf{E}=E_0(\\hat{\\mathbf{x}}\\cos(kz-\\omega t)\\pm\\hat{\\mathbf{y}}\\sin(kz-\\omega t))")+
+   p("则电场矢量端点在垂直于传播方向的平面内做圆周运动，称为圆偏振。$+$ 为右旋（迎着波看顺时针），$-$ 为左旋。"))+
+   der(p("<strong>旋向判断：</strong>固定空间点 $z=0$，$\\mathbf{E}=E_0(\\hat{\\mathbf{x}}\\cos\\omega t\\pm\\hat{\\mathbf{y}}\\sin\\omega t)$。取 $+$ 时，$t=0$ 沿 $+x$，$t=\\pi/(2\\omega)$ 沿 $+y$，迎着波（沿 $-z$ 看）为顺时针，即右旋圆偏振（RHC）。"))+
+   note(p("圆偏振光可分解为两个等幅、正交、相位差 $\\pi/2$ 的线偏振。光子自旋角动量 $\\pm\\hbar$ 对应左/右旋圆偏振。"))
+ )},
+{"id":"d2s5-2","name":"椭圆偏振","tags":["def","der"],"brief":"一般偏振态为椭圆偏振",
+ "body": wrap(
+   defn("椭圆偏振",p("一般情形下 $E_x=E_{x0}\\cos(kz-\\omega t)$，$E_y=E_{y0}\\cos(kz-\\omega t+\\delta)$，电场矢量端点轨迹为椭圆：")+
+   fml("\\left(\\frac{E_x}{E_{x0}}\\right)^2+\\left(\\frac{E_y}{E_{y0}}\\right)^2-2\\frac{E_xE_y}{E_{x0}E_{y0}}\\cos\\delta=\\sin^2\\delta")+
+   p("当 $\\delta=0,\\pi$ 退化为线偏振；$\\delta=\\pm\\pi/2$ 且 $E_{x0}=E_{y0}$ 为圆偏振。"))+
+   der(p("<strong>椭圆方程推导：</strong>由 $E_x/E_{x0}=\\cos\\tau$，$E_y/E_{y0}=\\cos(\\tau+\\delta)=\\cos\\tau\\cos\\delta-\\sin\\tau\\sin\\delta$，消去 $\\tau$ 即得上述椭圆方程。椭圆长轴与 $x$ 轴夹角 $\\psi$ 满足 $\\tan 2\\psi=\\frac{2E_{x0}E_{y0}\\cos\\delta}{E_{x0}^2-E_{y0}^2}$。"))+
+   app(p("椭圆偏振可用斯托克斯参量 $(I,Q,U,V)$ 完全描述，$V$ 对应圆偏振分量。"))
+ )}
+]},
+{
+"name": "2.6 电磁波能量密度",
+"color": "#14b8a6",
+"desc": "电磁场能量密度与坡印廷定理",
+"items": [
+{"id":"d2s6-1","name":"电磁波能量密度","tags":["thm","der"],"brief":"平面波的电能与磁能密度",
+ "body": wrap(
+   thm("能量密度",p("线性介质中电磁场能量密度：")+
+   fml("w=\\frac{1}{2}(\\mathbf{E}\\cdot\\mathbf{D}+\\mathbf{H}\\cdot\\mathbf{B})=\\frac{1}{2}\\varepsilon E^2+\\frac{1}{2\\mu}B^2")+
+   p("对平面电磁波，$\\varepsilon E^2=B^2/\\mu$，故电能密度等于磁能密度：$w=\\varepsilon E^2=B^2/\\mu$。"))+
+   der(p("<strong>坡印廷定理：</strong>由麦克斯韦方程出发，$\\mathbf{E}\\cdot(\\nabla\\times\\mathbf{H})-\\mathbf{H}\\cdot(\\nabla\\times\\mathbf{E})=\\mathbf{E}\\cdot\\mathbf{j}+\\mathbf{E}\\cdot\\partial\\mathbf{D}/\\partial t+\\mathbf{H}\\cdot\\partial\\mathbf{B}/\\partial t$，利用 $\\nabla\\cdot(\\mathbf{E}\\times\\mathbf{H})=\\mathbf{H}\\cdot(\\nabla\\times\\mathbf{E})-\\mathbf{E}\\cdot(\\nabla\\times\\mathbf{H})$，得：")+
+   fml("-\\nabla\\cdot(\\mathbf{E}\\times\\mathbf{H})=\\mathbf{E}\\cdot\\mathbf{j}+\\frac{\\partial w}{\\partial t}")+
+   p("即坡印廷矢量 $\\mathbf{S}=\\mathbf{E}\\times\\mathbf{H}$ 为能流密度。对平面波时间平均 $\\langle S\\rangle=\\frac{1}{2}E_0 H_0=\\frac{1}{2}\\sqrt{\\varepsilon/\\mu}\\,E_0^2$。"))
+ )}
+]},
+{
+"name": "2.7 电磁波动量与辐射压力",
+"color": "#14b8a6",
+"desc": "电磁波携带动量产生辐射压力",
+"items": [
+{"id":"d2s7-1","name":"辐射压力","tags":["thm","der"],"brief":"电磁波对物体施加的压力",
+ "body": wrap(
+   thm("动量密度",p("电磁场动量密度：")+
+   fml("\\mathbf{g}=\\varepsilon_0\\mathbf{E}\\times\\mathbf{B}=\\frac{\\mathbf{S}}{c^2}")+
+   p("能流与动量流关系：$g=S/c^2$，平面波中 $g=w/c$。"))+
+   der(p("<strong>辐射压力：</strong>垂直入射到完全吸收表面，动量变化率即压力 $P=\\langle g\\rangle c=\\langle w\\rangle=\\langle S\\rangle/c$。对完全反射表面（动量反向）：")+
+   fml("P=2\\frac{\\langle S\\rangle}{c}")+
+   p("对斜入射角 $\\theta$ 入射，吸收情形 $P=\\langle S\\rangle\\cos^2\\theta/c$。太阳光在地球处辐射压力约 $4.5\\times10^{-6}\\,\\text{Pa}$。"))+
+   app(p("太阳帆利用辐射压力推进；彗星尾受太阳光压与太阳风共同作用。"))
+ )}
+]},
+{
+"name": "2.8 群速度与相速度",
+"color": "#059669",
+"desc": "波包传播的群速度与单色波相速度",
+"items": [
+{"id":"d2s8-1","name":"群速度与相速度","tags":["def","der"],"brief":"色散介质中两种速度",
+ "body": wrap(
+   defn("相速度与群速度",p("单色波 $\\cos(kx-\\omega t)$ 等相位面传播速度为相速度 $v_p=\\omega/k$。波包（多频率叠加）整体传播速度为群速度：")+
+   fml("v_g=\\frac{d\\omega}{dk}"))+
+   der(p("<strong>推导：</strong>两列相近频率波叠加 $\\cos(k_1x-\\omega_1t)+\\cos(k_2x-\\omega_2t)=2\\cos(\\bar{k}x-\\bar{\\omega}t)\\cos(\\Delta k\\,x/2-\\Delta\\omega\\,t/2)$。包络以 $\\Delta\\omega/\\Delta k$ 传播，连续情形取极限：")+
+   fml("v_g=\\lim_{\\Delta k\\to 0}\\frac{\\Delta\\omega}{\\Delta k}=\\frac{d\\omega}{dk}")+
+   p("由 $v_p=\\omega/k$ 可得瑞利关系 $v_g=v_p+k\\,dv_p/dk$。正常色散 $dv_p/dk<0$ 时 $v_g<v_p$。"))+
+   note(p("群速度是能量和信息传播速度，须小于 $c$；相速度可大于 $c$ 但不携带信息。反常色散区群速度可能超光速或为负，但此时信号速度仍不超过 $c$。"))
+ )}
+]},
+{
+"name": "2.9 色散关系",
+"color": "#059669",
+"desc": "介质中 $\\omega(k)$ 的色散关系",
+"items": [
+{"id":"d2s9-1","name":"色散关系","tags":["thm","der"],"brief":"频率与波矢的函数关系",
+ "body": wrap(
+   defn("色散关系",p("色散关系 $\\omega(k)$ 给出波的频率与波矢的依赖关系。非色散介质 $\\omega=ck/n$（线性），色散介质中 $\\omega(k)$ 非线性。"))+
+   der(p("<strong>由麦克斯韦方程：</strong>对时谐平面波 $\\propto e^{i(\\mathbf{k}\\cdot\\mathbf{r}-\\omega t)}$，代入得亥姆霍兹方程：")+
+   fml("k^2=\\mu\\varepsilon\\omega^2=\\frac{\\omega^2}{c^2}n^2(\\omega)")+
+   p("若折射率 $n(\\omega)$ 依赖频率，则 $\\omega(k)$ 非线性，产生色散。群速度 $v_g=d\\omega/dk=c/[n+\\omega\\,dn/d\\omega]$。"))+
+   app(p("正常色散 $dn/d\\omega>0$，$v_g<c/n$；反常色散 $dn/d\\omega<0$。棱镜分光、光纤色散均源于此。"))
+ )}
+]},
+{
+"name": "2.10 全反射与倏逝波",
+"color": "#059669",
+"desc": "全反射时沿界面传播的衰减波",
+"items": [
+{"id":"d2s10-1","name":"倏逝波","tags":["thm","der"],"brief":"全反射时介质中存在的表面波",
+ "body": wrap(
+   thm("全反射条件",p("光从光密介质（$n_1$）入射光疏介质（$n_2<n_1$），入射角 $\\theta_1>\\theta_c=\\arcsin(n_2/n_1)$ 时发生全反射。此时折射角 $\\theta_t$ 满足 $\\sin\\theta_t=(n_1/n_2)\\sin\\theta_1>1$，即 $\\theta_t$ 为复数。"))+
+   der(p("<strong>倏逝波推导：</strong>令界面为 $z=0$，入射面为 $xz$ 平面。透射波波矢 $k_t=(k_{tx},0,k_{tz})$，由相位匹配 $k_{tx}=k_1\\sin\\theta_1$。而 $k_t^2=k_2^2=\\omega^2 n_2^2/c^2$，故：")+
+   fml("k_{tz}^2=k_2^2-k_{tx}^2=k_2^2-k_1^2\\sin^2\\theta_1<0")+
+   p("令 $k_{tz}=i\\kappa$，$\\kappa=k_1\\sqrt{\\sin^2\\theta_1-(n_2/n_1)^2}>0$，则透射场：")+
+   fml("\\mathbf{E}_t=\\mathbf{E}_{t0}e^{-\\kappa z}e^{i(k_{tx}x-\\omega t)}")+
+   p("这是沿界面传播（$x$ 方向）、垂直界面指数衰减（$z$ 方向）的倏逝波，穿透深度 $\\delta=1/\\kappa$。"))+
+   note(p("倏逝波不携带能量进入介质深部，但能沿界面传播并可通过近场耦合输出（受抑全反射）。"))
+ )}
+]},
+{
+"name": "2.11 等离子体中的电磁波",
+"color": "#059669",
+"desc": "无磁场等离子体的色散与截止",
+"items": [
+{"id":"d2s11-1","name":"等离子体色散","tags":["thm","der"],"brief":"电磁波在等离子体中的传播",
+ "body": wrap(
+   thm("色散关系",p("冷无碰撞等离子体中，电子在电场作用下振荡，介电函数：")+
+   fml("\\varepsilon(\\omega)=\\varepsilon_0\\left(1-\\frac{\\omega_p^2}{\\omega^2}\\right),\\quad \\omega_p=\\sqrt{\\frac{n_e e^2}{\\varepsilon_0 m_e}}")+
+   p("色散关系 $k^2=\\mu_0\\varepsilon\\omega^2$，即：")+
+   fml("k^2=\\frac{\\omega^2}{c^2}\\left(1-\\frac{\\omega_p^2}{\\omega^2}\\right)"))+
+   der(p("<strong>截止频率：</strong>当 $\\omega<\\omega_p$ 时 $k^2<0$，$k$ 为纯虚数，波指数衰减无法传播（截止）；仅当 $\\omega>\\omega_p$ 时波可传播。群速度：")+
+   fml("v_g=\\frac{d\\omega}{dk}=c\\sqrt{1-\\frac{\\omega_p^2}{\\omega^2}}<c")+
+   p("相速度 $v_p=c/\\sqrt{1-\\omega_p^2/\\omega^2}>c$，但不传递信息。"))+
+   app(p("电离层等离子体频率约 1-10 MHz，故短波（<10 MHz）被电离层反射实现远距离通信；而高于此频率的信号可穿透电离层用于卫星通信。"))
+ )}
+]},
+{
+"name": "2.12 矩形波导 TM 模",
+"color": "#059669",
+"desc": "横磁模的场分布与截止频率",
+"items": [
+{"id":"d2s12-1","name":"波导 TM 模","tags":["thm","der"],"brief":"TM 模的场结构与截止",
+ "body": wrap(
+   defn("TM 模",p("横磁模（TM）中 $H_z=0$，电场有纵向分量 $E_z$。由边界条件 $E_z|_{x=0,a}=0$ 和 $E_z|_{y=0,b}=0$。"))+
+   der(p("<strong>场分量：</strong>设 $E_z=E_0\\sin(m\\pi x/a)\\sin(n\\pi y/b)e^{i(k_z z-\\omega t)}$，由亥姆霍兹方程 $\\nabla_t^2 E_z+(k^2-k_z^2)E_z=0$ 得：")+
+   fml("k^2-k_z^2=\\left(\\frac{m\\pi}{a}\\right)^2+\\left(\\frac{n\\pi}{b}\\right)^2\\equiv k_c^2")+
+   p("截止频率与 TE 模相同 $\\omega_c=ck_c$。TM 模最低阶为 $\\text{TM}_{11}$（$m,n\\ge 1$，因 $m=0$ 或 $n=0$ 时 $E_z=0$）。"))+
+   note(p("与 TE 模不同，TM 模中 $m,n$ 不能为零，故最低 TM 模截止频率高于最低 TE 模（TE$_{10}$）。单模传输时只有 TE$_{10}$ 传播。"))
+ )}
+]},
+{
+"name": "2.13 谐振腔",
+"color": "#059669",
+"desc": "矩形谐振腔的固有频率与品质因数",
+"items": [
+{"id":"d2s13-1","name":"矩形谐振腔","tags":["thm","der"],"brief":"封闭金属腔的电磁振荡模式",
+ "body": wrap(
+   defn("谐振腔",p("两端封闭的金属矩形腔（尺寸 $a\\times b\\times d$），电磁波在腔内来回反射形成驻波。"))+
+   der(p("<strong>固有频率：</strong>三个方向均形成驻波，波矢分量量子化：$k_x=m\\pi/a$，$k_y=n\\pi/b$，$k_z=p\\pi/d$（$m,n,p$ 为正整数，TE 模 $p\\ge 0$）。色散关系：")+
+   fml("k^2=\\left(\\frac{m\\pi}{a}\\right)^2+\\left(\\frac{n\\pi}{b}\\right)^2+\\left(\\frac{p\\pi}{d}\\right)^2=\\frac{\\omega^2}{c^2}")+
+   p("故固有频率：")+
+   fml("f_{mnp}=\\frac{c}{2}\\sqrt{\\left(\\frac{m}{a}\\right)^2+\\left(\\frac{n}{b}\\right)^2+\\left(\\frac{p}{d}\\right)^2}"))+
+   app(p("谐振腔 $Q$ 值 $Q=\\omega W/P_{\\text{损耗}}$，描述频率选择性。常用于微波滤波器、振荡器和频率标准。"))
+ )}
+]},
+{
+"name": "2.14 菲涅耳公式",
+"color": "#059669",
+"desc": "反射与透射系数的完整表达式",
+"items": [
+{"id":"d2s14-1","name":"菲涅耳公式","tags":["thm","der"],"brief":"s/p 偏振的反射透射系数",
+ "body": wrap(
+   thm("菲涅耳公式",p("对 s 偏振（E 垂直入射面）和 p 偏振（E 平行入射面），反射系数 $r$ 与透射系数 $t$：")+
+   fml("r_s=\\frac{n_1\\cos\\theta_1-n_2\\cos\\theta_2}{n_1\\cos\\theta_1+n_2\\cos\\theta_2},\\quad t_s=\\frac{2n_1\\cos\\theta_1}{n_1\\cos\\theta_1+n_2\\cos\\theta_2}")+
+   fml("r_p=\\frac{n_2\\cos\\theta_1-n_1\\cos\\theta_2}{n_2\\cos\\theta_1+n_1\\cos\\theta_2},\\quad t_p=\\frac{2n_1\\cos\\theta_1}{n_2\\cos\\theta_1+n_1\\cos\\theta_2}"))+
+   der(p("<strong>推导：</strong>由边界条件 $E_t$ 和 $H_t$ 连续。对 s 偏振，$E$ 沿 $y$ 方向，$H$ 在入射面内：")+
+   fml("E_i+E_r=E_t,\\quad H_i\\cos\\theta_1-H_r\\cos\\theta_1=H_t\\cos\\theta_2")+
+   p("代入 $H=E/Z=nE/(\\mu_0 c)$，消去得 $r_s$。p 偏振类似但 $E$ 在入射面内、$H$ 沿 $y$，注意 $E$ 方向约定。"))+
+   note(p("当 $r_p=0$ 时为布儒斯特角；当 $\\theta_1>\\theta_c$ 时 $|r_s|=|r_p|=1$（全反射）。"))
+ )}
+]},
+{
+"name": "2.15 斯托克斯参量",
+"color": "#059669",
+"desc": "描述任意偏振态的四参数",
+"items": [
+{"id":"d2s15-1","name":"斯托克斯参量","tags":["def","der"],"brief":"偏振态的可测量参数",
+ "body": wrap(
+   defn("斯托克斯参量",p("任意偏振光可用四个实数斯托克斯参量描述：")+
+   fml("I=|E_x|^2+|E_y|^2,\\quad Q=|E_x|^2-|E_y|^2")+
+   fml("U=2\\text{Re}(E_x E_y^*),\\quad V=-2\\text{Im}(E_x E_y^*)")+
+   p("其中 $I$ 为总光强，$Q$ 表示 $x/y$ 方向线偏振，$U$ 表示 $\\pm 45°$ 线偏振，$V$ 表示圆偏振分量。"))+
+   der(p("<strong>归一化与庞加莱球：</strong>对完全偏振光 $I^2=Q^2+U^2+V^2$。定义归一化参量 $q=Q/I,u=U/I,v=V/I$，则 $q^2+u^2+v^2=1$，对应庞加莱球面上一点。部分偏振光满足 $Q^2+U^2+V^2<I^2$，偏振度 $P=\\sqrt{Q^2+U^2+V^2}/I$。"))+
+   app(p("斯托克斯参量可通过四组强度测量得到，是偏振遥感、光学相干断层扫描等的基础。"))
+ )}
+]},
+{
+"name": "2.16 各向异性介质中的波",
+"color": "#059669",
+"desc": "晶体中双折射与寻常/非常光",
+"items": [
+{"id":"d2s16-1","name":"双折射","tags":["thm","der"],"brief":"各向异性介质中波的分裂",
+ "body": wrap(
+   defn("双折射",p("各向异性介质中 $\\varepsilon$ 为张量，$D_i=\\sum_j\\varepsilon_{ij}E_j$。沿不同方向偏振的波传播速度不同，一束光入射分裂为两束（寻常光 o 与非常光 e）。"))+
+   der(p("<strong>单轴晶体：</strong>取光轴为 $z$，介电张量对角化 $\\varepsilon_{xx}=\\varepsilon_{yy}=\\varepsilon_\\perp$，$\\varepsilon_{zz}=\\varepsilon_\\parallel$。波沿与光轴夹角 $\\theta$ 方向传播时，寻常光折射率 $n_o=\\sqrt{\\varepsilon_\\perp/\\varepsilon_0}$，非常光折射率：")+
+   fml("\\frac{1}{n_e(\\theta)^2}=\\frac{\\cos^2\\theta}{n_o^2}+\\frac{\\sin^2\\theta}{n_e^2},\\quad n_e=\\sqrt{\\varepsilon_\\parallel/\\varepsilon_0}")+
+   p("非常光的相速度随方向变化，$E$ 与 $D$ 不平行，能流方向与波矢方向分离（离散效应）。"))+
+   app(p("方解石、石英均为单轴晶体；利用双折射可制作偏振棱镜、波片等光学元件。"))
+ )}
+]},
+{
+"name": "2.17 多层介质膜反射",
+"color": "#059669",
+"desc": "薄膜干涉与增反/增透膜",
+"items": [
+{"id":"d2s17-1","name":"薄膜光学","tags":["app","der"],"brief":"多层膜的反射与透射",
+ "body": wrap(
+   der(p("<strong>单层膜反射率：</strong>基底 $n_s$ 上镀折射率 $n_f$、厚度 $d$ 的薄膜，正入射时振幅反射系数：")+
+   fml("r=\\frac{r_{01}+r_{12}e^{-2i\\delta}}{1+r_{01}r_{12}e^{-2i\\delta}},\\quad \\delta=\\frac{2\\pi n_f d}{\\lambda}")+
+   p("其中 $r_{01}=(n_0-n_f)/(n_0+n_f)$，$r_{12}=(n_f-n_s)/(n_f+n_s)$。强度反射率 $R=|r|^2$。"))+
+   app(p("<strong>增透膜：</strong>取 $n_f=\\sqrt{n_0 n_s}$ 且 $d=\\lambda/(4n_f)$，则 $r_{01}=r_{12}$ 且相位差 $\\pi$，反射相消，$R\\approx 0$。<strong>高反膜：</strong>交替镀高低折射率 $\\lambda/4$ 膜层，可实现 $R>99\\%$。"))+
+   note(p("多层膜是光学镀膜、激光腔镜、干涉滤光片的核心技术。"))
+ )}
+]},
+{
+"name": "2.18 坡印廷定理与能流",
+"color": "#059669",
+"desc": "电磁场能量守恒的微分形式",
+"items": [
+{"id":"d2s18-1","name":"坡印廷定理","tags":["thm","der"],"brief":"电磁能量守恒定律",
+ "body": wrap(
+   thm("坡印廷定理",p("电磁场能量守恒的微分形式：")+
+   fml("-\\frac{\\partial w}{\\partial t}=\\nabla\\cdot\\mathbf{S}+\\mathbf{j}\\cdot\\mathbf{E}")+
+   p("其中 $w=\\frac{1}{2}(\\mathbf{E}\\cdot\\mathbf{D}+\\mathbf{B}\\cdot\\mathbf{H})$ 为能量密度，$\\mathbf{S}=\\mathbf{E}\\times\\mathbf{H}$ 为坡印廷矢量，$\\mathbf{j}\\cdot\\mathbf{E}$ 为焦耳热功率密度。"))+
+   der(p("<strong>积分形式：</strong>对体积 $V$ 积分：")+
+   fml("-\\frac{d}{dt}\\int_V w\\,dV=\\oint_S\\mathbf{S}\\cdot d\\mathbf{S}+\\int_V\\mathbf{j}\\cdot\\mathbf{E}\\,dV")+
+   p("左边为体积内电磁能量减少率，右边第一项为流出表面积的能流，第二项为场对电荷做功（焦耳热）。即能量减少 = 流出 + 耗散，体现能量守恒。"))+
+   note(p("直流电路中电池能量通过导线周围电磁场的坡印廷矢量传输给负载，而非导线内部。"))
+ )}
+]},
+{
+"name": "2.19 法拉第旋转",
+"color": "#059669",
+"desc": "磁化等离子体中偏振面的旋转",
+"items": [
+{"id":"d2s19-1","name":"法拉第旋转","tags":["thm","der"],"brief":"磁场中等离子体的旋光效应",
+ "body": wrap(
+   thm("法拉第旋转",p("沿磁场方向传播的线偏振光，其偏振面随传播距离旋转：")+
+   fml("\\psi=\\frac{1}{2}(n_+-n_-)\\frac{\\omega}{c}L")+
+   p("其中 $n_\\pm$ 为右/左旋圆偏振光的折射率，$L$ 为传播距离。"))+
+   der(p("<strong>物理机制：</strong>磁场中等离子体对左、右旋圆偏振光折射率不同（磁旋效应）。线偏振光可分解为左、右旋圆偏振，两者传播速度不同，经过距离 $L$ 后相位差为 $\\Delta\\phi=(n_+-n_-)\\omega L/c$，合成线偏振光的偏振面旋转 $\\psi=\\Delta\\phi/2$。"))+
+   app(p("法拉第旋转用于测量星际磁场、光隔离器、电流传感器等。"))
+ )}
+]},
+{
+"name": "2.20 波的叠加与拍频",
+"color": "#059669",
+"desc": "不同频率波叠加产生拍与波包",
+"items": [
+{"id":"d2s20-1","name":"拍频与波包","tags":["der","exa"],"brief":"两相近频率波的干涉",
+ "body": wrap(
+   der(p("<strong>两波叠加：</strong>两列振幅相同、频率 $\\omega_1,\\omega_2$ 相近的波沿同方向传播：")+
+   fml("E=E_0[\\cos(k_1x-\\omega_1t)+\\cos(k_2x-\\omega_2t)]")+
+   fml("=2E_0\\cos\\left(\\frac{\\Delta k}{2}x-\\frac{\\Delta\\omega}{2}t\\right)\\cos(\\bar{k}x-\\bar{\\omega}t)")+
+   p("其中 $\\Delta k=k_1-k_2$，$\\Delta\\omega=\\omega_1-\\omega_2$，$\\bar{k},\\bar{\\omega}$ 为平均值。结果为高频载波被低频包络调制，拍频 $f_b=|\\Delta\\omega|/(2\\pi)$。"))+
+   exa(p("两束激光频率差 1 MHz 时拍频为 1 MHz，可用于精密测距和光谱学（外差探测）。连续分布频率的叠加形成波包，其群速度 $v_g=d\\omega/dk$。"))+
+   note(p("拍频现象是外差检测、锁模激光器和精密测量的基础。"))
+ )}
+]},
+{
+"name": "2.21 电磁波的横波性",
+"color": "#059669",
+"desc": "电磁波横波性的严格证明",
+"items": [
+{"id":"d2s21-1","name":"横波性证明","tags":["thm","der"],"brief":"电磁波是横波",
+ "body": wrap(
+   thm("横波性",p("在无源均匀介质中，平面电磁波的电场和磁场均垂直于传播方向（横波），且 $\\mathbf{E}\\perp\\mathbf{B}\\perp\\mathbf{k}$。"))+
+   der(p("<strong>由麦克斯韦方程：</strong>对平面波 $\\mathbf{E}=\\mathbf{E}_0 e^{i(\\mathbf{k}\\cdot\\mathbf{r}-\\omega t)}$，$\\nabla\\cdot\\mathbf{E}=i\\mathbf{k}\\cdot\\mathbf{E}=0$，故 $\\mathbf{k}\\cdot\\mathbf{E}=0$，$\\mathbf{E}\\perp\\mathbf{k}$。同理 $\\mathbf{k}\\cdot\\mathbf{B}=0$。又 $\\nabla\\times\\mathbf{E}=i\\mathbf{k}\\times\\mathbf{E}=-\\partial\\mathbf{B}/\\partial t=i\\omega\\mathbf{B}$，故 $\\mathbf{B}=\\frac{1}{\\omega}\\mathbf{k}\\times\\mathbf{E}$，即 $\\mathbf{B}\\perp\\mathbf{k}$ 且 $\\mathbf{B}\\perp\\mathbf{E}$。"))+
+   note(p("横波性是电磁波区别于声波（纵波）的重要特征，也是偏振现象的根源。"))
+ )}
+]},
+{
+"name": "2.22 导电介质中的平面波",
+"color": "#059669",
+"desc": "导电介质中波的衰减与相位",
+"items": [
+{"id":"d2s22-1","name":"导电介质色散","tags":["thm","der"],"brief":"导电介质的复介电常数",
+ "body": wrap(
+   thm("复介电常数",p("导电介质中 $\\mathbf{j}=\\sigma\\mathbf{E}$，对时谐场安培定律为 $\\nabla\\times\\mathbf{H}=(\\sigma-i\\omega\\varepsilon)\\mathbf{E}$，可等效为复介电常数：")+
+   fml("\\varepsilon_c=\\varepsilon+i\\frac{\\sigma}{\\omega}")+
+   p("色散关系 $k^2=\\omega^2\\mu\\varepsilon_c$ 为复数，$k=\\beta+i\\alpha$。"))+
+   der(p("<strong>波的衰减：</strong>设 $k=\\beta+i\\alpha$，则 $k^2=\\beta^2-\\alpha^2+2i\\alpha\\beta=\\omega^2\\mu(\\varepsilon+i\\sigma/\\omega)$。比较实虚部：")+
+   fml("\\beta^2-\\alpha^2=\\omega^2\\mu\\varepsilon,\\quad 2\\alpha\\beta=\\omega\\mu\\sigma")+
+   p("解得 $\\alpha,\\beta=\\omega\\sqrt{\\mu\\varepsilon/2}\\left[\\sqrt{1+(\\sigma/\\omega\\varepsilon)^2}\\mp 1\\right]^{1/2}$。良导体（$\\sigma\\gg\\omega\\varepsilon$）时 $\\alpha\\approx\\beta\\approx\\sqrt{\\omega\\mu\\sigma/2}$。"))+
+   app(p("导电介质的色散决定了电波在电离层、海水、土壤中的传播特性。"))
+ )}
+]},
+{
+"name": "2.23 驻波",
+"color": "#059669",
+"desc": "两列反向行波叠加形成驻波",
+"items": [
+{"id":"d2s23-1","name":"驻波","tags":["thm","der"],"brief":"驻波的形成与特性",
+ "body": wrap(
+   thm("驻波",p("两列振幅相同、沿相反方向传播的行波叠加形成驻波：")+
+   fml("E=E_0[\\cos(kx-\\omega t)+\\cos(kx+\\omega t)]=2E_0\\cos(kx)\\cos(\\omega t)")+
+   p("波节位置 $kx=(n+1/2)\\pi$（振幅为零），波腹位置 $kx=n\\pi$（振幅最大）。"))+
+   der(p("<strong>特性：</strong>驻波不传播能量（平均能流为零），能量在波腹与波节间振荡。相邻波节（或波腹）间距为 $\\lambda/2$。导体表面电场切向分量为零，故为波节；磁场法向分量为零、切向最大，故磁场在导体表面为波腹。"))+
+   app(p("谐振腔、激光腔、琴弦振动均为驻波；天线、滤波器中的驻波比（VSWR）衡量匹配程度。"))
+ )}
+]},
+{
+"name": "2.24 电磁波的多普勒效应",
+"color": "#059669",
+"desc": "相对论性多普勒频移",
+"items": [
+{"id":"d2s24-1","name":"多普勒效应","tags":["thm","der"],"brief":"运动波源的频率移动",
+ "body": wrap(
+   thm("相对论多普勒公式",p("波源以速度 $v$ 沿与观测方向夹角 $\\theta$ 运动，观测频率 $\\omega$ 与固有频率 $\\omega_0$ 关系：")+
+   fml("\\omega=\\frac{\\omega_0}{\\gamma(1-\\beta\\cos\\theta)},\\quad \\gamma=\\frac{1}{\\sqrt{1-\\beta^2}},\\ \\beta=v/c")+
+   p("沿运动方向（$\\theta=0$）观测时 $\\omega=\\omega_0\\sqrt{(1+\\beta)/(1-\\beta)}$（蓝移）；垂直方向（$\\theta=\\pi/2$）$\\omega=\\omega_0/\\gamma$（横向多普勒红移，纯相对论效应）。"))+
+   der(p("<strong>推导：</strong>相位 $\\phi=\\mathbf{k}\\cdot\\mathbf{r}-\\omega t$ 是洛伦兹标量。在波源静止系 $S'$ 中 $\\omega'=\\omega_0$，$\\mathbf{k}'$ 沿方向。洛伦兹变换到观测系 $S$，$\\omega=\\gamma(\\omega'+\\mathbf{v}\\cdot\\mathbf{k}')=\\gamma\\omega_0(1+\\beta\\cos\\theta')$，再用光行差公式转换角度即得上式。"))+
+   app(p("多普勒效应用于雷达测速、星系红移（哈勃定律）、激光冷却、卫星导航的相对论修正。"))
+ )}
 ]},
 ]
 
@@ -329,6 +1019,340 @@ ch3_sections = [
    fml("P = \\frac{\\mu_0 m_0^2\\omega^4}{12\\pi c^3}")+
    p("与电偶极辐射 $P\\propto p_0^2\\omega^4/c$ 对比，磁偶极辐射功率多一个 $1/c^2$ 因子，通常远弱于同频率的电偶极辐射。"))
  )},
+]},
+{
+"name": "3.5 李纳-维谢尔势推导",
+"color": "#db2777",
+"desc": "任意运动点电荷的推迟势",
+"items": [
+{"id":"d3s5-1","name":"李纳-维谢尔势","tags":["thm","der"],"brief":"运动点电荷的势",
+ "body": wrap(
+   thm("李纳-维谢尔势",p("以速度 $\\mathbf{v}$ 运动的点电荷 $q$，在观测点 $\\mathbf{r},t$ 的推迟势为：")+
+   fml("\\varphi(\\mathbf{r},t)=\\frac{q}{4\\pi\\varepsilon_0}\\frac{1}{R-\\mathbf{v}\\cdot\\mathbf{R}/c}")+
+   fml("\\mathbf{A}(\\mathbf{r},t)=\\frac{\\mu_0 q\\mathbf{v}}{4\\pi}\\frac{1}{R-\\mathbf{v}\\cdot\\mathbf{R}/c}")+
+   p("其中 $\\mathbf{R}=\\mathbf{r}-\\mathbf{r}'(t')$ 为推迟时刻 $t'=t-R/c$ 电荷到场点的矢量，分母为 $R(1-\\mathbf{v}\\cdot\\hat{\\mathbf{R}}/c)$。"))+
+   der(p("<strong>推导：</strong>点电荷的推迟势积分 $\\varphi=\\frac{1}{4\\pi\\varepsilon_0}\\int\\frac{\\rho(\\mathbf{r}'',t-R'/c)}{R'}dV''$，其中 $\\rho=q\\delta(\\mathbf{r}''-\\mathbf{r}'(t'))$。积分时需注意 $t'$ 依赖于 $\\mathbf{r}''$，利用 $\\delta$ 函数变量替换 $\\delta[f(t')]=\\delta(t'-t_0')/|df/dt'|$，而 $df/dt'=d(R'/c)/dt'=-\\mathbf{v}\\cdot\\hat{\\mathbf{R}}/c$，故雅可比因子为 $1-\\mathbf{v}\\cdot\\hat{\\mathbf{R}}/c$，从而得上述结果。"))+
+   note(p("分母 $1-\\mathbf{v}\\cdot\\hat{\\mathbf{R}}/c$ 反映相对论性的多普勒因子，当电荷高速运动且朝向观测点时，势被强烈增强。"))
+ )}
+]},
+{
+"name": "3.6 运动电荷的辐射场",
+"color": "#db2777",
+"desc": "由李纳-维谢尔势求场，区分速度场与加速度场",
+"items": [
+{"id":"d3s6-1","name":"运动电荷的电磁场","tags":["thm","der"],"brief":"速度场与加速度场的分离",
+ "body": wrap(
+   thm("李纳-维谢尔场",p("由 $\\mathbf{E}=-\\nabla\\varphi-\\partial\\mathbf{A}/\\partial t$，$\\mathbf{B}=\\nabla\\times\\mathbf{A}$，对李纳-维谢尔势求导得总场：")+
+   fml("\\mathbf{E}=\\frac{q}{4\\pi\\varepsilon_0}\\left[\\frac{(\\hat{\\mathbf{R}}-\\boldsymbol{\\beta})(1-\\beta^2)}{\\gamma^2 R^2(1-\\boldsymbol{\\beta}\\cdot\\hat{\\mathbf{R}})^3}+\\frac{\\hat{\\mathbf{R}}\\times[(\\hat{\\mathbf{R}}-\\boldsymbol{\\beta})\\times\\dot{\\boldsymbol{\\beta}}]}{cR(1-\\boldsymbol{\\beta}\\cdot\\hat{\\mathbf{R}})^3}\\right]")+
+   fml("\\mathbf{B}=\\frac{1}{c}\\hat{\\mathbf{R}}\\times\\mathbf{E}")+
+   p("其中 $\\boldsymbol{\\beta}=\\mathbf{v}/c$，$\\gamma=1/\\sqrt{1-\\beta^2}$。第一项 $\\propto 1/R^2$ 为速度场（非辐射，近场），第二项 $\\propto 1/R$ 为加速度场（辐射场）。"))+
+   der(p("<strong>辐射场条件：</strong>辐射场由电荷加速度 $\\dot{\\boldsymbol{\\beta}}$ 产生，且 $\\mathbf{E}\\perp\\hat{\\mathbf{R}}$，$\\mathbf{B}\\perp\\mathbf{E}\\perp\\hat{\\mathbf{R}}$，能流 $\\mathbf{S}=\\mathbf{E}\\times\\mathbf{B}/\\mu_0\\propto 1/R^2$，故总辐射功率有限。匀速运动电荷（$\\dot{\\boldsymbol{\\beta}}=0$）不辐射。"))+
+   app(p("这是轫致辐射、同步辐射、切伦科夫辐射等的统一理论基础。"))
+ )}
+]},
+{
+"name": "3.7 轫致辐射",
+"color": "#db2777",
+"desc": "带电粒子被库仑场加速产生的辐射",
+"items": [
+{"id":"d3s7-1","name":"轫致辐射","tags":["thm","der"],"brief":"减速辐射的谱与角分布",
+ "body": wrap(
+   defn("轫致辐射",p("高速带电粒子穿过物质时，在原子核库仑场中减速（加速度）产生的连续谱电磁辐射，又称减速辐射。"))+
+   der(p("<strong>非相对论轫致辐射谱：</strong>粒子电荷 $ze$、质量 $m$、速度 $v$，在靶核电荷 $Ze$ 的库仑场中散射，单次碰撞辐射能量频谱：")+
+   fml("\\frac{dI}{d\\omega}=\\frac{8Z^2z^2 e^6}{3\\pi^2 c^3 m^2 v^2}\\ln\\left(\\frac{b_{\\max}}{b_{\\min}}\\right)")+
+   p("其中 $b_{\\min}\\approx\\hbar/(mv)$（量子下限）或 $Ze^2/(mv^2)$（经典近核），$b_{\\max}\\approx v/\\omega$。辐射功率与 $1/m^2$ 成正比，故电子轫致辐射远强于重离子。"))+
+   app(p("轫致辐射是 X 射线管、同步辐射白光、聚变等离子体辐射的重要机制；天体中热轫致辐射是高温等离子体的主要冷却机制。"))
+ )}
+]},
+{
+"name": "3.8 同步辐射",
+"color": "#db2777",
+"desc": "相对论性带电粒子做圆周运动的辐射",
+"items": [
+{"id":"d3s8-1","name":"同步辐射","tags":["thm","der"],"brief":"相对论性圆周运动的辐射特征",
+ "body": wrap(
+   thm("总辐射功率",p("相对论性粒子（$\\gamma\\gg 1$）在磁场中做回旋运动，总辐射功率：")+
+   fml("P=\\frac{e^2 c\\beta^4\\gamma^4}{6\\pi\\varepsilon_0\\rho^2}=\\frac{e^4 B^2\\gamma^2\\beta^2\\sin^2\\alpha}{6\\pi\\varepsilon_0 m^2 c}")+
+   p("其中 $\\rho$ 为轨道曲率半径，$\\alpha$ 为速度与磁场夹角。功率正比于 $\\gamma^4$（圆偏振）或 $\\gamma^2$（一般情形），相对论性越强辐射越强。"))+
+   der(p("<strong>角分布与临界频率：</strong>辐射集中在粒子运动前方的窄锥内，半张角 $\\sim 1/\\gamma$。频谱特征频率（临界频率）：")+
+   fml("\\omega_c=\\frac{3c\\gamma^3}{2\\rho}")+
+   p("辐射频谱从低频到 $\\omega_c$ 近似平坦，高于 $\\omega_c$ 迅速衰减。这是连续谱，覆盖从红外到 X 射线甚至 $\\gamma$ 射线。"))+
+   app(p("同步辐射光源具有高亮度、宽频谱、高偏振、准直性好等优点，是材料科学、生命科学、化学的重要研究工具；天文上蟹状星云等的辐射即同步辐射。"))
+ )}
+]},
+{
+"name": "3.9 多极辐射一般理论",
+"color": "#db2777",
+"desc": "时变电荷电流分布的辐射场多极展开",
+"items": [
+{"id":"d3s9-1","name":"多极辐射展开","tags":["thm","der"],"brief":"辐射场按球谐函数的多极展开",
+ "body": wrap(
+   thm("多极辐射",p("时变局域源（尺寸 $a\\ll\\lambda$）的辐射场可展开为电多极和磁多极辐射的叠加。第 $l$ 阶电多极（E$l$）和磁多极（M$l$）辐射功率随频率的依赖为：")+
+   fml("P_{El}\\propto\\frac{\\omega^{2l+2}}{c^{2l+1}}|Q_{lm}|^2,\\qquad P_{Ml}\\propto\\frac{\\omega^{2l+2}}{c^{2l+3}}|M_{lm}|^2")+
+   p("其中 $Q_{lm}$ 为电 $2^l$ 极矩，$M_{lm}$ 为磁 $2^l$ 极矩。阶数每增加 1，功率多一个 $(ka)^2\\ll 1$ 的小因子，故低阶辐射通常占主导。"))+
+   der(p("<strong>多极矩定义：</strong>电多极矩 $Q_{lm}=\\int r'^l Y_{lm}^*\\rho\\,dV'$，磁多极矩 $M_{lm}=-\\frac{1}{l+1}\\int r'^l Y_{lm}^*\\nabla\\cdot(\\mathbf{r}'\\times\\mathbf{j})dV'$。由矢势的多极展开并取远场辐射部分，可得到各阶辐射场。"))+
+   note(p("E1 为电偶极辐射，M1 为磁偶极辐射，E2 为电四极辐射。在原子核和原子物理中，不同多极性的跃迁有不同的选择定则。"))
+ )}
+]},
+{
+"name": "3.10 电四极辐射",
+"color": "#9333ea",
+"desc": "电四极矩振荡产生的辐射",
+"items": [
+{"id":"d3s10-1","name":"电四极辐射","tags":["thm","der"],"brief":"电四极辐射的角分布与功率",
+ "body": wrap(
+   thm("电四极辐射场",p("电四极矩张量 $Q_{ij}(t)$ 振荡产生的辐射场：")+
+   fml("B_{\\phi}=\\frac{\\mu_0}{4\\pi c^2 r}\\sin\\theta\\frac{d^3 Q_{33}(t-r/c)}{dt^3}")+
+   p("（以沿 $z$ 轴对称四极子为例）电场 $E_\\theta=cB_\\phi$。"))+
+   der(p("<strong>辐射角分布与功率：</strong>轴对称四极子的辐射角分布：")+
+   fml("\\frac{dP}{d\\Omega}=\\frac{\\mu_0}{2048\\pi^2 c^3}|\\dddot{Q}_{33}|^2\\sin^2\\theta\\cos^2\\theta")+
+   p("总辐射功率：")+
+   fml("P=\\frac{\\mu_0}{1440\\pi c^3}\\sum_{ij}|\\dddot{Q}_{ij}|^2")+
+   p("与电偶极辐射 $P\\propto\\omega^4$ 不同，电四极辐射 $P\\propto\\omega^6$，且因多一个 $(ka)^2$ 因子通常较弱。"))+
+   app(p("原子核的集体四极振动产生 E2 跃迁辐射；引力波也可类比为四极辐射（但由质量四极矩产生）。"))
+ )}
+]},
+{
+"name": "3.11 半波天线",
+"color": "#9333ea",
+"desc": "半波振子天线的辐射场与辐射电阻",
+"items": [
+{"id":"d3s11-1","name":"半波天线","tags":["thm","der"],"brief":"半波振子的辐射特性",
+ "body": wrap(
+   defn("半波天线",p("长度 $L=\\lambda/2$ 的中心馈电细直天线，电流分布近似为 $I(z)=I_0\\cos(kz)$（$|z|\\le L/2$）。"))+
+   der(p("<strong>辐射场：</strong>将天线分为电流元，每个电流元 $I dz$ 产生电偶极辐射场 $d\\mathbf{B}$，积分得远场：")+
+   fml("B_\\phi=\\frac{\\mu_0 I_0}{2\\pi r}\\frac{\\cos(\\pi\\cos\\theta/2)}{\\sin\\theta}")+
+   p("辐射角分布由方向性函数 $F(\\theta)=\\frac{\\cos(\\pi\\cos\\theta/2)}{\\sin\\theta}$ 决定，在 $\\theta=\\pi/2$（垂直天线方向）最强。"))+
+   thm("辐射功率与辐射电阻",p("总辐射功率：")+
+   fml("P=\\frac{\\mu_0 c I_0^2}{8\\pi^2}\\int_0^\\pi\\frac{\\cos^2(\\pi\\cos\\theta/2)}{\\sin\\theta}d\\theta\\approx 36.5\\,I_0^2")+
+   p("辐射电阻 $R_r=2P/I_0^2\\approx 73\\,\\Omega$，与常见同轴电缆特性阻抗 $50/75\\,\\Omega$ 匹配良好。"))
+ )}
+]},
+{
+"name": "3.12 天线阵列",
+"color": "#9333ea",
+"desc": "多元天线阵列的干涉方向性",
+"items": [
+{"id":"d3s12-1","name":"天线阵列","tags":["thm","der"],"brief":"阵列因子与方向性",
+ "body": wrap(
+   thm("方向图乘积定理",p("$N$ 元相同天线组成的阵列，其远场方向图为单元方向图 $F_1(\\theta,\\phi)$ 与阵列因子 $|A(\\theta,\\phi)|$ 的乘积：")+
+   fml("F(\\theta,\\phi)=F_1(\\theta,\\phi)\\cdot |A(\\theta,\\phi)|")+
+   p("对等间距 $d$、同相激励的 $N$ 元线阵，阵列因子：")+
+   fml("|A|=\\left|\\frac{\\sin[N(\\pi d\\sin\\theta)/\\lambda]}{N\\sin[(\\pi d\\sin\\theta)/\\lambda]}\\right|"))+
+   der(p("<strong>主瓣与栅瓣：</strong>主瓣在 $\\theta=0$（端射）或由相位差决定的方向。当 $d>\\lambda/2$ 时会出现栅瓣。半功率波束宽度约 $\\lambda/(Nd)$，阵列越大波束越窄，方向性越强。"))+
+   app(p("相控阵雷达通过控制各单元相位实现波束电子扫描，广泛用于雷达、卫星通信、射电天文望远镜（如 VLA、FAST 的馈源阵列）。"))
+ )}
+]},
+{
+"name": "3.13 瑞利散射",
+"color": "#9333ea",
+"desc": "小粒子对电磁波的散射",
+"items": [
+{"id":"d3s13-1","name":"瑞利散射","tags":["thm","der"],"brief":"远小于波长的粒子散射",
+ "body": wrap(
+   thm("瑞利散射截面",p("半径 $a\\ll\\lambda$ 的球形粒子（折射率 $n$）对光的散射截面：")+
+   fml("\\sigma_s=\\frac{8\\pi}{3}k^4 a^6\\left(\\frac{n^2-1}{n^2+2}\\right)^2")+
+   p("散射截面与 $\\lambda^{-4}$ 成正比（$k=2\\pi/\\lambda$），短波散射远强于长波。"))+
+   der(p("<strong>机制：</strong>粒子在入射电场中被极化为振荡电偶极子 $\\mathbf{p}=4\\pi\\varepsilon_0 a^3\\frac{n^2-1}{n^2+2}\\mathbf{E}_0$，其辐射（散射）功率由电偶极辐射公式 $P\\propto\\omega^4 p_0^2$ 给出。入射能流 $S_0$，故截面 $\\sigma_s=P/S_0\\propto\\omega^4 a^6$。"))+
+   app(p("天空呈蓝色因蓝光（短波长）瑞利散射强；日出日落呈红色因阳光穿过厚大气，蓝光被散射掉，红光透射。大气分子密度涨落是可见光瑞利散射的主要原因。"))
+ )}
+]},
+{
+"name": "3.14 切伦科夫辐射",
+"color": "#9333ea",
+"desc": "超光速粒子在介质中产生的辐射",
+"items": [
+{"id":"d3s14-1","name":"切伦科夫辐射","tags":["thm","der"],"brief":"带电粒子超介质光速时的辐射",
+ "body": wrap(
+   thm("切伦科夫辐射条件",p("带电粒子在介质中以速度 $v>c/n$（介质中光速）运动时，产生锥状电磁辐射，即切伦科夫辐射。辐射方向与粒子运动方向夹角 $\\theta_C$ 满足：")+
+   fml("\\cos\\theta_C=\\frac{c}{nv}=\\frac{1}{n\\beta}")+
+   p("其中 $\\beta=v/c$。仅当 $n\\beta>1$ 时才有辐射。"))+
+   der(p("<strong>辐射谱：</strong>单位频率间隔辐射能量：")+
+   fml("\\frac{dE}{dx\\,d\\omega}=\\frac{e^2\\omega}{4\\pi\\varepsilon_0 c^2}\\left(1-\\frac{1}{n^2\\beta^2}\\right)")+
+   p("谱近似与 $\\omega$ 成正比（短波占优），故切伦科夫辐射呈蓝白色。这是一种相干辐射，源于各时刻辐射场的相长干涉形成锥形波前（类似超音速飞机的马赫锥）。"))+
+   app(p("切伦科夫辐射用于粒子探测器（如中微子探测、宇宙线探测）、核反应堆堆芯蓝光、粒子鉴别的速度阈值探测器。"))
+ )}
+]},
+{
+"name": "3.15 散射截面与光学定理",
+"color": "#9333ea",
+"desc": "散射截面的一般定义与光学定理",
+"items": [
+{"id":"d3s15-1","name":"散射截面","tags":["def","der"],"brief":"微分散射截面与总截面",
+ "body": wrap(
+   defn("散射截面",p("微分散射截面 $d\\sigma/d\\Omega$ 定义为单位立体角的散射功率与入射能流之比：")+
+   fml("\\frac{d\\sigma}{d\\Omega}=\\frac{1}{S_0}\\frac{dP_s}{d\\Omega}")+
+   p("总散射截面 $\\sigma_s=\\int\\frac{d\\sigma}{d\\Omega}d\\Omega$。吸收截面 $\\sigma_a$ 与消光截面 $\\sigma_e=\\sigma_s+\\sigma_a$。"))+
+   der(p("<strong>光学定理：</strong>向前散射振幅 $f(0)$ 与总消光截面的关系：")+
+   fml("\\sigma_e=\\frac{4\\pi}{k}\\text{Im}\\,f(0)")+
+   p("该定理由能量守恒（幺正性）导出，表明只要有散射/吸收，向前方向必有散射振幅的虚部。这是散射理论的基本关系。"))+
+   app(p("瑞利散射、汤姆孙散射、米氏散射均满足光学定理，可用于验证计算的自洽性。"))
+ )}
+]},
+{
+"name": "3.16 短天线辐射",
+"color": "#9333ea",
+"desc": "电偶极近似下的短天线",
+"items": [
+{"id":"d3s16-1","name":"短天线","tags":["thm","der"],"brief":"电偶极近似的短天线",
+ "body": wrap(
+   defn("短天线",p("长度 $L\\ll\\lambda$ 的天线，电流近似均匀 $I=I_0 e^{-i\\omega t}$，等效于振荡电偶极子 $\\mathbf{p}=I_0 L/(i\\omega)\\hat{\\mathbf{z}}$。"))+
+   der(p("<strong>辐射场：</strong>由电偶极辐射公式，代入 $\\ddot{\\mathbf{p}}=-i\\omega I_0 L\\hat{\\mathbf{z}}$：")+
+   fml("B_\\phi=\\frac{\\mu_0 I_0 L k}{4\\pi r}\\sin\\theta e^{i(kr-\\omega t)}")+
+   p("辐射功率 $P=\\frac{\\mu_0 I_0^2\\omega^2 L^2}{12\\pi c}=\\frac{\\pi}{3}\\eta_0 I_0^2(L/\\lambda)^2$，其中 $\\eta_0=\\sqrt{\\mu_0/\\varepsilon_0}\\approx 377\\,\\Omega$。辐射电阻：")+
+   fml("R_r=\\frac{2P}{I_0^2}=\\frac{2\\pi}{3}\\eta_0\\left(\\frac{L}{\\lambda}\\right)^2\\approx 790\\left(\\frac{L}{\\lambda}\\right)^2\\Omega")+
+   p("因 $L\\ll\\lambda$，短天线辐射电阻很小，辐射效率低。"))
+ )}
+]},
+{
+"name": "3.17 米氏散射",
+"color": "#9333ea",
+"desc": "任意尺寸球的严格散射理论",
+"items": [
+{"id":"d3s17-1","name":"米氏散射","tags":["thm","der"],"brief":"均匀球散射的严格解",
+ "body": wrap(
+   defn("米氏散射",p("古斯塔夫·米给出均匀各向同性球对平面波散射的严格解，将入射波、散射波和球内场展开为球谐矢量波函数，由边界条件确定展开系数。"))+
+   der(p("<strong>展开：</strong>入射平面波展开为电多极和磁多极分量 $a_n,b_n$（米氏系数）。散射截面：")+
+   fml("\\sigma_s=\\frac{2\\pi}{k^2}\\sum_{n=1}^{\\infty}(2n+1)(|a_n|^2+|b_n|^2)")+
+   p("消光截面 $\\sigma_e=\\frac{2\\pi}{k^2}\\sum(2n+1)\\text{Re}(a_n+b_n)$。参数 $x=ka$（尺寸参数）和折射率 $m=n_1/n_0$ 决定散射特性。"))+
+   app(p("当 $x\\ll 1$ 退化为瑞利散射；$x\\gg 1$ 趋近几何光学。米氏散射解释了云雾的白色（大水滴对所有波长均匀散射）。"))
+ )}
+]},
+{
+"name": "3.18 衍射与基尔霍夫公式",
+"color": "#9333ea",
+"desc": "标量衍射理论的基本公式",
+"items": [
+{"id":"d3s18-1","name":"基尔霍夫衍射公式","tags":["thm","der"],"brief":"衍射场的积分表示",
+ "body": wrap(
+   thm("基尔霍夫公式",p("孔径 $\\Sigma$ 后的衍射场由基尔霍夫积分给出：")+
+   fml("\\psi(P)=\\frac{1}{4\\pi}\\int_\\Sigma\\left[\\psi\\frac{\\partial G}{\\partial n}-G\\frac{\\partial\\psi}{\\partial n}\\right]dS")+
+   p("其中 $G=e^{ikr}/r$ 为格林函数，$\\psi$ 为孔径上的入射场。"))+
+   der(p("<strong>菲涅尔-基尔霍夫近似：</strong>假设孔径上 $\\psi$ 等于入射波，$\\partial\\psi/\\partial n=ik\\cos\\theta\\,\\psi$，远场（夫琅禾费）近似下衍射场为孔径场分布的傅里叶变换：")+
+   fml("\\psi(P)\\propto\\int_\\Sigma\\psi(\\mathbf{r}_\\perp)e^{-i\\mathbf{k}_\\perp\\cdot\\mathbf{r}_\\perp}dS")+
+   p("其中 $\\mathbf{k}_\\perp$ 为衍射方向的横向波矢。单缝衍射的强度分布 $I\\propto[\\sin(\\pi a\\sin\\theta/\\lambda)/(\\pi a\\sin\\theta/\\lambda)]^2$。"))+
+   app(p("衍射是波动光学的核心，决定光学仪器的分辨率（瑞利判据 $\\theta=1.22\\lambda/D$）。"))
+ )}
+]},
+{
+"name": "3.19 辐射阻尼力的推导",
+"color": "#9333ea",
+"desc": "从能量守恒导出辐射反作用力",
+"items": [
+{"id":"d3s19-1","name":"辐射阻尼力","tags":["thm","der"],"brief":"电荷辐射对自身的反作用",
+ "body": wrap(
+   thm("辐射阻尼力",p("非相对论性加速电子因辐射损失能量，等效受到阻尼力：")+
+   fml("\\mathbf{F}_s=\\frac{e^2}{6\\pi\\varepsilon_0 c^3}\\ddot{\\mathbf{v}}")+
+   p("此力又称亚伯拉罕-洛伦兹力。"))+
+   der(p("<strong>由能量守恒推导：</strong>Larmor 公式给出辐射功率 $P=\\frac{e^2 a^2}{6\\pi\\varepsilon_0 c^3}$。阻尼力做功功率应等于辐射功率（取周期平均）：")+
+   fml("\\langle\\mathbf{F}_s\\cdot\\mathbf{v}\\rangle=-\\langle P\\rangle")+
+   p("对周期运动，$\\langle\\ddot{\\mathbf{v}}\\cdot\\mathbf{v}\\rangle=-\\langle\\dot{\\mathbf{v}}\\cdot\\dot{\\mathbf{v}}\\rangle=-\\langle a^2\\rangle$，故取 $\\mathbf{F}_s=\\frac{e^2}{6\\pi\\varepsilon_0 c^3}\\ddot{\\mathbf{v}}$ 可使功率平衡。"))+
+   note(p("辐射阻尼力导致谱线自然展宽。该公式在 $\\tau=e^2/(6\\pi\\varepsilon_0 m c^3)\\approx 6\\times10^{-24}\\,\\text{s}$ 时间尺度上有效，对快变过程需考虑高阶修正。"))
+ )}
+]},
+{
+"name": "3.20 多极辐射的选择定则",
+"color": "#9333ea",
+"desc": "角动量与宇称守恒对辐射多极性的限制",
+"items": [
+{"id":"d3s20-1","name":"辐射选择定则","tags":["thm","der"],"brief":"多极辐射的角动量与宇称选择定则",
+ "body": wrap(
+   thm("选择定则",p("电磁辐射是光子（自旋 1，宇称 $(-1)^{l+1}$ 对电多极，$(-1)^l$ 对磁多极）的发射，初末态角动量 $J_i,J_f$ 和宇称 $\\pi_i,\\pi_f$ 须满足：")+
+   fml("|J_i-J_f|\\le l\\le J_i+J_f,\\qquad \\pi_i\\pi_f=\\begin{cases}(-1)^l & \\text{E}l \\\\ (-1)^{l+1} & \\text{M}l\\end{cases}")+
+   p("且 $J_i=J_f=0$ 时 $l=0$ 被禁戒（光子至少带走 $\\hbar$ 角动量）。"))+
+   der(p("<strong>推导思路：</strong>光子携带角动量 $l\\hbar$（$l\\ge 1$）和宇称，由角动量守恒得三角条件 $|J_i-J_f|\\le l\\le J_i+J_f$；由宇称守恒，初态宇称等于末态宇称乘光子宇称。电 $l$ 极辐射的光子宇称为 $(-1)^l$（因电多极矩是 $l$ 阶张量，其空间反演性质），磁 $l$ 极为 $(-1)^{l+1}$。"))+
+   app(p("例如 $0^+\\to 0^+$ 跃迁不能发射单光子（禁戒）；$1^-\\to 0^+$ 为 E1 跃迁（宇称改变，$\\Delta J=1$）；$2^+\\to 0^+$ 为 E2 跃迁。"))
+ )}
+]},
+{
+"name": "3.21 偶极辐射的角分布与偏振",
+"color": "#9333ea",
+"desc": "电偶极辐射场的偏振与角分布细节",
+"items": [
+{"id":"d3s21-1","name":"电偶极辐射的偏振","tags":["thm","der"],"brief":"辐射场的偏振态",
+ "body": wrap(
+   thm("偏振特性",p("设电偶极矩 $\\mathbf{p}$ 沿 $z$ 轴振荡。观测方向 $\\hat{\\mathbf{r}}$ 与 $z$ 轴夹角 $\\theta$，方位角 $\\phi$。辐射电场 $\\mathbf{E}$ 在 $\\hat{\\mathbf{r}}\\times(\\ddot{\\mathbf{p}}\\times\\hat{\\mathbf{r}})$ 方向，即位于 $\\hat{\\mathbf{r}}$ 与 $\\mathbf{p}$ 构成的平面内（子午面），垂直于 $\\hat{\\mathbf{r}}$。"))+
+   der(p("<strong>分量分析：</strong>在以 $\\hat{\\mathbf{r}}$ 为极轴的局部坐标系中，$\\mathbf{E}$ 沿 $\\hat{\\boldsymbol{\\theta}}$ 方向（子午方向），$\\mathbf{B}$ 沿 $\\hat{\\boldsymbol{\\phi}}$ 方向。辐射完全线偏振，偏振方向在子午面内。在垂直于偶极轴方向（$\\theta=90°$），$\\mathbf{E}$ 与偶极轴平行；沿偶极轴方向（$\\theta=0$），辐射为零。"))+
+   app(p("天文观测中，通过测量辐射的偏振度和偏振角可推断辐射源的几何取向，如脉冲星、活动星系核的喷流方向。"))
+ )}
+]},
+{
+"name": "3.22 辐射场的傅里叶变换",
+"color": "#9333ea",
+"desc": "辐射频谱与时域辐射的关系",
+"items": [
+{"id":"d3s22-1","name":"辐射频谱","tags":["thm","der"],"brief":"辐射能量的频率分布",
+ "body": wrap(
+   thm("辐射频谱",p("对随时间变化的源，单位立体角单位频率间隔的辐射能量：")+
+   fml("\\frac{d^2 I}{d\\omega\\,d\\Omega}=\\frac{\\mu_0 c}{16\\pi^2}\\left|\\int_{-\\infty}^{\\infty}\\ddot{\\mathbf{p}}_{\\perp}(t)e^{-i\\omega t}dt\\right|^2")+
+   p("其中 $\\mathbf{p}_\\perp$ 为偶极矩垂直于观测方向的分量。这是辐射场傅里叶变换的模平方。"))+
+   der(p("<strong>推导：</strong>时域辐射功率 $dP/d\\Omega$ 对时间积分得总辐射能量。利用帕塞瓦尔定理，将时域积分转为频域：")+
+   fml("\\frac{dI}{d\\Omega}=\\int_{-\\infty}^{\\infty}\\frac{dP}{d\\Omega}dt=\\int_0^\\infty\\frac{d^2 I}{d\\omega\\,d\\Omega}d\\omega")+
+   p("代入偶极辐射场的傅里叶变换即得上式。该方法是分析瞬态辐射（如短脉冲、激光尾场辐射）频谱的基础。"))+
+   app(p("对持续时间 $\\tau$ 的脉冲辐射，频谱宽度约 $\\Delta\\omega\\sim 1/\\tau$，脉冲越短频谱越宽（带宽定理）。"))
+ )}
+]},
+{
+"name": "3.23 拉莫尔公式",
+"color": "#9333ea",
+"desc": "非相对论加速电荷的总辐射功率",
+"items": [
+{"id":"d3s23-1","name":"拉莫尔公式","tags":["thm","der"],"brief":"加速电荷的辐射总功率",
+ "body": wrap(
+   thm("拉莫尔公式",p("非相对论性加速带电粒子的总辐射功率：")+
+   fml("P=\\frac{e^2 a^2}{6\\pi\\varepsilon_0 c^3}")+
+   p("其中 $a$ 为加速度大小。功率与加速度平方成正比，与质量无关。"))+
+   der(p("<strong>由偶极辐射推导：</strong>加速电荷等效于电偶极矩 $\\mathbf{p}=e\\mathbf{r}$，$\\ddot{\\mathbf{p}}=e\\mathbf{a}$。由电偶极辐射功率 $P=\\frac{\\mu_0 |\\ddot{\\mathbf{p}}|^2}{12\\pi c}$，代入 $\\ddot{p}=ea$ 并利用 $\\mu_0=1/(\\varepsilon_0 c^2)$：")+
+   fml("P=\\frac{\\mu_0 e^2 a^2}{12\\pi c}=\\frac{e^2 a^2}{12\\pi\\varepsilon_0 c^3}")+
+   p("注意系数为 $1/(6\\pi)$ 而非 $1/(12\\pi)$，差异来自时间平均（$\\langle\\cos^2\\omega t\\rangle=1/2$）与瞬时值的区别。瞬时功率为 $P=\\frac{e^2 a^2}{6\\pi\\varepsilon_0 c^3}$。"))+
+   app(p("拉莫尔公式是经典辐射理论的基石，用于轫致辐射、同步辐射（相对论推广）、辐射阻尼等。"))
+ )}
+]},
+{
+"name": "3.24 汤姆孙散射的角分布",
+"color": "#9333ea",
+"desc": "自由电子散射的偏振与角分布",
+"items": [
+{"id":"d3s24-1","name":"汤姆孙散射角分布","tags":["thm","der"],"brief":"自由电子对电磁波的散射图样",
+ "body": wrap(
+   thm("微分散射截面",p("线偏振入射光被自由电子散射，微分散射截面：")+
+   fml("\\frac{d\\sigma}{d\\Omega}=r_e^2\\sin^2\\phi")+
+   p("其中 $r_e$ 为经典电子半径，$\\phi$ 为散射方向与入射电场方向的夹角。对非偏振入射光，平均后：")+
+   fml("\\frac{d\\sigma}{d\\Omega}=\\frac{r_e^2}{2}(1+\\cos^2\\theta)")+
+   p("$\\theta$ 为散射角。总截面 $\\sigma_T=8\\pi r_e^2/3$。"))+
+   der(p("<strong>推导：</strong>入射电场使电子加速度 $a=eE_0/m$，沿电场方向。由偶极辐射角分布 $dP/d\\Omega\\propto\\sin^2\\phi$（$\\phi$ 为观测方向与加速度夹角）。入射非偏振光可分解为两个正交偏振分量，分别计算后取平均：一个分量散射分布 $\\propto 1$，另一个 $\\propto\\cos^2\\theta$，平均得 $(1+\\cos^2\\theta)/2$。"))+
+   app(p("汤姆孙散射是康普顿散射的低能极限（$\\hbar\\omega\\ll m_e c^2$），用于测量等离子体密度和温度。"))
+ )}
+]},
+{
+"name": "3.25 偶极-偶极相互作用",
+"color": "#9333ea",
+"desc": "两个振荡电偶极子间的辐射相互作用",
+"items": [
+{"id":"d3s25-1","name":"偶极-偶极相互作用","tags":["thm","der"],"brief":"两偶极子间的作用力与能量转移",
+ "body": wrap(
+   thm("相互作用能",p("两个相距 $r$ 的电偶极子 $\\mathbf{p}_1,\\mathbf{p}_2$ 的静电相互作用能：")+
+   fml("U=\\frac{1}{4\\pi\\varepsilon_0 r^3}\\left[\\mathbf{p}_1\\cdot\\mathbf{p}_2-3(\\mathbf{p}_1\\cdot\\hat{\\mathbf{r}})(\\mathbf{p}_2\\cdot\\hat{\\mathbf{r}})\\right]")+
+   p("振荡偶极子间还存在辐射耦合，导致能量转移（如荧光共振能量转移 FRET）。"))+
+   der(p("<strong>振荡偶极子的能量转移：</strong>偶极子 1 辐射的场在偶极子 2 处激发其振荡，转移速率 $\\kappa\\propto |\\mathbf{p}_2\\cdot\\mathbf{E}_1|^2$。在近场（$r\\ll\\lambda$），转移效率 $\\eta$ 满足：")+
+   fml("\\eta=\\frac{1}{1+(r/R_0)^6}")+
+   p("其中 $R_0$ 为 F\u00f6rster 半径（转移效率 50% 时的距离），$R_0\\propto\\sqrt[6]{\\Phi_D\\kappa^2 n^{-4}J}$。$r^{-6}$ 依赖源于偶极近场的 $r^{-3}$ 场强平方。"))+
+   app(p("FRET 广泛用于分子生物学中测量分子内/分子间距离（1-10 nm），如蛋白质构象研究。"))
+ )}
+]},
+{
+"name": "3.26 引力波与电磁四极辐射的类比",
+"color": "#9333ea",
+"desc": "质量四极辐射与电四极辐射的对比",
+"items": [
+{"id":"d3s26-1","name":"四极辐射类比","tags":["note","der"],"brief":"电磁与引力四极辐射的对比",
+ "body": wrap(
+   thm("引力波辐射功率",p("爱因斯坦四极公式给出质量四极矩 $I_{ij}$ 振荡的引力波辐射功率：")+
+   fml("P=\\frac{G}{5c^5}\\left\\langle\\dddot{I}_{ij}\\dddot{I}_{ij}\\right\\rangle")+
+   p("其中 $G$ 为引力常数。与电磁四极辐射 $P\\propto\\frac{1}{c^3}|\\dddot{Q}_{ij}|^2$ 形式相似，但耦合常数 $G/c^5$ 极小。"))+
+   der(p("<strong>对比：</strong>电磁四极辐射由电荷四极矩 $Q_{ij}$ 产生，耦合常数 $\\mu_0/c^3$；引力四极辐射由质量四极矩 $I_{ij}$ 产生，耦合常数 $G/c^5$。引力耦合比电磁弱约 $10^{40}$ 倍，故引力波极难探测，需天体级质量加速（如双黑洞并合）。两者均为四极辐射（因无负质量，引力无单极和偶极辐射）。"))+
+   note(p("LIGO 在 2015 年首次直接探测到引力波，验证了爱因斯坦广义相对论的预言。"))
+ )}
 ]},
 ]
 

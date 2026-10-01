@@ -201,6 +201,35 @@ CORE_FORMULAS = [
     ("自感电动势", "\\varepsilon_L=-L\\frac{dI}{dt}", "自感系数与自感电动势"),
     ("互感电动势", "\\varepsilon_{21}=-M\\frac{dI_1}{dt}", "互感系数与互感电动势"),
     ("电磁场能量密度", "w=\\frac{1}{2}\\varepsilon E^2+\\frac{1}{2\\mu}B^2", "电场与磁场能量密度之和"),
+    ("连续带电体电场", "\\mathbf{E}=\\frac{1}{4\\pi\\varepsilon_0}\\int\\frac{dq}{r^2}\\hat{\\mathbf{r}}", "由电荷元电场叠加积分"),
+    ("均匀带电圆盘轴线电场", "E=\\frac{\\sigma}{2\\varepsilon_0}\\left(1-\\frac{x}{\\sqrt{R^2+x^2}}\\right)", "带电圆盘轴线上电场，R→∞ 得无限大平面场"),
+    ("电势叠加原理", "V=\\frac{1}{4\\pi\\varepsilon_0}\\sum_i\\frac{q_i}{r_i}", "多个点电荷电势的代数叠加"),
+    ("均匀带电球面电势", "V_{\\text{内}}=\\frac{q}{4\\pi\\varepsilon_0 R},\\ V_{\\text{外}}=\\frac{q}{4\\pi\\varepsilon_0 r}", "球面内部等势，外部同点电荷"),
+    ("偶极子非均匀场受力", "\\mathbf{F}=(\\mathbf{p}\\cdot\\nabla)\\mathbf{E}", "电偶极子在非均匀电场中受力"),
+    ("电四极子远场电势", "V=\\frac{1}{4\\pi\\varepsilon_0}\\frac{Q(3\\cos^2\\theta-1)}{2r^3}", "线性电四极子远场电势，按 1/r³ 衰减"),
+    ("电场力做功", "A_{ab}=q_0\\int_a^b\\mathbf{E}\\cdot d\\mathbf{l}", "静电场力做功与路径无关"),
+    ("泊松方程", "\\nabla^2 V=-\\frac{\\rho}{\\varepsilon}", "静电势满足的微分方程"),
+    ("束缚电荷体密度", "\\rho'=-\\nabla\\cdot\\mathbf{P}", "极化强度的散度等于束缚电荷体密度的负值"),
+    ("介质电场能量密度", "w_e=\\frac{1}{2}\\mathbf{D}\\cdot\\mathbf{E}", "电介质中的电场能量密度"),
+    ("电场线折射定律", "\\frac{\\tan\\theta_1}{\\tan\\theta_2}=\\frac{\\varepsilon_1}{\\varepsilon_2}", "电场线在介质界面的折射"),
+    ("载流直导线磁场", "B=\\frac{\\mu_0 I}{4\\pi a}(\\sin\\beta_2-\\sin\\beta_1)", "有限长直导线的磁场"),
+    ("载流螺线管磁场", "B=\\frac{\\mu_0 nI}{2}(\\cos\\beta_1-\\cos\\beta_2)", "直螺线管轴线上的磁场"),
+    ("运动电荷磁场", "\\mathbf{B}=\\frac{\\mu_0}{4\\pi}\\frac{q\\mathbf{v}\\times\\hat{\\mathbf{r}}}{r^2}", "匀速运动点电荷产生的磁场"),
+    ("磁场高斯定理", "\\oint_S\\mathbf{B}\\cdot d\\mathbf{S}=0", "穿过闭合曲面的磁通量恒为零"),
+    ("平行载流导线作用力", "\\frac{dF}{dl}=\\frac{\\mu_0 I_1 I_2}{2\\pi a}", "单位长度平行载流导线间的作用力"),
+    ("拉莫尔进动频率", "\\omega_L=\\gamma B", "磁矩在外磁场中的进动角速度"),
+    ("带电粒子回旋半径", "R=\\frac{mv_\\perp}{qB}", "带电粒子在磁场中做圆周运动的半径"),
+    ("磁化电流体密度", "\\mathbf{j}'=\\nabla\\times\\mathbf{M}", "磁化强度的旋度等于束缚电流体密度"),
+    ("磁路欧姆定律", "\\Phi=\\frac{F_m}{R_m},\\ R_m=\\frac{l}{\\mu S}", "磁通量、磁通势与磁阻的关系"),
+    ("静磁场边界条件", "B_{1n}=B_{2n},\\ H_{2t}-H_{1t}=\\alpha_f", "B 法向连续，H 切向跃变"),
+    ("楞次定律", "\\varepsilon=-\\frac{d\\Phi}{dt}", "感应电动势阻碍磁通量变化"),
+    ("动生电动势", "\\varepsilon=\\int(\\mathbf{v}\\times\\mathbf{B})\\cdot d\\mathbf{l}", "导体运动切割磁力线产生的电动势"),
+    ("RL 电路电流增长", "I(t)=\\frac{\\mathcal{E}}{R}(1-e^{-t/\\tau})", "RL 电路接通电源后的暂态电流"),
+    ("全电流定律", "\\oint\\mathbf{H}\\cdot d\\mathbf{l}=I_c+\\frac{d\\Phi_D}{dt}", "传导电流与位移电流之和的安培环路定理"),
+    ("电偶极辐射功率", "\\bar{P}=\\frac{\\mu_0 p_0^2\\omega^4}{12\\pi c}", "振荡电偶极子的平均辐射功率"),
+    ("电磁波动量密度", "\\mathbf{g}=\\frac{1}{c^2}\\mathbf{S}=\\varepsilon_0\\mathbf{E}\\times\\mathbf{B}", "电磁场单位体积的动量"),
+    ("光压", "P_{\\text{吸收}}=\\frac{I}{c},\\ P_{\\text{反射}}=\\frac{2I}{c}", "电磁波照射物体产生的辐射压强"),
+    ("矢势与标势", "\\mathbf{B}=\\nabla\\times\\mathbf{A},\\ \\mathbf{E}=-\\nabla\\varphi-\\frac{\\partial\\mathbf{A}}{\\partial t}", "用势函数描述电磁场"),
 ]
 
 def js_escape(s):
@@ -308,6 +337,151 @@ ch1_sections = [
    p("力矩使 $\\mathbf{p}$ 转向 $\\mathbf{E}$ 方向。势能 $U=-\\mathbf{p}\\cdot\\mathbf{E}$。"))
  )},
 ]},
+{
+"name": "1.6 电场叠加原理与连续带电体电场",
+"color": "#2563eb",
+"desc": "电场叠加原理及连续带电体的电场计算",
+"items": [
+{"id":"e1s6-1","name":"电场叠加原理","tags":["thm"],"brief":"多个点电荷产生的电场为各电荷单独产生电场的矢量和。",
+ "body": wrap(
+   thm("电场叠加原理",p("当空间存在多个点电荷时，任一点的电场强度等于各点电荷单独存在时在该点产生电场的矢量和：")+
+   fml("\\mathbf{E} = \\sum_{i=1}^{n} \\mathbf{E}_i = \\frac{1}{4\\pi\\varepsilon_0}\\sum_{i=1}^{n} \\frac{q_i}{r_i^2}\\hat{\\mathbf{r}}_i"))+
+   der(p("<strong>叠加原理的物理意义：</strong>电场是矢量场，满足线性叠加。这一原理是库仑定律与力的独立作用原理的直接推论，是计算任意电荷分布电场的基础。对连续带电体，将电荷分为无数电荷元 $dq$，每个电荷元视为点电荷，则：")+
+   fml("\\mathbf{E} = \\int d\\mathbf{E} = \\frac{1}{4\\pi\\varepsilon_0}\\int \\frac{dq}{r^2}\\hat{\\mathbf{r}}")+
+   p("其中 $r$ 是电荷元到场点的距离，$\\hat{\\mathbf{r}}$ 由电荷元指向场点。"))
+ )},
+{"id":"e1s6-2","name":"连续带电体的电场","tags":["def","der"],"brief":"线电荷、面电荷、体电荷分布的电场计算。",
+ "body": wrap(
+   defn("电荷分布的描述",p("电荷连续分布时，引入电荷密度：线密度 $\\lambda=dq/dl$，面密度 $\\sigma=dq/dS$，体密度 $\\rho=dq/dV$。对应 $dq=\\lambda dl,\\ \\sigma dS,\\ \\rho dV$。"))+
+   der(p("<strong>均匀带电直线的电场：</strong>长为 $L$ 的带电直线，线密度 $\\lambda$，中垂线上距直线 $a$ 处。由对称性，平行于直线的分量抵消，垂直分量叠加：")+
+   fml("E = \\int_{-L/2}^{L/2} \\frac{1}{4\\pi\\varepsilon_0}\\frac{\\lambda dy}{a^2+y^2}\\cdot\\frac{a}{\\sqrt{a^2+y^2}}")+
+   fml("E = \\frac{\\lambda}{4\\pi\\varepsilon_0 a}\\cdot\\frac{L}{\\sqrt{a^2+(L/2)^2}}")+
+   p("无限长时 $L\\to\\infty$，$E=\\frac{\\lambda}{2\\pi\\varepsilon_0 a}$。"))
+ )},
+{"id":"e1s6-3","name":"均匀带电圆环与圆盘的电场","tags":["der"],"brief":"轴对称带电体轴线上的电场分布。",
+ "body": wrap(
+   der(p("<strong>均匀带电圆环轴线上的电场：</strong>半径 $R$，电量 $q$，轴线上距圆心 $x$ 处。由对称性，垂直轴线分量抵消，平行分量叠加。每个电荷元 $dq$ 到场点距离 $r=\\sqrt{R^2+x^2}$：")+
+   fml("E = \\oint \\frac{1}{4\\pi\\varepsilon_0}\\frac{dq}{R^2+x^2}\\cdot\\frac{x}{\\sqrt{R^2+x^2}} = \\frac{1}{4\\pi\\varepsilon_0}\\frac{qx}{(R^2+x^2)^{3/2}}")+
+   p("圆心处 $x=0$，$E=0$；远场 $x\\gg R$，$E\\approx\\frac{q}{4\\pi\\varepsilon_0 x^2}$，退化为点电荷。")+
+   p("<strong>均匀带电圆盘轴线上的电场：</strong>面密度 $\\sigma$，将圆盘分为无数细圆环，半径 $r$，宽度 $dr$，带电量 $dq=2\\pi r\\sigma dr$：")+
+   fml("E = \\int_0^R \\frac{1}{4\\pi\\varepsilon_0}\\frac{2\\pi r\\sigma dr\\cdot x}{(r^2+x^2)^{3/2}} = \\frac{\\sigma}{2\\varepsilon_0}\\left(1-\\frac{x}{\\sqrt{R^2+x^2}}\\right)")+
+   p("无限大平面 $R\\to\\infty$，$E=\\frac{\\sigma}{2\\varepsilon_0}$，为匀强电场。"))
+ )},
+]},
+{
+"name": "1.7 电场线与电通量",
+"color": "#2563eb",
+"desc": "电场线的性质与电通量的计算",
+"items": [
+{"id":"e1s7-1","name":"电场线与电通量","tags":["def","thm"],"brief":"电场线的几何描述与电通量的物理意义。",
+ "body": wrap(
+   defn("电场线",p("电场线是描述电场分布的几何曲线，规定：(1) 切线方向为该点电场方向；(2) 垂直通过单位面积的电场线数正比于电场强度大小。电场线起始于正电荷，终止于负电荷，不闭合、不相交。"))+
+   defn("电通量",p("电场穿过曲面 $S$ 的电通量为电场强度在曲面法向上的分量对面积的积分：")+
+   fml("\\Phi_e = \\int_S \\mathbf{E}\\cdot d\\mathbf{S} = \\int_S E\\cos\\theta\\,dS")+
+   p("对闭合曲面，规定外法线方向为正方向，$\\Phi_e=\\oint_S\\mathbf{E}\\cdot d\\mathbf{S}$。"))+
+   thm("电场线与电通量的关系",p("穿过闭合曲面的电场线净条数（穿出减穿入）正比于电通量。正电荷发出的电场线数为 $q/\\varepsilon_0$，负电荷接收的电场线数为 $|q|/\\varepsilon_0$。电场线的连续性反映了高斯定理。"))
+ )},
+]},
+{
+"name": "1.8 电势的计算与叠加",
+"color": "#2563eb",
+"desc": "电势叠加原理与常见带电体的电势",
+"items": [
+{"id":"e1s8-1","name":"电势叠加原理","tags":["thm","der"],"brief":"电势为标量，满足代数叠加。",
+ "body": wrap(
+   thm("电势叠加原理",p("多个点电荷产生的电势等于各点电荷单独产生电势的代数和（标量叠加）：")+
+   fml("V = \\sum_i V_i = \\frac{1}{4\\pi\\varepsilon_0}\\sum_i \\frac{q_i}{r_i}"))+
+   der(p("<strong>推导：</strong>由电场叠加原理 $\\mathbf{E}=\\sum\\mathbf{E}_i$，电势定义 $V=\\int_a^{\\infty}\\mathbf{E}\\cdot d\\mathbf{l}$，积分是线性的，故：")+
+   fml("V = \\int_a^{\\infty}\\sum_i\\mathbf{E}_i\\cdot d\\mathbf{l} = \\sum_i\\int_a^{\\infty}\\mathbf{E}_i\\cdot d\\mathbf{l} = \\sum_i V_i")+
+   p("对连续带电体，$V=\\frac{1}{4\\pi\\varepsilon_0}\\int\\frac{dq}{r}$。电势是标量，叠加比电场矢量叠加更简单。"))
+ )},
+{"id":"e1s8-2","name":"等势面与电势的计算示例","tags":["def","exa"],"brief":"等势面的性质与典型带电体电势。",
+ "body": wrap(
+   defn("等势面",p("电场中电势相等的点构成的曲面称为等势面。等势面与电场线处处正交；等势面密集处电场强，稀疏处电场弱；沿等势面移动电荷电场力不做功。"))+
+   exa(p("<strong>典型带电体的电势：</strong>")+
+   p("(1) 点电荷：$V=\\frac{q}{4\\pi\\varepsilon_0 r}$")+
+   p("(2) 均匀带电球面（半径 $R$，电量 $q$）：内部 $V=\\frac{q}{4\\pi\\varepsilon_0 R}$（等势），外部 $V=\\frac{q}{4\\pi\\varepsilon_0 r}$")+
+   p("(3) 均匀带电球体（半径 $R$，电量 $q$）：内部 $V=\\frac{q}{8\\pi\\varepsilon_0 R^3}(3R^2-r^2)$，外部 $V=\\frac{q}{4\\pi\\varepsilon_0 r}$")+
+   p("(4) 无限长带电直线：$V=-\\frac{\\lambda}{2\\pi\\varepsilon_0}\\ln r+C$（取有限远为参考点）"))
+ )},
+]},
+{
+"name": "1.9 电场强度与电势的微分关系",
+"color": "#2563eb",
+"desc": "由电势求电场强度的梯度方法",
+"items": [
+{"id":"e1s9-1","name":"电场强度与电势的梯度关系","tags":["thm","der"],"brief":"电场是电势的负梯度。",
+ "body": wrap(
+   thm("电场与电势的关系",p("电场强度等于电势的负梯度：")+
+   fml("\\mathbf{E} = -\\nabla V = -\\left(\\frac{\\partial V}{\\partial x}\\mathbf{i}+\\frac{\\partial V}{\\partial y}\\mathbf{j}+\\frac{\\partial V}{\\partial z}\\mathbf{k}\\right)"))+
+   der(p("<strong>推导：</strong>在电场中取位移元 $d\\mathbf{l}$，电势变化 $dV=-\\mathbf{E}\\cdot d\\mathbf{l}$。在直角坐标系中 $d\\mathbf{l}=dx\\mathbf{i}+dy\\mathbf{j}+dz\\mathbf{k}$，故：")+
+   fml("dV = -(E_x dx + E_y dy + E_z dz)")+
+   p("而 $V$ 的全微分为 $dV=\\frac{\\partial V}{\\partial x}dx+\\frac{\\partial V}{\\partial y}dy+\\frac{\\partial V}{\\partial z}dz$，比较系数得：")+
+   fml("E_x=-\\frac{\\partial V}{\\partial x},\\quad E_y=-\\frac{\\partial V}{\\partial y},\\quad E_z=-\\frac{\\partial V}{\\partial z}")+
+   p("即 $\\mathbf{E}=-\\nabla V$。在球坐标中，$E_r=-\\frac{\\partial V}{\\partial r}$，$E_\\theta=-\\frac{1}{r}\\frac{\\partial V}{\\partial\\theta}$，$E_\\varphi=-\\frac{1}{r\\sin\\theta}\\frac{\\partial V}{\\partial\\varphi}$。"))+
+   app(p("<strong>应用：</strong>先求电势（标量叠加较易），再求梯度得电场。如电偶极子电势 $V=\\frac{p\\cos\\theta}{4\\pi\\varepsilon_0 r^2}$，求梯度得 $E_r=\\frac{2p\\cos\\theta}{4\\pi\\varepsilon_0 r^3}$，$E_\\theta=\\frac{p\\sin\\theta}{4\\pi\\varepsilon_0 r^3}$。"))
+ )},
+]},
+{
+"name": "1.10 电偶极子与电四极子",
+"color": "#2563eb",
+"desc": "电偶极子的受力、电四极子的电场",
+"items": [
+{"id":"e1s10-1","name":"电偶极子在外电场中的受力与能量","tags":["der"],"brief":"非均匀电场中偶极子受力及势能。",
+ "body": wrap(
+   der(p("<strong>非均匀电场中偶极子受力：</strong>电偶极子 $\\mathbf{p}=q\\mathbf{d}$ 位于非均匀电场中。设正电荷处电场为 $\\mathbf{E}_+$，负电荷处为 $\\mathbf{E}_-$，受力：")+
+   fml("\\mathbf{F} = q\\mathbf{E}_+ - q\\mathbf{E}_- = q(\\mathbf{E}_+ - \\mathbf{E}_-)")+
+   p("由于 $\\mathbf{d}$ 很小，$\\mathbf{E}_+-\\mathbf{E}_-=(\\mathbf{d}\\cdot\\nabla)\\mathbf{E}$，故：")+
+   fml("\\mathbf{F} = (\\mathbf{p}\\cdot\\nabla)\\mathbf{E}")+
+   p("在均匀电场中受力为零。")+
+   p("<strong>电偶极子的势能：</strong>将偶极子从 $\\mathbf{E}$ 垂直方向转到与 $\\mathbf{E}$ 成 $\\theta$ 角，外力克服力矩做功：")+
+   fml("U = -\\mathbf{p}\\cdot\\mathbf{E} = -pE\\cos\\theta")+
+   p("当 $\\mathbf{p}$ 与 $\\mathbf{E}$ 平行时势能最小（稳定平衡），反平行时势能最大。"))
+ )},
+{"id":"e1s10-2","name":"电四极子","tags":["def","der"],"brief":"两个反向偶极子构成的电四极子及其远场电势。",
+ "body": wrap(
+   defn("电四极子",p("电四极子由两个大小相等、方向相反、相距很近的电偶极子构成，总电荷为零，总偶极矩为零。最简单的线性电四极子由四个电荷 $+q,-2q,+q$ 等间距排列构成。"))+
+   der(p("<strong>线性电四极子的远场电势：</strong>四个电荷位于 $z$ 轴上：$+q$ 在 $z=\\pm l$，$-2q$ 在 $z=0$。远场 $r\\gg l$，电势叠加：")+
+   fml("V = \\frac{q}{4\\pi\\varepsilon_0}\\left(\\frac{1}{r_1}+\\frac{1}{r_2}-\\frac{2}{r}\\right)")+
+   p("其中 $r_1\\approx r-l\\cos\\theta$，$r_2\\approx r+l\\cos\\theta$。展开 $1/r_1,1/r_2$ 到 $l^2$ 阶：")+
+   fml("V \\approx \\frac{q l^2}{4\\pi\\varepsilon_0}\\frac{(3\\cos^2\\theta-1)}{r^3} = \\frac{1}{4\\pi\\varepsilon_0}\\frac{Q(3\\cos^2\\theta-1)}{2r^3}")+
+   p("其中电四极矩 $Q=2ql^2$。四极子电势按 $1/r^3$ 衰减，电场按 $1/r^4$ 衰减。"))
+ )},
+]},
+{
+"name": "1.11 静电场的功与电势能",
+"color": "#2563eb",
+"desc": "电场力做功的特点与电势能",
+"items": [
+{"id":"e1s11-1","name":"静电场力做功与电势能","tags":["thm","der"],"brief":"静电场力做功与路径无关，可引入电势能。",
+ "body": wrap(
+   thm("静电场力做功的特点",p("试验电荷 $q_0$ 在静电场中从 $a$ 移到 $b$，电场力做功仅与始末位置有关，与路径无关：")+
+   fml("A_{ab} = q_0\\int_a^b \\mathbf{E}\\cdot d\\mathbf{l}"))+
+   der(p("<strong>推导：</strong>点电荷的电场 $\\mathbf{E}=\\frac{q}{4\\pi\\varepsilon_0 r^2}\\hat{\\mathbf{r}}$，电场力做功：")+
+   fml("A_{ab} = q_0\\int_a^b \\frac{q}{4\\pi\\varepsilon_0 r^2}\\hat{\\mathbf{r}}\\cdot d\\mathbf{l} = \\frac{q_0 q}{4\\pi\\varepsilon_0}\\int_{r_a}^{r_b}\\frac{dr}{r^2}")+
+   fml("A_{ab} = \\frac{q_0 q}{4\\pi\\varepsilon_0}\\left(\\frac{1}{r_a}-\\frac{1}{r_b}\\right)")+
+   p("结果只与 $r_a,r_b$ 有关，与路径无关。由叠加原理，任意静电场的电场力做功都与路径无关，故静电场是保守场。"))+
+   defn("电势能",p("电荷在电场中具有势能，称为电势能。$q_0$ 在 $a$ 点的电势能 $W_a$ 等于将 $q_0$ 从 $a$ 移到零势能点电场力做的功：$W_a=q_0\\int_a^{\\infty}\\mathbf{E}\\cdot d\\mathbf{l}=q_0 V_a$。电场力做功等于电势能的减少：$A_{ab}=W_a-W_b$。"))
+ )},
+]},
+{
+"name": "1.12 静电场的唯一性定理与导体静电平衡",
+"color": "#2563eb",
+"desc": "静电场边值问题的唯一性与导体静电平衡条件",
+"items": [
+{"id":"e1s12-1","name":"静电场的唯一性定理","tags":["thm"],"brief":"给定边界条件，静电场的解唯一。",
+ "body": wrap(
+   thm("唯一性定理",p("在给定区域 $V$ 内，若满足以下条件之一，则区域内的静电场唯一确定：(1) 边界上的电势 $V|_S$ 已知（第一类边界条件）；(2) 边界上的电势法向导数 $\\partial V/\\partial n|_S$ 已知（第二类边界条件）；(3) 部分边界已知 $V$，其余已知 $\\partial V/\\partial n$（混合边界条件）。")+
+   fml("\\nabla^2 V = -\\frac{\\rho}{\\varepsilon}"))+
+   der(p("<strong>证明思路：</strong>反证法。设有两个解 $V_1,V_2$ 满足同一泊松方程和边界条件，令 $U=V_1-V_2$，则 $\\nabla^2 U=0$（拉普拉斯方程）且 $U$ 在边界上满足齐次条件。由格林第一恒等式可证 $\\int_V|\\nabla U|^2 dV=0$，故 $\\nabla U=0$，$U$ 为常数。若边界 $V$ 已知则 $U=0$；若边界 $\\partial V/\\partial n$ 已知则常数可取零。故解唯一。"))
+ )},
+{"id":"e1s12-2","name":"导体的静电平衡","tags":["def","thm"],"brief":"导体内部电场为零，电荷分布在表面。",
+ "body": wrap(
+   defn("静电平衡",p("导体内部没有电荷定向运动的状态称为静电平衡。达到静电平衡的条件是：(1) 导体内部电场强度处处为零；(2) 导体表面外侧电场垂直于表面。"))+
+   thm("静电平衡导体的性质",p("(1) 导体是等势体，表面是等势面；(2) 导体内部无净电荷，电荷只分布在表面；(3) 导体表面外侧电场 $E=\\sigma/\\varepsilon_0$，方向垂直表面；(4) 孤立导体表面电荷密度与曲率有关，曲率大处电荷密度大。")+
+   p("<strong>空腔导体（静电屏蔽）：</strong>若空腔内无电荷，导体壳外表面电荷分布不影响空腔内部，腔内电场为零。若空腔内有电荷 $q$，则内表面感应出 $-q$，外表面感应出 $+q$（若导体原本不带电）。接地导体壳可屏蔽内部电荷对外的影响。"))
+ )},
+]},
 ]
 
 # =====================================================
@@ -361,6 +535,112 @@ ch2_sections = [
    p("<strong>切向分量推导：</strong>跨分界面取小矩形环路，长边 $\\Delta l$ 平行界面，短边 $h\\to 0$。由环路定理 $\\oint\\mathbf{E}\\cdot d\\mathbf{l}=0$：")+
    fml("E_{2t}\\Delta l - E_{1t}\\Delta l = 0 \\implies E_{2t}=E_{1t}"))+
    note(p("对线性介质，$\\mathbf{D}=\\varepsilon\\mathbf{E}$，故 $\\varepsilon_2 E_{2n}=\\varepsilon_1 E_{1n}$（$\\sigma_f=0$ 时），电场线在界面发生折射：$\\frac{\\tan\\theta_1}{\\tan\\theta_2}=\\frac{\\varepsilon_1}{\\varepsilon_2}$。"))
+ )},
+]},
+{
+"name": "2.4 极化强度与极化电荷的计算",
+"color": "#0d9488",
+"desc": "极化强度矢量与束缚电荷的定量关系",
+"items": [
+{"id":"e2s4-1","name":"极化强度矢量","tags":["def"],"brief":"描述电介质极化程度的宏观物理量。",
+ "body": wrap(
+   defn("极化强度",p("电介质中单位体积内分子电偶极矩的矢量和称为极化强度：")+
+   fml("\\mathbf{P} = \\frac{\\sum_i \\mathbf{p}_i}{\\Delta V}")+
+   p("其中 $\\mathbf{p}_i$ 为第 $i$ 个分子的电偶极矩，$\\Delta V$ 为宏观小、微观大的体积元。$\\mathbf{P}$ 的单位为 $\\text{C/m}^2$。对均匀极化，$\\mathbf{P}$ 为常矢量；非均匀极化时 $\\mathbf{P}$ 是位置的函数。"))+
+   defn("极化率",p("在线性各向同性电介质中，极化强度与电场强度成正比：$\\mathbf{P}=\\varepsilon_0\\chi_e\\mathbf{E}$，其中 $\\chi_e$ 为电极化率，无量纲。"))
+ )},
+{"id":"e2s4-2","name":"极化电荷的计算","tags":["der"],"brief":"束缚电荷与极化强度的积分关系。",
+ "body": wrap(
+   der(p("<strong>束缚电荷面密度：</strong>在电介质表面取面元 $d\\mathbf{S}=\\mathbf{n}dS$，$\\mathbf{n}$ 为外法线方向。极化时，穿过面元的束缚电荷 $dq'=\\mathbf{P}\\cdot d\\mathbf{S}$，故束缚电荷面密度：")+
+   fml("\\sigma' = \\frac{dq'}{dS} = \\mathbf{P}\\cdot\\mathbf{n} = P_n")+
+   p("<strong>束缚电荷体密度：</strong>在电介质内取任意闭合曲面 $S$，极化时穿出 $S$ 的束缚电荷总量为 $\\oint_S\\mathbf{P}\\cdot d\\mathbf{S}$。由电荷守恒，$S$ 内束缚电荷 $q'=-\\oint_S\\mathbf{P}\\cdot d\\mathbf{S}$。利用高斯定理：")+
+   fml("q' = \\int_V \\rho'\\,dV = -\\oint_S\\mathbf{P}\\cdot d\\mathbf{S} = -\\int_V\\nabla\\cdot\\mathbf{P}\\,dV")+
+   fml("\\rho' = -\\nabla\\cdot\\mathbf{P}")+
+   p("均匀极化时 $\\nabla\\cdot\\mathbf{P}=0$，束缚电荷只分布在表面。"))
+ )},
+{"id":"e2s4-3","name":"电介质极化的微观机制","tags":["def","der"],"brief":"位移极化与取向极化的微观解释。",
+ "body": wrap(
+   defn("位移极化",p("无极性分子（如 $\\text{He},\\text{CH}_4$）正负电荷中心重合，固有偶极矩为零。在外电场作用下，正负电荷中心发生相对位移，产生感应偶极矩 $\\mathbf{p}=\\alpha\\mathbf{E}_{\\text{局}}$，其中 $\\alpha$ 为分子极化率。这种极化称为位移极化（电子位移极化为主）。"))+
+   defn("取向极化",p("极性分子（如 $\\text{H}_2\\text{O},\\text{HCl}$）具有固有偶极矩 $\\mathbf{p}_0$。无外场时热运动使取向杂乱；外场使偶极矩沿场方向取向排列，产生宏观极化。取向极化与温度有关，温度越高极化越弱（热运动破坏取向）。"))+
+   der(p("<strong>极化率与介电常数的关系（克劳修斯-莫索提公式）：</strong>对稀薄气体，局域场近似等于宏观场 $\\mathbf{E}$。单位体积分子数 $N$，极化强度 $P=Np=N\\alpha E$，又 $P=\\varepsilon_0\\chi_e E$，故：")+
+   fml("\\chi_e = \\frac{N\\alpha}{\\varepsilon_0},\\qquad \\varepsilon_r = 1+\\frac{N\\alpha}{\\varepsilon_0}")+
+   p("对稠密介质需考虑局域场修正，得到克劳修斯-莫索提公式：$\\frac{\\varepsilon_r-1}{\\varepsilon_r+2}=\\frac{N\\alpha}{3\\varepsilon_0}$。"))
+ )},
+]},
+{
+"name": "2.5 电介质的极化规律",
+"color": "#0d9488",
+"desc": "线性与非线性电介质、介电常数",
+"items": [
+{"id":"e2s5-1","name":"线性各向同性电介质","tags":["def","thm"],"brief":"P、E、D 三者的线性关系。",
+ "body": wrap(
+   defn("线性各向同性电介质",p("若极化强度与电场强度成正比且方向相同，称为线性各向同性电介质：")+
+   fml("\\mathbf{P} = \\varepsilon_0\\chi_e\\mathbf{E}")+
+   p("其中 $\\chi_e$ 为电极化率，是与电场无关的常数（对线性介质）。"))+
+   thm("D、E、P 的关系",p("由 $\\mathbf{D}=\\varepsilon_0\\mathbf{E}+\\mathbf{P}$，代入线性关系：")+
+   fml("\\mathbf{D} = \\varepsilon_0(1+\\chi_e)\\mathbf{E} = \\varepsilon_0\\varepsilon_r\\mathbf{E} = \\varepsilon\\mathbf{E}")+
+   p("相对介电常数 $\\varepsilon_r=1+\\chi_e$，介电常数 $\\varepsilon=\\varepsilon_0\\varepsilon_r$。真空中 $\\chi_e=0$，$\\varepsilon_r=1$。"))
+ )},
+{"id":"e2s5-2","name":"电介质的分类","tags":["def"],"brief":"各向异性、非线性与铁电体。",
+ "body": wrap(
+   defn("电介质分类",p("(1) <strong>线性各向同性</strong>：$\\mathbf{D}=\\varepsilon\\mathbf{E}$，$\\varepsilon$ 为标量常数。")+
+   p("(2) <strong>各向异性</strong>（如晶体）：$D_i=\\sum_j\\varepsilon_{ij}E_j$，介电常数为二阶张量，$\\mathbf{D}$ 与 $\\mathbf{E}$ 一般不同向。")+
+   p("(3) <strong>非线性</strong>：$\\varepsilon$ 与 $E$ 有关，存在电光效应等非线性现象。")+
+   p("(4) <strong>铁电体</strong>：存在自发极化，$P$ 与 $E$ 有滞回关系（类似铁磁质），如钛酸钡 $\\text{BaTiO}_3$。")+
+   p("(5) <strong>压电体</strong>：机械应力产生极化（压电效应），外加电场产生形变（逆压电效应），如石英。"))
+ )},
+]},
+{
+"name": "2.6 介质中的电场能量",
+"color": "#0d9488",
+"desc": "电介质存在时的电场能量密度",
+"items": [
+{"id":"e2s6-1","name":"电介质中的电场能量","tags":["der"],"brief":"介质中电场能量密度为 ½D·E。",
+ "body": wrap(
+   der(p("<strong>平行板电容器（充满介质）储能：</strong>极板面积 $S$，间距 $d$，介质介电常数 $\\varepsilon$。电容 $C=\\frac{\\varepsilon S}{d}$。充电至电压 $V$，储能：")+
+   fml("W = \\frac{1}{2}CV^2 = \\frac{1}{2}\\frac{\\varepsilon S}{d}(Ed)^2 = \\frac{1}{2}\\varepsilon E^2\\cdot Sd")+
+   p("体积 $V_{\\text{体}}=Sd$，故电场能量密度：")+
+   fml("w_e = \\frac{W}{V_{\\text{体}}} = \\frac{1}{2}\\varepsilon E^2 = \\frac{1}{2}\\mathbf{D}\\cdot\\mathbf{E}")+
+   p("总电场能量 $W=\\int_V w_e\\,dV=\\frac{1}{2}\\int_V\\mathbf{D}\\cdot\\mathbf{E}\\,dV$。此结果对任意电场分布普遍成立。"))+
+   note(p("与真空相比，介质中能量密度为 $\\frac{1}{2}\\varepsilon E^2=\\frac{1}{2}\\varepsilon_r\\varepsilon_0 E^2$，比真空大 $\\varepsilon_r$ 倍。这是因为极化过程中介质分子获得势能。"))
+ )},
+]},
+{
+"name": "2.7 边界条件的应用",
+"color": "#0d9488",
+"desc": "电场线折射与导体-介质界面",
+"items": [
+{"id":"e2s7-1","name":"电场线在介质界面的折射","tags":["der"],"brief":"D的法向连续与E的切向连续导致电场线折射。",
+ "body": wrap(
+   der(p("<strong>折射定律推导：</strong>设两种介质介电常数分别为 $\\varepsilon_1,\\varepsilon_2$，界面无自由电荷。电场线与法线夹角分别为 $\\theta_1,\\theta_2$。由边界条件：")+
+   fml("D_{1n}=D_{2n} \\implies \\varepsilon_1 E_1\\cos\\theta_1 = \\varepsilon_2 E_2\\cos\\theta_2")+
+   fml("E_{1t}=E_{2t} \\implies E_1\\sin\\theta_1 = E_2\\sin\\theta_2")+
+   p("两式相除，消去 $E_1,E_2$：")+
+   fml("\\frac{\\tan\\theta_1}{\\tan\\theta_2} = \\frac{\\varepsilon_1}{\\varepsilon_2}")+
+   p("这就是电场线的折射定律。若 $\\varepsilon_2>\\varepsilon_1$，则 $\\theta_2>\\theta_1$，电场线在介电常数大的一侧更偏离法线。"))
+ )},
+{"id":"e2s7-2","name":"导体与电介质界面","tags":["app"],"brief":"导体表面的边界条件与电场。",
+ "body": wrap(
+   app(p("<strong>导体-介质界面：</strong>导体内部电场为零，$E_1=0,D_1=0$。设导体为介质 1，介质为介质 2。由边界条件：")+
+   fml("D_{2n}-D_{1n}=\\sigma_f \\implies D_{2n}=\\sigma_f")+
+   fml("E_{2t}=E_{1t}=0")+
+   p("故导体表面外侧电场垂直于表面（切向为零），大小 $E=\\sigma_f/\\varepsilon$。导体表面的自由电荷面密度 $\\sigma_f=D_n=\\varepsilon E_n$。")+
+   p("<strong>注意：</strong>导体表面还可能有束缚电荷。极化电荷面密度 $\\sigma'=\\mathbf{P}\\cdot\\mathbf{n}=\\varepsilon_0\\chi_e E_n$。导体表面总面电荷密度为自由电荷与束缚电荷之和。"))
+ )},
+]},
+{
+"name": "2.8 电介质中的受力",
+"color": "#0d9488",
+"desc": "电介质在电场中受到的力",
+"items": [
+{"id":"e2s8-1","name":"电介质的受力","tags":["der"],"brief":"利用虚功原理求介质受的力。",
+ "body": wrap(
+   der(p("<strong>平行板电容器中介质的受力：</strong>平行板电容器宽 $b$，极板间距 $d$，插入介电常数 $\\varepsilon$ 的介质深度 $x$。电容可视为两个电容器并联：")+
+   fml("C = \\frac{\\varepsilon_0 b(l-x)}{d} + \\frac{\\varepsilon b x}{d} = \\frac{b}{d}[\\varepsilon_0 l + (\\varepsilon-\\varepsilon_0)x]")+
+   p("保持电压 $V$ 不变，电场能量 $W=\\frac{1}{2}CV^2$。介质受的力由虚功原理：电源做功 $dW_{\\text{源}}=VdQ=V^2 dC$，能量变化 $dW=\\frac{1}{2}V^2 dC$，故：")+
+   fml("F\\,dx = dW_{\\text{源}} - dW = \\frac{1}{2}V^2 dC")+
+   fml("F = \\frac{1}{2}V^2\\frac{dC}{dx} = \\frac{b V^2}{2d}(\\varepsilon-\\varepsilon_0)")+
+   p("力的方向沿 $x$ 增大方向，即介质被吸入电容器。此力源于介质极化后与电场的相互作用。"))
  )},
 ]},
 ]
@@ -437,6 +717,144 @@ ch3_sections = [
    p("线圈从 $\\theta_1$ 转到 $\\theta_2$，外力矩做功 $A=I(\\Phi_2-\\Phi_1)$。"))
  )},
 ]},
+{
+"name": "3.5 磁感应强度与磁力线",
+"color": "#059669",
+"desc": "磁感应强度的定义与磁力线的性质",
+"items": [
+{"id":"e3s5-1","name":"磁感应强度","tags":["def"],"brief":"描述磁场强弱和方向的物理量。",
+ "body": wrap(
+   defn("磁感应强度",p("运动电荷在磁场中受力 $\\mathbf{F}=q\\mathbf{v}\\times\\mathbf{B}$，由此定义磁感应强度 $\\mathbf{B}$。$\\mathbf{B}$ 的方向为小磁针 N 极受力方向；大小为 $B=\\frac{F}{qv\\sin\\theta}$，其中 $\\theta$ 为 $\\mathbf{v}$ 与 $\\mathbf{B}$ 夹角。单位为特斯拉（T），$1\\,\\text{T}=1\\,\\text{N/(A}\\cdot\\text{m)}$。"))+
+   defn("磁通量",p("穿过曲面 $S$ 的磁通量：$\\Phi=\\int_S\\mathbf{B}\\cdot d\\mathbf{S}$。单位为韦伯（Wb），$1\\,\\text{Wb}=1\\,\\text{T}\\cdot\\text{m}^2$。"))
+ )},
+{"id":"e3s5-2","name":"磁力线及其性质","tags":["def","thm"],"brief":"磁力线是闭合曲线，与电流互相套连。",
+ "body": wrap(
+   defn("磁力线",p("磁力线是描述磁场分布的几何曲线：(1) 切线方向为该点磁感应强度方向；(2) 垂直通过单位面积的磁力线数正比于 $B$ 的大小。"))+
+   thm("磁力线的性质",p("(1) 磁力线是闭合曲线（无头无尾），这与静电场电场线（起始于正电荷、终止于负电荷）根本不同，反映了磁场的无源性 $\\nabla\\cdot\\mathbf{B}=0$。")+
+   p("(2) 磁力线与电流互相套连，方向满足右手螺旋定则。")+
+   p("(3) 任意两条磁力线不相交。")+
+   p("(4) 磁力线密集处磁场强，稀疏处磁场弱。"))
+ )},
+]},
+{
+"name": "3.6 毕奥-萨伐尔定律的应用",
+"color": "#059669",
+"desc": "载流直导线、圆电流、螺线管的磁场",
+"items": [
+{"id":"e3s6-1","name":"载流直导线与圆电流的磁场","tags":["der"],"brief":"直导线和圆电流轴线上的磁感应强度。",
+ "body": wrap(
+   der(p("<strong>有限长载流直导线的磁场：</strong>设导线两端相对于场点 $P$ 的张角为 $\\beta_1,\\beta_2$（从垂线算起），$P$ 到导线距离 $a$。积分毕奥-萨伐尔定律：")+
+   fml("B = \\frac{\\mu_0 I}{4\\pi a}(\\sin\\beta_2 - \\sin\\beta_1)")+
+   p("无限长直导线 $\\beta_1=-\\pi/2,\\beta_2=\\pi/2$，$B=\\frac{\\mu_0 I}{2\\pi a}$。半无限长 $B=\\frac{\\mu_0 I}{4\\pi a}$。")+
+   p("<strong>圆电流轴线上的磁场：</strong>半径 $R$，电流 $I$，轴线上距圆心 $x$ 处：")+
+   fml("B = \\frac{\\mu_0 I R^2}{2(R^2+x^2)^{3/2}}")+
+   p("圆心处 $x=0$，$B=\\frac{\\mu_0 I}{2R}$。远场 $x\\gg R$，$B\\approx\\frac{\\mu_0}{4\\pi}\\frac{2m}{x^3}$，其中 $m=I\\pi R^2$ 为磁矩，形式与电偶极子电场类似。"))
+ )},
+{"id":"e3s6-2","name":"载流螺线管的磁场","tags":["der"],"brief":"有限长与无限长螺线管轴线上的磁场。",
+ "body": wrap(
+   der(p("<strong>载流直螺线管轴线上的磁场：</strong>单位长度匝数 $n$，电流 $I$，长度 $L$，半径 $R$。轴线上任一点的磁场可视为多个圆电流磁场的叠加。设场点到两端的张角为 $\\beta_1,\\beta_2$（从轴线算起）：")+
+   fml("B = \\frac{\\mu_0 n I}{2}(\\cos\\beta_1 - \\cos\\beta_2)")+
+   p("无限长螺线管 $\\beta_1=0,\\beta_2=\\pi$，$B=\\mu_0 n I$，内部为匀强磁场。半无限长螺线管端面处 $B=\\frac{1}{2}\\mu_0 n I$，为内部的一半。")+
+   p("<strong>螺绕环：</strong>细螺绕环（平均半径 $R$，总匝数 $N$）内部磁场 $B=\\frac{\\mu_0 N I}{2\\pi r}$，近似为 $B=\\mu_0 n I$（$n=N/(2\\pi R)$），外部 $B=0$。"))
+ )},
+]},
+{
+"name": "3.7 运动电荷的磁场",
+"color": "#059669",
+"desc": "匀速运动电荷产生的磁场",
+"items": [
+{"id":"e3s7-1","name":"运动电荷的磁场","tags":["der"],"brief":"匀速运动点电荷产生的磁感应强度。",
+ "body": wrap(
+   der(p("<strong>由毕奥-萨伐尔定律推导：</strong>电流元 $I d\\mathbf{l}$ 可视为大量运动电荷的集体效应。设导线截面积 $S$，电荷数密度 $n$，每个电荷 $q$ 以漂移速度 $\\mathbf{v}$ 运动，则 $I=nqvS$，$d\\mathbf{l}$ 内电荷数 $dN=nSdl$。电流元产生的磁场：")+
+   fml("d\\mathbf{B} = \\frac{\\mu_0}{4\\pi}\\frac{I d\\mathbf{l}\\times\\hat{\\mathbf{r}}}{r^2} = \\frac{\\mu_0}{4\\pi}\\frac{nqvS dl\\,\\hat{\\mathbf{v}}\\times\\hat{\\mathbf{r}}}{r^2}")+
+   p("除以 $dN=nSdl$ 得单个运动电荷产生的磁场（非相对论近似 $v\\ll c$）：")+
+   fml("\\mathbf{B} = \\frac{\\mu_0}{4\\pi}\\frac{q\\mathbf{v}\\times\\hat{\\mathbf{r}}}{r^2}")+
+   p("方向垂直于 $\\mathbf{v}$ 与 $\\mathbf{r}$ 组成的平面。运动电荷的电场 $\\mathbf{E}=\\frac{1}{4\\pi\\varepsilon_0}\\frac{q\\hat{\\mathbf{r}}}{r^2}$，故 $\\mathbf{B}=\\mu_0\\varepsilon_0\\mathbf{v}\\times\\mathbf{E}=\\frac{1}{c^2}\\mathbf{v}\\times\\mathbf{E}$。"))
+ )},
+]},
+{
+"name": "3.8 磁场的高斯定理",
+"color": "#059669",
+"desc": "磁场的无源性与磁通连续",
+"items": [
+{"id":"e3s8-1","name":"磁场的高斯定理","tags":["thm","der"],"brief":"穿过任意闭合曲面的磁通量为零。",
+ "body": wrap(
+   thm("磁场的高斯定理",p("磁感应强度通过任意闭合曲面的磁通量恒为零：")+
+   fml("\\oint_S \\mathbf{B}\\cdot d\\mathbf{S} = 0")+
+   p("其微分形式为 $\\nabla\\cdot\\mathbf{B}=0$，表明磁场是无源场，不存在磁单极子。"))+
+   der(p("<strong>推导：</strong>由毕奥-萨伐尔定律，电流元产生的磁场 $d\\mathbf{B}=\\frac{\\mu_0}{4\\pi}\\frac{I d\\mathbf{l}\\times\\hat{\\mathbf{r}}}{r^2}$。$d\\mathbf{B}$ 的方向沿以电流元延长线为轴的圆周切线，磁力线是闭合圆周。对任意闭合曲面，每条磁力线穿入必穿出，故 $\\oint d\\mathbf{B}\\cdot d\\mathbf{S}=0$。叠加得 $\\oint\\mathbf{B}\\cdot d\\mathbf{S}=0$。")+
+   p("由高斯公式 $\\oint_S\\mathbf{B}\\cdot d\\mathbf{S}=\\int_V\\nabla\\cdot\\mathbf{B}\\,dV=0$，因 $S$ 任意，故 $\\nabla\\cdot\\mathbf{B}=0$。"))+
+   note(p("与电场高斯定理 $\\oint\\mathbf{E}\\cdot d\\mathbf{S}=q/\\varepsilon_0$ 对比：电场有源（电荷），磁场无源（无磁单极）。这是电磁场的基本不对称性。"))
+ )},
+{"id":"e3s8-2","name":"磁矢势","tags":["def","der"],"brief":"由磁场无源性引入磁矢势 A。",
+ "body": wrap(
+   defn("磁矢势",p("由 $\\nabla\\cdot\\mathbf{B}=0$，根据矢量分析，无源场必可表示为某矢量场的旋度。引入磁矢势 $\\mathbf{A}$：")+
+   fml("\\mathbf{B} = \\nabla\\times\\mathbf{A}")+
+   p("$\\mathbf{A}$ 的单位为 $\\text{T}\\cdot\\text{m}$ 或 $\\text{Wb/m}$。$\\mathbf{A}$ 的选择不唯一，具有规范自由度。"))+
+   der(p("<strong>安培环路定理的矢势形式：</strong>由 $\\oint_L\\mathbf{B}\\cdot d\\mathbf{l}=\\mu_0 I$，利用斯托克斯定理 $\\oint_L\\mathbf{B}\\cdot d\\mathbf{l}=\\int_S(\\nabla\\times\\mathbf{B})\\cdot d\\mathbf{S}$。而 $\\mathbf{B}=\\nabla\\times\\mathbf{A}$，故：")+
+   fml("\\oint_L\\mathbf{A}\\cdot d\\mathbf{l} = \\int_S\\mathbf{B}\\cdot d\\mathbf{S} = \\Phi")+
+   p("即磁矢势沿闭合回路的环流等于穿过回路的磁通量。")+
+   p("<strong>长直导线的磁矢势：</strong>无限长直导线通电流 $I$，取库仑规范 $\\nabla\\cdot\\mathbf{A}=0$，$\\mathbf{A}$ 沿电流方向（$z$ 轴）：")+
+   fml("A_z = -\\frac{\\mu_0 I}{2\\pi}\\ln r + C")+
+   p("由 $\\mathbf{B}=\\nabla\\times\\mathbf{A}$ 可验证 $B_\\varphi=\\frac{\\mu_0 I}{2\\pi r}$，与毕奥-萨伐尔定律结果一致。"))
+ )},
+]},
+{
+"name": "3.9 安培力的应用",
+"color": "#059669",
+"desc": "平行载流导线间的作用力与载流回路受力",
+"items": [
+{"id":"e3s9-1","name":"平行载流导线间的作用力","tags":["der"],"brief":"同向电流相吸，反向电流相斥。",
+ "body": wrap(
+   der(p("<strong>两根无限长平行载流直导线：</strong>相距 $a$，分别通电流 $I_1,I_2$。导线 1 在导线 2 处产生的磁场 $B_1=\\frac{\\mu_0 I_1}{2\\pi a}$，方向垂直于两导线连线。导线 2 上电流元 $I_2 d\\mathbf{l}$ 受力：")+
+   fml("dF = I_2 dl\\cdot B_1 = \\frac{\\mu_0 I_1 I_2}{2\\pi a}dl")+
+   p("单位长度受力：")+
+   fml("\\frac{dF}{dl} = \\frac{\\mu_0 I_1 I_2}{2\\pi a}")+
+   p("同向电流时力为吸引力，反向电流时为排斥力。此式用于定义安培：真空中相距 1 米的两无限长平行导线通以相等电流，当单位长度受力为 $2\\times10^{-7}\\,\\text{N/m}$ 时，电流为 1 安培。"))
+ )},
+{"id":"e3s9-2","name":"载流回路在磁场中受的力","tags":["der"],"brief":"均匀磁场中载流回路受力为零，非均匀时受力。",
+ "body": wrap(
+   der(p("<strong>均匀磁场中任意载流闭合回路：</strong>安培力 $\\mathbf{F}=\\oint I d\\mathbf{l}\\times\\mathbf{B}$。由于 $\\mathbf{B}$ 为常矢量：")+
+   fml("\\mathbf{F} = I\\left(\\oint d\\mathbf{l}\\right)\\times\\mathbf{B} = 0")+
+   p("因为闭合回路的矢量和 $\\oint d\\mathbf{l}=0$。所以均匀磁场中闭合载流回路受力为零，但受力矩（除非 $\\mathbf{m}\\parallel\\mathbf{B}$）。")+
+   p("<strong>非均匀磁场中：</strong>载流回路受力不为零。设磁矩 $\\mathbf{m}$，磁场梯度 $\\nabla\\mathbf{B}$，则：")+
+   fml("\\mathbf{F} = \\nabla(\\mathbf{m}\\cdot\\mathbf{B})")+
+   p("当 $\\mathbf{m}$ 与 $\\mathbf{B}$ 平行时，力指向磁场增强方向；反平行时指向磁场减弱方向。这就是磁偶极子被吸向强磁场区的原因。"))
+ )},
+]},
+{
+"name": "3.10 磁矩的进动",
+"color": "#059669",
+"desc": "磁矩在磁场中的进动与拉莫尔频率",
+"items": [
+{"id":"e3s10-1","name":"拉莫尔进动","tags":["der"],"brief":"磁矩在外磁场中做进动。",
+ "body": wrap(
+   der(p("<strong>角动量与磁矩的关系：</strong>微观粒子的磁矩 $\\mathbf{m}$ 与角动量 $\\mathbf{L}$ 成正比：$\\mathbf{m}=\\gamma\\mathbf{L}$，其中 $\\gamma$ 为旋磁比。")+
+   p("<strong>进动方程：</strong>磁矩在磁场 $\\mathbf{B}$ 中受力矩 $\\boldsymbol{\\tau}=\\mathbf{m}\\times\\mathbf{B}$。由角动量定理 $\\frac{d\\mathbf{L}}{dt}=\\boldsymbol{\\tau}$：")+
+   fml("\\frac{d\\mathbf{m}}{dt} = \\gamma\\frac{d\\mathbf{L}}{dt} = \\gamma(\\mathbf{m}\\times\\mathbf{B})")+
+   p("此方程的解为 $\\mathbf{m}$ 绕 $\\mathbf{B}$ 方向做匀速进动，进动角速度（拉莫尔频率）：")+
+   fml("\\omega_L = \\gamma B")+
+   p("进动方向：对正电荷 $\\gamma>0$，进动方向与 $\\mathbf{B}$ 满足右手螺旋；对电子 $\\gamma<0$，进动方向相反。拉莫尔进动是磁共振（NMR、EPR）的物理基础。"))
+ )},
+]},
+{
+"name": "3.11 带电粒子在磁场中的运动",
+"color": "#059669",
+"desc": "带电粒子在均匀磁场中的螺旋运动",
+"items": [
+{"id":"e3s11-1","name":"带电粒子在均匀磁场中的运动","tags":["der"],"brief":"洛伦兹力提供向心力，粒子做螺旋运动。",
+ "body": wrap(
+   der(p("<strong>速度分解：</strong>将带电粒子速度 $\\mathbf{v}$ 分解为平行于 $\\mathbf{B}$ 的分量 $v_\\parallel$ 和垂直分量 $v_\\perp$。平行方向不受力，做匀速直线运动；垂直方向受洛伦兹力 $qv_\\perp B$ 提供向心力：")+
+   fml("qv_\\perp B = m\\frac{v_\\perp^2}{R} \\implies R = \\frac{mv_\\perp}{qB}")+
+   p("回旋半径（拉莫尔半径）$R=\\frac{mv_\\perp}{qB}$。回旋周期：")+
+   fml("T = \\frac{2\\pi R}{v_\\perp} = \\frac{2\\pi m}{qB}")+
+   p("回旋频率 $f=qB/(2\\pi m)$，角频率 $\\omega=qB/m$，与速度无关（非相对论）。")+
+   p("<strong>螺旋运动：</strong>粒子同时具有 $v_\\parallel$ 和 $v_\\perp$，合运动为螺旋线，螺距：")+
+   fml("h = v_\\parallel T = \\frac{2\\pi m v_\\parallel}{qB}")+
+   p("磁聚焦原理：从同一点出发的粒子，若 $v_\\parallel$ 相近，经过一个周期后会聚于同一点。"))+
+   app(p("<strong>应用：</strong>回旋加速器、磁聚焦、质谱仪、霍尔效应、磁约束（托卡马克）。霍尔电压 $U_H=\\frac{IB}{nqd}$，可用于测量磁场和载流子浓度。"))
+ )},
+]},
 ]
 
 # =====================================================
@@ -489,6 +907,114 @@ ch4_sections = [
    fml("B_r = B(H=0),\\qquad H_c = |H(B=0)|")+
    p("磁滞回线包围的面积等于单位体积反复磁化一周的能量损耗（磁滞损耗）。"))+
    note(p("<strong>磁畴理论：</strong>铁磁质内部分成许多小区域（磁畴），每个磁畴内磁矩自发平行排列。外场使磁畴壁移动和磁矩转向，宏观显示强磁性。硬磁材料（$H_c$ 大）做永磁体，软磁材料（$H_c$ 小）做变压器铁芯。"))
+ )},
+]},
+{
+"name": "4.4 磁化强度与磁化电流深入",
+"color": "#0891b2",
+"desc": "磁化强度的定量描述与磁化电流的计算",
+"items": [
+{"id":"e4s4-1","name":"磁化强度矢量","tags":["def"],"brief":"描述磁介质磁化程度的宏观物理量。",
+ "body": wrap(
+   defn("磁化强度",p("磁介质中单位体积内分子磁矩的矢量和称为磁化强度：")+
+   fml("\\mathbf{M} = \\frac{\\sum_i \\mathbf{m}_i}{\\Delta V}")+
+   p("单位为 A/m。均匀磁化时 $\\mathbf{M}$ 为常矢量；非均匀磁化时 $\\mathbf{M}$ 是位置函数。对线性各向同性磁介质，$\\mathbf{M}=\\chi_m\\mathbf{H}$，其中 $\\chi_m$ 为磁化率。"))+
+   defn("顺磁质与抗磁质",p("<strong>顺磁质</strong>：分子具有固有磁矩，外场使其取向排列，$\\chi_m>0$ 且很小（$\\sim10^{-5}$），如铝、氧。<strong>抗磁质</strong>：分子无固有磁矩，外场感应产生反向磁矩，$\\chi_m<0$ 且很小，如铜、铋。"))
+ )},
+{"id":"e4s4-2","name":"磁化电流的计算","tags":["der"],"brief":"磁化电流密度与磁化强度的关系。",
+ "body": wrap(
+   der(p("<strong>束缚电流面密度：</strong>在均匀磁化的介质表面，磁化强度 $\\mathbf{M}$ 沿表面的切向分量产生束缚面电流。束缚面电流线密度 $\\mathbf{i}'$（单位长度的电流）为：")+
+   fml("\\mathbf{i}' = \\mathbf{M}\\times\\mathbf{n}")+
+   p("其中 $\\mathbf{n}$ 为介质表面外法线方向。")+
+   p("<strong>束缚电流体密度：</strong>在非均匀磁化介质内部，磁化强度的空间变化产生束缚体电流。取任意闭合回路 $L$，穿过 $L$ 的束缚电流 $I'=\\oint_L\\mathbf{M}\\cdot d\\mathbf{l}$。由斯托克斯定理：")+
+   fml("I' = \\oint_L\\mathbf{M}\\cdot d\\mathbf{l} = \\int_S(\\nabla\\times\\mathbf{M})\\cdot d\\mathbf{S} = \\int_S\\mathbf{j}'\\cdot d\\mathbf{S}")+
+   fml("\\mathbf{j}' = \\nabla\\times\\mathbf{M}")+
+   p("均匀磁化时 $\\nabla\\times\\mathbf{M}=0$，束缚电流只分布在介质表面。"))
+ )},
+{"id":"e4s4-3","name":"顺磁质与抗磁质的微观机制","tags":["def","der"],"brief":"分子磁矩的来源与磁化的微观解释。",
+ "body": wrap(
+   defn("分子磁矩的来源",p("分子的磁矩来源于：(1) 电子的轨道磁矩 $\\mathbf{m}_l=-\\frac{e}{2m_e}\\mathbf{L}$；(2) 电子的自旋磁矩 $\\mathbf{m}_s=-\\frac{e}{m_e}\\mathbf{S}$；(3) 原子核的磁矩（很小，可忽略）。分子总磁矩为各电子磁矩的矢量和。"))+
+   der(p("<strong>顺磁性的微观机制：</strong>顺磁质分子具有固有磁矩 $\\mathbf{m}_0$。无外场时，热运动使分子磁矩取向杂乱，宏观磁矩为零。外加磁场 $\\mathbf{B}$ 后，每个磁矩受力矩 $\\boldsymbol{\\tau}=\\mathbf{m}\\times\\mathbf{B}$，势能 $U=-\\mathbf{m}\\cdot\\mathbf{B}=-mB\\cos\\theta$。由玻尔兹曼统计，沿 $\\mathbf{B}$ 方向取向的分子数略多，产生沿 $\\mathbf{B}$ 方向的磁化强度。居里定律：")+
+   fml("\\chi_m = \\frac{C}{T},\\qquad C=\\frac{N\\mu_0 m_0^2}{3k_B}")+
+   p("其中 $N$ 为单位体积分子数，$k_B$ 为玻尔兹曼常数。")+
+   p("<strong>抗磁性的微观机制：</strong>外场使电子轨道运动的角速度改变（拉莫尔进动），产生与外场反向的感应磁矩。感应磁矩 $\\Delta\\mathbf{m}=-\\frac{e^2 r^2}{4m_e}\\mathbf{B}$，方向与 $\\mathbf{B}$ 相反，故 $\\chi_m<0$。抗磁性是所有物质的共性，但在顺磁质和铁磁质中被掩盖。"))
+ )},
+]},
+{
+"name": "4.5 磁场强度 H 与磁介质分类",
+"color": "#0891b2",
+"desc": "H 的环路定理应用与三类磁介质",
+"items": [
+{"id":"e4s5-1","name":"H 的安培环路定理应用","tags":["thm","app"],"brief":"利用对称性由 H 的环路定理求磁场。",
+ "body": wrap(
+   thm("介质中的安培环路定理",p("磁场强度沿任意闭合回路的环流等于穿过回路的传导电流代数和：")+
+   fml("\\oint_L \\mathbf{H}\\cdot d\\mathbf{l} = \\sum I_{0\\text{内}}"))+
+   app(p("<strong>充满均匀磁介质的长直螺线管：</strong>单位长度匝数 $n$，传导电流 $I$，介质磁导率 $\\mu$。由对称性，管内 $\\mathbf{H}$ 沿轴线均匀。取矩形安培环路：")+
+   fml("\\oint\\mathbf{H}\\cdot d\\mathbf{l} = H l = n l I \\implies H = n I")+
+   p("由 $B=\\mu H$，得 $B=\\mu n I=\\mu_r\\mu_0 n I$。与真空相比，磁场增强了 $\\mu_r$ 倍（顺磁质略增强，抗磁质略减弱，铁磁质大幅增强）。"))
+ )},
+{"id":"e4s5-2","name":"磁介质的分类","tags":["def"],"brief":"顺磁质、抗磁质、铁磁质的特性对比。",
+ "body": wrap(
+   defn("磁介质分类",p("(1) <strong>顺磁质</strong>：$\\chi_m>0$（$10^{-5}\\sim10^{-3}$），$\\mu_r>1$，$M$ 与 $H$ 同向。分子具有固有磁矩，外场使磁矩取向排列。温度升高磁化减弱（居里定律 $\\chi_m=C/T$）。")+
+   p("(2) <strong>抗磁质</strong>：$\\chi_m<0$（$\\sim-10^{-5}$），$\\mu_r<1$，$M$ 与 $H$ 反向。源于外场对电子轨道运动的感应效应，与温度无关。")+
+   p("(3) <strong>铁磁质</strong>：$\\chi_m\\gg 1$（$10^2\\sim10^4$），$\\mu_r\\gg 1$，$M$ 与 $H$ 非线性且有磁滞。存在磁畴结构和居里温度。")+
+   p("(4) <strong>亚铁磁质/反铁磁质</strong>：相邻原子磁矩反平行排列，亚铁磁质有净磁矩（如铁氧体），反铁磁质净磁矩为零。"))
+ )},
+]},
+{
+"name": "4.6 铁磁质的磁滞与磁畴",
+"color": "#0891b2",
+"desc": "磁滞回线、磁畴理论与居里温度",
+"items": [
+{"id":"e4s6-1","name":"磁畴与居里温度","tags":["def","thm"],"brief":"铁磁质的微观机制与温度效应。",
+ "body": wrap(
+   defn("磁畴",p("铁磁质内部存在许多小区域（线度 $10^{-4}\\sim10^{-6}\\,\\text{m}$），称为磁畴。每个磁畴内原子磁矩自发平行排列（交换相互作用），具有很强的磁化强度。无外场时各磁畴取向杂乱，宏观磁矩为零。"))+
+   thm("磁化过程",p("外场较弱时，磁畴壁发生可逆位移；外场增强时，磁畴壁不可逆位移（Barkhausen 跳跃）；外场很强时，磁畴磁矩转向外场方向，达到饱和磁化 $M_s$。")+
+   p("<strong>居里温度 $T_c$：</strong>温度升高，热运动破坏磁畴内的自发磁化。当 $T>T_c$ 时，磁畴瓦解，铁磁质变为顺磁质，服从居里-外斯定律 $\\chi_m=\\frac{C}{T-T_c}$。铁的 $T_c\\approx770°\\text{C}$。"))+
+   note(p("<strong>软磁与硬磁材料：</strong>软磁材料（纯铁、硅钢）$H_c$ 小、磁导率高，用于变压器、电机铁芯；硬磁材料（钕铁硼、铝镍钴）$H_c$ 大、剩磁 $B_r$ 大，用于永磁体。"))
+ )},
+]},
+{
+"name": "4.7 磁路定理",
+"color": "#0891b2",
+"desc": "磁路的欧姆定律与磁路计算",
+"items": [
+{"id":"e4s7-1","name":"磁路定理","tags":["thm","der"],"brief":"磁路与电路的类比及磁阻概念。",
+ "body": wrap(
+   defn("磁路",p("磁通通过的闭合路径称为磁路。由于铁磁质磁导率远大于空气，磁通主要集中在铁芯中，类似于电流集中在导体中。"))+
+   thm("磁路欧姆定律",p("设铁芯截面积 $S$，平均长度 $l$，磁导率 $\\mu$，线圈匝数 $N$，电流 $I$。由安培环路定理：")+
+   fml("\\oint\\mathbf{H}\\cdot d\\mathbf{l} = H l = N I \\implies H = \\frac{N I}{l}")+
+   p("磁通 $\\Phi=BS=\\mu H S=\\mu\\frac{NI}{l}S$，整理得：")+
+   fml("\\Phi = \\frac{NI}{l/(\\mu S)} = \\frac{F_m}{R_m}")+
+   p("其中磁通势 $F_m=NI$（单位：安匝），磁阻 $R_m=\\frac{l}{\\mu S}$（单位：$\\text{H}^{-1}$）。此即磁路欧姆定律，与电路欧姆定律 $I=\\mathcal{E}/R$ 类比。"))+
+   der(p("<strong>串联磁路：</strong>磁阻串联 $R_m=\\sum R_{mi}$，磁通处处相等 $\\Phi$ 相同，总磁通势 $F_m=\\sum F_{mi}=\\Phi\\sum R_{mi}$。")+
+   p("<strong>并联磁路：</strong>磁阻并联 $1/R_m=\\sum 1/R_{mi}$，各支路磁通势相同，总磁通 $\\Phi=\\sum\\Phi_i$。"))
+ )},
+{"id":"e4s7-2","name":"变压器原理","tags":["app","der"],"brief":"利用互感和磁路实现电压变换。",
+ "body": wrap(
+   defn("变压器",p("变压器由闭合铁芯和绕在其上的原、副线圈组成。原线圈匝数 $N_1$，副线圈匝数 $N_2$。利用互感现象将交流电的电压升高或降低。"))+
+   der(p("<strong>理想变压器电压比：</strong>理想变压器（无漏磁、无铜损铁损、空载电流可忽略）中，原副线圈的磁通匝链数分别为 $\\Psi_1=N_1\\Phi$，$\\Psi_2=N_2\\Phi$。感应电动势 $\\varepsilon_1=-N_1\\frac{d\\Phi}{dt}$，$\\varepsilon_2=-N_2\\frac{d\\Phi}{dt}$。忽略线圈电阻，端电压 $U_1\\approx|\\varepsilon_1|$，$U_2\\approx|\\varepsilon_2|$，故：")+
+   fml("\\frac{U_1}{U_2} = \\frac{N_1}{N_2}")+
+   p("<strong>电流比：</strong>理想变压器输入功率等于输出功率 $U_1 I_1=U_2 I_2$，故：")+
+   fml("\\frac{I_1}{I_2} = \\frac{N_2}{N_1}")+
+   p("匝数多的一侧电压高、电流小，匝数少的一侧电压低、电流大。变压器只能变换交流电，不能变换直流电。"))
+ )},
+]},
+{
+"name": "4.8 静磁场的边界条件",
+"color": "#0891b2",
+"desc": "B 的法向连续与 H 的切向跃变",
+"items": [
+{"id":"e4s8-1","name":"静磁场边界条件","tags":["thm","der"],"brief":"B的法向分量连续，H的切向分量跃变。",
+ "body": wrap(
+   thm("边界条件",p("在两种磁介质分界面上：")+
+   fml("B_{1n}=B_{2n},\\qquad H_{2t}-H_{1t}=\\alpha_f")+
+   p("其中 $\\alpha_f$ 为分界面上传导电流的面密度（方向垂直于 $H$ 的切向分量）。若无传导电流，$H_{1t}=H_{2t}$。"))+
+   der(p("<strong>法向分量推导：</strong>跨分界面取扁圆柱高斯面，上下底 $\\Delta S$，高 $h\\to 0$。由 $\\oint\\mathbf{B}\\cdot d\\mathbf{S}=0$：")+
+   fml("B_{2n}\\Delta S - B_{1n}\\Delta S = 0 \\implies B_{1n}=B_{2n}")+
+   p("<strong>切向分量推导：</strong>跨分界面取小矩形环路，长边 $\\Delta l$ 平行界面，短边 $h\\to 0$。由 $\\oint\\mathbf{H}\\cdot d\\mathbf{l}=I_f$：")+
+   fml("H_{2t}\\Delta l - H_{1t}\\Delta l = \\alpha_f\\Delta l \\implies H_{2t}-H_{1t}=\\alpha_f"))+
+   note(p("对线性介质 $\\mathbf{B}=\\mu\\mathbf{H}$，无传导电流时 $B$ 线折射满足 $\\frac{\\tan\\theta_1}{\\tan\\theta_2}=\\frac{\\mu_1}{\\mu_2}$。铁磁质 $\\mu\\gg\\mu_0$，$B$ 线几乎垂直于铁磁质表面。"))
  )},
 ]},
 ]
@@ -581,6 +1107,199 @@ ch5_sections = [
    thm("坡印廷矢量",p("单位时间通过单位面积的电磁场能量（能流密度）为坡印廷矢量：")+
    fml("\\mathbf{S} = \\mathbf{E}\\times\\mathbf{H} = \\frac{1}{\\mu_0}\\mathbf{E}\\times\\mathbf{B}")+
    p("其方向为电磁波传播方向。电磁场的动量密度 $\\mathbf{g}=\\frac{1}{c^2}\\mathbf{S}=\\varepsilon_0\\mathbf{E}\\times\\mathbf{B}$，光压即源于电磁场动量。"))
+ )},
+]},
+{
+"name": "5.6 法拉第定律与楞次定律",
+"color": "#be185d",
+"desc": "感应电动势方向的判断",
+"items": [
+{"id":"e5s6-1","name":"楞次定律","tags":["thm"],"brief":"感应电流的方向总是阻碍引起感应电流的磁通量变化。",
+ "body": wrap(
+   thm("楞次定律",p("闭合回路中感应电流的方向，总是使它所激发的磁场阻碍引起感应电流的磁通量的变化。楞次定律是能量守恒定律在电磁感应中的体现。")+
+   fml("\\varepsilon = -\\frac{d\\Phi}{dt}")+
+   p("负号正是楞次定律的数学表达。若磁通量 $\\Phi$ 增加（$d\\Phi/dt>0$），则 $\\varepsilon<0$，感应电流产生的磁场与原磁场反向，阻碍 $\\Phi$ 增加；反之亦然。"))+
+   app(p("<strong>判断步骤：</strong>(1) 判断原磁通量的变化趋势（增或减）；(2) 确定感应电流磁场的方向（阻碍变化）；(3) 由右手定则确定感应电流方向。例如，磁铁 N 极插入线圈，线圈中感应电流产生的磁场阻碍磁通量增加，故靠近磁铁一侧为 N 极。"))
+ )},
+{"id":"e5s6-2","name":"感应电量","tags":["der"],"brief":"感应电流的总电量只与磁通量变化量有关。",
+ "body": wrap(
+   der(p("<strong>感应电量的推导：</strong>设回路电阻为 $R$，感应电流 $i=\\varepsilon/R=-\\frac{1}{R}\\frac{d\\Phi}{dt}$。在 $\\Delta t=t_2-t_1$ 时间内，通过回路横截面的感应电量：")+
+   fml("q = \\int_{t_1}^{t_2} i\\,dt = -\\frac{1}{R}\\int_{\\Phi_1}^{\\Phi_2} d\\Phi = \\frac{\\Phi_1-\\Phi_2}{R}")+
+   p("取绝对值：$q=\\frac{|\\Delta\\Phi|}{R}$。感应电量只与磁通量的变化量 $|\\Delta\\Phi|$ 和回路电阻 $R$ 有关，与磁通量变化的快慢（时间）无关。")+
+   p("<strong>应用：</strong>磁通计（冲击电流计）利用感应电量测量磁通量。将探测线圈从磁场中快速拉出（$\\Phi_2=0$），测得电量 $q$，则 $\\Phi_1=qR$，从而求得磁感应强度 $B=\\Phi_1/(NS)$。"))
+ )},
+]},
+{
+"name": "5.7 动生电动势",
+"color": "#be185d",
+"desc": "导体在磁场中运动产生的电动势",
+"items": [
+{"id":"e5s7-1","name":"动生电动势的计算","tags":["der"],"brief":"导体切割磁力线产生的电动势。",
+ "body": wrap(
+   der(p("<strong>动生电动势的本质：</strong>导体在磁场中运动时，自由电子受洛伦兹力 $\\mathbf{f}=-e\\mathbf{v}\\times\\mathbf{B}$。洛伦兹力等效于非静电力，对应非静电场 $\\mathbf{E}_k=\\mathbf{v}\\times\\mathbf{B}$。动生电动势为非静电力移动单位正电荷做的功：")+
+   fml("\\varepsilon = \\int_a^b \\mathbf{E}_k\\cdot d\\mathbf{l} = \\int_a^b (\\mathbf{v}\\times\\mathbf{B})\\cdot d\\mathbf{l}")+
+   p("<strong>直导线切割磁力线：</strong>长 $l$ 的直导线在均匀磁场 $B$ 中以速度 $v$ 垂直切割磁力线（$v\\perp B\\perp l$）：")+
+   fml("\\varepsilon = Blv")+
+   p("方向由右手定则确定（拇指沿 $\\mathbf{v}$，食指沿 $\\mathbf{B}$，中指指向电动势方向，即电势升高方向）。"))
+ )},
+{"id":"e5s7-2","name":"交流发电机原理","tags":["app","der"],"brief":"线圈在磁场中转动产生正弦交流电。",
+ "body": wrap(
+   der(p("<strong>交流发电机：</strong>面积 $S$ 的 $N$ 匝线圈在均匀磁场 $B$ 中以角速度 $\\omega$ 绕垂直于 $B$ 的轴转动。$t$ 时刻线圈法向与 $B$ 夹角 $\\theta=\\omega t$，磁链：")+
+   fml("\\Psi = NBS\\cos\\omega t")+
+   p("感应电动势：")+
+   fml("\\varepsilon = -\\frac{d\\Psi}{dt} = NBS\\omega\\sin\\omega t = \\varepsilon_0\\sin\\omega t")+
+   p("其中 $\\varepsilon_0=NBS\\omega$ 为电动势峰值。产生正弦交流电，频率 $f=\\omega/(2\\pi)$。这是交流发电机的基本原理。"))
+ )},
+]},
+{
+"name": "5.8 感生电动势与涡旋电场",
+"color": "#be185d",
+"desc": "变化磁场激发的涡旋电场",
+"items": [
+{"id":"e5s8-1","name":"涡旋电场","tags":["thm","der"],"brief":"变化磁场激发涡旋电场，其环流等于磁通量变化率的负值。",
+ "body": wrap(
+   thm("涡旋电场",p("变化的磁场在其周围激发一种非静电性的电场，称为感生电场或涡旋电场。涡旋电场沿任意闭合回路的环流等于穿过回路磁通量变化率的负值：")+
+   fml("\\oint_L \\mathbf{E}_i\\cdot d\\mathbf{l} = -\\frac{d\\Phi}{dt} = -\\int_S\\frac{\\partial\\mathbf{B}}{\\partial t}\\cdot d\\mathbf{S}"))+
+   der(p("<strong>微分形式：</strong>由斯托克斯定理 $\\oint_L\\mathbf{E}_i\\cdot d\\mathbf{l}=\\int_S(\\nabla\\times\\mathbf{E}_i)\\cdot d\\mathbf{S}$，比较得：")+
+   fml("\\nabla\\times\\mathbf{E}_i = -\\frac{\\partial\\mathbf{B}}{\\partial t}")+
+   p("<strong>涡旋电场与静电场的区别：</strong>静电场由电荷激发，是保守场（$\\nabla\\times\\mathbf{E}=0$），电场线不闭合；涡旋电场由变化磁场激发，是非保守场（$\\nabla\\times\\mathbf{E}\\neq0$），电场线是闭合曲线。涡旋电场的存在不依赖于导体回路。"))+
+   app(p("<strong>电子感应加速器：</strong>利用变化磁场产生的涡旋电场加速电子。要求磁场分布满足 $B_R=\\frac{1}{2}\\bar{B}$（轨道处磁场为平均磁场的一半），使电子在固定半径轨道上被加速。"))
+ )},
+]},
+{
+"name": "5.9 自感与互感的深入",
+"color": "#be185d",
+"desc": "RL 电路暂态过程与互感系数的计算",
+"items": [
+{"id":"e5s9-1","name":"RL 电路的暂态过程","tags":["der"],"brief":"电流增长和衰减的指数规律。",
+ "body": wrap(
+   der(p("<strong>电流增长：</strong>RL 电路接电源 $\\mathcal{E}$，由基尔霍夫定律：$\\mathcal{E}=IR+L\\frac{dI}{dt}$。初始条件 $I(0)=0$，解为：")+
+   fml("I(t) = \\frac{\\mathcal{E}}{R}\\left(1-e^{-Rt/L}\\right) = I_\\infty\\left(1-e^{-t/\\tau}\\right)")+
+   p("时间常数 $\\tau=L/R$。电流指数上升趋近稳态值 $I_\\infty=\\mathcal{E}/R$。")+
+   p("<strong>电流衰减：</strong>断开电源后短路，$0=IR+L\\frac{dI}{dt}$，初始 $I(0)=I_0$：")+
+   fml("I(t) = I_0 e^{-t/\\tau}")+
+   p("时间常数 $\\tau=L/R$ 越大，电流衰减越慢，体现自感阻碍电流变化的特性。"))
+ )},
+{"id":"e5s9-2","name":"互感系数的计算","tags":["der"],"brief":"由磁通量计算互感系数。",
+ "body": wrap(
+   der(p("<strong>互感的定义：</strong>线圈 1 通电流 $I_1$，产生穿过线圈 2 的磁通匝链数 $\\Psi_{21}=M I_1$；线圈 2 通电流 $I_2$，产生穿过线圈 1 的磁通匝链数 $\\Psi_{12}=M I_2$。可以证明 $M_{12}=M_{21}=M$。")+
+   p("<strong>互感与自感的关系：</strong>$M=k\\sqrt{L_1 L_2}$，其中耦合系数 $0\\le k\\le 1$。$k=1$ 为完全耦合（无漏磁），$k=0$ 为无耦合。")+
+   p("<strong>例：两共轴螺线管的互感</strong>。长 $l$，截面积 $S$，匝数分别 $N_1,N_2$，管内磁导率 $\\mu$。线圈 1 产生的磁场 $B=\\mu\\frac{N_1 I_1}{l}$，穿过线圈 2 的磁通匝链数 $\\Psi_{21}=N_2 BS=\\mu\\frac{N_1 N_2 S}{l}I_1$，故：")+
+   fml("M = \\frac{\\Psi_{21}}{I_1} = \\frac{\\mu N_1 N_2 S}{l}")+
+   p("完全耦合时 $M=\\sqrt{L_1 L_2}$，其中 $L_1=\\frac{\\mu N_1^2 S}{l}$，$L_2=\\frac{\\mu N_2^2 S}{l}$。"))
+ )},
+]},
+{
+"name": "5.10 磁场能量与能量密度",
+"color": "#be185d",
+"desc": "螺线管储能与磁场能量密度",
+"items": [
+{"id":"e5s10-1","name":"磁场能量密度","tags":["der"],"brief":"磁场能量密度为 ½B·H。",
+ "body": wrap(
+   der(p("<strong>长直螺线管储能：</strong>自感 $L=\\frac{\\mu N^2 S}{l}$，通电流 $I$ 时储能 $W=\\frac{1}{2}LI^2$。管内磁场 $B=\\mu n I=\\mu\\frac{N I}{l}$，即 $I=\\frac{Bl}{\\mu N}$。代入：")+
+   fml("W = \\frac{1}{2}\\cdot\\frac{\\mu N^2 S}{l}\\cdot\\frac{B^2 l^2}{\\mu^2 N^2} = \\frac{1}{2}\\frac{B^2}{\\mu}\\cdot Sl")+
+   p("体积 $V=Sl$，故磁场能量密度：")+
+   fml("w_m = \\frac{W}{V} = \\frac{1}{2}\\frac{B^2}{\\mu} = \\frac{1}{2}\\mathbf{B}\\cdot\\mathbf{H}")+
+   p("总磁场能量 $W_m=\\int_V w_m\\,dV=\\frac{1}{2}\\int_V\\mathbf{B}\\cdot\\mathbf{H}\\,dV$。"))+
+   note(p("与电场能量密度 $w_e=\\frac{1}{2}\\mathbf{D}\\cdot\\mathbf{E}$ 对比，电磁场总能量密度 $w=w_e+w_m=\\frac{1}{2}(\\mathbf{E}\\cdot\\mathbf{D}+\\mathbf{B}\\cdot\\mathbf{H})$。磁场能量存储于磁场中，是一种场的能量。"))
+ )},
+]},
+{
+"name": "5.11 位移电流的深入",
+"color": "#be185d",
+"desc": "电容器中的位移电流与全电流定律",
+"items": [
+{"id":"e5s11-1","name":"位移电流与全电流定律","tags":["der"],"brief":"充电电容器极板间的位移电流。",
+ "body": wrap(
+   der(p("<strong>平行板电容器充电：</strong>极板面积 $S$，间距 $d$，充电电流 $I_c$。极板间电场 $E=\\sigma/\\varepsilon=Q/(\\varepsilon S)$，电位移 $D=\\sigma=Q/S$。电位移通量 $\\Phi_D=DS=Q$。")+
+   p("传导电流 $I_c=\\frac{dQ}{dt}$，而位移电流：")+
+   fml("I_d = \\frac{d\\Phi_D}{dt} = \\frac{dQ}{dt} = I_c")+
+   p("即极板间的位移电流等于导线中的传导电流，电流在电容器处「连续」。位移电流密度 $\\mathbf{j}_d=\\frac{\\partial\\mathbf{D}}{\\partial t}$。")+
+   p("<strong>全电流定律：</strong>传导电流与位移电流之和为全电流，全电流永远连续：")+
+   fml("\\oint_L\\mathbf{H}\\cdot d\\mathbf{l} = I_c + I_d = \\int_S\\left(\\mathbf{j}_c+\\frac{\\partial\\mathbf{D}}{\\partial t}\\right)\\cdot d\\mathbf{S}")+
+   p("这就是含位移电流的安培环路定理（全电流定律），保证了电流连续性方程。"))
+ )},
+]},
+{
+"name": "5.12 麦克斯韦方程组的积分形式",
+"color": "#be185d",
+"desc": "积分形式的麦克斯韦方程组",
+"items": [
+{"id":"e5s12-1","name":"麦克斯韦方程组（积分形式）","tags":["thm"],"brief":"电磁场的四个积分方程。",
+ "body": wrap(
+   thm("麦克斯韦方程组（积分形式）",p("麦克斯韦方程组的积分形式为：")+
+   fml("\\oint_S\\mathbf{D}\\cdot d\\mathbf{S} = \\int_V\\rho\\,dV \\quad (\\text{电场的高斯定理})")+
+   fml("\\oint_S\\mathbf{B}\\cdot d\\mathbf{S} = 0 \\quad (\\text{磁场的高斯定理})")+
+   fml("\\oint_L\\mathbf{E}\\cdot d\\mathbf{l} = -\\int_S\\frac{\\partial\\mathbf{B}}{\\partial t}\\cdot d\\mathbf{S} \\quad (\\text{法拉第电磁感应定律})")+
+   fml("\\oint_L\\mathbf{H}\\cdot d\\mathbf{l} = \\int_S\\left(\\mathbf{j}+\\frac{\\partial\\mathbf{D}}{\\partial t}\\right)\\cdot d\\mathbf{S} \\quad (\\text{全电流定律})"))+
+   note(p("积分形式适用于有限区域，微分形式适用于场中每一点。两者等价，可通过高斯公式和斯托克斯公式互相转换。介质方程 $\\mathbf{D}=\\varepsilon\\mathbf{E}$，$\\mathbf{B}=\\mu\\mathbf{H}$，$\\mathbf{j}=\\sigma\\mathbf{E}$ 与麦克斯韦方程组共同构成完整的电磁场理论。"))
+ )},
+]},
+{
+"name": "5.13 电磁波的产生与辐射",
+"color": "#be185d",
+"desc": "电偶极辐射与电磁波的发射",
+"items": [
+{"id":"e5s13-1","name":"电偶极辐射","tags":["der"],"brief":"振荡电偶极子辐射电磁波。",
+ "body": wrap(
+   der(p("<strong>振荡电偶极子：</strong>电偶极矩随时间做简谐变化 $\\mathbf{p}(t)=p_0\\cos\\omega t\\,\\hat{\\mathbf{z}}$。在远区（$r\\gg\\lambda$），辐射场为球面横波，电场和磁场分量为：")+
+   fml("E_\\theta = \\frac{\\mu_0 p_0\\omega^2\\sin\\theta}{4\\pi r}\\cos\\omega\\left(t-\\frac{r}{c}\\right)")+
+   fml("B_\\varphi = \\frac{\\mu_0 p_0\\omega^2\\sin\\theta}{4\\pi c r}\\cos\\omega\\left(t-\\frac{r}{c}\\right)")+
+   p("其中 $\\theta$ 为位置矢量与偶极子轴的夹角。辐射场按 $1/r$ 衰减，是横波，$\\mathbf{E}\\perp\\mathbf{B}\\perp$ 传播方向。")+
+   p("<strong>辐射功率：</strong>平均辐射功率（拉莫尔公式推广）：")+
+   fml("\\bar{P} = \\frac{\\mu_0 p_0^2\\omega^4}{12\\pi c}")+
+   p("辐射功率与频率的四次方成正比，这就是为什么广播和通信需要高频载波。天线辐射即基于振荡电偶极子原理。"))
+ )},
+]},
+{
+"name": "5.14 电磁波谱",
+"color": "#be185d",
+"desc": "电磁波按波长/频率的分类",
+"items": [
+{"id":"e5s14-1","name":"电磁波谱","tags":["def"],"brief":"电磁波按频率从低到高的分类。",
+ "body": wrap(
+   defn("电磁波谱",p("电磁波按波长（或频率）由长到短可分为：")+
+   p("<strong>无线电波</strong>：$\\lambda>1\\,\\text{mm}$，$f<3\\times10^{11}\\,\\text{Hz}$，用于通信、广播、雷达。")+
+   p("<strong>微波</strong>：$\\lambda=1\\,\\text{mm}\\sim1\\,\\text{m}$，用于雷达、卫星通信、微波炉。")+
+   p("<strong>红外线</strong>：$\\lambda=760\\,\\text{nm}\\sim1\\,\\text{mm}$，热效应，用于红外遥感、加热。")+
+   p("<strong>可见光</strong>：$\\lambda=400\\sim760\\,\\text{nm}$，人眼可见，红橙黄绿蓝靛紫。")+
+   p("<strong>紫外线</strong>：$\\lambda=10\\sim400\\,\\text{nm}$，化学效应、荧光、杀菌。")+
+   p("<strong>X 射线</strong>：$\\lambda=0.01\\sim10\\,\\text{nm}$，穿透性强，用于医学透视、晶体衍射。")+
+   p("<strong>$\\gamma$ 射线</strong>：$\\lambda<0.01\\,\\text{nm}$，核辐射，能量极高，用于放疗、探伤。")+
+   p("所有电磁波在真空中速度均为 $c=3\\times10^8\\,\\text{m/s}$，满足 $c=\\lambda f$。"))
+ )},
+]},
+{
+"name": "5.15 电磁波的动量与光压",
+"color": "#be185d",
+"desc": "电磁场的动量密度与辐射压强",
+"items": [
+{"id":"e5s15-1","name":"电磁波的动量与光压","tags":["der"],"brief":"电磁波具有动量，照射物体产生光压。",
+ "body": wrap(
+   der(p("<strong>电磁场动量密度：</strong>电磁场不仅具有能量，还具有动量。动量密度（单位体积动量）为：")+
+   fml("\\mathbf{g} = \\frac{1}{c^2}\\mathbf{S} = \\varepsilon_0\\mathbf{E}\\times\\mathbf{B}")+
+   p("方向沿波的传播方向。对平面电磁波，$S=w c$（$w$ 为能量密度），故 $g=w/c$。")+
+   p("<strong>光压：</strong>电磁波照射物体表面，动量转移产生压强。对完全吸收面，光压 $P=\\frac{S}{c}=\\frac{I}{c}$（$I$ 为光强）；对完全反射面，光压 $P=\\frac{2I}{c}$。")+
+   fml("P_{\\text{吸收}} = \\frac{I}{c},\\qquad P_{\\text{反射}} = \\frac{2I}{c}")+
+   p("光压在天文上有重要作用，如太阳帆、彗尾背向太阳等。"))
+ )},
+]},
+{
+"name": "5.16 电磁场的矢势与标势",
+"color": "#be185d",
+"desc": "用矢势和标势描述电磁场及规范变换",
+"items": [
+{"id":"e5s16-1","name":"矢势、标势与规范变换","tags":["def","thm"],"brief":"由势函数描述电磁场，存在规范自由度。",
+ "body": wrap(
+   defn("矢势与标势",p("由 $\\nabla\\cdot\\mathbf{B}=0$，可引入矢势 $\\mathbf{A}$ 使 $\\mathbf{B}=\\nabla\\times\\mathbf{A}$。代入 $\\nabla\\times\\mathbf{E}=-\\partial\\mathbf{B}/\\partial t$，得 $\\nabla\\times(\\mathbf{E}+\\partial\\mathbf{A}/\\partial t)=0$，故可引入标势 $\\varphi$：")+
+   fml("\\mathbf{E} = -\\nabla\\varphi - \\frac{\\partial\\mathbf{A}}{\\partial t}"))+
+   thm("规范变换",p("$\\mathbf{A}$ 和 $\\varphi$ 的选择不唯一。对任意标量函数 $\\psi(\\mathbf{r},t)$，做变换：")+
+   fml("\\mathbf{A}' = \\mathbf{A}+\\nabla\\psi,\\qquad \\varphi' = \\varphi - \\frac{\\partial\\psi}{\\partial t}")+
+   p("$\\mathbf{E}$ 和 $\\mathbf{B}$ 保持不变。这种变换称为规范变换。常用规范：库仑规范 $\\nabla\\cdot\\mathbf{A}=0$，洛伦兹规范 $\\nabla\\cdot\\mathbf{A}+\\mu_0\\varepsilon_0\\frac{\\partial\\varphi}{\\partial t}=0$。"))+
+   der(p("<strong>达朗贝尔方程：</strong>在洛伦兹规范下，$\\mathbf{A}$ 和 $\\varphi$ 满足波动方程：")+
+   fml("\\nabla^2\\mathbf{A}-\\mu_0\\varepsilon_0\\frac{\\partial^2\\mathbf{A}}{\\partial t^2} = -\\mu_0\\mathbf{j}")+
+   fml("\\nabla^2\\varphi-\\mu_0\\varepsilon_0\\frac{\\partial^2\\varphi}{\\partial t^2} = -\\frac{\\rho}{\\varepsilon_0}")+
+   p("这表明势以光速 $c=1/\\sqrt{\\mu_0\\varepsilon_0}$ 传播，电磁波是矢势和标势的波动。"))
  )},
 ]},
 ]

@@ -88,6 +88,14 @@ CORE_FORMULAS = [
     ("辛矩阵", "S^T J S = J,\\quad J = \\begin{pmatrix}0 & I\\\\-I & 0\\end{pmatrix}", "保持辛形式的线性变换"),
     ("奇异值分解", "A = U\\Sigma V^*", "任意矩阵的正交对角化分解"),
     ("LU 分解", "A = LU", "下三角×上三角分解，用于高效解方程组"),
+    ("维数公式", "\\dim(W_1+W_2)=\\dim W_1+\\dim W_2-\\dim(W_1\\cap W_2)", "子空间和的维数等于维数和减去交的维数"),
+    ("直和判定", "W_1\\oplus W_2 \\Leftrightarrow W_1\\cap W_2=\\{0\\}", "两子空间交为零则和为直和"),
+    ("迹的性质", "\\mathrm{tr}(AB)=\\mathrm{tr}(BA)", "矩阵乘积的迹与顺序无关"),
+    ("行列式乘法定理", "\\det(AB)=\\det A\\cdot\\det B", "乘积的行列式等于行列式的乘积"),
+    ("拉普拉斯展开", "D=\\sum_{i} M_i A_i", "按 k 行(列)展开，子式乘代数余子式求和"),
+    ("瑞利商极值", "\\lambda_{\\max}=\\max_{\\|\\mathbf{x}\\|=1}\\mathbf{x}^TA\\mathbf{x}", "实对称矩阵最大特征值为瑞利商最大值"),
+    ("代数几何重数不等式", "g_\\lambda\\le a_\\lambda", "特征值的几何重数不超过代数重数"),
+    ("合同对角化", "C^TAC=\\mathrm{diag}(d_1,\\ldots,d_n)", "对称矩阵必合同于对角矩阵"),
 ]
 
 # ---------- helper functions ----------
@@ -192,6 +200,49 @@ ch1_sections = [
     + der(p("<strong>证明：</strong>设 $\\mathbf{p}=\\mathrm{proj}_W\\mathbf{v}$，则 $\\mathbf{v}-\\mathbf{p}\\perp W$。对任意 $\\mathbf{w}\\in W$，$\\mathbf{v}-\\mathbf{w}=(\\mathbf{v}-\\mathbf{p})+(\\mathbf{p}-\\mathbf{w})$，其中 $\\mathbf{p}-\\mathbf{w}\\in W$，故 $\\mathbf{v}-\\mathbf{p}\\perp\\mathbf{p}-\\mathbf{w}$。由勾股定理：$\\|\\mathbf{v}-\\mathbf{w}\\|^2=\\|\\mathbf{v}-\\mathbf{p}\\|^2+\\|\\mathbf{p}-\\mathbf{w}\\|^2\\ge\\|\\mathbf{v}-\\mathbf{p}\\|^2$，等号当且仅当 $\\mathbf{w}=\\mathbf{p}$。"))
 )}
 ]},
+# ---- 1.4 线性相关性判定与极大无关组 ----
+{
+"name": "1.4 线性相关性判定与极大无关组",
+"color": "#0891b2",
+"desc": "线性相关性的判定方法、极大线性无关组与向量组的秩",
+"items": [
+{"id":"c1s4-1","name":"线性相关性的判定方法","tags":["thm","der"],"brief":"用行列式、秩或定义判定向量组的线性相关性。",
+ "body": wrap(
+    thm("线性相关性的判定", p("设 $\\mathbf{v}_1,\\ldots,\\mathbf{v}_k\\in\\mathbb{F}^n$，以它们为列（行）构成矩阵 $A$。则：<br>(1) 若 $k>n$，向量组必线性相关；<br>(2) 若 $k=n$，线性相关 $\\Leftrightarrow \\det A=0$；线性无关 $\\Leftrightarrow \\det A\\neq 0$；<br>(3) 一般情形，线性相关 $\\Leftrightarrow \\mathrm{rank}(A)<k$；线性无关 $\\Leftrightarrow \\mathrm{rank}(A)=k$。"))
+    + der(p("<strong>(1) 的证明：</strong>若 $k>n$，则齐次方程组 $A\\mathbf{x}=\\mathbf{0}$ 有 $n$ 个方程 $k$ 个未知量，未知量个数多于方程个数，必有非零解，故线性相关。<br><strong>(2) 的证明：</strong>$k=n$ 时，$\\mathbf{v}_1,\\ldots,\\mathbf{v}_n$ 线性相关 $\\Leftrightarrow$ 存在不全为零的 $c_i$ 使 $\\sum c_i\\mathbf{v}_i=0$ $\\Leftrightarrow$ $A\\mathbf{c}=0$ 有非零解 $\\Leftrightarrow$ $\\det A=0$（方阵奇异）。<br><strong>(3) 的证明：</strong>一般地，$\\sum c_i\\mathbf{v}_i=0$ 有非零解 $\\Leftrightarrow$ $A$ 的列向量线性相关 $\\Leftrightarrow$ 列秩 $<k$ $\\Leftrightarrow$ $\\mathrm{rank}(A)<k$。"))
+)},
+{"id":"c1s4-2","name":"极大线性无关组与向量组的秩","tags":["def","thm","der"],"brief":"极大无关组所含向量个数即向量组的秩。",
+ "body": wrap(
+    defn("极大线性无关组", p("向量组 $\\mathbf{v}_1,\\ldots,\\mathbf{v}_k$ 的一个部分组 $\\mathbf{v}_{i_1},\\ldots,\\mathbf{v}_{i_r}$ 称为极大线性无关组，若它本身线性无关，且再加入原向量组中任一其他向量就线性相关。极大无关组所含向量个数 $r$ 称为向量组的秩，记作 $r(\\mathbf{v}_1,\\ldots,\\mathbf{v}_k)$。"))
+    + thm("秩的性质", p("(1) 向量组的秩等于以其为列的矩阵的秩；(2) 等价的向量组有相同的秩；(3) 若向量组 $A$ 可由向量组 $B$ 线性表示，则 $r(A)\\le r(B)$。"))
+    + der(p("<strong>(1) 的证明：</strong>以 $\\mathbf{v}_1,\\ldots,\\mathbf{v}_k$ 为列构成矩阵 $A$。$A$ 的列秩就是列向量组的极大无关组所含向量个数，而列秩=秩=$\\mathrm{rank}(A)$。<br><strong>(3) 的证明：</strong>设 $A$ 可由 $B$ 表示，则 $\\mathrm{span}(A)\\subseteq\\mathrm{span}(B)$，故 $\\dim\\mathrm{span}(A)\\le\\dim\\mathrm{span}(B)$，即 $r(A)\\le r(B)$。"))
+)}
+]},
+# ---- 1.5 子空间的交与直和 ----
+{
+"name": "1.5 子空间的交与直和",
+"color": "#0e7490",
+"desc": "子空间的交与和、维数公式、直和的判定与商空间",
+"items": [
+{"id":"c1s5-1","name":"子空间的交与和及维数公式","tags":["def","thm","der"],"brief":"dim(W1+W2)=dimW1+dimW2-dim(W1∩W2)。",
+ "body": wrap(
+    defn("子空间的交与和", p("设 $W_1,W_2$ 是 $V$ 的子空间。交 $W_1\\cap W_2=\\{\\mathbf{v}:\\mathbf{v}\\in W_1\\text{ 且 }\\mathbf{v}\\in W_2\\}$；和 $W_1+W_2=\\{\\mathbf{w}_1+\\mathbf{w}_2:\\mathbf{w}_1\\in W_1,\\mathbf{w}_2\\in W_2\\}$。两者都是 $V$ 的子空间。"))
+    + thm("维数公式", p("$\\dim(W_1+W_2)=\\dim W_1+\\dim W_2-\\dim(W_1\\cap W_2)$。"))
+    + der(p("<strong>证明：</strong>设 $\\dim(W_1\\cap W_2)=t$，取其一组基 $\\boldsymbol{\\alpha}_1,\\ldots,\\boldsymbol{\\alpha}_t$。扩充为 $W_1$ 的基 $\\boldsymbol{\\alpha}_1,\\ldots,\\boldsymbol{\\alpha}_t,\\boldsymbol{\\beta}_1,\\ldots,\\boldsymbol{\\beta}_s$（故 $\\dim W_1=t+s$），再扩充为 $W_2$ 的基 $\\boldsymbol{\\alpha}_1,\\ldots,\\boldsymbol{\\alpha}_t,\\boldsymbol{\\gamma}_1,\\ldots,\\boldsymbol{\\gamma}_r$（故 $\\dim W_2=t+r$）。<br><strong>断言：</strong>$\\boldsymbol{\\alpha}_1,\\ldots,\\boldsymbol{\\alpha}_t,\\boldsymbol{\\beta}_1,\\ldots,\\boldsymbol{\\beta}_s,\\boldsymbol{\\gamma}_1,\\ldots,\\boldsymbol{\\gamma}_r$ 是 $W_1+W_2$ 的一组基。<br>张成：任意 $\\mathbf{w}_1+\\mathbf{w}_2\\in W_1+W_2$，$\\mathbf{w}_1$ 可由 $\\alpha,\\beta$ 表示，$\\mathbf{w}_2$ 可由 $\\alpha,\\gamma$ 表示，故和可由 $\\alpha,\\beta,\\gamma$ 表示。<br>线性无关：设 $\\sum a_i\\boldsymbol{\\alpha}_i+\\sum b_j\\boldsymbol{\\beta}_j+\\sum c_k\\boldsymbol{\\gamma}_k=0$。则 $\\sum c_k\\boldsymbol{\\gamma}_k=-\\sum a_i\\boldsymbol{\\alpha}_i-\\sum b_j\\boldsymbol{\\beta}_j\\in W_1$，又 $\\sum c_k\\boldsymbol{\\gamma}_k\\in W_2$，故其属于 $W_1\\cap W_2$，可由 $\\boldsymbol{\\alpha}$ 表示。但 $\\boldsymbol{\\alpha},\\boldsymbol{\\gamma}$ 是 $W_2$ 的基，故 $c_k=0$ 且 $a_i=0$。代回得 $\\sum b_j\\boldsymbol{\\beta}_j=0$，由 $\\boldsymbol{\\beta}$ 线性无关得 $b_j=0$。<br>故 $\\dim(W_1+W_2)=t+s+r=(t+s)+(t+r)-t=\\dim W_1+\\dim W_2-\\dim(W_1\\cap W_2)$。"))
+)},
+{"id":"c1s5-2","name":"直和及其判定","tags":["def","thm","der"],"brief":"W1∩W2={0} 等价于维数可加。",
+ "body": wrap(
+    defn("直和", p("设 $W_1,W_2$ 是 $V$ 的子空间。若 $W_1+W_2$ 中每个向量的分解式 $\\mathbf{w}=\\mathbf{w}_1+\\mathbf{w}_2$（$\\mathbf{w}_i\\in W_i$）唯一，则称 $W_1+W_2$ 为直和，记作 $W_1\\oplus W_2$。"))
+    + thm("直和的等价条件", p("对 $V$ 的子空间 $W_1,W_2$，以下等价：(1) $W_1+W_2$ 是直和；(2) $W_1\\cap W_2=\\{0\\}$；(3) $\\dim(W_1+W_2)=\\dim W_1+\\dim W_2$；(4) 若 $\\mathbf{w}_1+\\mathbf{w}_2=0$（$\\mathbf{w}_i\\in W_i$），则 $\\mathbf{w}_1=\\mathbf{w}_2=0$。"))
+    + der(p("<strong>(1)⇒(2)：</strong>设 $\\mathbf{v}\\in W_1\\cap W_2$，则 $\\mathbf{v}$ 有两种分解：$\\mathbf{v}=\\mathbf{v}+0=0+\\mathbf{v}$。由分解唯一性，$\\mathbf{v}=0$。<br><strong>(2)⇒(1)：</strong>设 $\\mathbf{w}=\\mathbf{w}_1+\\mathbf{w}_2=\\mathbf{w}_1'+\\mathbf{w}_2'$，则 $\\mathbf{w}_1-\\mathbf{w}_1'=\\mathbf{w}_2'-\\mathbf{w}_2\\in W_1\\cap W_2=\\{0\\}$，故 $\\mathbf{w}_1=\\mathbf{w}_1'$，$\\mathbf{w}_2=\\mathbf{w}_2'$。<br><strong>(2)⇔(3)：</strong>由维数公式，$\\dim(W_1+W_2)=\\dim W_1+\\dim W_2-\\dim(W_1\\cap W_2)$。故 $\\dim(W_1+W_2)=\\dim W_1+\\dim W_2$ $\\Leftrightarrow$ $\\dim(W_1\\cap W_2)=0$ $\\Leftrightarrow$ $W_1\\cap W_2=\\{0\\}$。"))
+)},
+{"id":"c1s5-3","name":"商空间","tags":["def","thm","der"],"brief":"V/W 的维数 = dimV - dimW。",
+ "body": wrap(
+    defn("商空间", p("设 $W$ 是 $V$ 的子空间。定义等价关系 $\\mathbf{u}\\sim\\mathbf{v}\\Leftrightarrow\\mathbf{u}-\\mathbf{v}\\in W$。$\\mathbf{v}$ 所在的等价类记作 $\\overline{\\mathbf{v}}=\\mathbf{v}+W$，称为 $\\mathbf{v}$ 模 $W$ 的陪集。所有陪集构成的集合 $V/W=\\{\\mathbf{v}+W:\\mathbf{v}\\in V\\}$ 在运算 $(\\mathbf{u}+W)+(\\mathbf{v}+W)=(\\mathbf{u}+\\mathbf{v})+W$，$c(\\mathbf{v}+W)=c\\mathbf{v}+W$ 下构成向量空间，称为 $V$ 关于 $W$ 的商空间。"))
+    + thm("商空间的维数", p("若 $V$ 有限维，$W$ 是 $V$ 的子空间，则 $\\dim(V/W)=\\dim V-\\dim W$。"))
+    + der(p("<strong>证明：</strong>设 $\\dim W=k$，取 $W$ 的一组基 $\\mathbf{w}_1,\\ldots,\\mathbf{w}_k$，扩充为 $V$ 的基 $\\mathbf{w}_1,\\ldots,\\mathbf{w}_k,\\mathbf{v}_1,\\ldots,\\mathbf{v}_m$（故 $\\dim V=k+m$）。<br><strong>断言：</strong>$\\overline{\\mathbf{v}}_1,\\ldots,\\overline{\\mathbf{v}}_m$ 是 $V/W$ 的一组基。<br>张成：任意 $\\overline{\\mathbf{v}}\\in V/W$，设 $\\mathbf{v}=\\sum a_i\\mathbf{w}_i+\\sum b_j\\mathbf{v}_j$。则 $\\overline{\\mathbf{v}}=\\sum b_j\\overline{\\mathbf{v}}_j$（因 $\\sum a_i\\mathbf{w}_i\\in W$，其陪集为零陪集）。<br>线性无关：设 $\\sum b_j\\overline{\\mathbf{v}}_j=\\overline{0}$，即 $\\sum b_j\\mathbf{v}_j\\in W$。则 $\\sum b_j\\mathbf{v}_j=\\sum a_i\\mathbf{w}_i$，即 $\\sum b_j\\mathbf{v}_j-\\sum a_i\\mathbf{w}_i=0$。由 $\\mathbf{w},\\mathbf{v}$ 线性无关，所有 $b_j=0$。<br>故 $\\dim(V/W)=m=\\dim V-\\dim W$。"))
+)}
+]},
 ]
 
 # =====================================================
@@ -259,6 +310,49 @@ ch2_sections = [
     + der(p("<strong>(5) 的证明：</strong>设 $A$ 为 $m\\times n$，$B$ 为 $n\\times p$。$AB$ 的每一列是 $A$ 的列向量的线性组合（系数为 $B$ 的对应列），故 $AB$ 的列空间 $\\subseteq A$ 的列空间，从而 $\\mathrm{rank}(AB)\\le\\mathrm{rank}(A)$。同理，$AB$ 的每一行是 $B$ 的行向量的线性组合，故 $\\mathrm{rank}(AB)\\le\\mathrm{rank}(B)$。综上 $\\mathrm{rank}(AB)\\le\\min(r(A),r(B))$。"))
 )}
 ]},
+# ---- 2.4 分块矩阵 ----
+{
+"name": "2.4 分块矩阵",
+"color": "#0d9488",
+"desc": "分块矩阵的运算、分块对角矩阵的行列式与逆",
+"items": [
+{"id":"c2s4-1","name":"分块矩阵的运算","tags":["def","thm"],"brief":"将矩阵分块后按块运算，规则与普通元素相同。",
+ "body": wrap(
+    defn("分块矩阵", p("将矩阵 $A$ 用若干横线和纵线分成若干小块，每块是一个小矩阵，称为子矩阵。以子矩阵为元素的形式矩阵称为分块矩阵。分块的目的是简化运算和揭示结构。"))
+    + thm("分块矩阵的运算规则", p("(1) 加法：同型矩阵按相同方式分块后，对应块相加；(2) 数乘：每块乘以该数；(3) 乘法：$A$ 的列分块方式与 $B$ 的行分块方式一致时，$(AB)_{ij}=\\sum_k A_{ik}B_{kj}$；(4) 转置：$(A^T)_{ij}=(A_{ji})^T$。"))
+)},
+{"id":"c2s4-2","name":"分块对角矩阵的行列式与逆","tags":["thm","der"],"brief":"分块对角矩阵的行列式等于各块行列式之积。",
+ "body": wrap(
+    defn("分块对角矩阵", p("形如 $A=\\mathrm{diag}(A_1,A_2,\\ldots,A_s)=\\begin{pmatrix}A_1&&\\\\&A_2&\\\\&&\\ddots\\\\&&&A_s\\end{pmatrix}$ 的分块矩阵称为分块对角矩阵，其中 $A_i$ 为方阵。"))
+    + thm("分块对角矩阵的性质", p("(1) $\\det A=\\prod_{i=1}^s\\det A_i$；(2) $A$ 可逆当且仅当每个 $A_i$ 可逆，且 $A^{-1}=\\mathrm{diag}(A_1^{-1},\\ldots,A_s^{-1})$；(3) $A^k=\\mathrm{diag}(A_1^k,\\ldots,A_s^k)$。"))
+    + der(p("<strong>(1) 的证明：</strong>对分块数 $s$ 归纳。$s=1$ 显然。设 $s=2$，$A=\\begin{pmatrix}A_1&0\\\\0&A_2\\end{pmatrix}$。由行列式的完全展开定义，非零项必须取自不同行不同列。由于 $A_1$ 占据前 $m$ 行前 $m$ 列，$A_2$ 占据后 $n$ 行后 $n$ 列，交叉块为零，故非零项只能分别从 $A_1$ 和 $A_2$ 中选取。设 $A_1$ 的展开项符号为 $(-1)^{\\tau}$，$A_2$ 的为 $(-1)^{\\sigma}$，合并后符号为 $(-1)^{\\tau+\\sigma}$（因 $A_2$ 的列编号整体后移 $m$，逆序数增加量为偶数，不改变符号）。故 $\\det A=\\det A_1\\cdot\\det A_2$。一般情形由归纳即得。<br><strong>(2) 的证明：</strong>直接验证 $\\mathrm{diag}(A_1^{-1},\\ldots)\\cdot\\mathrm{diag}(A_1,\\ldots)=I$。"))
+)}
+]},
+# ---- 2.5 矩阵的迹与特殊矩阵 ----
+{
+"name": "2.5 矩阵的迹与特殊矩阵",
+"color": "#059669",
+"desc": "矩阵的迹、正交矩阵、幂等矩阵与幂零矩阵",
+"items": [
+{"id":"c2s5-1","name":"矩阵的迹","tags":["def","thm","der"],"brief":"迹是对角元之和，满足 tr(AB)=tr(BA)。",
+ "body": wrap(
+    defn("迹", p("$n$ 阶方阵 $A=(a_{ij})$ 的迹定义为其主对角线元素之和：$\\mathrm{tr}(A)=\\sum_{i=1}^n a_{ii}$。"))
+    + thm("迹的性质", p("(1) $\\mathrm{tr}(A+B)=\\mathrm{tr}(A)+\\mathrm{tr}(B)$；(2) $\\mathrm{tr}(cA)=c\\,\\mathrm{tr}(A)$；(3) $\\mathrm{tr}(A^T)=\\mathrm{tr}(A)$；(4) $\\mathrm{tr}(AB)=\\mathrm{tr}(BA)$（即使 $AB\\neq BA$）；(5) $\\mathrm{tr}(A)=\\sum_{i=1}^n\\lambda_i$（特征值之和）。"))
+    + der(p("<strong>(4) 的证明：</strong>设 $A=(a_{ij})$ 为 $m\\times n$，$B=(b_{ij})$ 为 $n\\times m$。$\\mathrm{tr}(AB)=\\sum_{i=1}^m(AB)_{ii}=\\sum_{i=1}^m\\sum_{k=1}^n a_{ik}b_{ki}$。交换求和顺序：$=\\sum_{k=1}^n\\sum_{i=1}^m b_{ki}a_{ik}=\\sum_{k=1}^n(BA)_{kk}=\\mathrm{tr}(BA)$。"))
+)},
+{"id":"c2s5-2","name":"正交矩阵","tags":["def","thm","der"],"brief":"列向量构成标准正交基的实方阵。",
+ "body": wrap(
+    defn("正交矩阵", p("$n$ 阶实方阵 $Q$ 称为正交矩阵，若 $Q^TQ=QQ^T=I$，即 $Q^{-1}=Q^T$。"))
+    + thm("正交矩阵的性质", p("(1) $\\det Q=\\pm 1$；(2) $Q$ 的列（行）向量构成 $\\mathbb{R}^n$ 的标准正交基；(3) 正交变换保持内积与长度：$\\langle Q\\mathbf{x},Q\\mathbf{y}\\rangle=\\langle\\mathbf{x},\\mathbf{y}\\rangle$；(4) 正交矩阵的特征值模为 1；(5) 正交矩阵的乘积与逆仍为正交矩阵。"))
+    + der(p("<strong>(2) 的证明：</strong>设 $Q=(\\mathbf{q}_1,\\ldots,\\mathbf{q}_n)$（列分块）。$Q^TQ$ 的 $(i,j)$ 元为 $\\mathbf{q}_i^T\\mathbf{q}_j=\\langle\\mathbf{q}_i,\\mathbf{q}_j\\rangle$。$Q^TQ=I$ 意味着 $\\langle\\mathbf{q}_i,\\mathbf{q}_j\\rangle=\\delta_{ij}$，即列向量标准正交。同理 $QQ^T=I$ 意味着行向量标准正交。<br><strong>(3) 的证明：</strong>$\\langle Q\\mathbf{x},Q\\mathbf{y}\\rangle=(Q\\mathbf{x})^T(Q\\mathbf{y})=\\mathbf{x}^TQ^TQ\\mathbf{y}=\\mathbf{x}^TI\\mathbf{y}=\\mathbf{x}^T\\mathbf{y}=\\langle\\mathbf{x},\\mathbf{y}\\rangle$。"))
+)},
+{"id":"c2s5-3","name":"幂等矩阵与幂零矩阵","tags":["def","thm","der"],"brief":"A²=A 的幂等矩阵特征值为 0 或 1。",
+ "body": wrap(
+    defn("幂等与幂零", p("若 $A^2=A$，称 $A$ 为幂等矩阵；若存在正整数 $k$ 使 $A^k=0$，称 $A$ 为幂零矩阵，满足 $A^k=0$ 的最小 $k$ 称为幂零指数。"))
+    + thm("幂等矩阵的性质", p("(1) 幂等矩阵的特征值只能是 0 或 1；(2) 幂等矩阵可对角化，且 $\\mathrm{rank}(A)=\\mathrm{tr}(A)$；(3) $I-A$ 也是幂等矩阵。"))
+    + der(p("<strong>(1) 的证明：</strong>设 $\\lambda$ 是 $A$ 的特征值，$\\mathbf{v}$ 为对应特征向量。$A^2\\mathbf{v}=A(A\\mathbf{v})=A(\\lambda\\mathbf{v})=\\lambda A\\mathbf{v}=\\lambda^2\\mathbf{v}$。又 $A^2=A$，故 $A^2\\mathbf{v}=A\\mathbf{v}=\\lambda\\mathbf{v}$。因此 $\\lambda^2\\mathbf{v}=\\lambda\\mathbf{v}$，因 $\\mathbf{v}\\neq 0$，$\\lambda^2=\\lambda$，即 $\\lambda=0$ 或 $1$。<br><strong>(2) 的证明：</strong>幂等矩阵的极小多项式为 $x(x-1)$（无重根），故可对角化。对角形中 1 的个数即秩，而迹等于特征值之和即 1 的个数，故 $\\mathrm{rank}(A)=\\mathrm{tr}(A)$。"))
+)}
+]},
 ]
 
 # =====================================================
@@ -324,6 +418,36 @@ ch3_sections = [
     + der(p("<strong>证明：</strong>由 $D\\neq 0$，$A$ 可逆，解唯一为 $\\mathbf{x}=A^{-1}\\mathbf{b}=\\frac{1}{D}\\mathrm{adj}(A)\\mathbf{b}$。$x_i=\\frac{1}{D}\\sum_j A_{ji}b_j=\\frac{1}{D}D_i$，其中 $D_i=\\sum_j b_j A_{ji}$ 正是将 $D$ 第 $i$ 列换为 $\\mathbf{b}$ 后按第 $i$ 列展开的结果。"))
 )}
 ]},
+# ---- 3.4 拉普拉斯展开与行列式的应用 ----
+{
+"name": "3.4 拉普拉斯展开与行列式的应用",
+"color": "#dc2626",
+"desc": "拉普拉斯展开定理、行列式的几何意义与乘法定理",
+"items": [
+{"id":"c3s4-1","name":"拉普拉斯展开定理","tags":["thm","der"],"brief":"按 k 行（列）展开的推广。",
+ "body": wrap(
+    defn("k 阶子式与余子式", p("在 $n$ 阶行列式 $D$ 中，任取 $k$ 行 $k$ 列（$1\\le k\\le n$），交点处元素构成的 $k$ 阶行列式称为 $D$ 的一个 $k$ 阶子式，记作 $M$。划去这 $k$ 行 $k$ 列后剩余的 $n-k$ 阶行列式称为 $M$ 的余子式。若 $k$ 行的行标为 $i_1<\\cdots<i_k$，$k$ 列的列标为 $j_1<\\cdots<j_k$，则 $(-1)^{\\sum i_t+\\sum j_t}$ 乘以余子式称为 $M$ 的代数余子式，记作 $A$。"))
+    + thm("拉普拉斯展开定理", p("在 $n$ 阶行列式 $D$ 中，任意取定 $k$ 行（列），则 $D$ 等于这 $k$ 行（列）中所有 $k$ 阶子式与其代数余子式乘积之和：$D=\\sum_{i=1}^{C_n^k} M_i A_i$。"))
+    + der(p("<strong>证明思路：</strong>按行展开定理是 $k=1$ 的特例。对一般 $k$，将行列式的 $n!$ 项按所取 $k$ 行中元素的位置分组。每组对应一个 $k$ 阶子式 $M$，组内各项可分解为 $M$ 的展开项乘以余子式的展开项，符号由所取行列的位置决定。详细证明需对排列作精细分析，核心是将 $n$ 级排列的逆序数分解为 $k$ 级排列与 $n-k$ 级排列逆序数之和再加交叉项 $\\sum i_t+\\sum j_t$ 的奇偶性。"))
+    + note(p("拉普拉斯展开在 $k=1$ 时退化为按行（列）展开。取 $k=n$ 时只有一项 $D$ 本身。它在证明分块矩阵行列式公式（如 $\\det\\begin{pmatrix}A&B\\\\0&D\\end{pmatrix}=\\det A\\cdot\\det D$）时非常有用。"))
+)},
+{"id":"c3s4-2","name":"行列式的几何意义","tags":["thm","der","app"],"brief":"行列式是平行多面体的有向体积。",
+ "body": wrap(
+    thm("行列式的几何解释", p("设 $A=(\\mathbf{a}_1,\\ldots,\\mathbf{a}_n)$ 为 $n$ 阶实方阵，$\\mathbf{a}_i$ 为列向量。则 $|\\det A|$ 等于 $\\mathbf{a}_1,\\ldots,\\mathbf{a}_n$ 张成的 $n$ 维平行多面体的体积；$\\det A$ 的符号表示定向（右手系为正，左手系为负）。"))
+    + der(p("<strong>二维情形：</strong>$\\mathbf{a}_1=(a,c)^T$，$\\mathbf{a}_2=(b,d)^T$ 张成的平行四边形面积为底 $\\times$ 高 $=\\sqrt{a^2+c^2}\\cdot|d-\\frac{bc}{a}|=|ad-bc|=|\\det A|$。<br><strong>三维情形：</strong>三个向量张成的平行六面体体积 $=|\\mathbf{a}_1\\cdot(\\mathbf{a}_2\\times\\mathbf{a}_3)|=|\\det A|$。<br><strong>一般 $n$ 维：</strong>用归纳法。体积函数满足：对每个向量多重线性、反对称、单位立方体体积为 1。行列式恰是满足这三条性质的唯一函数，故体积 $=|\\det A|$。"))
+    + app(p("<strong>应用：</strong>(1) 判断向量组线性无关：$\\mathbf{a}_1,\\ldots,\\mathbf{a}_n$ 线性无关 $\\Leftrightarrow$ 张成体积非零 $\\Leftrightarrow$ $\\det A\\neq 0$；(2) 坐标变换中的体积元：$d\\mathbf{x}=|\\det J|\\,d\\mathbf{u}$，其中 $J$ 是雅可比矩阵；(3) 线性变换的面积/体积缩放因子为 $|\\det A|$。"))
+)},
+{"id":"c3s4-3","name":"行列式与矩阵可逆性","tags":["thm","app"],"brief":"det A≠0 是方阵可逆与方程组唯一解的充要条件。",
+ "body": wrap(
+    thm("行列式的核心应用", p("对 $n$ 阶方阵 $A$，以下等价：(1) $\\det A\\neq 0$；(2) $A$ 可逆；(3) $A$ 的列（行）向量线性无关；(4) 齐次方程组 $A\\mathbf{x}=0$ 只有零解；(5) 对任意 $\\mathbf{b}$，$A\\mathbf{x}=\\mathbf{b}$ 有唯一解。"))
+    + der(p("<strong>证明链：</strong>(1)⇔(2) 由伴随矩阵法：$A^{-1}=\\frac{1}{\\det A}\\mathrm{adj}(A)$ 存在当且仅当 $\\det A\\neq 0$。(2)⇔(3) $A$ 可逆 $\\Leftrightarrow$ 列满秩 $\\Leftrightarrow$ 列向量线性无关。(2)⇒(5) 若 $A$ 可逆，则 $\\mathbf{x}=A^{-1}\\mathbf{b}$ 是唯一解。(5)⇒(4) 取 $\\mathbf{b}=0$ 得唯一解 $\\mathbf{x}=0$。(4)⇒(3) $A\\mathbf{x}=0$ 只有零解意味着列向量线性无关。(3)⇒(1) 列向量线性无关 $\\Leftrightarrow$ $\\mathrm{rank}(A)=n$ $\\Leftrightarrow$ $\\det A\\neq 0$。"))
+)},
+{"id":"c3s4-4","name":"行列式的乘法定理","tags":["thm","der"],"brief":"det(AB)=det A·det B。",
+ "body": wrap(
+    thm("行列式乘法定理", p("设 $A,B$ 为 $n$ 阶方阵，则 $\\det(AB)=\\det A\\cdot\\det B$。"))
+    + der(p("<strong>证明（初等矩阵法）：</strong>先证对初等矩阵 $E$，$\\det(EA)=\\det E\\cdot\\det A$。<br>(1) 若 $E$ 为交换两行型，则 $\\det E=-1$，$\\det(EA)=-\\det A=\\det E\\cdot\\det A$。<br>(2) 若 $E$ 为某行乘 $c$ 型，则 $\\det E=c$，$\\det(EA)=c\\det A=\\det E\\cdot\\det A$。<br>(3) 若 $E$ 为某行倍加型，则 $\\det E=1$，$\\det(EA)=\\det A=\\det E\\cdot\\det A$。<br>现对一般 $A$：若 $A$ 不可逆，则 $\\det A=0$，且 $AB$ 也不可逆（因 $\\mathrm{rank}(AB)\\le\\mathrm{rank}(A)<n$），故 $\\det(AB)=0=\\det A\\cdot\\det B$。<br>若 $A$ 可逆，则 $A$ 可表为初等矩阵之积 $A=E_1\\cdots E_k$。于是 $\\det(AB)=\\det(E_1\\cdots E_k B)=\\det E_1\\cdots\\det E_k\\cdot\\det B=\\det(E_1\\cdots E_k)\\cdot\\det B=\\det A\\cdot\\det B$。"))
+)}
+]},
 ]
 
 # =====================================================
@@ -384,6 +508,44 @@ ch4_sections = [
  "body": wrap(
     app(p("<strong>高斯消元法步骤：</strong>(1) 写出增广矩阵 $\\bar{A}=[A|\\mathbf{b}]$；(2) 用初等行变换化为行简化阶梯形；(3) 若出现 $[0\\cdots 0|c]$（$c\\neq 0$），则无解；(4) 否则，主元列对应基本变量，非主元列对应自由变量，令自由变量为任意参数，写出通解。"))
     + exa(p("<strong>例：</strong>解方程组 $\\begin{cases}x_1+x_2+x_3=6\\\\2x_1+3x_2+x_3=11\\\\3x_1+2x_2+x_3=9\\end{cases}$。增广矩阵 $\\begin{pmatrix}1&1&1&6\\\\2&3&1&11\\\\3&2&1&9\\end{pmatrix}\\xrightarrow{r_2-2r_1,r_3-3r_1}\\begin{pmatrix}1&1&1&6\\\\0&1&-1&-1\\\\0&-1&-2&-9\\end{pmatrix}\\xrightarrow{r_3+r_2}\\begin{pmatrix}1&1&1&6\\\\0&1&-1&-1\\\\0&0&-3&-10\\end{pmatrix}$。回代得 $x_3=\\frac{10}{3},x_2=\\frac{7}{3},x_1=\\frac{1}{3}$。"))
+)}
+]},
+# ---- 4.4 线性方程组的进一步讨论 ----
+{
+"name": "4.4 线性方程组的进一步讨论",
+"color": "#d97706",
+"desc": "解的存在唯一性、矩阵方程与西尔维斯特方程",
+"items": [
+{"id":"c4s4-1","name":"线性方程组解的存在唯一性定理","tags":["thm","der"],"brief":"r(A)=r(Ā)=n 时唯一解。",
+ "body": wrap(
+    thm("解的存在唯一性定理", p("设 $A$ 为 $m\\times n$ 矩阵，$\\bar{A}=[A|\\mathbf{b}]$。线性方程组 $A\\mathbf{x}=\\mathbf{b}$：<br>(1) 无解 $\\Leftrightarrow$ $\\mathrm{rank}(A)<\\mathrm{rank}(\\bar{A})$；<br>(2) 有唯一解 $\\Leftrightarrow$ $\\mathrm{rank}(A)=\\mathrm{rank}(\\bar{A})=n$；<br>(3) 有无穷多解 $\\Leftrightarrow$ $\\mathrm{rank}(A)=\\mathrm{rank}(\\bar{A})<n$。"))
+    + der(p("<strong>证明：</strong>(1) 若 $\\mathrm{rank}(A)<\\mathrm{rank}(\\bar{A})$，将 $\\bar{A}$ 化为行阶梯形后，最后一个非零行形如 $[0\\cdots 0|c]$（$c\\neq 0$），对应矛盾方程 $0=c$，无解。反之若无解，行阶梯形必出现这样的矛盾行，故 $\\mathrm{rank}(\\bar{A})=\\mathrm{rank}(A)+1$。<br>(2) 若 $\\mathrm{rank}(A)=\\mathrm{rank}(\\bar{A})=n$，行阶梯形有 $n$ 个主元，每个变量都是基本变量，回代得唯一解。<br>(3) 若秩 $r<n$，有 $n-r$ 个自由变量，取任意值均得解，故无穷多解。"))
+)},
+{"id":"c4s4-2","name":"矩阵方程 AX=B 与西尔维斯特方程","tags":["def","thm","der"],"brief":"将多右端项方程组统一为矩阵方程。",
+ "body": wrap(
+    defn("矩阵方程", p("设 $A$ 为 $m\\times n$，$B$ 为 $m\\times p$，求 $n\\times p$ 矩阵 $X$ 使 $AX=B$，称为矩阵方程。它等价于 $p$ 个线性方程组 $A\\mathbf{x}_j=\\mathbf{b}_j$（$j=1,\\ldots,p$），其中 $X=(\\mathbf{x}_1,\\ldots,\\mathbf{x}_p)$，$B=(\\mathbf{b}_1,\\ldots,\\mathbf{b}_p)$。"))
+    + thm("矩阵方程有解的条件", p("$AX=B$ 有解当且仅当 $\\mathrm{rank}(A)=\\mathrm{rank}([A|B])$。若 $A$ 可逆（$m=n$ 且 $\\det A\\neq 0$），则解唯一为 $X=A^{-1}B$。"))
+    + der(p("<strong>证明：</strong>$AX=B$ 有解 $\\Leftrightarrow$ 每个 $A\\mathbf{x}_j=\\mathbf{b}_j$ 有解 $\\Leftrightarrow$ 每个 $\\mathbf{b}_j$ 属于 $A$ 的列空间 $C(A)$ $\\Leftrightarrow$ $C(B)\\subseteq C(A)$ $\\Leftrightarrow$ $\\mathrm{rank}(A)=\\mathrm{rank}([A|B])$。当 $A$ 可逆时，$X=A^{-1}B$ 显然是唯一解。"))
+    + note(p("<strong>西尔维斯特方程：</strong>$AX+XB=C$（$A$ 为 $m\\times m$，$B$ 为 $n\\times n$，$X,C$ 为 $m\\times n$）。它有唯一解当且仅当 $A$ 与 $-B$ 无公共特征值。该方程在控制论和矩阵论中有重要应用。"))
+)}
+]},
+# ---- 4.5 线性方程组的几何意义 ----
+{
+"name": "4.5 线性方程组的几何意义",
+"color": "#f59e0b",
+"desc": "线性流形、解集的几何结构",
+"items": [
+{"id":"c4s5-1","name":"线性流形与解集的几何","tags":["def","thm"],"brief":"非齐次方程组的解集是平移的子空间。",
+ "body": wrap(
+    defn("线性流形", p("设 $W$ 是 $V$ 的子空间，$\\mathbf{v}_0\\in V$。集合 $\\mathbf{v}_0+W=\\{\\mathbf{v}_0+\\mathbf{w}:\\mathbf{w}\\in W\\}$ 称为 $V$ 中的一个线性流形（仿射子空间），其维数定义为 $\\dim W$。"))
+    + thm("非齐次方程组的解集", p("非齐次方程组 $A\\mathbf{x}=\\mathbf{b}$（有解时）的解集是一个线性流形：$S=\\boldsymbol{\\eta}^*+N(A)$，其中 $\\boldsymbol{\\eta}^*$ 是特解，$N(A)$ 是对应齐次方程组的解空间（零空间）。解集的维数为 $n-\\mathrm{rank}(A)$。"))
+    + der(p("<strong>证明：</strong>由解的结构定理，通解为 $\\mathbf{x}=\\boldsymbol{\\eta}^*+\\sum c_i\\boldsymbol{\\xi}_i$，其中 $\\boldsymbol{\\xi}_i$ 是基础解系（$N(A)$ 的基）。故解集 $S=\\{\\boldsymbol{\\eta}^*+\\mathbf{w}:\\mathbf{w}\\in N(A)\\}=\\boldsymbol{\\eta}^*+N(A)$。这是 $N(A)$ 沿 $\\boldsymbol{\\eta}^*$ 平移得到的线性流形，维数 $=\\dim N(A)=n-\\mathrm{rank}(A)$。几何上，齐次方程组的解空间是过原点的平面，非齐次方程组的解集是与之平行的平面。"))
+)},
+{"id":"c4s5-2","name":"基础解系的进一步性质","tags":["thm","der","note"],"brief":"基础解系含 n-r 个线性无关解。",
+ "body": wrap(
+    thm("基础解系的性质", p("设 $A$ 为 $m\\times n$ 矩阵，$\\mathrm{rank}(A)=r$。则齐次方程组 $A\\mathbf{x}=0$ 的基础解系恰含 $n-r$ 个线性无关的解向量，且任意 $n-r$ 个线性无关的解都构成基础解系。"))
+    + der(p("<strong>证明：</strong>由秩-零度定理，$\\dim N(A)=n-r$，故解空间的基（即基础解系）恰含 $n-r$ 个向量。<br>设 $\\boldsymbol{\\xi}_1,\\ldots,\\boldsymbol{\\xi}_{n-r}$ 是任意 $n-r$ 个线性无关的解。因 $\\dim N(A)=n-r$，且这 $n-r$ 个线性无关向量都在 $N(A)$ 中，它们构成 $N(A)$ 的一组基，故也是基础解系。"))
+    + note(p("<strong>求解步骤小结：</strong>(1) 对系数矩阵 $A$ 做初等行变换化为行简化阶梯形；(2) 确定主元列（基本变量）和自由变量（共 $n-r$ 个）；(3) 依次令每个自由变量为 1、其余为 0，回代求解得 $n-r$ 个解向量，即基础解系；(4) 通解为基础解系的任意线性组合。"))
 )}
 ]},
 ]
@@ -457,6 +619,37 @@ ch5_sections = [
     + app(p("<strong>应用：</strong>利用凯莱-哈密顿定理可将 $A$ 的高次幂表示为 $I,A,\\ldots,A^{n-1}$ 的线性组合，从而简化计算；也可用于求逆矩阵（当 $\\det A\\neq 0$ 时，由 $p_A(A)=0$ 可解出 $A^{-1}$）。"))
 )}
 ]},
+# ---- 5.4 特征值的进一步性质 ----
+{
+"name": "5.4 特征值的进一步性质",
+"color": "#dc2626",
+"desc": "代数重数与几何重数、最小多项式、瑞利商、广义特征向量",
+"items": [
+{"id":"c5s4-1","name":"代数重数与几何重数","tags":["def","thm","der"],"brief":"几何重数≤代数重数。",
+ "body": wrap(
+    defn("代数重数与几何重数", p("设 $\\lambda$ 是 $A$ 的特征值。$\\lambda$ 作为特征多项式根的重数称为代数重数，记作 $a_\\lambda$；特征子空间 $V_\\lambda=\\{\\mathbf{v}:A\\mathbf{v}=\\lambda\\mathbf{v}\\}$ 的维数称为几何重数，记作 $g_\\lambda$。"))
+    + thm("重数不等式", p("对 $A$ 的每个特征值 $\\lambda$，有 $1\\le g_\\lambda\\le a_\\lambda$。$A$ 可对角化当且仅当对所有特征值 $\\lambda$，$g_\\lambda=a_\\lambda$（即各特征子空间维数之和等于 $n$）。"))
+    + der(p("<strong>证明 $g_\\lambda\\le a_\\lambda$：</strong>设 $g_\\lambda=k$，取 $V_\\lambda$ 的一组基 $\\mathbf{v}_1,\\ldots,\\mathbf{v}_k$，扩充为 $\\mathbb{F}^n$ 的基 $\\mathbf{v}_1,\\ldots,\\mathbf{v}_k,\\mathbf{v}_{k+1},\\ldots,\\mathbf{v}_n$。令 $P=(\\mathbf{v}_1,\\ldots,\\mathbf{v}_n)$，则 $P^{-1}AP=\\begin{pmatrix}\\lambda I_k&B\\\\0&C\\end{pmatrix}$（前 $k$ 列：$A\\mathbf{v}_i=\\lambda\\mathbf{v}_i$）。特征多项式 $p_A(\\lambda)=\\det(\\lambda I-A)=\\det\\begin{pmatrix}(\\lambda_0-\\lambda)I_k&-B\\\\0&\\lambda I-C\\end{pmatrix}=(\\lambda_0-\\lambda)^k\\det(\\lambda I-C)$，故 $\\lambda$ 的代数重数 $a_\\lambda\\ge k=g_\\lambda$。<br><strong>可对角化条件：</strong>$A$ 可对角化 $\\Leftrightarrow$ 有 $n$ 个线性无关特征向量 $\\Leftrightarrow$ $\\sum g_\\lambda=n$。又 $\\sum a_\\lambda=n$，结合 $g_\\lambda\\le a_\\lambda$，得 $\\sum g_\\lambda=n$ $\\Leftrightarrow$ 每个 $g_\\lambda=a_\\lambda$。"))
+)},
+{"id":"c5s4-2","name":"最小多项式","tags":["def","thm","der"],"brief":"极小多项式整除特征多项式，无重根即可对角化。",
+ "body": wrap(
+    defn("最小多项式", p("设 $A$ 为 $n$ 阶方阵。满足 $p(A)=0$ 的首一多项式 $p(\\lambda)$ 中次数最低的称为 $A$ 的最小多项式，记作 $m_A(\\lambda)$。由凯莱-哈密顿定理，最小多项式存在且次数 $\\le n$。"))
+    + thm("最小多项式的性质", p("(1) $m_A(\\lambda)$ 整除 $A$ 的任何零化多项式（特别地，$m_A(\\lambda)\\mid p_A(\\lambda)$）；(2) $m_A(\\lambda)$ 与 $p_A(\\lambda)$ 有相同的根（不计重数），即 $A$ 的每个特征值都是 $m_A$ 的根；(3) $A$ 可对角化当且仅当 $m_A(\\lambda)$ 无重根。"))
+    + der(p("<strong>(1) 的证明：</strong>设 $f(A)=0$。由多项式除法，$f(\\lambda)=q(\\lambda)m_A(\\lambda)+r(\\lambda)$，其中 $\\deg r<\\deg m_A$ 或 $r=0$。代入 $A$：$0=f(A)=q(A)m_A(A)+r(A)=r(A)$。若 $r\\neq 0$，则 $r$ 是次数低于 $m_A$ 的零化多项式，与最小性矛盾。故 $r=0$，$m_A\\mid f$。<br><strong>(3) 的证明：</strong>若 $A$ 可对角化，$A=PDP^{-1}$，$D=\\mathrm{diag}(\\lambda_1,\\ldots,\\lambda_n)$。$m_A(A)=0$ $\\Leftrightarrow$ $m_A(D)=0$ $\\Leftrightarrow$ $m_A(\\lambda_i)=0$ 对所有 $i$。最小的这样的多项式是 $\\prod_{\\lambda\\text{ 互异}}(\\lambda-\\lambda)$，无重根。反之，若 $m_A$ 无重根，则 $m_A(\\lambda)=\\prod(\\lambda-\\lambda_i)$（$\\lambda_i$ 互异）。由 $(A-\\lambda_1 I)\\cdots(A-\\lambda_k I)=0$ 可证明 $V$ 是各特征子空间的直和，故 $A$ 可对角化。"))
+)},
+{"id":"c5s4-3","name":"瑞利商与特征值的极值性质","tags":["def","thm","der"],"brief":"实对称矩阵的最大/最小特征值由瑞利商的极值刻画。",
+ "body": wrap(
+    defn("瑞利商", p("设 $A$ 为 $n$ 阶实对称矩阵，非零向量 $\\mathbf{x}\\in\\mathbb{R}^n$。$A$ 关于 $\\mathbf{x}$ 的瑞利商定义为 $R(\\mathbf{x})=\\frac{\\mathbf{x}^TA\\mathbf{x}}{\\mathbf{x}^T\\mathbf{x}}$。"))
+    + thm("瑞利商的极值定理", p("设实对称矩阵 $A$ 的特征值为 $\\lambda_1\\ge\\lambda_2\\ge\\cdots\\ge\\lambda_n$。则：<br>(1) $\\lambda_1=\\max_{\\mathbf{x}\\neq 0}R(\\mathbf{x})=\\max_{\\|\\mathbf{x}\\|=1}\\mathbf{x}^TA\\mathbf{x}$；<br>(2) $\\lambda_n=\\min_{\\mathbf{x}\\neq 0}R(\\mathbf{x})=\\min_{\\|\\mathbf{x}\\|=1}\\mathbf{x}^TA\\mathbf{x}$；<br>(3) 极值在对应特征向量处取得。"))
+    + der(p("<strong>证明 (1)(2)：</strong>由谱定理，$A=Q\\Lambda Q^T$，$\\Lambda=\\mathrm{diag}(\\lambda_1,\\ldots,\\lambda_n)$，$Q$ 正交。令 $\\mathbf{y}=Q^T\\mathbf{x}$，则 $\\|\\mathbf{y}\\|=\\|\\mathbf{x}\\|$，且 $R(\\mathbf{x})=\\frac{\\mathbf{y}^T\\Lambda\\mathbf{y}}{\\mathbf{y}^T\\mathbf{y}}=\\frac{\\sum\\lambda_i y_i^2}{\\sum y_i^2}$。因 $\\lambda_1\\ge\\lambda_i$，$\\sum\\lambda_i y_i^2\\le\\lambda_1\\sum y_i^2$，故 $R(\\mathbf{x})\\le\\lambda_1$。取 $\\mathbf{x}=\\mathbf{q}_1$（对应 $\\lambda_1$ 的单位特征向量），则 $R(\\mathbf{q}_1)=\\lambda_1$，故最大值为 $\\lambda_1$。同理最小值为 $\\lambda_n$。"))
+)},
+{"id":"c5s4-4","name":"广义特征向量与若尔当链","tags":["def","thm"],"brief":"不可对角化矩阵的精细结构由广义特征向量链刻画。",
+ "body": wrap(
+    defn("广义特征向量", p("设 $\\lambda$ 是 $A$ 的特征值。若非零向量 $\\mathbf{v}$ 满足 $(A-\\lambda I)^k\\mathbf{v}=0$ 对某个正整数 $k$ 成立，则称 $\\mathbf{v}$ 为对应于 $\\lambda$ 的广义特征向量。满足该式的最小 $k$ 称为 $\\mathbf{v}$ 的指数。普通特征向量是指数为 1 的广义特征向量。"))
+    + thm("若尔当链", p("设 $\\mathbf{v}_k$ 是指数为 $k$ 的广义特征向量。定义 $\\mathbf{v}_{k-1}=(A-\\lambda I)\\mathbf{v}_k$，$\\mathbf{v}_{k-2}=(A-\\lambda I)\\mathbf{v}_{k-1}$，…，$\\mathbf{v}_1=(A-\\lambda I)\\mathbf{v}_2$。则 $\\mathbf{v}_1,\\ldots,\\mathbf{v}_k$ 构成若尔当链，其中 $\\mathbf{v}_1$ 是普通特征向量，且 $(A-\\lambda I)\\mathbf{v}_i=\\mathbf{v}_{i-1}$（$i\\ge 2$），$(A-\\lambda I)\\mathbf{v}_1=0$。"))
+    + der(p("<strong>链的线性无关性：</strong>设 $\\sum_{i=1}^k c_i\\mathbf{v}_i=0$。用 $(A-\\lambda I)^{k-1}$ 作用：左边 $=c_k(A-\\lambda I)^{k-1}\\mathbf{v}_k+0+\\cdots+0=c_k\\mathbf{v}_1$（因 $(A-\\lambda I)^{k-1}\\mathbf{v}_i=0$ 当 $i<k$，而 $(A-\\lambda I)^{k-1}\\mathbf{v}_k=\\mathbf{v}_1$）。故 $c_k\\mathbf{v}_1=0$，$\\mathbf{v}_1\\neq 0$ 得 $c_k=0$。再用 $(A-\\lambda I)^{k-2}$ 作用得 $c_{k-1}=0$，依此类推，所有 $c_i=0$。故若尔当链线性无关。"))
+)}
+]},
 ]
 
 # =====================================================
@@ -486,6 +679,12 @@ ch6_sections = [
     + thm("正定的等价条件", p("对 $n$ 阶实对称矩阵 $A$，以下等价：(1) $A$ 正定；(2) $A$ 的所有特征值 $>0$；(3) $A$ 的正惯性指数 $=n$；(4) $A$ 的所有顺序主子式 $>0$；(5) 存在可逆矩阵 $C$ 使 $A=C^TC$（即 $A$ 合同于单位矩阵）。"))
     + der(p("<strong>(1)⇒(2)：</strong>设 $\\lambda$ 是 $A$ 的特征值，$\\mathbf{v}$ 为对应特征向量。则 $\\mathbf{v}^TA\\mathbf{v}=\\lambda\\mathbf{v}^T\\mathbf{v}$。由正定，$\\mathbf{v}^TA\\mathbf{v}>0$，又 $\\mathbf{v}^T\\mathbf{v}>0$，故 $\\lambda>0$。<br><strong>(2)⇒(1)：</strong>若所有特征值 $>0$，由谱定理 $A=Q\\Lambda Q^T$，$\\Lambda=\\mathrm{diag}(\\lambda_1,\\ldots,\\lambda_n)$。对任意 $\\mathbf{x}\\neq 0$，令 $\\mathbf{y}=Q^T\\mathbf{x}\\neq 0$，则 $\\mathbf{x}^TA\\mathbf{x}=\\mathbf{y}^T\\Lambda\\mathbf{y}=\\sum\\lambda_i y_i^2>0$（因 $\\mathbf{y}\\neq 0$，至少一个 $y_i\\neq 0$）。"))
     + der(p("<strong>(1)⇒(4) 西尔维斯特判据（顺序主子式全正）：</strong>设 $A_k$ 为 $A$ 的 $k$ 阶顺序主子矩阵。对任意非零 $\\mathbf{x}_k=(x_1,\\ldots,x_k)^T$，补零为 $\\mathbf{x}=(x_1,\\ldots,x_k,0,\\ldots,0)^T\\neq 0$。因 $A$ 正定，$0<\\mathbf{x}^TA\\mathbf{x}=\\mathbf{x}_k^T A_k \\mathbf{x}_k$，故 $A_k$ 正定，从而 $\\det A_k>0$（正定矩阵行列式为正，由特征值全正与行列式=特征值之积）。<br><strong>(4)⇒(1)：</strong>对 $n$ 归纳。$n=1$ 显然。设 $n-1$ 成立。因 $\\det A_n>0$，$A$ 可逆。用分块高斯消元：$A=\\begin{pmatrix}A_{n-1}&\\mathbf{a}\\\\\\mathbf{a}^T&a_{nn}\\end{pmatrix}$，存在可逆矩阵 $P$ 使 $P^TAP=\\begin{pmatrix}A_{n-1}&0\\\\0&d\\end{pmatrix}$（合同变换），其中 $d=a_{nn}-\\mathbf{a}^TA_{n-1}^{-1}\\mathbf{a}$。由 $\\det A=\\det A_{n-1}\\cdot d>0$ 且 $\\det A_{n-1}>0$，得 $d>0$。由归纳 $A_{n-1}$ 正定，又 $d>0$，故 $P^TAP$ 正定，从而 $A$ 正定。"))
+)},
+{"id":"c6s1-4","name":"化二次型为标准形的方法","tags":["thm","der","app"],"brief":"配方法与正交变换法化二次型为标准形。",
+ "body": wrap(
+    thm("化二次型为标准形", p("任意二次型 $Q(\\mathbf{x})=\\mathbf{x}^TA\\mathbf{x}$（$A$ 对称）都可经可逆线性变换化为标准形 $d_1y_1^2+\\cdots+d_ny_n^2$。常用方法：(1) 配方法（拉格朗日）；(2) 正交变换法（$A$ 实对称时）；(3) 初等变换法。"))
+    + der(p("<strong>正交变换法（实对称矩阵）：</strong>由谱定理，实对称矩阵 $A$ 可正交对角化：$Q^TAQ=\\Lambda=\\mathrm{diag}(\\lambda_1,\\ldots,\\lambda_n)$，其中 $Q$ 为正交矩阵。令 $\\mathbf{x}=Q\\mathbf{y}$，则 $Q(\\mathbf{x})=\\mathbf{y}^TQ^TAQ\\mathbf{y}=\\mathbf{y}^T\\Lambda\\mathbf{y}=\\sum_{i=1}^n\\lambda_i y_i^2$。这是标准形，且系数恰为 $A$ 的特征值。正交变换保持向量长度和夹角，故几何上是将二次曲面旋转到主轴方向。<br><strong>配方法（一般对称矩阵）：</strong>若 $a_{11}\\neq 0$，将含 $x_1$ 的项配成完全平方：$Q=a_{11}(x_1+\\frac{a_{12}}{a_{11}}x_2+\\cdots+\\frac{a_{1n}}{a_{11}}x_n)^2+Q_1(x_2,\\ldots,x_n)$，其中 $Q_1$ 是 $n-1$ 元二次型。若所有平方项系数为 0 但有交叉项，先作变换 $x_1=y_1+y_2, x_2=y_1-y_2$ 产生平方项，再继续。递归进行即得标准形。"))
+    + app(p("<strong>几何应用：</strong>二次型 $\\mathbf{x}^TA\\mathbf{x}=c$ 表示二次曲面（椭球面、双曲面等）。正交变换法将其化为标准形 $\\lambda_1y_1^2+\\cdots+\\lambda_ny_n^2=c$，可直接看出曲面类型：特征值全正为椭球，有正有负为双曲，有零为柱面。"))
 )}
 ]},
 # ---- 6.2 特殊矩阵 ----
@@ -567,6 +766,30 @@ ch6_sections = [
  "body": wrap(
     thm("最小二乘解", p("设 $A$ 为 $m\\times n$ 矩阵（$m>n$），$\\mathbf{b}\\in\\mathbb{R}^m$。超定方程组 $A\\mathbf{x}=\\mathbf{b}$ 一般无解。最小二乘解 $\\hat{\\mathbf{x}}$ 是使 $\\|A\\mathbf{x}-\\mathbf{b}\\|^2$ 最小的 $\\mathbf{x}$，满足法方程 $A^TA\\hat{\\mathbf{x}}=A^T\\mathbf{b}$。若 $A$ 列满秩，则 $\\hat{\\mathbf{x}}=(A^TA)^{-1}A^T\\mathbf{b}$。"))
     + der(p("<strong>推导：</strong>$f(\\mathbf{x})=\\|A\\mathbf{x}-\\mathbf{b}\\|^2=(A\\mathbf{x}-\\mathbf{b})^T(A\\mathbf{x}-\\mathbf{b})=\\mathbf{x}^TA^TA\\mathbf{x}-2\\mathbf{b}^TA\\mathbf{x}+\\mathbf{b}^T\\mathbf{b}$。对 $\\mathbf{x}$ 求梯度并令其为零：$\\nabla f=2A^TA\\mathbf{x}-2A^T\\mathbf{b}=0$，得 $A^TA\\mathbf{x}=A^T\\mathbf{b}$。若 $A$ 列满秩，则 $A^TA$ 正定可逆，解唯一。几何上，$A\\hat{\\mathbf{x}}$ 是 $\\mathbf{b}$ 在 $A$ 的列空间上的正交投影。"))
+)}
+]},
+# ---- 6.5 二次型的合同对角化与分类 ----
+{
+"name": "6.5 二次型的合同对角化与分类",
+"color": "#7c3aed",
+"desc": "半正定与负定、合同变换化标准形、二次型的分类",
+"items": [
+{"id":"c6s5-1","name":"半正定与负定二次型","tags":["def","thm","der"],"brief":"特征值全非负则半正定，全负则负定。",
+ "body": wrap(
+    defn("半正定与负定", p("设 $A$ 为 $n$ 阶实对称矩阵。若对任意 $\\mathbf{x}$，$\\mathbf{x}^TA\\mathbf{x}\\ge 0$，称 $A$ 半正定；若对任意非零 $\\mathbf{x}$，$\\mathbf{x}^TA\\mathbf{x}<0$，称 $A$ 负定。"))
+    + thm("半正定的等价条件", p("对实对称矩阵 $A$，以下等价：(1) $A$ 半正定；(2) $A$ 的所有特征值 $\\ge 0$；(3) $A$ 的正惯性指数 $=\\mathrm{rank}(A)$；(4) 存在矩阵 $C$ 使 $A=C^TC$；(5) $A$ 的所有主子式 $\\ge 0$。"))
+    + der(p("<strong>(1)⇔(2)：</strong>由谱定理 $A=Q\\Lambda Q^T$。$\\mathbf{x}^TA\\mathbf{x}=\\sum\\lambda_i y_i^2$（$\\mathbf{y}=Q^T\\mathbf{x}$）。对任意 $\\mathbf{x}\\neq 0$ 有 $\\mathbf{y}\\neq 0$。$\\sum\\lambda_i y_i^2\\ge 0$ 对所有 $\\mathbf{y}$ 成立 $\\Leftrightarrow$ 所有 $\\lambda_i\\ge 0$（若有 $\\lambda_j<0$，取 $\\mathbf{y}=\\mathbf{e}_j$ 得负值）。<br><strong>(2)⇒(4)：</strong>若特征值 $\\ge 0$，令 $\\Sigma^{1/2}=\\mathrm{diag}(\\sqrt{\\lambda_1},\\ldots,\\sqrt{\\lambda_n})$，则 $A=Q\\Lambda Q^T=Q\\Sigma^{1/2}\\Sigma^{1/2}Q^T=(\\Sigma^{1/2}Q^T)^T(\\Sigma^{1/2}Q^T)=C^TC$，其中 $C=\\Sigma^{1/2}Q^T$。"))
+)},
+{"id":"c6s5-2","name":"合同变换化二次型为标准形","tags":["thm","der"],"brief":"用可逆线性变换（合同）化二次型为平方和。",
+ "body": wrap(
+    thm("合同对角化定理", p("任意 $n$ 阶对称矩阵 $A$ 都合同于一个对角矩阵，即存在可逆矩阵 $C$ 使 $C^TAC=\\mathrm{diag}(d_1,\\ldots,d_n)$。等价地，任意二次型都可经可逆线性变换化为标准形。"))
+    + der(p("<strong>证明（归纳法）：</strong>$n=1$ 显然。设 $n-1$ 成立。对 $n$ 阶对称矩阵 $A$：<br>若 $A$ 有非零对角元，不妨设 $a_{11}\\neq 0$（否则可通过合同变换交换行列使某个非零元到对角）。令 $C_1=\\begin{pmatrix}1&-\\frac{\\mathbf{a}^T}{a_{11}}\\\\0&I_{n-1}\\end{pmatrix}$，其中 $\\mathbf{a}=(a_{12},\\ldots,a_{1n})^T$。则 $C_1^TAC_1=\\begin{pmatrix}a_{11}&0\\\\0&A_1\\end{pmatrix}$，其中 $A_1$ 是 $n-1$ 阶对称矩阵。由归纳假设，存在可逆 $C_2$ 使 $C_2^TA_1C_2$ 为对角矩阵。令 $C=C_1\\begin{pmatrix}1&0\\\\0&C_2\\end{pmatrix}$，则 $C^TAC$ 为对角矩阵。<br>若 $A$ 所有对角元为 0 但 $A\\neq 0$，设 $a_{12}\\neq 0$。令 $C_1$ 为将第 2 列加到第 1 列（同时第 2 行加到第 1 行）的初等矩阵，则 $C_1^TAC_1$ 的 $(1,1)$ 元为 $2a_{12}\\neq 0$，化为已证情形。"))
+)},
+{"id":"c6s5-3","name":"二次型的分类与惯性指数","tags":["def","thm","app"],"brief":"按惯性指数将二次型分为正定、负定、半正定、半负定、不定。",
+ "body": wrap(
+    defn("二次型的分类", p("设二次型 $Q(\\mathbf{x})=\\mathbf{x}^TA\\mathbf{x}$ 的正惯性指数为 $p$，负惯性指数为 $q$，秩为 $r=p+q$。则：<br>(1) $p=n$（$q=0$）：正定；<br>(2) $q=n$（$p=0$）：负定；<br>(3) $p=r<n$（$q=0$）：半正定；<br>(4) $q=r<n$（$p=0$）：半负定；<br>(5) $p>0$ 且 $q>0$：不定。"))
+    + thm("惯性定理再述", p("二次型的正惯性指数 $p$ 和负惯性指数 $q$ 是合同变换下的不变量，与所选的可逆线性变换无关。$p-q$ 称为符号差。"))
+    + app(p("<strong>几何分类（二元二次型）：</strong>$Q(x,y)=ax^2+2bxy+cy^2$，矩阵 $A=\\begin{pmatrix}a&b\\\\b&c\\end{pmatrix}$。<br>(1) $\\det A=ac-b^2>0$ 且 $a>0$：正定（椭圆型）；<br>(2) $\\det A>0$ 且 $a<0$：负定；<br>(3) $\\det A<0$：不定（双曲型）；<br>(4) $\\det A=0$：半正定或半负定（抛物型）。这与二次曲线 $ax^2+2bxy+cy^2=1$ 的分类完全对应。"))
 )}
 ]},
 ]

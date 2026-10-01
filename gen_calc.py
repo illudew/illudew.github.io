@@ -59,6 +59,30 @@ FIG = {
 <path d="M50 120 Q 30 60 110 50" fill="none" stroke="#ef4444" stroke-width="2" stroke-dasharray="5 3"/>
 <text x="100" y="90" font-size="14" fill="#1e293b">D</text>
 <text x="120" y="60" font-size="11" fill="#ef4444">∂D</text></svg>''',
+"gradient": '''<svg viewBox="0 0 220 150" xmlns="http://www.w3.org/2000/svg">
+<line x1="20" y1="130" x2="200" y2="130" stroke="#94a3b8" stroke-width="1.5"/>
+<line x1="20" y1="130" x2="20" y2="20" stroke="#94a3b8" stroke-width="1.5"/>
+<path d="M40 110 Q 100 60 180 90" fill="none" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="4 3"/>
+<path d="M40 95 Q 100 45 180 75" fill="none" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="4 3"/>
+<path d="M40 80 Q 100 30 180 60" fill="none" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="4 3"/>
+<defs><marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#ef4444"/></marker></defs>
+<line x1="100" y1="80" x2="140" y2="40" stroke="#ef4444" stroke-width="2.5" marker-end="url(#arr)"/>
+<circle cx="100" cy="80" r="3.5" fill="#ef4444"/>
+<text x="145" y="38" font-size="11" fill="#ef4444">∇f</text>
+<text x="60" y="124" font-size="10" fill="#3b82f6">等值线</text></svg>''',
+"riemann": '''<svg viewBox="0 0 220 130" xmlns="http://www.w3.org/2000/svg">
+<line x1="20" y1="110" x2="200" y2="110" stroke="#94a3b8" stroke-width="1.5"/>
+<line x1="20" y1="110" x2="20" y2="20" stroke="#94a3b8" stroke-width="1.5"/>
+<path d="M30 100 Q 80 30 140 50 Q 180 60 195 45" fill="none" stroke="#3b82f6" stroke-width="2"/>
+<rect x="30" y="80" width="15" height="30" fill="#dbeafe" stroke="#93c5fd"/>
+<rect x="45" y="58" width="15" height="52" fill="#bfdbfe" stroke="#93c5fd"/>
+<rect x="60" y="40" width="15" height="70" fill="#93c5fd" stroke="#93c5fd"/>
+<rect x="75" y="33" width="15" height="77" fill="#60a5fa" stroke="#93c5fd"/>
+<rect x="90" y="42" width="15" height="68" fill="#93c5fd" stroke="#93c5fd"/>
+<rect x="105" y="52" width="15" height="58" fill="#bfdbfe" stroke="#93c5fd"/>
+<rect x="120" y="48" width="15" height="62" fill="#93c5fd" stroke="#93c5fd"/>
+<text x="75" y="28" font-size="11" fill="#ef4444">f(ξ_i)</text>
+<text x="55" y="124" font-size="10" fill="#475569">Δx_i</text></svg>''',
 }
 
 TAG_LABEL = {"def":"定 义","thm":"定 理","der":"推 导","exa":"例 子","app":"应 用","his":"注 记","note":"备 注"}
@@ -84,6 +108,19 @@ CORE_FORMULAS = [
     ("旋转体体积（圆盘法）", "V = \\pi\\int_a^b f^2(x)\\,dx", "曲线绕 x 轴旋转的体积"),
     ("曲面面积", "S = \\iint_D\\sqrt{1+z_x^2+z_y^2}\\,d\\sigma", "曲面 z=z(x,y) 的面积"),
     ("曲线弧长", "s = \\int_a^b\\sqrt{1+y'^2}\\,dx", "平面曲线的长度"),
+    ("极限的 ε-δ 定义", "\\lim_{x\\to x_0}f(x)=A \\Leftrightarrow \\forall\\varepsilon>0,\\exists\\delta>0,\\,0<|x-x_0|<\\delta\\Rightarrow|f(x)-A|<\\varepsilon", "函数极限的严格定义"),
+    ("两个重要极限", "\\lim_{x\\to 0}\\frac{\\sin x}{x}=1,\\quad \\lim_{x\\to\\infty}\\left(1+\\frac{1}{x}\\right)^x=e", "微积分中最基础的两个极限"),
+    ("莱布尼茨公式", "(uv)^{(n)} = \\sum_{k=0}^{n}\\binom{n}{k}u^{(n-k)}v^{(k)}", "两个函数乘积的高阶导数"),
+    ("柯西中值定理", "\\frac{f(b)-f(a)}{g(b)-g(a)} = \\frac{f'(\\xi)}{g'(\\xi)},\\quad \\xi\\in(a,b)", "拉格朗日中值定理的推广"),
+    ("洛必达法则", "\\lim\\frac{f(x)}{g(x)} = \\lim\\frac{f'(x)}{g'(x)}", "0/0 或 ∞/∞ 型不定式极限"),
+    ("第二换元积分法", "\\int f(x)\\,dx = \\int f(\\psi(t))\\psi'(t)\\,dt,\\quad x=\\psi(t)", "含根式积分的常用代换"),
+    ("参数方程求导", "\\frac{dy}{dx} = \\frac{\\psi'(t)}{\\varphi'(t)},\\quad x=\\varphi(t),y=\\psi(t)", "参数方程表示的曲线的切线斜率"),
+    ("方向导数", "\\frac{\\partial f}{\\partial l} = \\nabla f\\cdot\\vec l^0 = |\\nabla f|\\cos\\theta", "沿方向 l 的变化率，梯度方向最大"),
+    ("梯度", "\\nabla f = (f_x,f_y,f_z),\\quad \\frac{\\partial f}{\\partial l}\\bigg|_{\\max}=|\\nabla f|", "函数增长最快的方向与速率"),
+    ("二重积分换元法", "\\iint_D f(x,y)\\,d\\sigma = \\iint_{D'} f(x(u,v),y(u,v))\\,|J|\\,du\\,dv", "雅可比行列式 |J| 为面积伸缩系数"),
+    ("球坐标体积元素", "dV = r^2\\sin\\varphi\\,dr\\,d\\varphi\\,d\\theta", "球坐标系下的体积元素"),
+    ("曲率", "\\kappa = \\frac{|y''|}{(1+y'^2)^{3/2}}", "曲线弯曲程度的度量"),
+    ("一般斯托克斯定理", "\\int_{\\partial M} \\omega = \\int_M d\\omega", "边界积分等于内部外微分的积分（统一形式）"),
 ]
 
 # ---------- helper functions ----------
@@ -224,6 +261,63 @@ ch1_sections = [
 )},
 ]
 },
+# ---- 1.5 极限理论深入 ----
+{
+"name": "1.5 极限理论深入",
+"color": "#1d4ed8",
+"desc": "极限运算法则的ε-δ证明、第二重要极限、等价无穷小严格推导",
+"items": [
+{"id":"c1s5-1","name":"极限运算法则及其证明","tags":["thm","der"],"brief":"和差积商极限法则的严格证明。",
+ "body": wrap(
+    thm("极限的四则运算法则", p("设 $\\lim f(x)=A$，$\\lim g(x)=B$（同一极限过程），则：<br>(1) $\\lim[f(x)\\pm g(x)]=A\\pm B$；<br>(2) $\\lim[f(x)\\cdot g(x)]=A\\cdot B$；<br>(3) $\\lim\\frac{f(x)}{g(x)}=\\frac{A}{B}$（要求 $B\\ne 0$）。"))
+    + der(p("<strong>乘积法则的 ε-δ 证明：</strong>第一步，由 $\\lim f=A$，取 $\\varepsilon=1$，存在 $\\delta_1>0$，当 $0<|x-x_0|<\\delta_1$ 时 $|f(x)-A|<1$，故 $|f(x)|\\le|f(x)-A|+|A|<|A|+1$，即 $f$ 在 $x_0$ 局部有界。<br>第二步，对任意 $\\varepsilon>0$，由 $\\lim f=A$ 存在 $\\delta_2$ 使 $|f(x)-A|<\\frac{\\varepsilon}{2(|B|+1)}$；由 $\\lim g=B$ 存在 $\\delta_3$ 使 $|g(x)-B|<\\frac{\\varepsilon}{2(|A|+1)}$。取 $\\delta=\\min(\\delta_1,\\delta_2,\\delta_3)$，则当 $0<|x-x_0|<\\delta$ 时：")+
+    fml("|f(x)g(x)-AB| = |f(x)g(x)-f(x)B+f(x)B-AB| \\le |f(x)|\\cdot|g(x)-B|+|B|\\cdot|f(x)-A| < (|A|+1)\\cdot\\frac{\\varepsilon}{2(|A|+1)}+|B|\\cdot\\frac{\\varepsilon}{2(|B|+1)} < \\frac{\\varepsilon}{2}+\\frac{\\varepsilon}{2}=\\varepsilon",
+        "故 $\\lim[f(x)\\cdot g(x)]=AB$。$\\blacksquare$<br>商法则由 $f/g=f\\cdot(1/g)$ 及先证 $\\lim(1/g)=1/B$ 推出：$\\left|\\frac{1}{g(x)}-\\frac{1}{B}\\right|=\\frac{|g(x)-B|}{|g(x)||B|}$，由 $g\\to B\\ne 0$ 知 $g$ 局部有 $|g|>|B|/2$，故可任意小。"))
+    + der(p("<strong>夹逼准则证明（函数情形）：</strong>若在 $x_0$ 去心邻域内 $g(x)\\le f(x)\\le h(x)$，且 $\\lim g=\\lim h=A$，则对任意 $\\varepsilon>0$，存在 $\\delta$ 使 $|g-A|<\\varepsilon$ 且 $|h-A|<\\varepsilon$，即 $A-\\varepsilon<g(x)$ 且 $h(x)<A+\\varepsilon$。于是 $A-\\varepsilon<g(x)\\le f(x)\\le h(x)<A+\\varepsilon$，即 $|f(x)-A|<\\varepsilon$。$\\blacksquare$"))
+)},
+{"id":"c1s5-2","name":"第二重要极限与等价无穷小","tags":["thm","der","exa"],"brief":"(1+1/n)^n→e 与常用等价无穷小的推导。",
+ "body": wrap(
+    thm("第二重要极限", p("")+
+    fml("\\lim_{n\\to\\infty}\\left(1+\\frac{1}{n}\\right)^n = e,\\qquad \\lim_{x\\to\\infty}\\left(1+\\frac{1}{x}\\right)^x = e,\\qquad \\lim_{x\\to 0}(1+x)^{1/x}=e",
+        "其中 $e\\approx 2.718281828\\cdots$ 是自然对数的底，由欧拉命名。"))
+    + der(p("<strong>数列极限证明：</strong>设 $a_n=(1+1/n)^n$。由二项式定理展开：")+
+    fml("a_n = \\sum_{k=0}^n\\binom{n}{k}\\frac{1}{n^k} = 1+1+\\frac{1}{2!}\\left(1-\\frac{1}{n}\\right)+\\frac{1}{3!}\\left(1-\\frac{1}{n}\\right)\\left(1-\\frac{2}{n}\\right)+\\cdots+\\frac{1}{n!}\\prod_{j=1}^{n-1}\\left(1-\\frac{j}{n}\\right)",
+        "当 $n$ 增大时，每一项的因子 $(1-j/n)$ 增大，且项数也增加（多出正项），故 $\\{a_n\\}$ 单调递增。另一方面，$a_n<1+1+\\frac{1}{2!}+\\frac{1}{3!}+\\cdots+\\frac{1}{n!}<1+1+\\frac{1}{2}+\\frac{1}{2^2}+\\cdots+\\frac{1}{2^{n-1}}<1+2=3$，有上界。由单调有界准则，$\\lim a_n$ 存在，记为 $e$。"))
+    + der(p("<strong>常用等价无穷小推导（$x\\to 0$）：</strong><br>(1) $\\ln(1+x)\\sim x$：$\\lim_{x\\to 0}\\frac{\\ln(1+x)}{x}=\\lim_{x\\to 0}\\ln(1+x)^{1/x}=\\ln e=1$。<br>(2) $e^x-1\\sim x$：令 $t=e^x-1$，则 $x=\\ln(1+t)$，$\\lim\\frac{e^x-1}{x}=\\lim_{t\\to 0}\\frac{t}{\\ln(1+t)}=1$。<br>(3) $(1+x)^\\alpha-1\\sim\\alpha x$：$(1+x)^\\alpha-1=e^{\\alpha\\ln(1+x)}-1\\sim\\alpha\\ln(1+x)\\sim\\alpha x$。<br>(4) $1-\\cos x\\sim x^2/2$：$\\lim\\frac{1-\\cos x}{x^2/2}=\\lim\\frac{2\\sin^2(x/2)}{x^2/2}=\\lim\\left(\\frac{\\sin(x/2)}{x/2}\\right)^2=1$。"))
+    + exa(p("<strong>例：</strong>求 $\\lim_{x\\to 0}\\frac{\\tan x-\\sin x}{x^3}$。<br>正解：$\\tan x-\\sin x=\\sin x(\\sec x-1)=\\sin x\\cdot\\frac{1-\\cos x}{\\cos x}\\sim x\\cdot\\frac{x^2/2}{1}=\\frac{x^3}{2}$，故极限为 $1/2$。<br><strong>典型错误：</strong>分别替换 $\\tan x\\sim x$、$\\sin x\\sim x$ 得 $x-x=0$。加减运算中一般不能替换等价无穷小！"))
+)},
+]
+},
+# ---- 1.6 求导法则的证明 ----
+{
+"name": "1.6 求导法则的证明",
+"color": "#2563eb",
+"desc": "乘积法则、商法则、链式法则的严格证明",
+"items": [
+{"id":"c1s6-1","name":"乘积与商求导法则的证明","tags":["thm","der","exa"],"brief":"(uv)' 与 (u/v)' 的推导。",
+ "body": wrap(
+    thm("乘积法则", p("若 $u(x),v(x)$ 在 $x$ 处可导，则 $(uv)'=u'v+uv'$。"))
+    + der(p("<strong>证明：</strong>设 $y=u(x)v(x)$，给 $x$ 以增量 $\\Delta x$，则 $u,v$ 各有增量 $\\Delta u,\\Delta v$：")+
+    fml("\\Delta y = (u+\\Delta u)(v+\\Delta v)-uv = u\\Delta v+v\\Delta u+\\Delta u\\,\\Delta v",
+        "故 $\\frac{\\Delta y}{\\Delta x}=u\\frac{\\Delta v}{\\Delta x}+v\\frac{\\Delta u}{\\Delta x}+\\Delta u\\frac{\\Delta v}{\\Delta x}$。令 $\\Delta x\\to 0$，由 $u$ 可导知 $\\Delta u\\to 0$，$\\frac{\\Delta u}{\\Delta x}\\to u'$，$\\frac{\\Delta v}{\\Delta x}\\to v'$，故 $y'=uv'+vu'+0\\cdot v'=u'v+uv'$。$\\blacksquare$"))
+    + thm("商法则", p("若 $u,v$ 可导且 $v(x)\\ne 0$，则 $\\left(\\frac{u}{v}\\right)'=\\frac{u'v-uv'}{v^2}$。"))
+    + der(p("<strong>证明：</strong>设 $y=u/v$，则 $\\Delta y=\\frac{u+\\Delta u}{v+\\Delta v}-\\frac{u}{v}=\\frac{v\\Delta u-u\\Delta v}{v(v+\\Delta v)}$，故")+
+    fml("\\frac{\\Delta y}{\\Delta x} = \\frac{v\\frac{\\Delta u}{\\Delta x}-u\\frac{\\Delta v}{\\Delta x}}{v(v+\\Delta v)} \\xrightarrow{\\Delta x\\to 0} \\frac{vu'-uv'}{v^2}",
+        "其中用到 $\\Delta v\\to 0$（$v$ 可导必连续）。$\\blacksquare$"))
+    + exa(p("<strong>例：</strong>$(\\tan x)'=\\left(\\frac{\\sin x}{\\cos x}\\right)'=\\frac{\\cos x\\cdot\\cos x-\\sin x\\cdot(-\\sin x)}{\\cos^2 x}=\\frac{1}{\\cos^2 x}=\\sec^2 x$。"))
+)},
+{"id":"c1s6-2","name":"链式法则的证明","tags":["thm","der","exa"],"brief":"复合函数求导的严格证明。",
+ "body": wrap(
+    thm("链式法则", p("若 $y=f(u)$ 在 $u_0$ 可导，$u=g(x)$ 在 $x_0$ 可导，且 $u_0=g(x_0)$，则复合函数 $y=f(g(x))$ 在 $x_0$ 可导，且")+
+    fml("\\frac{dy}{dx}\\bigg|_{x=x_0} = f'(u_0)\\cdot g'(x_0)"))
+    + der(p("<strong>证明：</strong>由 $f$ 在 $u_0$ 可导，有 $\\Delta y=f'(u_0)\\Delta u+\\alpha\\Delta u$，其中 $\\alpha\\to 0$（当 $\\Delta u\\to 0$）。补充定义 $\\alpha=0$ 当 $\\Delta u=0$，则上式对 $\\Delta u=0$ 也成立。两边除以 $\\Delta x$：")+
+    fml("\\frac{\\Delta y}{\\Delta x} = f'(u_0)\\frac{\\Delta u}{\\Delta x}+\\alpha\\frac{\\Delta u}{\\Delta x}",
+        "令 $\\Delta x\\to 0$。由 $g$ 可导知 $\\Delta u\\to 0$，从而 $\\alpha\\to 0$；又 $\\frac{\\Delta u}{\\Delta x}\\to g'(x_0)$。故 $\\frac{dy}{dx}=f'(u_0)g'(x_0)+0\\cdot g'(x_0)=f'(u_0)g'(x_0)$。$\\blacksquare$"))
+    + der(p("<strong>反函数求导推导：</strong>设 $y=f(x)$ 严格单调可导且 $f'(x)\\ne 0$，反函数 $x=\\varphi(y)$。由 $\\frac{\\Delta x}{\\Delta y}=\\frac{1}{\\Delta y/\\Delta x}$，令 $\\Delta y\\to 0$（此时 $\\Delta x\\to 0$），得 $\\varphi'(y)=\\frac{1}{f'(x)}$。<br>例：$y=\\arcsin x$，则 $x=\\sin y$，$\\frac{dx}{dy}=\\cos y=\\sqrt{1-\\sin^2 y}=\\sqrt{1-x^2}$，故 $(\\arcsin x)'=\\frac{1}{\\sqrt{1-x^2}}$。"))
+    + exa(p("<strong>例（多层复合）：</strong>求 $y=e^{\\sin^2 x}$ 的导数。令 $y=e^u$，$u=v^2$，$v=\\sin x$，则 $\\frac{dy}{dx}=\\frac{dy}{du}\\cdot\\frac{du}{dv}\\cdot\\frac{dv}{dx}=e^u\\cdot 2v\\cdot\\cos x=e^{\\sin^2 x}\\cdot 2\\sin x\\cos x=e^{\\sin^2 x}\\sin 2x$。"))
+)},
+]
+},
 ]
 print(f"Ch1: {sum(len(s['items']) for s in ch1_sections)} items")
 
@@ -324,6 +418,26 @@ ch2_sections = [
     defn("凸性", p("设 $f$ 在区间 $I$ 连续。若对 $I$ 上任意 $x_1,x_2$ 及 $t\\in[0,1]$，有 $f(tx_1+(1-t)x_2)\\le tf(x_1)+(1-t)f(x_2)$，则称 $f$ 在 $I$ 上是<strong>凸函数</strong>（下凸）；反向不等式为凹函数（上凸）。"))
     + thm("凸性判定", p("若 $f$ 在 $I$ 上二阶可导，则 $f$ 为凸函数 $\\Leftrightarrow$ $f''(x)\\ge 0$（$x\\in I$）；严格凸 $\\Leftarrow$ $f''>0$。<br><strong>拐点：</strong>曲线凹凸性发生改变的点。若 $f''(x_0)=0$ 且 $f''$ 在 $x_0$ 两侧变号，则 $(x_0,f(x_0))$ 为拐点。"))
     + app(p("<strong>詹森不等式：</strong>若 $f$ 为凸函数，则 $f\\left(\\sum t_i x_i\\right)\\le\\sum t_i f(x_i)$（$t_i\\ge 0$，$\\sum t_i=1$）。这是凸性最有用的应用，在概率论（期望的琴生不等式）和优化中广泛使用。"))
+)},
+]
+},
+# ---- 2.5 泰勒公式的余项与函数作图 ----
+{
+"name": "2.5 泰勒公式的余项与函数作图",
+"color": "#0d9488",
+"desc": "皮亚诺余项、余项估计、函数作图的一般步骤",
+"items": [
+{"id":"c2s5-1","name":"泰勒公式的余项形式","tags":["thm","der","exa"],"brief":"拉格朗日余项、皮亚诺余项、积分余项。",
+ "body": wrap(
+    thm("三种余项形式", p("泰勒公式 $f(x)=\\sum_{k=0}^n\\frac{f^{(k)}(x_0)}{k!}(x-x_0)^k+R_n(x)$ 有三种常用余项：<br>(1) <strong>拉格朗日余项：</strong>$R_n(x)=\\frac{f^{(n+1)}(\\xi)}{(n+1)!}(x-x_0)^{n+1}$，$\\xi$ 介于 $x_0,x$ 之间；<br>(2) <strong>皮亚诺余项：</strong>$R_n(x)=o((x-x_0)^n)$（$x\\to x_0$），只需 $f^{(n)}(x_0)$ 存在；<br>(3) <strong>积分余项：</strong>$R_n(x)=\\frac{1}{n!}\\int_{x_0}^x f^{(n+1)}(t)(x-t)^n\\,dt$。"))
+    + der(p("<strong>积分余项推导：</strong>由牛顿-莱布尼茨公式 $f(x)-f(x_0)=\\int_{x_0}^x f'(t)\\,dt$。对 $n=1$，分部积分：$\\int_{x_0}^x f'(t)\\,dt=[f'(t)(t-x)]_{x_0}^x-\\int_{x_0}^x f''(t)(t-x)\\,dt=f'(x_0)(x-x_0)+\\int_{x_0}^x f''(t)(x-t)\\,dt$。反复分部积分 $n$ 次，即得积分余项。<br><strong>拉格朗日余项由积分余项推出：</strong>由积分第一中值定理，$\\int_{x_0}^x f^{(n+1)}(t)(x-t)^n\\,dt=f^{(n+1)}(\\xi)\\int_{x_0}^x(x-t)^n\\,dt=f^{(n+1)}(\\xi)\\cdot\\frac{(x-x_0)^{n+1}}{n+1}$，故 $R_n=\\frac{f^{(n+1)}(\\xi)}{(n+1)!}(x-x_0)^{n+1}$。"))
+    + exa(p("<strong>例（余项估计）：</strong>用 $e^x$ 的麦克劳林展开计算 $e$，取 $n=9$：$e\\approx\\sum_{k=0}^9\\frac{1}{k!}$。余项 $R_9=\\frac{e^\\xi}{10!}$（$0<\\xi<1$），$e^\\xi<e<3$，故 $|R_9|<\\frac{3}{10!}=\\frac{3}{3628800}\\approx 8.3\\times 10^{-7}$，精度达百万分之一。"))
+)},
+{"id":"c2s5-2","name":"函数作图的一般步骤","tags":["thm","app","exa"],"brief":"利用导数系统描绘函数图像。",
+ "body": wrap(
+    thm("作图步骤", p("<strong>(1)</strong> 确定定义域、奇偶性、周期性；<br><strong>(2)</strong> 求一阶导数 $f'$，确定驻点和不可导点，判断单调性与极值；<br><strong>(3)</strong> 求二阶导数 $f''$，确定凹凸性与拐点；<br><strong>(4)</strong> 求渐近线（水平、铅直、斜）；<br><strong>(5)</strong> 描点作图（极值点、拐点、与坐标轴交点等）。"))
+    + der(p("<strong>渐近线求法：</strong><br>(1) <strong>水平渐近线：</strong>若 $\\lim_{x\\to+\\infty}f(x)=c$（或 $x\\to-\\infty$），则 $y=c$ 为水平渐近线。<br>(2) <strong>铅直渐近线：</strong>若 $\\lim_{x\\to a}f(x)=\\infty$，则 $x=a$ 为铅直渐近线（$a$ 通常为间断点）。<br>(3) <strong>斜渐近线：</strong>若 $\\lim_{x\\to\\infty}\\frac{f(x)}{x}=k\\ne 0$ 且 $\\lim_{x\\to\\infty}[f(x)-kx]=b$，则 $y=kx+b$ 为斜渐近线。"))
+    + exa(p("<strong>例：</strong>作 $y=\\frac{x^3}{x^2-1}$ 的图像。<br>定义域 $x\\ne\\pm 1$，奇函数。$y'=\\frac{x^2(x^2-3)}{(x^2-1)^2}$，驻点 $x=0,\\pm\\sqrt{3}$。$y''=\\frac{2x(x^2+3)}{(x^2-1)^3}$。<br>极大值 $y(\\sqrt{3})=\\frac{3\\sqrt{3}}{2}$，极小值 $y(-\\sqrt{3})=-\\frac{3\\sqrt{3}}{2}$，拐点 $(0,0)$。<br>渐近线：$x=\\pm 1$（铅直），$y=x$（斜渐近线，$k=1,b=0$）。据此可画出完整图像。"))
 )},
 ]
 },
@@ -468,6 +582,29 @@ ch3_sections = [
 )},
 ]
 },
+# ---- 3.6 有理函数积分与积分技巧 ----
+{
+"name": "3.6 有理函数积分与积分技巧",
+"color": "#059669",
+"desc": "部分分式分解、有理函数积分、可有理化的积分",
+"items": [
+{"id":"c3s6-1","name":"有理函数的积分","tags":["thm","der","exa"],"brief":"部分分式分解法。",
+ "body": wrap(
+    thm("部分分式分解", p("有理函数 $R(x)=\\frac{P(x)}{Q(x)}$（真分式）可分解为四类简单分式之和：<br>(1) $\\frac{A}{x-a}$；(2) $\\frac{A}{(x-a)^k}$；(3) $\\frac{Bx+C}{x^2+px+q}$（$p^2-4q<0$）；(4) $\\frac{Bx+C}{(x^2+px+q)^k}$。<br>其中 $A,B,C$ 为待定系数。"))
+    + der(p("<strong>待定系数法：</strong>设分解式后通分，分子多项式恒等，比较同次幂系数或代入特殊 $x$ 值求解。<br>例如 $\\frac{1}{x^2-1}=\\frac{A}{x-1}+\\frac{B}{x+1}$，通分后分子 $1=A(x+1)+B(x-1)$。令 $x=1$ 得 $A=1/2$；令 $x=-1$ 得 $B=-1/2$。故 $\\frac{1}{x^2-1}=\\frac{1}{2}\\left(\\frac{1}{x-1}-\\frac{1}{x+1}\\right)$。"))
+    + exa(p("<strong>例：</strong>求 $\\int\\frac{dx}{x^3+1}$。<br>$x^3+1=(x+1)(x^2-x+1)$，设 $\\frac{1}{x^3+1}=\\frac{A}{x+1}+\\frac{Bx+C}{x^2-x+1}$。通分比较得 $A=1/3$，$B=-1/3$，$C=2/3$。<br>$\\int\\frac{dx}{x^3+1}=\\frac{1}{3}\\ln|x+1|-\\frac{1}{6}\\ln(x^2-x+1)+\\frac{1}{\\sqrt{3}}\\arctan\\frac{2x-1}{\\sqrt{3}}+C$。<br>其中 $\\int\\frac{-x/3+2/3}{x^2-x+1}dx$ 需拆为含分子分母导数的项与配方后 $\\arctan$ 的项。"))
+)},
+{"id":"c3s6-2","name":"可化为有理函数的积分","tags":["thm","exa","app"],"brief":"三角有理式与简单无理函数的积分。",
+ "body": wrap(
+    thm("三角有理式的积分", p("对 $\\int R(\\sin x,\\cos x)\\,dx$，用<strong>万能代换</strong> $t=\\tan\\frac{x}{2}$，则")+
+    fml("\\sin x=\\frac{2t}{1+t^2},\\quad \\cos x=\\frac{1-t^2}{1+t^2},\\quad dx=\\frac{2}{1+t^2}\\,dt",
+        "化为 $t$ 的有理函数积分。虽万能，但计算量大，应优先考虑更简便的代换。"))
+    + thm("简单无理函数的积分", p("<br>(1) $\\int R(x,\\sqrt[n]{ax+b})\\,dx$：令 $t=\\sqrt[n]{ax+b}$；<br>(2) $\\int R(x,\\sqrt{ax^2+bx+c})\\,dx$：先配方化为 $\\sqrt{u^2\\pm a^2}$ 或 $\\sqrt{a^2-u^2}$，再用三角代换；<br>(3) $\\int R(x,\\sqrt{\\frac{ax+b}{cx+d}})\\,dx$：令 $t=\\sqrt{\\frac{ax+b}{cx+d}}$。"))
+    + exa(p("<strong>例：</strong>求 $\\int\\frac{\\sin x}{\\sin x+\\cos x}\\,dx$。<br>方法一（万能代换）：令 $t=\\tan\\frac{x}{2}$，计算较繁。<br>方法二（技巧）：$\\frac{\\sin x}{\\sin x+\\cos x}=\\frac{1}{2}\\cdot\\frac{(\\sin x+\\cos x)-(\\cos x-\\sin x)}{\\sin x+\\cos x}=\\frac{1}{2}-\\frac{1}{2}\\cdot\\frac{(\\sin x+\\cos x)'}{\\sin x+\\cos x}$。<br>故积分 $=\\frac{x}{2}-\\frac{1}{2}\\ln|\\sin x+\\cos x|+C$。这展示了凑微分技巧的威力。"))
+    + app(p("<strong>积分技巧总结：</strong>(1) 优先考虑能否直接用基本公式；(2) 看能否凑微分；(3) 考虑分部积分（特别是反三角、对数、乘积）；(4) 含根式用三角代换或倒代换；(5) 有理函数用部分分式；(6) 三角有理式考虑万能代换或恒等变形。"))
+)},
+]
+},
 ]
 print(f"Ch3: {sum(len(s['items']) for s in ch3_sections)} items")
 
@@ -572,6 +709,33 @@ ch4_sections = [
 )},
 ]
 },
+# ---- 4.5 欧拉方程与解的存在唯一性 ----
+{
+"name": "4.5 欧拉方程与解的存在唯一性",
+"color": "#c2410c",
+"desc": "欧拉方程、常数变易法、皮卡存在唯一性定理",
+"items": [
+{"id":"c4s5-1","name":"欧拉方程","tags":["thm","der","exa"],"brief":"变系数方程中可化为常系数的特例。",
+ "body": wrap(
+    defn("欧拉方程", p("形如")+
+    fml("x^n y^{(n)}+a_1 x^{n-1}y^{(n-1)}+\\cdots+a_{n-1}xy'+a_n y = f(x)",
+        "的变系数线性方程称为<strong>欧拉方程</strong>。其特点是 $x^k$ 的幂次与导数阶数相同。"))
+    + der(p("<strong>解法（自变量代换）：</strong>令 $x=e^t$（即 $t=\\ln x$，$x>0$），则 $\\frac{dy}{dx}=\\frac{1}{x}\\frac{dy}{dt}$，$\\frac{d^2y}{dx^2}=\\frac{1}{x^2}\\left(\\frac{d^2y}{dt^2}-\\frac{dy}{dt}\\right)$，$\\frac{d^3y}{dx^3}=\\frac{1}{x^3}\\left(\\frac{d^3y}{dt^3}-3\\frac{d^2y}{dt^2}+2\\frac{dy}{dt}\\right)$，等等。代入后化为以 $t$ 为自变量的<strong>常系数</strong>线性方程，求解后回代 $t=\\ln x$。<br>对二阶欧拉方程 $x^2 y''+axy'+by=0$，也可直接设 $y=x^r$，代入得特征方程 $r(r-1)+ar+b=0$，解得 $r$ 后写出通解。"))
+    + exa(p("<strong>例：</strong>解 $x^2 y''+xy'-y=0$。设 $y=x^r$，特征方程 $r(r-1)+r-1=r^2-1=0$，$r=\\pm 1$。通解 $y=C_1 x+\\frac{C_2}{x}$。"))
+)},
+{"id":"c4s5-2","name":"常数变易法与解的存在唯一性","tags":["thm","der","app"],"brief":"非齐次方程的通解求法与皮卡定理。",
+ "body": wrap(
+    thm("常数变易法（一阶线性）", p("对 $y'+P(x)y=Q(x)$，先求齐次解 $y=Ce^{-\\int P\\,dx}$，将 $C$ 改为 $C(x)$ 代入非齐次方程，得 $C'(x)=Q(x)e^{\\int P\\,dx}$，故")+
+    fml("y = e^{-\\int P\\,dx}\\left(\\int Q(x)e^{\\int P\\,dx}\\,dx + C\\right)",
+        "这就是通解公式。常数变易法的思想是：把齐次解中的常数视为待定函数，使其满足非齐次方程。"))
+    + thm("常数变易法（二阶非齐次）", p("设 $y''+P(x)y'+Q(x)y=f(x)$ 的齐次通解为 $Y=C_1 y_1+C_2 y_2$，令非齐次特解 $y^*=C_1(x)y_1+C_2(x)y_2$，其中 $C_1',C_2'$ 满足方程组：")+
+    fml("\\begin{cases} C_1' y_1 + C_2' y_2 = 0 \\\\ C_1' y_1' + C_2' y_2' = f(x) \\end{cases}",
+        "由朗斯基行列式 $W(y_1,y_2)\\ne 0$ 可唯一解出 $C_1',C_2'$，积分得 $C_1,C_2$。"))
+    + thm("皮卡存在唯一性定理", p("若 $f(x,y)$ 在矩形区域 $R:\\,|x-x_0|\\le a,\\,|y-y_0|\\le b$ 上连续，且关于 $y$ 满足利普希茨条件 $|f(x,y_1)-f(x,y_2)|\\le L|y_1-y_2|$，则初值问题 $y'=f(x,y),\\,y(x_0)=y_0$ 在 $|x-x_0|\\le h$ 上存在唯一解（$h=\\min(a,b/M)$，$M=\\max_R|f|$）。"))
+    + app(p("<strong>皮卡迭代：</strong>唯一性定理的证明构造皮卡迭代序列 $y_{n+1}(x)=y_0+\\int_{x_0}^x f(t,y_n(t))\\,dt$，证明其一致收敛到解。这是数值求解微分方程（如改进欧拉法、龙格-库塔法）的理论基础。"))
+)},
+]
+},
 ]
 print(f"Ch4: {sum(len(s['items']) for s in ch4_sections)} items")
 
@@ -668,6 +832,35 @@ ch5_sections = [
         "解方程组 $L_x=0$，$L_y=0$，$L_\\lambda=0$（即 $\\varphi=0$），得可能的极值点。"))
     + der(p("<strong>几何解释：</strong>在约束曲线 $\\varphi=0$ 上，$f$ 取极值的点处，$f$ 的梯度与 $\\varphi$ 的梯度平行，即 $\\nabla f=\\lambda\\nabla\\varphi$（$\\lambda$ 为比例常数）。这正是拉格朗日乘数法的来源。"))
     + exa(p("<strong>例：</strong>求 $f(x,y)=xy$ 在 $x+y=1$ 下的极值。$L=xy+\\lambda(x+y-1)$。$L_x=y+\\lambda=0$，$L_y=x+\\lambda=0$，得 $x=y=-\\lambda$。由 $x+y=1$ 得 $x=y=1/2$，极值 $f=1/4$（最大值）。"))
+)},
+]
+},
+# ---- 5.5 方向导数与梯度 ----
+{
+"name": "5.5 方向导数与梯度",
+"color": "#7c3aed",
+"desc": "方向导数定义、梯度的几何意义、梯度与方向导数的关系",
+"items": [
+{"id":"c5s5-1","name":"方向导数","tags":["def","thm","der"],"brief":"沿任意方向的变化率。",
+ "body": wrap(
+    defn("方向导数", p("设 $z=f(x,y)$ 在点 $P_0(x_0,y_0)$ 某邻域有定义，$\\vec l$ 为从 $P_0$ 出发的射线，方向余弦为 $(\\cos\\alpha,\\cos\\beta)$。若极限")+
+    fml("\\frac{\\partial f}{\\partial l}\\bigg|_{P_0} = \\lim_{\\rho\\to 0^+}\\frac{f(x_0+\\rho\\cos\\alpha,y_0+\\rho\\cos\\beta)-f(x_0,y_0)}{\\rho}",
+        "存在，则称其为 $f$ 在 $P_0$ 沿方向 $\\vec l$ 的<strong>方向导数</strong>。"))
+    + thm("方向导数计算公式", p("若 $f$ 在 $P_0$ 可微，则 $f$ 在 $P_0$ 沿任意方向 $\\vec l$ 的方向导数存在，且")+
+    fml("\\frac{\\partial f}{\\partial l} = f_x\\cos\\alpha + f_y\\cos\\beta",
+        "三元函数：$\\frac{\\partial f}{\\partial l}=f_x\\cos\\alpha+f_y\\cos\\beta+f_z\\cos\\gamma$。"))
+    + der(p("<strong>推导：</strong>由 $f$ 可微，$\\Delta f=f_x\\Delta x+f_y\\Delta y+o(\\rho)$，其中 $\\Delta x=\\rho\\cos\\alpha$，$\\Delta y=\\rho\\cos\\beta$。两边除以 $\\rho$ 并令 $\\rho\\to 0^+$，得 $\\frac{\\partial f}{\\partial l}=f_x\\cos\\alpha+f_y\\cos\\beta$。<br><strong>注意：</strong>可微是充分条件。偏导数存在但不可微时，方向导数公式不一定成立。"))
+)},
+{"id":"c5s5-2","name":"梯度及其性质","tags":["def","thm","app"],"brief":"梯度的定义、方向与模的意义。",
+ "body": wrap(
+    defn("梯度", p("函数 $f(x,y)$ 在点 $P_0$ 的梯度是一个向量，定义为")+
+    fml("\\mathrm{grad}\\,f = \\nabla f = \\left(\\frac{\\partial f}{\\partial x},\\frac{\\partial f}{\\partial y}\\right)",
+        "三元函数：$\\nabla f=(f_x,f_y,f_z)$。梯度方向是函数增长最快的方向。"))
+    + thm("梯度与方向导数的关系", p("$\\frac{\\partial f}{\\partial l}=\\nabla f\\cdot\\vec l^0=|\\nabla f|\\cos\\theta$，其中 $\\vec l^0$ 为 $\\vec l$ 的单位向量，$\\theta$ 为 $\\nabla f$ 与 $\\vec l$ 的夹角。<br>故：<br>(1) 当 $\\theta=0$（$\\vec l$ 与梯度同向），方向导数最大，值为 $|\\nabla f|$；<br>(2) 当 $\\theta=\\pi$（反向），方向导数最小，值为 $-|\\nabla f|$；<br>(3) 当 $\\theta=\\pi/2$（正交），方向导数为 0。"))
+    + der(p("<strong>梯度的几何意义：</strong>设曲面 $z=f(x,y)$，等值线 $f(x,y)=c$ 在 $P_0$ 处的切线方向为等值线方向。沿等值线方向，$f$ 值不变，故方向导数为 0，即 $\\nabla f\\cdot\\vec\\tau=0$。这说明<strong>梯度方向垂直于等值线的切线，即沿等值线的法线方向</strong>。梯度指向函数值增大的一侧。")+
+    fml("\\nabla f \\perp \\text{等值线（面）的切线}",
+        "在物理中，温度场的梯度方向指向温度升高最快的方向；电场强度是电势的负梯度 $\\vec E=-\\nabla\\varphi$，指向电势降低最快的方向。"))
+    + app(p("<strong>梯度的应用：</strong>(1) <strong>最速下降法</strong>（优化）：沿 $-\\nabla f$ 方向迭代寻找最小值；(2) <strong>等高线图</strong>：梯度垂直于等高线，密集处梯度大（地形陡峭）；(3) <strong>法向量</strong>：曲面 $F(x,y,z)=0$ 在点处的法向量为 $\\nabla F$。"))
 )},
 ]
 },
@@ -836,6 +1029,32 @@ ch6_sections = [
 )},
 ]
 },
+# ---- 6.7 重积分的换元法与对称性 ----
+{
+"name": "6.7 重积分的换元法与对称性",
+"color": "#0891b2",
+"desc": "重积分一般换元公式、雅可比行列式、积分对称性",
+"items": [
+{"id":"c6s7-1","name":"重积分的换元法","tags":["thm","der","exa"],"brief":"一般换元公式与雅可比行列式。",
+ "body": wrap(
+    thm("二重积分换元法", p("设 $f$ 在 $D$ 连续，变换 $T:\\,x=x(u,v),\\,y=y(u,v)$ 将 $uOv$ 平面上的区域 $D'$ 一一映射到 $xOy$ 平面上的 $D$，且 $x,y$ 有一阶连续偏导数，雅可比行列式 $J=\\frac{\\partial(x,y)}{\\partial(u,v)}\\ne 0$，则")+
+    fml("\\iint_D f(x,y)\\,d\\sigma = \\iint_{D'} f(x(u,v),y(u,v))\\,|J|\\,du\\,dv"))
+    + der(p("<strong>雅可比行列式的几何意义：</strong>$|J|$ 是坐标变换下的<strong>面积伸缩系数</strong>。在 $(u,v)$ 处取小矩形 $\\Delta u\\times\\Delta v$，其像在 $xOy$ 平面上近似为平行四边形，边长向量为 $\\vec r_u\\Delta u=(x_u,y_u)\\Delta u$ 和 $\\vec r_v\\Delta v=(x_v,y_v)\\Delta v$，面积为 $|\\vec r_u\\times\\vec r_v|\\Delta u\\Delta v=|J|\\Delta u\\Delta v$。故 $d\\sigma=|J|\\,du\\,dv$。"))
+    + thm("三重积分换元法", p("变换 $x=x(u,v,w),y=y(u,v,w),z=z(u,v,w)$，雅可比 $J=\\frac{\\partial(x,y,z)}{\\partial(u,v,w)}$，则")+
+    fml("\\iiint_\\Omega f(x,y,z)\\,dV = \\iiint_{\\Omega'} f(x(u,v,w),y(u,v,w),z(u,v,w))\\,|J|\\,du\\,dv\\,dw"))
+    + exa(p("<strong>常见变换的雅可比：</strong><br>极坐标 $(x,y)=(r\\cos\\theta,r\\sin\\theta)$：$J=r$；<br>柱坐标 $(x,y,z)=(r\\cos\\theta,r\\sin\\theta,z)$：$J=r$；<br>球坐标 $(x,y,z)=(r\\sin\\varphi\\cos\\theta,r\\sin\\varphi\\sin\\theta,r\\cos\\varphi)$：$J=r^2\\sin\\varphi$。<br><strong>例：</strong>求椭球体 $\\frac{x^2}{a^2}+\\frac{y^2}{b^2}+\\frac{z^2}{c^2}\\le 1$ 的体积。作广义球坐标变换 $x=ar\\sin\\varphi\\cos\\theta$，$y=br\\sin\\varphi\\sin\\theta$，$z=cr\\cos\\varphi$，则 $J=abc\\,r^2\\sin\\varphi$。$V=\\int_0^{2\\pi}d\\theta\\int_0^\\pi\\sin\\varphi\\,d\\varphi\\int_0^1 abc\\,r^2\\,dr=abc\\cdot 2\\pi\\cdot 2\\cdot\\frac{1}{3}=\\frac{4}{3}\\pi abc$。"))
+)},
+{"id":"c6s7-2","name":"重积分的对称性","tags":["thm","app","exa"],"brief":"利用奇偶性与对称性简化积分。",
+ "body": wrap(
+    thm("奇偶对称性", p("设积分区域 $D$ 关于 $x$ 轴对称，$f(x,y)$ 关于 $y$ 为奇（偶）函数：<br>若 $f(x,-y)=-f(x,y)$（奇函数），则 $\\iint_D f\\,d\\sigma=0$；<br>若 $f(x,-y)=f(x,y)$（偶函数），则 $\\iint_D f\\,d\\sigma=2\\iint_{D_1}f\\,d\\sigma$（$D_1$ 为 $D$ 在 $y\\ge 0$ 的部分）。<br>关于 $y$ 轴对称时同理（看 $f$ 关于 $x$ 的奇偶性）。"))
+    + thm("轮换对称性", p("若积分区域 $D$ 关于 $y=x$ 对称（即 $(x,y)\\in D\\Rightarrow(y,x)\\in D$），则")+
+    fml("\\iint_D f(x,y)\\,d\\sigma = \\iint_D f(y,x)\\,d\\sigma",
+        "特别地，$\\iint_D x^2\\,d\\sigma=\\iint_D y^2\\,d\\sigma=\\frac{1}{2}\\iint_D(x^2+y^2)\\,d\\sigma$。"))
+    + der(p("<strong>轮换对称性证明：</strong>作变换 $(x,y)\\mapsto(y,x)$，此变换的雅可比 $J=\\begin{vmatrix}0&1\\\\1&0\\end{vmatrix}=-1$，$|J|=1$，且 $D'=D$，故 $\\iint_D f(x,y)\\,d\\sigma=\\iint_D f(y,x)\\,|J|\\,d\\sigma=\\iint_D f(y,x)\\,d\\sigma$。"))
+    + exa(p("<strong>例：</strong>计算 $\\iint_D(x^2+y^2)\\,d\\sigma$，$D:x^2+y^2\\le 1$。由轮换对称性 $\\iint_D x^2=\\iint_D y^2$，故原式 $=2\\iint_D x^2\\,d\\sigma=\\iint_D(x^2+y^2)\\,d\\sigma$。极坐标下 $=\\int_0^{2\\pi}d\\theta\\int_0^1 r^2\\cdot r\\,dr=2\\pi\\cdot\\frac{1}{4}=\\frac{\\pi}{2}$。"))
+)},
+]
+},
 ]
 print(f"Ch6: {sum(len(s['items']) for s in ch6_sections)} items")
 
@@ -939,6 +1158,30 @@ ch7_sections = [
 )},
 ]
 },
+# ---- 7.5 外微分与一般斯托克斯定理 ----
+{
+"name": "7.5 外微分与一般斯托克斯定理",
+"color": "#be185d",
+"desc": "微分形式、外微分算子、统一的斯托克斯定理",
+"items": [
+{"id":"c7s5-1","name":"微分形式与外微分","tags":["def","thm"],"brief":"从向量场到微分形式的统一语言。",
+ "body": wrap(
+    defn("微分形式", p("在 $\\mathbb{R}^3$ 中：<br><strong>0-形式</strong>：标量函数 $f$；<br><strong>1-形式</strong>：$\\omega=P\\,dx+Q\\,dy+R\\,dz$（对应向量场 $\\vec F=(P,Q,R)$）；<br><strong>2-形式</strong>：$\\omega=P\\,dy\\wedge dz+Q\\,dz\\wedge dx+R\\,dx\\wedge dy$（对应向量场的通量）；<br><strong>3-形式</strong>：$\\omega=f\\,dx\\wedge dy\\wedge dz$（对应体积密度）。"))
+    + thm("外微分算子 d", p("外微分 $d$ 将 $k$-形式变为 $(k+1)$-形式，满足：<br>(1) $d^2=0$（$d$ 作用两次为零）；<br>(2) 线性：$d(\\alpha+\\beta)=d\\alpha+d\\beta$；<br>(3) 莱布尼茨法则：$d(\\alpha\\wedge\\beta)=d\\alpha\\wedge\\beta+(-1)^k\\alpha\\wedge d\\beta$（$\\alpha$ 为 $k$-形式）。")+
+    fml("df = f_x\\,dx+f_y\\,dy+f_z\\,dz\\quad(\\text{0-形式}\\to\\text{1-形式，对应梯度 }\\nabla f)",
+        "对 1-形式 $\\omega=Pdx+Qdy+Rdz$：$d\\omega=(R_y-Q_z)dy\\wedge dz+(P_z-R_x)dz\\wedge dx+(Q_x-P_y)dx\\wedge dy$，对应旋度 $\\nabla\\times\\vec F$；<br>对 2-形式 $\\omega=Pdy\\wedge dz+Qdz\\wedge dx+Rdx\\wedge dy$：$d\\omega=(P_x+Q_y+R_z)dx\\wedge dy\\wedge dz$，对应散度 $\\nabla\\cdot\\vec F$。"))
+    + app(p("<strong>$d^2=0$ 的物理意义：</strong>$d^2 f=0$ 对应 $\\nabla\\times(\\nabla f)=0$（梯度场无旋）；$d^2\\omega=0$（对 1-形式）对应 $\\nabla\\cdot(\\nabla\\times\\vec F)=0$（旋度场无源）。这两个向量恒等式是 $d^2=0$ 的体现。"))
+)},
+{"id":"c7s5-2","name":"一般斯托克斯定理","tags":["thm","app","note"],"brief":"三大积分定理的统一形式。",
+ "body": wrap(
+    thm("一般斯托克斯定理", p("设 $M$ 为 $n$ 维定向流形，$\\partial M$ 为其边界（带诱导定向），$\\omega$ 为 $(n-1)$-形式，则")+
+    fml("\\int_{\\partial M} \\omega = \\int_M d\\omega",
+        "这是微积分基本定理在高维的最一般形式。"))
+    + app(p("<strong>三大定理作为特例：</strong><br>(1) <strong>梯度定理</strong>：$M$ 为曲线（1 维），$\\omega=f$（0-形式），$\\int_A^B df=f(B)-f(A)$（牛顿-莱布尼茨）；<br>(2) <strong>格林公式</strong>：$M$ 为平面区域（2 维），$\\omega=Pdx+Qdy$（1-形式），$\\oint_{\\partial M}Pdx+Qdy=\\iint_M(Q_x-P_y)d\\sigma$；<br>(3) <strong>高斯公式</strong>：$M$ 为空间区域（3 维），$\\omega=Pdy\\wedge dz+Qdz\\wedge dx+Rdx\\wedge dy$（2-形式），$\\mathop{\\oint}_{\\partial M}\\vec F\\cdot d\\vec S=\\iiint_M\\nabla\\cdot\\vec F\\,dV$；<br>(4) <strong>斯托克斯公式</strong>：$M$ 为空间曲面（2 维），$\\omega=Pdx+Qdy+Rdz$（1-形式），$\\oint_{\\partial M}\\vec F\\cdot d\\vec r=\\iint_M(\\nabla\\times\\vec F)\\cdot d\\vec S$。"))
+    + note(p("一般斯托克斯定理揭示了微积分的深刻统一性：<strong>边界上的积分等于内部外微分的积分</strong>。它是微分几何、拓扑学（德拉姆上同调）、理论物理（规范场论）的基础工具。理解这一定理，就把握了从一元微积分到高维微积分的全部精髓。"))
+)},
+]
+},
 ]
 print(f"Ch7: {sum(len(s['items']) for s in ch7_sections)} items")
 
@@ -1033,6 +1276,32 @@ ch8_sections = [
         "令 $x=\\pi$ 得著名的欧拉恒等式 $e^{i\\pi}+1=0$，联系了数学中最重要的五个常数。"))
     + app(p("<strong>微分方程的级数解：</strong>某些变系数微分方程（如勒让德方程、贝塞尔方程）无法用初等函数求解，但可设解为幂级数 $y=\\sum a_n x^n$ 代入方程，递推求出系数。这是特殊函数理论的基础。"))
     + note(p("级数是分析学的核心工具：它将复杂函数表示为简单函数（多项式、三角函数）的叠加，是函数逼近、数值计算、信号处理和现代物理学的基础。"))
+)},
+]
+},
+# ---- 8.5 函数项级数与一致收敛 ----
+{
+"name": "8.5 函数项级数与一致收敛",
+"color": "#be185d",
+"desc": "函数列与函数项级数的一致收敛、魏尔斯特拉斯判别法、逐项积分与求导",
+"items": [
+{"id":"c8s5-1","name":"一致收敛的概念与判别","tags":["def","thm","der"],"brief":"逐点收敛与一致收敛的区别。",
+ "body": wrap(
+    defn("一致收敛", p("设函数列 $\\{f_n(x)\\}$ 在区间 $I$ 上逐点收敛于 $f(x)$。若对任意 $\\varepsilon>0$，存在与 $x$ 无关的正整数 $N$，使得当 $n>N$ 时，对一切 $x\\in I$ 都有 $|f_n(x)-f(x)|<\\varepsilon$，则称 $\\{f_n\\}$ 在 $I$ 上<strong>一致收敛</strong>于 $f$，记作 $f_n\\rightrightarrows f$。"))
+    + thm("一致收敛的柯西准则", p("$\\{f_n\\}$ 在 $I$ 上一致收敛 $\\Leftrightarrow$ 对任意 $\\varepsilon>0$，存在 $N$，当 $m,n>N$ 时，对一切 $x\\in I$ 有 $|f_m(x)-f_n(x)|<\\varepsilon$。"))
+    + thm("魏尔斯特拉斯 M 判别法", p("对函数项级数 $\\sum u_n(x)$，若存在收敛的正项级数 $\\sum M_n$，使得对一切 $x\\in I$ 有 $|u_n(x)|\\le M_n$，则 $\\sum u_n(x)$ 在 $I$ 上一致收敛且绝对收敛。"))
+    + der(p("<strong>一致收敛 vs 逐点收敛：</strong>逐点收敛的 $N$ 可依赖于 $x$；一致收敛要求存在公共的 $N$ 对所有 $x$ 适用。例：$f_n(x)=x^n$ 在 $[0,1)$ 逐点收敛于 0，但不一致收敛（当 $x$ 接近 1 时需 $n$ 很大才能使 $x^n<\\varepsilon$）。而在 $[0,a]$（$a<1$）上一致收敛。<br>一致收敛保证了极限运算与积分、求导运算的可交换性。"))
+)},
+{"id":"c8s5-2","name":"一致收敛级数的性质","tags":["thm","app"],"brief":"和函数的连续性、逐项积分、逐项求导。",
+ "body": wrap(
+    thm("连续性定理", p("若 $u_n(x)$ 都在 $I$ 上连续，且 $\\sum u_n(x)$ 在 $I$ 上一致收敛于 $S(x)$，则 $S(x)$ 在 $I$ 上连续。即：<br>$\\lim_{x\\to x_0}S(x)=S(x_0)$，或 $\\lim_{x\\to x_0}\\sum u_n(x)=\\sum u_n(x_0)=\\sum\\lim_{x\\to x_0}u_n(x)$（极限与求和可交换）。"))
+    + thm("逐项积分定理", p("若 $u_n(x)$ 在 $[a,b]$ 连续，$\\sum u_n(x)$ 在 $[a,b]$ 一致收敛于 $S(x)$，则")+
+    fml("\\int_a^b S(x)\\,dx = \\sum_{n=1}^\\infty\\int_a^b u_n(x)\\,dx",
+        "即积分与求和可交换。"))
+    + thm("逐项求导定理", p("若 $u_n(x)$ 在 $I$ 上有连续导数，$\\sum u_n(x)$ 在 $I$ 上逐点收敛，且 $\\sum u_n'(x)$ 在 $I$ 上一致收敛，则 $\\sum u_n(x)$ 在 $I$ 上一致收敛，且可逐项求导：")+
+    fml("\\left(\\sum_{n=1}^\\infty u_n(x)\\right)' = \\sum_{n=1}^\\infty u_n'(x)"))
+    + app(p("<strong>应用：</strong>一致收敛理论是幂级数在收敛区间内可逐项积分、逐项求导的理论基础。例如 $\\frac{1}{1-x}=\\sum_{n=0}^\\infty x^n$ 在 $(-1,1)$ 内闭一致收敛，逐项积分得 $-\\ln(1-x)=\\sum_{n=1}^\\infty\\frac{x^n}{n}$；逐项求导得 $\\frac{1}{(1-x)^2}=\\sum_{n=1}^\\infty n x^{n-1}$。"))
+    + note(p("一致收敛是分析学中保证运算可交换的关键条件。没有一致收敛，和函数可能不连续、不可逐项积分或求导。这一理论由魏尔斯特拉斯严格建立，是现代分析学的基石。"))
 )},
 ]
 },
