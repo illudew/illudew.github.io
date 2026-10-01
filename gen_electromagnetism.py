@@ -1,0 +1,723 @@
+# -*- coding: utf-8 -*-
+"""Generate electromagnetism.html with 5 chapters: 静电场/介质静电场/静磁场/介质静磁场/麦克斯韦."""
+import json
+
+FIG = {
+"pointcharge": '''<svg viewBox="0 0 240 160" xmlns="http://www.w3.org/2000/svg">
+<circle cx="120" cy="80" r="12" fill="#ef4444"/>
+<text x="114" y="84" font-size="12" fill="#fff" font-weight="bold">+</text>
+<line x1="120" y1="80" x2="120" y2="30" stroke="#3b82f6" stroke-width="1.5"/>
+<polygon points="120,30 114,40 126,40" fill="#3b82f6"/>
+<line x1="120" y1="80" x2="170" y2="80" stroke="#3b82f6" stroke-width="1.5"/>
+<polygon points="170,80 160,74 160,86" fill="#3b82f6"/>
+<line x1="120" y1="80" x2="85" y2="115" stroke="#3b82f6" stroke-width="1.5"/>
+<polygon points="85,115 91,105 83,107" fill="#3b82f6"/>
+<line x1="120" y1="80" x2="70" y2="55" stroke="#3b82f6" stroke-width="1.5"/>
+<polygon points="70,55 76,48 80,58" fill="#3b82f6"/>
+<text x="175" y="78" font-size="11" fill="#3b82f6">E</text></svg>''',
+"dipole": '''<svg viewBox="0 0 240 160" xmlns="http://www.w3.org/2000/svg">
+<circle cx="95" cy="80" r="10" fill="#ef4444"/>
+<text x="90" y="84" font-size="12" fill="#fff" font-weight="bold">+</text>
+<circle cx="145" cy="80" r="10" fill="#3b82f6"/>
+<text x="140" y="84" font-size="12" fill="#fff" font-weight="bold">−</text>
+<line x1="95" y1="80" x2="145" y2="80" stroke="#475569" stroke-width="1.5" stroke-dasharray="4 3"/>
+<text x="115" y="74" font-size="10" fill="#475569">d</text>
+<line x1="120" y1="40" x2="120" y2="60" stroke="#10b981" stroke-width="2"/>
+<polygon points="120,40 114,50 126,50" fill="#10b981"/>
+<text x="125" y="42" font-size="11" fill="#10b981">p</text></svg>''',
+"gauss": '''<svg viewBox="0 0 240 160" xmlns="http://www.w3.org/2000/svg">
+<circle cx="120" cy="80" r="14" fill="#ef4444"/>
+<text x="114" y="84" font-size="11" fill="#fff" font-weight="bold">q</text>
+<circle cx="120" cy="80" r="55" fill="none" stroke="#0ea5e9" stroke-width="2" stroke-dasharray="5 4"/>
+<text x="178" y="50" font-size="11" fill="#0ea5e9">S (高斯面)</text>
+<line x1="134" y1="80" x2="170" y2="80" stroke="#3b82f6" stroke-width="1.5"/>
+<polygon points="170,80 160,74 160,86" fill="#3b82f6"/>
+<text x="150" y="72" font-size="10" fill="#3b82f6">dS</text></svg>''',
+"capacitor": '''<svg viewBox="0 0 240 160" xmlns="http://www.w3.org/2000/svg">
+<line x1="60" y1="40" x2="60" y2="120" stroke="#3b82f6" stroke-width="4"/>
+<line x1="180" y1="40" x2="180" y2="120" stroke="#ef4444" stroke-width="4"/>
+<text x="45" y="138" font-size="11" fill="#3b82f6">+Q</text>
+<text x="170" y="138" font-size="11" fill="#ef4444">−Q</text>
+<line x1="90" y1="80" x2="150" y2="80" stroke="#10b981" stroke-width="1.5" stroke-dasharray="3 3"/>
+<text x="112" y="72" font-size="10" fill="#10b981">d</text>
+<line x1="100" y1="60" x2="140" y2="60" stroke="#f59e0b" stroke-width="1.5"/>
+<polygon points="140,60 132,56 132,64" fill="#f59e0b"/>
+<text x="110" y="52" font-size="10" fill="#f59e0b">E</text></svg>''',
+"biot": '''<svg viewBox="0 0 240 160" xmlns="http://www.w3.org/2000/svg">
+<path d="M 40 120 Q 120 120 200 120" fill="none" stroke="#475569" stroke-width="3"/>
+<circle cx="120" cy="120" r="4" fill="#ef4444"/>
+<text x="126" y="116" font-size="10" fill="#ef4444">Idl</text>
+<circle cx="170" cy="60" r="4" fill="#3b82f6"/>
+<text x="175" y="56" font-size="10" fill="#3b82f6">P</text>
+<line x1="120" y1="120" x2="170" y2="60" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4 3"/>
+<text x="138" y="82" font-size="10" fill="#94a3b8">r</text>
+<line x1="170" y1="60" x2="170" y2="35" stroke="#10b981" stroke-width="2"/>
+<polygon points="170,35 164,45 176,45" fill="#10b981"/>
+<text x="175" y="40" font-size="11" fill="#10b981">dB</text></svg>''',
+"solenoid": '''<svg viewBox="0 0 240 160" xmlns="http://www.w3.org/2000/svg">
+<path d="M 30 80 Q 50 50 70 80 Q 90 110 110 80 Q 130 50 150 80 Q 170 110 190 80 Q 210 50 230 80" fill="none" stroke="#3b82f6" stroke-width="2.5"/>
+<line x1="40" y1="80" x2="220" y2="80" stroke="#10b981" stroke-width="1.5" stroke-dasharray="3 3"/>
+<polygon points="220,80 210,74 210,86" fill="#10b981"/>
+<text x="200" y="70" font-size="11" fill="#10b981">B</text>
+<text x="30" y="130" font-size="11" fill="#3b82f6">N 匝, 电流 I</text></svg>''',
+"induction": '''<svg viewBox="0 0 240 160" xmlns="http://www.w3.org/2000/svg">
+<circle cx="120" cy="80" r="50" fill="none" stroke="#3b82f6" stroke-width="2"/>
+<line x1="120" y1="80" x2="170" y2="80" stroke="#94a3b8" stroke-width="1.5"/>
+<text x="140" y="74" font-size="10" fill="#94a3b8">A</text>
+<line x1="80" y1="100" x2="160" y2="100" stroke="#10b981" stroke-width="2"/>
+<polygon points="160,100 150,94 150,106" fill="#10b981"/>
+<text x="110" y="118" font-size="11" fill="#10b981">B(t)</text>
+<path d="M 120 30 A 50 50 0 0 1 170 80" fill="none" stroke="#ef4444" stroke-width="2" stroke-dasharray="4 3"/>
+<polygon points="170,80 160,74 162,86" fill="#ef4444"/>
+<text x="150" y="55" font-size="10" fill="#ef4444">ε</text></svg>''',
+"wave_em": '''<svg viewBox="0 0 240 160" xmlns="http://www.w3.org/2000/svg">
+<line x1="10" y1="80" x2="230" y2="80" stroke="#cbd5e1" stroke-width="1"/>
+<path d="M 10 80 Q 40 30 70 80 T 130 80 T 190 80 T 230 80" fill="none" stroke="#3b82f6" stroke-width="2"/>
+<path d="M 10 80 Q 40 130 70 80 T 130 80 T 190 80 T 230 80" fill="none" stroke="#ef4444" stroke-width="2"/>
+<text x="20" y="28" font-size="10" fill="#3b82f6">E</text>
+<text x="20" y="140" font-size="10" fill="#ef4444">B</text>
+<line x1="10" y1="80" x2="230" y2="80" stroke="#10b981" stroke-width="1" stroke-dasharray="6 4" opacity="0.6"/>
+<text x="185" y="72" font-size="10" fill="#10b981">传播方向</text></svg>''',
+"dielectric": '''<svg viewBox="0 0 240 160" xmlns="http://www.w3.org/2000/svg">
+<rect x="30" y="30" width="180" height="100" fill="#eef4fb" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4 3"/>
+<text x="80" y="20" font-size="11" fill="#475569">电介质</text>
+<g>
+<circle cx="70" cy="70" r="8" fill="none" stroke="#cbd5e1" stroke-width="1"/>
+<circle cx="70" cy="70" r="3" fill="#ef4444"/>
+<line x1="70" y1="70" x2="78" y2="62" stroke="#3b82f6" stroke-width="1"/>
+</g>
+<g>
+<circle cx="120" cy="90" r="8" fill="none" stroke="#cbd5e1" stroke-width="1"/>
+<circle cx="120" cy="90" r="3" fill="#ef4444"/>
+<line x1="120" y1="90" x2="128" y2="82" stroke="#3b82f6" stroke-width="1"/>
+</g>
+<g>
+<circle cx="170" cy="70" r="8" fill="none" stroke="#cbd5e1" stroke-width="1"/>
+<circle cx="170" cy="70" r="3" fill="#ef4444"/>
+<line x1="170" y1="70" x2="178" y2="62" stroke="#3b82f6" stroke-width="1"/>
+</g>
+<text x="100" y="145" font-size="10" fill="#475569">极化：束缚电荷沿电场方向排列</text></svg>''',
+"magnetic_material": '''<svg viewBox="0 0 240 160" xmlns="http://www.w3.org/2000/svg">
+<rect x="30" y="30" width="180" height="100" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="4 3"/>
+<text x="80" y="20" font-size="11" fill="#475569">磁介质</text>
+<g>
+<circle cx="70" cy="70" r="7" fill="none" stroke="#cbd5e1"/>
+<line x1="70" y1="70" x2="76" y2="64" stroke="#3b82f6" stroke-width="1.5"/>
+<polygon points="76,64 72,72 80,68" fill="#3b82f6"/>
+</g>
+<g>
+<circle cx="120" cy="90" r="7" fill="none" stroke="#cbd5e1"/>
+<line x1="120" y1="90" x2="126" y2="84" stroke="#3b82f6" stroke-width="1.5"/>
+<polygon points="126,84 122,92 130,88" fill="#3b82f6"/>
+</g>
+<g>
+<circle cx="170" cy="70" r="7" fill="none" stroke="#cbd5e1"/>
+<line x1="170" y1="70" x2="176" y2="64" stroke="#3b82f6" stroke-width="1.5"/>
+<polygon points="176,64 172,72 180,68" fill="#3b82f6"/>
+</g>
+<text x="80" y="145" font-size="10" fill="#475569">磁化：分子磁矩沿磁场方向排列</text></svg>''',
+}
+
+TAG_LABEL = {"def":"定 义","thm":"定 理","der":"推 导","exa":"例 子","app":"应 用","his":"注 记","note":"备 注"}
+
+CORE_FORMULAS = [
+    ("库仑定律", "\\mathbf{F} = \\frac{1}{4\\pi\\varepsilon_0}\\frac{q_1 q_2}{r^2}\\hat{\\mathbf{r}}", "真空中两点电荷间的作用力"),
+    ("电场强度", "\\mathbf{E} = \\frac{\\mathbf{F}}{q_0} = \\frac{1}{4\\pi\\varepsilon_0}\\frac{q}{r^2}\\hat{\\mathbf{r}}", "单位正电荷所受的力"),
+    ("电场通量", "\\Phi_e = \\oint_S \\mathbf{E}\\cdot d\\mathbf{S}", "电场穿过闭合曲面的通量"),
+    ("高斯定理", "\\oint_S \\mathbf{E}\\cdot d\\mathbf{S} = \\frac{q_{\\text{内}}}{\\varepsilon_0}", "静电场的通量与包围电荷的关系"),
+    ("电势", "V_a = \\int_a^{\\infty} \\mathbf{E}\\cdot d\\mathbf{l}", "单位正电荷在 a 点的电势能"),
+    ("电场与电势", "\\mathbf{E} = -\\nabla V", "电场是电势的负梯度"),
+    ("电容", "C = \\frac{Q}{V}", "导体储存电荷能力的量度"),
+    ("电偶极矩", "\\mathbf{p} = q\\mathbf{d}", "等量异号电荷的偶极矩"),
+    ("电位移矢量", "\\mathbf{D} = \\varepsilon_0\\mathbf{E} + \\mathbf{P}", "电位移矢量定义"),
+    ("介质高斯定理", "\\oint_S \\mathbf{D}\\cdot d\\mathbf{S} = q_{0\\text{内}}", "电位移通量仅与自由电荷有关"),
+    ("毕奥-萨伐尔定律", "d\\mathbf{B} = \\frac{\\mu_0}{4\\pi}\\frac{I d\\mathbf{l}\\times\\hat{\\mathbf{r}}}{r^2}", "电流元产生的磁场"),
+    ("安培环路定理", "\\oint_L \\mathbf{B}\\cdot d\\mathbf{l} = \\mu_0 I_{\\text{内}}", "磁场的环流与穿过电流的关系"),
+    ("洛伦兹力", "\\mathbf{F} = q(\\mathbf{E} + \\mathbf{v}\\times\\mathbf{B})", "带电粒子在电磁场中受的力"),
+    ("安培力", "d\\mathbf{F} = I d\\mathbf{l}\\times\\mathbf{B}", "电流元在磁场中受的力"),
+    ("磁矩", "\\mathbf{m} = I\\mathbf{S}", "载流线圈的磁矩"),
+    ("磁场强度", "\\mathbf{H} = \\frac{\\mathbf{B}}{\\mu_0} - \\mathbf{M}", "磁场强度定义"),
+    ("介质安培环路定理", "\\oint_L \\mathbf{H}\\cdot d\\mathbf{l} = I_{0\\text{内}}", "H 的环流仅与传导电流有关"),
+    ("法拉第电磁感应", "\\varepsilon = -\\frac{d\\Phi}{dt}", "感应电动势等于磁通量变化率的负值"),
+    ("动生电动势", "\\varepsilon = \\int (\\mathbf{v}\\times\\mathbf{B})\\cdot d\\mathbf{l}", "导体运动产生的电动势"),
+    ("位移电流", "I_d = \\varepsilon_0\\frac{d\\Phi_e}{dt}", "变化电场等效的电流"),
+    ("麦克斯韦方程组(微分)", "\\nabla\\cdot\\mathbf{E}=\\frac{\\rho}{\\varepsilon_0},\\ \\nabla\\cdot\\mathbf{B}=0,\\ \\nabla\\times\\mathbf{E}=-\\frac{\\partial\\mathbf{B}}{\\partial t},\\ \\nabla\\times\\mathbf{B}=\\mu_0\\mathbf{j}+\\mu_0\\varepsilon_0\\frac{\\partial\\mathbf{E}}{\\partial t}", "电磁场的基本方程"),
+    ("电磁波速", "c = \\frac{1}{\\sqrt{\\mu_0\\varepsilon_0}}", "真空中电磁波的传播速度"),
+    ("电磁波能流密度", "\\mathbf{S} = \\frac{1}{\\mu_0}\\mathbf{E}\\times\\mathbf{B}", "坡印廷矢量"),
+]
+
+def js_escape(s):
+    return s.replace("\\","\\\\").replace("`","\\`").replace("${","\\${")
+def defn(t, body): return f'<section class="la-kp-sec la-kp-def"><h5>定 义</h5><p><strong>{t}</strong></p>{body}</section>'
+def thm(t, body): return f'<section class="la-kp-sec la-kp-thm"><h5>定 理 · {t}</h5>{body}</section>'
+def der(body): return f'<section class="la-kp-sec la-kp-der"><h5>推 导</h5>{body}</section>'
+def exa(body): return f'<section class="la-kp-sec la-kp-exa"><h5>例 子</h5>{body}</section>'
+def app(body): return f'<section class="la-kp-sec la-kp-app"><h5>应 用</h5>{body}</section>'
+def note(body): return f'<section class="la-kp-sec la-kp-note"><h5>备 注</h5>{body}</section>'
+def fml(latex, caption=""):
+    cap = f'<span class="note">{caption}</span>' if caption else ""
+    return f'<div class="la-fml">$${latex}$$ {cap}</div>'
+def p(txt): return f'<p>{txt}</p>'
+def wrap(body): return f'<div class="la-kp">{body}</div>'
+
+# =====================================================
+#  CHAPTER 1: 静电场
+# =====================================================
+ch1_sections = [
+{
+"name": "1.1 库仑定律与电场强度",
+"color": "#2563eb",
+"desc": "库仑定律、电场强度与叠加原理",
+"items": [
+{"id":"e1s1-1","name":"库仑定律","tags":["def","thm"],"brief":"真空中两点电荷间的相互作用力。",
+ "fig":"pointcharge","figCap":"正点电荷的电场线",
+ "body": wrap(
+   defn("库仑定律",p("真空中两个静止点电荷 $q_1,q_2$ 之间的相互作用力大小与电量乘积成正比，与距离平方成反比，方向沿连线：")+
+   fml("\\mathbf{F} = \\frac{1}{4\\pi\\varepsilon_0}\\frac{q_1 q_2}{r^2}\\hat{\\mathbf{r}}")+
+   p("其中 $\\varepsilon_0=8.85\\times10^{-12}\\,\\text{C}^2/(\\text{N}\\cdot\\text{m}^2)$ 为真空介电常数。"))+
+   defn("电场强度",p("电场中某点的电场强度等于单位正试探电荷在该点所受的力：$\\mathbf{E}=\\mathbf{F}/q_0$。点电荷的电场：")+
+   fml("\\mathbf{E} = \\frac{1}{4\\pi\\varepsilon_0}\\frac{q}{r^2}\\hat{\\mathbf{r}}"))+
+   thm("叠加原理",p("多个点电荷产生的电场为各点电荷单独产生电场的矢量和：")+
+   fml("\\mathbf{E} = \\sum_i \\mathbf{E}_i = \\frac{1}{4\\pi\\varepsilon_0}\\sum_i \\frac{q_i}{r_i^2}\\hat{\\mathbf{r}}_i"))
+ )},
+]},
+{
+"name": "1.2 高斯定理",
+"color": "#2563eb",
+"desc": "电场的通量定理及其应用",
+"items": [
+{"id":"e1s2-1","name":"高斯定理","tags":["thm","der"],"brief":"静电场的通量与包围电荷的关系。",
+ "fig":"gauss","figCap":"点电荷的高斯面",
+ "body": wrap(
+   defn("电通量",p("电场穿过曲面 $S$ 的电通量：$\\Phi_e=\\int_S\\mathbf{E}\\cdot d\\mathbf{S}$。"))+
+   thm("高斯定理",p("真空中静电场通过任意闭合曲面的电通量等于该曲面包围的电荷代数和除以 $\\varepsilon_0$：")+
+   fml("\\oint_S \\mathbf{E}\\cdot d\\mathbf{S} = \\frac{1}{\\varepsilon_0}\\sum_i q_{i\\text{内}}"))+
+   der(p("<strong>推导（点电荷情形）：</strong>点电荷 $q$ 位于闭合球面 $S$ 中心，球面上 $E=\\frac{q}{4\\pi\\varepsilon_0 r^2}$ 且沿径向，$\\mathbf{E}\\parallel d\\mathbf{S}$：")+
+   fml("\\oint_S \\mathbf{E}\\cdot d\\mathbf{S} = \\oint_S E\\,dS = \\frac{q}{4\\pi\\varepsilon_0 r^2}\\cdot 4\\pi r^2 = \\frac{q}{\\varepsilon_0}")+
+   p("对任意闭合曲面，利用立体角可证结果相同；多个电荷由叠加原理得 $\\sum q_{\\text{内}}/\\varepsilon_0$。"))+
+   app(p("<strong>应用：</strong>利用对称性求电场。如无限长带电直线 $E=\\frac{\\lambda}{2\\pi\\varepsilon_0 r}$，无限大带电平面 $E=\\frac{\\sigma}{2\\varepsilon_0}$，均匀带电球面内部 $E=0$、外部 $E=\\frac{q}{4\\pi\\varepsilon_0 r^2}$。"))
+ )},
+]},
+{
+"name": "1.3 电势与电势能",
+"color": "#2563eb",
+"desc": "环路定理、电势、电场与电势的关系",
+"items": [
+{"id":"e1s3-1","name":"电势与电场的梯度关系","tags":["thm","der"],"brief":"静电场是保守场，可引入电势。",
+ "body": wrap(
+   thm("静电场环路定理",p("静电场沿任意闭合回路的环流为零：$\\oint_L\\mathbf{E}\\cdot d\\mathbf{l}=0$，故静电场是保守场。")+
+   fml("\\nabla\\times\\mathbf{E} = 0"))+
+   defn("电势",p("选无穷远为零势点，$a$ 点电势：")+
+   fml("V_a = \\int_a^{\\infty} \\mathbf{E}\\cdot d\\mathbf{l}")+
+   p("点电荷的电势 $V=\\frac{q}{4\\pi\\varepsilon_0 r}$。"))+
+   der(p("<strong>电场与电势的关系：</strong>由保守场性质，$\\mathbf{E}$ 可表示为某标量函数的负梯度。设 $V$ 为电势，则：")+
+   fml("dV = -\\mathbf{E}\\cdot d\\mathbf{l} = -(E_x dx + E_y dy + E_z dz)")+
+   p("而全微分 $dV=\\frac{\\partial V}{\\partial x}dx+\\frac{\\partial V}{\\partial y}dy+\\frac{\\partial V}{\\partial z}dz$，比较得：")+
+   fml("E_x=-\\frac{\\partial V}{\\partial x},\\quad E_y=-\\frac{\\partial V}{\\partial y},\\quad E_z=-\\frac{\\partial V}{\\partial z} \\implies \\mathbf{E}=-\\nabla V"))
+ )},
+]},
+{
+"name": "1.4 电容与电容器",
+"color": "#2563eb",
+"desc": "电容的定义与平行板电容器",
+"items": [
+{"id":"e1s4-1","name":"电容与平行板电容器","tags":["def","der"],"brief":"导体储存电荷的能力。",
+ "fig":"capacitor","figCap":"平行板电容器",
+ "body": wrap(
+   defn("电容",p("孤立导体的电容 $C=Q/V$。电容器的电容 $C=Q/(V_1-V_2)$，仅与几何形状和介质有关。"))+
+   der(p("<strong>平行板电容器电容推导：</strong>极板面积 $S$，间距 $d$，带电量 $\\pm Q$，面电荷密度 $\\sigma=Q/S$。忽略边缘效应，极板间电场 $E=\\sigma/\\varepsilon_0=Q/(\\varepsilon_0 S)$。")+
+   p("电势差 $V=Ed=Qd/(\\varepsilon_0 S)$，故：")+
+   fml("C = \\frac{Q}{V} = \\frac{\\varepsilon_0 S}{d}"))+
+   note(p("球形电容器 $C=4\\pi\\varepsilon_0\\frac{R_1 R_2}{R_2-R_1}$；圆柱形电容器单位长度电容 $C/L=\\frac{2\\pi\\varepsilon_0}{\\ln(R_2/R_1)}$。"))
+ )},
+]},
+]
+
+# =====================================================
+#  CHAPTER 2: 介质中的静电场
+# =====================================================
+ch2_sections = [
+{
+"name": "2.1 电介质的极化",
+"color": "#0d9488",
+"desc": "电偶极子、极化强度与束缚电荷",
+"items": [
+{"id":"e2s1-1","name":"电介质极化","tags":["def","der"],"brief":"电介质在电场中产生极化电荷。",
+ "fig":"dielectric","figCap":"电介质的极化示意图",
+ "body": wrap(
+   defn("电偶极矩",p("两个相距 $d$ 的等量异号电荷 $\\pm q$ 构成电偶极子，电偶极矩 $\\mathbf{p}=q\\mathbf{d}$（方向由负电荷指向正电荷）。"))+
+   defn("极化强度",p("单位体积内电偶极矩的矢量和：$\\mathbf{P}=\\frac{\\sum\\mathbf{p}_i}{\\Delta V}$。"))+
+   der(p("<strong>束缚电荷面密度：</strong>在电介质表面取面元 $d\\mathbf{S}=\\mathbf{n}dS$，极化时穿过面元的束缚电荷 $dq'=\\mathbf{P}\\cdot d\\mathbf{S}$。故束缚电荷面密度：")+
+   fml("\\sigma' = \\mathbf{P}\\cdot\\mathbf{n}")+
+   p("束缚电荷体密度 $\\rho'=-\\nabla\\cdot\\mathbf{P}$。"))
+ )},
+]},
+{
+"name": "2.2 电位移矢量与介质高斯定理",
+"color": "#0d9488",
+"desc": "D 矢量的引入与介质中的高斯定理",
+"items": [
+{"id":"e2s2-1","name":"电位移矢量","tags":["thm","der"],"brief":"将束缚电荷吸收进 D 矢量。",
+ "body": wrap(
+   defn("电位移矢量",p("定义 $\\mathbf{D}=\\varepsilon_0\\mathbf{E}+\\mathbf{P}$。对线性各向同性电介质，$\\mathbf{P}=\\varepsilon_0\\chi_e\\mathbf{E}$，故：")+
+   fml("\\mathbf{D} = \\varepsilon_0(1+\\chi_e)\\mathbf{E} = \\varepsilon_0\\varepsilon_r\\mathbf{E} = \\varepsilon\\mathbf{E}")+
+   p("其中 $\\varepsilon_r=1+\\chi_e$ 为相对介电常数，$\\varepsilon=\\varepsilon_0\\varepsilon_r$ 为介电常数。"))+
+   thm("介质中的高斯定理",p("电位移矢量通过任意闭合曲面的通量等于曲面内自由电荷的代数和：")+
+   fml("\\oint_S \\mathbf{D}\\cdot d\\mathbf{S} = \\sum q_{0\\text{内}}"))+
+   der(p("<strong>推导：</strong>真空中高斯定理 $\\oint\\mathbf{E}\\cdot d\\mathbf{S}=(q_0+q')/\\varepsilon_0$，其中 $q'=-\\oint\\mathbf{P}\\cdot d\\mathbf{S}$（束缚电荷）。代入：")+
+   fml("\\oint\\varepsilon_0\\mathbf{E}\\cdot d\\mathbf{S} = q_0 - \\oint\\mathbf{P}\\cdot d\\mathbf{S}")+
+   fml("\\oint(\\varepsilon_0\\mathbf{E}+\\mathbf{P})\\cdot d\\mathbf{S} = q_0 \\implies \\oint\\mathbf{D}\\cdot d\\mathbf{S} = q_0"))
+ )},
+]},
+]
+
+# =====================================================
+#  CHAPTER 3: 静磁场
+# =====================================================
+ch3_sections = [
+{
+"name": "3.1 毕奥-萨伐尔定律",
+"color": "#059669",
+"desc": "电流元产生的磁场与叠加原理",
+"items": [
+{"id":"e3s1-1","name":"毕奥-萨伐尔定律","tags":["def","der"],"brief":"电流元在空间产生磁场的规律。",
+ "fig":"biot","figCap":"电流元 Idl 在 P 点产生 dB",
+ "body": wrap(
+   defn("毕奥-萨伐尔定律",p("电流元 $I d\\mathbf{l}$ 在距其 $r$ 处的 $P$ 点产生的磁感应强度：")+
+   fml("d\\mathbf{B} = \\frac{\\mu_0}{4\\pi}\\frac{I d\\mathbf{l}\\times\\hat{\\mathbf{r}}}{r^2}")+
+   p("其中 $\\mu_0=4\\pi\\times10^{-7}\\,\\text{T}\\cdot\\text{m/A}$ 为真空磁导率。"))+
+   der(p("<strong>载流直导线的磁场：</strong>设导线长 $L$，$P$ 到导线距离 $a$。积分得：")+
+   fml("B = \\frac{\\mu_0 I}{4\\pi a}(\\sin\\beta_2 - \\sin\\beta_1)")+
+   p("无限长直导线 $B=\\frac{\\mu_0 I}{2\\pi a}$。")+
+   p("<strong>圆电流轴线上磁场：</strong>半径 $R$，轴线上距圆心 $x$ 处：")+
+   fml("B = \\frac{\\mu_0 I R^2}{2(R^2+x^2)^{3/2}}")+
+   p("圆心处 $B=\\frac{\\mu_0 I}{2R}$。"))
+ )},
+]},
+{
+"name": "3.2 安培环路定理",
+"color": "#059669",
+"desc": "磁场的环流定理及其应用",
+"items": [
+{"id":"e3s2-1","name":"安培环路定理","tags":["thm","der"],"brief":"磁场的环流与穿过电流的关系。",
+ "fig":"solenoid","figCap":"载流螺线管内部均匀磁场",
+ "body": wrap(
+   thm("安培环路定理",p("真空中磁感应强度沿任意闭合回路的环流等于穿过回路所围面积的电流代数和乘以 $\\mu_0$：")+
+   fml("\\oint_L \\mathbf{B}\\cdot d\\mathbf{l} = \\mu_0 \\sum I_{\\text{内}}")+
+   p("电流方向与回路绕行方向满足右手螺旋时取正。"))+
+   der(p("<strong>长直螺线管内磁场推导：</strong>螺线管单位长度匝数 $n$，电流 $I$。取矩形安培环路，一边在管内平行轴线，其余三边垂直。管内磁场均匀，管外 $B=0$，故：")+
+   fml("\\oint \\mathbf{B}\\cdot d\\mathbf{l} = B\\cdot l = \\mu_0 n l I \\implies B = \\mu_0 n I")+
+   p("方向沿轴线，由右手定则确定。"))
+ )},
+]},
+{
+"name": "3.3 洛伦兹力与安培力",
+"color": "#059669",
+"desc": "带电粒子和载流导线在磁场中受的力",
+"items": [
+{"id":"e3s3-1","name":"洛伦兹力与安培力","tags":["def","der"],"brief":"磁场对运动电荷和电流的作用力。",
+ "body": wrap(
+   defn("洛伦兹力",p("运动电荷 $q$ 在磁场 $\\mathbf{B}$ 中受的力：$\\mathbf{F}=q\\mathbf{v}\\times\\mathbf{B}$。若同时存在电场，$\\mathbf{F}=q(\\mathbf{E}+\\mathbf{v}\\times\\mathbf{B})$。"))+
+   defn("安培力",p("电流元 $I d\\mathbf{l}$ 在磁场中受的力：$d\\mathbf{F}=I d\\mathbf{l}\\times\\mathbf{B}$。"))+
+   der(p("<strong>安培力与洛伦兹力的关系：</strong>导线中自由电子数密度 $n$，每个电子受洛伦兹力 $f=-e\\mathbf{v}_d\\times\\mathbf{B}$。电流元 $I d\\mathbf{l}=n e v_d S d\\mathbf{l}$（$S$ 为截面积），单位长度受力：")+
+   fml("\\frac{d\\mathbf{F}}{dl} = n S (-e)\\mathbf{v}_d\\times\\mathbf{B} = I\\frac{d\\mathbf{l}}{dl}\\times\\mathbf{B}")+
+   p("故 $d\\mathbf{F}=I d\\mathbf{l}\\times\\mathbf{B}$，安培力是大量自由电子洛伦兹力的宏观表现。"))+
+   note(p("洛伦兹力始终与速度垂直，不做功，只改变速度方向；安培力可以做功，其能量来自电源。"))
+ )},
+]},
+]
+
+# =====================================================
+#  CHAPTER 4: 介质中的静磁场
+# =====================================================
+ch4_sections = [
+{
+"name": "4.1 磁介质的磁化",
+"color": "#0891b2",
+"desc": "磁化强度、分子电流与束缚电流",
+"items": [
+{"id":"e4s1-1","name":"磁介质磁化","tags":["def","der"],"brief":"磁介质在磁场中产生磁化电流。",
+ "fig":"magnetic_material","figCap":"磁介质的磁化示意图",
+ "body": wrap(
+   defn("分子磁矩",p("分子中电子轨道运动和自旋产生的等效磁矩 $\\mathbf{m}_m$。无外场时分子磁矩取向杂乱，宏观不显磁性。"))+
+   defn("磁化强度",p("单位体积内分子磁矩的矢量和：$\\mathbf{M}=\\frac{\\sum\\mathbf{m}_i}{\\Delta V}$。"))+
+   der(p("<strong>束缚电流面密度：</strong>磁化强度沿介质表面的切向分量等于束缚面电流线密度 $\\mathbf{i}'=\\mathbf{M}\\times\\mathbf{n}$。束缚体电流密度 $\\mathbf{j}'=\\nabla\\times\\mathbf{M}$。")+
+   fml("\\mathbf{i}' = \\mathbf{M}\\times\\mathbf{n},\\qquad \\mathbf{j}' = \\nabla\\times\\mathbf{M}"))
+ )},
+]},
+{
+"name": "4.2 磁场强度与介质安培环路定理",
+"color": "#0891b2",
+"desc": "H 矢量的引入与磁介质分类",
+"items": [
+{"id":"e4s2-1","name":"磁场强度","tags":["def","thm","der"],"brief":"将磁化电流吸收进 H 矢量。",
+ "body": wrap(
+   defn("磁场强度",p("定义 $\\mathbf{H}=\\frac{\\mathbf{B}}{\\mu_0}-\\mathbf{M}$。对线性各向同性磁介质，$\\mathbf{M}=\\chi_m\\mathbf{H}$，故：")+
+   fml("\\mathbf{B} = \\mu_0(1+\\chi_m)\\mathbf{H} = \\mu_0\\mu_r\\mathbf{H} = \\mu\\mathbf{H}")+
+   p("其中 $\\mu_r=1+\\chi_m$ 为相对磁导率。"))+
+   thm("介质中的安培环路定理",p("磁场强度沿任意闭合回路的环流等于穿过回路的传导电流代数和：")+
+   fml("\\oint_L \\mathbf{H}\\cdot d\\mathbf{l} = \\sum I_{0\\text{内}}"))+
+   der(p("<strong>推导：</strong>真空中 $\\oint\\mathbf{B}\\cdot d\\mathbf{l}=\\mu_0(I_0+I')$，而磁化电流 $I'=\\oint\\mathbf{M}\\cdot d\\mathbf{l}$。代入：")+
+   fml("\\oint\\frac{\\mathbf{B}}{\\mu_0}\\cdot d\\mathbf{l} = I_0 + \\oint\\mathbf{M}\\cdot d\\mathbf{l}")+
+   fml("\\oint\\left(\\frac{\\mathbf{B}}{\\mu_0}-\\mathbf{M}\\right)\\cdot d\\mathbf{l} = I_0 \\implies \\oint\\mathbf{H}\\cdot d\\mathbf{l} = I_0"))+
+   note(p("<strong>磁介质分类：</strong>顺磁质 $\\chi_m>0$（$\\mu_r>1$），抗磁质 $\\chi_m<0$（$\\mu_r<1$），铁磁质 $\\mu_r\\gg 1$ 且非线性、有磁滞。"))
+ )},
+]},
+]
+
+# =====================================================
+#  CHAPTER 5: 麦克斯韦方程组与电磁波
+# =====================================================
+ch5_sections = [
+{
+"name": "5.1 电磁感应",
+"color": "#be185d",
+"desc": "法拉第电磁感应定律与动生/感生电动势",
+"items": [
+{"id":"e5s1-1","name":"法拉第电磁感应定律","tags":["thm","der"],"brief":"磁通量变化产生感应电动势。",
+ "fig":"induction","figCap":"变化磁场产生感应电动势",
+ "body": wrap(
+   thm("法拉第电磁感应定律",p("通过回路的磁通量发生变化时，回路中产生的感应电动势等于磁通量变化率的负值：")+
+   fml("\\varepsilon = -\\frac{d\\Phi}{dt},\\qquad \\Phi = \\int_S \\mathbf{B}\\cdot d\\mathbf{S}"))+
+   der(p("<strong>动生电动势推导：</strong>导体棒在磁场中以速度 $\\mathbf{v}$ 运动，自由电子受洛伦兹力 $\\mathbf{f}=-e\\mathbf{v}\\times\\mathbf{B}$，等效非静电场 $\\mathbf{E}_k=\\mathbf{v}\\times\\mathbf{B}$。电动势：")+
+   fml("\\varepsilon = \\int_a^b (\\mathbf{v}\\times\\mathbf{B})\\cdot d\\mathbf{l}")+
+   p("<strong>感生电动势：</strong>变化磁场激发涡旋电场 $\\mathbf{E}_i$，$\\oint\\mathbf{E}_i\\cdot d\\mathbf{l}=-\\frac{d\\Phi}{dt}$，即：")+
+   fml("\\nabla\\times\\mathbf{E} = -\\frac{\\partial\\mathbf{B}}{\\partial t}"))
+ )},
+]},
+{
+"name": "5.2 位移电流与麦克斯韦方程组",
+"color": "#be185d",
+"desc": "位移电流假设与电磁场基本方程",
+"items": [
+{"id":"e5s2-1","name":"麦克斯韦方程组","tags":["thm","der"],"brief":"电磁场的完整理论体系。",
+ "fig":"wave_em","figCap":"电磁波中 E、B 与传播方向互相垂直",
+ "body": wrap(
+   defn("位移电流",p("麦克斯韦假设：变化的电场等效于一种电流，称为位移电流。位移电流密度：")+
+   fml("\\mathbf{j}_d = \\varepsilon_0\\frac{\\partial\\mathbf{E}}{\\partial t},\\qquad I_d = \\varepsilon_0\\frac{d\\Phi_e}{dt}"))+
+   thm("麦克斯韦方程组（微分形式）",p("")+
+   fml("\\nabla\\cdot\\mathbf{E} = \\frac{\\rho}{\\varepsilon_0} \\quad (\\text{电场的高斯定理})")+
+   fml("\\nabla\\cdot\\mathbf{B} = 0 \\quad (\\text{磁场的高斯定理，无磁单极})")+
+   fml("\\nabla\\times\\mathbf{E} = -\\frac{\\partial\\mathbf{B}}{\\partial t} \\quad (\\text{法拉第定律})")+
+   fml("\\nabla\\times\\mathbf{B} = \\mu_0\\mathbf{j} + \\mu_0\\varepsilon_0\\frac{\\partial\\mathbf{E}}{\\partial t} \\quad (\\text{含位移电流的安培环路定理})"))+
+   der(p("<strong>位移电流引入的必要性：</strong>对充电电容器，传导电流 $I_0$ 在极板间中断。若安培环路定理仅含传导电流，则 $\\oint\\mathbf{H}\\cdot d\\mathbf{l}$ 对不同环路结果矛盾。引入位移电流 $I_d=\\frac{d\\Phi_D}{dt}$ 后，$I_0=I_d$，矛盾消除。"))+
+   note(p("麦克斯韦方程组预言了电磁波的存在，并计算出其速度 $c=1/\\sqrt{\\mu_0\\varepsilon_0}$，与光速一致，揭示了光的电磁本质。"))
+ )},
+]},
+{
+"name": "5.3 电磁波",
+"color": "#be185d",
+"desc": "平面电磁波的性质与能流密度",
+"items": [
+{"id":"e5s3-1","name":"电磁波的传播","tags":["thm","der"],"brief":"变化电磁场互相激发形成电磁波。",
+ "body": wrap(
+   thm("平面电磁波方程",p("在无电荷、无电流的真空中，由麦克斯韦方程组可推出电场和磁场满足波动方程：")+
+   fml("\\nabla^2\\mathbf{E} = \\mu_0\\varepsilon_0\\frac{\\partial^2\\mathbf{E}}{\\partial t^2},\\qquad \\nabla^2\\mathbf{B} = \\mu_0\\varepsilon_0\\frac{\\partial^2\\mathbf{B}}{\\partial t^2}")+
+   p("波速 $v=1/\\sqrt{\\mu_0\\varepsilon_0}=c\\approx 3\\times10^8\\,\\text{m/s}$。"))+
+   der(p("<strong>推导：</strong>对 $\\nabla\\times\\mathbf{E}=-\\partial\\mathbf{B}/\\partial t$ 两边取旋度：")+
+   fml("\\nabla\\times(\\nabla\\times\\mathbf{E}) = -\\frac{\\partial}{\\partial t}(\\nabla\\times\\mathbf{B})")+
+   p("利用矢量恒等式 $\\nabla\\times(\\nabla\\times\\mathbf{E})=\\nabla(\\nabla\\cdot\\mathbf{E})-\\nabla^2\\mathbf{E}$，真空中 $\\nabla\\cdot\\mathbf{E}=0$，且 $\\nabla\\times\\mathbf{B}=\\mu_0\\varepsilon_0\\partial\\mathbf{E}/\\partial t$，代入得：")+
+   fml("-\\nabla^2\\mathbf{E} = -\\mu_0\\varepsilon_0\\frac{\\partial^2\\mathbf{E}}{\\partial t^2} \\implies \\nabla^2\\mathbf{E} = \\mu_0\\varepsilon_0\\frac{\\partial^2\\mathbf{E}}{\\partial t^2}"))+
+   thm("平面电磁波性质",p("(1) 横波：$\\mathbf{E}\\perp\\mathbf{B}\\perp$ 传播方向；(2) $\\mathbf{E}\\times\\mathbf{B}$ 沿传播方向；(3) $E=cB$；(4) 能流密度（坡印廷矢量）：")+
+   fml("\\mathbf{S} = \\frac{1}{\\mu_0}\\mathbf{E}\\times\\mathbf{B}"))
+ )},
+]},
+]
+
+CHAPTERS = [
+    {"id":"e-ch1","num":"第一章","title":"静电场","en":"ELECTROSTATICS",
+     "desc":"库仑定律、电场强度、高斯定理、电势与电势能、电容与电容器。",
+     "sections": ch1_sections},
+    {"id":"e-ch2","num":"第二章","title":"介质中的静电场","en":"DIELECTRICS",
+     "desc":"电介质极化、极化强度与束缚电荷、电位移矢量、介质中的高斯定理。",
+     "sections": ch2_sections},
+    {"id":"e-ch3","num":"第三章","title":"静磁场","en":"MAGNETOSTATICS",
+     "desc":"毕奥-萨伐尔定律、安培环路定理、洛伦兹力与安培力、磁矩。",
+     "sections": ch3_sections},
+    {"id":"e-ch4","num":"第四章","title":"介质中的静磁场","en":"MAGNETIC MEDIA",
+     "desc":"磁介质磁化、磁化强度、磁场强度、介质中的安培环路定理、铁磁质。",
+     "sections": ch4_sections},
+    {"id":"e-ch5","num":"第五章","title":"麦克斯韦方程组与电磁波","en":"MAXWELL & EM WAVES",
+     "desc":"法拉第电磁感应定律、位移电流、麦克斯韦方程组、平面电磁波与坡印廷矢量。",
+     "sections": ch5_sections},
+]
+
+total_items = sum(sum(len(s["items"]) for s in ch["sections"]) for ch in CHAPTERS)
+print(f"Total items: {total_items}")
+
+def gen_html():
+    data_lines = []
+    for ch in CHAPTERS:
+        sec_strs = []
+        for sec in ch["sections"]:
+            item_strs = []
+            for it in sec["items"]:
+                tags_js = json.dumps(it["tags"], ensure_ascii=False)
+                body_esc = js_escape(it["body"])
+                fig_field = f",fig:{json.dumps(it.get('fig',''),ensure_ascii=False)}" if it.get("fig") else ""
+                figcap_field = f",figCap:{json.dumps(it.get('figCap',''),ensure_ascii=False)}" if it.get("figCap") else ""
+                item_strs.append(
+                    f"{{id:'{it['id']}',name:{json.dumps(it['name'],ensure_ascii=False)},"
+                    f"tags:{tags_js},brief:{json.dumps(it['brief'],ensure_ascii=False)},"
+                    f"body:`{body_esc}`{fig_field}{figcap_field}}}"
+                )
+            sec_strs.append(
+                f"{{name:{json.dumps(sec['name'],ensure_ascii=False)},"
+                f"color:'{sec['color']}',desc:{json.dumps(sec['desc'],ensure_ascii=False)},"
+                f"items:[{','.join(item_strs)}]}}"
+            )
+        data_lines.append(
+            f"{{id:'{ch['id']}',num:{json.dumps(ch['num'],ensure_ascii=False)},"
+            f"title:{json.dumps(ch['title'],ensure_ascii=False)},en:'{ch['en']}',"
+            f"desc:{json.dumps(ch['desc'],ensure_ascii=False)},"
+            f"sections:[{','.join(sec_strs)}]}}"
+        )
+    la_data = "[" + ",".join(data_lines) + "]"
+
+    fig_entries = []
+    for k, v in FIG.items():
+        fig_entries.append(f"{json.dumps(k)}:`{js_escape(v)}`")
+    fig_js = "{" + ",".join(fig_entries) + "}"
+    tag_label_js = json.dumps(TAG_LABEL, ensure_ascii=False)
+
+    nav_tabs = "".join(
+        f'<a class="la-nav-tab c{i+1}" href="#{ch["id"]}">{ch["num"]} · {ch["title"]}</a>'
+        for i, ch in enumerate(CHAPTERS)
+    )
+
+    css = '''  :root{--la-bg:#f4f7fb;--la-card:#ffffff;--la-ink:#152033;--la-muted:#607089;--la-shadow:0 12px 32px rgba(20,36,60,.09);}
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;color:var(--la-ink);background:radial-gradient(circle at 10% 10%,rgba(37,99,235,.08),transparent 28%),radial-gradient(circle at 90% 10%,rgba(124,58,237,.08),transparent 28%),var(--la-bg);line-height:1.7}
+  a{color:inherit}
+  .la-wrap{width:min(1400px,94vw);margin:auto}
+  .la-header{padding:52px 0 20px;text-align:center}
+  .la-eyebrow{font-size:13px;letter-spacing:.22em;color:var(--la-muted);font-weight:700;text-transform:uppercase}
+  h1{margin:10px 0 8px;font-size:clamp(30px,5vw,54px);line-height:1.08;letter-spacing:-.03em}
+  .la-subtitle{margin:0 auto;color:var(--la-muted);font-size:16px;max-width:820px;line-height:1.8}
+  .back-bar{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:22px 0 6px}
+  .back-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 22px;border-radius:999px;text-decoration:none;font-size:14px;font-weight:800;background:#fff;color:#1e3a8a;border:1px solid #c7d7ee;box-shadow:0 8px 20px rgba(20,36,60,.08);transition:.25s;cursor:pointer}
+  .back-btn:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(20,36,60,.14);color:#4c1d95;border-color:#ddd6fe}
+  .la-nav-tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:22px 0 8px}
+  .la-nav-tab{padding:8px 16px;border-radius:999px;text-decoration:none;font-weight:700;font-size:13px;border:1px solid #d5deea;background:#fff;transition:.25s;color:#334155}
+  .la-nav-tab:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(20,36,60,.1)}
+  .la-nav-tab.c1{color:#1e40af;border-color:#bfdbfe}
+  .la-nav-tab.c2{color:#0f766e;border-color:#99f6e4}
+  .la-nav-tab.c3{color:#047857;border-color:#a7f3d0}
+  .la-nav-tab.c4{color:#0e7490;border-color:#a5f3fc}
+  .la-nav-tab.c5{color:#be185d;border-color:#fbcfe8}
+  .la-engagement-bar{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:26px 0 10px}
+  .la-stat-item{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border-radius:999px;background:#fff;border:1px solid #e2e8f0;font-size:13px;color:#334155;font-weight:600}
+  .la-stat-value{color:#6366f1;font-weight:800;font-size:15px}
+  .la-stat-link{cursor:pointer;text-decoration:none;transition:.2s}
+  .la-stat-link:hover{background:#eef2ff;border-color:#c7d2fe}
+  .la-legend{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:0 0 24px;font-size:12px;color:#64748b}
+  .la-legend-title{font-weight:700;margin-right:4px}
+  .la-arc-badge{font-size:11px;padding:3px 10px;border-radius:999px;font-weight:700;letter-spacing:.04em}
+  .la-arc-def{background:#dbeafe;color:#1e40af}
+  .la-arc-thm{background:#ede9fe;color:#6d28d9}
+  .la-arc-der{background:#e0f2fe;color:#0369a1}
+  .la-arc-exa{background:#dcfce7;color:#15803d}
+  .la-arc-app{background:#fef3c7;color:#b45309}
+  .la-arc-note{background:#fee2e2;color:#b91c1c}
+  .la-roadmap{padding:30px 0}
+  .la-phase-title{font-size:24px;color:#1e293b;margin:40px 0 6px 18px;display:flex;align-items:center;gap:12px}
+  .la-phase-title::before{content:"";width:6px;height:26px;border-radius:4px}
+  .la-phase-title.e-ch1::before{background:#2563eb}
+  .la-phase-title.e-ch2::before{background:#0d9488}
+  .la-phase-title.e-ch3::before{background:#059669}
+  .la-phase-title.e-ch4::before{background:#0891b2}
+  .la-phase-title.e-ch5::before{background:#be185d}
+  .la-phase-en{font-size:11px;letter-spacing:.36em;color:#94a3b8;font-weight:700;text-transform:uppercase;margin:0 0 12px 18px;font-style:italic}
+  .la-phase-desc{color:var(--la-muted);font-size:14px;margin:0 0 24px 18px;line-height:1.8;max-width:960px}
+  .la-domain{margin-bottom:26px;padding:16px 18px 18px 22px;position:relative;background:rgba(255,255,255,.6);border-radius:18px;border:1px solid #e5ebf2}
+  .la-domain::before{content:"";position:absolute;left:6px;top:16px;bottom:16px;width:5px;border-radius:5px;background:var(--domain-color,#2563eb);box-shadow:0 0 12px rgba(37,99,235,.25)}
+  .la-domain-header{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+  .la-domain-header h3{margin:0;font-size:17px;color:#1e293b}
+  .la-domain-count{font-size:11px;padding:2px 10px;border-radius:999px;background:#eef2ff;color:#4f46e5;font-weight:700}
+  .la-domain-desc{font-size:12px;color:#94a3b8}
+  .la-domain-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+  .la-course-card{background:#fff;border:1px solid #e5ebf2;border-radius:14px;padding:14px 16px;cursor:pointer;transition:.22s;box-shadow:var(--la-shadow)}
+  .la-course-card:hover{transform:translateY(-3px);border-color:#c7d2fe;box-shadow:0 16px 40px rgba(37,99,235,.12)}
+  .la-course-card h4{margin:6px 0;font-size:15px;color:#1e293b}
+  .la-course-card p{margin:4px 0 0;font-size:12.5px;color:#64748b;line-height:1.6}
+  .la-arc-badges{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:2px}
+  .la-overlay{position:fixed;inset:0;background:rgba(15,23,42,.5);display:none;align-items:center;justify-content:center;padding:18px;z-index:60;backdrop-filter:blur(2px)}
+  .la-overlay.show{display:flex}
+  .la-modal{width:min(820px,96vw);background:white;border-radius:24px;padding:30px;box-shadow:0 24px 80px rgba(0,0,0,.28);animation:laPopIn .3s;max-height:90vh;overflow-y:auto}
+  @keyframes laPopIn{from{transform:scale(.94);opacity:0}to{transform:scale(1);opacity:1}}
+  .la-modal h2{margin:0 0 10px;font-size:23px;color:#1e293b;line-height:1.35}
+  .la-modal .la-crumbs{font-size:12px;color:#94a3b8;margin:0 0 14px;font-weight:600;letter-spacing:.02em}
+  .la-modal .la-arc-badges{margin:0 0 16px}
+  .la-modal-body{color:#334155;font-size:15px;line-height:1.9}
+  .la-modal-body p{margin:0 0 12px}
+  .la-modal-body strong{color:#0f172a}
+  .la-modal-body ul{margin:0 0 12px;padding-left:22px}
+  .la-modal-body li{margin-bottom:6px}
+  .la-fml{margin:16px 0;padding:14px 18px;background:linear-gradient(135deg,#f8fafc,#eef4fb);border-left:4px solid #93b4e8;border-radius:10px;overflow-x:auto;font-size:16px;color:#0f172a}
+  .la-fml .note{display:block;font-size:12.5px;color:#8496ad;margin-top:8px;line-height:1.6;font-family:system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+  .la-fml mjx-container[display="true"]{margin:0 !important}
+  mjx-container, mjx-container *{color:#0f172a !important;opacity:1 !important}
+  mjx-mi{font-style:italic !important}
+  mjx-mo{color:#0f172a !important}
+  .la-modal-body mjx-container, .la-modal-body mjx-container *{color:#0f172a !important;opacity:1 !important}
+  .la-fig{margin:18px auto;padding:14px 16px 10px;background:#fafcff;border:1px solid #e2ebf7;border-radius:14px;display:flex;flex-direction:column;align-items:center;max-width:600px}
+  .la-fig svg{display:block;width:100%;height:auto;max-width:560px}
+  .la-fig .la-fig-cap{font-size:12px;color:#8496ad;margin-top:8px;text-align:center;letter-spacing:.02em}
+  .la-callout{margin:14px 0;padding:12px 16px;background:#fffbeb;border-left:3px solid #fbbf24;border-radius:8px;font-size:13.5px;color:#78350f;line-height:1.8}
+  .la-kp-sec{margin:0 0 18px;padding:14px 16px;border-radius:12px;background:#f8fafc;border:1px solid #eef2f7}
+  .la-kp-sec h5{margin:0 0 10px;font-size:14px;color:#1e293b;letter-spacing:.04em;display:flex;align-items:center;gap:8px}
+  .la-kp-sec h5::before{content:"";width:4px;height:14px;border-radius:2px;background:var(--la-accent,#3b82f6)}
+  .la-kp-def{border-left:3px solid #3b82f6}
+  .la-kp-thm{border-left:3px solid #8b5cf6;background:#faf7ff}
+  .la-kp-der{border-left:3px solid #0ea5e9;background:#f0f9ff}
+  .la-kp-exa{border-left:3px solid #10b981;background:#f0fdf4}
+  .la-kp-app{border-left:3px solid #f59e0b;background:#fffbeb}
+  .la-kp-note{border-left:3px solid #ef4444;background:#fef2f2}
+  .la-kp-his{border-left:3px solid #64748b;background:#f8fafc}
+  .la-kp-sec p:last-child{margin-bottom:0}
+  .la-modal-close{margin-top:22px;background:#0f172a;color:white;border-color:#0f172a;padding:10px 20px;font-weight:bold}
+  .la-footer{padding:34px 0 50px;color:var(--la-muted);text-align:center;font-size:13px;line-height:1.9}
+  .la-core-fmls{margin:40px 0 20px;padding:28px 24px;background:linear-gradient(135deg,#f0f4ff,#faf7ff);border:1px solid #e0e7ff;border-radius:18px}
+  .la-core-fmls h3{font-size:18px;color:#1e293b;margin:0 0 20px;text-align:center;letter-spacing:.04em}
+  .la-core-fmls h3 .la-core-count{display:inline-block;background:#6366f1;color:#fff;font-size:13px;padding:2px 10px;border-radius:20px;margin-left:8px;vertical-align:middle}
+  .la-core-item{display:flex;gap:12px;margin:0 0 14px;padding:12px 16px;background:#fff;border-radius:12px;border-left:3px solid #6366f1;align-items:flex-start}
+  .la-core-num{flex-shrink:0;width:26px;height:26px;border-radius:50%;background:#6366f1;color:#fff;font-size:13px;display:flex;align-items:center;justify-content:center;font-weight:bold}
+  .la-core-body{flex:1;min-width:0}
+  .la-core-body .la-core-name{font-size:14px;font-weight:600;color:#1e293b;margin-bottom:4px}
+  .la-core-body .la-fml{margin:6px 0 0;padding:8px 14px;font-size:15px}
+  .la-back-top{display:inline-block;margin-top:20px;padding:10px 28px;background:#1e293b;color:#fff;border:none;border-radius:25px;font-size:14px;cursor:pointer;letter-spacing:.04em;transition:background .2s}
+  .la-back-top:hover{background:#334155}
+  @media(max-width:900px){.la-wrap{width:min(94vw,720px)}.la-roadmap{padding:20px}.la-phase-title{font-size:19px}.la-phase-en{font-size:10px;letter-spacing:.26em}.la-domain-desc{display:none}.la-domain-grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}.la-modal{padding:22px}}'''
+
+    js = f'''const LA_DATA = {la_data};
+const LA_TAG_LABEL = {tag_label_js};
+const LA_FIG = {fig_js};
+const LA_KP = {{}};
+function laBuildCard(item){{
+  const tags = item.tags.map(t => `<span class="la-arc-badge la-arc-${{t}}">${{LA_TAG_LABEL[t]}}</span>`).join('');
+  return `<div class="la-course-card" onclick="showLaItem('${{item.id}}')"><div class="la-arc-badges">${{tags}}</div><h4>${{item.name}}</h4><p>${{item.brief}}</p></div>`;
+}}
+function renderLa(){{
+  const root = document.getElementById('laRoadmap');
+  let html = '';
+  LA_DATA.forEach(ch => {{
+    html += `<h2 class="la-phase-title ${{ch.id}}" id="${{ch.id}}">${{ch.num}} · ${{ch.title}}</h2>`;
+    html += `<div class="la-phase-en">${{ch.en}}</div>`;
+    html += `<p class="la-phase-desc">${{ch.desc}}</p>`;
+    ch.sections.forEach(sec => {{
+      html += `<div class="la-domain" style="--domain-color:${{sec.color}};"><div class="la-domain-header"><h3>${{sec.name}}</h3><span class="la-domain-count">${{sec.items.length}} 个知识点</span><span class="la-domain-desc">${{sec.desc}}</span></div><div class="la-domain-grid">`;
+      sec.items.forEach(it => {{ html += laBuildCard(it); LA_KP[it.id] = {{item: it, section: sec.name, chapter: `${{ch.num}} · ${{ch.title}}`}}; }});
+      html += `</div></div>`;
+    }});
+  }});
+  root.innerHTML = html;
+  const kCount = Object.keys(LA_KP).length;
+  document.getElementById('laKCount').textContent = kCount;
+}}
+function showLaItem(id){{
+  const rec = LA_KP[id];
+  if(!rec) return;
+  const it = rec.item;
+  document.getElementById('laCrumbs').textContent = rec.chapter + ' ／ ' + rec.section;
+  document.getElementById('laTitle').textContent = it.name;
+  document.getElementById('laTags').innerHTML = it.tags.map(t => `<span class="la-arc-badge la-arc-${{t}}">${{LA_TAG_LABEL[t]}}</span>`).join('');
+  let bodyHtml = it.body;
+  if (it.fig && LA_FIG[it.fig]) {{
+    const figHtml = `<div class="la-fig">${{LA_FIG[it.fig]}}<div class="la-fig-cap">${{it.figCap || ''}}</div></div>`;
+    bodyHtml = figHtml + bodyHtml;
+  }}
+  document.getElementById('laBody').innerHTML = bodyHtml;
+  document.getElementById('laOverlay').classList.add('show');
+  document.querySelector('.la-modal').scrollTop = 0;
+  if (window.MathJax && window.MathJax.typesetPromise) {{ window.MathJax.typesetPromise([document.getElementById('laBody')]).catch(()=>{{}}); }}
+}}
+function hideLaInfo(){{ document.getElementById('laOverlay').classList.remove('show'); }}
+function closeLaInfo(e){{ if(e.target.id === 'laOverlay') hideLaInfo(); }}
+document.addEventListener('keydown', e => {{ if(e.key === 'Escape') hideLaInfo(); }});
+document.addEventListener('DOMContentLoaded', () => {{
+  renderLa();
+  if (window.MathJax && window.MathJax.typesetPromise) {{ window.MathJax.typesetPromise([document.getElementById('laRoadmap')]).catch(()=>{{}}); }}
+}});'''
+
+    html = f'''<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="电磁学知识体系：静电场、介质中的静电场、静磁场、介质中的静磁场、麦克斯韦方程组与电磁波">
+<title>电磁学 · 知识体系</title>
+<script>
+window.MathJax = {{
+  tex: {{
+    inlineMath: [['$','$'], ['\\\\(','\\\\)']],
+    displayMath: [['$$','$$'], ['\\\\[','\\\\]']],
+    processEscapes: true,
+    packages: {{'[+]': ['ams','boldsymbol']}}
+  }},
+  options: {{
+    skipHtmlTags: ['script','noscript','style','textarea','pre','code'],
+    ignoreHtmlClass: 'tex2jax_ignore'
+  }},
+  svg: {{ fontCache: 'global' }}
+}};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" async></script>
+<style>
+{css}
+</style>
+</head>
+<body>
+<div class="la-wrap">
+  <header class="la-header">
+    <div class="la-eyebrow">ELECTROMAGNETISM · KNOWLEDGE MAP</div>
+    <h1>电磁学 · 知识体系</h1>
+    <p class="la-subtitle">静电场 · 介质中的静电场 · 静磁场 · 介质中的静磁场 · 麦克斯韦方程组与电磁波</p>
+    <div class="back-bar"><a class="back-btn" href="index.html">← 返回总览</a></div>
+    <div class="la-nav-tabs">{nav_tabs}</div>
+    <div class="la-engagement-bar">
+      <div class="la-stat-item"><span>📘</span><span class="la-stat-value" id="laKCount">--</span><span>个知识点</span></div>
+      <a class="la-stat-item la-stat-link" href="#laCoreFmls" onclick="event.preventDefault();document.getElementById('laCoreFmls').scrollIntoView({{behavior:'smooth',block:'start'}})"><span>🧮</span><span class="la-stat-value">{len(CORE_FORMULAS)}</span><span>条核心公式 · 点击速查</span></a>
+    </div>
+  </header>
+  <div class="la-legend">
+    <span class="la-legend-title">知识记号</span>
+    <span class="la-arc-badge la-arc-def">定 义</span>
+    <span class="la-arc-badge la-arc-thm">定 理</span>
+    <span class="la-arc-badge la-arc-der">推 导</span>
+    <span class="la-arc-badge la-arc-exa">例 子</span>
+    <span class="la-arc-badge la-arc-app">应 用</span>
+    <span class="la-arc-badge la-arc-note">备 注</span>
+  </div>
+  <main class="la-roadmap" id="laRoadmap"></main>
+  <section class="la-core-fmls" id="laCoreFmls">
+    <h3>核心公式速查 <span class="la-core-count">{len(CORE_FORMULAS)} 条</span></h3>
+{chr(10).join(f'    <div class="la-core-item"><div class="la-core-num">{i+1}</div><div class="la-core-body"><div class="la-core-name">{name}</div><div class="la-fml">$${latex}$$</div><div class="note" style="font-size:12px;color:#8496ad;margin-top:4px">{desc}</div></div></div>' for i,(name,latex,desc) in enumerate(CORE_FORMULAS))}
+  </section>
+  <footer class="la-footer">
+    <div>电磁学 · 知识体系可视化 · MathJax + SVG</div>
+    <div style="margin-top:8px">基于电磁学核心知识体系整理</div>
+    <button class="la-back-top" onclick="window.scrollTo({{top:0,behavior:'smooth'}})">↑ 回到顶部</button>
+  </footer>
+</div>
+<div class="la-overlay" id="laOverlay" onclick="closeLaInfo(event)">
+  <div class="la-modal" onclick="event.stopPropagation()">
+    <p class="la-crumbs" id="laCrumbs"></p>
+    <h2 id="laTitle">知识点</h2>
+    <div class="la-arc-badges" id="laTags"></div>
+    <div class="la-modal-body" id="laBody"></div>
+    <button class="la-modal-close" onclick="hideLaInfo()">关 闭</button>
+  </div>
+</div>
+<script>
+{js}
+</script>
+</body>
+</html>'''
+    return html
+
+if __name__ == "__main__":
+    html = gen_html()
+    with open("/workspace/electromagnetism.html", "w", encoding="utf-8") as f:
+        f.write(html)
+    print(f"Generated electromagnetism.html ({len(html)} chars)")

@@ -1,0 +1,540 @@
+# -*- coding: utf-8 -*-
+"""Generate electrodynamics.html with 3 chapters: 静电磁场/电磁波/电磁辐射."""
+import json
+
+FIG = {
+"potential": '''<svg viewBox="0 0 240 160" xmlns="http://www.w3.org/2000/svg">
+<rect x="20" y="30" width="200" height="100" fill="none" stroke="#94a3b8" stroke-width="1.5"/>
+<line x1="20" y1="30" x2="20" y2="130" stroke="#3b82f6" stroke-width="3"/>
+<line x1="220" y1="30" x2="220" y2="130" stroke="#ef4444" stroke-width="3"/>
+<text x="5" y="85" font-size="11" fill="#3b82f6">V₀</text>
+<text x="222" y="85" font-size="11" fill="#ef4444">0</text>
+<path d="M 60 80 Q 120 60 180 80" fill="none" stroke="#10b981" stroke-width="2"/>
+<text x="110" y="55" font-size="10" fill="#10b981">等势面</text></svg>''',
+"waveguide": '''<svg viewBox="0 0 240 160" xmlns="http://www.w3.org/2000/svg">
+<rect x="20" y="30" width="200" height="100" fill="none" stroke="#475569" stroke-width="2"/>
+<path d="M 20 80 Q 70 40 120 80 T 220 80" fill="none" stroke="#3b82f6" stroke-width="2"/>
+<path d="M 20 80 Q 70 120 120 80 T 220 80" fill="none" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="4 3"/>
+<text x="95" y="22" font-size="11" fill="#3b82f6">TE 波导</text>
+<text x="10" y="90" font-size="10" fill="#64748b">a</text></svg>''',
+"dipole_rad": '''<svg viewBox="0 0 240 160" xmlns="http://www.w3.org/2000/svg">
+<circle cx="120" cy="80" r="6" fill="#ef4444"/>
+<ellipse cx="120" cy="80" rx="70" ry="25" fill="none" stroke="#8b5cf6" stroke-width="1.5" opacity="0.5"/>
+<ellipse cx="120" cy="80" rx="95" ry="35" fill="none" stroke="#8b5cf6" stroke-width="1.5" opacity="0.3"/>
+<line x1="120" y1="80" x2="120" y2="40" stroke="#3b82f6" stroke-width="2"/>
+<polygon points="120,40 114,50 126,50" fill="#3b82f6"/>
+<text x="125" y="50" font-size="11" fill="#3b82f6">p(t)</text>
+<path d="M 60 60 Q 100 50 120 80 Q 140 110 180 100" fill="none" stroke="#10b981" stroke-width="1.5"/>
+<text x="180" y="95" font-size="10" fill="#10b981">辐射场</text></svg>''',
+"multipole": '''<svg viewBox="0 0 240 160" xmlns="http://www.w3.org/2000/svg">
+<circle cx="120" cy="80" r="10" fill="#ef4444"/>
+<text x="114" y="84" font-size="11" fill="#fff" font-weight="bold">q</text>
+<circle cx="100" cy="80" r="6" fill="#ef4444" opacity="0.4"/>
+<circle cx="140" cy="80" r="6" fill="#3b82f6" opacity="0.4"/>
+<circle cx="110" cy="60" r="5" fill="#ef4444" opacity="0.3"/>
+<circle cx="130" cy="60" r="5" fill="#3b82f6" opacity="0.3"/>
+<text x="80" y="140" font-size="10" fill="#64748b">单极 · 偶极 · 四极 · · · 多极展开</text></svg>''',
+"emwave2": '''<svg viewBox="0 0 240 160" xmlns="http://www.w3.org/2000/svg">
+<line x1="10" y1="80" x2="230" y2="80" stroke="#cbd5e1" stroke-width="1"/>
+<path d="M 10 80 Q 40 30 70 80 T 130 80 T 190 80 T 230 80" fill="none" stroke="#3b82f6" stroke-width="2"/>
+<path d="M 10 80 L 40 110 L 70 80 L 100 50 L 130 80 L 160 110 L 190 80 L 220 50" fill="none" stroke="#ef4444" stroke-width="2"/>
+<text x="20" y="28" font-size="10" fill="#3b82f6">E (线偏振)</text>
+<text x="20" y="140" font-size="10" fill="#ef4444">B</text>
+<polygon points="220,80 210,74 210,86" fill="#10b981"/>
+<text x="195" y="70" font-size="10" fill="#10b981">k</text></svg>''',
+}
+
+TAG_LABEL = {"def":"定 义","thm":"定 理","der":"推 导","exa":"例 子","app":"应 用","his":"注 记","note":"备 注"}
+
+CORE_FORMULAS = [
+    ("泊松方程", "\\nabla^2\\varphi = -\\frac{\\rho}{\\varepsilon_0}", "静电势满足的偏微分方程"),
+    ("拉普拉斯方程", "\\nabla^2\\varphi = 0", "无电荷区域电势满足的方程"),
+    ("唯一性定理", "\\text{给定边界 }\\varphi|_S \\text{ 或 } \\frac{\\partial\\varphi}{\\partial n}|_S \\text{，解唯一}", "静电边值问题的唯一性"),
+    ("分离变量法", "\\varphi(r,\\theta,\\phi) = R(r)\\Theta(\\theta)\\Phi(\\phi)", "拉普拉斯方程的分离变量解法"),
+    ("电多极展开", "\\varphi = \\frac{1}{4\\pi\\varepsilon_0}\\left(\\frac{Q}{r} + \\frac{\\mathbf{p}\\cdot\\hat{\\mathbf{r}}}{r^2} + \\frac{1}{2}\\frac{Q_{ij}n_i n_j}{r^3} + \\cdots\\right)", "电荷体系的多极矩展开"),
+    ("磁矢势", "\\mathbf{B} = \\nabla\\times\\mathbf{A}", "引入矢势描述磁场"),
+    ("库仑规范", "\\nabla\\cdot\\mathbf{A} = 0", "矢势的规范选择"),
+    ("静磁矢势方程", "\\nabla^2\\mathbf{A} = -\\mu_0\\mathbf{j}", "库仑规范下矢势的泊松方程"),
+    ("平面电磁波", "\\mathbf{E} = \\mathbf{E}_0 e^{i(\\mathbf{k}\\cdot\\mathbf{r}-\\omega t)}", "时谐平面波解"),
+    ("波阻抗", "Z = \\frac{E}{H} = \\sqrt{\\frac{\\mu}{\\varepsilon}}", "介质中电场与磁场振幅之比"),
+    ("波导截止频率", "\\omega_c = c\\sqrt{\\left(\\frac{m\\pi}{a}\\right)^2 + \\left(\\frac{n\\pi}{b}\\right)^2}", "矩形波导 TE 模截止频率"),
+    ("推迟势", "\\varphi(\\mathbf{r},t) = \\frac{1}{4\\pi\\varepsilon_0}\\int\\frac{\\rho(\\mathbf{r}',t-r/c)}{r}dV'", "考虑传播延迟的电势"),
+    ("电偶极辐射功率", "P = \\frac{\\mu_0 p_0^2 \\omega^4}{12\\pi c}", "电偶极辐射的总功率"),
+    ("辐射场", "\\mathbf{B} = \\frac{\\mu_0}{4\\pi c}\\frac{\\ddot{\\mathbf{p}}(t-r/c)\\times\\hat{\\mathbf{r}}}{r}", "电偶极辐射的磁场"),
+    ("坡印廷矢量", "\\mathbf{S} = \\frac{1}{\\mu_0}\\mathbf{E}\\times\\mathbf{B}", "电磁能流密度"),
+    ("辐射角分布", "\\frac{dP}{d\\Omega} = \\frac{\\mu_0 p_0^2\\omega^4}{32\\pi^2 c}\\sin^2\\theta", "电偶极辐射的角分布"),
+]
+
+def js_escape(s):
+    return s.replace("\\","\\\\").replace("`","\\`").replace("${","\\${")
+def defn(t, body): return f'<section class="la-kp-sec la-kp-def"><h5>定 义</h5><p><strong>{t}</strong></p>{body}</section>'
+def thm(t, body): return f'<section class="la-kp-sec la-kp-thm"><h5>定 理 · {t}</h5>{body}</section>'
+def der(body): return f'<section class="la-kp-sec la-kp-der"><h5>推 导</h5>{body}</section>'
+def exa(body): return f'<section class="la-kp-sec la-kp-exa"><h5>例 子</h5>{body}</section>'
+def app(body): return f'<section class="la-kp-sec la-kp-app"><h5>应 用</h5>{body}</section>'
+def note(body): return f'<section class="la-kp-sec la-kp-note"><h5>备 注</h5>{body}</section>'
+def fml(latex, caption=""):
+    cap = f'<span class="note">{caption}</span>' if caption else ""
+    return f'<div class="la-fml">$${latex}$$ {cap}</div>'
+def p(txt): return f'<p>{txt}</p>'
+def wrap(body): return f'<div class="la-kp">{body}</div>'
+
+# =====================================================
+#  CHAPTER 1: 静电磁场
+# =====================================================
+ch1_sections = [
+{
+"name": "1.1 静电场边值问题与唯一性定理",
+"color": "#2563eb",
+"desc": "泊松方程、拉普拉斯方程、唯一性定理、分离变量法",
+"items": [
+{"id":"d1s1-1","name":"静电势的边值问题","tags":["thm","der"],"brief":"静电势满足的方程与唯一性定理。",
+ "fig":"potential","figCap":"两平板间的等势面（边值问题）",
+ "body": wrap(
+   thm("泊松方程与拉普拉斯方程",p("由 $\\mathbf{E}=-\\nabla\\varphi$ 和 $\\nabla\\cdot\\mathbf{E}=\\rho/\\varepsilon_0$ 得：")+
+   fml("\\nabla^2\\varphi = -\\frac{\\rho}{\\varepsilon_0} \\quad (\\text{泊松方程})")+
+   fml("\\nabla^2\\varphi = 0 \\quad (\\text{拉普拉斯方程，} \\rho=0)"))+
+   thm("唯一性定理",p("在区域 $V$ 内，给定电荷分布 $\\rho$ 和边界 $S$ 上的电势 $\\varphi|_S$（第一类）或法向导数 $\\partial\\varphi/\\partial n|_S$（第二类），则泊松方程的解唯一。"))+
+   der(p("<strong>唯一性定理证明（反证法）：</strong>设有两个解 $\\varphi_1,\\varphi_2$，令 $\\psi=\\varphi_1-\\varphi_2$，则 $\\nabla^2\\psi=0$。由格林第一恒等式：")+
+   fml("\\oint_S \\psi\\frac{\\partial\\psi}{\\partial n}dS = \\int_V (\\nabla\\psi)^2 dV")+
+   p("第一类边界 $\\psi|_S=0$，第二类边界 $\\partial\\psi/\\partial n|_S=0$，左边均为零，故 $\\int_V(\\nabla\\psi)^2 dV=0$，即 $\\nabla\\psi=0$，$\\psi$ 为常数。第一类边界 $\\psi=0$，故 $\\varphi_1=\\varphi_2$。"))+
+   app(p("<strong>分离变量法：</strong>对球对称问题，拉普拉斯方程球坐标解为 $\\varphi=\\sum_l (A_l r^l + B_l r^{-l-1})P_l(\\cos\\theta)$，由边界条件定系数。"))
+ )},
+]},
+{
+"name": "1.2 电多极展开",
+"color": "#2563eb",
+"desc": "电荷体系的多极矩展开与远场电势",
+"items": [
+{"id":"d1s2-1","name":"电多极展开","tags":["thm","der"],"brief":"远区电势展开为各阶多极矩贡献。",
+ "fig":"multipole","figCap":"电荷体系的多极展开示意",
+ "body": wrap(
+   thm("电多极展开",p("有限区域电荷分布在远区（$r\\gg r'$）的电势可展开为：")+
+   fml("\\varphi(\\mathbf{r}) = \\frac{1}{4\\pi\\varepsilon_0}\\left[\\frac{Q}{r} + \\frac{\\mathbf{p}\\cdot\\hat{\\mathbf{r}}}{r^2} + \\frac{1}{2}\\frac{Q_{ij}n_i n_j}{r^3} + \\cdots\\right]")+
+   p("其中 $Q=\\int\\rho dV'$（总电荷/单极矩），$\\mathbf{p}=\\int\\rho\\mathbf{r}' dV'$（电偶极矩），$Q_{ij}=\\int\\rho(3x_i'x_j'-r'^2\\delta_{ij})dV'$（电四极矩张量）。"))+
+   der(p("<strong>推导：</strong>利用 $1/|\\mathbf{r}-\\mathbf{r}'|$ 在 $r'\\ll r$ 时展开：")+
+   fml("\\frac{1}{|\\mathbf{r}-\\mathbf{r}'|} = \\frac{1}{r} + \\frac{\\mathbf{r}'\\cdot\\hat{\\mathbf{r}}}{r^2} + \\frac{1}{2}\\frac{3(\\mathbf{r}'\\cdot\\hat{\\mathbf{r}})^2-r'^2}{r^3} + \\cdots")+
+   p("代入 $\\varphi=\\frac{1}{4\\pi\\varepsilon_0}\\int\\frac{\\rho(\\mathbf{r}')}{|\\mathbf{r}-\\mathbf{r}'|}dV'$，逐项积分即得多极展开。"))
+ )},
+]},
+{
+"name": "1.3 静磁矢势",
+"color": "#2563eb",
+"desc": "磁矢势的引入、库仑规范、静磁矢势方程",
+"items": [
+{"id":"d1s3-1","name":"磁矢势与库仑规范","tags":["def","thm","der"],"brief":"用矢势描述静磁场。",
+ "body": wrap(
+   defn("磁矢势",p("由 $\\nabla\\cdot\\mathbf{B}=0$，可引入矢势 $\\mathbf{A}$ 使 $\\mathbf{B}=\\nabla\\times\\mathbf{A}$。矢势可相差任意梯度 $\\mathbf{A}\\to\\mathbf{A}+\\nabla\\chi$（规范变换）。"))+
+   defn("库仑规范",p("选择规范 $\\nabla\\cdot\\mathbf{A}=0$，使矢势方程简化。"))+
+   der(p("<strong>静磁矢势方程推导：</strong>由 $\\nabla\\times\\mathbf{B}=\\mu_0\\mathbf{j}$ 和 $\\mathbf{B}=\\nabla\\times\\mathbf{A}$：")+
+   fml("\\nabla\\times(\\nabla\\times\\mathbf{A}) = \\mu_0\\mathbf{j}")+
+   p("利用矢量恒等式 $\\nabla\\times(\\nabla\\times\\mathbf{A})=\\nabla(\\nabla\\cdot\\mathbf{A})-\\nabla^2\\mathbf{A}$，库仑规范下 $\\nabla\\cdot\\mathbf{A}=0$：")+
+   fml("\\nabla^2\\mathbf{A} = -\\mu_0\\mathbf{j}")+
+   p("其解（类比静电势）：$\\mathbf{A}(\\mathbf{r})=\\frac{\\mu_0}{4\\pi}\\int\\frac{\\mathbf{j}(\\mathbf{r}')}{|\\mathbf{r}-\\mathbf{r}'|}dV'$。"))+
+   note(p("磁矢势不是唯一的，但 $\\mathbf{B}=\\nabla\\times\\mathbf{A}$ 是规范不变的，具有物理意义。在量子力学中，$\\mathbf{A}$ 的环流（AB 效应）有可观测效应。"))
+ )},
+]},
+]
+
+# =====================================================
+#  CHAPTER 2: 电磁波
+# =====================================================
+ch2_sections = [
+{
+"name": "2.1 平面电磁波",
+"color": "#0d9488",
+"desc": "时谐平面波、偏振、波阻抗",
+"items": [
+{"id":"d2s1-1","name":"平面电磁波的性质","tags":["thm","der"],"brief":"无源区麦克斯韦方程组的平面波解。",
+ "fig":"emwave2","figCap":"线偏振平面电磁波",
+ "body": wrap(
+   thm("平面电磁波",p("在无源（$\\rho=0,\\mathbf{j}=0$）均匀介质中，麦克斯韦方程组给出波动方程，其单色平面波解为：")+
+   fml("\\mathbf{E} = \\mathbf{E}_0 e^{i(\\mathbf{k}\\cdot\\mathbf{r}-\\omega t)},\\qquad \\mathbf{B} = \\mathbf{B}_0 e^{i(\\mathbf{k}\\cdot\\mathbf{r}-\\omega t)}")+
+   p("色散关系 $k=\\omega\\sqrt{\\mu\\varepsilon}$，相速 $v=\\omega/k=1/\\sqrt{\\mu\\varepsilon}$。"))+
+   der(p("<strong>横波性与 E、B 关系：</strong>由 $\\nabla\\cdot\\mathbf{E}=0$ 得 $\\mathbf{k}\\cdot\\mathbf{E}_0=0$，即 $\\mathbf{E}\\perp\\mathbf{k}$；由 $\\nabla\\times\\mathbf{E}=-\\partial\\mathbf{B}/\\partial t$：")+
+   fml("i\\mathbf{k}\\times\\mathbf{E}_0 = i\\omega\\mathbf{B}_0 \\implies \\mathbf{B}_0 = \\frac{1}{\\omega}\\mathbf{k}\\times\\mathbf{E}_0")+
+   p("故 $\\mathbf{B}\\perp\\mathbf{E}$ 且 $\\mathbf{B}\\perp\\mathbf{k}$，三者构成右手系。振幅比 $E_0/B_0=\\omega/k=v$，真空中 $E_0=cB_0$。"))+
+   defn("波阻抗",p("介质中电场与磁场振幅之比 $Z=E/H=\\sqrt{\\mu/\\varepsilon}$。真空阻抗 $Z_0=\\sqrt{\\mu_0/\\varepsilon_0}\\approx 377\\,\\Omega$。"))
+ )},
+]},
+{
+"name": "2.2 电磁波的反射与折射",
+"color": "#0d9488",
+"desc": "菲涅耳公式、布儒斯特角、全反射",
+"items": [
+{"id":"d2s2-1","name":"菲涅耳公式与布儒斯特角","tags":["thm","der"],"brief":"电磁波在介质界面的反射折射。",
+ "body": wrap(
+   thm("边界条件",p("在两介质界面上，$E$ 和 $H$ 的切向分量连续，$D$ 和 $B$ 的法向分量连续。由此可得反射系数和透射系数（菲涅耳公式）。"))+
+   thm("布儒斯特角",p("当入射角 $\\theta_B$ 满足 $\\theta_B+\\theta_t=90°$ 时，p 偏振（平行入射面）反射系数为零：")+
+   fml("\\tan\\theta_B = \\frac{n_2}{n_1}"))+
+   der(p("<strong>布儒斯特角推导：</strong>p 偏振反射系数为零的条件是反射光与折射光垂直，即 $\\theta_B+\\theta_t=90°$。由折射定律 $n_1\\sin\\theta_B=n_2\\sin\\theta_t=n_2\\cos\\theta_B$，故：")+
+   fml("\\frac{\\sin\\theta_B}{\\cos\\theta_B} = \\frac{n_2}{n_1} \\implies \\tan\\theta_B = \\frac{n_2}{n_1}")+
+   p("此时反射光为完全 s 偏振（垂直入射面）。"))+
+   thm("全反射",p("当光从光密介质入射到光疏介质（$n_1>n_2$），入射角大于临界角 $\\theta_c=\\arcsin(n_2/n_1)$ 时发生全反射，此时存在沿界面传播的倏逝波。"))
+ )},
+]},
+{
+"name": "2.3 波导与谐振腔",
+"color": "#0d9488",
+"desc": "矩形波导的 TE/TM 模与截止频率",
+"items": [
+{"id":"d2s3-1","name":"矩形波导","tags":["thm","der"],"brief":"电磁波在波导中的传播模式。",
+ "fig":"waveguide","figCap":"矩形波导中的 TE 波",
+ "body": wrap(
+   defn("波导",p("引导电磁波传播的金属管结构。矩形波导截面 $a\\times b$，内为真空或介质。"))+
+   thm("TE 模与截止频率",p("对矩形波导 $\\text{TE}_{mn}$ 模（电场无纵向分量），截止角频率：")+
+   fml("\\omega_{mn} = c\\sqrt{\\left(\\frac{m\\pi}{a}\\right)^2 + \\left(\\frac{n\\pi}{b}\\right)^2}")+
+   p("仅当 $\\omega>\\omega_{mn}$ 时该模才能传播。最低模为 $\\text{TE}_{10}$。"))+
+   der(p("<strong>截止频率推导：</strong>设波沿 $z$ 方向传播，分离变量 $E_x(x,y)e^{i(k_z z-\\omega t)}$，亥姆霍兹方程 $(\\nabla_t^2+k^2-k_z^2)E=0$，其中 $\\nabla_t^2=\\partial_x^2+\\partial_y^2$。由边界条件 $E_x|_{x=0,a}=0$ 得 $E_x\\propto\\sin(m\\pi x/a)$，同理 $y$ 方向。故：")+
+   fml("k^2-k_z^2 = \\left(\\frac{m\\pi}{a}\\right)^2+\\left(\\frac{n\\pi}{b}\\right)^2")+
+   p("传播条件 $k_z^2>0$，即 $k>k_c$，截止角频率 $\\omega_c=ck_c$。"))
+ )},
+]},
+]
+
+# =====================================================
+#  CHAPTER 3: 电磁辐射
+# =====================================================
+ch3_sections = [
+{
+"name": "3.1 推迟势与李纳-维谢尔势",
+"color": "#be185d",
+"desc": "推迟势、运动电荷的李纳-维谢尔势",
+"items": [
+{"id":"d3s1-1","name":"推迟势","tags":["thm","der"],"brief":"考虑电磁作用传播延迟的势。",
+ "body": wrap(
+   thm("推迟势",p("在洛伦兹规范 $\\nabla\\cdot\\mathbf{A}+\\mu\\varepsilon\\partial\\varphi/\\partial t=0$ 下，势满足达朗贝尔方程，其解为推迟势：")+
+   fml("\\varphi(\\mathbf{r},t) = \\frac{1}{4\\pi\\varepsilon_0}\\int\\frac{\\rho(\\mathbf{r}',t-r/c)}{r}dV'")+
+   fml("\\mathbf{A}(\\mathbf{r},t) = \\frac{\\mu_0}{4\\pi}\\int\\frac{\\mathbf{j}(\\mathbf{r}',t-r/c)}{r}dV'")+
+   p("其中 $r=|\\mathbf{r}-\\mathbf{r}'|$，$t-r/c$ 为推迟时间，表示 $\\mathbf{r}'$ 处 $t-r/c$ 时刻的源在 $t$ 时刻对 $\\mathbf{r}$ 处场的贡献。"))+
+   der(p("<strong>推迟势的物理意义：</strong>电磁作用以有限速度 $c$ 传播，因此 $t$ 时刻 $\\mathbf{r}$ 处的势由较早时刻 $t-r/c$ 源的状态决定。这体现了电磁场的局域性和因果性。"))+
+   thm("李纳-维谢尔势",p("匀速运动点电荷的推迟势：")+
+   fml("\\varphi = \\frac{q}{4\\pi\\varepsilon_0}\\frac{1}{r-\\mathbf{v}\\cdot\\mathbf{r}/c},\\qquad \\mathbf{A} = \\frac{\\mu_0 q\\mathbf{v}}{4\\pi}\\frac{1}{r-\\mathbf{v}\\cdot\\mathbf{r}/c}"))
+ )},
+]},
+{
+"name": "3.2 电偶极辐射",
+"color": "#be185d",
+"desc": "电偶极辐射场、角分布与总功率",
+"items": [
+{"id":"d3s2-1","name":"电偶极辐射","tags":["thm","der"],"brief":"振荡电偶极子的辐射。",
+ "fig":"dipole_rad","figCap":"振荡电偶极子的辐射场",
+ "body": wrap(
+   thm("电偶极辐射场",p("振荡电偶极矩 $\\mathbf{p}(t)=\\mathbf{p}_0\\cos\\omega t$ 在远区产生辐射场：")+
+   fml("\\mathbf{B} = \\frac{\\mu_0}{4\\pi c}\\frac{\\ddot{\\mathbf{p}}(t-r/c)\\times\\hat{\\mathbf{r}}}{r}")+
+   fml("\\mathbf{E} = c\\mathbf{B}\\times\\hat{\\mathbf{r}}"))+
+   der(p("<strong>辐射角分布推导：</strong>辐射场坡印廷矢量 $\\mathbf{S}=\\mathbf{E}\\times\\mathbf{B}/\\mu_0$。由 $\\mathbf{E}=c\\mathbf{B}\\times\\hat{\\mathbf{r}}$ 且 $\\mathbf{E}\\perp\\mathbf{B}$，$S=E^2/(\\mu_0 c)$。设 $\\mathbf{p}$ 沿极轴，$\\theta$ 为观测方向与 $\\mathbf{p}$ 夹角，则：")+
+   fml("\\frac{dP}{d\\Omega} = \\frac{\\mu_0 p_0^2\\omega^4}{32\\pi^2 c}\\sin^2\\theta")+
+   p("辐射在垂直于偶极矩方向（$\\theta=90°$）最强，沿偶极矩方向（$\\theta=0,\\pi$）为零。")+
+   p("<strong>总辐射功率：</strong>对角分布积分：")+
+   fml("P = \\int\\frac{dP}{d\\Omega}d\\Omega = \\frac{\\mu_0 p_0^2\\omega^4}{32\\pi^2 c}\\int_0^{2\\pi}d\\phi\\int_0^\\pi\\sin^2\\theta\\sin\\theta\\,d\\theta"))+
+   fml("= \\frac{\\mu_0 p_0^2\\omega^4}{32\\pi^2 c}\\cdot 2\\pi\\cdot\\frac{4}{3} = \\frac{\\mu_0 p_0^2\\omega^4}{12\\pi c}")+
+   p("此为 Larmor 公式的偶极辐射形式，辐射功率与频率四次方成正比。")
+ )},
+]},
+{
+"name": "3.3 散射与辐射阻尼",
+"color": "#be185d",
+"desc": "汤姆孙散射、辐射阻尼力",
+"items": [
+{"id":"d3s3-1","name":"汤姆孙散射与辐射阻尼","tags":["thm","der"],"brief":"自由电子对电磁波的散射。",
+ "body": wrap(
+   thm("汤姆孙散射",p("自由电子在入射电磁波作用下做受迫振荡并辐射（散射）。非相对论情形下，散射截面：")+
+   fml("\\sigma_T = \\frac{8\\pi}{3}\\left(\\frac{e^2}{4\\pi\\varepsilon_0 m_e c^2}\\right)^2 = \\frac{8\\pi}{3}r_e^2")+
+   p("其中 $r_e=e^2/(4\\pi\\varepsilon_0 m_e c^2)\\approx 2.8\\times10^{-15}\\,\\text{m}$ 为经典电子半径。"))+
+   der(p("<strong>推导：</strong>入射电场 $\\mathbf{E}_0$ 使电子加速度 $\\mathbf{a}=e\\mathbf{E}_0/m_e$。由 Larmor 公式，电子辐射功率 $P=\\frac{e^2 a^2}{6\\pi\\varepsilon_0 c^3}$。入射能流 $S_0=\\frac{1}{2}\\varepsilon_0 c E_0^2$。散射截面 $\\sigma=P/S_0$：")+
+   fml("\\sigma = \\frac{e^2 (eE_0/m_e)^2/(6\\pi\\varepsilon_0 c^3)}{\\tfrac{1}{2}\\varepsilon_0 c E_0^2} = \\frac{8\\pi}{3}\\frac{e^4}{(4\\pi\\varepsilon_0)^2 m_e^2 c^4} = \\frac{8\\pi}{3}r_e^2"))+
+   thm("辐射阻尼力",p("电子因辐射损失能量，等效受一个阻尼力：")+
+   fml("\\mathbf{F}_s = \\frac{e^2}{6\\pi\\varepsilon_0 c^3}\\ddot{\\mathbf{v}}")+
+   p("该力由能量守恒导出：辐射功率等于阻尼力做负功的功率。"))
+ )},
+]},
+]
+
+CHAPTERS = [
+    {"id":"d-ch1","num":"第一章","title":"静电磁场","en":"STATIC EM FIELDS",
+     "desc":"静电场边值问题与唯一性定理、电多极展开、磁矢势与库仑规范。",
+     "sections": ch1_sections},
+    {"id":"d-ch2","num":"第二章","title":"电磁波","en":"EM WAVES",
+     "desc":"平面电磁波的横波性与偏振、菲涅耳公式与布儒斯特角、矩形波导的 TE/TM 模与截止频率。",
+     "sections": ch2_sections},
+    {"id":"d-ch3","num":"第三章","title":"电磁辐射","en":"EM RADIATION",
+     "desc":"推迟势与李纳-维谢尔势、电偶极辐射场与角分布、汤姆孙散射与辐射阻尼。",
+     "sections": ch3_sections},
+]
+
+total_items = sum(sum(len(s["items"]) for s in ch["sections"]) for ch in CHAPTERS)
+print(f"Total items: {total_items}")
+
+def gen_html():
+    data_lines = []
+    for ch in CHAPTERS:
+        sec_strs = []
+        for sec in ch["sections"]:
+            item_strs = []
+            for it in sec["items"]:
+                tags_js = json.dumps(it["tags"], ensure_ascii=False)
+                body_esc = js_escape(it["body"])
+                fig_field = f",fig:{json.dumps(it.get('fig',''),ensure_ascii=False)}" if it.get("fig") else ""
+                figcap_field = f",figCap:{json.dumps(it.get('figCap',''),ensure_ascii=False)}" if it.get("figCap") else ""
+                item_strs.append(
+                    f"{{id:'{it['id']}',name:{json.dumps(it['name'],ensure_ascii=False)},"
+                    f"tags:{tags_js},brief:{json.dumps(it['brief'],ensure_ascii=False)},"
+                    f"body:`{body_esc}`{fig_field}{figcap_field}}}"
+                )
+            sec_strs.append(
+                f"{{name:{json.dumps(sec['name'],ensure_ascii=False)},"
+                f"color:'{sec['color']}',desc:{json.dumps(sec['desc'],ensure_ascii=False)},"
+                f"items:[{','.join(item_strs)}]}}"
+            )
+        data_lines.append(
+            f"{{id:'{ch['id']}',num:{json.dumps(ch['num'],ensure_ascii=False)},"
+            f"title:{json.dumps(ch['title'],ensure_ascii=False)},en:'{ch['en']}',"
+            f"desc:{json.dumps(ch['desc'],ensure_ascii=False)},"
+            f"sections:[{','.join(sec_strs)}]}}"
+        )
+    la_data = "[" + ",".join(data_lines) + "]"
+
+    fig_entries = []
+    for k, v in FIG.items():
+        fig_entries.append(f"{json.dumps(k)}:`{js_escape(v)}`")
+    fig_js = "{" + ",".join(fig_entries) + "}"
+    tag_label_js = json.dumps(TAG_LABEL, ensure_ascii=False)
+
+    nav_tabs = "".join(
+        f'<a class="la-nav-tab c{i+1}" href="#{ch["id"]}">{ch["num"]} · {ch["title"]}</a>'
+        for i, ch in enumerate(CHAPTERS)
+    )
+
+    css = '''  :root{--la-bg:#f4f7fb;--la-card:#ffffff;--la-ink:#152033;--la-muted:#607089;--la-shadow:0 12px 32px rgba(20,36,60,.09);}
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;color:var(--la-ink);background:radial-gradient(circle at 10% 10%,rgba(37,99,235,.08),transparent 28%),radial-gradient(circle at 90% 10%,rgba(124,58,237,.08),transparent 28%),var(--la-bg);line-height:1.7}
+  a{color:inherit}
+  .la-wrap{width:min(1400px,94vw);margin:auto}
+  .la-header{padding:52px 0 20px;text-align:center}
+  .la-eyebrow{font-size:13px;letter-spacing:.22em;color:var(--la-muted);font-weight:700;text-transform:uppercase}
+  h1{margin:10px 0 8px;font-size:clamp(30px,5vw,54px);line-height:1.08;letter-spacing:-.03em}
+  .la-subtitle{margin:0 auto;color:var(--la-muted);font-size:16px;max-width:820px;line-height:1.8}
+  .back-bar{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:22px 0 6px}
+  .back-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 22px;border-radius:999px;text-decoration:none;font-size:14px;font-weight:800;background:#fff;color:#1e3a8a;border:1px solid #c7d7ee;box-shadow:0 8px 20px rgba(20,36,60,.08);transition:.25s;cursor:pointer}
+  .back-btn:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(20,36,60,.14);color:#4c1d95;border-color:#ddd6fe}
+  .la-nav-tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:22px 0 8px}
+  .la-nav-tab{padding:8px 16px;border-radius:999px;text-decoration:none;font-weight:700;font-size:13px;border:1px solid #d5deea;background:#fff;transition:.25s;color:#334155}
+  .la-nav-tab:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(20,36,60,.1)}
+  .la-nav-tab.c1{color:#1e40af;border-color:#bfdbfe}
+  .la-nav-tab.c2{color:#0f766e;border-color:#99f6e4}
+  .la-nav-tab.c3{color:#be185d;border-color:#fbcfe8}
+  .la-engagement-bar{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:26px 0 10px}
+  .la-stat-item{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border-radius:999px;background:#fff;border:1px solid #e2e8f0;font-size:13px;color:#334155;font-weight:600}
+  .la-stat-value{color:#6366f1;font-weight:800;font-size:15px}
+  .la-stat-link{cursor:pointer;text-decoration:none;transition:.2s}
+  .la-stat-link:hover{background:#eef2ff;border-color:#c7d2fe}
+  .la-legend{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:0 0 24px;font-size:12px;color:#64748b}
+  .la-legend-title{font-weight:700;margin-right:4px}
+  .la-arc-badge{font-size:11px;padding:3px 10px;border-radius:999px;font-weight:700;letter-spacing:.04em}
+  .la-arc-def{background:#dbeafe;color:#1e40af}
+  .la-arc-thm{background:#ede9fe;color:#6d28d9}
+  .la-arc-der{background:#e0f2fe;color:#0369a1}
+  .la-arc-exa{background:#dcfce7;color:#15803d}
+  .la-arc-app{background:#fef3c7;color:#b45309}
+  .la-arc-note{background:#fee2e2;color:#b91c1c}
+  .la-roadmap{padding:30px 0}
+  .la-phase-title{font-size:24px;color:#1e293b;margin:40px 0 6px 18px;display:flex;align-items:center;gap:12px}
+  .la-phase-title::before{content:"";width:6px;height:26px;border-radius:4px}
+  .la-phase-title.d-ch1::before{background:#2563eb}
+  .la-phase-title.d-ch2::before{background:#0d9488}
+  .la-phase-title.d-ch3::before{background:#be185d}
+  .la-phase-en{font-size:11px;letter-spacing:.36em;color:#94a3b8;font-weight:700;text-transform:uppercase;margin:0 0 12px 18px;font-style:italic}
+  .la-phase-desc{color:var(--la-muted);font-size:14px;margin:0 0 24px 18px;line-height:1.8;max-width:960px}
+  .la-domain{margin-bottom:26px;padding:16px 18px 18px 22px;position:relative;background:rgba(255,255,255,.6);border-radius:18px;border:1px solid #e5ebf2}
+  .la-domain::before{content:"";position:absolute;left:6px;top:16px;bottom:16px;width:5px;border-radius:5px;background:var(--domain-color,#2563eb);box-shadow:0 0 12px rgba(37,99,235,.25)}
+  .la-domain-header{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+  .la-domain-header h3{margin:0;font-size:17px;color:#1e293b}
+  .la-domain-count{font-size:11px;padding:2px 10px;border-radius:999px;background:#eef2ff;color:#4f46e5;font-weight:700}
+  .la-domain-desc{font-size:12px;color:#94a3b8}
+  .la-domain-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+  .la-course-card{background:#fff;border:1px solid #e5ebf2;border-radius:14px;padding:14px 16px;cursor:pointer;transition:.22s;box-shadow:var(--la-shadow)}
+  .la-course-card:hover{transform:translateY(-3px);border-color:#c7d2fe;box-shadow:0 16px 40px rgba(37,99,235,.12)}
+  .la-course-card h4{margin:6px 0;font-size:15px;color:#1e293b}
+  .la-course-card p{margin:4px 0 0;font-size:12.5px;color:#64748b;line-height:1.6}
+  .la-arc-badges{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:2px}
+  .la-overlay{position:fixed;inset:0;background:rgba(15,23,42,.5);display:none;align-items:center;justify-content:center;padding:18px;z-index:60;backdrop-filter:blur(2px)}
+  .la-overlay.show{display:flex}
+  .la-modal{width:min(820px,96vw);background:white;border-radius:24px;padding:30px;box-shadow:0 24px 80px rgba(0,0,0,.28);animation:laPopIn .3s;max-height:90vh;overflow-y:auto}
+  @keyframes laPopIn{from{transform:scale(.94);opacity:0}to{transform:scale(1);opacity:1}}
+  .la-modal h2{margin:0 0 10px;font-size:23px;color:#1e293b;line-height:1.35}
+  .la-modal .la-crumbs{font-size:12px;color:#94a3b8;margin:0 0 14px;font-weight:600;letter-spacing:.02em}
+  .la-modal .la-arc-badges{margin:0 0 16px}
+  .la-modal-body{color:#334155;font-size:15px;line-height:1.9}
+  .la-modal-body p{margin:0 0 12px}
+  .la-modal-body strong{color:#0f172a}
+  .la-modal-body ul{margin:0 0 12px;padding-left:22px}
+  .la-modal-body li{margin-bottom:6px}
+  .la-fml{margin:16px 0;padding:14px 18px;background:linear-gradient(135deg,#f8fafc,#eef4fb);border-left:4px solid #93b4e8;border-radius:10px;overflow-x:auto;font-size:16px;color:#0f172a}
+  .la-fml .note{display:block;font-size:12.5px;color:#8496ad;margin-top:8px;line-height:1.6;font-family:system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+  .la-fml mjx-container[display="true"]{margin:0 !important}
+  mjx-container, mjx-container *{color:#0f172a !important;opacity:1 !important}
+  mjx-mi{font-style:italic !important}
+  mjx-mo{color:#0f172a !important}
+  .la-modal-body mjx-container, .la-modal-body mjx-container *{color:#0f172a !important;opacity:1 !important}
+  .la-fig{margin:18px auto;padding:14px 16px 10px;background:#fafcff;border:1px solid #e2ebf7;border-radius:14px;display:flex;flex-direction:column;align-items:center;max-width:600px}
+  .la-fig svg{display:block;width:100%;height:auto;max-width:560px}
+  .la-fig .la-fig-cap{font-size:12px;color:#8496ad;margin-top:8px;text-align:center;letter-spacing:.02em}
+  .la-callout{margin:14px 0;padding:12px 16px;background:#fffbeb;border-left:3px solid #fbbf24;border-radius:8px;font-size:13.5px;color:#78350f;line-height:1.8}
+  .la-kp-sec{margin:0 0 18px;padding:14px 16px;border-radius:12px;background:#f8fafc;border:1px solid #eef2f7}
+  .la-kp-sec h5{margin:0 0 10px;font-size:14px;color:#1e293b;letter-spacing:.04em;display:flex;align-items:center;gap:8px}
+  .la-kp-sec h5::before{content:"";width:4px;height:14px;border-radius:2px;background:var(--la-accent,#3b82f6)}
+  .la-kp-def{border-left:3px solid #3b82f6}
+  .la-kp-thm{border-left:3px solid #8b5cf6;background:#faf7ff}
+  .la-kp-der{border-left:3px solid #0ea5e9;background:#f0f9ff}
+  .la-kp-exa{border-left:3px solid #10b981;background:#f0fdf4}
+  .la-kp-app{border-left:3px solid #f59e0b;background:#fffbeb}
+  .la-kp-note{border-left:3px solid #ef4444;background:#fef2f2}
+  .la-kp-his{border-left:3px solid #64748b;background:#f8fafc}
+  .la-kp-sec p:last-child{margin-bottom:0}
+  .la-modal-close{margin-top:22px;background:#0f172a;color:white;border-color:#0f172a;padding:10px 20px;font-weight:bold}
+  .la-footer{padding:34px 0 50px;color:var(--la-muted);text-align:center;font-size:13px;line-height:1.9}
+  .la-core-fmls{margin:40px 0 20px;padding:28px 24px;background:linear-gradient(135deg,#f0f4ff,#faf7ff);border:1px solid #e0e7ff;border-radius:18px}
+  .la-core-fmls h3{font-size:18px;color:#1e293b;margin:0 0 20px;text-align:center;letter-spacing:.04em}
+  .la-core-fmls h3 .la-core-count{display:inline-block;background:#6366f1;color:#fff;font-size:13px;padding:2px 10px;border-radius:20px;margin-left:8px;vertical-align:middle}
+  .la-core-item{display:flex;gap:12px;margin:0 0 14px;padding:12px 16px;background:#fff;border-radius:12px;border-left:3px solid #6366f1;align-items:flex-start}
+  .la-core-num{flex-shrink:0;width:26px;height:26px;border-radius:50%;background:#6366f1;color:#fff;font-size:13px;display:flex;align-items:center;justify-content:center;font-weight:bold}
+  .la-core-body{flex:1;min-width:0}
+  .la-core-body .la-core-name{font-size:14px;font-weight:600;color:#1e293b;margin-bottom:4px}
+  .la-core-body .la-fml{margin:6px 0 0;padding:8px 14px;font-size:15px}
+  .la-back-top{display:inline-block;margin-top:20px;padding:10px 28px;background:#1e293b;color:#fff;border:none;border-radius:25px;font-size:14px;cursor:pointer;letter-spacing:.04em;transition:background .2s}
+  .la-back-top:hover{background:#334155}
+  @media(max-width:900px){.la-wrap{width:min(94vw,720px)}.la-roadmap{padding:20px}.la-phase-title{font-size:19px}.la-phase-en{font-size:10px;letter-spacing:.26em}.la-domain-desc{display:none}.la-domain-grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}.la-modal{padding:22px}}'''
+
+    js = f'''const LA_DATA = {la_data};
+const LA_TAG_LABEL = {tag_label_js};
+const LA_FIG = {fig_js};
+const LA_KP = {{}};
+function laBuildCard(item){{
+  const tags = item.tags.map(t => `<span class="la-arc-badge la-arc-${{t}}">${{LA_TAG_LABEL[t]}}</span>`).join('');
+  return `<div class="la-course-card" onclick="showLaItem('${{item.id}}')"><div class="la-arc-badges">${{tags}}</div><h4>${{item.name}}</h4><p>${{item.brief}}</p></div>`;
+}}
+function renderLa(){{
+  const root = document.getElementById('laRoadmap');
+  let html = '';
+  LA_DATA.forEach(ch => {{
+    html += `<h2 class="la-phase-title ${{ch.id}}" id="${{ch.id}}">${{ch.num}} · ${{ch.title}}</h2>`;
+    html += `<div class="la-phase-en">${{ch.en}}</div>`;
+    html += `<p class="la-phase-desc">${{ch.desc}}</p>`;
+    ch.sections.forEach(sec => {{
+      html += `<div class="la-domain" style="--domain-color:${{sec.color}};"><div class="la-domain-header"><h3>${{sec.name}}</h3><span class="la-domain-count">${{sec.items.length}} 个知识点</span><span class="la-domain-desc">${{sec.desc}}</span></div><div class="la-domain-grid">`;
+      sec.items.forEach(it => {{ html += laBuildCard(it); LA_KP[it.id] = {{item: it, section: sec.name, chapter: `${{ch.num}} · ${{ch.title}}`}}; }});
+      html += `</div></div>`;
+    }});
+  }});
+  root.innerHTML = html;
+  const kCount = Object.keys(LA_KP).length;
+  document.getElementById('laKCount').textContent = kCount;
+}}
+function showLaItem(id){{
+  const rec = LA_KP[id];
+  if(!rec) return;
+  const it = rec.item;
+  document.getElementById('laCrumbs').textContent = rec.chapter + ' ／ ' + rec.section;
+  document.getElementById('laTitle').textContent = it.name;
+  document.getElementById('laTags').innerHTML = it.tags.map(t => `<span class="la-arc-badge la-arc-${{t}}">${{LA_TAG_LABEL[t]}}</span>`).join('');
+  let bodyHtml = it.body;
+  if (it.fig && LA_FIG[it.fig]) {{
+    const figHtml = `<div class="la-fig">${{LA_FIG[it.fig]}}<div class="la-fig-cap">${{it.figCap || ''}}</div></div>`;
+    bodyHtml = figHtml + bodyHtml;
+  }}
+  document.getElementById('laBody').innerHTML = bodyHtml;
+  document.getElementById('laOverlay').classList.add('show');
+  document.querySelector('.la-modal').scrollTop = 0;
+  if (window.MathJax && window.MathJax.typesetPromise) {{ window.MathJax.typesetPromise([document.getElementById('laBody')]).catch(()=>{{}}); }}
+}}
+function hideLaInfo(){{ document.getElementById('laOverlay').classList.remove('show'); }}
+function closeLaInfo(e){{ if(e.target.id === 'laOverlay') hideLaInfo(); }}
+document.addEventListener('keydown', e => {{ if(e.key === 'Escape') hideLaInfo(); }});
+document.addEventListener('DOMContentLoaded', () => {{
+  renderLa();
+  if (window.MathJax && window.MathJax.typesetPromise) {{ window.MathJax.typesetPromise([document.getElementById('laRoadmap')]).catch(()=>{{}}); }}
+}});'''
+
+    html = f'''<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="电动力学知识体系：静电磁场、电磁波、电磁辐射">
+<title>电动力学 · 知识体系</title>
+<script>
+window.MathJax = {{
+  tex: {{
+    inlineMath: [['$','$'], ['\\\\(','\\\\)']],
+    displayMath: [['$$','$$'], ['\\\\[','\\\\]']],
+    processEscapes: true,
+    packages: {{'[+]': ['ams','boldsymbol']}}
+  }},
+  options: {{
+    skipHtmlTags: ['script','noscript','style','textarea','pre','code'],
+    ignoreHtmlClass: 'tex2jax_ignore'
+  }},
+  svg: {{ fontCache: 'global' }}
+}};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" async></script>
+<style>
+{css}
+</style>
+</head>
+<body>
+<div class="la-wrap">
+  <header class="la-header">
+    <div class="la-eyebrow">ELECTRODYNAMICS · KNOWLEDGE MAP</div>
+    <h1>电动力学 · 知识体系</h1>
+    <p class="la-subtitle">静电磁场 · 电磁波 · 电磁辐射</p>
+    <div class="back-bar"><a class="back-btn" href="index.html">← 返回总览</a></div>
+    <div class="la-nav-tabs">{nav_tabs}</div>
+    <div class="la-engagement-bar">
+      <div class="la-stat-item"><span>📘</span><span class="la-stat-value" id="laKCount">--</span><span>个知识点</span></div>
+      <a class="la-stat-item la-stat-link" href="#laCoreFmls" onclick="event.preventDefault();document.getElementById('laCoreFmls').scrollIntoView({{behavior:'smooth',block:'start'}})"><span>🧮</span><span class="la-stat-value">{len(CORE_FORMULAS)}</span><span>条核心公式 · 点击速查</span></a>
+    </div>
+  </header>
+  <div class="la-legend">
+    <span class="la-legend-title">知识记号</span>
+    <span class="la-arc-badge la-arc-def">定 义</span>
+    <span class="la-arc-badge la-arc-thm">定 理</span>
+    <span class="la-arc-badge la-arc-der">推 导</span>
+    <span class="la-arc-badge la-arc-exa">例 子</span>
+    <span class="la-arc-badge la-arc-app">应 用</span>
+    <span class="la-arc-badge la-arc-note">备 注</span>
+  </div>
+  <main class="la-roadmap" id="laRoadmap"></main>
+  <section class="la-core-fmls" id="laCoreFmls">
+    <h3>核心公式速查 <span class="la-core-count">{len(CORE_FORMULAS)} 条</span></h3>
+{chr(10).join(f'    <div class="la-core-item"><div class="la-core-num">{i+1}</div><div class="la-core-body"><div class="la-core-name">{name}</div><div class="la-fml">$${latex}$$</div><div class="note" style="font-size:12px;color:#8496ad;margin-top:4px">{desc}</div></div></div>' for i,(name,latex,desc) in enumerate(CORE_FORMULAS))}
+  </section>
+  <footer class="la-footer">
+    <div>电动力学 · 知识体系可视化 · MathJax + SVG</div>
+    <div style="margin-top:8px">基于电动力学核心知识体系整理</div>
+    <button class="la-back-top" onclick="window.scrollTo({{top:0,behavior:'smooth'}})">↑ 回到顶部</button>
+  </footer>
+</div>
+<div class="la-overlay" id="laOverlay" onclick="closeLaInfo(event)">
+  <div class="la-modal" onclick="event.stopPropagation()">
+    <p class="la-crumbs" id="laCrumbs"></p>
+    <h2 id="laTitle">知识点</h2>
+    <div class="la-arc-badges" id="laTags"></div>
+    <div class="la-modal-body" id="laBody"></div>
+    <button class="la-modal-close" onclick="hideLaInfo()">关 闭</button>
+  </div>
+</div>
+<script>
+{js}
+</script>
+</body>
+</html>'''
+    return html
+
+if __name__ == "__main__":
+    html = gen_html()
+    with open("/workspace/electrodynamics.html", "w", encoding="utf-8") as f:
+        f.write(html)
+    print(f"Generated electrodynamics.html ({len(html)} chars)")
