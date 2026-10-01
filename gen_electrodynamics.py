@@ -42,6 +42,27 @@ FIG = {
 <text x="20" y="140" font-size="10" fill="#ef4444">B</text>
 <polygon points="220,80 210,74 210,86" fill="#10b981"/>
 <text x="195" y="70" font-size="10" fill="#10b981">k</text></svg>''',
+"skin_depth": '''<svg viewBox="0 0 240 160" xmlns="http://www.w3.org/2000/svg">
+<rect x="100" y="20" width="120" height="120" fill="#e0f2fe" stroke="#0ea5e9" stroke-width="1.5"/>
+<text x="130" y="15" font-size="11" fill="#0369a1">导体</text>
+<line x1="100" y1="80" x2="220" y2="80" stroke="#cbd5e1" stroke-width="1"/>
+<path d="M 100 80 Q 115 55 130 80 Q 145 105 160 80 Q 175 62 190 80 Q 205 92 220 80" fill="none" stroke="#3b82f6" stroke-width="2"/>
+<path d="M 100 80 Q 115 105 130 80 Q 145 55 160 80 Q 175 98 190 80 Q 205 68 220 80" fill="none" stroke="#ef4444" stroke-width="2" opacity="0.6"/>
+<line x1="100" y1="80" x2="40" y2="80" stroke="#10b981" stroke-width="2"/>
+<polygon points="40,80 50,74 50,86" fill="#10b981"/>
+<text x="50" y="70" font-size="10" fill="#10b981">入射波</text>
+<text x="110" y="145" font-size="10" fill="#475569">δ = √(2/ωμσ)</text></svg>''',
+"magnetic_dipole_rad": '''<svg viewBox="0 0 240 160" xmlns="http://www.w3.org/2000/svg">
+<circle cx="120" cy="80" r="5" fill="#4c1d95"/>
+<ellipse cx="120" cy="80" rx="30" ry="14" fill="none" stroke="#4c1d95" stroke-width="2"/>
+<polygon points="150,80 143,76 143,84" fill="#4c1d95"/>
+<text x="155" y="70" font-size="10" fill="#4c1d95">I(t)</text>
+<line x1="120" y1="80" x2="120" y2="38" stroke="#3b82f6" stroke-width="2"/>
+<polygon points="120,38 114,48 126,48" fill="#3b82f6"/>
+<text x="125" y="48" font-size="10" fill="#3b82f6">m(t)</text>
+<ellipse cx="120" cy="80" rx="75" ry="22" fill="none" stroke="#8b5cf6" stroke-width="1.2" opacity="0.5"/>
+<ellipse cx="120" cy="80" rx="100" ry="30" fill="none" stroke="#8b5cf6" stroke-width="1.2" opacity="0.3"/>
+<text x="185" y="70" font-size="9" fill="#8b5cf6">辐射场</text></svg>''',
 }
 
 TAG_LABEL = {"def":"定 义","thm":"定 理","der":"推 导","exa":"例 子","app":"应 用","his":"注 记","note":"备 注"}
@@ -63,6 +84,11 @@ CORE_FORMULAS = [
     ("辐射场", "\\mathbf{B} = \\frac{\\mu_0}{4\\pi c}\\frac{\\ddot{\\mathbf{p}}(t-r/c)\\times\\hat{\\mathbf{r}}}{r}", "电偶极辐射的磁场"),
     ("坡印廷矢量", "\\mathbf{S} = \\frac{1}{\\mu_0}\\mathbf{E}\\times\\mathbf{B}", "电磁能流密度"),
     ("辐射角分布", "\\frac{dP}{d\\Omega} = \\frac{\\mu_0 p_0^2\\omega^4}{32\\pi^2 c}\\sin^2\\theta", "电偶极辐射的角分布"),
+    ("磁标势", "\\mathbf{H}=-\\nabla\\varphi_m", "无电流区域的磁标势"),
+    ("趋肤深度", "\\delta = \\sqrt{\\frac{2}{\\omega\\mu\\sigma}}", "良导体中电磁波衰减的特征深度"),
+    ("复波矢", "k^2 = i\\omega\\mu\\sigma", "良导体中亥姆霍兹方程的色散关系"),
+    ("磁偶极辐射场", "\\mathbf{E}=-\\frac{\\mu_0}{4\\pi c}\\frac{\\ddot{\\mathbf{m}}\\times\\hat{\\mathbf{r}}}{r}", "磁偶极辐射的电场"),
+    ("磁偶极辐射功率", "P=\\frac{\\mu_0 m_0^2\\omega^4}{12\\pi c^3}", "磁偶极辐射的总功率"),
 ]
 
 def js_escape(s):
@@ -134,6 +160,22 @@ ch1_sections = [
    note(p("磁矢势不是唯一的，但 $\\mathbf{B}=\\nabla\\times\\mathbf{A}$ 是规范不变的，具有物理意义。在量子力学中，$\\mathbf{A}$ 的环流（AB 效应）有可观测效应。"))
  )},
 ]},
+{
+"name": "1.4 磁标势与静磁边值问题",
+"color": "#2563eb",
+"desc": "无电流区域的磁标势、磁荷观点与静磁边界条件",
+"items": [
+{"id":"d1s4-1","name":"磁标势","tags":["def","der"],"brief":"无传导电流区域引入磁标势简化静磁问题。",
+ "body": wrap(
+   defn("磁标势",p("在 $\\mathbf{j}=0$ 的单连通区域，$\\nabla\\times\\mathbf{H}=0$，故可引入磁标势 $\\varphi_m$ 使：")+
+   fml("\\mathbf{H} = -\\nabla\\varphi_m")+
+   p("又因 $\\nabla\\cdot\\mathbf{B}=0$ 且 $\\mathbf{B}=\\mu_0(\\mathbf{H}+\\mathbf{M})$，得：")+
+   fml("\\nabla^2\\varphi_m = \\nabla\\cdot\\mathbf{M} \\equiv \\rho_m/\\mu_0")+
+   p("其中 $\\rho_m=-\\mu_0\\nabla\\cdot\\mathbf{M}$ 为等效磁荷体密度。"))+
+   der(p("<strong>均匀磁化介质的磁场：</strong>均匀磁化时 $\\nabla\\cdot\\mathbf{M}=0$，体磁荷为零，仅表面有磁荷面密度 $\\sigma_m=\\mu_0\\mathbf{M}\\cdot\\mathbf{n}$。磁标势满足拉普拉斯方程 $\\nabla^2\\varphi_m=0$，可类比静电问题求解。"))+
+   note(p("磁标势仅在无传导电流的单连通区域有定义；与静电势不同，磁标势在多连通区域（如螺线管内部）可能多值。磁荷是等效概念，自然界不存在真实磁单极（至少尚未发现）。"))
+ )},
+]},
 ]
 
 # =====================================================
@@ -188,6 +230,25 @@ ch2_sections = [
    der(p("<strong>截止频率推导：</strong>设波沿 $z$ 方向传播，分离变量 $E_x(x,y)e^{i(k_z z-\\omega t)}$，亥姆霍兹方程 $(\\nabla_t^2+k^2-k_z^2)E=0$，其中 $\\nabla_t^2=\\partial_x^2+\\partial_y^2$。由边界条件 $E_x|_{x=0,a}=0$ 得 $E_x\\propto\\sin(m\\pi x/a)$，同理 $y$ 方向。故：")+
    fml("k^2-k_z^2 = \\left(\\frac{m\\pi}{a}\\right)^2+\\left(\\frac{n\\pi}{b}\\right)^2")+
    p("传播条件 $k_z^2>0$，即 $k>k_c$，截止角频率 $\\omega_c=ck_c$。"))
+ )},
+]},
+{
+"name": "2.4 电磁波在导体中的传播与趋肤效应",
+"color": "#0d9488",
+"desc": "良导体中电磁波的衰减、趋肤深度与表面阻抗",
+"items": [
+{"id":"d2s4-1","name":"趋肤效应","tags":["thm","der"],"brief":"电磁波进入导体后指数衰减的现象。",
+ "fig":"skin_depth","figCap":"电磁波在导体表面的趋肤效应",
+ "body": wrap(
+   defn("导体中的麦克斯韦方程",p("导体中 $\\mathbf{j}=\\sigma\\mathbf{E}$，安培环路定理为 $\\nabla\\times\\mathbf{H}=\\sigma\\mathbf{E}+\\varepsilon\\partial\\mathbf{E}/\\partial t$。对时谐场 $e^{-i\\omega t}$，良导体条件 $\\sigma\\gg\\omega\\varepsilon$ 时，位移电流可忽略。"))+
+   der(p("<strong>亥姆霍兹方程与复波矢：</strong>由麦克斯韦方程组得导体中电场满足：")+
+   fml("\\nabla^2\\mathbf{E} - i\\omega\\mu\\sigma\\mathbf{E} = 0")+
+   p("设平面波沿 $x$ 方向垂直入射导体表面（$x>0$ 为导体），解为 $\\mathbf{E}=\\mathbf{E}_0 e^{-\\alpha x}e^{i(\\beta x-\\omega t)}$，其中复波矢 $k=\\beta+i\\alpha$。由 $k^2=i\\omega\\mu\\sigma$：")+
+   fml("\\alpha = \\beta = \\sqrt{\\frac{\\omega\\mu\\sigma}{2}}")+
+   p("<strong>趋肤深度：</strong>波幅衰减至表面 $1/e$ 的深度：")+
+   fml("\\delta = \\frac{1}{\\alpha} = \\sqrt{\\frac{2}{\\omega\\mu\\sigma}}")+
+   p("例如铜（$\\sigma\\approx 5.8\\times10^7\\,\\text{S/m}$），$1\\,\\text{GHz}$ 时 $\\delta\\approx 2\\,\\mu\\text{m}$。"))+
+   note(p("趋肤效应使高频电流集中于导体表面薄层，导致交流电阻大于直流电阻，也用于电磁屏蔽（屏蔽层厚度须大于 $\\delta$）。表面阻抗 $Z_s=(1+i)/\\sigma\\delta$。"))
  )},
 ]},
 ]
@@ -247,6 +308,26 @@ ch3_sections = [
    thm("辐射阻尼力",p("电子因辐射损失能量，等效受一个阻尼力：")+
    fml("\\mathbf{F}_s = \\frac{e^2}{6\\pi\\varepsilon_0 c^3}\\ddot{\\mathbf{v}}")+
    p("该力由能量守恒导出：辐射功率等于阻尼力做负功的功率。"))
+ )},
+]},
+{
+"name": "3.4 磁偶极辐射",
+"color": "#be185d",
+"desc": "振荡磁偶极矩的辐射场、角分布与总功率",
+"items": [
+{"id":"d3s4-1","name":"磁偶极辐射","tags":["thm","der"],"brief":"振荡磁偶极子的电磁辐射。",
+ "fig":"magnetic_dipole_rad","figCap":"振荡磁偶极子的辐射",
+ "body": wrap(
+   defn("磁偶极辐射",p("振荡磁偶极矩 $\\mathbf{m}(t)=\\mathbf{m}_0\\cos\\omega t$（如载流线圈中交变电流）产生的辐射。可与电偶极辐射做对偶变换得到。"))+
+   der(p("<strong>辐射场推导：</strong>由推迟矢势 $\\mathbf{A}(\\mathbf{r},t)=\\frac{\\mu_0}{4\\pi}\\int\\frac{\\mathbf{j}(\\mathbf{r}',t-r/c)}{r}dV'$，对小电流环（磁偶极），远区辐射场为：")+
+   fml("\\mathbf{E} = -\\frac{\\mu_0}{4\\pi c}\\frac{\\ddot{\\mathbf{m}}(t-r/c)\\times\\hat{\\mathbf{r}}}{r}")+
+   fml("\\mathbf{B} = \\frac{\\mu_0}{4\\pi c^2}\\frac{(\\ddot{\\mathbf{m}}(t-r/c)\\times\\hat{\\mathbf{r}})\\times\\hat{\\mathbf{r}}}{r}")+
+   p("与电偶极辐射相比，$\\mathbf{E}$ 与 $\\mathbf{B}$ 的角色对调。"))+
+   thm("磁偶极辐射角分布与功率",p("设 $\\mathbf{m}$ 沿极轴，$\\theta$ 为观测方向与 $\\mathbf{m}$ 夹角，角分布：")+
+   fml("\\frac{dP}{d\\Omega} = \\frac{\\mu_0 m_0^2\\omega^4}{32\\pi^2 c^3}\\sin^2\\theta")+
+   p("总辐射功率：")+
+   fml("P = \\frac{\\mu_0 m_0^2\\omega^4}{12\\pi c^3}")+
+   p("与电偶极辐射 $P\\propto p_0^2\\omega^4/c$ 对比，磁偶极辐射功率多一个 $1/c^2$ 因子，通常远弱于同频率的电偶极辐射。"))
  )},
 ]},
 ]

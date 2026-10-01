@@ -116,6 +116,53 @@ FIG = {
 <polygon points="176,64 172,72 180,68" fill="#3b82f6"/>
 </g>
 <text x="80" y="145" font-size="10" fill="#475569">磁化：分子磁矩沿磁场方向排列</text></svg>''',
+"dipole_field": '''<svg viewBox="0 0 240 160" xmlns="http://www.w3.org/2000/svg">
+<circle cx="95" cy="80" r="9" fill="#ef4444"/>
+<text x="90" y="84" font-size="11" fill="#fff" font-weight="bold">+</text>
+<circle cx="145" cy="80" r="9" fill="#3b82f6"/>
+<text x="140" y="84" font-size="11" fill="#fff" font-weight="bold">−</text>
+<path d="M 95 80 Q 120 30 145 80" fill="none" stroke="#3b82f6" stroke-width="1.2"/>
+<path d="M 95 80 Q 120 130 145 80" fill="none" stroke="#3b82f6" stroke-width="1.2"/>
+<path d="M 80 60 Q 60 80 80 100" fill="none" stroke="#3b82f6" stroke-width="1.2"/>
+<path d="M 160 60 Q 180 80 160 100" fill="none" stroke="#3b82f6" stroke-width="1.2"/>
+<polygon points="145,80 138,74 138,86" fill="#3b82f6"/>
+<polygon points="95,80 102,74 102,86" fill="#3b82f6"/>
+<line x1="120" y1="30" x2="120" y2="50" stroke="#10b981" stroke-width="2"/>
+<polygon points="120,30 114,40 126,40" fill="#10b981"/>
+<text x="125" y="38" font-size="11" fill="#10b981">p</text></svg>''',
+"magnetic_moment": '''<svg viewBox="0 0 240 160" xmlns="http://www.w3.org/2000/svg">
+<ellipse cx="120" cy="80" rx="55" ry="30" fill="none" stroke="#3b82f6" stroke-width="2.5"/>
+<polygon points="175,80 167,76 167,84" fill="#3b82f6"/>
+<text x="155" y="70" font-size="11" fill="#3b82f6">I</text>
+<line x1="120" y1="80" x2="120" y2="35" stroke="#10b981" stroke-width="2"/>
+<polygon points="120,35 114,45 126,45" fill="#10b981"/>
+<text x="125" y="45" font-size="11" fill="#10b981">m</text>
+<text x="80" y="130" font-size="10" fill="#475569">载流线圈的磁矩 m = ISn̂</text></svg>''',
+"hysteresis": '''<svg viewBox="0 0 240 160" xmlns="http://www.w3.org/2000/svg">
+<line x1="20" y1="80" x2="220" y2="80" stroke="#cbd5e1" stroke-width="1"/>
+<line x1="120" y1="20" x2="120" y2="140" stroke="#cbd5e1" stroke-width="1"/>
+<path d="M 120 80 Q 160 30 200 50 Q 210 70 190 90 Q 160 130 120 80 Q 80 30 50 50 Q 40 70 60 90 Q 80 130 120 80 Z" fill="none" stroke="#be185d" stroke-width="2"/>
+<text x="205" y="76" font-size="10" fill="#475569">H</text>
+<text x="108" y="18" font-size="10" fill="#475569">B</text>
+<circle cx="120" cy="50" r="2.5" fill="#475569"/>
+<circle cx="120" cy="110" r="2.5" fill="#475569"/>
+<text x="125" y="48" font-size="9" fill="#475569">Br</text>
+<text x="125" y="120" font-size="9" fill="#475569">-Br</text></svg>''',
+"mutual_induct": '''<svg viewBox="0 0 240 160" xmlns="http://www.w3.org/2000/svg">
+<path d="M 40 80 Q 60 50 80 80 Q 100 110 120 80" fill="none" stroke="#3b82f6" stroke-width="2"/>
+<path d="M 120 80 Q 140 50 160 80 Q 180 110 200 80" fill="none" stroke="#ef4444" stroke-width="2"/>
+<text x="20" y="130" font-size="11" fill="#3b82f6">线圈1 (I₁)</text>
+<text x="150" y="130" font-size="11" fill="#ef4444">线圈2</text>
+<line x1="80" y1="80" x2="160" y2="80" stroke="#10b981" stroke-width="1.2" stroke-dasharray="4 3"/>
+<text x="108" y="72" font-size="10" fill="#10b981">Φ₁₂</text></svg>''',
+"em_energy": '''<svg viewBox="0 0 240 160" xmlns="http://www.w3.org/2000/svg">
+<line x1="10" y1="80" x2="230" y2="80" stroke="#cbd5e1" stroke-width="1"/>
+<path d="M 10 80 Q 40 30 70 80 T 130 80 T 190 80 T 230 80" fill="none" stroke="#3b82f6" stroke-width="2"/>
+<path d="M 10 80 Q 40 130 70 80 T 130 80 T 190 80 T 230 80" fill="none" stroke="#ef4444" stroke-width="2"/>
+<line x1="70" y1="30" x2="70" y2="130" stroke="#10b981" stroke-width="1.5" stroke-dasharray="3 3"/>
+<text x="20" y="26" font-size="10" fill="#3b82f6">E</text>
+<text x="20" y="142" font-size="10" fill="#ef4444">B</text>
+<text x="75" y="26" font-size="9" fill="#10b981">w=½(εE²+B²/μ)</text></svg>''',
 }
 
 TAG_LABEL = {"def":"定 义","thm":"定 理","der":"推 导","exa":"例 子","app":"应 用","his":"注 记","note":"备 注"}
@@ -144,6 +191,16 @@ CORE_FORMULAS = [
     ("麦克斯韦方程组(微分)", "\\nabla\\cdot\\mathbf{E}=\\frac{\\rho}{\\varepsilon_0},\\ \\nabla\\cdot\\mathbf{B}=0,\\ \\nabla\\times\\mathbf{E}=-\\frac{\\partial\\mathbf{B}}{\\partial t},\\ \\nabla\\times\\mathbf{B}=\\mu_0\\mathbf{j}+\\mu_0\\varepsilon_0\\frac{\\partial\\mathbf{E}}{\\partial t}", "电磁场的基本方程"),
     ("电磁波速", "c = \\frac{1}{\\sqrt{\\mu_0\\varepsilon_0}}", "真空中电磁波的传播速度"),
     ("电磁波能流密度", "\\mathbf{S} = \\frac{1}{\\mu_0}\\mathbf{E}\\times\\mathbf{B}", "坡印廷矢量"),
+    ("电偶极子远场电势", "V = \\frac{\\mathbf{p}\\cdot\\hat{\\mathbf{r}}}{4\\pi\\varepsilon_0 r^2}", "电偶极子在远区的电势"),
+    ("电偶极子电场", "E_r=\\frac{2p\\cos\\theta}{4\\pi\\varepsilon_0 r^3},\\ E_\\theta=\\frac{p\\sin\\theta}{4\\pi\\varepsilon_0 r^3}", "偶极子远场电场分量"),
+    ("偶极子力矩", "\\boldsymbol{\\tau}=\\mathbf{p}\\times\\mathbf{E}", "电偶极子在均匀电场中受力矩"),
+    ("静电场边界条件", "D_{2n}-D_{1n}=\\sigma_f,\\ E_{2t}=E_{1t}", "介质分界面上 D 的法向与 E 的切向跃变"),
+    ("磁矩", "\\mathbf{m}=IS\\hat{\\mathbf{n}}", "载流线圈的磁矩"),
+    ("磁力矩", "\\boldsymbol{\\tau}=\\mathbf{m}\\times\\mathbf{B}", "载流线圈在磁场中受力矩"),
+    ("磁滞回线", "B_r=B(H=0),\\ H_c=|H(B=0)|", "剩磁与矫顽力"),
+    ("自感电动势", "\\varepsilon_L=-L\\frac{dI}{dt}", "自感系数与自感电动势"),
+    ("互感电动势", "\\varepsilon_{21}=-M\\frac{dI_1}{dt}", "互感系数与互感电动势"),
+    ("电磁场能量密度", "w=\\frac{1}{2}\\varepsilon E^2+\\frac{1}{2\\mu}B^2", "电场与磁场能量密度之和"),
 ]
 
 def js_escape(s):
@@ -231,6 +288,26 @@ ch1_sections = [
    note(p("球形电容器 $C=4\\pi\\varepsilon_0\\frac{R_1 R_2}{R_2-R_1}$；圆柱形电容器单位长度电容 $C/L=\\frac{2\\pi\\varepsilon_0}{\\ln(R_2/R_1)}$。"))
  )},
 ]},
+{
+"name": "1.5 电偶极子的电场与力矩",
+"color": "#2563eb",
+"desc": "电偶极子的远场电势、电场及在外场中的受力矩",
+"items": [
+{"id":"e1s5-1","name":"电偶极子的远场","tags":["thm","der"],"brief":"电偶极子在远区产生的电势与电场。",
+ "fig":"dipole_field","figCap":"电偶极子的电场线分布",
+ "body": wrap(
+   defn("电偶极子",p("电偶极矩 $\\mathbf{p}=q\\mathbf{d}$，取偶极子中心为原点，$\\mathbf{p}$ 沿 $z$ 轴。远区条件 $r\\gg d$。"))+
+   der(p("<strong>远场电势推导：</strong>正、负电荷到场点 $P(r,\\theta)$ 的距离分别为 $r_+\\approx r-\\frac{d}{2}\\cos\\theta$，$r_-\\approx r+\\frac{d}{2}\\cos\\theta$。电势叠加：")+
+   fml("V = \\frac{q}{4\\pi\\varepsilon_0}\\left(\\frac{1}{r_+}-\\frac{1}{r_-}\\right) \\approx \\frac{q}{4\\pi\\varepsilon_0}\\frac{d\\cos\\theta}{r^2}")+
+   fml("V = \\frac{\\mathbf{p}\\cdot\\hat{\\mathbf{r}}}{4\\pi\\varepsilon_0 r^2} = \\frac{p\\cos\\theta}{4\\pi\\varepsilon_0 r^2}")+
+   p("<strong>电场分量：</strong>由 $\\mathbf{E}=-\\nabla V$，球坐标下：")+
+   fml("E_r = -\\frac{\\partial V}{\\partial r} = \\frac{2p\\cos\\theta}{4\\pi\\varepsilon_0 r^3},\\quad E_\\theta = -\\frac{1}{r}\\frac{\\partial V}{\\partial\\theta} = \\frac{p\\sin\\theta}{4\\pi\\varepsilon_0 r^3}")+
+   p("电场随 $1/r^3$ 衰减，比点电荷的 $1/r^2$ 更快。"))+
+   thm("偶极子在外电场中受力矩",p("电偶极子在均匀外场 $\\mathbf{E}$ 中受力为零，但受力矩：")+
+   fml("\\boldsymbol{\\tau} = \\mathbf{p}\\times\\mathbf{E}")+
+   p("力矩使 $\\mathbf{p}$ 转向 $\\mathbf{E}$ 方向。势能 $U=-\\mathbf{p}\\cdot\\mathbf{E}$。"))
+ )},
+]},
 ]
 
 # =====================================================
@@ -267,6 +344,23 @@ ch2_sections = [
    der(p("<strong>推导：</strong>真空中高斯定理 $\\oint\\mathbf{E}\\cdot d\\mathbf{S}=(q_0+q')/\\varepsilon_0$，其中 $q'=-\\oint\\mathbf{P}\\cdot d\\mathbf{S}$（束缚电荷）。代入：")+
    fml("\\oint\\varepsilon_0\\mathbf{E}\\cdot d\\mathbf{S} = q_0 - \\oint\\mathbf{P}\\cdot d\\mathbf{S}")+
    fml("\\oint(\\varepsilon_0\\mathbf{E}+\\mathbf{P})\\cdot d\\mathbf{S} = q_0 \\implies \\oint\\mathbf{D}\\cdot d\\mathbf{S} = q_0"))
+ )},
+]},
+{
+"name": "2.3 静电场的边界条件",
+"color": "#0d9488",
+"desc": "E 与 D 在介质分界面上的跃变规律",
+"items": [
+{"id":"e2s3-1","name":"静电场边界条件","tags":["thm","der"],"brief":"D 的法向分量与 E 的切向分量的边界跃变。",
+ "body": wrap(
+   thm("边界条件",p("在两种介质分界面上，取小扁圆柱高斯面和小矩形环路，可得：")+
+   fml("D_{2n}-D_{1n} = \\sigma_f,\\qquad E_{2t}=E_{1t}")+
+   p("其中 $\\sigma_f$ 为分界面上自由电荷面密度。若无自由电荷，$D_{1n}=D_{2n}$。"))+
+   der(p("<strong>法向分量推导：</strong>跨分界面取扁圆柱高斯面，上下底面积 $\\Delta S$，高 $h\\to 0$。由高斯定理 $\\oint\\mathbf{D}\\cdot d\\mathbf{S}=q_f$：")+
+   fml("D_{2n}\\Delta S - D_{1n}\\Delta S = \\sigma_f\\Delta S \\implies D_{2n}-D_{1n}=\\sigma_f")+
+   p("<strong>切向分量推导：</strong>跨分界面取小矩形环路，长边 $\\Delta l$ 平行界面，短边 $h\\to 0$。由环路定理 $\\oint\\mathbf{E}\\cdot d\\mathbf{l}=0$：")+
+   fml("E_{2t}\\Delta l - E_{1t}\\Delta l = 0 \\implies E_{2t}=E_{1t}"))+
+   note(p("对线性介质，$\\mathbf{D}=\\varepsilon\\mathbf{E}$，故 $\\varepsilon_2 E_{2n}=\\varepsilon_1 E_{1n}$（$\\sigma_f=0$ 时），电场线在界面发生折射：$\\frac{\\tan\\theta_1}{\\tan\\theta_2}=\\frac{\\varepsilon_1}{\\varepsilon_2}$。"))
  )},
 ]},
 ]
@@ -325,6 +419,24 @@ ch3_sections = [
    note(p("洛伦兹力始终与速度垂直，不做功，只改变速度方向；安培力可以做功，其能量来自电源。"))
  )},
 ]},
+{
+"name": "3.4 载流线圈的磁矩与磁力矩",
+"color": "#059669",
+"desc": "磁矩定义、载流线圈在磁场中受的力矩与做功",
+"items": [
+{"id":"e3s4-1","name":"磁矩与磁力矩","tags":["def","der"],"brief":"载流线圈的磁矩及其在均匀磁场中受力矩。",
+ "fig":"magnetic_moment","figCap":"载流线圈的磁矩方向",
+ "body": wrap(
+   defn("磁矩",p("载流线圈的磁矩 $\\mathbf{m}=I\\mathbf{S}\\hat{\\mathbf{n}}$，其中 $S$ 为线圈面积，$\\hat{\\mathbf{n}}$ 由右手定则确定（四指沿电流方向，拇指为 $\\hat{\\mathbf{n}}$）。"))+
+   der(p("<strong>均匀磁场中载流平面线圈受力矩推导：</strong>设矩形线圈边长 $a,b$，电流 $I$，法向与 $\\mathbf{B}$ 夹角 $\\theta$。两条长为 $a$ 的边受力 $F=IaB$，方向相反，构成力偶。力臂为 $b\\sin\\theta$，故力矩大小：")+
+   fml("\\tau = F\\cdot b\\sin\\theta = IabB\\sin\\theta = ISB\\sin\\theta")+
+   fml("\\boldsymbol{\\tau} = \\mathbf{m}\\times\\mathbf{B}")+
+   p("力矩使线圈法向转向磁场方向。"))+
+   der(p("<strong>磁力矩做功：</strong>线圈转动 $d\\theta$ 时，力矩做功 $dA=-\\tau d\\theta$（$\\theta$ 为 $\\mathbf{m}$ 与 $\\mathbf{B}$ 夹角）。磁通量 $\\Phi=BS\\cos\\theta$，故 $d\\Phi=-BS\\sin\\theta\\,d\\theta$：")+
+   fml("dA = I\\,d\\Phi")+
+   p("线圈从 $\\theta_1$ 转到 $\\theta_2$，外力矩做功 $A=I(\\Phi_2-\\Phi_1)$。"))
+ )},
+]},
 ]
 
 # =====================================================
@@ -361,6 +473,22 @@ ch4_sections = [
    fml("\\oint\\frac{\\mathbf{B}}{\\mu_0}\\cdot d\\mathbf{l} = I_0 + \\oint\\mathbf{M}\\cdot d\\mathbf{l}")+
    fml("\\oint\\left(\\frac{\\mathbf{B}}{\\mu_0}-\\mathbf{M}\\right)\\cdot d\\mathbf{l} = I_0 \\implies \\oint\\mathbf{H}\\cdot d\\mathbf{l} = I_0"))+
    note(p("<strong>磁介质分类：</strong>顺磁质 $\\chi_m>0$（$\\mu_r>1$），抗磁质 $\\chi_m<0$（$\\mu_r<1$），铁磁质 $\\mu_r\\gg 1$ 且非线性、有磁滞。"))
+ )},
+]},
+{
+"name": "4.3 铁磁质与磁滞回线",
+"color": "#0891b2",
+"desc": "铁磁质的磁化曲线、磁滞回线与磁畴",
+"items": [
+{"id":"e4s3-1","name":"铁磁质的磁化规律","tags":["def","thm"],"brief":"铁磁质的非线性磁化与磁滞现象。",
+ "fig":"hysteresis","figCap":"铁磁质的磁滞回线",
+ "body": wrap(
+   defn("铁磁质",p("$\\mu_r\\gg 1$（可达 $10^2\\sim10^4$），$B$ 与 $H$ 非线性，存在磁滞和居里温度 $T_c$（高于此温度变为顺磁质）。"))+
+   defn("起始磁化曲线",p("从退磁状态（$H=0,B=0$）开始，$B$ 随 $H$ 增加而非线性增大，先缓后陡再趋饱和。饱和磁感应强度为 $B_s$。"))+
+   thm("磁滞回线",p("$H$ 减小至零后 $B$ 不为零，剩余磁感应强度 $B_r$（剩磁）。使 $B=0$ 需加反向矫顽力 $H_c$。$B$ 的变化滞后于 $H$，形成闭合回线：")+
+   fml("B_r = B(H=0),\\qquad H_c = |H(B=0)|")+
+   p("磁滞回线包围的面积等于单位体积反复磁化一周的能量损耗（磁滞损耗）。"))+
+   note(p("<strong>磁畴理论：</strong>铁磁质内部分成许多小区域（磁畴），每个磁畴内磁矩自发平行排列。外场使磁畴壁移动和磁矩转向，宏观显示强磁性。硬磁材料（$H_c$ 大）做永磁体，软磁材料（$H_c$ 小）做变压器铁芯。"))
  )},
 ]},
 ]
@@ -420,6 +548,39 @@ ch5_sections = [
    fml("-\\nabla^2\\mathbf{E} = -\\mu_0\\varepsilon_0\\frac{\\partial^2\\mathbf{E}}{\\partial t^2} \\implies \\nabla^2\\mathbf{E} = \\mu_0\\varepsilon_0\\frac{\\partial^2\\mathbf{E}}{\\partial t^2}"))+
    thm("平面电磁波性质",p("(1) 横波：$\\mathbf{E}\\perp\\mathbf{B}\\perp$ 传播方向；(2) $\\mathbf{E}\\times\\mathbf{B}$ 沿传播方向；(3) $E=cB$；(4) 能流密度（坡印廷矢量）：")+
    fml("\\mathbf{S} = \\frac{1}{\\mu_0}\\mathbf{E}\\times\\mathbf{B}"))
+ )},
+]},
+{
+"name": "5.4 自感与互感",
+"color": "#be185d",
+"desc": "自感系数、互感系数及其推导",
+"items": [
+{"id":"e5s4-1","name":"自感与互感","tags":["def","der"],"brief":"回路自身与回路间的电磁感应。",
+ "fig":"mutual_induct","figCap":"两线圈之间的互感",
+ "body": wrap(
+   defn("自感",p("回路电流 $I$ 产生的穿过自身的磁通量 $\\Phi=L I$，比例系数 $L$ 为自感系数。由法拉第定律，自感电动势：")+
+   fml("\\varepsilon_L = -L\\frac{dI}{dt}")+
+   der(p("<strong>长直螺线管自感推导：</strong>长度 $l$，匝数 $N$，截面积 $S$，管内 $B=\\mu_0 n I=\\mu_0 N I/l$。总磁链 $\\Psi=N\\Phi=NBS=\\mu_0 N^2 S I/l$，故：")+
+   fml("L = \\frac{\\Psi}{I} = \\frac{\\mu_0 N^2 S}{l}")))+
+   defn("互感",p("线圈 1 的电流 $I_1$ 产生的穿过线圈 2 的磁通量 $\\Phi_{21}=M_{21}I_1$。互感系数 $M=M_{12}=M_{21}$。互感电动势：")+
+   fml("\\varepsilon_{21} = -M\\frac{dI_1}{dt},\\qquad \\varepsilon_{12} = -M\\frac{dI_2}{dt}"))+
+   note(p("互感与自感的关系：$M=k\\sqrt{L_1 L_2}$，耦合系数 $0\\le k\\le 1$。无漏磁时 $k=1$。"))
+ )},
+]},
+{
+"name": "5.5 电磁场的能量与动量",
+"color": "#be185d",
+"desc": "电磁场能量密度、能流密度与动量密度",
+"items": [
+{"id":"e5s5-1","name":"电磁场能量与坡印廷矢量","tags":["thm","der"],"brief":"电磁场的能量密度与能流密度矢量。",
+ "fig":"em_energy","figCap":"电磁波携带的电磁场能量",
+ "body": wrap(
+   thm("电磁场能量密度",p("电磁场单位体积的能量为电场能量密度与磁场能量密度之和：")+
+   fml("w = \\frac{1}{2}\\mathbf{E}\\cdot\\mathbf{D} + \\frac{1}{2}\\mathbf{B}\\cdot\\mathbf{H} = \\frac{1}{2}\\varepsilon E^2 + \\frac{1}{2\\mu}B^2"))+
+   der(p("<strong>推导（电容器储能）：</strong>平行板电容器储能 $W=\\frac{1}{2}CV^2=\\frac{1}{2}\\varepsilon E^2\\cdot Sd=w_e\\cdot V$，故电场能量密度 $w_e=\\frac{1}{2}\\varepsilon E^2$。类似地，螺线管储能 $W=\\frac{1}{2}LI^2=\\frac{1}{2\\mu}B^2\\cdot V$，故磁场能量密度 $w_m=\\frac{1}{2\\mu}B^2$。"))+
+   thm("坡印廷矢量",p("单位时间通过单位面积的电磁场能量（能流密度）为坡印廷矢量：")+
+   fml("\\mathbf{S} = \\mathbf{E}\\times\\mathbf{H} = \\frac{1}{\\mu_0}\\mathbf{E}\\times\\mathbf{B}")+
+   p("其方向为电磁波传播方向。电磁场的动量密度 $\\mathbf{g}=\\frac{1}{c^2}\\mathbf{S}=\\varepsilon_0\\mathbf{E}\\times\\mathbf{B}$，光压即源于电磁场动量。"))
  )},
 ]},
 ]
