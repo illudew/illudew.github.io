@@ -116,6 +116,86 @@ FIG = {
 <line x1="152" y1="90" x2="130" y2="90" stroke="#f59e0b" stroke-width="2"/>
 <polygon points="130,90 138,86 138,94" fill="#f59e0b"/>
 <text x="130" y="82" font-size="10" fill="#f59e0b">v₂</text></svg>''',
+"com": '''<svg viewBox="0 0 240 160" xmlns="http://www.w3.org/2000/svg">
+<line x1="10" y1="140" x2="230" y2="140" stroke="#94a3b8" stroke-width="1.5"/>
+<line x1="10" y1="140" x2="10" y2="10" stroke="#94a3b8" stroke-width="1.5"/>
+<circle cx="70" cy="90" r="10" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+<text x="60" y="112" font-size="10" fill="#1e293b">m₁</text>
+<circle cx="170" cy="60" r="14" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+<text x="160" y="85" font-size="10" fill="#1e293b">m₂</text>
+<line x1="70" y1="90" x2="170" y2="60" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="4 3"/>
+<circle cx="133" cy="72" r="5" fill="#ef4444"/>
+<text x="138" y="66" font-size="11" fill="#ef4444" font-weight="bold">C</text>
+<text x="138" y="80" font-size="9" fill="#94a3b8">质心</text>
+<text x="80" y="105" font-size="9" fill="#64748b">r₁</text>
+<text x="145" y="100" font-size="9" fill="#64748b">r₂</text></svg>''',
+"oblique": '''<svg viewBox="0 0 240 160" xmlns="http://www.w3.org/2000/svg">
+<line x1="120" y1="10" x2="120" y2="150" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="3 3"/>
+<circle cx="80" cy="80" r="16" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+<text x="72" y="84" font-size="11" fill="#1e293b">m₁</text>
+<circle cx="160" cy="80" r="16" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+<text x="152" y="84" font-size="11" fill="#1e293b">m₂</text>
+<line x1="55" y1="100" x2="78" y2="82" stroke="#3b82f6" stroke-width="2"/>
+<polygon points="78,82 68,84 74,92" fill="#3b82f6"/>
+<text x="40" y="108" font-size="10" fill="#3b82f6">v₁</text>
+<line x1="96" y1="55" x2="100" y2="68" stroke="#0ea5e9" stroke-width="2"/>
+<polygon points="100,68 92,64 96,60" fill="#0ea5e9"/>
+<text x="100" y="52" font-size="10" fill="#0ea5e9">v₁'</text>
+<line x1="178" y1="62" x2="200" y2="55" stroke="#f59e0b" stroke-width="2"/>
+<polygon points="200,55 190,56 194,64" fill="#f59e0b"/>
+<text x="200" y="50" font-size="10" fill="#f59e0b">v₂'</text></svg>''',
+"beats": '''<svg viewBox="0 0 240 160" xmlns="http://www.w3.org/2000/svg">
+<line x1="10" y1="80" x2="230" y2="80" stroke="#cbd5e1" stroke-width="1"/>
+<path d="M 10 80 Q 35 20 60 80 T 110 80 T 160 80 T 210 80 T 230 80" fill="none" stroke="#3b82f6" stroke-width="1.5" opacity="0.5"/>
+<path d="M 10 80 Q 30 30 50 80 Q 70 130 90 80 Q 110 30 130 80 Q 150 130 170 80 Q 190 30 210 80 Q 220 105 230 80" fill="none" stroke="#ef4444" stroke-width="2"/>
+<path d="M 10 50 Q 60 50 110 80 Q 160 110 210 80" fill="none" stroke="#10b981" stroke-width="1" stroke-dasharray="5 4"/>
+<text x="12" y="45" font-size="10" fill="#10b981">包络</text>
+<text x="90" y="155" font-size="10" fill="#64748b">拍周期 T=1/|f₁-f₂|</text></svg>''',
+"lissajous": '''<svg viewBox="0 0 240 160" xmlns="http://www.w3.org/2000/svg">
+<line x1="10" y1="80" x2="230" y2="80" stroke="#e2e8f0" stroke-width="1"/>
+<line x1="120" y1="10" x2="120" y2="150" stroke="#e2e8f0" stroke-width="1"/>
+<path d="M 120 30 Q 200 50 200 80 Q 200 110 120 130 Q 40 110 40 80 Q 40 50 120 30 Z M 120 50 Q 175 62 175 80 Q 175 98 120 110 Q 65 98 65 80 Q 65 62 120 50 Z" fill="none" stroke="#8b5cf6" stroke-width="2"/>
+<circle cx="120" cy="80" r="3" fill="#ef4444"/>
+<text x="180" y="40" font-size="11" fill="#8b5cf6">ω_x:ω_y = 2:1</text>
+<text x="14" y="25" font-size="10" fill="#64748b">y</text>
+<text x="215" y="92" font-size="10" fill="#64748b">x</text></svg>''',
+"halfwave": '''<svg viewBox="0 0 240 160" xmlns="http://www.w3.org/2000/svg">
+<line x1="120" y1="10" x2="120" y2="150" stroke="#475569" stroke-width="2"/>
+<text x="60" y="25" font-size="11" fill="#64748b" font-weight="700">介质1</text>
+<text x="160" y="25" font-size="11" fill="#64748b" font-weight="700">介质2</text>
+<text x="122" y="22" font-size="9" fill="#475569">界面</text>
+<path d="M 20 80 Q 45 50 70 80 Q 95 110 120 80" fill="none" stroke="#3b82f6" stroke-width="2"/>
+<text x="30" y="72" font-size="10" fill="#3b82f6">入射</text>
+<path d="M 120 80 Q 145 110 170 80 Q 195 50 220 80" fill="none" stroke="#ef4444" stroke-width="2"/>
+<text x="130" y="115" font-size="10" fill="#ef4444">反射(反相)</text>
+<path d="M 120 80 Q 145 50 170 80 Q 195 110 220 80" fill="none" stroke="#10b981" stroke-width="1.5" stroke-dasharray="4 3"/>
+<text x="130" y="60" font-size="10" fill="#10b981">透射</text>
+<text x="55" y="145" font-size="9" fill="#94a3b8">波疏→波密：反射波相位突变π（半波损失）</text></svg>''',
+"inertia_shapes": '''<svg viewBox="0 0 240 180" xmlns="http://www.w3.org/2000/svg">
+<g>
+<rect x="15" y="20" width="80" height="8" fill="#94a3b8"/>
+<line x1="55" y1="20" x2="55" y2="8" stroke="#475569" stroke-width="1.5" stroke-dasharray="2 2"/>
+<text x="15" y="50" font-size="10" fill="#1e293b">细杆 中垂轴</text>
+<text x="15" y="64" font-size="10" fill="#6366f1">I=¹⁄₁₂mL²</text>
+</g>
+<g transform="translate(120,0)">
+<circle cx="55" cy="24" r="16" fill="none" stroke="#94a3b8" stroke-width="2"/>
+<line x1="55" y1="24" x2="55" y2="8" stroke="#475569" stroke-width="1.5" stroke-dasharray="2 2"/>
+<text x="15" y="60" font-size="10" fill="#1e293b">圆环 中心轴</text>
+<text x="15" y="74" font-size="10" fill="#6366f1">I=mR²</text>
+</g>
+<g transform="translate(0,90)">
+<circle cx="55" cy="24" r="16" fill="#e2e8f0" stroke="#94a3b8" stroke-width="2"/>
+<line x1="55" y1="24" x2="55" y2="8" stroke="#475569" stroke-width="1.5" stroke-dasharray="2 2"/>
+<text x="15" y="60" font-size="10" fill="#1e293b">圆盘 中心轴</text>
+<text x="15" y="74" font-size="10" fill="#6366f1">I=½mR²</text>
+</g>
+<g transform="translate(120,90)">
+<circle cx="55" cy="24" r="16" fill="#e2e8f0" stroke="#94a3b8" stroke-width="2"/>
+<line x1="55" y1="24" x2="55" y2="8" stroke="#475569" stroke-width="1.5" stroke-dasharray="2 2"/>
+<text x="15" y="60" font-size="10" fill="#1e293b">球体 球心轴</text>
+<text x="15" y="74" font-size="10" fill="#6366f1">I=⅖mR²</text>
+</g></svg>''',
 }
 
 TAG_LABEL = {"def":"定 义","thm":"定 理","der":"推 导","exa":"例 子","app":"应 用","his":"注 记","note":"备 注"}
@@ -150,6 +230,10 @@ CORE_FORMULAS = [
     ("波速", "v = \\lambda f = \\frac{\\lambda}{T}", "波长、频率与波速的关系"),
     ("简谐波方程", "y = A\\cos\\left[\\omega\\left(t - \\frac{x}{v}\\right) + \\varphi\\right]", "沿 x 正方向传播的简谐波"),
     ("驻波方程", "y = 2A\\cos\\frac{2\\pi x}{\\lambda}\\cos\\omega t", "两列反向行波叠加形成驻波"),
+    ("质心位置", "\\mathbf{r}_C = \\frac{1}{M}\\sum_i m_i\\mathbf{r}_i", "质点系质心的质量加权平均位置"),
+    ("质心运动定理", "\\sum \\mathbf{F}_{\\text{外}} = M\\mathbf{a}_C", "合外力等于总质量乘质心加速度"),
+    ("拍频", "f_{\\text{拍}} = |f_1 - f_2|", "两频率相近振动合成的拍频"),
+    ("反射系数", "\\frac{A_r}{A_i} = \\frac{Z_1-Z_2}{Z_1+Z_2}", "波在界面反射的振幅比，Z=ρv 为波阻"),
 ]
 
 # ---------- helper functions ----------
@@ -384,7 +468,48 @@ ch2_sections = [
    fml("v_1+v_1' = v_2+v_2' \\implies v_1-v_2 = v_2'-v_1'")+
    p("即弹性碰撞中恢复系数 $e=1$。联立动量守恒解得：")+
    fml("v_1' = \\frac{(m_1-m_2)v_1+2m_2 v_2}{m_1+m_2},\\qquad v_2' = \\frac{(m_2-m_1)v_2+2m_1 v_1}{m_1+m_2}")+
-   p("<strong>特例</strong>：若 $m_1=m_2$，则 $v_1'=v_2$，$v_2'=v_1$（速度交换）；若 $m_2\\gg m_1$ 且 $v_2=0$，则 $v_1'\\approx -v_1$，$v_2'\\approx 0$。"))
+   p("<strong>特例</strong>：若 $m_1=m_2$，则 $v_1'=v_2$，$v_2'=v_1$（速度交换）；若 $m_2\\gg m_1$ 且 $v_2=0$，则 $v_1'\\approx -v_1$，$v_2'\\approx 0$。"))+
+   defn("质心系（零动量系）",p("质心系中系统总动量为零。质心速度 $v_C=\\frac{m_1 v_1+m_2 v_2}{m_1+m_2}$。各质点在质心系中的速度为 $u_1=v_1-v_C$，$u_2=v_2-v_C$。")+
+   fml("m_1 u_1 + m_2 u_2 = 0"))+
+   der(p("<strong>质心系中的弹性碰撞：</strong>由动量守恒 $m_1 u_1+m_2 u_2=m_1 u_1'+m_2 u_2'=0$，得 $u_2=-\\frac{m_1}{m_2}u_1$，$u_2'=-\\frac{m_1}{m_2}u_1'$。代入动能守恒：")+
+   fml("\\tfrac{1}{2}m_1 u_1^2+\\tfrac{1}{2}m_2 u_2^2 = \\tfrac{1}{2}m_1 u_1'^2+\\tfrac{1}{2}m_2 u_2'^2")+
+   fml("\\tfrac{1}{2}m_1 u_1^2\\left(1+\\frac{m_1}{m_2}\\right) = \\tfrac{1}{2}m_1 u_1'^2\\left(1+\\frac{m_1}{m_2}\\right)")+
+   p("故 $u_1'^2=u_1^2$，即碰撞后各质点在质心系中速率不变、仅方向改变。弹性碰撞在质心系中表现为<strong>速度方向反转或偏转</strong>。"))
+ )},
+{"id":"c2s5-2","name":"斜碰（二维碰撞）","tags":["thm","der"],"brief":"二维弹性碰撞的动量分量守恒与散射角关系。",
+ "fig":"oblique","figCap":"二维斜碰示意",
+ "body": wrap(
+   thm("二维弹性碰撞",p("二维碰撞中动量守恒分解为 x、y 分量，弹性碰撞动能仍守恒：")+
+   fml("m_1 v_{1x}+m_2 v_{2x} = m_1 v_{1x}'+m_2 v_{2x}'")+
+   fml("m_1 v_{1y}+m_2 v_{2y} = m_1 v_{1y}'+m_2 v_{2y}'"))+
+   der(p("<strong>等质量静止靶的散射角关系：</strong>设 $m_1=m_2=m$，靶初始静止 $v_2=0$。动量守恒 $\\mathbf{v}_1=\\mathbf{v}_1'+\\mathbf{v}_2'$，动能守恒 $v_1^2=v_1'^2+v_2'^2$。")+
+   p("将动量守恒式两边平方：$v_1^2 = v_1'^2 + v_2'^2 + 2\\mathbf{v}_1'\\cdot\\mathbf{v}_2'$。与动能守恒比较得 $2\\mathbf{v}_1'\\cdot\\mathbf{v}_2'=0$，即：")+
+   fml("\\mathbf{v}_1' \\perp \\mathbf{v}_2'")+
+   p("故等质量弹性碰撞中，若靶初始静止，则碰后两球速度<strong>互相垂直</strong>。这是台球碰撞的经典结论。"))
+ )},
+]},
+# ---- 2.6 质心运动定理 ----
+{
+"name": "2.6 质心运动定理",
+"color": "#0d9488",
+"desc": "质心的定义、质心速度与质心运动定理",
+"items": [
+{"id":"c2s6-1","name":"质心与质心运动定理","tags":["def","thm","der"],"brief":"系统质心的运动如同一个质点的运动。",
+ "fig":"com","figCap":"两质点系统的质心 C",
+ "body": wrap(
+   defn("质心",p("质点系的质心位置矢量定义为各质元位置的质量加权平均：")+
+   fml("\\mathbf{r}_C = \\frac{\\sum_i m_i \\mathbf{r}_i}{\\sum_i m_i} = \\frac{1}{M}\\sum_i m_i \\mathbf{r}_i,\\quad M=\\sum m_i")+
+   p("对连续体：$\\mathbf{r}_C = \\frac{1}{M}\\int \\mathbf{r}\\,dm$。"))+
+   thm("质心运动定理",p("质点系所受合外力等于总质量乘以质心加速度：")+
+   fml("\\sum \\mathbf{F}_{\\text{外}} = M \\mathbf{a}_C = M\\frac{d^2\\mathbf{r}_C}{dt^2}"))+
+   der(p("<strong>推导：</strong>对质心定义式求二阶导数：")+
+   fml("M\\frac{d^2\\mathbf{r}_C}{dt^2} = \\sum_i m_i \\frac{d^2\\mathbf{r}_i}{dt^2} = \\sum_i m_i \\mathbf{a}_i")+
+   p("由牛顿第二定律，$m_i\\mathbf{a}_i = \\mathbf{F}_i^{\\text{外}} + \\sum_{j\\neq i}\\mathbf{F}_{ij}^{\\text{内}}$。对所有质元求和：")+
+   fml("\\sum_i m_i\\mathbf{a}_i = \\sum_i \\mathbf{F}_i^{\\text{外}} + \\sum_i\\sum_{j\\neq i}\\mathbf{F}_{ij}^{\\text{内}}")+
+   p("内力成对出现（$\\mathbf{F}_{ij}=-\\mathbf{F}_{ji}$），故内力求和为零：")+
+   fml("\\sum_i\\sum_{j\\neq i}\\mathbf{F}_{ij}^{\\text{内}} = 0")+
+   p("因此 $M\\mathbf{a}_C = \\sum \\mathbf{F}_{\\text{外}}$，即质心的运动只由合外力决定，与内力无关。"))+
+   note(p("质心运动定理是质点系动力学的核心：内力不影响质心运动。例如炮弹爆炸时，弹片四散但质心仍沿原抛物线运动。"))
  )},
 ]},
 ]
@@ -520,7 +645,17 @@ ch4_sections = [
    p("对 $z$ 轴，$r_i^2 = (x_i'+d)^2 + y_i'^2 = r_i'^2 + 2dx_i' + d^2$，则：")+
    fml("I = \\sum m_i r_i^2 = \\sum m_i r_i'^2 + 2d\\sum m_i x_i' + d^2\\sum m_i = I_c + 0 + md^2")+
    p("其中 $\\sum m_i x_i'=0$ 是因为质心系中质心在原点。"))+
-   exa(p("<strong>常用转动惯量：</strong><br>细杆（过中心垂直轴）$I=\\frac{1}{12}mL^2$，（过端点）$I=\\frac{1}{3}mL^2$<br>圆盘（过中心垂直轴）$I=\\frac{1}{2}mR^2$<br>圆环（过中心垂直轴）$I=mR^2$<br>球体（过球心）$I=\\frac{2}{5}mR^2$"))
+   exa(p("<strong>圆盘转动惯量推导：</strong>均质圆盘质量 $m$、半径 $R$，面密度 $\\sigma=\\frac{m}{\\pi R^2}$。取半径 $r$、宽度 $dr$ 的细圆环，质量 $dm=\\sigma\\cdot 2\\pi r\\,dr$：")+
+   fml("I = \\int r^2\\,dm = \\int_0^R r^2\\cdot \\sigma 2\\pi r\\,dr = 2\\pi\\sigma\\int_0^R r^3\\,dr = 2\\pi\\sigma\\cdot\\frac{R^4}{4} = \\frac{1}{2}\\sigma\\pi R^4")+
+   fml("= \\frac{1}{2}\\cdot\\frac{m}{\\pi R^2}\\cdot\\pi R^4 = \\frac{1}{2}mR^2"))+
+   app(p("<strong>常见物体转动惯量表：</strong>")+
+   fml("\\begin{array}{|l|l|l|} \\hline \\text{物体} & \\text{转轴} & \\text{转动惯量} \\\\ \\hline \\text{细杆} & \\text{过中心垂直轴} & \\frac{1}{12}mL^2 \\\\ \\text{细杆} & \\text{过端点垂直轴} & \\frac{1}{3}mL^2 \\\\ \\text{圆环} & \\text{过中心垂直轴} & mR^2 \\\\ \\text{圆盘/圆柱} & \\text{过中心垂直轴} & \\frac{1}{2}mR^2 \\\\ \\text{实心球} & \\text{过球心} & \\frac{2}{5}mR^2 \\\\ \\text{薄球壳} & \\text{过球心} & \\frac{2}{3}mR^2 \\\\ \\hline \\end{array}")+
+   fml("", "由平行轴定理，细杆过端点的 $I=\\frac{1}{12}mL^2+m\\left(\\frac{L}{2}\\right)^2=\\frac{1}{3}mL^2$。"))
+ )},
+{"id":"c4s2-2","name":"常见物体转动惯量图","tags":["app"],"brief":"细杆、圆环、圆盘、球体的转动惯量与转轴图示。",
+ "fig":"inertia_shapes","figCap":"常见刚体的形状、转轴与转动惯量",
+ "body": wrap(
+   note(p("上图列出四种常见刚体的转动惯量。注意：转动惯量依赖于<strong>转轴位置</strong>，同一物体对不同轴的 $I$ 不同。平行轴定理 $I=I_c+md^2$ 可由过质心轴的 $I_c$ 求出任意平行轴的 $I$。"))
  )},
 ]},
 # ---- 4.3 转动定律 ----
@@ -690,6 +825,56 @@ ch5_sections = [
    der(p("<strong>驻波推导：</strong>$y_1=A\\cos(\\omega t-kx)$，$y_2=A\\cos(\\omega t+kx)$，叠加：")+
    fml("y = A[\\cos(\\omega t-kx)+\\cos(\\omega t+kx)] = 2A\\cos(kx)\\cos(\\omega t)")+
    p("其中 $k=2\\pi/\\lambda$。当 $\\cos\\frac{2\\pi x}{\\lambda}=0$ 时 $y=0$（波节）；当 $|\\cos\\frac{2\\pi x}{\\lambda}|=1$ 时振幅最大（波腹）。波节间距 $\\lambda/2$。"))
+ )},
+]},
+# ---- 5.6 振动的合成 ----
+{
+"name": "5.6 振动的合成",
+"color": "#be185d",
+"desc": "拍现象、李萨如图形、同方向与垂直方向振动的合成",
+"items": [
+{"id":"c5s6-1","name":"拍现象","tags":["thm","der"],"brief":"两频率相近的同方向振动合成产生拍。",
+ "fig":"beats","figCap":"拍现象：合振动振幅周期性变化（包络）",
+ "body": wrap(
+   defn("拍",p("两个频率相近、同方向的简谐振动合成时，合振幅周期性变化的现象称为<strong>拍</strong>。"))+
+   thm("拍频",p("设两分振动 $y_1=A\\cos\\omega_1 t$，$y_2=A\\cos\\omega_2 t$，且 $|\\omega_1-\\omega_2|\\ll\\omega_1,\\omega_2$，则合振动：")+
+   fml("y = 2A\\cos\\left(\\frac{\\omega_1-\\omega_2}{2}t\\right)\\cos\\left(\\frac{\\omega_1+\\omega_2}{2}t\\right)")+
+   p("拍频（单位时间内振幅极大出现的次数）：$f_{\\text{拍}}=|f_1-f_2|$，拍周期 $T_{\\text{拍}}=\\frac{1}{|f_1-f_2|}$。"))+
+   der(p("<strong>推导：</strong>利用和差化积公式 $\\cos\\alpha+\\cos\\beta=2\\cos\\frac{\\alpha-\\beta}{2}\\cos\\frac{\\alpha+\\beta}{2}$：")+
+   fml("y = A\\cos\\omega_1 t + A\\cos\\omega_2 t = 2A\\cos\\frac{\\omega_1-\\omega_2}{2}t\\cdot\\cos\\frac{\\omega_1+\\omega_2}{2}t")+
+   p("令 $\\omega_{\\text{avg}}=\\frac{\\omega_1+\\omega_2}{2}$（平均角频率），$\\omega_{\\text{mod}}=\\frac{|\\omega_1-\\omega_2|}{2}$（调制角频率），则 $y=2A\\cos(\\omega_{\\text{mod}}t)\\cos(\\omega_{\\text{avg}}t)$。")+
+   p("由于 $\\omega_{\\text{mod}}\\ll\\omega_{\\text{avg}}$，$\\cos(\\omega_{\\text{mod}}t)$ 变化缓慢，可视为<strong>振幅包络</strong>。振幅包络 $|2A\\cos(\\omega_{\\text{mod}}t)|$ 的周期为 $\\frac{\\pi}{\\omega_{\\text{mod}}}=\\frac{2\\pi}{|\\omega_1-\\omega_2|}=\\frac{1}{|f_1-f_2|}$，故拍频 $f_{\\text{拍}}=|f_1-f_2|$。"))+
+   app(p("拍的应用：利用拍频校准乐器、测量超声波频率、多普勒测速等。"))
+ )},
+{"id":"c5s6-2","name":"李萨如图形","tags":["thm","der","app"],"brief":"两个互相垂直的简谐振动合成的轨迹。",
+ "fig":"lissajous","figCap":"李萨如图形示例（ω_x:ω_y = 2:1）",
+ "body": wrap(
+   defn("李萨如图形",p("两个频率成整数比、互相垂直的简谐振动合成时，质点的运动轨迹为封闭曲线，称为<strong>李萨如图形</strong>。"))+
+   thm("参数方程",p("设 $x=A_x\\cos(\\omega_x t+\\varphi_x)$，$y=A_y\\cos(\\omega_y t+\\varphi_y)$，则轨迹由参数方程确定。当 $\\omega_x:\\omega_y$ 为有理数时轨迹闭合。"))+
+   der(p("<strong>频率比与切点数关系：</strong>在李萨如图中，水平方向切点数 $N_x$ 与垂直方向切点数 $N_y$ 之比等于频率的反比：")+
+   fml("\\frac{N_x}{N_y} = \\frac{\\omega_y}{\\omega_x}")+
+   p("由此可由已知一个频率测量未知频率。例如图中 $\\omega_x:\\omega_y=2:1$，水平切点数与垂直切点数之比为 $1:2$。"))+
+   app(p("应用：示波器观察李萨如图形测量频率、相位差。当两振动频率相同（$\\omega_x=\\omega_y$）时，轨迹为椭圆（特殊情形为直线或圆），椭圆形状由相位差 $\\Delta\\varphi=\\varphi_y-\\varphi_x$ 决定。"))
+ )},
+]},
+# ---- 5.7 波的反射与半波损失 ----
+{
+"name": "5.7 波的反射与半波损失",
+"color": "#be185d",
+"desc": "波在介质界面的反射、相位突变与半波损失",
+"items": [
+{"id":"c5s7-1","name":"半波损失","tags":["thm","der","note"],"brief":"波从波疏介质入射到波密介质时反射波相位突变π。",
+ "fig":"halfwave","figCap":"波在界面的反射：波疏→波密时反射波反相",
+ "body": wrap(
+   defn("半波损失",p("当波从<strong>波疏介质</strong>（波阻 $Z_1=\\rho_1 v_1$ 较小）入射到<strong>波密介质</strong>（$Z_2>Z_1$）界面并反射时，反射波在界面处相位发生 $\\pi$ 的突变，等效于损失了半个波长，称为<strong>半波损失</strong>。"))+
+   thm("反射波相位变化",p("设入射波 $y_i=A_i\\cos(\\omega t-k_1 x)$，在 $x=0$ 界面反射。反射波 $y_r=A_r\\cos(\\omega t+k_1 x+\\varphi_r)$，其中：")+
+   fml("\\varphi_r = \\begin{cases} 0, & Z_2 < Z_1 \\ (\\text{波密}\\to\\text{波疏}) \\\\ \\pi, & Z_2 > Z_1 \\ (\\text{波疏}\\to\\text{波密}) \\end{cases}"))+
+   der(p("<strong>边界条件推导：</strong>在界面 $x=0$ 处，位移连续 $y_i+y_r=y_t$，应力（张力）连续。对弦波，张力与斜率成正比：$T\\frac{\\partial y}{\\partial x}$ 连续。")+
+   p("设入射波 $y_i=A_i\\cos(\\omega t-k_1 x)$，反射波 $y_r=A_r\\cos(\\omega t+k_1 x+\\varphi_r)$，透射波 $y_t=A_t\\cos(\\omega t-k_2 x)$。")+
+   p("位移连续：$A_i+A_r=A_t$。张力连续：$T_1 k_1(A_i-A_r)=T_2 k_2 A_t$。利用 $Z=\\rho v=T/v$、$k=\\omega/v$，可得反射系数：")+
+   fml("\\frac{A_r}{A_i} = \\frac{Z_1-Z_2}{Z_1+Z_2}")+
+   p("当 $Z_2>Z_1$（波疏→波密）时，$A_r/A_i<0$，即反射波振幅为负，等效于相位突变 $\\pi$，产生半波损失；当 $Z_2<Z_1$ 时无半波损失。"))+
+   note(p("<strong>光的半波损失：</strong>光从光疏介质入射到光密介质表面反射时也有半波损失（相位突变 $\\pi$）。这是薄膜干涉（如牛顿环、劈尖干涉）中额外光程差 $\\lambda/2$ 的来源。"))
  )},
 ]},
 ]
