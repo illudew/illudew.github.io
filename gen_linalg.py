@@ -873,6 +873,6 @@ window.MathJax = {{
 
 if __name__ == "__main__":
     html = gen_html()
-    with open("/workspace/linalg.html", "w", encoding="utf-8") as f:
+    with open("/workspace/linear-algebra.html", "w", encoding="utf-8") as f:
         f.write(html)
-    print(f"Generated linalg.html ({len(html)} chars)")
+    print(f"Generated linear-algebra.html ({len(html)} chars)")
