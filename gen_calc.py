@@ -73,7 +73,7 @@ CORE_FORMULAS = [
     ("牛顿-莱布尼茨公式", "\\int_a^b f(x)\\,dx = F(b)-F(a)", "微分与积分的统一"),
     ("分部积分", "\\int u\\,dv = uv - \\int v\\,du", "积分的核心技巧之一"),
     ("格林公式", "\\oint_{\\partial D} P\\,dx+Q\\,dy = \\iint_D\\left(\\frac{\\partial Q}{\\partial x}-\\frac{\\partial P}{\\partial y}\\right)d\\sigma", "平面曲线积分与二重积分的转化"),
-    ("高斯公式", "∯_{\\partial\\Omega}\\vec F\\cdot d\\vec S = \\iiint_\\Omega \\nabla\\cdot\\vec F\\,dV", "通量与散度的体积分"),
+    ("高斯公式", "\\mathop{\\oint\\!\\!\\!\\!\\!\\int}_{\\partial\\Omega}\\vec F\\cdot d\\vec S = \\iiint_\\Omega \\nabla\\cdot\\vec F\\,dV", "通量与散度的体积分"),
     ("斯托克斯公式", "\\oint_{\\partial\\Sigma}\\vec F\\cdot d\\vec r = \\iint_\\Sigma (\\nabla\\times\\vec F)\\cdot d\\vec S", "环量与旋度的面积分"),
     ("傅里叶系数", "a_n = \\frac{1}{\\pi}\\int_{-\\pi}^{\\pi}f(x)\\cos nx\\,dx,\\; b_n = \\frac{1}{\\pi}\\int_{-\\pi}^{\\pi}f(x)\\sin nx\\,dx", "函数的三角级数展开（余弦+正弦系数）"),
     ("欧拉积分（Γ函数）", "\\Gamma(s) = \\int_0^{+\\infty} x^{s-1}e^{-x}\\,dx", "阶乘的解析延拓"),
@@ -877,19 +877,19 @@ ch7_sections = [
 {"id":"c7s2-1","name":"高斯公式","tags":["thm","der","exa"],"brief":"散度定理的完整表述与证明。",
  "body": wrap(
     thm("高斯公式", p("设 $\\Omega$ 为空间有界闭区域，边界 $\\Sigma$ 为分片光滑闭曲面，取外侧。若 $P,Q,R$ 在 $\\Omega$ 上有一阶连续偏导数，则")+
-    fml("∯_\\Sigma P\\,dy\\,dz+Q\\,dz\\,dx+R\\,dx\\,dy = \\iiint_\\Omega\\left(\\frac{\\partial P}{\\partial x}+\\frac{\\partial Q}{\\partial y}+\\frac{\\partial R}{\\partial z}\\right)dV",
-        "用向量形式表示：$∯_\\Sigma\\vec F\\cdot d\\vec S=\\iiint_\\Omega\\nabla\\cdot\\vec F\\,dV$，其中 $\\vec F=(P,Q,R)$，$\\nabla\\cdot\\vec F$ 为散度。"))
-    + der(p("<strong>证明：</strong>只需证 $∯_\\Sigma R\\,dx\\,dy=\\iiint_\\Omega\\frac{\\partial R}{\\partial z}\\,dV$，其余两式类似。<br>设 $\\Omega$ 为 $xy$ 型区域（母线平行 $z$ 轴），其边界曲面分为上底 $\\Sigma_2:z=z_2(x,y)$（上侧）、下底 $\\Sigma_1:z=z_1(x,y)$（下侧）、侧面 $\\Sigma_3$。<br>对三重积分用先一后二：")+
+    fml("\\mathop{\\oint\\!\\!\\!\\!\\!\\int}_\\Sigma P\\,dy\\,dz+Q\\,dz\\,dx+R\\,dx\\,dy = \\iiint_\\Omega\\left(\\frac{\\partial P}{\\partial x}+\\frac{\\partial Q}{\\partial y}+\\frac{\\partial R}{\\partial z}\\right)dV",
+        "用向量形式表示：$\\mathop{\\oint\\!\\!\\!\\!\\!\\int}_\\Sigma\\vec F\\cdot d\\vec S=\\iiint_\\Omega\\nabla\\cdot\\vec F\\,dV$，其中 $\\vec F=(P,Q,R)$，$\\nabla\\cdot\\vec F$ 为散度。"))
+    + der(p("<strong>证明：</strong>只需证 $\\mathop{\\oint\\!\\!\\!\\!\\!\\int}_\\Sigma R\\,dx\\,dy=\\iiint_\\Omega\\frac{\\partial R}{\\partial z}\\,dV$，其余两式类似。<br>设 $\\Omega$ 为 $xy$ 型区域（母线平行 $z$ 轴），其边界曲面分为上底 $\\Sigma_2:z=z_2(x,y)$（上侧）、下底 $\\Sigma_1:z=z_1(x,y)$（下侧）、侧面 $\\Sigma_3$。<br>对三重积分用先一后二：")+
     fml("\\iiint_\\Omega\\frac{\\partial R}{\\partial z}\\,dV = \\iint_D\\left[\\int_{z_1(x,y)}^{z_2(x,y)}\\frac{\\partial R}{\\partial z}\\,dz\\right]d\\sigma = \\iint_D [R(x,y,z_2)-R(x,y,z_1)]\\,d\\sigma",
-        "而曲面积分中，侧面 $\\Sigma_3$ 的法向量垂直于 $z$ 轴，故 $\\iint_{\\Sigma_3}R\\,dx\\,dy=0$；上底取上侧为 $+\\iint_D R(x,y,z_2)\\,d\\sigma$，下底取下侧为 $-\\iint_D R(x,y,z_1)\\,d\\sigma$。<br>故 $∯_\\Sigma R\\,dx\\,dy=\\iint_D[R(x,y,z_2)-R(x,y,z_1)]\\,d\\sigma$，与三重积分相等。一般区域可分割为若干 $xy$ 型区域。$\\blacksquare$"))
-    + exa(p("<strong>例：</strong>求 $∯_\\Sigma x^3\\,dy\\,dz+y^3\\,dz\\,dx+z^3\\,dx\\,dy$，$\\Sigma$ 为球面 $x^2+y^2+z^2=R^2$ 外侧。<br>由高斯公式：$=\\iiint_\\Omega 3(x^2+y^2+z^2)\\,dV=3\\int_0^{2\\pi}d\\theta\\int_0^\\pi\\sin\\varphi\\,d\\varphi\\int_0^R r^2\\cdot r^2\\,dr=3\\cdot 2\\pi\\cdot 2\\cdot\\frac{R^5}{5}=\\frac{12\\pi R^5}{5}$。"))
+        "而曲面积分中，侧面 $\\Sigma_3$ 的法向量垂直于 $z$ 轴，故 $\\iint_{\\Sigma_3}R\\,dx\\,dy=0$；上底取上侧为 $+\\iint_D R(x,y,z_2)\\,d\\sigma$，下底取下侧为 $-\\iint_D R(x,y,z_1)\\,d\\sigma$。<br>故 $\\mathop{\\oint\\!\\!\\!\\!\\!\\int}_\\Sigma R\\,dx\\,dy=\\iint_D[R(x,y,z_2)-R(x,y,z_1)]\\,d\\sigma$，与三重积分相等。一般区域可分割为若干 $xy$ 型区域。$\\blacksquare$"))
+    + exa(p("<strong>例：</strong>求 $\\mathop{\\oint\\!\\!\\!\\!\\!\\int}_\\Sigma x^3\\,dy\\,dz+y^3\\,dz\\,dx+z^3\\,dx\\,dy$，$\\Sigma$ 为球面 $x^2+y^2+z^2=R^2$ 外侧。<br>由高斯公式：$=\\iiint_\\Omega 3(x^2+y^2+z^2)\\,dV=3\\int_0^{2\\pi}d\\theta\\int_0^\\pi\\sin\\varphi\\,d\\varphi\\int_0^R r^2\\cdot r^2\\,dr=3\\cdot 2\\pi\\cdot 2\\cdot\\frac{R^5}{5}=\\frac{12\\pi R^5}{5}$。"))
 )},
 {"id":"c7s2-2","name":"散度的物理意义","tags":["def","thm","app"],"brief":"通量密度与无源场。",
  "body": wrap(
     defn("散度", p("向量场 $\\vec F=(P,Q,R)$ 在点 $M$ 处的散度")+
     fml("\\mathrm{div}\\,\\vec F = \\nabla\\cdot\\vec F = \\frac{\\partial P}{\\partial x}+\\frac{\\partial Q}{\\partial y}+\\frac{\\partial R}{\\partial z}",
         "散度是标量，表示单位体积内穿出的通量（通量密度）。$\\mathrm{div}\\,\\vec F>0$ 表示该点有源（流出），$<0$ 表示有汇（流入），$=0$ 表示无源。"))
-    + thm("散度的极限定义", p("$\\mathrm{div}\\,\\vec F(M)=\\lim_{\\Omega\\to M}\\frac{1}{V}∯_{\\partial\\Omega}\\vec F\\cdot d\\vec S$，其中 $V$ 为包含 $M$ 的小区域 $\\Omega$ 的体积。"))
+    + thm("散度的极限定义", p("$\\mathrm{div}\\,\\vec F(M)=\\lim_{\\Omega\\to M}\\frac{1}{V}\\mathop{\\oint\\!\\!\\!\\!\\!\\int}_{\\partial\\Omega}\\vec F\\cdot d\\vec S$，其中 $V$ 为包含 $M$ 的小区域 $\\Omega$ 的体积。"))
     + app(p("<strong>无源场（螺线场）：</strong>若 $\\nabla\\cdot\\vec F\\equiv 0$，则穿出任意闭曲面的通量为零，场线闭合。稳恒磁场是无源场（$\\nabla\\cdot\\vec B=0$）。<br><strong>高斯公式的物理意义：</strong>穿出闭曲面的总通量等于内部所有源的散度之体积分——这正是静电学高斯定理和流体连续性方程的数学基础。"))
 )},
 ]
@@ -927,7 +927,7 @@ ch7_sections = [
 {"id":"c7s4-1","name":"梯度、散度、旋度的统一","tags":["def","thm","app"],"brief":"nabla算子与三大积分定理。",
  "body": wrap(
     defn("nabla 算子", p("$\\nabla=\\left(\\frac{\\partial}{\\partial x},\\frac{\\partial}{\\partial y},\\frac{\\partial}{\\partial z}\\right)$。对数量场 $u$：梯度 $\\nabla u$ 是向量；对向量场 $\\vec F$：散度 $\\nabla\\cdot\\vec F$ 是标量，旋度 $\\nabla\\times\\vec F$ 是向量。"))
-    + thm("三大积分定理的向量形式", p("<strong>高斯公式：</strong>$∯_{\\partial\\Omega}\\vec F\\cdot d\\vec S=\\iiint_\\Omega\\nabla\\cdot\\vec F\\,dV$（通量=散度体积分）；<br><strong>斯托克斯公式：</strong>$\\oint_{\\partial\\Sigma}\\vec F\\cdot d\\vec r=\\iint_\\Sigma(\\nabla\\times\\vec F)\\cdot d\\vec S$（环量=旋度通量）；<br><strong>梯度定理：</strong>$\\int_A^B\\nabla u\\cdot d\\vec r=u(B)-u(A)$（曲线积分=端点势差）。"))
+    + thm("三大积分定理的向量形式", p("<strong>高斯公式：</strong>$\\mathop{\\oint\\!\\!\\!\\!\\!\\int}_{\\partial\\Omega}\\vec F\\cdot d\\vec S=\\iiint_\\Omega\\nabla\\cdot\\vec F\\,dV$（通量=散度体积分）；<br><strong>斯托克斯公式：</strong>$\\oint_{\\partial\\Sigma}\\vec F\\cdot d\\vec r=\\iint_\\Sigma(\\nabla\\times\\vec F)\\cdot d\\vec S$（环量=旋度通量）；<br><strong>梯度定理：</strong>$\\int_A^B\\nabla u\\cdot d\\vec r=u(B)-u(A)$（曲线积分=端点势差）。"))
     + app(p("三大定理揭示了微积分的统一结构：<strong>边界上的积分 = 内部微分运算的积分</strong>。这是微分流形上斯托克斯定理的特例，也是整个向量分析的核心。"))
 )},
 {"id":"c7s4-2","name":"势场与调和场","tags":["thm","app"],"brief":"保守场、无源场、调和场。",
