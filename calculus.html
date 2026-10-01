@@ -13,8 +13,8 @@ window.MathJax = {
     processEscapes: true,
     packages: {'[+]': ['ams','boldsymbol']},
     macros: {
-      oiint: '\mathop{\circ\!\!\!\!\!\!\!\!\!\!\iint}',
-      oiiint: '\mathop{\circ\!\!\!\!\!\!\!\!\!\!\!\!\iiint}'
+      oiint: '\\mathop{\\circ\\!\\!\\!\\!\\!\\!\\!\\!\\!\\!\\iint}',
+      oiiint: '\\mathop{\\circ\\!\\!\\!\\!\\!\\!\\!\\!\\!\\!\\!\\!\\iiint}'
     }
   },
   options: {
@@ -176,7 +176,7 @@ window.MathJax = {
     <div class="la-core-item"><div class="la-core-num">8</div><div class="la-core-body"><div class="la-core-name">格林公式</div><div class="la-fml">$$\oint_{\partial D} P\,dx+Q\,dy = \iint_D\left(\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}\right)d\sigma$$</div><div class="note" style="font-size:12px;color:#8496ad;margin-top:4px">平面曲线积分与二重积分的转化</div></div></div>
     <div class="la-core-item"><div class="la-core-num">9</div><div class="la-core-body"><div class="la-core-name">高斯公式</div><div class="la-fml">$$\oiint_{\partial\Omega}\vec F\cdot d\vec S = \iiint_\Omega \nabla\cdot\vec F\,dV$$</div><div class="note" style="font-size:12px;color:#8496ad;margin-top:4px">通量与散度的体积分</div></div></div>
     <div class="la-core-item"><div class="la-core-num">10</div><div class="la-core-body"><div class="la-core-name">斯托克斯公式</div><div class="la-fml">$$\oint_{\partial\Sigma}\vec F\cdot d\vec r = \iint_\Sigma (\nabla\times\vec F)\cdot d\vec S$$</div><div class="note" style="font-size:12px;color:#8496ad;margin-top:4px">环量与旋度的面积分</div></div></div>
-    <div class="la-core-item"><div class="la-core-num">11</div><div class="la-core-body"><div class="la-core-name">傅里叶系数</div><div class="la-fml">$$a_n = \frac{1}{\pi}\int_{-\pi}^{\pi}f(x)\cos nx\,dx$$</div><div class="note" style="font-size:12px;color:#8496ad;margin-top:4px">函数的三角级数展开</div></div></div>
+    <div class="la-core-item"><div class="la-core-num">11</div><div class="la-core-body"><div class="la-core-name">傅里叶系数</div><div class="la-fml">$$a_n = \frac{1}{\pi}\int_{-\pi}^{\pi}f(x)\cos nx\,dx,\; b_n = \frac{1}{\pi}\int_{-\pi}^{\pi}f(x)\sin nx\,dx$$</div><div class="note" style="font-size:12px;color:#8496ad;margin-top:4px">函数的三角级数展开（余弦+正弦系数）</div></div></div>
     <div class="la-core-item"><div class="la-core-num">12</div><div class="la-core-body"><div class="la-core-name">欧拉积分（Γ函数）</div><div class="la-fml">$$\Gamma(s) = \int_0^{+\infty} x^{s-1}e^{-x}\,dx$$</div><div class="note" style="font-size:12px;color:#8496ad;margin-top:4px">阶乘的解析延拓</div></div></div>
     <div class="la-core-item"><div class="la-core-num">13</div><div class="la-core-body"><div class="la-core-name">拉格朗日乘数法</div><div class="la-fml">$$\nabla f = \lambda\nabla g$$</div><div class="note" style="font-size:12px;color:#8496ad;margin-top:4px">条件极值的必要条件</div></div></div>
     <div class="la-core-item"><div class="la-core-num">14</div><div class="la-core-body"><div class="la-core-name">二阶常系数齐次方程解</div><div class="la-fml">$$y''+py'+qy=0 \Rightarrow \text{由特征方程 } r^2+pr+q=0 \text{ 决定}$$</div><div class="note" style="font-size:12px;color:#8496ad;margin-top:4px">常微分方程基础解法</div></div></div>

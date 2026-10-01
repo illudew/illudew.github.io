@@ -75,7 +75,7 @@ CORE_FORMULAS = [
     ("格林公式", "\\oint_{\\partial D} P\\,dx+Q\\,dy = \\iint_D\\left(\\frac{\\partial Q}{\\partial x}-\\frac{\\partial P}{\\partial y}\\right)d\\sigma", "平面曲线积分与二重积分的转化"),
     ("高斯公式", "\\oiint_{\\partial\\Omega}\\vec F\\cdot d\\vec S = \\iiint_\\Omega \\nabla\\cdot\\vec F\\,dV", "通量与散度的体积分"),
     ("斯托克斯公式", "\\oint_{\\partial\\Sigma}\\vec F\\cdot d\\vec r = \\iint_\\Sigma (\\nabla\\times\\vec F)\\cdot d\\vec S", "环量与旋度的面积分"),
-    ("傅里叶系数", "a_n = \\frac{1}{\\pi}\\int_{-\\pi}^{\\pi}f(x)\\cos nx\\,dx", "函数的三角级数展开"),
+    ("傅里叶系数", "a_n = \\frac{1}{\\pi}\\int_{-\\pi}^{\\pi}f(x)\\cos nx\\,dx,\\; b_n = \\frac{1}{\\pi}\\int_{-\\pi}^{\\pi}f(x)\\sin nx\\,dx", "函数的三角级数展开（余弦+正弦系数）"),
     ("欧拉积分（Γ函数）", "\\Gamma(s) = \\int_0^{+\\infty} x^{s-1}e^{-x}\\,dx", "阶乘的解析延拓"),
     ("拉格朗日乘数法", "\\nabla f = \\lambda\\nabla g", "条件极值的必要条件"),
     ("二阶常系数齐次方程解", "y''+py'+qy=0 \\Rightarrow \\text{由特征方程 } r^2+pr+q=0 \\text{ 决定}", "常微分方程基础解法"),
@@ -1289,8 +1289,8 @@ window.MathJax = {{
     processEscapes: true,
     packages: {{'[+]': ['ams','boldsymbol']}},
     macros: {{
-      oiint: '\\mathop{{\\circ\\!\\!\\!\\!\\!\\!\\!\\!\\!\\!\\iint}}',
-      oiiint: '\\mathop{{\\circ\\!\\!\\!\\!\\!\\!\\!\\!\\!\\!\\!\\!\\iiint}}'
+      oiint: '\\\\mathop{{\\\\circ\\\\!\\\\!\\\\!\\\\!\\\\!\\\\!\\\\!\\\\!\\\\!\\\\!\\\\iint}}',
+      oiiint: '\\\\mathop{{\\\\circ\\\\!\\\\!\\\\!\\\\!\\\\!\\\\!\\\\!\\\\!\\\\!\\\\!\\\\!\\\\!\\\\iiint}}'
     }}
   }},
   options: {{
