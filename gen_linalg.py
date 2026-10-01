@@ -167,10 +167,12 @@ ch1_sections = [
 "color": "#059669",
 "desc": "内积、正交性、施密特正交化、投影",
 "items": [
-{"id":"c1s3-1","name":"内积的定义","tags":["def","note"],"brief":"赋予向量长度与夹角的双线性函数。",
+{"id":"c1s3-1","name":"内积的定义","tags":["def","thm","der","note"],"brief":"赋予向量长度与夹角的双线性函数。",
  "body": wrap(
     defn("内积", p("设 $V$ 是 $\\mathbb{F}$ 上的向量空间。函数 $\\langle\\cdot,\\cdot\\rangle:V\\times V\\to\\mathbb{F}$ 称为内积，若满足：(1) 对第一变元线性 $\\langle a\\mathbf{u}+b\\mathbf{v},\\mathbf{w}\\rangle=a\\langle\\mathbf{u},\\mathbf{w}\\rangle+b\\langle\\mathbf{v},\\mathbf{w}\\rangle$；(2) 共轭对称性 $\\langle\\mathbf{u},\\mathbf{v}\\rangle=\\overline{\\langle\\mathbf{v},\\mathbf{u}\\rangle}$；(3) 正定性 $\\langle\\mathbf{v},\\mathbf{v}\\rangle\\ge 0$，等号当且仅当 $\\mathbf{v}=0$。赋予内积的向量空间称为内积空间。"))
-    + note(p("欧氏空间中标准内积：$\\langle\\mathbf{u},\\mathbf{v}\\rangle=u_1v_1+\\cdots+u_nv_n$。向量长度 $\\|\\mathbf{v}\\|=\\sqrt{\\langle\\mathbf{v},\\mathbf{v}\\rangle}$。柯西-施瓦茨不等式：$|\\langle\\mathbf{u},\\mathbf{v}\\rangle|\\le\\|\\mathbf{u}\\|\\|\\mathbf{v}\\|$。"))
+    + thm("柯西-施瓦茨不等式", p("对内积空间中任意向量 $\\mathbf{u},\\mathbf{v}$，有 $|\\langle\\mathbf{u},\\mathbf{v}\\rangle|\\le\\|\\mathbf{u}\\|\\|\\mathbf{v}\\|$，等号当且仅当 $\\mathbf{u},\\mathbf{v}$ 线性相关。"))
+    + der(p("<strong>证明：</strong>若 $\\mathbf{v}=0$，不等式显然成立。设 $\\mathbf{v}\\neq 0$。对任意实数 $t$，由正定性 $\\langle\\mathbf{u}-t\\mathbf{v},\\mathbf{u}-t\\mathbf{v}\\rangle\\ge 0$。展开：$\\|\\mathbf{u}\\|^2-2t\\,\\mathrm{Re}\\langle\\mathbf{u},\\mathbf{v}\\rangle+t^2\\|\\mathbf{v}\\|^2\\ge 0$。这是关于 $t$ 的二次函数恒非负，故判别式 $\\le 0$：$4(\\mathrm{Re}\\langle\\mathbf{u},\\mathbf{v}\\rangle)^2-4\\|\\mathbf{u}\\|^2\\|\\mathbf{v}\\|^2\\le 0$，即 $(\\mathrm{Re}\\langle\\mathbf{u},\\mathbf{v}\\rangle)^2\\le\\|\\mathbf{u}\\|^2\\|\\mathbf{v}\\|^2$。取 $\\theta$ 使 $e^{i\\theta}\\langle\\mathbf{u},\\mathbf{v}\\rangle=|\\langle\\mathbf{u},\\mathbf{v}\\rangle|$（实数），用 $e^{i\\theta}\\mathbf{u}$ 代 $\\mathbf{u}$ 得 $|\\langle\\mathbf{u},\\mathbf{v}\\rangle|\\le\\|\\mathbf{u}\\|\\|\\mathbf{v}\\|$。等号成立当且仅当判别式为 0，即存在 $t$ 使 $\\mathbf{u}-t\\mathbf{v}=0$，即线性相关。"))
+    + note(p("欧氏空间中标准内积：$\\langle\\mathbf{u},\\mathbf{v}\\rangle=u_1v_1+\\cdots+u_nv_n$。向量长度 $\\|\\mathbf{v}\\|=\\sqrt{\\langle\\mathbf{v},\\mathbf{v}\\rangle}$。由柯西-施瓦茨不等式可定义夹角 $\\cos\\theta=\\frac{\\langle\\mathbf{u},\\mathbf{v}\\rangle}{\\|\\mathbf{u}\\|\\|\\mathbf{v}\\|}$。"))
 )},
 {"id":"c1s3-2","name":"正交与正交基","tags":["def","thm"],"brief":"两两正交的非零向量组必线性无关。",
  "body": wrap(
@@ -232,10 +234,11 @@ ch2_sections = [
     thm("可逆矩阵的等价刻画", p("对 $n$ 阶方阵 $A$，以下等价：(1) $A$ 可逆；(2) $\\det A\\neq 0$；(3) $A$ 的列向量线性无关；(4) $A$ 的行向量线性无关；(5) $\\mathrm{rank}(A)=n$；(6) 齐次方程 $A\\mathbf{x}=0$ 只有零解；(7) 对任意 $\\mathbf{b}$，$A\\mathbf{x}=\\mathbf{b}$ 有唯一解。"))
     + der(p("<strong>(1)⇒(2)：</strong>若 $A$ 可逆，则 $AA^{-1}=I$，两边取行列式：$\\det A\\cdot\\det(A^{-1})=\\det I=1$，故 $\\det A\\neq 0$。<br><strong>(2)⇒(1)：</strong>若 $\\det A\\neq 0$，构造 $A^{-1}=\\frac{1}{\\det A}\\mathrm{adj}(A)$，其中 $\\mathrm{adj}(A)$ 是伴随矩阵。由行列式展开定理，$A\\cdot\\mathrm{adj}(A)=\\mathrm{adj}(A)\\cdot A=(\\det A)I$，故 $A\\cdot\\frac{1}{\\det A}\\mathrm{adj}(A)=I$，即 $A$ 可逆。其余等价性由秩的定义和线性方程组理论可得。"))
 )},
-{"id":"c2s2-3","name":"初等变换与初等矩阵","tags":["def","thm","app"],"brief":"行初等变换对应左乘初等矩阵。",
+{"id":"c2s2-3","name":"初等变换与初等矩阵","tags":["def","thm","der","app"],"brief":"行初等变换对应左乘初等矩阵。",
  "body": wrap(
     defn("初等变换与初等矩阵", p("三种初等行变换：(1) 交换两行 $r_i\\leftrightarrow r_j$；(2) 某行乘非零数 $c$：$r_i\\leftarrow c r_i$；(3) 某行的倍数加到另一行：$r_i\\leftarrow r_i+kr_j$。对单位矩阵 $I$ 做一次初等变换得到的矩阵称为初等矩阵。"))
     + thm("初等变换与矩阵乘法", p("对矩阵 $A$ 做一次初等行变换等价于左乘相应的初等矩阵；做一次初等列变换等价于右乘相应的初等矩阵。初等矩阵均可逆，其逆仍是同类初等矩阵。"))
+    + der(p("<strong>用初等变换求逆的正确性证明：</strong>设对 $[A|I]$ 做了一系列行变换，对应左乘初等矩阵 $P_1,P_2,\\ldots,P_k$。令 $P=P_kP_{k-1}\\cdots P_1$，则整个增广矩阵变为 $P[A|I]=[PA|P]$。若左侧 $PA=I$，则 $P=A^{-1}$（因 $A$ 可逆时，$P$ 是 $A$ 的左逆，而方阵左逆等于右逆）。此时右侧恰为 $P=A^{-1}$。故 $[A|I]\\to[I|A^{-1}]$。"))
     + app(p("<strong>用初等变换求逆：</strong>构造增广矩阵 $[A|I]$，对其做行初等变换将 $A$ 化为 $I$，则右侧 $I$ 同时化为 $A^{-1}$，即 $[A|I]\\xrightarrow{\\text{行变换}}[I|A^{-1}]$。原理：一系列初等矩阵 $P_1,\\ldots,P_k$ 满足 $P_k\\cdots P_1 A=I$，故 $A^{-1}=P_k\\cdots P_1$。"))
 )}
 ]},
@@ -305,9 +308,11 @@ ch3_sections = [
 "color": "#be185d",
 "desc": "行列式计算技巧、伴随矩阵与克拉默法则",
 "items": [
-{"id":"c3s3-1","name":"行列式的计算","tags":["exa","note"],"brief":"化三角形、递推法、范德蒙德行列式。",
+{"id":"c3s3-1","name":"行列式的计算","tags":["exa","der","note"],"brief":"化三角形、递推法、范德蒙德行列式。",
  "body": wrap(
-    exa(p("<strong>化三角形法：</strong>利用行变换将行列式化为上（下）三角形，其值等于对角线元素之积。<br><strong>范德蒙德行列式：</strong>$V_n=\\begin{vmatrix}1&1&\\cdots&1\\\\x_1&x_2&\\cdots&x_n\\\\x_1^2&x_2^2&\\cdots&x_n^2\\\\\\vdots&\\vdots&&\\vdots\\\\x_1^{n-1}&x_2^{n-1}&\\cdots&x_n^{n-1}\\end{vmatrix}=\\prod_{1\\le i<j\\le n}(x_j-x_i)$。"))
+    exa(p("<strong>化三角形法：</strong>利用行变换将行列式化为上（下）三角形，其值等于对角线元素之积。"))
+    + thm("范德蒙德行列式", p("$V_n=\\begin{vmatrix}1&1&\\cdots&1\\\\x_1&x_2&\\cdots&x_n\\\\x_1^2&x_2^2&\\cdots&x_n^2\\\\\\vdots&\\vdots&&\\vdots\\\\x_1^{n-1}&x_2^{n-1}&\\cdots&x_n^{n-1}\\end{vmatrix}=\\prod_{1\\le i<j\\le n}(x_j-x_i)$。"))
+    + der(p("<strong>证明（数学归纳法）：</strong>$n=2$ 时，$V_2=\\begin{vmatrix}1&1\\\\x_1&x_2\\end{vmatrix}=x_2-x_1=\\prod_{1\\le i<j\\le 2}(x_j-x_i)$，成立。<br>假设 $n-1$ 阶成立。对 $n$ 阶，从第 $n$ 行起依次用上一行的 $-x_1$ 倍加到下一行（$r_k\\leftarrow r_k-x_1 r_{k-1}$，$k=n,n-1,\\ldots,2$），第一列除 $a_{11}=1$ 外全为 0。按第一列展开得 $V_n=\\begin{vmatrix}x_2-x_1&x_3-x_1&\\cdots&x_n-x_1\\\\x_2(x_2-x_1)&x_3(x_3-x_1)&\\cdots&x_n(x_n-x_1)\\\\\\vdots&\\vdots&&\\vdots\\\\x_2^{n-2}(x_2-x_1)&x_3^{n-2}(x_3-x_1)&\\cdots&x_n^{n-2}(x_n-x_1)\\end{vmatrix}$。各列提出公因子 $x_j-x_1$（$j=2,\\ldots,n$），得 $V_n=\\prod_{j=2}^n(x_j-x_1)\\cdot V_{n-1}(x_2,\\ldots,x_n)$。由归纳假设 $V_{n-1}=\\prod_{2\\le i<j\\le n}(x_j-x_i)$，故 $V_n=\\prod_{j=2}^n(x_j-x_1)\\cdot\\prod_{2\\le i<j\\le n}(x_j-x_i)=\\prod_{1\\le i<j\\le n}(x_j-x_i)$。"))
     + note(p("范德蒙德行列式非零当且仅当 $x_1,x_2,\\ldots,x_n$ 互不相同。这一事实在多项式插值、特征值互不相同的矩阵对角化中有关键应用。"))
 )},
 {"id":"c3s3-2","name":"伴随矩阵与克拉默法则","tags":["def","thm","der","app"],"brief":"用行列式表示逆矩阵与方程组的解。",
@@ -337,6 +342,7 @@ ch4_sections = [
     + thm("解空间是子空间", p("$N(A)$ 是 $\\mathbb{F}^n$ 的子空间。"))
     + der(p("<strong>证明：</strong>$\\mathbf{0}\\in N(A)$，故非空。若 $\\mathbf{x}_1,\\mathbf{x}_2\\in N(A)$，$c_1,c_2\\in\\mathbb{F}$，则 $A(c_1\\mathbf{x}_1+c_2\\mathbf{x}_2)=c_1A\\mathbf{x}_1+c_2A\\mathbf{x}_2=c_1\\mathbf{0}+c_2\\mathbf{0}=\\mathbf{0}$，故 $c_1\\mathbf{x}_1+c_2\\mathbf{x}_2\\in N(A)$。因此 $N(A)$ 对线性组合封闭，是子空间。"))
     + thm("秩-零度定理", p("$\\dim N(A)+\\mathrm{rank}(A)=n$，即零空间维数（零度）$=n-\\mathrm{rank}(A)$。"))
+    + der(p("<strong>证明：</strong>设 $\\mathrm{rank}(A)=r$，$\\dim N(A)=s$。取 $N(A)$ 的一组基 $\\mathbf{v}_1,\\ldots,\\mathbf{v}_s$，扩充为 $\\mathbb{F}^n$ 的基 $\\mathbf{v}_1,\\ldots,\\mathbf{v}_s,\\mathbf{v}_{s+1},\\ldots,\\mathbf{v}_n$。<br><strong>断言：</strong>$A\\mathbf{v}_{s+1},\\ldots,A\\mathbf{v}_n$ 是列空间 $C(A)$ 的一组基。<br>(1) 张成：$C(A)$ 中任意向量 $A\\mathbf{x}$，设 $\\mathbf{x}=\\sum_{i=1}^n c_i\\mathbf{v}_i$，则 $A\\mathbf{x}=\\sum_{i=1}^n c_i A\\mathbf{v}_i=\\sum_{i=s+1}^n c_i A\\mathbf{v}_i$（因 $i\\le s$ 时 $A\\mathbf{v}_i=0$）。<br>(2) 线性无关：设 $\\sum_{i=s+1}^n c_i A\\mathbf{v}_i=0$，则 $A(\\sum_{i=s+1}^n c_i\\mathbf{v}_i)=0$，故 $\\sum_{i=s+1}^n c_i\\mathbf{v}_i\\in N(A)$，可表示为 $\\sum_{i=1}^s d_i\\mathbf{v}_i$。移项得 $\\sum_{i=1}^s d_i\\mathbf{v}_i-\\sum_{i=s+1}^n c_i\\mathbf{v}_i=0$。由 $\\mathbf{v}_1,\\ldots,\\mathbf{v}_n$ 线性无关，所有系数为 0，特别 $c_i=0$（$i>s$）。<br>故 $\\dim C(A)=n-s$，即 $r=n-s$，$r+s=n$。"))
 )},
 {"id":"c4s1-2","name":"基础解系","tags":["def","thm","der"],"brief":"零空间的基，含 $n-r$ 个向量。",
  "body": wrap(
@@ -428,6 +434,8 @@ ch5_sections = [
  "body": wrap(
     thm("实对称矩阵的谱定理", p("设 $A$ 为 $n$ 阶实对称矩阵（$A^T=A$），则：(1) $A$ 的特征值全为实数；(2) 不同特征值对应的特征向量正交；(3) $A$ 可正交对角化，即存在正交矩阵 $Q$（$Q^TQ=I$）使得 $Q^TAQ=\\Lambda=\\mathrm{diag}(\\lambda_1,\\ldots,\\lambda_n)$。"))
     + der(p("<strong>(1) 特征值为实数的证明：</strong>设 $A\\mathbf{v}=\\lambda\\mathbf{v}$，$\\mathbf{v}\\neq 0$。取共轭转置：$\\overline{\\mathbf{v}}^T A^T=\\overline{\\lambda}\\overline{\\mathbf{v}}^T$。因 $A^T=A$ 且 $A$ 实，$\\overline{\\mathbf{v}}^T A=\\overline{\\lambda}\\overline{\\mathbf{v}}^T$。右乘 $\\mathbf{v}$：$\\overline{\\mathbf{v}}^T A\\mathbf{v}=\\overline{\\lambda}\\overline{\\mathbf{v}}^T\\mathbf{v}$。左边 $=\\overline{\\mathbf{v}}^T(\\lambda\\mathbf{v})=\\lambda\\overline{\\mathbf{v}}^T\\mathbf{v}$。故 $\\lambda\\overline{\\mathbf{v}}^T\\mathbf{v}=\\overline{\\lambda}\\overline{\\mathbf{v}}^T\\mathbf{v}$。因 $\\mathbf{v}\\neq 0$，$\\overline{\\mathbf{v}}^T\\mathbf{v}>0$，得 $\\lambda=\\overline{\\lambda}$，即 $\\lambda$ 为实数。"))
+    + der(p("<strong>(2) 不同特征值特征向量正交的证明：</strong>设 $A\\mathbf{v}_1=\\lambda_1\\mathbf{v}_1$，$A\\mathbf{v}_2=\\lambda_2\\mathbf{v}_2$，$\\lambda_1\\neq\\lambda_2$。由 $A^T=A$，计算 $\\lambda_1\\mathbf{v}_1^T\\mathbf{v}_2=(A\\mathbf{v}_1)^T\\mathbf{v}_2=\\mathbf{v}_1^T A^T\\mathbf{v}_2=\\mathbf{v}_1^T A\\mathbf{v}_2=\\mathbf{v}_1^T(\\lambda_2\\mathbf{v}_2)=\\lambda_2\\mathbf{v}_1^T\\mathbf{v}_2$。故 $(\\lambda_1-\\lambda_2)\\mathbf{v}_1^T\\mathbf{v}_2=0$。因 $\\lambda_1\\neq\\lambda_2$，得 $\\mathbf{v}_1^T\\mathbf{v}_2=0$，即正交。"))
+    + der(p("<strong>(3) 正交对角化的证明思路：</strong>由 (1) 特征值为实数，可取实特征向量。对重特征值，用施密特正交化将其特征子空间的基化为标准正交基；由 (2) 不同特征值的特征向量自动正交。合并所有标准正交特征向量构成正交矩阵 $Q=(\\mathbf{q}_1,\\ldots,\\mathbf{q}_n)$，则 $AQ=Q\\Lambda$，故 $Q^TAQ=\\Lambda$。"))
 )}
 ]},
 # ---- 5.3 若尔当标准形与凯莱-哈密顿 ----
@@ -477,6 +485,7 @@ ch6_sections = [
     defn("正定矩阵", p("设 $A$ 为 $n$ 阶实对称矩阵。若对任意非零向量 $\\mathbf{x}\\in\\mathbb{R}^n$ 都有 $\\mathbf{x}^TA\\mathbf{x}>0$，则称 $A$ 正定，对应的二次型 $Q(\\mathbf{x})=\\mathbf{x}^TA\\mathbf{x}$ 称为正定二次型。"))
     + thm("正定的等价条件", p("对 $n$ 阶实对称矩阵 $A$，以下等价：(1) $A$ 正定；(2) $A$ 的所有特征值 $>0$；(3) $A$ 的正惯性指数 $=n$；(4) $A$ 的所有顺序主子式 $>0$；(5) 存在可逆矩阵 $C$ 使 $A=C^TC$（即 $A$ 合同于单位矩阵）。"))
     + der(p("<strong>(1)⇒(2)：</strong>设 $\\lambda$ 是 $A$ 的特征值，$\\mathbf{v}$ 为对应特征向量。则 $\\mathbf{v}^TA\\mathbf{v}=\\lambda\\mathbf{v}^T\\mathbf{v}$。由正定，$\\mathbf{v}^TA\\mathbf{v}>0$，又 $\\mathbf{v}^T\\mathbf{v}>0$，故 $\\lambda>0$。<br><strong>(2)⇒(1)：</strong>若所有特征值 $>0$，由谱定理 $A=Q\\Lambda Q^T$，$\\Lambda=\\mathrm{diag}(\\lambda_1,\\ldots,\\lambda_n)$。对任意 $\\mathbf{x}\\neq 0$，令 $\\mathbf{y}=Q^T\\mathbf{x}\\neq 0$，则 $\\mathbf{x}^TA\\mathbf{x}=\\mathbf{y}^T\\Lambda\\mathbf{y}=\\sum\\lambda_i y_i^2>0$（因 $\\mathbf{y}\\neq 0$，至少一个 $y_i\\neq 0$）。"))
+    + der(p("<strong>(1)⇒(4) 西尔维斯特判据（顺序主子式全正）：</strong>设 $A_k$ 为 $A$ 的 $k$ 阶顺序主子矩阵。对任意非零 $\\mathbf{x}_k=(x_1,\\ldots,x_k)^T$，补零为 $\\mathbf{x}=(x_1,\\ldots,x_k,0,\\ldots,0)^T\\neq 0$。因 $A$ 正定，$0<\\mathbf{x}^TA\\mathbf{x}=\\mathbf{x}_k^T A_k \\mathbf{x}_k$，故 $A_k$ 正定，从而 $\\det A_k>0$（正定矩阵行列式为正，由特征值全正与行列式=特征值之积）。<br><strong>(4)⇒(1)：</strong>对 $n$ 归纳。$n=1$ 显然。设 $n-1$ 成立。因 $\\det A_n>0$，$A$ 可逆。用分块高斯消元：$A=\\begin{pmatrix}A_{n-1}&\\mathbf{a}\\\\\\mathbf{a}^T&a_{nn}\\end{pmatrix}$，存在可逆矩阵 $P$ 使 $P^TAP=\\begin{pmatrix}A_{n-1}&0\\\\0&d\\end{pmatrix}$（合同变换），其中 $d=a_{nn}-\\mathbf{a}^TA_{n-1}^{-1}\\mathbf{a}$。由 $\\det A=\\det A_{n-1}\\cdot d>0$ 且 $\\det A_{n-1}>0$，得 $d>0$。由归纳 $A_{n-1}$ 正定，又 $d>0$，故 $P^TAP$ 正定，从而 $A$ 正定。"))
 )}
 ]},
 # ---- 6.2 特殊矩阵 ----
