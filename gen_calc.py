@@ -1287,11 +1287,7 @@ window.MathJax = {{
     inlineMath: [['$','$'], ['\\\\(','\\\\)']],
     displayMath: [['$$','$$'], ['\\\\[','\\\\]']],
     processEscapes: true,
-    packages: {{'[+]': ['ams','boldsymbol']}},
-    macros: {{
-      oiint: '\\\\mathop{{\\\\circ\\\\!\\\\!\\\\!\\\\!\\\\!\\\\!\\\\!\\\\!\\\\!\\\\!\\\\iint}}',
-      oiiint: '\\\\mathop{{\\\\circ\\\\!\\\\!\\\\!\\\\!\\\\!\\\\!\\\\!\\\\!\\\\!\\\\!\\\\!\\\\!\\\\iiint}}'
-    }}
+    packages: {{'[+]': ['ams','boldsymbol']}}
   }},
   options: {{
     skipHtmlTags: ['script','noscript','style','textarea','pre','code'],
