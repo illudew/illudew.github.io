@@ -420,6 +420,9 @@ CORE_FORMULAS = [
 
 def js_escape(s):
     return s.replace("\\","\\\\").replace("`","\\`").replace("${","\\${")
+def fix_lt_math(s):
+    import re
+    return re.sub(r"\$\$[\s\S]*?\$\$|\$[^$\n]*?\$", lambda m: m.group(0).replace("<", "&lt;"), s)
 def defn(t, body): return f'<section class="la-kp-sec la-kp-def"><h5>定 义</h5><p><strong>{t}</strong></p>{body}</section>'
 def thm(t, body): return f'<section class="la-kp-sec la-kp-thm"><h5>定 理 · {t}</h5>{body}</section>'
 def der(body): return f'<section class="la-kp-sec la-kp-der"><h5>推 导</h5>{body}</section>'
@@ -1672,7 +1675,7 @@ def gen_html():
             item_strs = []
             for it in sec["items"]:
                 tags_js = json.dumps(it["tags"], ensure_ascii=False)
-                body_esc = js_escape(it["body"])
+                body_esc = js_escape(fix_lt_math(it["body"]))
                 fig_field = f",fig:{json.dumps(it.get('fig',''),ensure_ascii=False)}" if it.get("fig") else ""
                 figcap_field = f",figCap:{json.dumps(it.get('figCap',''),ensure_ascii=False)}" if it.get("figCap") else ""
                 item_strs.append(
