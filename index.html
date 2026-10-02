@@ -732,66 +732,66 @@ document.addEventListener('DOMContentLoaded',()=>{initViewCount();initLikes()});
 
 /* ===== 量子力学解锁魔王的试炼 ===== */
 var TRIAL_QUESTIONS=[
- {topic:'理论力学 · 哈密顿力学', q:'若哈密顿量 $H(q,p,t)$ 不显含时间 $t$，则 $\\dfrac{dH}{dt}$ 等于？', options:[
-   '$0$',
-   '$\\dfrac{\\partial H}{\\partial t}$',
-   '$\\{H,H\\}$',
-   '以上都对'
- ], answer:3},
- {topic:'电动力学 · 电磁波波导', q:'矩形波导（宽 $a$，高 $b$，$a>b$）中 TE₁₀ 模的相速度 $v_p$ 为（$\\lambda$ 为工作波长，$c$ 为光速）？', options:[
-   '$c\\sqrt{1-(\\lambda/2a)^2}$',
-   '$c$',
-   '$\\dfrac{c}{\\sqrt{1-(\\lambda/a)^2}}$',
-   '$\\dfrac{c}{\\sqrt{1-(\\lambda/2a)^2}}$'
- ], answer:3},
- {topic:'数学物理方法 · 分离变量法', q:'两端固定弦（$0\\le x\\le l$）自由振动，初始位移 $u(x,0)=\\varphi(x)$，初始速度为零。第 $n$ 阶本征模的振幅系数 $A_n$ 为？', options:[
-   '$\\dfrac{2}{l}\\displaystyle\\int_0^l \\varphi(x)\\cos\\dfrac{n\\pi x}{l}\\,dx$',
-   '$\\dfrac{1}{l}\\displaystyle\\int_0^l \\varphi(x)\\sin\\dfrac{n\\pi x}{l}\\,dx$',
-   '$\\dfrac{2}{n\\pi a}\\displaystyle\\int_0^l \\psi(x)\\sin\\dfrac{n\\pi x}{l}\\,dx$',
-   '$\\dfrac{2}{l}\\displaystyle\\int_0^l \\varphi(x)\\sin\\dfrac{n\\pi x}{l}\\,dx$'
- ], answer:3},
- {topic:'热力学与统计物理 · 系综', q:'正则系综中 $\\beta=1/(k_BT)$ 的引入，本质上来源于？', options:[
-   '能量守恒定律',
-   '微正则系综等概率假设下，两系统热平衡时温度相等的统计推导',
-   '玻尔兹曼分布的经验公式',
-   '量子力学的能级离散性'
- ], answer:1},
- {topic:'热力学与统计物理 · 涨落', q:'正则系综中能量涨落 $\\overline{(\\Delta E)^2}=k_BT^2C_V$（$C_V$ 为定容热容），该关系直接体现了？', options:[
-   '能量守恒定律',
-   '涨落-耗散定理',
-   '各态历经假说',
-   '热力学第二定律'
- ], answer:1},
- {topic:'特殊函数 · 谐振子波函数', q:'一维谐振子定态波函数 $\\psi_n(x)=N_nH_n(\\alpha x)e^{-\\alpha^2x^2/2}$ 的归一化常数 $N_n$ 为（$\\alpha=\\sqrt{m\\omega/\\hbar}$）？', options:[
-   '$N_n = \\left(\\dfrac{\\alpha}{\\sqrt{\\pi}\\,2^n\\,n!}\\right)^{1/2}$',
-   '$N_n = \\dfrac{\\alpha}{\\sqrt{\\pi}\\,2^n\\,n!}$',
-   '$N_n = \\left(\\dfrac{\\alpha^2}{\\pi\\,2^n\\,n!}\\right)^{1/2}$',
-   '$N_n = \\dfrac{1}{\\sqrt{2^n\\,n!}}$'
+ {topic:'理论力学 · 哈密顿-雅可比理论', q:'哈密顿-雅可比方程 $H(q,\\partial S/\\partial q,t)+\\partial S/\\partial t=0$ 中，若 $H$ 不显含 $t$，可令 $S=W(q)-Et$，则 $W(q)$ 满足的方程为？', options:[
+   '$H\\left(q,\\dfrac{\\partial W}{\\partial q}\\right)=E$',
+   '$H\\left(q,\\dfrac{\\partial W}{\\partial q}\\right)+E=0$',
+   '$\\dfrac{\\partial W}{\\partial t}=E$',
+   '$H\\left(q,\\dfrac{\\partial W}{\\partial q},t\\right)=0$'
  ], answer:0},
- {topic:'原子物理 · 电子自旋', q:'电子自旋磁矩 $\\boldsymbol{\\mu}_s$ 与自旋角动量 $\\mathbf{S}$ 的关系为（$g_s\\approx2$ 为朗德 g 因子）？', options:[
-   '$\\boldsymbol{\\mu}_s = -\\dfrac{e}{m_e}\\mathbf{S}$',
-   '$\\boldsymbol{\\mu}_s = -\\dfrac{e}{2m_e}\\mathbf{S}$',
-   '$\\boldsymbol{\\mu}_s = -g_s\\dfrac{e}{2m_e}\\mathbf{S}\\quad(g_s\\approx 2)$',
-   '$\\boldsymbol{\\mu}_s = g_s\\dfrac{e}{m_e}\\mathbf{S}$'
- ], answer:2},
- {topic:'光学 · 光栅衍射', q:'由光栅方程 $d\\sin\\theta=m\\lambda$，光栅的角色散率 $D_\\theta=\\dfrac{d\\theta}{d\\lambda}$ 为？', options:[
-   '$\\dfrac{N}{d}$',
-   '$\\dfrac{d}{\\cos\\theta}$',
-   '$\\dfrac{m}{d\\cos\\theta}$',
-   '$\\dfrac{Nm}{d}$'
- ], answer:2},
- {topic:'光学 · 干涉', q:'迈克尔逊干涉仪中，将一臂反射镜移动 $\\Delta d$，观察到干涉条纹移动 $N$ 条，则 $\\Delta d$ 为？', options:[
-   '$N\\lambda$',
-   '$\\dfrac{N\\lambda}{2}$',
-   '$2N\\lambda$',
-   '$\\dfrac{N\\lambda}{4}$'
+ {topic:'电动力学 · 电磁波波导', q:'矩形波导中传播的 TE 模，其电磁能量的传播速度（能流速度）等于？', options:[
+   '相速度 $v_p$',
+   '群速度 $v_g$',
+   '光速 $c$',
+   '$\\dfrac{v_p+v_g}{2}$'
  ], answer:1},
- {topic:'量子力学 · 光电效应', q:'光电效应中，遏止电压 $V_0$ 与入射光频率 $\\nu$ 的关系为（$W$ 为金属逸出功）？', options:[
-   '$eV_0 = h\\nu - W$',
-   '$eV_0 = h\\nu + W$',
-   '$V_0 = \\dfrac{h\\nu}{e}$',
-   '$eV_0 = W - h\\nu$'
- ], answer:0}
+ {topic:'数学物理方法 · 球谐函数', q:'球坐标系中拉普拉斯方程轴对称（与 $\\varphi$ 无关）解的通解形式为？', options:[
+   '$\\sum_l A_l r^l P_l(\\cos\\theta)$',
+   '$\\sum_l \\left(A_l r^l+B_l r^{-(l+1)}\\right)Y_l^m(\\theta,\\varphi)$',
+   '$\\sum_l \\left(A_l r^l+B_l r^{-(l+1)}\\right)P_l(\\cos\\theta)$',
+   '$\\sum_l A_l\\dfrac{e^{ikr}}{r}$'
+ ], answer:2},
+ {topic:'热力学与统计物理 · 配分函数', q:'正则系综中，$N$ 个全同单原子理想气体分子（体积 $V$，温度 $T$）的配分函数 $Z$ 为（需考虑全同粒子不可分辨修正）？', options:[
+   '$\\dfrac{V}{h^3}(2\\pi mkT)^{3/2}$',
+   '$\\left[\\dfrac{V}{h^3}(2\\pi mkT)^{3/2}\\right]^N$',
+   '$\\dfrac{V^N}{N!}(2\\pi mkT)^{3N/2}$',
+   '$\\dfrac{1}{N!}\\left[\\dfrac{V}{h^3}(2\\pi mkT)^{3/2}\\right]^N$'
+ ], answer:3},
+ {topic:'热力学与统计物理 · 涨落', q:'巨正则系综中，粒子数的涨落 $\\overline{(\\Delta N)^2}$ 等于？', options:[
+   '$k_BT^2 C_V$',
+   '$k_BT\\left(\\dfrac{\\partial N}{\\partial \\mu}\\right)_{T,V}$',
+   '$Nk_BT\\kappa_T$',
+   '$\\left(\\dfrac{\\partial N}{\\partial \\mu}\\right)_{T,V}$'
+ ], answer:1},
+ {topic:'特殊函数 · 贝塞尔函数', q:'贝塞尔函数 $J_n(x)$ 的生成函数为？', options:[
+   '$\\exp\\left[\\dfrac{x}{2}(t+t^{-1})\\right]$',
+   '$\\dfrac{1}{\\sqrt{1-2xt+t^2}}$',
+   '$\\exp\\left[\\dfrac{x}{2}(t-t^{-1})\\right]=\\sum_{n=-\\infty}^{\\infty}J_n(x)t^n$',
+   '$(1-t)^{-x}$'
+ ], answer:2},
+ {topic:'原子物理 · 塞曼效应', q:'钠原子 D 线（3p→3s）在弱磁场中发生反常塞曼分裂，其根本原因是？', options:[
+   '原子核磁矩的影响',
+   '电子轨道磁矩与外磁场的相互作用',
+   '相对论效应',
+   '电子自旋磁矩与轨道磁矩的耦合（自旋-轨道耦合）'
+ ], answer:3},
+ {topic:'光学 · 光栅衍射', q:'光栅的色分辨本领 $R=\\lambda/\\Delta\\lambda$ 等于（$N$ 为缝数，$m$ 为衍射级次）？', options:[
+   '$Nm$',
+   '$N/d$',
+   '$\\dfrac{m}{d\\cos\\theta}$',
+   '$Nd$'
+ ], answer:0},
+ {topic:'光学 · 多光束干涉', q:'法布里-珀罗干涉仪的精细度 $F$（自由光谱范围与透射峰半高宽之比），当反射镜反射率为 $R$ 时，$F$ 约为？', options:[
+   '$\\dfrac{\\pi}{1-R}$',
+   '$\\dfrac{1-R}{\\sqrt{R}}$',
+   '$\\dfrac{\\pi\\sqrt{R}}{1-R}$',
+   '$\\dfrac{\\sqrt{R}}{1-R}$'
+ ], answer:2},
+ {topic:'量子力学 · 不确定关系', q:'不确定关系 $\\Delta x\\cdot\\Delta p \\ge \\hbar/2$ 中，$\\Delta x$ 和 $\\Delta p$ 的严格定义为？', options:[
+   '测量值的最大偏差',
+   '仪器的分辨率极限',
+   '波函数的半峰全宽',
+   '标准差 $\\sqrt{\\overline{x^2}-\\bar{x}^2}$ 与 $\\sqrt{\\overline{p^2}-\\bar{p}^2}$'
+ ], answer:3}
 ];
 
 var ALL_SUBJECTS=['初等数学','微积分','线性代数','概率论与数理统计','群论','数学物理方法','特殊函数','矢量分析','计算物理','力学','理论力学','流体力学','固体力学','计算流体力学','电磁学','电动力学','电路','模拟电子技术','数字电子技术','集成电路','热学','热力学与统计物理','光学','工程光学','光学系统设计','激光原理','非线性光学','发光物理','声学','原子物理学','量子力学','量子信息','量子计算','原子核物理','基础物理实验','近代物理实验','固体物理','材料物理','超导物理','纳米物理','拓扑物态','二维材料','低温物理','材料制备技术','材料测试技术','半导体物理','半导体材料','半导体器件','半导体工艺','相对论','宇宙学','黑洞物理','粒子物理','规范场论','量子场论','弦理论','量子引力','共形场论','拓扑量子场论','天体物理学','等离子体物理','生物物理','辐射过程','核聚变物理'];
