@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Generate optics.html with 5 chapters: 几何光学/干涉/衍射/偏振/傅里叶光学与激光."""
+"""Generate optics.html with 6 chapters: 几何光学/波动光学基础/干涉/衍射/偏振/散射吸收色散."""
 import json
 
 FIG = {
@@ -191,6 +191,105 @@ FIG = {
 <polygon points="228,80 218,75 218,85" fill="#be185d"/>
 <text x="196" y="104" font-size="10" fill="#be185d">激光</text>
 </svg>''',
+"emwave": '''<svg viewBox="0 0 240 160" xmlns="http://www.w3.org/2000/svg">
+<line x1="16" y1="80" x2="228" y2="80" stroke="#94a3b8" stroke-width="1"/>
+<polygon points="228,80 218,76 218,84" fill="#94a3b8"/>
+<text x="200" y="96" font-size="10" fill="#94a3b8">k</text>
+<path d="M 30 80 Q 50 34 70 80 T 110 80 T 150 80 T 190 80" fill="none" stroke="#2563eb" stroke-width="1.8"/>
+<path d="M 30 80 Q 50 126 70 80 T 110 80 T 150 80 T 190 80" fill="none" stroke="#7c3aed" stroke-width="1.4"/>
+<g stroke="#2563eb" stroke-width="0.8">
+<line x1="50" y1="80" x2="50" y2="46"/>
+<line x1="90" y1="80" x2="90" y2="36"/>
+<line x1="130" y1="80" x2="130" y2="46"/>
+</g>
+<g stroke="#7c3aed" stroke-width="0.8">
+<line x1="50" y1="80" x2="50" y2="112"/>
+<line x1="90" y1="80" x2="90" y2="124"/>
+<line x1="130" y1="80" x2="130" y2="112"/>
+</g>
+<text x="24" y="34" font-size="10" fill="#2563eb">E</text>
+<text x="24" y="128" font-size="10" fill="#7c3aed">B</text>
+<text x="58" y="150" font-size="10" fill="#64748b">横波：E ⊥ B ⊥ k</text>
+</svg>''',
+"waveadd": '''<svg viewBox="0 0 240 160" xmlns="http://www.w3.org/2000/svg">
+<path d="M 20 34 Q 45 12 70 34 T 120 34 T 170 34 T 220 34" fill="none" stroke="#7c3aed" stroke-width="1.6"/>
+<path d="M 20 76 Q 45 54 70 76 T 120 76 T 170 76 T 220 76" fill="none" stroke="#2563eb" stroke-width="1.6"/>
+<path d="M 20 122 Q 45 96 70 122 T 120 122 T 170 122 T 220 122" fill="none" stroke="#0d9488" stroke-width="2"/>
+<text x="186" y="26" font-size="10" fill="#7c3aed">E₁</text>
+<text x="186" y="68" font-size="10" fill="#2563eb">E₂</text>
+<text x="176" y="114" font-size="10" fill="#0d9488">E₁+E₂</text>
+<text x="22" y="30" font-size="10" fill="#94a3b8">+</text>
+<text x="40" y="150" font-size="10" fill="#64748b">线性叠加与波的独立传播</text>
+</svg>''',
+"coherence": '''<svg viewBox="0 0 240 160" xmlns="http://www.w3.org/2000/svg">
+<line x1="14" y1="60" x2="226" y2="60" stroke="#cbd5e1" stroke-width="1"/>
+<path d="M 20 60 Q 30 36 40 60 T 60 60 T 80 60 T 100 60 T 120 60 T 140 60" fill="none" stroke="#7c3aed" stroke-width="1.6"/>
+<path d="M 150 60 Q 158 44 166 60 T 182 60 T 198 60 T 214 60" fill="none" stroke="#a855f7" stroke-width="1.6"/>
+<line x1="146" y1="30" x2="146" y2="84" stroke="#ef4444" stroke-width="1" stroke-dasharray="3 3"/>
+<text x="52" y="24" font-size="10" fill="#7c3aed">一个波列</text>
+<line x1="20" y1="94" x2="140" y2="94" stroke="#0891b2" stroke-width="1.4"/>
+<polygon points="20,94 30,90 30,98" fill="#0891b2"/>
+<polygon points="140,94 130,90 130,98" fill="#0891b2"/>
+<text x="56" y="110" font-size="10" fill="#0891b2">相干长度 L_c</text>
+<text x="34" y="134" font-size="10" fill="#64748b">L_c = λ²/Δλ</text>
+</svg>''',
+"rayleigh": '''<svg viewBox="0 0 240 160" xmlns="http://www.w3.org/2000/svg">
+<circle cx="28" cy="80" r="12" fill="#fbbf24"/>
+<text x="14" y="112" font-size="10" fill="#b45309">阳光</text>
+<line x1="40" y1="80" x2="120" y2="80" stroke="#f59e0b" stroke-width="2"/>
+<g fill="#0e7490">
+<circle cx="80" cy="80" r="3"/><circle cx="132" cy="58" r="3"/><circle cx="132" cy="104" r="3"/><circle cx="186" cy="80" r="3"/>
+</g>
+<line x1="80" y1="80" x2="106" y2="50" stroke="#3b82f6" stroke-width="1.4"/>
+<polygon points="106,50 96,54 101,60" fill="#3b82f6"/>
+<line x1="80" y1="80" x2="106" y2="110" stroke="#3b82f6" stroke-width="1.4"/>
+<polygon points="106,110 96,106 101,100" fill="#3b82f6"/>
+<text x="86" y="40" font-size="10" fill="#2563eb">蓝光散射</text>
+<line x1="120" y1="80" x2="226" y2="80" stroke="#ef4444" stroke-width="2"/>
+<polygon points="226,80 216,75 216,85" fill="#ef4444"/>
+<text x="180" y="98" font-size="10" fill="#ef4444">红光透射</text>
+<text x="82" y="140" font-size="10" fill="#64748b">分子尺度远小于波长</text>
+<text x="24" y="150" font-size="10" fill="#64748b">⟹ 瑞利散射 I ∝ λ⁻⁴</text>
+</svg>''',
+"absorption": '''<svg viewBox="0 0 240 160" xmlns="http://www.w3.org/2000/svg">
+<line x1="34" y1="20" x2="34" y2="130" stroke="#475569" stroke-width="1.2"/>
+<polygon points="34,14 30,24 38,24" fill="#475569"/>
+<line x1="34" y1="130" x2="224" y2="130" stroke="#475569" stroke-width="1.2"/>
+<polygon points="228,130 218,126 218,134" fill="#475569"/>
+<text x="16" y="26" font-size="10" fill="#475569">I</text>
+<text x="214" y="146" font-size="10" fill="#475569">l</text>
+<path d="M 34 26 C 70 70 110 108 210 126" fill="none" stroke="#0891b2" stroke-width="2"/>
+<line x1="34" y1="26" x2="72" y2="26" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3 3"/>
+<line x1="34" y1="90" x2="58" y2="90" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3 3"/>
+<circle cx="58" cy="90" r="2.5" fill="#0891b2"/>
+<text x="62" y="86" font-size="10" fill="#0891b2">I₀/e</text>
+<text x="104" y="56" font-size="10" fill="#0891b2">I = I₀ e⁻ᵅˡ</text>
+<text x="86" y="150" font-size="10" fill="#64748b">朗伯-比尔定律</text>
+</svg>''',
+"dispersion": '''<svg viewBox="0 0 240 160" xmlns="http://www.w3.org/2000/svg">
+<line x1="34" y1="20" x2="34" y2="130" stroke="#475569" stroke-width="1.2"/>
+<line x1="34" y1="130" x2="224" y2="130" stroke="#475569" stroke-width="1.2"/>
+<text x="14" y="26" font-size="10" fill="#475569">n</text>
+<text x="206" y="146" font-size="10" fill="#475569">λ</text>
+<path d="M 44 40 C 80 70 110 96 140 100" fill="none" stroke="#0891b2" stroke-width="2"/>
+<path d="M 140 100 C 152 102 156 60 168 46" fill="none" stroke="#ef4444" stroke-width="2"/>
+<path d="M 168 46 C 180 36 196 40 214 52" fill="none" stroke="#0891b2" stroke-width="2"/>
+<line x1="150" y1="20" x2="150" y2="130" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3 3"/>
+<text x="52" y="120" font-size="10" fill="#0891b2">正常色散</text>
+<text x="152" y="30" font-size="10" fill="#ef4444">反常色散</text>
+<text x="174" y="120" font-size="10" fill="#0891b2">正常色散</text>
+<text x="122" y="150" font-size="10" fill="#64748b">吸收带</text>
+</svg>''',
+"groupspeed": '''<svg viewBox="0 0 240 160" xmlns="http://www.w3.org/2000/svg">
+<line x1="10" y1="80" x2="230" y2="80" stroke="#cbd5e1" stroke-width="1"/>
+<path d="M 20 80 Q 60 26 100 80 Q 140 134 180 80 Q 200 54 224 80" fill="none" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4 3"/>
+<path d="M 20 80 Q 30 60 40 80 T 60 80 T 80 80 T 100 80 T 120 80 T 140 80 T 160 80 T 180 80 T 200 80 T 220 80" fill="none" stroke="#0891b2" stroke-width="1.6"/>
+<circle cx="100" cy="80" r="3" fill="#ef4444"/>
+<polygon points="114,80 104,75 104,85" fill="#ef4444"/>
+<text x="74" y="106" font-size="10" fill="#ef4444">v_g 波包</text>
+<text x="146" y="62" font-size="10" fill="#0891b2">v_p 相位</text>
+<text x="42" y="148" font-size="10" fill="#64748b">群速度与相速度色散</text>
+</svg>''',
 }
 
 TAG_LABEL = {"def":"定 义","thm":"定 理","der":"推 导","exa":"例 子","app":"应 用","his":"注 记","note":"备 注"}
@@ -246,13 +345,25 @@ CORE_FORMULAS = [
     ("傅里叶变换", "F(u) = \\int_{-\\infty}^{\\infty} f(x)e^{-i2\\pi ux}\\,dx", "空间域到空间频域的变换"),
     ("夫琅禾费衍射场", "\\tilde{E}(u) = C\\,\\mathcal{F}\\{t(x)\\} \\Big|_{u=\\sin\\theta/\\lambda}", "衍射场为孔径函数的傅里叶变换"),
     ("阿贝成像公式", "I(x) = |\\mathcal{F}^{-1}\\{\\mathcal{F}\\{O\\}\\cdot H\\}|^2", "成像为频谱经滤波后的逆变换"),
-    ("光学传递函数", "H(u) = \\int P(\\xi)P^*(\\xi-\\lambda z u)\\,d\\xi", "光瞳函数自相关得到 OTF"),
-    ("纵横模频率", "\\nu_q = q\\frac{c}{2nL}", "谐振腔纵模频率间隔"),
-    ("高斯光束束宽", "w(z) = w_0\\sqrt{1+\\left(\\frac{z}{z_R}\\right)^2}", "高斯光束随传播距离的束宽"),
-    ("瑞利长度", "z_R = \\frac{\\pi w_0^2}{\\lambda}", "束腰附近光束准直的长度尺度"),
-    ("高斯光束发散角", "\\theta_{div} = \\frac{\\lambda}{\\pi w_0}", "远场光斑的角发散"),
-    ("粒子数反转", "\\frac{N_2}{g_2} > \\frac{N_1}{g_1}", "激光增益的必要条件"),
-    ("激光阈值增益", "G_{th} = \\alpha + \\frac{1}{2L}\\ln\\frac{1}{R_1R_2}", "腔损耗决定的起振阈值增益"),
+    ("电磁波动方程", "\\nabla^2\\mathbf{E} = \\mu\\varepsilon\\frac{\\partial^2\\mathbf{E}}{\\partial t^2}", "无源介质中电场满足的波动方程"),
+    ("单色平面波", "\\tilde{E} = E_0 e^{i(\\mathbf{k}\\cdot\\mathbf{r}-\\omega t+\\varphi_0)}", "单色平面波的复指数表示"),
+    ("介质中光速", "v = \\frac{1}{\\sqrt{\\mu\\varepsilon}} = \\frac{c}{n}", "介质中光速由介电常数与磁导率决定"),
+    ("光强与振幅", "I = \\frac{1}{2}c\\varepsilon_0 E_0^2 \\propto E_0^2", "光强正比于振幅平方"),
+    ("相位差与光程差", "\\delta = \\frac{2\\pi}{\\lambda}\\Delta", "相位差与光程差的换算关系"),
+    ("坡印廷矢量", "\\mathbf{S} = \\frac{1}{\\mu_0}\\mathbf{E}\\times\\mathbf{B}", "电磁场能流密度矢量"),
+    ("辐射压力", "p_{rad} = \\frac{I}{c}\\ (\\text{吸收}),\\ \\frac{2I}{c}\\ (\\text{反射})", "光对物体表面施加的辐射压力"),
+    ("空间相干宽度", "d_c \\approx \\frac{\\lambda z}{b}", "扩展光源在距离 z 处的横向相干宽度"),
+    ("瑞利散射截面", "\\sigma_{sca} = \\frac{128\\pi^5 a^6}{3\\lambda^4}\\left|\\frac{m^2-1}{m^2+2}\\right|^2", "小颗粒瑞利散射截面与 λ⁻⁴ 定律"),
+    ("拉曼频移", "\\nu_s = \\nu_0 \\pm \\Delta\\nu_{vib}", "分子振动引起的散射光频移"),
+    ("布里渊频移", "\\Delta\\nu_B = \\pm\\frac{2nv_a}{\\lambda_0}\\sin\\frac{\\theta}{2}", "声波散射引起的多普勒频移"),
+    ("朗伯-比尔定律", "I = I_0 e^{-\\alpha l} = I_0 10^{-\\varepsilon c l}", "吸收介质中光强的指数衰减"),
+    ("复折射率", "\\tilde{n} = n + i\\kappa", "统一描述折射与吸收的复折射率"),
+    ("吸收系数与消光系数", "\\alpha = \\frac{4\\pi\\kappa}{\\lambda_0}", "吸收系数由消光系数决定"),
+    ("洛伦兹色散公式", "\\tilde{n}^2 = 1 + \\frac{Ne^2}{m\\varepsilon_0}\\cdot\\frac{1}{\\omega_0^2-\\omega^2-i\\gamma\\omega}", "经典振子模型的色散与吸收"),
+    ("柯西公式", "n(\\lambda) = A + \\frac{B}{\\lambda^2} + \\frac{C}{\\lambda^4}", "透明区折射率的经验色散公式"),
+    ("塞耳迈耶尔方程", "n^2(\\lambda) = 1 + \\sum_i \\frac{B_i\\lambda^2}{\\lambda^2-C_i}", "多共振叠加的精确色散公式"),
+    ("群速度", "v_g = \\frac{d\\omega}{dk} = v_p - \\lambda\\frac{dv_p}{d\\lambda}", "波包传播速度与相速度的关系"),
+    ("法拉第旋转角", "\\alpha = V B l", "磁场引起的偏振面旋转（法拉第效应）"),
 ]
 
 def js_escape(s):
@@ -540,11 +651,187 @@ ch1_sections = [
 
 ch2_sections = [
 {
-"name": "2.1 相干性与光程差",
+"name": "2.1 光的电磁本性",
+"color": "#7c3aed",
+"desc": "电磁波性质、麦克斯韦波动方程、平面波解与光速",
+"items": [
+{"id":"o2s1-1","name":"光的电磁波性质","tags":["def","der"],"brief":"光是横波，由交变的电场与磁场构成。",
+ "fig":"emwave","figCap":"单色平面电磁波：E ⊥ B ⊥ k，电场与磁场同相位",
+ "body": wrap(
+   defn("光波",p("光是一种电磁波：相互垂直的电场 $\\mathbf{E}$ 与磁场 $\\mathbf{B}$ 随时间与空间周期变化，在真空中以 $c$ 传播。可见光波长约 $380\\sim760\\,\\text{nm}$，频率约 $4\\times10^{14}\\sim8\\times10^{14}\\,\\text{Hz}$，只占电磁波谱的极窄一段。"))+
+   der(p("<strong>横波性的导出：</strong>在无源区 $\\rho=0$、$\\mathbf{J}=0$，取平面单色波 $\\mathbf{E}=\\mathbf{E}_0e^{i(\\mathbf{k}\\cdot\\mathbf{r}-\\omega t)}$，由 $\\nabla\\cdot\\mathbf{E}=0$ 得：")+
+   fml("i\\mathbf{k}\\cdot\\mathbf{E}_0=0\\ \\Rightarrow\\ \\mathbf{k}\\perp\\mathbf{E},\\qquad \\mathbf{k}\\perp\\mathbf{B}")+
+   p("电场与磁场均垂直于传播方向，故光波为横波；再由 $\\nabla\\times\\mathbf{E}=-\\partial\\mathbf{B}/\\partial t$ 得 $\\mathbf{B}$ 与 $\\mathbf{E}$ 同相位并互相垂直，且 $E=cB$。"))+
+   note(p("横波性正是偏振现象存在的根本前提；纵波（如声波）不存在偏振态。"))
+ )},
+{"id":"o2s1-2","name":"麦克斯韦方程组与波动方程","tags":["thm","der"],"brief":"由麦克斯韦方程组导出电磁波动方程。",
+ "body": wrap(
+   thm("电磁波动方程",p("在无源均匀介质中，电场与磁场分别满足齐次波动方程：")+
+   fml("\\nabla^2\\mathbf{E}=\\mu\\varepsilon\\frac{\\partial^2\\mathbf{E}}{\\partial t^2},\\qquad \\nabla^2\\mathbf{B}=\\mu\\varepsilon\\frac{\\partial^2\\mathbf{B}}{\\partial t^2}")+
+   p("方程预言了以速度 $v=1/\\sqrt{\\mu\\varepsilon}$ 传播的电磁波。"))+
+   der(p("<strong>推导：</strong>对法拉第定律 $\\nabla\\times\\mathbf{E}=-\\partial\\mathbf{B}/\\partial t$ 取旋度，并利用 $\\nabla\\times(\\nabla\\times\\mathbf{E})=\\nabla(\\nabla\\cdot\\mathbf{E})-\\nabla^2\\mathbf{E}$，在无源区 $\\nabla\\cdot\\mathbf{E}=0$：")+
+   fml("\\nabla\\times(\\nabla\\times\\mathbf{E})=-\\frac{\\partial}{\\partial t}(\\nabla\\times\\mathbf{B})=-\\mu\\varepsilon\\frac{\\partial^2\\mathbf{E}}{\\partial t^2}")+
+   p("与恒等式联立即得电场波动方程；对 $\\nabla\\times\\mathbf{B}$ 重复同样步骤可得磁场方程，二者结构完全一致，说明 $\\mathbf{E}$、$\\mathbf{B}$ 以同一速度传播。"))+
+   note(p("麦克斯韦由此算得 $c=1/\\sqrt{\\mu_0\\varepsilon_0}\\approx3\\times10^8\\,\\text{m/s}$，与实测光速吻合，从而确认光就是电磁波。"))
+ )},
+{"id":"o2s1-3","name":"平面波解与单色波","tags":["der","exa"],"brief":"单色平面波的复数表示与实部意义。",
+ "body": wrap(
+   der(p("<strong>平面波解：</strong>波动方程最简单的解为单色平面波，复数形式为：")+
+   fml("\\tilde{E}(\\mathbf{r},t)=E_0e^{i(\\mathbf{k}\\cdot\\mathbf{r}-\\omega t+\\varphi_0)}")+
+   p("其中 $k=2\\pi/\\lambda$ 为波数，$\\omega=2\\pi\\nu$ 为角频率，等相位面 $\\mathbf{k}\\cdot\\mathbf{r}=\\text{const}$ 为平面。真实场取其实部：")+
+   fml("E(\\mathbf{r},t)=E_0\\cos(\\mathbf{k}\\cdot\\mathbf{r}-\\omega t+\\varphi_0)")+
+   p("复指数表示使相位运算化为乘法，便于处理叠加、干涉与衍射问题。"))+
+   exa(p("<strong>例：</strong>He-Ne 激光 $\\lambda=632.8\\,\\text{nm}$，则 $k=2\\pi/\\lambda\\approx9.93\\times10^6\\,\\text{m}^{-1}$，$\\omega=2\\pi c/\\lambda\\approx2.98\\times10^{15}\\,\\text{s}^{-1}$。")+
+   note(p("球面波解为 $\\tilde{E}=\\frac{A}{r}e^{i(kr-\\omega t)}$，振幅随 $1/r$ 衰减以保持能流守恒。")))
+ )},
+{"id":"o2s1-4","name":"光速与折射率","tags":["der","def"],"brief":"介质中光速与折射率的关系。",
+ "body": wrap(
+   der(p("<strong>推导：</strong>介质中电磁波速度由介电常数与磁导率决定：")+
+   fml("v=\\frac{1}{\\sqrt{\\mu\\varepsilon}}=\\frac{c}{n},\\qquad n=\\sqrt{\\mu_r\\varepsilon_r}\\approx\\sqrt{\\varepsilon_r}")+
+   p("对非磁性介质 $\\mu_r\\approx1$，折射率主要由相对介电常数决定。频率 $\\nu$ 在界面两侧不变，故介质中波长变短：")+
+   fml("\\lambda_n=\\frac{v}{\\nu}=\\frac{\\lambda_0}{n}"))+
+   defn("折射率",p("$n=c/v$ 描述介质对光的减速程度，是真空中光速与介质中相速之比，也是表征介质光学性质的基本参数。"))+
+   note(p("色散使 $n=n(\\lambda)$；在吸收带附近折射率出现反常变化，须用复折射率 $\\tilde{n}=n+i\\kappa$ 描述。"))
+ )},
+]},
+{
+"name": "2.2 光强与光程",
+"color": "#8b5cf6",
+"desc": "光强与振幅、单色波与波列、相位与光程、光程差",
+"items": [
+{"id":"o2s2-1","name":"光强与振幅","tags":["der"],"brief":"光强正比于振幅平方。",
+ "body": wrap(
+   der(p("<strong>推导：</strong>光频极高（约 $10^{14}\\,\\text{Hz}$），探测器只能响应时间平均值。能流密度大小为 $S=c\\varepsilon_0E^2$，取时间平均：")+
+   fml("I=\\langle S\\rangle=c\\varepsilon_0\\langle E^2\\rangle=\\frac{1}{2}c\\varepsilon_0E_0^2\\propto E_0^2")+
+   p("故<strong>光强正比于振幅平方</strong>。两波叠加时须先叠加振幅再求平方，交叉项即干涉项。"))+
+   exa(p("<strong>例：</strong>强度分别为 $I_1$、$I_2$ 的两相干光叠加，$I=I_1+I_2+2\\sqrt{I_1I_2}\\cos\\delta$；不相干时交叉项时间平均为零，$I=I_1+I_2$。"))+
+   note(p("计算中常省略常数，直接写 $I=A^2$，此时振幅以相对单位计。"))
+ )},
+{"id":"o2s2-2","name":"单色波与波列","tags":["def","der"],"brief":"实际光波由有限长波列组成。",
+ "body": wrap(
+   defn("波列",p("原子发光持续时间约 $10^{-8}\\,\\text{s}$，发射的是有限长正弦片段，称为<strong>波列</strong>。普通光源是大量随机波列的叠加，相位不恒定；激光波列很长，单色性好。"))+
+   der(p("<strong>波列长度与谱宽：</strong>设波列时长 $\\tau_0$，由傅里叶分析其频谱宽度满足：")+
+   fml("\\Delta\\nu\\,\\tau_0\\sim1\\ \\Rightarrow\\ \\Delta\\lambda=\\frac{\\lambda^2}{c}\\Delta\\nu\\sim\\frac{\\lambda^2}{c\\tau_0}")+
+   p("波列越长，谱线越窄、单色性越好，可干涉的最大光程差也越大，由此给出相干长度的估计。"))+
+   note(p("谱线加宽机制包括自然加宽（有限寿命）、多普勒加宽（热运动）与碰撞加宽（压强），它们共同决定实际谱宽。"))
+ )},
+{"id":"o2s2-3","name":"相位与光程","tags":["der","def"],"brief":"光程等于折射率与几何路程之积。",
+ "body": wrap(
+   defn("光程",p("光在折射率为 $n$ 的介质中走过几何路程 $r$，其光程定义为 $\\Delta=nr$；它等于相同时向内光在真空中走过的距离，是描述相位积累的等效路程。"))+
+   der(p("<strong>推导：</strong>介质中波长为 $\\lambda/n$，走过路程 $r$ 引起的相位变化为：")+
+   fml("\\varphi=\\frac{2\\pi}{\\lambda/n}\\,r=\\frac{2\\pi}{\\lambda}\\,nr=\\frac{2\\pi}{\\lambda}\\Delta")+
+   p("故相位变化只由光程 $\\Delta=nr$ 决定。对分段介质 $\\Delta=\\sum_i n_ir_i$；对连续变化介质 $\\Delta=\\int n\\,ds$。"))+
+   note(p("费马原理 $\\delta\\int n\\,ds=0$ 的物理含义即实际光路的相位取极值（稳定值）。"))
+ )},
+{"id":"o2s2-4","name":"光程差与相位差","tags":["der","thm"],"brief":"相位差等于光程差乘以波数。",
+ "body": wrap(
+   der(p("<strong>推导：</strong>两相干光的光程分别为 $\\Delta_1$、$\\Delta_2$，其相位差为：")+
+   fml("\\delta=\\frac{2\\pi}{\\lambda}(\\Delta_2-\\Delta_1)=\\frac{2\\pi}{\\lambda}\\Delta")+
+   p("由此得到干涉判据：")+
+   fml("\\Delta=k\\lambda\\ (\\text{加强}),\\qquad \\Delta=\\left(k+\\tfrac12\\right)\\lambda\\ (\\text{减弱})"))+
+   exa(p("<strong>例：</strong>$\\Delta=1.5\\lambda$ 时 $\\delta=3\\pi$，$\\cos\\delta=-1$，两波相消，光强取极小。"))+
+   note(p("相位差与光程差的换算是全部干涉问题的核心工具：先算光程差，再换算相位差，最后代入光强公式。"))
+ )},
+]},
+{
+"name": "2.3 波的传播与叠加",
+"color": "#a855f7",
+"desc": "波前与波面、惠更斯原理、叠加原理、能流与坡印廷矢量",
+"items": [
+{"id":"o2s3-1","name":"波前与波面","tags":["def","der"],"brief":"等相位面与波前的几何描述。",
+ "body": wrap(
+   defn("波面与波前",p("相位相同的点构成<strong>波面</strong>（等相位面）；最前面的那个波面称为<strong>波前</strong>。波面可以是平面（平面波）、球面（球面波）或复杂曲面。"))+
+   der(p("<strong>波面与光线的关系：</strong>由相位 $\\varphi=\\mathbf{k}\\cdot\\mathbf{r}-\\omega t$ 为常数得波面方程 $\\mathbf{k}\\cdot\\mathbf{r}=\\text{const}$，其法线方向即 $\\mathbf{k}$。在各向同性介质中：")+
+   fml("\\mathbf{k}\\parallel\\nabla\\varphi\\ \\Rightarrow\\ \\text{光线}\\perp\\text{波面}")+
+   p("因此几何光学中的光线就是波面的法线，几何光学可视为波长趋于零时波动光学的极限。"))+
+   note(p("在各向异性晶体（如方解石）中光线与波面法线不再一致，出现双折射，此时须区分光线方向与波面法线方向。"))
+ )},
+{"id":"o2s3-2","name":"惠更斯原理","tags":["thm","der"],"brief":"波前上每点都是新的次波源。",
+ "body": wrap(
+   thm("惠更斯原理",p("波前上每一点都可看作发射球面次波的新波源，这些次波的包络面构成下一时刻的新波前。"))+
+   der(p("<strong>用于推导反射与折射定律：</strong>设平面波以角 $\\theta_1$ 入射到界面，波前先后到达 $A$、$B$ 两点，同一时间间隔内次波在两侧传播距离为：")+
+   fml("AA'=v_1\\Delta t,\\qquad BB'=v_2\\Delta t")+
+   p("由包络面的几何关系 $AA'=\\overline{AB}\\sin\\theta_1$、$BB'=\\overline{AB}\\sin\\theta_2$，消去 $\\overline{AB}$ 并以 $v=c/n$ 代入得：")+
+   fml("\\frac{\\sin\\theta_1}{v_1}=\\frac{\\sin\\theta_2}{v_2}\\ \\Rightarrow\\ n_1\\sin\\theta_1=n_2\\sin\\theta_2")+
+   p("即折射定律；同法令两侧速度相同可得 $\\theta_i=\\theta_r$，即反射定律。"))+
+   note(p("菲涅耳进一步假设次波相干叠加并引入倾斜因子，得到惠更斯-菲涅耳原理，成为衍射理论的基础。"))
+ )},
+{"id":"o2s3-3","name":"叠加原理与波的独立传播","tags":["thm","der"],"brief":"线性介质中光波线性叠加、互不干扰。",
+ "fig":"waveadd","figCap":"两列波在线性介质中独立传播并叠加为合振动",
+ "body": wrap(
+   thm("叠加原理",p("在线性介质中，多个光波同时存在时的总场强为各波单独存在时的矢量之和：")+
+   fml("\\mathbf{E}=\\mathbf{E}_1+\\mathbf{E}_2+\\cdots")+
+   p("各波相遇后仍保持原有的频率、振幅与传播方向，互不干扰，称为波的独立传播。"))+
+   der(p("<strong>线性依据：</strong>波动方程对场量是线性的，若 $\\mathbf{E}_1$、$\\mathbf{E}_2$ 均为解，则任意线性组合亦为解：")+
+   fml("\\nabla^2(\\mathbf{E}_1+\\mathbf{E}_2)=\\mu\\varepsilon\\frac{\\partial^2(\\mathbf{E}_1+\\mathbf{E}_2)}{\\partial t^2}")+
+   p("但光强与振幅为平方关系，叠加后出现交叉项，故光强并不简单相加：")+
+   fml("I=\\langle|\\mathbf{E}_1+\\mathbf{E}_2|^2\\rangle=I_1+I_2+2\\sqrt{I_1I_2}\\,\\langle\\cos\\delta\\rangle")+
+   p("仅当交叉项的时间平均值不为零时才出现干涉。"))+
+   note(p("强光（如聚焦激光）下介质响应呈非线性，叠加原理失效，产生倍频、自聚焦等非线性光学效应。"))
+ )},
+{"id":"o2s3-4","name":"波的能流与坡印廷矢量","tags":["der","app"],"brief":"用坡印廷矢量描述光能量输运。",
+ "body": wrap(
+   der(p("<strong>坡印廷矢量：</strong>电磁场能流密度定义为：")+
+   fml("\\mathbf{S}=\\frac{1}{\\mu_0}\\mathbf{E}\\times\\mathbf{B}")+
+   p("其方向为能量传播方向，大小为单位时间通过单位面积的能量。对平面波 $B=E/c$：")+
+   fml("S=\\frac{E^2}{\\mu_0c}=c\\varepsilon_0E^2\\ \\Rightarrow\\ I=\\langle S\\rangle=\\frac12c\\varepsilon_0E_0^2")+
+   p("由能流还可得到光对物体的辐射压力：")+
+   fml("p_{rad}=\\frac{I}{c}\\ (\\text{吸收}),\\qquad p_{rad}=\\frac{2I}{c}\\ (\\text{反射})"))+
+   app(p("<strong>应用：</strong>光镊与激光冷却利用辐射压力操控原子与微粒；太阳帆、激光推进器则利用光压获得推力。"))
+ )},
+]},
+{
+"name": "2.4 相干性 偏振态与光谱",
+"color": "#9333ea",
+"desc": "偏振态基础、时间与空间相干性、相干长度、光谱与色散",
+"items": [
+{"id":"o2s4-1","name":"偏振态基础","tags":["def","der"],"brief":"光波横振动方向构成偏振态。",
+ "body": wrap(
+   defn("偏振态",p("光波电矢量 $\\mathbf{E}$ 在垂直于传播方向的平面内的振动方式称为偏振态，基本形式有线偏振、圆偏振与椭圆偏振，此外还有完全无规则的自然光。"))+
+   der(p("<strong>偏振态的参数描述：</strong>把 $\\mathbf{E}$ 分解为两个正交分量：")+
+   fml("E_x=a_1\\cos(\\omega t+\\varphi_1),\\qquad E_y=a_2\\cos(\\omega t+\\varphi_2)")+
+   p("消去时间 $t$ 得轨迹方程：")+
+   fml("\\frac{E_x^2}{a_1^2}+\\frac{E_y^2}{a_2^2}-\\frac{2E_xE_y}{a_1a_2}\\cos\\delta=\\sin^2\\delta,\\quad \\delta=\\varphi_2-\\varphi_1")+
+   p("$\\delta=0,\\pi$ 时退化为直线（线偏振）；$\\delta=\\pm\\pi/2$ 且 $a_1=a_2$ 时为圆偏振；其余情形为椭圆偏振，旋转方向由 $\\delta$ 的符号决定。"))+
+   note(p("偏振态也可用斯托克斯参量或琼斯矢量表示，后者在偏振器件的矩阵计算中最方便。"))
+ )},
+{"id":"o2s4-2","name":"时间相干性与空间相干性","tags":["der"],"brief":"相干性在时间与空间两个维度的体现。",
+ "body": wrap(
+   der(p("<strong>时间相干性：</strong>源于光源谱宽有限，同一波列在不同时刻的相位相关程度随延迟 $\\tau$ 下降，相干时间 $\\tau_c\\sim1/\\Delta\\nu$ 决定最大可干涉光程差。"))+
+   der(p("<strong>空间相干性：</strong>源于光源尺寸有限，横向相距 $d$ 的两点相位相关程度随 $d$ 增大而下降。对尺寸为 $b$ 的非相干扩展光源，距离 $z$ 处相干宽度为：")+
+   fml("d_c\\approx\\frac{\\lambda z}{b}")+
+   p("杨氏双缝实验中若缝距超过 $d_c$，条纹对比度将显著下降。"))+
+   exa(p("<strong>例：</strong>太阳角直径约 $0.009\\,\\text{rad}$，$\\lambda=550\\,\\text{nm}$ 时地面相干宽度仅约 $0.06\\,\\text{mm}$，故用太阳光做双缝实验必须用极窄的缝。"))+
+   note(p("相干性可用复空间-时间相干度统一描述，干涉条纹对比度等于相干度的模。"))
+ )},
+{"id":"o2s4-3","name":"相干长度与相干时间","tags":["der","thm"],"brief":"谱宽决定可干涉的最大光程差。",
+ "fig":"coherence","figCap":"有限长波列与相干长度：光程差超过 L_c 后条纹消失",
+ "body": wrap(
+   der(p("<strong>推导：</strong>谱宽为 $\\Delta\\lambda$ 的光，只有当光程差不超过一个波列长度时才能观察到干涉，该长度称为相干长度：")+
+   fml("L_c=\\frac{\\lambda^2}{\\Delta\\lambda},\\qquad \\tau_c=\\frac{L_c}{c}=\\frac{\\lambda^2}{c\\,\\Delta\\lambda}")+
+   p("由 $\\Delta\\nu=\\frac{c}{\\lambda^2}\\Delta\\lambda$ 可见 $\\tau_c\\,\\Delta\\nu\\approx1$，即相干时间与谱宽成反比。"))+
+   exa(p("<strong>例：</strong>白光 $\\Delta\\lambda\\approx300\\,\\text{nm}$ 时 $L_c\\approx1\\,\\mu\\text{m}$，只能看到几条彩色条纹；稳频激光 $\\Delta\\lambda\\sim10^{-6}\\,\\text{nm}$ 时 $L_c$ 可达数百米。")+
+   note(p("相干长度给出干涉仪的最大可测光程差，是选择光源与设计干涉系统的关键指标。")))
+ )},
+{"id":"o2s4-4","name":"光谱与色散基础","tags":["der","app"],"brief":"光谱的波长分布与介质色散。",
+ "body": wrap(
+   der(p("<strong>色散的物理来源：</strong>介质折射率随波长变化 $n=n(\\lambda)$。远离吸收带时可用柯西公式近似：")+
+   fml("n(\\lambda)=A+\\frac{B}{\\lambda^2}+\\frac{C}{\\lambda^4}")+
+   p("由此得色散率 $\\frac{dn}{d\\lambda}<0$（正常色散），即短波（紫光）折射率大、偏折强，棱镜分光正基于此。"))+
+   defn("光谱",p("把复色光按波长（或频率）展开后得到的强度分布称为光谱，分为线状谱（原子）、带状谱（分子）与连续谱（热辐射）。"))+
+   app(p("<strong>应用：</strong>光谱分析用于鉴别物质成分与测定天体运动（多普勒频移），棱镜与光栅是常用的分光元件。"))+
+   note(p("在吸收带附近 $\\frac{dn}{d\\lambda}>0$，称为反常色散，须用完整的振子模型（塞耳迈耶尔方程）描述，详见第六章。"))
+ )},
+]},
+]
+
+ch3_sections = [
+{
+"name": "3.1 相干性与光程差",
 "color": "#7c3aed",
 "desc": "相干条件、光程差与杨氏双缝干涉",
 "items": [
-{"id":"o2s1-1","name":"相干条件与相干叠加","tags":["def","der"],"brief":"频率相同、振动方向相同、相位差恒定。",
+{"id":"o3s1-1","name":"相干条件与相干叠加","tags":["def","der"],"brief":"频率相同、振动方向相同、相位差恒定。",
  "body": wrap(
    exa(p("<strong>例：</strong>两相干光强度相等 $I_1=I_2=I_0$，相位差 $\\delta=\\pi/3$：")+
    fml("I=2I_0(1+\\cos\\delta)=2I_0(1+0.5)=3I_0")+
@@ -556,7 +843,7 @@ ch2_sections = [
    p("当 $\\delta=2k\\pi$ 时 $I$ 最大，$\\delta=(2k+1)\\pi$ 时 $I$ 最小；非相干光第三项平均为零，$I=I_1+I_2$。"))+
    note(p("普通光源各原子独立发光，只有把同一束光分为两束再叠加才能获得恒定的相位差。"))
  )},
-{"id":"o2s1-2","name":"光程与光程差","tags":["der"],"brief":"相位差与光程差的换算关系。",
+{"id":"o3s1-2","name":"光程与光程差","tags":["der"],"brief":"相位差与光程差的换算关系。",
  "body": wrap(
    exa(p("<strong>例：</strong>一束光在折射率 $n=1.5$ 的玻璃中走过 $r=2\\,\\text{mm}$，与另一束在真空中走过相同几何距离：")+
    fml("\\Delta=nr-r=0.5\\times2\\,\\text{mm}=1.0\\,\\text{mm}")+
@@ -568,7 +855,7 @@ ch2_sections = [
    p("干涉加强条件 $\\delta=2k\\pi$ 等价于光程差 $\\Delta=k\\lambda$。"))+
    note(p("引入光程后，不同介质中光路可在统一尺度上比较，是把几何路径换算成相位的关键。"))
  )},
-{"id":"o2s1-3","name":"杨氏双缝干涉","tags":["thm","der"],"brief":"双缝干涉条纹间距公式。",
+{"id":"o3s1-3","name":"杨氏双缝干涉","tags":["thm","der"],"brief":"双缝干涉条纹间距公式。",
  "fig":"doubleslit","figCap":"杨氏双缝干涉装置与条纹",
  "body": wrap(
    exa(p("<strong>例：</strong>$\\lambda=600\\,\\text{nm}$，双缝间距 $d=0.20\\,\\text{mm}$，屏距 $D=1.0\\,\\text{m}$：")+
@@ -589,11 +876,11 @@ ch2_sections = [
  )},
 ]},
 {
-"name": "2.2 分波前干涉",
+"name": "3.2 分波前干涉",
 "color": "#8b5cf6",
 "desc": "菲涅耳双镜、劳埃德镜与半波损失",
 "items": [
-{"id":"o2s2-1","name":"菲涅耳双镜","tags":["der"],"brief":"用双平面镜获得相干光。",
+{"id":"o3s2-1","name":"菲涅耳双镜","tags":["der"],"brief":"用双平面镜获得相干光。",
  "body": wrap(
    exa(p("<strong>例：</strong>双镜夹角偏离 $180°$ 的角为 $\\alpha=10'$，光源到交线距离 $r=20\\,\\text{cm}$：")+
    fml("d=2r\\alpha=2\\times0.20\\times\\frac{10}{60}\\times\\frac{\\pi}{180}\\approx1.16\\times10^{-3}\\,\\text{m}")+
@@ -611,7 +898,7 @@ ch2_sections = [
    p("调节夹角 $\\alpha$ 即可改变条纹间距，常用于演示与测量。"))+
    note(p("分波前干涉的共同特点：把同一波前的不同部分分割后叠加，故要求光源足够小以保证空间相干性。"))
  )},
-{"id":"o2s2-2","name":"劳埃德镜与半波损失","tags":["der"],"brief":"掠入射反射引入附加半波损失。",
+{"id":"o3s2-2","name":"劳埃德镜与半波损失","tags":["der"],"brief":"掠入射反射引入附加半波损失。",
  "body": wrap(
    exa(p("<strong>例（半波损失的相位）：</strong>反射光在光疏-光密界面反射时相位突变 $\\pi$：")+
    fml("\\Delta\\varphi=\\pi \\Longleftrightarrow \\Delta_{\\text{附加}}=\\frac{\\lambda}{2}")+
@@ -629,11 +916,11 @@ ch2_sections = [
  )},
 ]},
 {
-"name": "2.3 薄膜干涉",
+"name": "3.3 薄膜干涉",
 "color": "#a855f7",
 "desc": "等倾干涉、等厚干涉与牛顿环",
 "items": [
-{"id":"o2s3-1","name":"等倾干涉","tags":["der"],"brief":"薄膜厚度均匀、倾角相同的条纹。",
+{"id":"o3s3-1","name":"等倾干涉","tags":["der"],"brief":"薄膜厚度均匀、倾角相同的条纹。",
  "body": wrap(
    defn("等倾干涉",p("厚度均匀的薄膜，入射角相同的光对应同一条干涉条纹，条纹呈同心圆环，故称等倾干涉。"))+
    der(p("<strong>光程差推导：</strong>光在厚度 $d$、折射率 $n$ 的膜内以折射角 $\\theta$ 传播，往返路程 $2d/\\cos\\theta$，其中一段在空气中，等效光程差：")+
@@ -643,7 +930,7 @@ ch2_sections = [
    p("明纹条件 $\\Delta=k\\lambda$。因 $\\cos\\theta$ 随入射角变化，同一倾角对应同一级次，形成同心环。"))+
    app(p("<strong>应用：</strong>用来检验光学表面平行度、测量薄膜厚度；观察方式有反射光与透射光两种，条纹互补。"))
  )},
-{"id":"o2s3-2","name":"等厚干涉与劈尖","tags":["der"],"brief":"厚度线性变化的楔形膜条纹。",
+{"id":"o3s3-2","name":"等厚干涉与劈尖","tags":["der"],"brief":"厚度线性变化的楔形膜条纹。",
  "body": wrap(
    exa(p("<strong>例（测细丝直径）：</strong>两玻璃片夹入直径 $D$ 的细丝形成长 $L$ 的劈尖，条纹总数 $N$：")+
    fml("D=\\frac{N\\lambda}{2},\\qquad \\theta=\\frac{D}{L}")+
@@ -661,7 +948,7 @@ ch2_sections = [
    p("若中间充以折射率 $n$ 的液体则 $\\Delta x=\\lambda/(2n\\theta)$。"))+
    app(p("<strong>应用：</strong>劈尖干涉可测量微小角度、薄膜厚度、细丝直径，检验平面度。"))
  )},
-{"id":"o2s3-3","name":"牛顿环","tags":["der","app"],"brief":"平凸透镜与平板间空气层形成的圆环条纹。",
+{"id":"o3s3-3","name":"牛顿环","tags":["der","app"],"brief":"平凸透镜与平板间空气层形成的圆环条纹。",
  "fig":"newtonring","figCap":"牛顿环干涉圆环",
  "body": wrap(
    exa(p("<strong>例：</strong>测得第 10 与第 20 暗环直径 $D_{10}=6.0\\,\\text{mm}$、$D_{20}=8.6\\,\\text{mm}$，$\\lambda=589\\,\\text{nm}$：")+
@@ -682,11 +969,11 @@ ch2_sections = [
  )},
 ]},
 {
-"name": "2.4 多光束干涉与干涉仪",
+"name": "3.4 多光束干涉与干涉仪",
 "color": "#7c3aed",
 "desc": "迈克尔逊干涉仪、法布里-珀罗干涉仪与干涉滤光片",
 "items": [
-{"id":"o2s4-1","name":"迈克尔逊干涉仪","tags":["der","app"],"brief":"分振幅双光束干涉仪。",
+{"id":"o3s4-1","name":"迈克尔逊干涉仪","tags":["der","app"],"brief":"分振幅双光束干涉仪。",
  "body": wrap(
    exa(p("<strong>例：</strong>移动动镜 $\\Delta d=0.10\\,\\text{mm}$ 时数得 $N=316$ 条条纹移过，求波长：")+
    fml("\\lambda=\\frac{2\\Delta d}{N}=\\frac{2\\times0.10\\times10^{-3}}{316}\\approx633\\,\\text{nm}")+
@@ -702,7 +989,7 @@ ch2_sections = [
    p("据此可精确测定长度或由已知位移测波长。等倾干涉时呈现同心圆环，等厚干涉时呈现直条纹。"))+
    app(p("<strong>应用：</strong>精密测长、测折射率、傅里叶变换光谱仪（FTIR）的基础，也是迈克尔逊-莫雷实验的核心装置。"))
  )},
-{"id":"o2s4-2","name":"多光束干涉与法布里-珀罗","tags":["der"],"brief":"高反射率平行板的多光束干涉。",
+{"id":"o3s4-2","name":"多光束干涉与法布里-珀罗","tags":["der"],"brief":"高反射率平行板的多光束干涉。",
  "body": wrap(
    exa(p("<strong>例：</strong>反射率 $R=0.90$，求精细度参数与条纹锐度：")+
    fml("F=\\frac{4R}{(1-R)^2}=\\frac{4\\times0.90}{0.01}=360")+
@@ -718,7 +1005,7 @@ ch2_sections = [
    p("其中 $R=r^2$ 为反射率。$R$ 越大 $F$ 越大，透射峰越锐。峰的半高全宽 $\\Delta\\delta\\approx\\frac{4}{\\sqrt F}$，精细度 $\\mathcal F=\\frac{2\\pi}{\\Delta\\delta}$。"))+
    app(p("<strong>应用：</strong>高分辨光谱、激光谐振腔（纵模选择）、窄带滤光片与光学频率梳。"))
  )},
-{"id":"o2s4-3","name":"干涉滤光片","tags":["der","app"],"brief":"利用多光束干涉选择特定波长。",
+{"id":"o3s4-3","name":"干涉滤光片","tags":["der","app"],"brief":"利用多光束干涉选择特定波长。",
  "body": wrap(
    defn("干涉滤光片",p("在两层高反射膜之间夹一层介质间隔层（厚度 $d$、折射率 $n$），构成法布里-珀罗型滤光片。"))+
    der(p("<strong>中心波长：</strong>透射极大由间隔层光程差决定 $2nd=k\\lambda$：")+
@@ -730,11 +1017,11 @@ ch2_sections = [
  )},
 ]},
 {
-"name": "2.5 相干性与薄膜应用",
+"name": "3.5 相干性与薄膜应用",
 "color": "#8b5cf6",
 "desc": "相干长度、时间空间相干性与增透增反膜",
 "items": [
-{"id":"o2s5-1","name":"相干长度与相干时间","tags":["der"],"brief":"光谱宽度决定可干涉的最大光程差。",
+{"id":"o3s5-1","name":"相干长度与相干时间","tags":["der"],"brief":"光谱宽度决定可干涉的最大光程差。",
  "body": wrap(
    exa(p("<strong>例：</strong>氦氖激光 $\\lambda=632.8\\,\\text{nm}$，谱线宽度 $\\Delta\\lambda=10^{-3}\\,\\text{nm}$：")+
    fml("L_c=\\frac{\\lambda^2}{\\Delta\\lambda}=\\frac{(632.8\\times10^{-9})^2}{10^{-12}}\\approx4.0\\times10^5\\,\\text{m}")+
@@ -752,7 +1039,7 @@ ch2_sections = [
    p("单色性越好（$\\Delta\\lambda$ 越小），相干长度越长；白光相干长度仅数微米，激光可达公里量级。"))+
    note(p("迈克尔逊干涉仪中白光只在零光程差附近出现彩色条纹，可用于精确确定等光程位置。"))
  )},
-{"id":"o2s5-2","name":"时间相干性与空间相干性","tags":["der"],"brief":"相干性在时间与空间两个维度的体现。",
+{"id":"o3s5-2","name":"时间相干性与空间相干性","tags":["der"],"brief":"相干性在时间与空间两个维度的体现。",
  "body": wrap(
    exa(p("<strong>例：</strong>扩展光源宽 $b=1\\,\\text{mm}$、距双缝 $R=1\\,\\text{m}$、$\\lambda=550\\,\\text{nm}$：")+
    fml("d_c=\\frac{\\lambda R}{b}=\\frac{550\\times10^{-9}\\times1}{10^{-3}}=0.55\\,\\text{mm}")+
@@ -764,7 +1051,7 @@ ch2_sections = [
    p("故双缝间距 $d<d_c$ 才能观察到干涉；这也是为什么需要狭缝限制光源尺寸。"))+
    note(p("复空间相干度 $\\mu=\\frac{\\langle E_1 E_2^*\\rangle}{\\sqrt{I_1 I_2}}$，$|\\mu|=1$ 完全相干，$|\\mu|=0$ 完全不相干，$0<|\\mu|<1$ 部分相干。"))
  )},
-{"id":"o2s5-3","name":"增透膜与增反膜","tags":["der","app"],"brief":"利用薄膜干涉控制反射率。",
+{"id":"o3s5-3","name":"增透膜与增反膜","tags":["der","app"],"brief":"利用薄膜干涉控制反射率。",
  "body": wrap(
    defn("增透膜",p("在光学元件表面镀一层折射率介于空气与玻璃之间、厚度为四分之一波长的薄膜，使反射光相干相消，增强透射。"))+
    der(p("<strong>条件推导：</strong>垂直入射时两反射光光程差 $2nd$，两界面均存在半波损失（或均无）时相互抵消。相消条件：")+
@@ -775,11 +1062,11 @@ ch2_sections = [
  )},
 ]},
 {
-"name": "2.6 干涉应用",
+"name": "3.6 干涉应用",
 "color": "#a855f7",
 "desc": "干涉测量、条纹计数与白光干涉",
 "items": [
-{"id":"o2s6-1","name":"干涉测量与条纹移动","tags":["der","app"],"brief":"以条纹移动量作精密长度计量。",
+{"id":"o3s6-1","name":"干涉测量与条纹移动","tags":["der","app"],"brief":"以条纹移动量作精密长度计量。",
  "body": wrap(
    defn("干涉计量",p("利用干涉条纹的移动数 $N$ 与光程变化的关系实现亚微米乃至纳米级长度测量。"))+
    der(p("<strong>灵敏度：</strong>光程每变化 $\\lambda/2$，条纹移动一条。故测长分辨率约半个波长，采用条纹细分或相位检测可达 $\\lambda/100$：")+
@@ -787,7 +1074,7 @@ ch2_sections = [
    p("干涉测长还广泛用于测微小位移、振动、形变与折射率变化。"))+
    app(p("<strong>应用：</strong>激光干涉仪（如用于光刻机工作台）、原子力显微镜的探测、引力波探测（LIGO）等。"))
  )},
-{"id":"o2s6-2","name":"白光干涉与彩色条纹","tags":["der"],"brief":"白光下零级条纹呈白色，其余呈彩色。",
+{"id":"o3s6-2","name":"白光干涉与彩色条纹","tags":["der"],"brief":"白光下零级条纹呈白色，其余呈彩色。",
  "body": wrap(
    exa(p("<strong>例：</strong>白光干涉仪中连续移动动镜，只在零光程差附近出现少数几条清晰的彩色条纹：")+
    fml("L_c^{\\text{白}}\\approx\\frac{\\lambda^2}{\\Delta\\lambda}\\sim1\\,\\mu\\text{m}")+
@@ -802,13 +1089,13 @@ ch2_sections = [
 ]},
 ]
 
-ch3_sections = [
+ch4_sections = [
 {
-"name": "3.1 惠更斯-菲涅耳原理",
+"name": "4.1 惠更斯-菲涅耳原理",
 "color": "#0d9488",
 "desc": "子波相干叠加的衍射理论基础",
 "items": [
-{"id":"o3s1-1","name":"惠更斯-菲涅耳原理","tags":["def","der"],"brief":"波前上各点作为子波源相干叠加。",
+{"id":"o4s1-1","name":"惠更斯-菲涅耳原理","tags":["def","der"],"brief":"波前上各点作为子波源相干叠加。",
  "body": wrap(
    exa(p("<strong>例（泊松亮斑）：</strong>按惠更斯-菲涅耳原理，圆盘阴影中心并非全黑，而应出现亮点。")+
    fml("I_{\\text{中心}}\\approx I_0","圆盘完全遮挡几何阴影中心仍亮")+
@@ -826,11 +1113,11 @@ ch3_sections = [
  )},
 ]},
 {
-"name": "3.2 菲涅耳衍射",
+"name": "4.2 菲涅耳衍射",
 "color": "#14b8a6",
 "desc": "半波带法、菲涅耳积分与波带片",
 "items": [
-{"id":"o3s2-1","name":"菲涅耳衍射与半波带法","tags":["der"],"brief":"用半波带定量分析近场衍射。",
+{"id":"o4s2-1","name":"菲涅耳衍射与半波带法","tags":["der"],"brief":"用半波带定量分析近场衍射。",
  "body": wrap(
    exa(p("<strong>例：</strong>圆孔恰好露出第 1 个半波带时，中心光强最大；露出 2 个半波带时几乎全暗：")+
    fml("A_1=a_1\\ (\\text{最亮}),\\qquad A_2=a_1-a_2\\approx0\\ (\\text{最暗})")+
@@ -848,7 +1135,7 @@ ch3_sections = [
    p("因 $a_k$ 随 $k$ 缓慢单调减小，故合振幅约等于第一半波带贡献的一半。"))+
    note(p("圆孔衍射中，随孔的大小露出不同数量的半波带，中心可交替出现明暗，这是菲涅耳衍射与夫琅禾费衍射的重要区别。"))
  )},
-{"id":"o3s2-2","name":"菲涅耳积分与螺旋","tags":["der"],"brief":"用积分描述近场衍射光强分布。",
+{"id":"o4s2-2","name":"菲涅耳积分与螺旋","tags":["der"],"brief":"用积分描述近场衍射光强分布。",
  "body": wrap(
    exa(p("<strong>例（科纽螺线）：</strong>自由空间（无遮挡）时衍射积分为螺线两端连线，其长度对应振幅：")+
    fml("|A|=\\frac{1}{\\sqrt2}a_1")+
@@ -860,7 +1147,7 @@ ch3_sections = [
    p("观察点复振幅正比于 $\\{C(v)+iS(v)\\}$，在复平面上描出<strong>科纽螺线</strong>。自由空间（无遮挡）时积分趋于螺线两端的连线，其长度为 $1/\\sqrt2$，对应半波带法的 $a_1/2$ 结果。"))+
    note(p("科纽螺线是分析直边、狭缝、圆孔等菲涅耳衍射的直观工具，曲线绕卷曲点的位置决定光强的振荡。"))
  )},
-{"id":"o3s2-3","name":"菲涅耳波带片","tags":["der","app"],"brief":"只让奇数或偶数半波带透光的衍射透镜。",
+{"id":"o4s2-3","name":"菲涅耳波带片","tags":["der","app"],"brief":"只让奇数或偶数半波带透光的衍射透镜。",
  "body": wrap(
    exa(p("<strong>例：</strong>波带片第一带半径 $r_1=1.0\\,\\text{mm}$，用于 $\\lambda=633\\,\\text{nm}$：")+
    fml("f=\\frac{r_1^2}{\\lambda}=\\frac{(10^{-3})^2}{633\\times10^{-9}}\\approx1.58\\,\\text{m}")+
@@ -878,11 +1165,11 @@ ch3_sections = [
  )},
 ]},
 {
-"name": "3.3 夫琅禾费衍射",
+"name": "4.3 夫琅禾费衍射",
 "color": "#059669",
 "desc": "单缝、圆孔衍射与光学仪器分辨率",
 "items": [
-{"id":"o3s3-1","name":"单缝夫琅禾费衍射","tags":["der","thm"],"brief":"单缝衍射的 sinc² 光强分布。",
+{"id":"o4s3-1","name":"单缝夫琅禾费衍射","tags":["der","thm"],"brief":"单缝衍射的 sinc² 光强分布。",
  "fig":"singleslit","figCap":"单缝夫琅禾费衍射光强分布",
  "body": wrap(
    exa(p("<strong>例：</strong>缝宽 $a=0.10\\,\\text{mm}$，$\\lambda=500\\,\\text{nm}$，求中央亮纹的角宽度：")+
@@ -902,7 +1189,7 @@ ch3_sections = [
    p("中央主极大宽度为 $2\\lambda/a$，缝越窄衍射越显著。"))+
    note(p("次极大强度迅速衰减，约为中央极大的 4.7%、1.7%、0.8%……"))
  )},
-{"id":"o3s3-2","name":"圆孔衍射与艾里斑","tags":["der"],"brief":"圆孔衍射形成中央亮斑（艾里斑）。",
+{"id":"o4s3-2","name":"圆孔衍射与艾里斑","tags":["der"],"brief":"圆孔衍射形成中央亮斑（艾里斑）。",
  "fig":"airy","figCap":"圆孔衍射与艾里斑",
  "body": wrap(
    exa(p("<strong>例：</strong>圆孔直径 $D=2\\,\\text{mm}$、$\\lambda=500\\,\\text{nm}$、焦距 $f=1\\,\\text{m}$：")+
@@ -915,7 +1202,7 @@ ch3_sections = [
    p("其中 $D$ 为圆孔直径。焦面上艾里斑半径 $r=1.22\\lambda f/D$，约 84% 的光能量集中在艾里斑内。"))+
    app(p("<strong>应用：</strong>艾里斑决定成像系统的分辨极限；大口径望远镜与显微镜可获得更小的衍射斑。"))
  )},
-{"id":"o3s3-3","name":"光学仪器分辨率","tags":["der","app"],"brief":"瑞利判据决定的极限分辨角。",
+{"id":"o4s3-3","name":"光学仪器分辨率","tags":["der","app"],"brief":"瑞利判据决定的极限分辨角。",
  "body": wrap(
    exa(p("<strong>例：</strong>人眼瞳孔 $D=3\\,\\text{mm}$、$\\lambda=550\\,\\text{nm}$：")+
    fml("\\theta_R=1.22\\frac{\\lambda}{D}\\approx2.2\\times10^{-4}\\,\\text{rad}\\approx45''")+
@@ -935,11 +1222,11 @@ ch3_sections = [
  )},
 ]},
 {
-"name": "3.4 光栅衍射",
+"name": "4.4 光栅衍射",
 "color": "#0d9488",
 "desc": "光栅方程、角色散与分辨本领",
 "items": [
-{"id":"o3s4-1","name":"光栅方程与角色散","tags":["der","thm"],"brief":"多缝干涉与单缝衍射的综合。",
+{"id":"o4s4-1","name":"光栅方程与角色散","tags":["der","thm"],"brief":"多缝干涉与单缝衍射的综合。",
  "fig":"grating","figCap":"光栅衍射主极大方向",
  "body": wrap(
    exa(p("<strong>例：</strong>光栅每毫米 500 条（$d=2\\,\\mu\\text{m}$），$\\lambda=600\\,\\text{nm}$，求第二级衍射角：")+
@@ -958,7 +1245,7 @@ ch3_sections = [
    p("级次越高、缝距越小，色散越大。"))+
    note(p("光栅刻痕（不透光部分）产生的单缝衍射起调制作用，若 $d/a$ 为整数则某些级次缺级。"))
  )},
-{"id":"o3s4-2","name":"光栅分辨本领","tags":["der"],"brief":"由刻线总数与级次决定分辨能力。",
+{"id":"o4s4-2","name":"光栅分辨本领","tags":["der"],"brief":"由刻线总数与级次决定分辨能力。",
  "body": wrap(
    exa(p("<strong>例：</strong>光栅宽 $5\\,\\text{cm}$、每毫米 600 条，在第二级工作：")+
    fml("N=600\\times50=3.0\\times10^4,\\quad R=kN=6.0\\times10^4")+
@@ -974,7 +1261,7 @@ ch3_sections = [
    p("分辨本领正比于级次 $k$ 与刻线总数 $N$，与缝距无关。"))+
    app(p("<strong>应用：</strong>天文光谱仪、拉曼光谱仪依靠高刻线数光栅分辨精细光谱结构；$N$ 越大光谱越纯。"))
  )},
-{"id":"o3s4-3","name":"光栅衍射光强分布","tags":["der"],"brief":"干涉因子与衍射因子的乘积。",
+{"id":"o4s4-3","name":"光栅衍射光强分布","tags":["der"],"brief":"干涉因子与衍射因子的乘积。",
  "body": wrap(
    defn("强度分布",p("光栅的衍射场由单缝衍射与多缝干涉共同决定。"))+
    der(p("<strong>推导：</strong>设缝宽 $a$、缝距 $d$，单缝衍射因子 $\\frac{\\sin\\alpha}{\\alpha}$（$\\alpha=\\pi a\\sin\\theta/\\lambda$），$N$ 缝干涉因子 $\\frac{\\sin N\\beta}{\\sin\\beta}$（$\\beta=\\pi d\\sin\\theta/\\lambda$）。总光强：")+
@@ -984,11 +1271,11 @@ ch3_sections = [
  )},
 ]},
 {
-"name": "3.5 晶体衍射与全息",
+"name": "4.5 晶体衍射与全息",
 "color": "#14b8a6",
 "desc": "X 射线布拉格衍射与全息术",
 "items": [
-{"id":"o3s5-1","name":"X射线衍射与布拉格公式","tags":["der","app"],"brief":"晶体点阵对 X 射线的相干衍射。",
+{"id":"o4s5-1","name":"X射线衍射与布拉格公式","tags":["der","app"],"brief":"晶体点阵对 X 射线的相干衍射。",
  "body": wrap(
    exa(p("<strong>例：</strong>用 $\\lambda=0.154\\,\\text{nm}$ 的 X 射线，测得一级衍射掠射角 $\\theta=21.7°$：")+
    fml("d=\\frac{\\lambda}{2\\sin\\theta}=\\frac{0.154}{2\\sin21.7°}\\approx0.209\\,\\text{nm}")+
@@ -1004,7 +1291,7 @@ ch3_sections = [
    p("该式表明只有特定角度才出现衍射极大，据此可测定晶面间距与晶体结构。"))+
    app(p("<strong>应用：</strong>X 射线晶体学、DNA 双螺旋结构的发现、粉末衍射物相分析、布拉格反射镜。"))
  )},
-{"id":"o3s5-2","name":"全息术原理","tags":["der","app"],"brief":"记录并再现光波振幅与相位。",
+{"id":"o4s5-2","name":"全息术原理","tags":["der","app"],"brief":"记录并再现光波振幅与相位。",
  "body": wrap(
    exa(p("<strong>例：</strong>以物光 $O$ 与参考光 $R$ 记录，再现时用 $R$ 照明，透射场第三项给出原始物光：")+
    fml("U_3=O|R|^2\\propto O")+
@@ -1020,11 +1307,11 @@ ch3_sections = [
  )},
 ]},
 {
-"name": "3.6 衍射应用",
+"name": "4.6 衍射应用",
 "color": "#059669",
 "desc": "衍射的工程与现代应用",
 "items": [
-{"id":"o3s6-1","name":"衍射在分光与测量中的应用","tags":["app","der"],"brief":"光栅光谱仪与衍射计量。",
+{"id":"o4s6-1","name":"衍射在分光与测量中的应用","tags":["app","der"],"brief":"光栅光谱仪与衍射计量。",
  "body": wrap(
    exa(p("<strong>例：</strong>用 $\\lambda=632.8\\,\\text{nm}$ 激光，测得单缝第 1 级暗纹与中央的角距离为 $0.63°$：")+
    fml("a=\\frac{\\lambda}{\\sin\\theta_1}=\\frac{632.8\\times10^{-9}}{\\sin0.63°}\\approx5.8\\times10^{-5}\\,\\text{m}")+
@@ -1036,7 +1323,7 @@ ch3_sections = [
    p("由光栅方程 $d\\sin\\theta=k\\lambda$ 可测光栅常数；利用衍射条纹的移动可探测角位移与形变。"))+
    note(p("光栅刻划与全息光栅制作本身也依赖衍射和干涉技术。"))
  )},
-{"id":"o3s6-2","name":"圆孔与直边的菲涅耳衍射","tags":["der"],"brief":"近场衍射的光强振荡与边缘效应。",
+{"id":"o4s6-2","name":"圆孔与直边的菲涅耳衍射","tags":["der"],"brief":"近场衍射的光强振荡与边缘效应。",
  "body": wrap(
    defn("菲涅耳衍射现象",p("圆孔衍射时，随孔径增大中心光强周期性明暗变化；直边衍射时几何阴影边界外侧出现明暗条纹，内侧光强单调下降。"))+
    der(p("<strong>直边衍射：</strong>用科纽螺线分析，直边外侧光强在几何边界处为自由光强的 $1/4$，随后振荡趋近 $I_0$：")+
@@ -1044,7 +1331,7 @@ ch3_sections = [
    p("这些近场效应表明几何光学的明暗边界并不锐利，是衍射的普遍表现。"))+
    note(p("菲涅耳衍射与夫琅禾费衍射的区分在于光源与观察面到衍射屏的距离是否有限。"))
  )},
-{"id":"o3s6-3","name":"衍射极限与现代应用","tags":["app","der"],"brief":"突破衍射极限的现代光学技术。",
+{"id":"o4s6-3","name":"衍射极限与现代应用","tags":["app","der"],"brief":"突破衍射极限的现代光学技术。",
  "body": wrap(
    app(p("衍射极限限制了传统成像与光刻的精度，现代技术通过缩短波长、增大数值孔径或非线性效应突破该极限。"))+
    der(p("<strong>决定因素：</strong>成像分辨极限与光刻线宽均正比于 $\\lambda/\\text{NA}$：")+
@@ -1055,13 +1342,13 @@ ch3_sections = [
 ]},
 ]
 
-ch4_sections = [
+ch5_sections = [
 {
-"name": "4.1 偏振光基础",
+"name": "5.1 偏振光基础",
 "color": "#c2410c",
 "desc": "自然光、线偏振光与马吕斯、布儒斯特定律",
 "items": [
-{"id":"o4s1-1","name":"自然光与偏振光","tags":["def","der"],"brief":"光波横振动与偏振态的描述。",
+{"id":"o5s1-1","name":"自然光与偏振光","tags":["def","der"],"brief":"光波横振动与偏振态的描述。",
  "body": wrap(
    exa(p("<strong>例：</strong>部分偏振光极大光强 $I_{\\max}=8$、极小 $I_{\\min}=2$：")+
    fml("P=\\frac{I_{\\max}-I_{\\min}}{I_{\\max}+I_{\\min}}=\\frac{8-2}{8+2}=0.6")+
@@ -1075,7 +1362,7 @@ ch4_sections = [
    p("这正是检验自然光的常用判据。"))+
    note(p("偏振度 $P=(I_{\\max}-I_{\\min})/(I_{\\max}+I_{\\min})$，自然光 $P=0$，线偏振光 $P=1$。"))
  )},
-{"id":"o4s1-2","name":"马吕斯定律","tags":["der","thm"],"brief":"线偏振光经检偏器后的强度变化。",
+{"id":"o5s1-2","name":"马吕斯定律","tags":["der","thm"],"brief":"线偏振光经检偏器后的强度变化。",
  "body": wrap(
    exa(p("<strong>例：</strong>自然光先通过起偏器，再通过与其透振方向成 $30°$ 的检偏器：")+
    fml("I=\\frac{I_0}{2}\\cos^2 30°=\\frac{I_0}{2}\\times\\frac{3}{4}=\\frac{3}{8}I_0")+
@@ -1094,7 +1381,7 @@ ch4_sections = [
    p("当 $\\theta=0$ 全透，$\\theta=90°$ 全消光。"))+
    app(p("<strong>应用：</strong>两片偏振片即可实现光强调节；结合旋转检偏器可判断偏振态与测量偏振度。"))
  )},
-{"id":"o4s1-3","name":"布儒斯特定律","tags":["der","thm"],"brief":"反射光成为完全偏振光的入射角。",
+{"id":"o5s1-3","name":"布儒斯特定律","tags":["der","thm"],"brief":"反射光成为完全偏振光的入射角。",
  "fig":"brewster","figCap":"布儒斯特角下的反射与折射",
  "body": wrap(
    exa(p("<strong>例：</strong>玻璃 $n_2=1.50$、空气 $n_1=1.00$，布儒斯特角：")+
@@ -1115,11 +1402,11 @@ ch4_sections = [
  )},
 ]},
 {
-"name": "4.2 双折射与晶体光学",
+"name": "5.2 双折射与晶体光学",
 "color": "#ea580c",
 "desc": "双折射、o 光与 e 光、偏振器件",
 "items": [
-{"id":"o4s2-1","name":"双折射现象","tags":["def","der"],"brief":"各向异性晶体中一束光分为两束。",
+{"id":"o5s2-1","name":"双折射现象","tags":["def","der"],"brief":"各向异性晶体中一束光分为两束。",
  "fig":"birefringence","figCap":"双折射产生 o 光与 e 光",
  "body": wrap(
    exa(p("<strong>例：</strong>方解石 $|n_o-n_e|=0.172$，厚度 $d=0.10\\,\\text{mm}$，$\\lambda=589\\,\\text{nm}$：")+
@@ -1136,7 +1423,7 @@ ch4_sections = [
    p("方解石 $n_o>n_e$ 为负晶体，石英 $n_o<n_e$ 为正晶体。"))+
    note(p("沿光轴方向传播时无双折射，o 光与 e 光速度相同。"))
  )},
-{"id":"o4s2-2","name":"o光与e光及晶体光学","tags":["der"],"brief":"波面、光轴与主平面。",
+{"id":"o5s2-2","name":"o光与e光及晶体光学","tags":["der"],"brief":"波面、光轴与主平面。",
  "body": wrap(
    exa(p("<strong>例：</strong>石英为正晶体（$n_e>n_o$），光轴方向无双折射；垂直光轴方向 e 光折射率取主值 $n_e$。")+
    fml("n(\\theta):\\ \\frac{1}{n_e(\\theta)^2}=\\frac{\\cos^2\\theta}{n_o^2}+\\frac{\\sin^2\\theta}{n_e^2}")+
@@ -1152,7 +1439,7 @@ ch4_sections = [
    p("e 光在一般方向的折射率 $\\frac{1}{n_e(\\theta)^2}=\\frac{\\cos^2\\theta}{n_o^2}+\\frac{\\sin^2\\theta}{n_e^2}$。"))+
    note(p("双折射的物理根源是晶体中原子排列的各向异性导致介电常数张量的各向异性。"))
  )},
-{"id":"o4s2-3","name":"偏振器件与尼科尔棱镜","tags":["der","app"],"brief":"利用双折射产生纯净线偏振光。",
+{"id":"o5s2-3","name":"偏振器件与尼科尔棱镜","tags":["der","app"],"brief":"利用双折射产生纯净线偏振光。",
  "body": wrap(
    defn("偏振分光器件",p("利用双折射晶体的全反射或镀膜分光，把自然光分离为分开的 o 光与 e 光，从而获得线偏振光。"))+
    der(p("<strong>尼科尔棱镜：</strong>将方解石按特定角度剖开并用加拿大树胶粘合，胶的折射率介于 $n_o$ 与 $n_e$ 之间。o 光在胶层发生全反射，e 光透过，故出射为纯净线偏振光。全反射条件：")+
@@ -1162,11 +1449,11 @@ ch4_sections = [
  )},
 ]},
 {
-"name": "4.3 相位延迟器件",
+"name": "5.3 相位延迟器件",
 "color": "#f97316",
 "desc": "波片、椭圆偏振与色偏振",
 "items": [
-{"id":"o4s3-1","name":"波片与相位延迟","tags":["der","thm"],"brief":"四分之一波片与二分之一波片。",
+{"id":"o5s3-1","name":"波片与相位延迟","tags":["der","thm"],"brief":"四分之一波片与二分之一波片。",
  "fig":"waveplate","figCap":"波片引入 o、e 光相位差",
  "body": wrap(
    exa(p("<strong>例：</strong>石英 $|n_o-n_e|=0.0091$，$\\lambda=589\\,\\text{nm}$，求 $\\lambda/4$ 波片厚度：")+
@@ -1183,7 +1470,7 @@ ch4_sections = [
    p("即 $d_{\\lambda/4}=\\frac{\\lambda}{4|n_o-n_e|}$，$d_{\\lambda/2}=\\frac{\\lambda}{2|n_o-n_e|}$。"))+
    app(p("<strong>作用：</strong>$\\lambda/4$ 波片把线偏振光变为椭圆/圆偏振光，或反之；$\\lambda/2$ 波片把线偏振方向转过 $2\\alpha$（$\\alpha$ 为入射方向与光轴夹角）。"))
  )},
-{"id":"o4s3-2","name":"椭圆与圆偏振光的产生","tags":["der"],"brief":"两垂直分量的合成。",
+{"id":"o5s3-2","name":"椭圆与圆偏振光的产生","tags":["der"],"brief":"两垂直分量的合成。",
  "body": wrap(
    exa(p("<strong>例：</strong>$45°$ 线偏振光通过 $\\lambda/4$ 波片（$\\delta=\\pi/2$，$a_1=a_2$）：")+
    fml("E_x=a\\cos\\omega t,\\quad E_y=a\\cos(\\omega t\\pm\\pi/2)=\\mp a\\sin\\omega t")+
@@ -1199,7 +1486,7 @@ ch4_sections = [
    p("当 $\\delta=\\pm\\pi/2$ 且 $a_1=a_2$ 时退化为圆偏振光：$E_x^2+E_y^2=a^2$；当 $\\delta=0,\\pi$ 时为线偏振光。"))+
    app(p("<strong>产生方法：</strong>线偏振光垂直通过 $\\lambda/4$ 波片且与光轴成 $45°$ 即得圆偏振光；调整夹角可得任意椭圆偏振光。"))
  )},
-{"id":"o4s3-3","name":"偏振光的干涉与色偏振","tags":["der"],"brief":"偏振光干涉产生色彩。",
+{"id":"o5s3-3","name":"偏振光的干涉与色偏振","tags":["der"],"brief":"偏振光干涉产生色彩。",
  "body": wrap(
    exa(p("<strong>例：</strong>正交偏振片间放双折射晶片，$\\alpha=45°$ 时透射光强：")+
    fml("I=I_0\\sin^2 2\\alpha\\,\\sin^2\\frac{\\delta}{2}=I_0\\sin^2\\frac{\\delta}{2},\\quad \\delta=\\frac{2\\pi}{\\lambda}(n_o-n_e)d")+
@@ -1213,11 +1500,11 @@ ch4_sections = [
  )},
 ]},
 {
-"name": "4.4 旋光与琼斯矩阵",
+"name": "5.4 旋光与琼斯矩阵",
 "color": "#c2410c",
 "desc": "旋光现象与偏振态的矩阵描述",
 "items": [
-{"id":"o4s4-1","name":"旋光现象","tags":["der"],"brief":"偏振面在介质中发生旋转。",
+{"id":"o5s4-1","name":"旋光现象","tags":["der"],"brief":"偏振面在介质中发生旋转。",
  "body": wrap(
    exa(p("<strong>例：</strong>某糖溶液比旋光率 $[\\alpha]=66.5°\\,\\text{mL}/(\\text{dm}\\cdot\\text{g})$，管长 $l=2\\,\\text{dm}$，测得旋光角 $\\alpha=13.3°$：")+
    fml("c=\\frac{\\alpha}{[\\alpha]l}=\\frac{13.3}{66.5\\times2}\\approx0.10\\,\\text{g/mL}")+
@@ -1233,7 +1520,7 @@ ch4_sections = [
    p("其中 $[\\alpha]_t$ 为比旋光率，$l$ 为光程，$c$ 为溶液浓度。旋光率随波长变化（旋光色散）。"))+
    app(p("<strong>应用：</strong>旋光仪测糖溶液浓度、鉴别手性分子、药物纯度检测；法拉第效应中磁场可使介质产生旋光，用于光隔离器。"))
  )},
-{"id":"o4s4-2","name":"琼斯矩阵","tags":["der"],"brief":"用矩阵运算描述偏振态与器件。",
+{"id":"o5s4-2","name":"琼斯矩阵","tags":["der"],"brief":"用矩阵运算描述偏振态与器件。",
  "body": wrap(
    exa(p("<strong>例：</strong>$\\lambda/4$ 波片（快轴竖直）作用于 $45°$ 线偏振光：")+
    fml("W=\\begin{pmatrix}1&0\\\\0&-i\\end{pmatrix},\\quad \\mathbf{J}_{45}=\\frac{1}{\\sqrt2}\\begin{pmatrix}1\\\\1\\end{pmatrix}")+
@@ -1250,11 +1537,11 @@ ch4_sections = [
  )},
 ]},
 {
-"name": "4.5 电光与光弹效应",
+"name": "5.5 电光与光弹效应",
 "color": "#ea580c",
 "desc": "应力双折射与电场致双折射",
 "items": [
-{"id":"o4s5-1","name":"光弹效应","tags":["der","app"],"brief":"应力使各向同性材料产生双折射。",
+{"id":"o5s5-1","name":"光弹效应","tags":["der","app"],"brief":"应力使各向同性材料产生双折射。",
  "body": wrap(
    defn("光弹效应",p("各向同性透明材料（如玻璃、塑料）受力时变为光学各向异性，产生与应力成正比的双折射，称为光弹效应或应力双折射。"))+
    der(p("<strong>相位差与主应力差：</strong>设主应力差为 $\\sigma_1-\\sigma_2$，材料应力光学系数为 $C$，光程 $d$：")+
@@ -1262,7 +1549,7 @@ ch4_sections = [
    p("把模型置于正交偏振片之间，白光下应力集中处呈现彩色条纹，据此读出应力分布。"))+
    app(p("<strong>应用：</strong>光弹应力分析、透明塑料制品内应力检验、光弹调制器与应力传感器。"))
  )},
-{"id":"o4s5-2","name":"电光效应","tags":["der","app"],"brief":"电场引起折射率变化（克尔与泡克尔斯）。",
+{"id":"o5s5-2","name":"电光效应","tags":["der","app"],"brief":"电场引起折射率变化（克尔与泡克尔斯）。",
  "body": wrap(
    exa(p("<strong>例：</strong>泡克尔斯晶体电光系数 $r$、长度 $d$，半波电压 $V_\\pi$ 对应相位延迟 $\\pi$：")+
    fml("V_\\pi=\\frac{\\lambda}{2n^3 r}")+
@@ -1280,11 +1567,11 @@ ch4_sections = [
  )},
 ]},
 {
-"name": "4.6 偏振应用",
+"name": "5.6 偏振应用",
 "color": "#f97316",
 "desc": "偏振检测、液晶显示与工程应用",
 "items": [
-{"id":"o4s6-1","name":"偏振光的检测与应用","tags":["app","der"],"brief":"偏振态的鉴别与工程应用。",
+{"id":"o5s6-1","name":"偏振光的检测与应用","tags":["app","der"],"brief":"偏振态的鉴别与工程应用。",
  "body": wrap(
    exa(p("<strong>例：</strong>旋转检偏器，光强有两处消光则为线偏振光；强度不变则可能是自然光或圆偏振光。在检偏器前加 $\\lambda/4$ 波片再判别：")+
    fml("\\text{出现消光}\\Rightarrow\\text{圆偏振},\\quad \\text{不消光}\\Rightarrow\\text{自然光}")+
@@ -1296,7 +1583,7 @@ ch4_sections = [
    p("再在检偏器前加 $\\lambda/4$ 波片，若出现消光则为圆偏振光，否则为部分偏振或椭圆偏振光。"))+
    app(p("<strong>应用：</strong>偏光太阳镜消除反光、摄影偏振镜、应力检测、3D 电影的偏振分像、光通信中的偏振复用。"))
  )},
-{"id":"o4s6-2","name":"液晶显示与偏振","tags":["app","der"],"brief":"液晶扭曲调控偏振实现显示。",
+{"id":"o5s6-2","name":"液晶显示与偏振","tags":["app","der"],"brief":"液晶扭曲调控偏振实现显示。",
  "body": wrap(
    defn("液晶显示原理",p("液晶分子在电场中取向改变，使通过它的偏振光偏振面发生旋转（扭曲向列 TN 模式），配合两片正交偏振片实现明暗控制。"))+
    der(p("<strong>透过率：</strong>无电场时液晶将偏振面旋转 90°，光可通过正交检偏器（亮）；加电场后旋转消失，光被阻挡（暗）。透过率为：")+
@@ -1307,269 +1594,203 @@ ch4_sections = [
 ]},
 ]
 
-ch5_sections = [
+ch6_sections = [
 {
-"name": "5.1 空间频率与傅里叶变换",
-"color": "#be185d",
-"desc": "空间频谱与常用函数的变换",
+"name": "6.1 光的散射",
+"color": "#0891b2",
+"desc": "瑞利散射、米氏散射、无选择性散射、天空颜色与丁达尔效应",
 "items": [
-{"id":"o5s1-1","name":"空间频率与傅里叶变换","tags":["def","der"],"brief":"用空间频率描述光场的空间结构。",
+{"id":"o6s1-1","name":"瑞利散射与 λ⁻⁴ 定律","tags":["thm","der"],"brief":"微小颗粒的散射强度与波长四次方成反比。",
+ "fig":"rayleigh","figCap":"大气分子对阳光的瑞利散射：蓝光被散射，红光透射",
  "body": wrap(
-   exa(p("<strong>例：</strong>衍射角 $\\theta$ 与空间频率的关系：")+
-   fml("u=\\frac{\\sin\\theta}{\\lambda}")+
-   p("故 $\\theta=30°$、$\\lambda=500\\,\\text{nm}$ 对应 $u=1000\\,\\text{mm}^{-1}$。")+
-   note(p("空间频率越高对应衍射角越大；透镜后焦面上离轴越远的位置携带越高频的空间信息。")))+
-   exa(p("<strong>例：</strong>衍射角 $\\theta$ 与空间频率的关系：")+
-   fml("u=\\frac{\\sin\\theta}{\\lambda}")+
-   p("故 $\\theta=30°$、$\\lambda=500\\,\\text{nm}$ 对应 $u=1000\\,\\text{mm}^{-1}$。")+
-   note(p("空间频率越高对应衍射角越大；透镜后焦面上离轴越远的位置携带越高频的空间信息。")))+
-   defn("空间频率",p("沿 $x$ 方向按周期性变化的光场，其<strong>空间频率</strong> $u$ 定义为单位长度内的周期数（线/mm）。任意光场可分解为不同空间频率的正弦光栅之和。"))+
-   der(p("<strong>傅里叶变换对：</strong>光场复振幅 $f(x)$ 与其空间频谱 $F(u)$ 构成变换对：")+
-   fml("F(u)=\\int_{-\\infty}^{\\infty} f(x)e^{-i2\\pi ux}\\,dx,\\quad f(x)=\\int_{-\\infty}^{\\infty}F(u)e^{i2\\pi ux}\\,du")+
-   p("空间频率 $u=\\sin\\theta/\\lambda$，与衍射角一一对应，这是衍射与傅里叶变换联系的桥梁。"))+
-   note(p("透镜是天然的傅里叶变换器：焦面上的光场分布正比于入射光场的傅里叶变换。"))
+   thm("瑞利散射定律",p("当散射颗粒尺寸远小于波长（$a\\ll\\lambda$）时，散射光强与波长的四次方成反比：")+
+   fml("I_{sca}\\propto\\frac{1}{\\lambda^4}")+
+   p("散射强度还正比于颗粒体积平方，并具有 $1+\\cos^2\\theta$ 的方向分布。"))+
+   der(p("<strong>推导：</strong>入射光场使颗粒内电子做受迫振动，形成振荡电偶极子 $p=p_0e^{-i\\omega t}$。电偶极辐射功率为：")+
+   fml("P=\\frac{\\omega^4|p_0|^2}{12\\pi\\varepsilon_0c^3}\\propto\\omega^4\\propto\\frac{1}{\\lambda^4}")+
+   p("因颗粒远小于波长，感生偶极矩 $p_0=\\alpha\\varepsilon_0E_0$ 与频率近似无关，故散射截面：")+
+   fml("\\sigma_{sca}=\\frac{8\\pi}{3}k^4|\\alpha|^2=\\frac{128\\pi^5a^6}{3\\lambda^4}\\left|\\frac{m^2-1}{m^2+2}\\right|^2,\\quad m=\\frac{n_{part}}{n_{med}}")+
+   p("可见 $\\sigma\\propto\\lambda^{-4}$，蓝光（$450\\,\\text{nm}$）的散射比红光（$650\\,\\text{nm}$）强约 $(650/450)^4\\approx4.4$ 倍。"))+
+   app(p("<strong>应用：</strong>解释天空呈蓝色、朝霞晚霞呈红色；浊度计与激光粒度仪利用散射强度反演颗粒尺寸与浓度。"))
  )},
-{"id":"o5s1-2","name":"常用函数的傅里叶变换","tags":["der"],"brief":"矩形、圆孔与高斯函数的变换。",
+{"id":"o6s1-2","name":"米氏散射","tags":["der","app"],"brief":"颗粒尺寸与波长相当时的散射规律。",
  "body": wrap(
-   der(p("<strong>矩形函数：</strong>宽 $a$ 的单缝 $\\text{rect}(x/a)$ 的变换为 sinc 函数，正对应单缝衍射：")+
-   fml("\\mathcal{F}\\{\\text{rect}(x/a)\\}=a\\,\\text{sinc}(au)=\\frac{\\sin(\\pi au)}{\\pi u}")+
-   p("<strong>圆孔：</strong>半径为 $R$ 的圆孔变换为含贝塞尔函数的一阶贝塞尔，正对应艾里斑：")+
-   fml("\\mathcal{F}\\{\\text{circ}(r/R)\\}\\propto \\frac{J_1(2\\pi R\\rho)}{2\\pi R\\rho}")+
-   p("<strong>高斯函数：</strong>高斯的傅里叶变换仍是高斯，这是高斯光束稳定传播的根本原因：")+
-   fml("\\mathcal{F}\\{e^{-\\pi x^2}\\}=e^{-\\pi u^2}"))+
-   note(p("卷积定理 $\\mathcal{F}\\{f*g\\}=\\mathcal{F}\\{f\\}\\cdot\\mathcal{F}\\{g\\}$ 是分析成像与滤波的核心工具。"))
+   der(p("<strong>米氏理论：</strong>当 $a\\sim\\lambda$ 时瑞利近似失效，须用米氏理论求解球形颗粒对平面波的严格麦克斯韦方程解，散射截面为：")+
+   fml("\\sigma_{Mie}=\\frac{2\\pi}{k^2}\\sum_{l=1}^{\\infty}(2l+1)\\left(|a_l|^2+|b_l|^2\\right)")+
+   p("其中 $a_l$、$b_l$ 为米氏系数，由球贝塞尔函数与尺寸参量 $x=2\\pi a/\\lambda$ 决定。"))+
+   p("<strong>主要特征：</strong>散射强度对波长的依赖显著减弱（近似 $\\lambda^{-1}$ 甚至更弱），前向散射明显增强，散射光的方向分布出现复杂的花瓣状结构。")+
+   app(p("<strong>应用：</strong>云、雾、牛奶与气溶胶对光的散射都属于米氏散射，故云呈白色；激光雷达与大气颗粒物监测依赖米氏散射回波反演。"))
+ )},
+{"id":"o6s1-3","name":"无选择性散射","tags":["def","der"],"brief":"颗粒远大于波长时各色光被同等散射。",
+ "body": wrap(
+   defn("无选择性散射",p("当颗粒尺寸 $a\\gg\\lambda$ 时，散射不再依赖于波长，各种颜色的光被同等散射，散射光呈现入射光的颜色（白光入射则散射白光）。"))+
+   der(p("<strong>判断依据：</strong>由几何光学极限，大颗粒的散射截面趋于几何截面：")+
+   fml("\\sigma\\to2\\pi a^2\\quad(a\\gg\\lambda)")+
+   p("式中因子 2 表示几何遮挡与衍射的共同贡献，与 $\\lambda$ 无关，故散射没有颜色选择性。"))+
+   exa(p("<strong>例：</strong>云滴半径约 $5\\sim20\\,\\mu\\text{m}$，远大于可见光波长，故乌云、白云均呈灰白色；雾天使能见度下降但景物颜色基本不失真。")+
+   note(p("雾灯用黄光并非因黄光散射最弱（长波红光散射更弱），而是黄光在人眼灵敏度、穿透力与警示色之间取得平衡。")))
+ )},
+{"id":"o6s1-4","name":"大气散射与天空颜色","tags":["der","app"],"brief":"瑞利散射解释天空蓝与朝霞晚霞红。",
+ "body": wrap(
+   der(p("<strong>天空为何是蓝色：</strong>大气分子（$\\text{N}_2$、$\\text{O}_2$）尺寸约 $0.3\\,\\text{nm}$，远小于可见光波长，满足瑞利散射条件，散射光强与 $\\lambda^{-4}$ 成正比：")+
+   fml("\\frac{I_{450}}{I_{650}}=\\left(\\frac{650}{450}\\right)^4\\approx4.4")+
+   p("蓝光被散射得更多，来自各方向的散射光进入人眼，故天空呈蓝色。"))+
+   der(p("<strong>朝霞晚霞为何是红色：</strong>日出日落时光线斜穿大气，路径长约增加 $1/\\sin\\theta$ 倍，蓝光被大量散射掉，透射光中长波红光占优：")+
+   fml("I_{trans}=I_0e^{-\\tau},\\qquad \\tau\\propto\\lambda^{-4}")+
+   p("散射损耗的波长选择性使透过光偏红，形成朝霞与晚霞；沙尘、污染（大颗粒）会削弱该效应使天色发白。"))+
+   app(p("<strong>应用：</strong>大气散射模型是大气光学与遥感反演的基础；天文观测中的大气消光（瑞利散射加臭氧吸收）需按波长修正。"))
+ )},
+{"id":"o6s1-5","name":"丁达尔效应","tags":["der","app"],"brief":"含悬浮微粒介质中出现可见光柱。",
+ "body": wrap(
+   defn("丁达尔效应",p("当一束光通过含悬浮微粒的胶体或浑浊介质时，从侧面可以观察到一条明亮的散射光柱，这一现象称为丁达尔效应，是区分胶体与真溶液的重要判据。"))+
+   der(p("<strong>机理与判据：</strong>胶体粒子半径约 $1\\sim100\\,\\text{nm}$，满足 $a\\ll\\lambda$，发生瑞利散射：")+
+   fml("I_{sca}\\propto N\\,V^2\\,\\lambda^{-4}")+
+   p("散射光强正比于粒子数密度 $N$ 与粒子体积平方 $V^2$，且对短波更敏感，故侧向观察到蓝白色光柱；溶液中的分子太小，散射微弱而无可见光柱。"))+
+   app(p("<strong>应用：</strong>丁达尔效应用于鉴别胶体与溶液、演示激光光路；大气中的丁达尔现象形成云隙光（耶稣光）。"))
  )},
 ]},
 {
-"name": "5.2 衍射的傅里叶解释",
-"color": "#db2777",
-"desc": "傅里叶变换、阿贝成像与 4f 系统",
+"name": "6.2 拉曼散射与散射应用",
+"color": "#0891b2",
+"desc": "拉曼散射、布里渊散射与散射的工程应用",
 "items": [
-{"id":"o5s2-1","name":"夫琅禾费衍射的傅里叶变换解释","tags":["der"],"brief":"衍射场是孔径函数的傅里叶变换。",
+{"id":"o6s2-1","name":"拉曼散射","tags":["der","app"],"brief":"分子振动使散射光发生频移。",
  "body": wrap(
-   exa(p("<strong>例：</strong>宽 $a$ 的单缝透过率 $t(x)=\\text{rect}(x/a)$，其夫琅禾费衍射场：")+
-   fml("\\tilde{E}(u)=a\\,\\text{sinc}(au)\\propto\\frac{\\sin(\\pi a u)}{\\pi a u}")+
-   p("取 $u=\\sin\\theta/\\lambda$ 即得单缝衍射光强，与直接积分结果完全一致。")+
-   note(p("这一对应关系表明：圆孔的傅里叶变换给出艾里斑，双缝的变换给出余弦调制，衍射可用频谱语言统一理解。")))+
-   der(p("<strong>推导：</strong>夫琅禾费衍射的衍射积分可化为：")+
-   fml("\\tilde{E}(\\theta)=C\\int t(x)e^{-i\\frac{2\\pi}{\\lambda}x\\sin\\theta}\\,dx = C\\,\\mathcal{F}\\{t(x)\\}\\Big|_{u=\\sin\\theta/\\lambda}")+
-   p("其中 $t(x)$ 为孔径（或物体的）复振幅透过率函数。即观察屏上的衍射场分布就是孔径函数的傅里叶变换，空间坐标 $x'$ 与空间频率 $u=x'/(\\lambda f)$ 对应。"))+
-   note(p("这一结论把衍射问题转化为频谱分析问题，是傅里叶光学的基石：单缝的 sinc、圆孔的艾里斑都是相应的频谱。"))
+   der(p("<strong>现象与规律：</strong>单色光被分子散射时，除与入射频率相同的瑞利线 $\\nu_0$ 外，还出现对称分布的伴线：")+
+   fml("\\nu_s=\\nu_0\\pm\\Delta\\nu_{vib}")+
+   p("频移量 $\\Delta\\nu$ 由分子振动（或转动）能级差决定 $h\\Delta\\nu=\\Delta E$，与入射波长无关，故拉曼谱可作为分子指纹。"))+
+   der(p("<strong>量子解释：</strong>光子与分子发生非弹性碰撞。光子损失能量交给分子（斯托克斯线，$\\nu_0-\\Delta\\nu$）或从振动激发态分子获得能量（反斯托克斯线，$\\nu_0+\\Delta\\nu$），两者强度比为：")+
+   fml("\\frac{I_{as}}{I_{s}}=\\exp\\left(-\\frac{h\\Delta\\nu}{k_BT}\\right)")+
+   p("室温下 $h\\Delta\\nu\\gg k_BT$，故斯托克斯线远强于反斯托克斯线。"))+
+   app(p("<strong>应用：</strong>拉曼光谱用于化学分析与材料表征；光纤中的自发与受激拉曼散射既是损耗机制，也可用于拉曼光纤放大器与拉曼激光器。"))
  )},
-{"id":"o5s2-2","name":"阿贝成像理论","tags":["der","thm"],"brief":"成像分两步：衍射分频与干涉合成。",
+{"id":"o6s2-2","name":"布里渊散射","tags":["der","app"],"brief":"声波引起的光频移散射。",
  "body": wrap(
-   exa(p("<strong>例：</strong>在阿贝成像的频谱面上遮挡零频（中心）只留高频，则像变为边缘轮廓；遮挡高频只留零频则像变为模糊的均匀亮斑。")+
-   fml("\\text{遮零频}\\Rightarrow\\text{边缘增强},\\quad \\text{遮高频}\\Rightarrow\\text{平滑模糊}")+
-   p("这直观说明像 = 频谱的重新合成，细节信息存储在高频分量中。")+
-   note(p("阿贝成像理论把成像与滤波统一在同一框架，直接导致空间滤波与光学信息处理技术的诞生。")))+
-   exa(p("<strong>例：</strong>在阿贝成像的频谱面上遮挡零频（中心）只留高频，则像变为边缘轮廓；遮挡高频只留零频则像变为模糊的均匀亮斑。")+
-   fml("\\text{遮零频}\\Rightarrow\\text{边缘增强},\\quad \\text{遮高频}\\Rightarrow\\text{平滑模糊}")+
-   p("这直观说明像 = 频谱的重新合成，细节信息存储在高频分量中。")+
-   note(p("阿贝成像理论把成像与滤波统一在同一框架，直接导致空间滤波与光学信息处理技术的诞生。")))+
-   thm("阿贝成像原理",p("成像分两步：物对光衍射产生各级频谱，在透镜后焦面（频谱面）上分开；各级频谱再干涉合成，在像面重建物的像。"))+
-   der(p("<strong>数学表述：</strong>物分布 $O(x)$，透镜后焦面频谱 $\\mathcal{F}\\{O\\}$，像面光场为频谱经透镜二次变换（含有限光瞳截断 $H$）后的逆变换：")+
-   fml("I(x)=\\left|\\mathcal{F}^{-1}\\{\\mathcal{F}\\{O\\}\\cdot H\\}\\right|^2")+
-   p("若光瞳足够大、频谱无缺失，则像与物相似；若频谱被遮挡则细节丢失，这是分辨率极限的频谱解释。"))+
-   app(p("<strong>应用：</strong>阿贝成像理论直接启发了空间滤波、相干成像与光学信息处理。"))
+   der(p("<strong>机理：</strong>光被介质中的声波（声子）散射，由于声速远小于光速，多普勒频移很小，频移量由声速 $v_a$ 与散射角 $\\theta$ 决定：")+
+   fml("\\Delta\\nu_B=\\pm\\frac{2nv_a}{\\lambda_0}\\sin\\frac{\\theta}{2}")+
+   p("对石英光纤典型值为约 $11\\,\\text{GHz}$（$\\lambda=1550\\,\\text{nm}$、背向散射），比拉曼频移（约 $13\\,\\text{THz}$）小几个量级。"))+
+   exa(p("<strong>例：</strong>布里渊光时域反射利用布里渊频移随应变与温度的线性变化，实现分布式应变与温度传感，空间分辨率可达米级。")+
+   note(p("受激布里渊散射会限制光纤中可传输的最大光功率，是光纤通信与高功率光纤激光器的重要限制因素。")))
  )},
-{"id":"o5s2-3","name":"4f系统与空间滤波","tags":["der","app"],"brief":"两级透镜实现频谱滤波。",
- "fig":"fourier4f","figCap":"4f 系统与频谱面上的空间滤波",
+{"id":"o6s2-3","name":"散射的应用与光纤损耗","tags":["app","der"],"brief":"散射在测量与光纤损耗中的作用。",
  "body": wrap(
-   exa(p("<strong>例：</strong>在 4f 系统频谱面放置小孔作低通滤波，只允许低频通过，则像面高频细节被滤除，图像变平滑。")+
-   fml("H(u)=\\text{circ}\\!\\left(\\frac{u}{u_c}\\right)\\Rightarrow\\text{低通}")+
-   p("反之放置挡板遮挡低频则实现高通，获得边缘增强效果。")+
-   note(p("用空间光调制器（SLM）替代固定滤波器，可编程实现任意复振幅滤波，构成实时光学处理系统。")))+
-   exa(p("<strong>例：</strong>在 4f 系统频谱面放置小孔作低通滤波，只允许低频通过，则像面高频细节被滤除，图像变平滑。")+
-   fml("H(u)=\\text{circ}\\!\\left(\\frac{u}{u_c}\\right)\\Rightarrow\\text{低通}")+
-   p("反之放置挡板遮挡低频则实现高通，获得边缘增强效果。")+
-   note(p("用空间光调制器（SLM）替代固定滤波器，可编程实现任意复振幅滤波，构成实时光学处理系统。")))+
-   defn("4f 系统",p("两透镜共焦排列，物在第一个透镜前焦面、像在其后第二个透镜的后焦面，两焦面间距均为 $f$，总长 $4f$。中间为频谱面。"))+
-   der(p("<strong>滤波原理：</strong>在频谱面插入滤波器 $H(u)$，则像面光场为滤波后的频谱逆变换：")+
-   fml("U_{\\text{像}}(x)=\\mathcal{F}^{-1}\\{\\mathcal{F}\\{U_{\\text{物}}\\}\\cdot H\\}")+
-   p("如低通滤波（挡高频）使图像平滑去噪，高通滤波（挡零频）实现边缘增强；方向滤波可提取特定方向的条纹。"))+
-   app(p("<strong>应用：</strong>光学图像处理、去噪与边缘检测、纹影法与相衬显微、光学相关与模式识别、可编程 SLM 滤波。"))
+   der(p("<strong>散射损耗：</strong>光纤中本征瑞利散射引起的衰减系数近似为：")+
+   fml("\\alpha_R=\\frac{A}{\\lambda^4}\\approx0.85\\ \\text{dB/km}\\quad(\\lambda=1550\\,\\text{nm})")+
+   p("叠加吸收损耗后，石英光纤总损耗在 $1550\\,\\text{nm}$ 附近最低（约 $0.2\\,\\text{dB/km}$），这正是光通信窗口选择该波长的原因。"))+
+   app(p("<strong>测量应用：</strong>浊度计以 $90°$ 散射光强标定浊度（NTU）；激光粒度仪用散射角分布反演粒径；光时域反射计利用后向散射定位光纤断点。"))+
+   app(p("<strong>医学与日用品：</strong>光学相干层析利用生物组织散射成像；防晒霜中的 $\\text{TiO}_2$、$\\text{ZnO}$ 颗粒通过散射与吸收屏蔽紫外；牛奶因酪蛋白微粒散射呈白色。"))
  )},
 ]},
 {
-"name": "5.3 光学传递函数",
-"color": "#ec4899",
-"desc": "OTF、MTF 与截止频率",
+"name": "6.3 光的吸收",
+"color": "#0891b2",
+"desc": "朗伯-比尔定律、复折射率、洛伦兹振子模型",
 "items": [
-{"id":"o5s3-1","name":"光学传递函数 OTF/MTF","tags":["der"],"brief":"描述系统对不同空间频率的响应。",
+{"id":"o6s3-1","name":"光的吸收与朗伯-比尔定律","tags":["thm","der"],"brief":"吸收使光强随厚度指数衰减。",
+ "fig":"absorption","figCap":"朗伯-比尔定律：光强随介质厚度指数衰减",
  "body": wrap(
-   exa(p("<strong>例：</strong>对正弦强度分布 $I(x)=1+m\\cos(2\\pi u_0x)$，成像后对比度被 MTF 调制：")+
-   fml("m'=m\\,|H(u_0)|")+
-   p("故 MTF 直接给出系统对某空间频率正弦光栅的对比度传递比例。")+
-   note(p("MTF 曲线是镜头厂商标定成像质量的核心指标，通常给出 10、30、50 线对/mm 处的数值。")))+
-   exa(p("<strong>例：</strong>对正弦强度分布 $I(x)=1+m\\cos(2\\pi u_0x)$，成像后对比度被 MTF 调制：")+
-   fml("m'=m\\,|H(u_0)|")+
-   p("故 MTF 直接给出系统对某空间频率正弦光栅的对比度传递比例。")+
-   note(p("MTF 曲线是镜头厂商标定成像质量的核心指标，通常给出 10、30、50 线对/mm 处的数值。")))+
-   defn("光学传递函数",p("线性平移不变成像系统对各个空间频率的调制能力用光学传递函数 $H(u)$ 描述，其模 $|H(u)|$ 为调制传递函数 MTF，辐角为相位传递函数 PTF。"))+
-   der(p("<strong>由光瞳求 OTF：</strong>OTF 等于光瞳函数的归一化自相关：")+
-   fml("H(u)=\\frac{\\int P(\\xi)P^*(\\xi-\\lambda z u)\\,d\\xi}{\\int |P(\\xi)|^2\\,d\\xi}")+
-   p("MTF 表示系统对正弦光栅对比度的传递比例，MTF 越大成像越锐利。"))+
-   app(p("<strong>应用：</strong>镜头与成像系统质量评价、光学设计指标、CTF/MTF 测量；衍射极限系统的 OTF 由光瞳自动相关决定。"))
+   thm("朗伯-比尔定律",p("光通过吸收介质时，光强随传播距离按指数规律衰减：")+
+   fml("I=I_0e^{-\\alpha l}=I_0\\,10^{-\\varepsilon c l}")+
+   p("$\\alpha$ 为线性吸收系数，$\\varepsilon$ 为摩尔吸光系数，$c$ 为吸收物质浓度，$l$ 为光程。"))+
+   der(p("<strong>推导：</strong>在厚度 $dx$ 的薄层内，光强的减少量正比于入射光强与该层内吸收粒子数：")+
+   fml("-dI=\\alpha I\\,dx\\ \\Rightarrow\\ \\frac{dI}{I}=-\\alpha\\,dx")+
+   p("由 $I(0)=I_0$ 积分：")+
+   fml("\\int_{I_0}^{I}\\frac{dI'}{I'}=-\\alpha\\int_0^l dx'\\ \\Rightarrow\\ I=I_0e^{-\\alpha l}")+
+   p("以粒子数密度 $N$ 与吸收截面 $\\sigma_a$ 表示有 $\\alpha=N\\sigma_a$，与浓度成正比，故可写为 $I=I_010^{-\\varepsilon cl}$，即比尔定律。"))+
+   app(p("<strong>应用：</strong>分光光度计据此测定溶液浓度；大气痕量气体（$\\text{NO}_2$、$\\text{SO}_2$）用差分吸收光谱监测。"))
  )},
-{"id":"o5s3-2","name":"光瞳与截止频率","tags":["der"],"brief":"口径决定可通过的最高空间频率。",
+{"id":"o6s3-2","name":"复折射率与吸收系数","tags":["der"],"brief":"用复折射率统一描述折射与吸收。",
  "body": wrap(
-   defn("截止频率",p("系统只能传递低于某一空间频率的成分，该上限称为截止频率 $u_c$，由数值孔径与波长决定。"))+
-   der(p("<strong>推导：</strong>光瞳直径 $D$、焦距 $f$、波长 $\\lambda$，OFT 自相关支持的最大频率：")+
-   fml("u_c = \\frac{D}{\\lambda f} = \\frac{1}{\\lambda F}")+
-   p("其中 $F=f/D$ 为 f 数。超过 $u_c$ 的频率完全不能成像，对应最小可分辨细节 $\\delta=1/u_c=\\lambda F$。"))+
-   note(p("减小 f 数（增大口径）可提高截止频率，但像差和衍射斑也随之变化，需权衡设计。"))
+   der(p("<strong>推导：</strong>把折射率推广为复数 $\\tilde{n}=n+i\\kappa$，平面波传播因子变为：")+
+   fml("e^{i\\frac{\\omega}{c}(\\tilde{n}z-ct)}=e^{-\\frac{\\omega\\kappa}{c}z}\\,e^{i\\frac{\\omega}{c}(nz-ct)}")+
+   p("实部 $n$ 决定相位速度，虚部 $\\kappa$（消光系数）决定振幅的指数衰减。与朗伯定律比较得：")+
+   fml("\\alpha=\\frac{2\\omega\\kappa}{c}=\\frac{4\\pi\\kappa}{\\lambda_0}")+
+   p("吸收与色散并非独立：$n$ 与 $\\kappa$ 通过克拉默斯-克勒尼希关系相互联系：")+
+   fml("n(\\omega)=1+\\frac{2}{\\pi}\\,\\mathcal{P}\\!\\int_0^{\\infty}\\frac{\\omega'\\kappa(\\omega')}{\\omega'^2-\\omega^2}\\,d\\omega'"))+
+   note(p("金属的高反射源于其很大的 $\\kappa$；半导体在带边附近的强吸收由 $\\kappa$ 的变化体现，是光电探测器的工作基础。"))
+ )},
+{"id":"o6s3-3","name":"洛伦兹振子模型","tags":["der","thm"],"brief":"经典电子振子模型统一解释吸收与色散。",
+ "body": wrap(
+   der(p("<strong>运动方程：</strong>把介质中的束缚电子视为受驱阻尼振子（质量 $m$、本征频率 $\\omega_0$、阻尼 $\\gamma$），在光场 $E=E_0e^{-i\\omega t}$ 驱动下：")+
+   fml("m\\ddot{x}+m\\gamma\\dot{x}+m\\omega_0^2x=-eE_0e^{-i\\omega t}")+
+   p("稳态解 $x=\\dfrac{-eE_0/m}{\\omega_0^2-\\omega^2-i\\gamma\\omega}e^{-i\\omega t}$。由极化强度 $P=-Nex$ 与 $\\varepsilon_r=1+P/\\varepsilon_0E$ 得：")+
+   fml("\\tilde{n}^2=\\tilde{\\varepsilon}_r=1+\\frac{Ne^2}{m\\varepsilon_0}\\cdot\\frac{1}{\\omega_0^2-\\omega^2-i\\gamma\\omega}")+
+   p("令 $\\tilde{n}=n+i\\kappa$ 并分离实虚部，即得洛伦兹吸收线型与色散曲线：")+
+   fml("\\kappa(\\omega)\\approx\\frac{Ne^2}{2m\\varepsilon_0n}\\cdot\\frac{\\gamma\\omega}{(\\omega_0^2-\\omega^2)^2+\\gamma^2\\omega^2}")+
+   p("远离共振时 $n$ 随频率单调增大（正常色散）；共振点附近 $dn/d\\omega$ 反号出现反常色散，同时 $\\kappa$ 达到峰值产生强吸收。"))+
+   note(p("洛伦兹模型的量子对应是电偶极跃迁；多共振叠加即塞耳迈耶尔方程，用于描述透明区的折射率。"))
  )},
 ]},
 {
-"name": "5.4 激光原理",
-"color": "#be185d",
-"desc": "粒子数反转、谐振腔与激光模式",
+"name": "6.4 色散 群速度与磁光效应",
+"color": "#0891b2",
+"desc": "正常与反常色散、柯西与塞耳迈耶尔公式、群速度、旋光色散与法拉第效应",
 "items": [
-{"id":"o5s4-1","name":"激光原理与粒子数反转","tags":["der","thm"],"brief":"受激辐射放大需要粒子数反转。",
+{"id":"o6s4-1","name":"正常色散与反常色散","tags":["der","thm"],"brief":"折射率随波长变化的两种规律。",
+ "fig":"dispersion","figCap":"色散曲线：正常色散区折射率随波长减小，吸收带附近出现反常色散",
  "body": wrap(
-   exa(p("<strong>例：</strong>若腔镜反射率 $R_1=R_2=0.98$、腔长 $L=0.30\\,\\text{m}$、内部损耗 $\\alpha\\approx0$：")+
-   fml("G_{th}=\\frac{1}{2L}\\ln\\frac{1}{R_1R_2}=\\frac{1}{0.60}\\ln\\frac{1}{0.9604}\\approx0.067\\,\\text{m}^{-1}")+
-   p("即增益介质须提供约 $6.7\\%$ 每米的增益才能起振。")+
-   note(p("阈值条件揭示了激光器三要素：增益介质、泵浦（实现反转）与光学谐振腔（提供反馈）。")))+
-   exa(p("<strong>例：</strong>若腔镜反射率 $R_1=R_2=0.98$、腔长 $L=0.30\\,\\text{m}$、内部损耗 $\\alpha\\approx0$：")+
-   fml("G_{th}=\\frac{1}{2L}\\ln\\frac{1}{R_1R_2}=\\frac{1}{0.60}\\ln\\frac{1}{0.9604}\\approx0.067\\,\\text{m}^{-1}")+
-   p("即增益介质须提供约 $6.7\\%$ 每米的增益才能起振。")+
-   note(p("阈值条件揭示了激光器三要素：增益介质、泵浦（实现反转）与光学谐振腔（提供反馈）。")))+
-   thm("激光产生条件",p("实现光放大必须使高能级粒子数多于低能级（粒子数反转），并通过谐振腔提供正反馈。"))+
-   der(p("<strong>粒子数反转条件：</strong>热平衡下玻尔兹曼分布 $N_2/N_1=e^{-(E_2-E_1)/kT}<1$，无法放大。通过泵浦（光泵、电泵）抽运使：")+
-   fml("\\frac{N_2}{g_2} > \\frac{N_1}{g_1}","粒子数反转")+
-   p("此时受激辐射超过吸收，增益系数 $g$ 大于损耗。振荡阈值：")+
-   fml("G_{th} = \\alpha + \\frac{1}{2L}\\ln\\frac{1}{R_1R_2}")+
-   p("其中 $L$ 为腔长，$R_1,R_2$ 为腔镜反射率，$\\alpha$ 为内部损耗。"))+
-   note(p("激光的三大特性源于此：高单色性、高方向性、高亮度（相干性强）。"))
+   thm("正常色散与反常色散",p("正常色散：折射率随波长增大而减小，$\\dfrac{dn}{d\\lambda}<0$。反常色散：在吸收带附近 $\\dfrac{dn}{d\\lambda}>0$。"))+
+   der(p("<strong>判据：</strong>由洛伦兹模型，远离共振时 $\\tilde{n}\\approx1+\\dfrac{A}{\\omega_0^2-\\omega^2}$，对波长求导：")+
+   fml("\\frac{dn}{d\\lambda}=\\frac{dn}{d\\omega}\\cdot\\frac{d\\omega}{d\\lambda}\\approx-\\frac{2\\pi c}{\\lambda^2}\\cdot\\frac{2A\\omega}{(\\omega_0^2-\\omega^2)^2}<0")+
+   p("在 $\\omega\\to\\omega_0$ 的共振区，$\\omega_0^2-\\omega^2$ 变号使导数反号，$\\dfrac{dn}{d\\lambda}>0$，即反常色散，同时伴随强吸收。"))+
+   exa(p("<strong>例：</strong>普通玻璃在可见光区为正常色散，紫光折射率大于红光；钠蒸气在 D 线附近出现反常色散，可用交叉棱镜法观测。")+
+   note(p("反常色散不违反因果律：它只出现在吸收带内，该波段光被强烈吸收，信号传播速度仍由群速度保证不超过 $c$。")))
  )},
-{"id":"o5s4-2","name":"光学谐振腔","tags":["der"],"brief":"两反射镜间形成光振荡与模式选择。",
- "fig":"lasercavity","figCap":"激光谐振腔与光振荡",
+{"id":"o6s4-2","name":"柯西公式与塞耳迈耶尔方程","tags":["der","app"],"brief":"描述透明波段色散的经验公式。",
  "body": wrap(
-   exa(p("<strong>例：</strong>腔长 $L=0.30\\,\\text{m}$、空气腔 $n=1$，纵模间隔：")+
-   fml("\\Delta\\nu=\\frac{c}{2nL}=\\frac{3\\times10^8}{2\\times0.30}=5.0\\times10^8\\,\\text{Hz}")+
-   p("若增益带宽为 $1.5\\,\\text{GHz}$，则腔内可容纳约 3 个纵模同时振荡。")+
-   note(p("缩短腔长或插入标准具可实现单纵模，获得高相干长度与稳定的激光输出。")))+
-   exa(p("<strong>例：</strong>腔长 $L=0.30\\,\\text{m}$、空气腔 $n=1$，纵模间隔：")+
-   fml("\\Delta\\nu=\\frac{c}{2nL}=\\frac{3\\times10^8}{2\\times0.30}=5.0\\times10^8\\,\\text{Hz}")+
-   p("若增益带宽为 $1.5\\,\\text{GHz}$，则腔内可容纳约 3 个纵模同时振荡。")+
-   note(p("缩短腔长或插入标准具可实现单纵模，获得高相干长度与稳定的激光输出。")))+
-   defn("光学谐振腔",p("由两面反射镜构成，增益介质置于腔内。光在两镜间多次往返，满足驻波条件的光被放大形成振荡。腔按稳定性分为稳定腔、临界腔与非稳腔。"))+
-   der(p("<strong>纵模条件与频率间隔：</strong>腔长 $L$、介质折射率 $n$，驻波条件 $2nL=q\\lambda$：")+
-   fml("\\nu_q = q\\frac{c}{2nL},\\quad \\Delta\\nu = \\frac{c}{2nL}","纵模频率与间隔")+
-   p("腔长越短纵模间隔越大，便于单纵模运转。稳定性由 $g$ 参数 $g_i=1-L/R_i$ 判定，稳定条件 $0<g_1g_2<1$。"))+
-   app(p("<strong>应用：</strong>激光器、光学频率梳、超短脉冲（锁模）与高精细度腔增强光谱。"))
+   der(p("<strong>柯西公式：</strong>在远离吸收带的透明区，把洛伦兹模型作长波展开得：")+
+   fml("n(\\lambda)=A+\\frac{B}{\\lambda^2}+\\frac{C}{\\lambda^4}")+
+   p("$A$、$B$、$C$ 为材料常数，由若干波长的测量值拟合。求导得色散率：")+
+   fml("\\frac{dn}{d\\lambda}=-\\frac{2B}{\\lambda^3}-\\frac{4C}{\\lambda^5}<0")+
+   p("与正常色散一致。"))+
+   der(p("<strong>塞耳迈耶尔方程：</strong>考虑多个吸收共振后更为精确：")+
+   fml("n^2(\\lambda)=1+\\sum_i\\frac{B_i\\lambda^2}{\\lambda^2-C_i}")+
+   p("它由洛伦兹振子模型对多个共振频率求和得到，能同时覆盖可见与红外波段，是玻璃库标定色散的标准形式。"))+
+   app(p("<strong>应用：</strong>光学设计软件用塞耳迈耶尔系数计算色差与设计消色差透镜；光纤中材料色散与波导色散之和决定零色散波长。"))
  )},
-{"id":"o5s4-3","name":"激光模式","tags":["der"],"brief":"纵模与横模的描述。",
+{"id":"o6s4-3","name":"群速度与相速度色散","tags":["der","thm"],"brief":"波包传播速度与相速度的区别。",
+ "fig":"groupspeed","figCap":"波包由群速度传播，而等相位面以相速度移动",
  "body": wrap(
-   exa(p("<strong>例：</strong>基横模 TEM$_{00}$ 光斑为高斯分布、光束质量 $M^2=1$；TEM$_{10}$ 有双瓣结构，光束质量变差。")+
-   fml("\\nu_{mnq}=\\frac{c}{2nL}\\left[q+\\frac{1}{2}(m+n+1)\\frac{\\arccos\\sqrt{g_1g_2}}{\\pi}\\right]")+
-   p("不同横模的共振频率略有差异，故可同时振荡多个横模，应通过选模抑制。")+
-   note(p("基横模光束可聚焦到衍射极限，是激光加工、光镊与精密测量首选的光束模式。")))+
-   defn("激光模式",p("激光腔内稳定存在的光场分布称为模式，分为表征纵向驻波结构的<strong>纵模</strong>与表征横截面强度分布的<strong>横模</strong>（TEM$_{mn}$）。"))+
-   der(p("<strong>模式频率：</strong>综合考虑纵模指数 $q$ 与横模指数 $m,n$，矩形腔模式频率：")+
-   fml("\\nu_{mnq}=\\frac{c}{2nL}\\left[q+\\frac{1}{2}(m+n+1)\\frac{\\arccos\\sqrt{g_1g_2}}{\\pi}\\right]")+
-   p("基横模 TEM$_{00}$ 光斑为高斯分布，光束质量最好（$M^2=1$）；高阶模光斑有分裂结构，光束质量下降。"))+
-   note(p("通过选模技术（如小孔光阑、腔内倾斜标准具）可获得单横模、单纵模输出。"))
+   der(p("<strong>推导：</strong>两频率相近的单色波叠加形成波包，振幅峰以群速度传播：")+
+   fml("v_g=\\frac{d\\omega}{dk}=v_p+k\\frac{dv_p}{dk}=v_p-\\lambda\\frac{dv_p}{d\\lambda}")+
+   p("其中 $v_p=\\omega/k=c/n$ 为相速度。代入 $v_p=c/n$ 得：")+
+   fml("v_g=\\frac{c}{n}+\\frac{c\\omega}{n^2}\\frac{dn}{d\\omega}=\\frac{c}{n}\\left(1+\\frac{\\lambda}{n}\\frac{dn}{d\\lambda}\\right)^{-1}")+
+   p("正常色散时 $\\dfrac{dn}{d\\lambda}<0$，$v_g<v_p$；反常色散时 $v_g>v_p$，但此时波形严重畸变，信息速度仍不超过 $c$。"))+
+   app(p("<strong>应用：</strong>光纤中不同波长的群速度不同造成脉冲展宽，限制传输带宽；色散补偿光纤与啁啾光栅用于抵消累积色散。"))
  )},
-]},
-{
-"name": "5.5 高斯光束与全息",
-"color": "#db2777",
-"desc": "高斯光束传播与全息成像",
-"items": [
-{"id":"o5s5-1","name":"高斯光束","tags":["der"],"brief":"激光束的场分布与传播规律。",
- "fig":"gaussianbeam","figCap":"高斯光束的束腰与发散",
+{"id":"o6s4-4","name":"旋光色散与法拉第效应","tags":["der","app"],"brief":"偏振面旋转随波长与磁场变化。",
  "body": wrap(
-   exa(p("<strong>例：</strong>氦氖激光束腰 $w_0=0.5\\,\\text{mm}$，$\\lambda=632.8\\,\\text{nm}$：")+
-   fml("z_R=\\frac{\\pi w_0^2}{\\lambda}\\approx1.24\\,\\text{m},\\quad \\theta_{div}=\\frac{\\lambda}{\\pi w_0}\\approx0.40\\,\\text{mrad}")+
-   p("在 $z=10\\,\\text{m}$ 处束宽 $w(10)\\approx w_0\\sqrt{1+(8.1)^2}\\approx4.1\\,\\text{mm}$。")+
-   note(p("束腰越细发散越快，激光打标与医疗需在小光斑与长工作距离间折中。")))+
-   exa(p("<strong>例：</strong>氦氖激光束腰 $w_0=0.5\\,\\text{mm}$，$\\lambda=632.8\\,\\text{nm}$：")+
-   fml("z_R=\\frac{\\pi w_0^2}{\\lambda}\\approx1.24\\,\\text{m},\\quad \\theta_{div}=\\frac{\\lambda}{\\pi w_0}\\approx0.40\\,\\text{mrad}")+
-   p("在 $z=10\\,\\text{m}$ 处束宽 $w(10)\\approx w_0\\sqrt{1+(8.1)^2}\\approx4.1\\,\\text{mm}$。")+
-   note(p("束腰越细发散越快，激光打标与医疗需在小光斑与长工作距离间折中。")))+
-   defn("高斯光束",p("基横模激光的横截面光强呈高斯分布，束腰处最细，随传播距离按双曲线规律展宽，是激光的基本光束模型。"))+
-   der(p("<strong>传播规律：</strong>束腰半径 $w_0$，瑞利长度 $z_R=\\pi w_0^2/\\lambda$，束宽：")+
-   fml("w(z)=w_0\\sqrt{1+\\left(\\frac{z}{z_R}\\right)^2}")+
-   p("远场发散角与束腰成反比：")+
-   fml("\\theta_{div}=\\frac{\\lambda}{\\pi w_0}")+
-   p("$z\\ll z_R$ 时光束近似平行（准直）；$z\\gg z_R$ 时近似线性发散。束腰越细发散越快，二者不可兼得。"))+
-   app(p("<strong>应用：</strong>激光聚焦、光纤耦合、激光加工与激光雷达的束斑设计。"))
- )},
-{"id":"o5s5-2","name":"全息成像与波前记录","tags":["der","app"],"brief":"傅里叶变换全息与数字全息。",
- "body": wrap(
-   exa(p("<strong>例（傅里叶变换全息再现）：</strong>对记录强度作逆傅里叶变换，第三项给出物分布：")+
-   fml("\\mathcal{F}^{-1}\\{A^*O(u)e^{i2\\pi u x_0}\\}=A^*O(x-x_0)")+
-   p("输出在 $x=x_0$ 处重建物的像，实现无透镜再现。")+
-   note(p("数字全息用 CCD 记录、计算机数值再现，可灵活进行相位补偿与三维重构，广泛用于显微与测量。")))+
-   defn("傅里叶变换全息",p("将物置于透镜前焦面，频谱面记录干涉图样，得到傅里叶变换全息图，再现时直接给出物的频谱与像。"))+
-   der(p("<strong>记录：</strong>物频谱 $O(u)$ 与倾斜参考光 $R(u)=A e^{-i2\\pi u x_0}$ 干涉，记录：")+
-   fml("I(u)=|O|^2+A^2+AO^*(u)e^{-i2\\pi u x_0}+A^*O(u)e^{i2\\pi u x_0}")+
-   p("再现时对 $I(u)$ 作傅里叶逆变换，第三项给出物分布 $O(x)$ 的实像，实现无透镜再现。"))+
-   app(p("<strong>应用：</strong>全息存储（高密度）、数字全息显微（数值再现）、粒子场测量与全息防伪。"))
- )},
-]},
-{
-"name": "5.6 傅里叶光学应用",
-"color": "#ec4899",
-"desc": "激光应用、光学信息处理与散斑",
-"items": [
-{"id":"o5s6-1","name":"激光应用","tags":["app","der"],"brief":"激光在加工、测量与信息领域的应用。",
- "body": wrap(
-   exa(p("<strong>例：</strong>激光功率 $P=1\\,\\text{W}$、$\\lambda=1064\\,\\text{nm}$，聚焦到衍射极限斑 $r=1.22\\lambda f/D$。取 $D/f=0.1$：")+
-   fml("r\\approx1.22\\times\\frac{1064\\times10^{-9}}{0.1}\\approx1.3\\times10^{-5}\\,\\text{m}")+
-   p("功率密度 $S=P/(\\pi r^2)\\approx1.9\\times10^9\\,\\text{W/m}^2$，足以熔化或汽化多数金属。")+
-   note(p("提高功率密度需增大口径、缩短波长或采用脉冲压缩，这正是激光加工与激光核聚变的核心思路。")))+
-   app(p("激光凭借高单色性、高方向性与高相干性，广泛用于激光加工（切割、焊接、打标）、激光测距与雷达、激光医疗、激光光谱与激光核聚变等。"))+
-   der(p("<strong>聚焦功率密度：</strong>激光束经透镜聚焦到衍射极限斑 $r\\approx\\lambda f/D$，功率密度：")+
-   fml("S=\\frac{P}{\\pi r^2}\\propto \\frac{P D^2}{\\lambda^2 f^2}")+
-   p("波长越短、口径越大，聚焦光斑越小、功率密度越高，足以使材料熔化或汽化。"))+
-   note(p("激光相干性使激光散斑、激光干涉与激光多普勒测速成为可能。"))
- )},
-{"id":"o5s6-2","name":"光学信息处理","tags":["app","der"],"brief":"以光学方式做运算与识别。",
- "body": wrap(
-   exa(p("<strong>例（光学相关识别）：</strong>在 4f 系统频谱面放置目标图像 $g$ 的匹配滤波器 $H=\\mathcal{F}\\{g\\}^*$：")+
-   fml("\\text{输出}=\\mathcal{F}^{-1}\\{\\mathcal{F}\\{f\\}H\\}=f\\star g")+
-   p("当输入图像 $f$ 含目标 $g$ 时，相关面出现明亮相关峰，峰值位置指示目标位置。")+
-   note(p("光学相关具有大规模并行与高速度优势，用于指纹识别、目标跟踪与合成孔径雷达数据实时处理。")))+
-   exa(p("<strong>例（光学相关识别）：</strong>在 4f 系统频谱面放置目标图像 $g$ 的匹配滤波器 $H=\\mathcal{F}\\{g\\}^*$：")+
-   fml("\\text{输出}=\\mathcal{F}^{-1}\\{\\mathcal{F}\\{f\\}H\\}=f\\star g")+
-   p("当输入图像 $f$ 含目标 $g$ 时，相关面出现明亮相关峰，峰值位置指示目标位置。")+
-   note(p("光学相关具有大规模并行与高速度优势，用于指纹识别、目标跟踪与合成孔径雷达数据实时处理。")))+
-   app(p("利用透镜的傅里叶变换特性，可在光学系统上直接实现卷积、相关、频谱分析与图像识别，具有并行、高速的特点。"))+
-   der(p("<strong>相关运算：</strong>两图像 $f,g$ 的相关输出在 4f 系统中由卷积定理实现：")+
-   fml("f\\star g = \\mathcal{F}^{-1}\\{\\mathcal{F}\\{f\\}\\cdot \\mathcal{F}\\{g\\}^*\\}")+
-   p("在频谱面放置匹配滤波器 $\\mathcal{F}\\{g\\}^*$，相关峰的位置与强度即给出目标的位置与相似度，实现光学模式识别。"))+
-   app(p("<strong>应用：</strong>光学相关识别、指纹与字符识别、合成孔径雷达数据处理、可编程光计算。"))
- )},
-{"id":"o5s6-3","name":"散斑与相干成像","tags":["der"],"brief":"相干光照明下的随机颗粒图样。",
- "body": wrap(
-   defn("散斑",p("相干光照射粗糙表面时，各散射点散射光随机干涉，形成明暗随机分布的颗粒状图样，称为激光散斑。"))+
-   der(p("<strong>统计特性：</strong>散斑场复振幅服从圆高斯分布，强度服从负指数分布，其对比度与散斑尺寸由照射孔径与波长决定：")+
-   fml("\\langle I\\rangle=I_0,\\quad \\sigma_I=\\langle I\\rangle,\\quad P(I)=\\frac{1}{\\langle I\\rangle}e^{-I/\\langle I\\rangle}")+
-   p("散斑平均尺寸 $\\delta\\approx\\frac{\\lambda z}{D}$。散斑既是全息与相干成像中的噪声，也可作为测量信息载体。"))+
-   app(p("<strong>应用：</strong>散斑干涉计量（测形变、振动）、数字散斑相关法（DIC）、激光投影中的散斑抑制。"))
+   der(p("<strong>旋光色散：</strong>旋光介质的偏振面旋转角随波长变化，由毕奥定律：")+
+   fml("\\alpha=[\\alpha]_\\lambda\\,l\\,c,\\qquad [\\alpha]_\\lambda\\propto\\frac{1}{\\lambda^2}")+
+   p("短波旋转更强，故白光通过旋光介质后各色偏振面转角不同，形成旋光色散。其微观来源是左右旋圆偏振光折射率不同：")+
+   fml("\\alpha=\\frac{\\pi l}{\\lambda}(n_L-n_R)"))+
+   der(p("<strong>法拉第效应：</strong>外加磁场使介质产生圆双折射，偏振面旋转角正比于磁场与光程：")+
+   fml("\\alpha=V\\,B\\,l")+
+   p("$V$ 为费尔德常数。与天然旋光不同，法拉第旋转的方向由磁场方向决定而与光的传播方向无关，故光往返一次旋转角加倍，可制成光隔离器。"))+
+   app(p("<strong>应用：</strong>光隔离器、磁光调制器、磁场与电流传感（法拉第传感器）、磁光存储；旋光色散亦用于研究材料中的载流子浓度。"))
  )},
 ]},
 ]
 
 CHAPTERS = [
     {"id":"o-ch1","num":"第一章","title":"几何光学","en":"GEOMETRICAL OPTICS",
-     "desc":"光的直线传播与反射、折射定律与费马原理、全反射与棱镜色散、球面镜与球面折射、薄透镜、光学仪器、光阑与光度学。",
+     "desc":"光的直线传播、反射与折射定律、费马原理、全反射与光纤、棱镜色散、球面镜与球面折射成像、薄透镜与透镜制造者公式、组合透镜、光学仪器、光阑与光度学。",
      "sections": ch1_sections},
-    {"id":"o-ch2","num":"第二章","title":"光的干涉","en":"INTERFERENCE",
-     "desc":"相干条件与光程差、杨氏双缝干涉、分波前干涉、薄膜等倾与等厚干涉、牛顿环、迈克尔逊与法布里-珀罗干涉仪、相干性。",
+    {"id":"o-ch2","num":"第二章","title":"波动光学基础","en":"WAVE OPTICS",
+     "desc":"光的电磁本性、麦克斯韦波动方程、平面波解、光速与折射率、光强与振幅、单色波与波列、相位与光程、光程差、波前与波面、惠更斯原理、叠加原理、坡印廷矢量、偏振态基础、空间与时间相干性、相干长度、光谱与色散基础。",
      "sections": ch2_sections},
-    {"id":"o-ch3","num":"第三章","title":"光的衍射","en":"DIFFRACTION",
-     "desc":"惠更斯-菲涅耳原理、菲涅耳衍射与波带片、单缝与圆孔夫琅禾费衍射、光学仪器分辨率、光栅衍射、布拉格衍射与全息。",
+    {"id":"o-ch3","num":"第三章","title":"干涉","en":"INTERFERENCE",
+     "desc":"相干条件与光程差、杨氏双缝干涉、分波前干涉、薄膜等倾与等厚干涉、牛顿环、迈克尔逊与法布里-珀罗干涉仪、相干性与干涉应用。",
      "sections": ch3_sections},
-    {"id":"o-ch4","num":"第四章","title":"光的偏振","en":"POLARIZATION",
-     "desc":"自然光与偏振光、马吕斯定律、布儒斯特定律、双折射与晶体光学、波片、偏振光干涉与色偏振、旋光与琼斯矩阵、电光效应。",
+    {"id":"o-ch4","num":"第四章","title":"衍射","en":"DIFFRACTION",
+     "desc":"惠更斯-菲涅耳原理、菲涅耳衍射与波带片、单缝与圆孔夫琅禾费衍射、光学仪器分辨率、光栅衍射、布拉格衍射与全息。",
      "sections": ch4_sections},
-    {"id":"o-ch5","num":"第五章","title":"傅里叶光学与激光","en":"FOURIER OPTICS & LASER",
-     "desc":"空间频率与傅里叶变换、衍射的傅里叶解释、阿贝成像、4f 系统与空间滤波、光学传递函数、激光原理与谐振腔、高斯光束与全息。",
+    {"id":"o-ch5","num":"第五章","title":"偏振","en":"POLARIZATION",
+     "desc":"自然光与偏振光、马吕斯定律、布儒斯特定律、双折射与晶体光学、波片与椭圆偏振、偏振光干涉与色偏振、旋光与琼斯矩阵、电光效应与偏振应用。",
      "sections": ch5_sections},
+    {"id":"o-ch6","num":"第六章","title":"散射 吸收 色散","en":"SCATTERING · ABSORPTION · DISPERSION",
+     "desc":"瑞利散射与 λ⁻⁴ 定律、米氏散射、无选择性散射、大气散射与天空颜色、丁达尔效应、拉曼与布里渊散射、朗伯-比尔定律、复折射率、洛伦兹振子模型、正常与反常色散、柯西与塞耳迈耶尔公式、群速度色散、旋光色散与法拉第效应。",
+     "sections": ch6_sections},
 ]
 
 total_items = sum(sum(len(s["items"]) for s in ch["sections"]) for ch in CHAPTERS)
@@ -1636,6 +1857,7 @@ def gen_html():
   .la-nav-tab.c3{color:#0d9488;border-color:#99f6e4}
   .la-nav-tab.c4{color:#c2410c;border-color:#fed7aa}
   .la-nav-tab.c5{color:#be185d;border-color:#fbcfe8}
+  .la-nav-tab.c6{color:#0891b2;border-color:#a5f3fc}
   .la-engagement-bar{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:26px 0 10px}
   .la-stat-item{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border-radius:999px;background:#fff;border:1px solid #e2e8f0;font-size:13px;color:#334155;font-weight:600}
   .la-stat-value{color:#6366f1;font-weight:800;font-size:15px}
@@ -1658,6 +1880,7 @@ def gen_html():
   .la-phase-title.o-ch3::before{background:#0d9488}
   .la-phase-title.o-ch4::before{background:#c2410c}
   .la-phase-title.o-ch5::before{background:#be185d}
+  .la-phase-title.o-ch6::before{background:#0891b2}
   .la-phase-en{font-size:11px;letter-spacing:.36em;color:#94a3b8;font-weight:700;text-transform:uppercase;margin:0 0 12px 18px;font-style:italic}
   .la-phase-desc{color:var(--la-muted);font-size:14px;margin:0 0 24px 18px;line-height:1.8;max-width:960px}
   .la-domain{margin-bottom:26px;padding:16px 18px 18px 22px;position:relative;background:rgba(255,255,255,.6);border-radius:18px;border:1px solid #e5ebf2}
@@ -1775,7 +1998,7 @@ document.addEventListener('DOMContentLoaded', () => {{
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="光学知识体系：几何光学、干涉、衍射、偏振、傅里叶光学与激光">
+<meta name="description" content="光学知识体系：几何光学、波动光学基础、干涉、衍射、偏振、散射吸收色散">
 <title>光学 · 知识体系</title>
 <script>
 window.MathJax = {{
@@ -1802,7 +2025,7 @@ window.MathJax = {{
   <header class="la-header">
     <div class="la-eyebrow">OPTICS · KNOWLEDGE MAP</div>
     <h1>光学 · 知识体系</h1>
-    <p class="la-subtitle">几何光学 · 光的干涉 · 光的衍射 · 光的偏振 · 傅里叶光学与激光</p>
+    <p class="la-subtitle">几何光学 · 波动光学基础 · 干涉 · 衍射 · 偏振 · 散射吸收色散</p>
     <div class="back-bar"><a class="back-btn" href="index.html">← 返回总览</a></div>
     <div class="la-nav-tabs">{nav_tabs}</div>
     <div class="la-engagement-bar">
