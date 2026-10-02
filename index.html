@@ -125,11 +125,12 @@
   .modal-close{margin-top:20px;background:#0f172a;color:white;border-color:#0f172a;padding:10px 20px;font-weight:bold}
   footer{padding:34px 0 50px;color:var(--muted);text-align:center;font-size:13px}
   @media(max-width:900px){.wrap{width:min(94vw,720px)}.roadmap{padding:20px}.phase-title{font-size:19px}.phase-en{font-size:10px;letter-spacing:.28em}.domain-desc{display:none}.domain-grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}.relations{grid-template-columns:1fr}}
-  .locked-chapter{position:relative;filter:grayscale(0.85) brightness(0.6);pointer-events:none;user-select:none;border-radius:18px;overflow:hidden}
-  .locked-chapter .lock-overlay{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(30,41,59,0.55);backdrop-filter:blur(2px);z-index:10;border-radius:18px;pointer-events:auto}
-  .locked-chapter .lock-icon{font-size:52px;margin-bottom:14px;opacity:0.9}
-  .locked-chapter .lock-text{color:#fff;font-size:18px;font-weight:700;text-align:center;letter-spacing:.05em;text-shadow:0 2px 8px rgba(0,0,0,0.5)}
-  .locked-chapter .lock-sub{color:#cbd5e1;font-size:13px;margin-top:8px;text-align:center}
+  .locked-chapter,.locked-card{position:relative;filter:grayscale(0.85) brightness(0.6);pointer-events:none;user-select:none;border-radius:18px;overflow:hidden}
+  .locked-chapter .lock-overlay,.locked-card .lock-overlay{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(30,41,59,0.55);backdrop-filter:blur(2px);z-index:10;border-radius:18px;pointer-events:auto}
+  .locked-chapter .lock-icon,.locked-card .lock-icon{font-size:52px;margin-bottom:14px;opacity:0.9}
+  .locked-chapter .lock-text,.locked-card .lock-text{color:#fff;font-size:18px;font-weight:700;text-align:center;letter-spacing:.05em;text-shadow:0 2px 8px rgba(0,0,0,0.5)}
+  .locked-chapter .lock-sub,.locked-card .lock-sub{color:#cbd5e1;font-size:13px;margin-top:8px;text-align:center}
+  .locked-card .lock-overlay{pointer-events:none!important}
 </style>
 </head>
 <body>
@@ -165,15 +166,15 @@
         <div class="course-card" onclick="showCourse('线性代数')"><div class="tag">前传第2章</div><h4>线性代数</h4>
           <div class="arc-badges"><span class="arc-badge arc-pst">PST 3</span><span class="arc-badge arc-prs">PRS 5</span><span class="arc-badge arc-ftr">FTR 7</span></div>
           <p>行列式、矩阵、线性方程组。新手村困难章节。</p></div>
-        <div class="course-card" onclick="showCourse('概率论与数理统计')"><div class="tag">前传第3章</div><h4>概率论与数理统计</h4>
+        <div class="course-card locked-card"><div class="tag">前传第3章</div><h4>概率论与数理统计</h4>
           <div class="arc-badges"><span class="arc-badge arc-pst">PST 3</span><span class="arc-badge arc-prs">PRS 5</span><span class="arc-badge arc-ftr">FTR 7</span></div>
-          <p>随机变量、分布、统计推断。不会统计等于白做实验。</p></div>
-        <div class="course-card special-card" onclick="showCourse('矢量分析')"><div class="tag">前传第4章</div><h4>矢量分析</h4>
+          <p>随机变量、分布、统计推断。不会统计等于白做实验。</p><div class="lock-overlay"><div class="lock-icon">🔒</div><div class="lock-text">知识不够，前面的区域以后再来探索吧</div></div></div>
+        <div class="course-card locked-card special-card"><div class="tag">前传第4章</div><h4>矢量分析</h4>
           <div class="arc-badges"><span class="arc-badge arc-pst">PST 3</span><span class="arc-badge arc-prs">PRS 5</span><span class="arc-badge arc-ftr">FTR 7</span><span class="arc-badge arc-etr">ETR 9</span></div>
-          <p>梯度、散度、旋度、斯托克斯定理。电磁学的数学语言。</p></div>
-        <div class="course-card special-card" onclick="showCourse('群论')"><div class="tag">前传第5章</div><h4>群论</h4>
+          <p>梯度、散度、旋度、斯托克斯定理。电磁学的数学语言。</p><div class="lock-overlay"><div class="lock-icon">🔒</div><div class="lock-text">知识不够，前面的区域以后再来探索吧</div></div></div>
+        <div class="course-card locked-card special-card"><div class="tag">前传第5章</div><h4>群论</h4>
           <div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-etr">ETR 10</span></div>
-          <p>抽象代数、对称性。物理学家最爱的"魔法"工具。</p></div>
+          <p>抽象代数、对称性。物理学家最爱的"魔法"工具。</p><div class="lock-overlay"><div class="lock-icon">🔒</div><div class="lock-text">知识不够，前面的区域以后再来探索吧</div></div></div>
       </div>
     </div>
 
@@ -205,15 +206,15 @@
         <div class="course-card" onclick="showCourse('理论力学')"><div class="tag">第1章pro</div><h4>理论力学</h4>
           <div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 10</span></div>
           <p>拉格朗日、哈密顿。真正的物理才刚刚开始！</p></div>
-        <div class="course-card" onclick="showCourse('流体力学')"><div class="tag">第1-1章</div><h4>流体力学</h4>
+        <div class="course-card locked-card"><div class="tag">第1-1章</div><h4>流体力学</h4>
           <div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 10</span></div>
-          <p>NS方程、湍流、边界层。经典物理最后的难题。</p></div>
-        <div class="course-card" onclick="showCourse('固体力学')"><div class="tag">第1-2章</div><h4>固体力学</h4>
+          <p>NS方程、湍流、边界层。经典物理最后的难题。</p><div class="lock-overlay"><div class="lock-icon">🔒</div><div class="lock-text">知识不够，前面的区域以后再来探索吧</div></div></div>
+        <div class="course-card locked-card"><div class="tag">第1-2章</div><h4>固体力学</h4>
           <div class="arc-badges"><span class="arc-badge arc-pst">PST 3</span><span class="arc-badge arc-prs">PRS 5</span><span class="arc-badge arc-ftr">FTR 7</span><span class="arc-badge arc-etr">ETR 9</span></div>
-          <p>应力应变、本构关系、有限元。让物理变成桥梁和高楼。</p></div>
-        <div class="course-card hard-card" onclick="showCourse('计算流体力学')"><div class="tag">第1-1章pro</div><h4>计算流体力学</h4>
+          <p>应力应变、本构关系、有限元。让物理变成桥梁和高楼。</p><div class="lock-overlay"><div class="lock-icon">🔒</div><div class="lock-text">知识不够，前面的区域以后再来探索吧</div></div></div>
+        <div class="course-card locked-card hard-card"><div class="tag">第1-1章pro</div><h4>计算流体力学</h4>
           <div class="arc-badges"><span class="arc-badge arc-pst">PST 5</span><span class="arc-badge arc-prs">PRS 7</span><span class="arc-badge arc-ftr">FTR 9+</span><span class="arc-badge arc-byd">BYD 11</span></div>
-          <p>有限差分、有限体积、谱方法。从NS方程到数值模拟。</p></div>
+          <p>有限差分、有限体积、谱方法。从NS方程到数值模拟。</p><div class="lock-overlay"><div class="lock-icon">🔒</div><div class="lock-text">知识不够，前面的区域以后再来探索吧</div></div></div>
       </div>
     </div>
 
@@ -229,15 +230,15 @@
         <div class="course-card" onclick="showCourse('电路')"><div class="tag">第2-1章</div><h4>电路</h4>
           <div class="arc-badges"><span class="arc-badge arc-pst">PST 2</span><span class="arc-badge arc-prs">PRS 4</span><span class="arc-badge arc-ftr">FTR 6</span></div>
           <p>电路定律与分析方法。电阻炸了！</p></div>
-        <div class="course-card" onclick="showCourse('模拟电子技术')"><div class="tag">第2-2章</div><h4>模拟电子技术</h4>
+        <div class="course-card locked-card"><div class="tag">第2-2章</div><h4>模拟电子技术</h4>
           <div class="arc-badges"><span class="arc-badge arc-pst">PST 3</span><span class="arc-badge arc-prs">PRS 5</span><span class="arc-badge arc-ftr">FTR 7</span><span class="arc-badge arc-etr">ETR 9</span></div>
-          <p>三极管、运放、滤波器。调参调到怀疑人生。</p></div>
-        <div class="course-card" onclick="showCourse('数字电子技术')"><div class="tag">第2-3章</div><h4>数字电子技术</h4>
+          <p>三极管、运放、滤波器。调参调到怀疑人生。</p><div class="lock-overlay"><div class="lock-icon">🔒</div><div class="lock-text">知识不够，前面的区域以后再来探索吧</div></div></div>
+        <div class="course-card locked-card"><div class="tag">第2-3章</div><h4>数字电子技术</h4>
           <div class="arc-badges"><span class="arc-badge arc-pst">PST 2</span><span class="arc-badge arc-prs">PRS 4</span><span class="arc-badge arc-ftr">FTR 6</span></div>
-          <p>布尔代数、触发器、状态机。数电不难，难的是老师觉得你不难。</p></div>
-        <div class="course-card chip-card" onclick="showCourse('集成电路')"><div class="tag">第2-4章</div><h4>集成电路</h4>
+          <p>布尔代数、触发器、状态机。数电不难，难的是老师觉得你不难。</p><div class="lock-overlay"><div class="lock-icon">🔒</div><div class="lock-text">知识不够，前面的区域以后再来探索吧</div></div></div>
+        <div class="course-card locked-card chip-card"><div class="tag">第2-4章</div><h4>集成电路</h4>
           <div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 10</span></div>
-          <p>晶体管到芯片，版图到流片。承载一个时代的算力。</p></div>
+          <p>晶体管到芯片，版图到流片。承载一个时代的算力。</p><div class="lock-overlay"><div class="lock-icon">🔒</div><div class="lock-text">知识不够，前面的区域以后再来探索吧</div></div></div>
       </div>
     </div>
 
@@ -262,27 +263,27 @@
         <div class="course-card" onclick="showCourse('工程光学')"><div class="tag">第4-1章</div><h4>工程光学</h4>
           <div class="arc-badges"><span class="arc-badge arc-pst">PST 3</span><span class="arc-badge arc-prs">PRS 5</span><span class="arc-badge arc-ftr">FTR 7</span><span class="arc-badge arc-etr">ETR 9</span></div>
           <p>透镜设计、光路计算、像差分析。把光学搬进工厂！</p></div>
-        <div class="course-card" onclick="showCourse('光学系统设计')"><div class="tag">第4-2章</div><h4>光学系统设计</h4>
+        <div class="course-card locked-card"><div class="tag">第4-2章</div><h4>光学系统设计</h4>
           <div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 10</span></div>
-          <p>从单透镜到复杂镜头组。Zemax一开，头发掉一半。</p></div>
-        <div class="course-card hard-card" onclick="showCourse('激光原理')"><div class="tag">第4-3章</div><h4>激光原理</h4>
+          <p>从单透镜到复杂镜头组。Zemax一开，头发掉一半。</p><div class="lock-overlay"><div class="lock-icon">🔒</div><div class="lock-text">知识不够，前面的区域以后再来探索吧</div></div></div>
+        <div class="course-card locked-card hard-card"><div class="tag">第4-3章</div><h4>激光原理</h4>
           <div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 10+</span></div>
-          <p>受激辐射、光放大。让电子们"卷"起来！</p></div>
-        <div class="course-card hard-card" onclick="showCourse('非线性光学')"><div class="tag">第4-4章</div><h4>非线性光学</h4>
+          <p>受激辐射、光放大。让电子们"卷"起来！</p><div class="lock-overlay"><div class="lock-icon">🔒</div><div class="lock-text">知识不够，前面的区域以后再来探索吧</div></div></div>
+        <div class="course-card locked-card hard-card"><div class="tag">第4-4章</div><h4>非线性光学</h4>
           <div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 10+</span></div>
-          <p>倍频、四波混频。光不仅直线传播，还会跟光打架！</p></div>
-        <div class="course-card" onclick="showCourse('发光物理')"><div class="tag">第4-5章</div><h4>发光物理</h4>
+          <p>倍频、四波混频。光不仅直线传播，还会跟光打架！</p><div class="lock-overlay"><div class="lock-icon">🔒</div><div class="lock-text">知识不够，前面的区域以后再来探索吧</div></div></div>
+        <div class="course-card locked-card"><div class="tag">第4-5章</div><h4>发光物理</h4>
           <div class="arc-badges"><span class="arc-badge arc-pst">PST 3</span><span class="arc-badge arc-prs">PRS 5</span><span class="arc-badge arc-ftr">FTR 7</span><span class="arc-badge arc-etr">ETR 9</span></div>
-          <p>电子跃迁，释放光子。你不发光怎么照亮全人类？</p></div>
+          <p>电子跃迁，释放光子。你不发光怎么照亮全人类？</p><div class="lock-overlay"><div class="lock-icon">🔒</div><div class="lock-text">知识不够，前面的区域以后再来探索吧</div></div></div>
       </div>
     </div>
 
     <div class="domain" style="--domain-color:#0891b2;">
       <div class="domain-header"><h3>🔊 声学领域</h3><span class="domain-count">1门</span><span class="domain-desc">波动物理的另一分支</span></div>
       <div class="domain-grid">
-        <div class="course-card" onclick="showCourse('声学')"><div class="tag">额外章节</div><h4>声学</h4>
+        <div class="course-card locked-card"><div class="tag">额外章节</div><h4>声学</h4>
           <div class="arc-badges"><span class="arc-badge arc-pst">PST 3</span><span class="arc-badge arc-prs">PRS 5</span><span class="arc-badge arc-ftr">FTR 7</span></div>
-          <p>声波传播、超声成像、声纳探测。声音是探测世界的另一种感官。</p></div>
+          <p>声波传播、超声成像、声纳探测。声音是探测世界的另一种感官。</p><div class="lock-overlay"><div class="lock-icon">🔒</div><div class="lock-text">知识不够，前面的区域以后再来探索吧</div></div></div>
       </div>
     </div>
 
@@ -305,33 +306,33 @@
     <div class="domain" style="--domain-color:#6366f1;">
       <div class="domain-header"><h3>🔐 量子应用</h3><span class="domain-count">2门</span><span class="domain-desc">量子力学的信息革命</span></div>
       <div class="domain-grid">
-        <div class="course-card hard-card" onclick="showCourse('量子信息')"><div class="tag">第5-1章</div><h4>量子信息</h4>
+        <div class="course-card locked-card hard-card"><div class="tag">第5-1章</div><h4>量子信息</h4>
           <div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 10</span></div>
-          <p>量子比特、量子纠缠。量子加密，绝对安全！</p></div>
-        <div class="course-card hard-card" onclick="showCourse('量子计算')"><div class="tag">第5-2章</div><h4>量子计算</h4>
+          <p>量子比特、量子纠缠。量子加密，绝对安全！</p><div class="lock-overlay"><div class="lock-icon">🔒</div><div class="lock-text">知识不够，前面的区域以后再来探索吧</div></div></div>
+        <div class="course-card locked-card hard-card"><div class="tag">第5-2章</div><h4>量子计算</h4>
           <div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 10+</span></div>
-          <p>Shor、Grover、量子门。经典算一万年，量子算几分钟。</p></div>
+          <p>Shor、Grover、量子门。经典算一万年，量子算几分钟。</p><div class="lock-overlay"><div class="lock-icon">🔒</div><div class="lock-text">知识不够，前面的区域以后再来探索吧</div></div></div>
       </div>
     </div>
 
     <div class="domain" style="--domain-color:#b91c1c;">
       <div class="domain-header"><h3>☢️ 核物理</h3><span class="domain-count">1门</span><span class="domain-desc">微观世界的暴力美学</span></div>
       <div class="domain-grid">
-        <div class="course-card" onclick="showCourse('原子核物理')"><div class="tag">额外章节</div><h4>原子核物理</h4>
+        <div class="course-card locked-card"><div class="tag">额外章节</div><h4>原子核物理</h4>
           <div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 10</span></div>
-          <p>裂变聚变释放能量。微观世界的暴力美学。</p></div>
+          <p>裂变聚变释放能量。微观世界的暴力美学。</p><div class="lock-overlay"><div class="lock-icon">🔒</div><div class="lock-text">知识不够，前面的区域以后再来探索吧</div></div></div>
       </div>
     </div>
 
     <div class="domain" style="--domain-color:#6d28d9;">
       <div class="domain-header"><h3>🧪 实验与科学通识</h3><span class="domain-count">2门</span><span class="domain-desc">动手能力与科学视野</span></div>
       <div class="domain-grid">
-        <div class="course-card" onclick="showCourse('基础物理实验')"><div class="tag">第EX1章</div><h4>基础物理实验</h4>
+        <div class="course-card locked-card"><div class="tag">第EX1章</div><h4>基础物理实验</h4>
           <div class="arc-badges"><span class="arc-badge arc-pst">PST 1</span><span class="arc-badge arc-prs">PRS 2</span><span class="arc-badge arc-ftr">FTR 3</span></div>
-          <p>从拧螺丝到调光路。物理学的实验基础。</p></div>
-        <div class="course-card" onclick="showCourse('近代物理实验')"><div class="tag">第EX2章</div><h4>近代物理实验</h4>
+          <p>从拧螺丝到调光路。物理学的实验基础。</p><div class="lock-overlay"><div class="lock-icon">🔒</div><div class="lock-text">知识不够，前面的区域以后再来探索吧</div></div></div>
+        <div class="course-card locked-card"><div class="tag">第EX2章</div><h4>近代物理实验</h4>
           <div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span></div>
-          <p>卢瑟福散射、弗兰克-赫兹、塞曼效应。亲手验证量子世界的奇妙规律。</p></div>
+          <p>卢瑟福散射、弗兰克-赫兹、塞曼效应。亲手验证量子世界的奇妙规律。</p><div class="lock-overlay"><div class="lock-icon">🔒</div><div class="lock-text">知识不够，前面的区域以后再来探索吧</div></div></div>
       </div>
     </div>
 
@@ -343,63 +344,63 @@
     <div class="domain" style="--domain-color:#0f766e;">
       <div class="domain-header"><h3>💠 凝聚态基础</h3><span class="domain-count">2门</span><span class="domain-desc">微观量子在宏观材料中的体现</span></div>
       <div class="domain-grid">
-        <div class="course-card final-card" onclick="showCourse('固体物理')"><div class="tag">第6章</div><h4>固体物理</h4>
+        <div class="course-card locked-card final-card"><div class="tag">第6章</div><h4>固体物理</h4>
           <div class="arc-badges"><span class="arc-badge arc-pst">PST 5</span><span class="arc-badge arc-prs">PRS 7</span><span class="arc-badge arc-ftr">FTR 9+</span><span class="arc-badge arc-byd">BYD 11</span></div>
-          <p>晶体结构、能带理论。微观量子的宏观体现。</p></div>
-        <div class="course-card chip-card" onclick="showCourse('材料物理')"><div class="tag">第6.5章</div><h4>材料物理</h4>
+          <p>晶体结构、能带理论。微观量子的宏观体现。</p><div class="lock-overlay"><div class="lock-icon">🔒</div><div class="lock-text">知识不够，前面的区域以后再来探索吧</div></div></div>
+        <div class="course-card locked-card chip-card"><div class="tag">第6.5章</div><h4>材料物理</h4>
           <div class="arc-badges"><span class="arc-badge arc-pst">PST 5</span><span class="arc-badge arc-prs">PRS 7</span><span class="arc-badge arc-ftr">FTR 9</span><span class="arc-badge arc-byd">BYD 10</span></div>
-          <p>结构决定性质。在原子尺度上盖房子！</p></div>
+          <p>结构决定性质。在原子尺度上盖房子！</p><div class="lock-overlay"><div class="lock-icon">🔒</div><div class="lock-text">知识不够，前面的区域以后再来探索吧</div></div></div>
       </div>
     </div>
 
     <div class="domain" style="--domain-color:#7c3aed;">
       <div class="domain-header"><h3>💎 凝聚态前沿专题</h3><span class="domain-count">5门</span><span class="domain-desc">超导、纳米、拓扑、二维材料、低温</span></div>
       <div class="domain-grid">
-        <div class="course-card ultimate-card" onclick="showCourse('超导物理')"><div class="tag">第6-1章</div><h4 style="color:#4c1d95;">超导物理</h4>
+        <div class="course-card locked-card ultimate-card"><div class="tag">第6-1章</div><h4 style="color:#4c1d95;">超导物理</h4>
           <div class="arc-badges"><span class="arc-badge arc-pst">PST 5</span><span class="arc-badge arc-prs">PRS 7</span><span class="arc-badge arc-ftr">FTR 9+</span><span class="arc-badge arc-byd">BYD 11</span></div>
-          <p style="color:#4c1d95;">零电阻、迈斯纳效应、BCS理论。宏观量子现象最壮观的展示。</p></div>
-        <div class="course-card ultimate-card" onclick="showCourse('纳米物理')"><div class="tag">第6-2章</div><h4 style="color:#4c1d95;">纳米物理</h4>
+          <p style="color:#4c1d95;">零电阻、迈斯纳效应、BCS理论。宏观量子现象最壮观的展示。</p><div class="lock-overlay"><div class="lock-icon">🔒</div><div class="lock-text">知识不够，前面的区域以后再来探索吧</div></div></div>
+        <div class="course-card locked-card ultimate-card"><div class="tag">第6-2章</div><h4 style="color:#4c1d95;">纳米物理</h4>
           <div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 10</span></div>
-          <p style="color:#4c1d95;">量子点、碳纳米管、石墨烯。当材料缩小到纳米尺度，量子效应主导一切。</p></div>
-        <div class="course-card ultimate-card" onclick="showCourse('拓扑物态')"><div class="tag">第6-3章</div><h4 style="color:#4c1d95;">拓扑物态</h4>
+          <p style="color:#4c1d95;">量子点、碳纳米管、石墨烯。当材料缩小到纳米尺度，量子效应主导一切。</p><div class="lock-overlay"><div class="lock-icon">🔒</div><div class="lock-text">知识不够，前面的区域以后再来探索吧</div></div></div>
+        <div class="course-card locked-card ultimate-card"><div class="tag">第6-3章</div><h4 style="color:#4c1d95;">拓扑物态</h4>
           <div class="arc-badges"><span class="arc-badge arc-pst">PST 6</span><span class="arc-badge arc-prs">PRS 8</span><span class="arc-badge arc-ftr">FTR 10+</span><span class="arc-badge arc-byd">BYD 11+</span></div>
-          <p style="color:#4c1d95;">拓扑绝缘体、拓扑半金属。用拓扑不变量分类物质的新范式。</p></div>
-        <div class="course-card ultimate-card" onclick="showCourse('二维材料')"><div class="tag">第6-4章</div><h4 style="color:#4c1d95;">二维材料</h4>
+          <p style="color:#4c1d95;">拓扑绝缘体、拓扑半金属。用拓扑不变量分类物质的新范式。</p><div class="lock-overlay"><div class="lock-icon">🔒</div><div class="lock-text">知识不够，前面的区域以后再来探索吧</div></div></div>
+        <div class="course-card locked-card ultimate-card"><div class="tag">第6-4章</div><h4 style="color:#4c1d95;">二维材料</h4>
           <div class="arc-badges"><span class="arc-badge arc-pst">PST 5</span><span class="arc-badge arc-prs">PRS 7</span><span class="arc-badge arc-ftr">FTR 9</span><span class="arc-badge arc-byd">BYD 10</span></div>
-          <p style="color:#4c1d95;">石墨烯、MoS2、黑磷。原子层厚度的材料世界，薄到离谱，强到离谱。</p></div>
-        <div class="course-card ultimate-card" onclick="showCourse('低温物理')"><div class="tag">第6-5章</div><h4 style="color:#4c1d95;">低温物理</h4>
+          <p style="color:#4c1d95;">石墨烯、MoS2、黑磷。原子层厚度的材料世界，薄到离谱，强到离谱。</p><div class="lock-overlay"><div class="lock-icon">🔒</div><div class="lock-text">知识不够，前面的区域以后再来探索吧</div></div></div>
+        <div class="course-card locked-card ultimate-card"><div class="tag">第6-5章</div><h4 style="color:#4c1d95;">低温物理</h4>
           <div class="arc-badges"><span class="arc-badge arc-pst">PST 5</span><span class="arc-badge arc-prs">PRS 7</span><span class="arc-badge arc-ftr">FTR 9</span><span class="arc-badge arc-byd">BYD 10</span></div>
-          <p style="color:#4c1d95;">液氦超流、玻色-爱因斯坦凝聚。接近绝对零度，量子涨落主宰一切。</p></div>
+          <p style="color:#4c1d95;">液氦超流、玻色-爱因斯坦凝聚。接近绝对零度，量子涨落主宰一切。</p><div class="lock-overlay"><div class="lock-icon">🔒</div><div class="lock-text">知识不够，前面的区域以后再来探索吧</div></div></div>
       </div>
     </div>
 
     <div class="domain" style="--domain-color:#0891b2;">
       <div class="domain-header"><h3>🧱 材料工程</h3><span class="domain-count">2门</span><span class="domain-desc">烧炉子、测样品的手艺</span></div>
       <div class="domain-grid">
-        <div class="course-card" onclick="showCourse('材料制备技术')"><div class="tag">第6.5-1章</div><h4>材料制备技术</h4>
+        <div class="course-card locked-card"><div class="tag">第6.5-1章</div><h4>材料制备技术</h4>
           <div class="arc-badges"><span class="arc-badge arc-pst">PST 3</span><span class="arc-badge arc-prs">PRS 5</span><span class="arc-badge arc-ftr">FTR 7</span><span class="arc-badge arc-etr">ETR 9</span></div>
-          <p>烧炉子、镀膜、拉单晶。今天你烧炉子了吗？</p></div>
-        <div class="course-card" onclick="showCourse('材料测试技术')"><div class="tag">第6.5-2章</div><h4>材料测试技术</h4>
+          <p>烧炉子、镀膜、拉单晶。今天你烧炉子了吗？</p><div class="lock-overlay"><div class="lock-icon">🔒</div><div class="lock-text">知识不够，前面的区域以后再来探索吧</div></div></div>
+        <div class="course-card locked-card"><div class="tag">第6.5-2章</div><h4>材料测试技术</h4>
           <div class="arc-badges"><span class="arc-badge arc-pst">PST 3</span><span class="arc-badge arc-prs">PRS 5</span><span class="arc-badge arc-ftr">FTR 7</span><span class="arc-badge arc-etr">ETR 9</span></div>
-          <p>XRD、SEM、TEM。样品制备一小时，分析数据一整天。</p></div>
+          <p>XRD、SEM、TEM。样品制备一小时，分析数据一整天。</p><div class="lock-overlay"><div class="lock-icon">🔒</div><div class="lock-text">知识不够，前面的区域以后再来探索吧</div></div></div>
       </div>
     </div>
 
     <div class="domain" style="--domain-color:#c2410c;">
       <div class="domain-header"><h3>🔷 半导体产业链</h3><span class="domain-count">4门</span><span class="domain-desc">从物理到芯片的完整路径</span></div>
       <div class="domain-grid">
-        <div class="course-card hard-card" onclick="showCourse('半导体物理')"><div class="tag">第7章</div><h4>半导体物理</h4>
+        <div class="course-card locked-card hard-card"><div class="tag">第7章</div><h4>半导体物理</h4>
           <div class="arc-badges"><span class="arc-badge arc-pst">PST 5</span><span class="arc-badge arc-prs">PRS 7</span><span class="arc-badge arc-ftr">FTR 9+</span><span class="arc-badge arc-byd">BYD 11</span></div>
-          <p>能带、载流子、PN结。没有它现代科技瘫痪！</p></div>
-        <div class="course-card chip-card" onclick="showCourse('半导体材料')"><div class="tag">第7-1章</div><h4>半导体材料</h4>
+          <p>能带、载流子、PN结。没有它现代科技瘫痪！</p><div class="lock-overlay"><div class="lock-icon">🔒</div><div class="lock-text">知识不够，前面的区域以后再来探索吧</div></div></div>
+        <div class="course-card locked-card chip-card"><div class="tag">第7-1章</div><h4>半导体材料</h4>
           <div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 10</span></div>
-          <p>硅、锗、砷化镓、氮化镓。一代材料，一代器件。</p></div>
-        <div class="course-card chip-card" onclick="showCourse('半导体器件')"><div class="tag">第7-2章</div><h4>半导体器件</h4>
+          <p>硅、锗、砷化镓、氮化镓。一代材料，一代器件。</p><div class="lock-overlay"><div class="lock-icon">🔒</div><div class="lock-text">知识不够，前面的区域以后再来探索吧</div></div></div>
+        <div class="course-card locked-card chip-card"><div class="tag">第7-2章</div><h4>半导体器件</h4>
           <div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 10+</span></div>
-          <p>PN结、MOSFET、HEMT。器件是芯片的细胞。</p></div>
-        <div class="course-card chip-card" onclick="showCourse('半导体工艺')"><div class="tag">第7-3章</div><h4>半导体工艺</h4>
+          <p>PN结、MOSFET、HEMT。器件是芯片的细胞。</p><div class="lock-overlay"><div class="lock-icon">🔒</div><div class="lock-text">知识不够，前面的区域以后再来探索吧</div></div></div>
+        <div class="course-card locked-card chip-card"><div class="tag">第7-3章</div><h4>半导体工艺</h4>
           <div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 10+</span></div>
-          <p>光刻、刻蚀、离子注入。从沙子到芯片的纳米魔术。</p></div>
+          <p>光刻、刻蚀、离子注入。从沙子到芯片的纳米魔术。</p><div class="lock-overlay"><div class="lock-icon">🔒</div><div class="lock-text">知识不够，前面的区域以后再来探索吧</div></div></div>
       </div>
     </div>
     <div class="lock-overlay"><div class="lock-icon">🔒</div><div class="lock-text">知识不够，前面的区域以后再来探索吧</div></div>
@@ -413,48 +414,48 @@
     <div class="domain" style="--domain-color:#4338ca;">
       <div class="domain-header"><h3>🌠 引力与宇宙</h3><span class="domain-count">3门</span><span class="domain-desc">时空、引力、宇宙演化</span></div>
       <div class="domain-grid">
-        <div class="course-card cosmos-card" onclick="showCourse('相对论')"><div class="tag">？？？</div><h4>相对论</h4>
+        <div class="course-card locked-card cosmos-card"><div class="tag">？？？</div><h4>相对论</h4>
           <div class="arc-badges"><span class="arc-badge arc-pst">PST 5</span><span class="arc-badge arc-prs">PRS 7</span><span class="arc-badge arc-ftr">FTR 9+</span><span class="arc-badge arc-byd">BYD 11</span></div>
-          <p>狭义与广义相对论，弯曲时空，引力波。时空不是舞台，而是演员。</p></div>
-        <div class="course-card cosmos-card" onclick="showCourse('宇宙学')"><div class="tag">？？？</div><h4>宇宙学</h4>
+          <p>狭义与广义相对论，弯曲时空，引力波。时空不是舞台，而是演员。</p><div class="lock-overlay"><div class="lock-icon">🔒</div><div class="lock-text">知识不够，前面的区域以后再来探索吧</div></div></div>
+        <div class="course-card locked-card cosmos-card"><div class="tag">？？？</div><h4>宇宙学</h4>
           <div class="arc-badges"><span class="arc-badge arc-pst">PST 5</span><span class="arc-badge arc-prs">PRS 7</span><span class="arc-badge arc-ftr">FTR 9</span><span class="arc-badge arc-byd">BYD 11</span></div>
-          <p>大爆炸、CMB、暗物质、暗能量。宇宙的起源与命运。</p></div>
-        <div class="course-card cosmos-card" onclick="showCourse('黑洞物理')"><div class="tag">？？？</div><h4>黑洞物理</h4>
+          <p>大爆炸、CMB、暗物质、暗能量。宇宙的起源与命运。</p><div class="lock-overlay"><div class="lock-icon">🔒</div><div class="lock-text">知识不够，前面的区域以后再来探索吧</div></div></div>
+        <div class="course-card locked-card cosmos-card"><div class="tag">？？？</div><h4>黑洞物理</h4>
           <div class="arc-badges"><span class="arc-badge arc-pst">PST 5</span><span class="arc-badge arc-prs">PRS 7</span><span class="arc-badge arc-ftr">FTR 9+</span><span class="arc-badge arc-byd">BYD 11</span></div>
-          <p>事件视界、霍金辐射、黑洞热力学、信息悖论。黑洞不是黑的。</p></div>
+          <p>事件视界、霍金辐射、黑洞热力学、信息悖论。黑洞不是黑的。</p><div class="lock-overlay"><div class="lock-icon">🔒</div><div class="lock-text">知识不够，前面的区域以后再来探索吧</div></div></div>
       </div>
     </div>
 
     <div class="domain" style="--domain-color:#6d28d9;">
       <div class="domain-header"><h3>⚛️ 粒子与场论</h3><span class="domain-count">3门</span><span class="domain-desc">基本粒子与相互作用的终极理论</span></div>
       <div class="domain-grid">
-        <div class="course-card cosmos-card" onclick="showCourse('粒子物理')"><div class="tag">？？？</div><h4>粒子物理</h4>
+        <div class="course-card locked-card cosmos-card"><div class="tag">？？？</div><h4>粒子物理</h4>
           <div class="arc-badges"><span class="arc-badge arc-pst">PST 5</span><span class="arc-badge arc-prs">PRS 7</span><span class="arc-badge arc-ftr">FTR 9+</span><span class="arc-badge arc-byd">BYD 11+</span></div>
-          <p>夸克、轻子、Higgs。标准模型是20世纪物理最伟大的成就之一。</p></div>
-        <div class="course-card final-card" onclick="showCourse('规范场论')"><div class="tag">？？？</div><h4>规范场论</h4>
+          <p>夸克、轻子、Higgs。标准模型是20世纪物理最伟大的成就之一。</p><div class="lock-overlay"><div class="lock-icon">🔒</div><div class="lock-text">知识不够，前面的区域以后再来探索吧</div></div></div>
+        <div class="course-card locked-card final-card"><div class="tag">？？？</div><h4>规范场论</h4>
           <div class="arc-badges"><span class="arc-badge arc-pst">PST 6</span><span class="arc-badge arc-prs">PRS 8</span><span class="arc-badge arc-ftr">FTR 10+</span><span class="arc-badge arc-ins">INS 12</span></div>
-          <p>Yang-Mills理论、量子场论、重整化。用对称性书写宇宙的法则。</p></div>
-        <div class="course-card final-card" onclick="showCourse('量子场论')"><div class="tag">？？？</div><h4>量子场论</h4>
+          <p>Yang-Mills理论、量子场论、重整化。用对称性书写宇宙的法则。</p><div class="lock-overlay"><div class="lock-icon">🔒</div><div class="lock-text">知识不够，前面的区域以后再来探索吧</div></div></div>
+        <div class="course-card locked-card final-card"><div class="tag">？？？</div><h4>量子场论</h4>
           <div class="arc-badges"><span class="arc-badge arc-pst">PST 6</span><span class="arc-badge arc-prs">PRS 8</span><span class="arc-badge arc-ftr">FTR 10+</span><span class="arc-badge arc-ins">INS 12</span></div>
-          <p>路径积分、费曼图、重整化。粒子物理与凝聚态的共同语言。</p></div>
+          <p>路径积分、费曼图、重整化。粒子物理与凝聚态的共同语言。</p><div class="lock-overlay"><div class="lock-icon">🔒</div><div class="lock-text">知识不够，前面的区域以后再来探索吧</div></div></div>
       </div>
     </div>
 
     <div class="domain" style="--domain-color:#4c1d95;">
       <div class="domain-header"><h3>🔮 终极理论</h3><span class="domain-count">4门</span><span class="domain-desc">物理学的终极问题</span></div>
       <div class="domain-grid">
-        <div class="course-card ultimate-card" onclick="showCourse('弦理论')"><div class="tag">？？？</div><h4 style="color:#4c1d95;">弦理论</h4>
+        <div class="course-card locked-card ultimate-card"><div class="tag">？？？</div><h4 style="color:#4c1d95;">弦理论</h4>
           <div class="arc-badges"><span class="arc-badge arc-pst">PST 6</span><span class="arc-badge arc-prs">PRS 8</span><span class="arc-badge arc-ftr">FTR 10+</span><span class="arc-badge arc-byd">BYD 11+</span></div>
-          <p style="color:#4c1d95;">一维弦的振动模式、10维时空、超对称、M理论。万有理论的候选者。</p></div>
-        <div class="course-card god-card" onclick="showCourse('量子引力')"><div class="tag">？？？</div><h4 style="color:#78350f;">量子引力</h4>
+          <p style="color:#4c1d95;">一维弦的振动模式、10维时空、超对称、M理论。万有理论的候选者。</p><div class="lock-overlay"><div class="lock-icon">🔒</div><div class="lock-text">知识不够，前面的区域以后再来探索吧</div></div></div>
+        <div class="course-card locked-card god-card"><div class="tag">？？？</div><h4 style="color:#78350f;">量子引力</h4>
           <div class="arc-badges"><span class="arc-badge arc-pst">PST 7</span><span class="arc-badge arc-prs">PRS 9+</span><span class="arc-badge arc-ftr">FTR 11+</span><span class="arc-badge arc-ins-plus">INS 12+</span></div>
-          <p style="color:#78350f;">引力的量子化。圈量子引力、因果动力学三角剖分。物理学最后的圣杯。</p></div>
-        <div class="course-card ultimate-card" onclick="showCourse('共形场论')"><div class="tag">？？？</div><h4 style="color:#4c1d95;">共形场论</h4>
+          <p style="color:#78350f;">引力的量子化。圈量子引力、因果动力学三角剖分。物理学最后的圣杯。</p><div class="lock-overlay"><div class="lock-icon">🔒</div><div class="lock-text">知识不够，前面的区域以后再来探索吧</div></div></div>
+        <div class="course-card locked-card ultimate-card"><div class="tag">？？？</div><h4 style="color:#4c1d95;">共形场论</h4>
           <div class="arc-badges"><span class="arc-badge arc-pst">PST 7</span><span class="arc-badge arc-prs">PRS 9+</span><span class="arc-badge arc-ftr">FTR 11+</span><span class="arc-badge arc-ins">INS 12</span></div>
-          <p style="color:#4c1d95;">共形对称性、临界现象、弦理论核心工具。二维CFT与弦理论紧密相关。</p></div>
-        <div class="course-card ultimate-card" onclick="showCourse('拓扑量子场论')"><div class="tag">？？？</div><h4 style="color:#4c1d95;">拓扑量子场论</h4>
+          <p style="color:#4c1d95;">共形对称性、临界现象、弦理论核心工具。二维CFT与弦理论紧密相关。</p><div class="lock-overlay"><div class="lock-icon">🔒</div><div class="lock-text">知识不够，前面的区域以后再来探索吧</div></div></div>
+        <div class="course-card locked-card ultimate-card"><div class="tag">？？？</div><h4 style="color:#4c1d95;">拓扑量子场论</h4>
           <div class="arc-badges"><span class="arc-badge arc-pst">PST 7</span><span class="arc-badge arc-prs">PRS 9+</span><span class="arc-badge arc-ftr">FTR 11+</span><span class="arc-badge arc-byd">BYD 11+</span></div>
-          <p style="color:#4c1d95;">拓扑不变量、TQFT、量子计算。数学物理交叉最前沿。</p></div>
+          <p style="color:#4c1d95;">拓扑不变量、TQFT、量子计算。数学物理交叉最前沿。</p><div class="lock-overlay"><div class="lock-icon">🔒</div><div class="lock-text">知识不够，前面的区域以后再来探索吧</div></div></div>
       </div>
     </div>
     <div class="lock-overlay"><div class="lock-icon">🔒</div><div class="lock-text">知识不够，前面的区域以后再来探索吧</div></div>
@@ -467,21 +468,21 @@
     <div class="domain" style="--domain-color:#059669;">
       <div class="domain-header"><h3>🌟 应用与交叉物理</h3><span class="domain-count">5门</span><span class="domain-desc">物理学的广阔应用天地</span></div>
       <div class="domain-grid">
-        <div class="course-card cosmos-card" onclick="showCourse('天体物理学')"><div class="tag">天体物理</div><h4>天体物理学</h4>
+        <div class="course-card locked-card cosmos-card"><div class="tag">天体物理</div><h4>天体物理学</h4>
           <div class="arc-badges"><span class="arc-badge arc-pst">PST 5</span><span class="arc-badge arc-prs">PRS 7</span><span class="arc-badge arc-ftr">FTR 9+</span><span class="arc-badge arc-byd">BYD 11</span></div>
-          <p>恒星演化、星系动力学、活动星系核。用物理理解宇宙中的天体。</p></div>
-        <div class="course-card cosmos-card" onclick="showCourse('等离子体物理')"><div class="tag">等离子体·核聚变</div><h4>等离子体物理</h4>
+          <p>恒星演化、星系动力学、活动星系核。用物理理解宇宙中的天体。</p><div class="lock-overlay"><div class="lock-icon">🔒</div><div class="lock-text">知识不够，前面的区域以后再来探索吧</div></div></div>
+        <div class="course-card locked-card cosmos-card"><div class="tag">等离子体·核聚变</div><h4>等离子体物理</h4>
           <div class="arc-badges"><span class="arc-badge arc-pst">PST 5</span><span class="arc-badge arc-prs">PRS 7</span><span class="arc-badge arc-ftr">FTR 9+</span><span class="arc-badge arc-byd">BYD 11</span></div>
-          <p>宇宙99%的可观测物质都是等离子体。核聚变、日冕、极光……</p></div>
-        <div class="course-card cosmos-card" onclick="showCourse('生物物理')"><div class="tag">交叉学科</div><h4>生物物理</h4>
+          <p>宇宙99%的可观测物质都是等离子体。核聚变、日冕、极光……</p><div class="lock-overlay"><div class="lock-icon">🔒</div><div class="lock-text">知识不够，前面的区域以后再来探索吧</div></div></div>
+        <div class="course-card locked-card cosmos-card"><div class="tag">交叉学科</div><h4>生物物理</h4>
           <div class="arc-badges"><span class="arc-badge arc-pst">PST 4</span><span class="arc-badge arc-prs">PRS 6</span><span class="arc-badge arc-ftr">FTR 8</span><span class="arc-badge arc-byd">BYD 10</span></div>
-          <p>用物理工具研究生命。蛋白质折叠、DNA力学、分子马达……</p></div>
-        <div class="course-card cosmos-card" onclick="showCourse('辐射过程')"><div class="tag">辐射物理</div><h4>辐射过程</h4>
+          <p>用物理工具研究生命。蛋白质折叠、DNA力学、分子马达……</p><div class="lock-overlay"><div class="lock-icon">🔒</div><div class="lock-text">知识不够，前面的区域以后再来探索吧</div></div></div>
+        <div class="course-card locked-card cosmos-card"><div class="tag">辐射物理</div><h4>辐射过程</h4>
           <div class="arc-badges"><span class="arc-badge arc-pst">PST 5</span><span class="arc-badge arc-prs">PRS 7</span><span class="arc-badge arc-ftr">FTR 9</span><span class="arc-badge arc-byd">BYD 10</span></div>
-          <p>同步辐射、轫致辐射、切伦科夫辐射。加速的电荷必然辐射。</p></div>
-        <div class="course-card cosmos-card" onclick="showCourse('核聚变物理')"><div class="tag">核能·前沿</div><h4>核聚变物理</h4>
+          <p>同步辐射、轫致辐射、切伦科夫辐射。加速的电荷必然辐射。</p><div class="lock-overlay"><div class="lock-icon">🔒</div><div class="lock-text">知识不够，前面的区域以后再来探索吧</div></div></div>
+        <div class="course-card locked-card cosmos-card"><div class="tag">核能·前沿</div><h4>核聚变物理</h4>
           <div class="arc-badges"><span class="arc-badge arc-pst">PST 6</span><span class="arc-badge arc-prs">PRS 8</span><span class="arc-badge arc-ftr">FTR 10</span><span class="arc-badge arc-byd">BYD 11</span></div>
-          <p>人造太阳——让恒星在地球上燃烧。可控核聚变的物理基础。</p></div>
+          <p>人造太阳——让恒星在地球上燃烧。可控核聚变的物理基础。</p><div class="lock-overlay"><div class="lock-icon">🔒</div><div class="lock-text">知识不够，前面的区域以后再来探索吧</div></div></div>
       </div>
     </div>
 
