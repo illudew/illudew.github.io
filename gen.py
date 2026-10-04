@@ -20,6 +20,20 @@ def js_escape(s):
     s = s.replace("${", "\\${")
     return s
 
+def fix_lt_math(s):
+    """把 $...$ / $$...$$ 数学区内的 < 转义为 &lt;，避免被当作 HTML 标签吞掉。"""
+    import re
+    return re.sub(r"\$\$[\s\S]*?\$\$|\$[^$\n]*?\$", lambda m: m.group(0).replace("<", "&lt;"), s)
+
+def fix_lt_text(s):
+    """纯文本字段（brief/figCap/desc 等）里的 < 全部转义。"""
+    return s.replace("<", "&lt;")
+
+def fix_svg_lt(s):
+    """SVG 文本节点内的 < （如 T<Tc）转义，保留真实 SVG 标签。"""
+    import re
+    return re.sub(r"<(?!/?(?:svg|g|defs|line|rect|circle|ellipse|path|polygon|polyline|text|tspan|use|marker|linearGradient|radialGradient|stop|clipPath|symbol|pattern|mask|filter|title|desc|animate|animateTransform|image|style)\b)([A-Za-z])", r"&lt;\1", s)
+
 # ============================================================
 # SVG 图库（通用，按需引用）
 # ============================================================
@@ -392,24 +406,24 @@ def render_subject(sub):
         for sec in ch["sections"]:
             items_parts = []
             for it in sec["items"]:
-                body_js = js_escape(it["body"])
+                body_js = js_escape(fix_lt_math(it["body"]))
                 item_fields = [
                     f"id:'{it['id']}'",
-                    f"name:'{it['name']}'",
+                    f"name:'{fix_lt_text(it['name'])}'",
                     f"tags:{json.dumps(it['tags'], ensure_ascii=False)}",
-                    f"brief:'{js_escape(it['brief'])}'",
+                    f"brief:'{js_escape(fix_lt_text(it['brief']))}'",
                 ]
                 if it.get("fig"):
                     item_fields.append(f"fig:'{it['fig']}'")
                 if it.get("figCap"):
-                    item_fields.append(f"figCap:'{js_escape(it['figCap'])}'")
+                    item_fields.append(f"figCap:'{js_escape(fix_lt_text(it['figCap']))}'")
                 item_fields.append(f"body:`{body_js}`")
                 items_parts.append("{" + ",".join(item_fields) + "}")
             secs_parts.append(
-                "{" + f"name:'{sec['name']}',color:'{sec['color']}',desc:'{js_escape(sec['desc'])}',items:[{','.join(items_parts)}]" + "}"
+                "{" + f"name:'{sec['name']}',color:'{sec['color']}',desc:'{js_escape(fix_lt_text(sec['desc']))}',items:[{','.join(items_parts)}]" + "}"
             )
         data_parts.append(
-            "{" + f"id:'{ch['id']}',num:'{ch['num']}',title:'{ch['title']}',en:'{ch['en']}',sub:'{js_escape(ch.get('sub',''))}',desc:'{js_escape(ch['desc'])}',sections:[{','.join(secs_parts)}]" + "}"
+            "{" + f"id:'{ch['id']}',num:'{ch['num']}',title:'{ch['title']}',en:'{ch['en']}',sub:'{js_escape(fix_lt_text(ch.get('sub','')))}',desc:'{js_escape(fix_lt_text(ch['desc']))}',sections:[{','.join(secs_parts)}]" + "}"
         )
     data_json = ",\n".join(data_parts)
 
@@ -424,7 +438,7 @@ def render_subject(sub):
     for k in sorted(fig_keys):
         svg = fig_svg(k)
         if svg:
-            fig_entries.append(f"'{k}':`{svg}`")
+            fig_entries.append(f"'{k}':`{fix_svg_lt(svg)}`")
     fig_dict = ",".join(fig_entries)
 
     html = HTML_HEAD.format(

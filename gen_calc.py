@@ -1341,6 +1341,16 @@ CHAPTERS = [
 total_items = sum(sum(len(s["items"]) for s in ch["sections"]) for ch in CHAPTERS)
 print(f"Total items: {total_items}")
 
+
+def fix_lt_math(s):
+    import re
+    return re.sub(r"\$\$[\s\S]*?\$\$|\$[^$\n]*?\$", lambda m: m.group(0).replace("<", "&lt;"), s)
+def fix_lt_text(s):
+    return s.replace("<", "&lt;")
+def fix_svg_lt(s):
+    import re
+    return re.sub(r"<(?!/?(?:svg|g|defs|line|rect|circle|ellipse|path|polygon|polyline|text|tspan|use|marker|linearGradient|radialGradient|stop|clipPath|symbol|pattern|mask|filter|title|desc|animate|animateTransform|image|style)\b)([A-Za-z])", r"&lt;\1", s)
+
 def gen_html():
     data_lines = []
     for ch in CHAPTERS:
@@ -1349,10 +1359,10 @@ def gen_html():
             item_strs = []
             for it in sec["items"]:
                 tags_js = json.dumps(it["tags"], ensure_ascii=False)
-                body_esc = js_escape(it["body"])
+                body_esc = js_escape(fix_lt_math(it["body"]))
                 item_strs.append(
                     f"{{id:'{it['id']}',name:{json.dumps(it['name'],ensure_ascii=False)},"
-                    f"tags:{tags_js},brief:{json.dumps(it['brief'],ensure_ascii=False)},"
+                    f"tags:{tags_js},brief:{json.dumps(fix_lt_text(it['brief']),ensure_ascii=False)},"
                     f"body:`{body_esc}`}}"
                 )
             sec_strs.append(
@@ -1370,7 +1380,7 @@ def gen_html():
 
     fig_entries = []
     for k, v in FIG.items():
-        fig_entries.append(f"{json.dumps(k)}:`{js_escape(v)}`")
+        fig_entries.append(f"{json.dumps(k)}:`{js_escape(fix_svg_lt(v))}`")
     fig_js = "{" + ",".join(fig_entries) + "}"
     tag_label_js = json.dumps(TAG_LABEL, ensure_ascii=False)
 
@@ -1595,7 +1605,7 @@ window.MathJax = {{
   <main class="la-roadmap" id="laRoadmap"></main>
   <section class="la-core-fmls" id="laCoreFmls">
     <h3>核心公式速查 <span class="la-core-count">{len(CORE_FORMULAS)} 条</span></h3>
-{chr(10).join(f'    <div class="la-core-item"><div class="la-core-num">{i+1}</div><div class="la-core-body"><div class="la-core-name">{name}</div><div class="la-fml">$${latex}$$</div><div class="note" style="font-size:12px;color:#8496ad;margin-top:4px">{desc}</div></div></div>' for i,(name,latex,desc) in enumerate(CORE_FORMULAS))}
+{chr(10).join(f'    <div class="la-core-item"><div class="la-core-num">{i+1}</div><div class="la-core-body"><div class="la-core-name">{name.replace("<","&lt;")}</div><div class="la-fml">$${latex.replace("<","&lt;")}$$</div><div class="note" style="font-size:12px;color:#8496ad;margin-top:4px">{desc.replace("<","&lt;")}</div></div></div>' for i,(name,latex,desc) in enumerate(CORE_FORMULAS))}
   </section>
   <footer class="la-footer">
     <div>微积分 · 知识体系可视化 · MathJax + SVG</div>
