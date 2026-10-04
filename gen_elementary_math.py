@@ -495,7 +495,7 @@ ch1_sections = [
 
 # ============ 第二章 代数 ============
 ch2_sections = [
-{"name":"2.1 数系基础","color":"#7c3aed","desc":"数系分类、运算律与绝对值",
+{"name":"2.1 数系基础","color":"#7c3aed","desc":"实数、有理数、整数与加减乘除运算律、绝对值",
 "items":[
 {"id":"e2s1-1","name":"实数、有理数与运算律","tags":["def","thm","der"],"brief":"数系分类、加减乘除运算律与有理数稠密性。",
 "fig":"number_system","figCap":"数系包含关系 N ⊂ Z ⊂ Q ⊂ R",
@@ -699,15 +699,20 @@ ch3_sections = [
 ]},
 {"name":"3.3 三角函数","color":"#0f766e","desc":"任意角三角函数、同角关系、诱导公式、和差倍半角",
 "items":[
-{"id":"e3s3-1","name":"任意角三角函数定义","tags":["def","der","exa"],"brief":"弧度制、单位圆定义、三角函数线。",
+{"id":"e3s3-1","name":"六个三角函数的定义","tags":["def","der","exa"],"brief":"弧度制、单位圆定义六个三角函数、符号规律与三角函数线。",
 "fig":"trig_circle","figCap":"单位圆上点 $P(\\cos\\theta,\\sin\\theta)$，三角函数线示意",
 "body":wrap(
  defn("弧度制",p("弧长等于半径的弧所对圆心角为 1 弧度（rad）。$1^\\circ=\\dfrac{\\pi}{180}\\,\\text{rad}$，$\\pi\\,\\text{rad}=180^\\circ$。"))+
- defn("三角函数定义",p("设 $\\alpha$ 为任意角，终边上一点 $P(x,y)$，$r=\\sqrt{x^2+y^2}$，则 $\\sin\\alpha=\\dfrac{y}{r}$，$\\cos\\alpha=\\dfrac{x}{r}$，$\\tan\\alpha=\\dfrac{y}{x}\\ (x\\ne0)$。"))+
+ defn("六个三角函数定义",p("设 $\\alpha$ 为任意角，终边上一点 $P(x,y)$，$r=\\sqrt{x^2+y^2}>0$，则六个三角函数定义为：")+
+ fml("\\sin\\alpha=\\dfrac{y}{r},\\quad \\cos\\alpha=\\dfrac{x}{r},\\quad \\tan\\alpha=\\dfrac{y}{x}")+
+ fml("\\cot\\alpha=\\dfrac{x}{y},\\quad \\sec\\alpha=\\dfrac{r}{x},\\quad \\csc\\alpha=\\dfrac{r}{y}")+
+ p("其中三组互为倒数：$\\tan\\alpha=\\dfrac{1}{\\cot\\alpha}$，$\\cos\\alpha=\\dfrac{1}{\\sec\\alpha}$，$\\sin\\alpha=\\dfrac{1}{\\csc\\alpha}$；$\\cot,\\sec,\\csc$ 常合称<strong>余切、正割、余割</strong>。"))+
  der(p("<strong>单位圆推导：</strong>取 $r=1$（单位圆上），点 $P(\\cos\\alpha,\\sin\\alpha)$，由勾股定理 $x^2+y^2=1$ 即 $\\sin^2\\alpha+\\cos^2\\alpha=1$。")+
- p("<strong>符号规律推导：</strong>由定义：第一象限 $x>0,y>0$ 故 $\\sin,\\cos,\\tan$ 均正；第二象限 $x<0,y>0$ 故 $\\sin$ 正、$\\cos$ 负、$\\tan$ 负；类似得「一全正、二正弦、三正切、四余弦」口诀。")+
+ p("<strong>倒数关系推导：</strong>由定义 $\\dfrac{1}{\\cos\\alpha}=\\dfrac{1}{x/r}=\\dfrac{r}{x}=\\sec\\alpha$；$\\dfrac{1}{\\sin\\alpha}=\\dfrac{r}{y}=\\csc\\alpha$；$\\dfrac{1}{\\tan\\alpha}=\\dfrac{x}{y}=\\cot\\alpha$。")+
+ p("<strong>符号规律推导：</strong>由定义：第一象限 $x>0,y>0$ 故六个函数均正；第二象限 $x<0,y>0$ 故 $\\sin,\\csc$ 正、其余负；第三象限 $x<0,y<0$ 故 $\\tan,\\cot$ 正（同号相除）、其余负；第四象限 $x>0,y<0$ 故 $\\cos,\\sec$ 正、其余负，即「一全正、二正弦、三正切、四余弦」。")+
+ p("<strong>定义域推导：</strong>$\\tan,\\sec$ 的分母为 $x$，故 $x=0$ 即 $\\alpha=\\dfrac{\\pi}{2}+k\\pi$ 处无定义；$\\cot,\\csc$ 的分母为 $y$，故 $y=0$ 即 $\\alpha=k\\pi$ 处无定义。")+
  p("<strong>弧长扇形推导：</strong>弧长 $l=|\\alpha|\\cdot r$（$\\alpha$ 为弧度），扇形面积 $S=\\dfrac{1}{2}lr=\\dfrac{1}{2}|\\alpha|r^2$。"))+
- exa(p("<strong>例：</strong>$\\alpha=\\dfrac{\\pi}{3}$，$\\sin\\dfrac{\\pi}{3}=\\dfrac{\\sqrt3}{2}$，$\\cos\\dfrac{\\pi}{3}=\\dfrac{1}{2}$，$\\tan\\dfrac{\\pi}{3}=\\sqrt3$。")))
+ exa(p("<strong>例：</strong>$\\alpha=\\dfrac{\\pi}{3}$，$\\sin\\dfrac{\\pi}{3}=\\dfrac{\\sqrt3}{2}$，$\\cos\\dfrac{\\pi}{3}=\\dfrac{1}{2}$，$\\tan\\dfrac{\\pi}{3}=\\sqrt3$，$\\cot\\dfrac{\\pi}{3}=\\dfrac{\\sqrt3}{3}$，$\\sec\\dfrac{\\pi}{3}=2$，$\\csc\\dfrac{\\pi}{3}=\\dfrac{2\\sqrt3}{3}$。")))
 },
 {"id":"e3s3-2","name":"同角关系与诱导公式","tags":["def","thm","der"],"brief":"同角三角函数基本关系、诱导公式推导。",
 "body":wrap(
@@ -805,7 +810,7 @@ ch4_sections = [
  p("<strong>循环小数化分数推导：</strong>$0.\\dot{3}=0.333\\ldots=\\dfrac{3}{10}+\\dfrac{3}{100}+\\cdots$，首项 $\\dfrac{3}{10}$，公比 $\\dfrac{1}{10}$，$|q|<1$，和 $=\\dfrac{3/10}{1-1/10}=\\dfrac{1}{3}$。")))
 }
 ]},
-{"name":"4.3 数列求和方法","color":"#ea580c","desc":"裂项相消、错位相减、倒序相加",
+{"name":"4.3 数列求和方法","color":"#ea580c","desc":"公式法、倒序相加、错位相减、裂项相消、分组、并项、累加与累乘",
 "items":[
 {"id":"e4s3-1","name":"裂项相消法","tags":["thm","der","exa"],"brief":"相邻整数乘积裂项与一般裂项方法。",
 "body":wrap(
@@ -832,6 +837,23 @@ ch4_sections = [
  p("<strong>立方和推导（倒序思想）：</strong>$\\sum_{k=1}^n k^3=\\left[\\dfrac{n(n+1)}{2}\\right]^2$。利用恒等式 $k^3-(k-1)^3=3k^2-3k+1$ 累加：$n^3=3\\sum k^2-3\\sum k+n$，代入 $\\sum k^2=\\dfrac{n(n+1)(2n+1)}{6}$ 与 $\\sum k=\\dfrac{n(n+1)}{2}$ 解得 $\\sum k^3$。")+
  p("<strong>分组推导：</strong>如 $a_n=2^n+n$，则 $S_n=\\sum 2^k+\\sum k=\\dfrac{2(2^n-1)}{2-1}+\\dfrac{n(n+1)}{2}=2^{n+1}-2+\\dfrac{n(n+1)}{2}$。"))+
  exa(p("<strong>例：</strong>求 $1+2+\\cdots+100$。倒序相加 $2S=(1+100)+(2+99)+\\cdots=101\\times100$，$S=5050$。")))
+},
+{"id":"e4s3-4","name":"公式法与并项求和法","tags":["thm","der","exa"],"brief":"直接套用已知求和公式、相邻项合并求和。",
+"body":wrap(
+ thm("常用求和公式",p("")+
+ fml("\\sum_{k=1}^n k=\\dfrac{n(n+1)}{2},\\quad \\sum_{k=1}^n k^2=\\dfrac{n(n+1)(2n+1)}{6},\\quad \\sum_{k=1}^n k^3=\\left[\\dfrac{n(n+1)}{2}\\right]^2"))+
+ thm("并项求和",p("当数列相邻两项（或若干项）之和为常数或易于计算时，可两两（或若干项）合并后再求和。"))+
+ der(p("<strong>公式法推导：</strong>自然数求和 $\\sum k=\\dfrac{n(n+1)}{2}$ 由倒序相加得；平方和 $\\sum k^2=\\dfrac{n(n+1)(2n+1)}{6}$ 由恒等式 $(k+1)^3-k^3=3k^2+3k+1$ 累加（裂项法）整理得；立方和由 $(k+1)^4-k^4=4k^3+6k^2+4k+1$ 累加整理得 $\\sum k^3=\\left[\\dfrac{n(n+1)}{2}\\right]^2$。")+
+ p("<strong>并项推导：</strong>典型如 $S_n=1-2+3-4+\\cdots$。当 $n$ 为偶数时两两并项：$(1-2)+(3-4)+\\cdots+((n-1)-n)=-\\dfrac{n}{2}$；当 $n$ 为奇数时 $=-\\dfrac{n-1}{2}+n=\\dfrac{n+1}{2}$。故需按 $n$ 的奇偶分类讨论。"))+
+ exa(p("<strong>例：</strong>$S_n=1^2+2^2+\\cdots+n^2$，取 $n=10$：$S_{10}=\\dfrac{10\\cdot11\\cdot21}{6}=385$。")))
+},
+{"id":"e4s3-5","name":"累加法与累乘法求通项","tags":["thm","der","exa"],"brief":"由相邻差累加、相邻比累乘求数列通项。",
+"body":wrap(
+ thm("累加法",p("若数列满足 $a_{n+1}-a_n=f(n)$，则 $a_n=a_1+\\sum_{k=1}^{n-1}f(k)$。"))+
+ thm("累乘法",p("若数列满足 $\\dfrac{a_{n+1}}{a_n}=g(n)$（$a_n\\ne0$），则 $a_n=a_1\\prod_{k=1}^{n-1}g(k)$。"))+
+ der(p("<strong>累加推导：</strong>由 $a_{n+1}-a_n=f(n)$，写出 $n-1$ 个等式：$a_2-a_1=f(1)$，$a_3-a_2=f(2)$，$\\ldots$，$a_n-a_{n-1}=f(n-1)$。左右分别相加，中间项全部抵消：$a_n-a_1=\\sum_{k=1}^{n-1}f(k)$，故 $a_n=a_1+\\sum_{k=1}^{n-1}f(k)$。")+
+ p("<strong>累乘推导：</strong>由 $\\dfrac{a_{n+1}}{a_n}=g(n)$，写出 $\\dfrac{a_2}{a_1}=g(1),\\dfrac{a_3}{a_2}=g(2),\\ldots,\\dfrac{a_n}{a_{n-1}}=g(n-1)$。左右相乘，分子分母逐项约去：$\\dfrac{a_n}{a_1}=\\prod_{k=1}^{n-1}g(k)$，故 $a_n=a_1\\prod_{k=1}^{n-1}g(k)$。"))+
+ exa(p("<strong>例：</strong>$a_1=1$，$a_{n+1}=a_n+2n$，则 $a_n=1+\\sum_{k=1}^{n-1}2k=1+2\\cdot\\dfrac{(n-1)n}{2}=n^2-n+1$。$n=1$ 时 $a_1=1$ 也满足，故 $a_n=n^2-n+1$。")))
 }
 ]}
 ]
@@ -1068,6 +1090,26 @@ ch6_sections = [
  der(p("<strong>数量积推导：</strong>由 $\\vec{a}\\cdot\\vec{b}=|\\vec{a}||\\vec{b}|\\cos\\theta$ 及余弦定理 $|\\vec{a}-\\vec{b}|^2=|\\vec{a}|^2+|\\vec{b}|^2-2\\vec{a}\\cdot\\vec{b}$，得 $\\vec{a}\\cdot\\vec{b}=\\dfrac{|\\vec{a}|^2+|\\vec{b}|^2-|\\vec{a}-\\vec{b}|^2}{2}$。代入坐标计算 $|\\vec{a}-\\vec{b}|^2=(x_1-x_2)^2+(y_1-y_2)^2+(z_1-z_2)^2$ 展开，化简得 $\\vec{a}\\cdot\\vec{b}=x_1x_2+y_1y_2+z_1z_2$。")+
  p("<strong>夹角推导：</strong>由 $\\vec{a}\\cdot\\vec{b}=|\\vec{a}||\\vec{b}|\\cos\\theta$，得 $\\cos\\theta=\\dfrac{x_1x_2+y_1y_2+z_1z_2}{\\sqrt{x_1^2+y_1^2+z_1^2}\\sqrt{x_2^2+y_2^2+z_2^2}}$。两向量垂直 $\\Leftrightarrow\\vec{a}\\cdot\\vec{b}=0$。")))
 }
+]},
+{"name":"6.4 立体几何公式汇总","color":"#4c1d95","desc":"柱、锥、台、球体积与表面积汇总表",
+"items":[
+{"id":"e6s4-1","name":"常见立体图形体积与表面积汇总表","tags":["def","der","app","note"],"brief":"柱、锥、台、球及正多面体的侧面积、表面积与体积公式汇总。",
+"body":wrap(
+ defn("公式汇总",p("以下为常见立体图形的侧面积、表面积与体积公式汇总（$S$ 为底面积、$h$ 为高、$r,R$ 为半径、$l$ 为母线/斜高、$C$ 为底面周长）："))+
+ p("<strong>棱柱：</strong>$V=Sh$，$S_{侧}=Ch$，$S_{全}=2S+Ch$。")+
+ p("<strong>圆柱：</strong>$V=\\pi r^2 h$，$S_{侧}=2\\pi rh$，$S_{全}=2\\pi r^2+2\\pi rh$。")+
+ p("<strong>棱锥：</strong>$V=\\dfrac{1}{3}Sh$，$S_{侧}=\\dfrac{1}{2}Cl$（正棱锥），$S_{全}=S+\\dfrac{1}{2}Cl$。")+
+ p("<strong>圆锥：</strong>$V=\\dfrac{1}{3}\\pi r^2 h$，$S_{侧}=\\pi rl$，$S_{全}=\\pi r^2+\\pi rl$（母线 $l=\\sqrt{r^2+h^2}$）。")+
+ p("<strong>棱台：</strong>$V=\\dfrac{h}{3}\\left(S_{上}+\\sqrt{S_{上}S_{下}}+S_{下}\\right)$。")+
+ p("<strong>圆台：</strong>$V=\\dfrac{\\pi h}{3}(r^2+rR+R^2)$，$S_{侧}=\\pi(r+R)l$。")+
+ p("<strong>球：</strong>$V=\\dfrac{4}{3}\\pi R^3$，$S_{球}=4\\pi R^2$。")+
+ p("<strong>正方体：</strong>$V=a^3$，$S_{全}=6a^2$，体对角线 $\\sqrt3 a$。")+
+ p("<strong>正四面体：</strong>$V=\\dfrac{\\sqrt2}{12}a^3$，$S_{全}=\\sqrt3 a^2$（棱长 $a$）。")+
+ der(p("<strong>台的统一性推导：</strong>棱台（圆台）体积 $V=\\dfrac{h}{3}(S_{上}+\\sqrt{S_{上}S_{下}}+S_{下})$。当 $S_{上}=S_{下}=S$ 时 $V=\\dfrac{h}{3}(S+S+S)=Sh$，退化为<strong>柱</strong>体积；当 $S_{上}=0$ 时 $V=\\dfrac{h}{3}S_{下}$，退化为<strong>锥</strong>体积。故柱、锥皆为台的特例。")+
+ p("<strong>球体积推导（祖暅原理）：</strong>半径 $R$ 的球与「底面半径 $R$、高 $2R$ 的圆柱挖去同底等高圆锥」等积。水平截面处球截面 $\\pi(R^2-x^2)$ 与挖空后环形截面 $\\pi R^2-\\pi x^2$ 面积相等，由祖暅原理体积相等，得 $V_{球}=2\\pi R^3-\\dfrac{2}{3}\\pi R^3=\\dfrac{4}{3}\\pi R^3$。")+
+ p("<strong>圆台侧面积推导：</strong>圆台由圆锥截得，母线 $l$，侧面积等于两圆锥侧面积之差 $=\\pi R l_1-\\pi r l_2$，由相似 $\\dfrac{l_2}{l_1}=\\dfrac{r}{R}$、$l_1-l_2=l$ 解得 $=\\pi(r+R)l$。")+
+ note(p("记忆要点：柱 $V=Sh$、锥 $V=\\dfrac{1}{3}Sh$、台取「上下底面积几何平均」形式，球为特殊旋转体；侧面积只算侧面，全面积需加上下底。"))))
+}
 ]}
 ]
 
@@ -1230,30 +1272,6 @@ ch7_sections = [
  p("<strong>法平面推导：</strong>法平面是过切点且与切向量垂直的平面。以切向量 $\\vec{T}$ 为法向量，由点法式平面方程得 $T_x(x-x_0)+T_y(y-y_0)+T_z(z-z_0)=0$。"))+
  exa(p("<strong>例：</strong>圆柱 $x^2+y^2=1$ 与平面 $z=y$ 的交线为椭圆。点 $(1,0,0)$ 处 $\\nabla F_1=(2,0,0)$，$\\nabla F_2=(0,-1,1)$，$\\vec{T}=\\nabla F_1\\times\\nabla F_2=(0,-2,-2)$，法平面 $-2y-2z=0$ 即 $y+z=0$。")))
 }
-]},
-{"name":"7.3 极坐标与参数方程","color":"#155e75","desc":"极坐标、参数方程、坐标互化",
-"items":[
-{"id":"e7s3-1","name":"极坐标与直角坐标","tags":["def","thm","der","exa"],"brief":"极坐标定义、与直角坐标互化、常见极坐标方程。",
-"fig":"polar_coord","figCap":"极坐标 $P(\\rho,\\theta)$，极径与极角",
-"body":wrap(
- defn("极坐标",p("平面上取定点 $O$ 为极点、射线 $Ox$ 为极轴。点 $P$ 的极坐标 $(\\rho,\\theta)$，$\\rho$ 为极径（$|OP|$）、$\\theta$ 为极角（$Ox$ 到 $OP$ 的角）。"))+
- thm("坐标互化",p("")+
- fml("x=\\rho\\cos\\theta,\\ y=\\rho\\sin\\theta,\\ \\rho^2=x^2+y^2,\\ \\tan\\theta=\\dfrac{y}{x}"))+
- der(p("<strong>互化推导：</strong>以极点为原点、极轴为 $x$ 轴正向建立直角坐标系。设 $P$ 直角坐标 $(x,y)$、极坐标 $(\\rho,\\theta)$。由直角三角形 $OP$ 在 $x$ 轴投影 $x=\\rho\\cos\\theta$，$y$ 轴投影 $y=\\rho\\sin\\theta$（三角函数定义）。反过来 $\\rho=\\sqrt{x^2+y^2}$（距离公式），$\\tan\\theta=\\dfrac{y}{x}$（正切定义），$\\theta$ 由象限确定。")+
- p("<strong>极坐标方程推导：</strong>圆 $x^2+y^2=r^2$ 化为 $\\rho=r$；直线 $x=a$ 化为 $\\rho\\cos\\theta=a$；心形线 $\\rho=a(1+\\cos\\theta)$（由动点与圆上点距离关系构造）；玫瑰线 $\\rho=a\\cos(n\\theta)$。"))+
- exa(p("<strong>例：</strong>$\\rho=2\\cos\\theta$ 化直角坐标。$\\rho=2\\dfrac{x}{\\rho}$，$\\rho^2=2x$，$x^2+y^2=2x$，即 $(x-1)^2+y^2=1$，圆心 $(1,0)$ 半径 1。")))
-},
-{"id":"e7s3-2","name":"参数方程与坐标变换","tags":["def","thm","der"],"brief":"参数方程概念、直线圆的参数方程、坐标变换。",
-"body":wrap(
- defn("参数方程",p("曲线上点的坐标 $(x,y)$ 用第三变量 $t$（参数）表示：$\\begin{cases}x=f(t)\\\\y=g(t)\\end{cases}$，称曲线的参数方程。"))+
- thm("常见参数方程",p("")+
- fml("\\text{直线过}(x_0,y_0)\\text{方向}(a,b):\\ \\begin{cases}x=x_0+a t\\\\y=y_0+b t\\end{cases}")+
- fml("\\text{圆}(x_0,y_0)\\text{半径}r:\\ \\begin{cases}x=x_0+r\\cos t\\\\y=y_0+r\\sin t\\end{cases}")+
- fml("\\text{椭圆}:\\ \\begin{cases}x=a\\cos t\\\\y=b\\sin t\\end{cases}"))+
- der(p("<strong>圆参数方程推导：</strong>圆 $(x-x_0)^2+(y-y_0)^2=r^2$，设圆心 $(x_0,y_0)$、半径 $r$。圆上点 $P$ 与圆心连线和 $x$ 轴正向夹角 $t$，由三角函数 $P$ 相对圆心位移 $(r\\cos t,r\\sin t)$，故 $x=x_0+r\\cos t$，$y=y_0+r\\sin t$。")+
- p("<strong>椭圆参数推导：</strong>椭圆 $\\dfrac{x^2}{a^2}+\\dfrac{y^2}{b^2}=1$。设 $x=a\\cos t$，代入方程 $\\dfrac{a^2\\cos^2 t}{a^2}+\\dfrac{y^2}{b^2}=1$，得 $y^2=b^2\\sin^2 t$，$y=\\pm b\\sin t$，取 $y=b\\sin t$ 得参数方程。参数 $t$ 是辅助圆上对应圆心角，不是椭圆上点与原点连线和 $x$ 轴的夹角。")+
- p("<strong>化参数为普通方程：</strong>消去参数 $t$。如 $\\begin{cases}x=2t\\\\y=t^2\\end{cases}$，由 $t=\\dfrac{x}{2}$ 代入 $y=\\left(\\dfrac{x}{2}\\right)^2=\\dfrac{x^2}{4}$，即抛物线 $x^2=4y$。")))
-}
 ]}
 ]
 
@@ -1363,22 +1381,22 @@ CHAPTERS = [
      "desc":"集合概念与表示、交并补运算与德摩根律、子集与容斥原理、命题与四种命题关系、充要条件与全称存在量词。",
      "sections": ch1_sections},
     {"id":"e-ch2","num":"第二章","title":"代数","en":"ALGEBRA",
-     "desc":"数系分类与运算律、绝对值与三角不等式、整式运算与乘法公式、因式分解、一元二次方程与韦达定理、分式方程、一元二次不等式与均值不等式链。",
+     "desc":"实数有理数整数与加减乘除运算律、绝对值与三角不等式、整式运算与平方差/完全平方/立方和差公式、因式分解、一元一次与二元一次方程组、一元二次方程与韦达定理、高次方程、一元二次与分式绝对值不等式、均值不等式链与常见放缩。",
      "sections": ch2_sections},
     {"id":"e-ch3","num":"第三章","title":"函数","en":"FUNCTIONS",
-     "desc":"函数定义与三要素、单调性奇偶性周期性、反函数与复合函数、指数对数幂函数、二次函数、分段与绝对值函数、三角函数定义、同角关系与诱导公式、和差倍半角、反三角函数与三角恒等变换。",
+     "desc":"函数定义与三要素、单调性奇偶性周期性、反函数与复合函数、指数对数幂函数、二次函数、分段与绝对值函数、六个三角函数定义、同角关系与诱导公式、和差倍半角、反三角函数与三角恒等变换。",
      "sections": ch3_sections},
     {"id":"e-ch4","num":"第四章","title":"数列","en":"SEQUENCES",
-     "desc":"等差数列通项求和与性质、等比数列通项求和与无穷递缩、裂项相消、错位相减、倒序相加与分组求和。",
+     "desc":"等差数列通项求和与性质（等差中项、片段和）、等比数列通项求和与无穷递缩、裂项相消、错位相减、倒序相加、分组、并项、公式法、累加法与累乘法求通项。",
      "sections": ch4_sections},
     {"id":"e-ch5","num":"第五章","title":"平面几何","en":"PLANE GEOMETRY",
-     "desc":"三角形内角和与面积公式、正弦定理与余弦定理、海伦公式与中位线、平行四边形与特殊四边形、梯形与中位线、圆的定理与切线、圆周角定理、相交弦与切割线定理。",
+     "desc":"三角形内角和与面积公式、正弦定理与余弦定理、海伦公式与中位线、平行四边形、矩形、菱形、正方形、梯形、圆与垂径定理、圆心角与圆周角、切线与圆幂定理、平面图形面积周长汇总。",
      "sections": ch5_sections},
     {"id":"e-ch6","num":"第六章","title":"立体几何","en":"SOLID GEOMETRY",
-     "desc":"棱柱棱锥与体积、棱台与截面积比、欧拉公式与正多面体、圆柱圆锥圆台、球与球面、线面平行与垂直、二面角与点面距离、空间向量基础。",
+     "desc":"棱柱棱锥与体积、棱台与截面积比、欧拉公式与正多面体、圆柱圆锥圆台、球与球面、线面平行与垂直、二面角与点面距离、空间向量基础、体积与表面积汇总表。",
      "sections": ch6_sections},
     {"id":"e-ch7","num":"第七章","title":"解析几何","en":"ANALYTIC GEOMETRY",
-     "desc":"直线方程与位置关系、圆的方程与切线、距离公式、椭圆双曲线抛物线、极坐标与直角坐标互化、参数方程与坐标变换。",
+     "desc":"极坐标柱坐标球坐标与参数方程、直线方程与位置关系、圆的方程与切线、距离公式、空间直线与平面方程、椭球面与双曲面、抛物面与锥面、空间曲线与螺旋线、椭圆双曲线抛物线。",
      "sections": ch7_sections},
     {"id":"e-ch8","num":"第八章","title":"概率统计","en":"PROBABILITY & STATISTICS",
      "desc":"排列与组合、二项式定理、古典概型与几何概型、条件概率与全概率公式、贝叶斯公式、离散型随机变量与期望方差、二项分布与正态分布、样本均值与线性回归。",
