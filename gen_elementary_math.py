@@ -358,6 +358,15 @@ CORE_FORMULAS = [
     ("双曲线标准方程", "\\dfrac{x^2}{a^2}-\\dfrac{y^2}{b^2} = 1", "焦点在 x 轴的双曲线"),
     ("双曲线渐近线", "y=\\pm\\dfrac{b}{a}x", "双曲线渐近线方程"),
     ("抛物线标准方程", "y^2 = 2px\\ (p>0)", "开口向右的抛物线"),
+    ("抛物线焦点准线", "F\\left(\\dfrac{p}{2},0\\right),\\ x=-\\dfrac{p}{2}", "y^2=2px 的焦点与准线"),
+    ("平面向量数量积", "\\vec{a}\\cdot\\vec{b}=x_1x_2+y_1y_2", "平面向量数量积坐标式"),
+    ("空间向量数量积", "\\vec{a}\\cdot\\vec{b}=x_1x_2+y_1y_2+z_1z_2", "空间向量数量积坐标式"),
+    ("向量夹角", "\\cos\\theta=\\dfrac{\\vec{a}\\cdot\\vec{b}}{|\\vec{a}||\\vec{b}|}", "两向量夹角余弦"),
+    ("三角形重心性质", "AG:GD=2:1", "重心分中线为 2:1"),
+    ("三角形内切圆半径", "r=\\dfrac{S}{p}", "p 为半周长"),
+    ("三角形外接圆半径", "R=\\dfrac{abc}{4S}", "外接圆半径"),
+    ("平行线判定", "\\text{内错角相等}\\Rightarrow a\\parallel b", "平行线判定（内错角）"),
+    ("空间曲线投影柱面", "\\text{消去 }z:\\ H(x,y)=0", "投影到 xOy 面的柱面方程"),
     ("极坐标互化", "x=\\rho\\cos\\theta,\\ y=\\rho\\sin\\theta,\\ \\rho^2=x^2+y^2", "极坐标与直角坐标互化"),
     ("柱坐标关系", "x=\\rho\\cos\\theta,\\ y=\\rho\\sin\\theta,\\ z=z", "柱坐标与直角坐标关系"),
     ("球坐标关系", "x=r\\sin\\varphi\\cos\\theta,\\ y=r\\sin\\varphi\\sin\\theta,\\ z=r\\cos\\varphi", "球坐标与直角坐标关系"),
@@ -734,23 +743,11 @@ ch3_sections = [
  fml("\\sin 2\\alpha=2\\sin\\alpha\\cos\\alpha,\\quad \\cos 2\\alpha=\\cos^2\\alpha-\\sin^2\\alpha=2\\cos^2\\alpha-1=1-2\\sin^2\\alpha")+
  fml("\\tan 2\\alpha=\\dfrac{2\\tan\\alpha}{1-\\tan^2\\alpha}"))+
  der(p("<strong>$\\cos(\\alpha-\\beta)$ 推导：</strong>设单位圆上 $A(\\cos\\alpha,\\sin\\alpha),B(\\cos\\beta,\\sin\\beta)$，则 $|AB|^2=(\\cos\\alpha-\\cos\\beta)^2+(\\sin\\alpha-\\sin\\beta)^2=2-2(\\cos\\alpha\\cos\\beta+\\sin\\alpha\\sin\\beta)$。另一方面，$|AB|=2\\sin\\dfrac{\\alpha-\\beta}{2}$，故 $|AB|^2=4\\sin^2\\dfrac{\\alpha-\\beta}{2}=2-2\\cos(\\alpha-\\beta)$。比较得 $\\cos(\\alpha-\\beta)=\\cos\\alpha\\cos\\beta+\\sin\\alpha\\sin\\beta$。")+
- p("<strong>和角公式推导：</strong>令上式中 $\\beta\\to-\\beta$ 得 $\\cos(\\alpha+\\beta)=\\cos\\alpha\\cos\\beta-\\sin\\alpha\\sin\\beta$；由 $\\sin\\alpha=\\cos\\left(\\dfrac{\\pi}{2}-\\alpha\\right)$ 化归得 $\\sin(\\alpha+\\beta)=\\sin\\alpha\\cos\\beta+\\cos\\alpha\\sin\\beta$。")+
+ p("<strong>和角公式推导：</strong>令上式中 $\\beta$ 换成 $-\\beta$ 得 $\\cos(\\alpha+\\beta)=\\cos\\alpha\\cos\\beta-\\sin\\alpha\\sin\\beta$；由 $\\sin\\alpha=\\cos\\left(\\dfrac{\\pi}{2}-\\alpha\\right)$ 化归得 $\\sin(\\alpha+\\beta)=\\sin\\alpha\\cos\\beta+\\cos\\alpha\\sin\\beta$。")+
  p("<strong>倍角推导：</strong>在 $\\sin(\\alpha+\\beta)$ 中令 $\\alpha=\\beta$ 得 $\\sin 2\\alpha=2\\sin\\alpha\\cos\\alpha$；在 $\\cos(\\alpha+\\beta)$ 中令 $\\alpha=\\beta$ 得 $\\cos 2\\alpha=\\cos^2\\alpha-\\sin^2\\alpha$，再由 $\\sin^2\\alpha+\\cos^2\\alpha=1$ 得另两形式 $2\\cos^2\\alpha-1$ 与 $1-2\\sin^2\\alpha$。")+
  p("<strong>半角推导：</strong>由 $\\cos 2\\alpha=2\\cos^2\\alpha-1$，令 $2\\alpha=\\theta$ 得 $\\cos\\theta=2\\cos^2\\dfrac{\\theta}{2}-1$，故 $\\cos\\dfrac{\\theta}{2}=\\pm\\sqrt{\\dfrac{1+\\cos\\theta}{2}}$；同理 $\\sin\\dfrac{\\theta}{2}=\\pm\\sqrt{\\dfrac{1-\\cos\\theta}{2}}$。")))
-}
-]},
-{"name":"3.4 反三角函数与三角变换","color":"#15803d","desc":"反三角函数定义、三角恒等变换",
-"items":[
-{"id":"e3s4-1","name":"反三角函数定义与关系","tags":["def","thm","der"],"brief":"反正弦、反余弦、反正切定义与互补关系。",
-"body":wrap(
- defn("反三角函数",p("在主值区间上的反函数：<strong>反正弦</strong> $y=\\arcsin x$（$x\\in[-1,1],y\\in\\left[-\\dfrac{\\pi}{2},\\dfrac{\\pi}{2}\\right]$）；<strong>反余弦</strong> $y=\\arccos x$（$x\\in[-1,1],y\\in[0,\\pi]$）；<strong>反正切</strong> $y=\\arctan x$（$x\\in\\mathbb{R},y\\in\\left(-\\dfrac{\\pi}{2},\\dfrac{\\pi}{2}\\right)$）。"))+
- thm("互补关系",p("")+
- fml("\\arcsin x+\\arccos x=\\dfrac{\\pi}{2}\\ (|x|\\le1)")+
- fml("\\arctan x+\\operatorname{arccot} x=\\dfrac{\\pi}{2}"))+
- der(p("<strong>互补关系推导：</strong>设 $\\alpha=\\arcsin x$，则 $\\sin\\alpha=x,\\alpha\\in\\left[-\\dfrac{\\pi}{2},\\dfrac{\\pi}{2}\\right]$。由 $\\sin\\alpha=\\cos\\left(\\dfrac{\\pi}{2}-\\alpha\\right)$ 且 $\\dfrac{\\pi}{2}-\\alpha\\in[0,\\pi]$，故 $\\arccos x=\\dfrac{\\pi}{2}-\\alpha=\\dfrac{\\pi}{2}-\\arcsin x$，即 $\\arcsin x+\\arccos x=\\dfrac{\\pi}{2}$。")+
- p("<strong>反三角恒等推导：</strong>$\\sin(\\arcsin x)=x$（定义）；$\\cos(\\arcsin x)=\\sqrt{1-\\sin^2(\\arcsin x)}=\\sqrt{1-x^2}$（由 $\\arcsin x\\in\\left[-\\dfrac{\\pi}{2},\\dfrac{\\pi}{2}\\right]$ 时 $\\cos\\ge0$）；$\\tan(\\arccos x)=\\dfrac{\\sin(\\arccos x)}{\\cos(\\arccos x)}=\\dfrac{\\sqrt{1-x^2}}{x}$。")))
 },
-{"id":"e3s4-2","name":"三角恒等变换","tags":["thm","der","exa"],"brief":"和差化积、积化和差与万能公式。",
+{"id":"e3s3-4","name":"三角恒等变换","tags":["thm","der","exa"],"brief":"和差化积、积化和差与万能公式。",
 "body":wrap(
  thm("和差化积",p("")+
  fml("\\sin\\alpha+\\sin\\beta=2\\sin\\dfrac{\\alpha+\\beta}{2}\\cos\\dfrac{\\alpha-\\beta}{2}")+
@@ -762,6 +759,18 @@ ch3_sections = [
  p("<strong>积化和差推导：</strong>由和角公式 $\\sin(A+B)=\\sin A\\cos B+\\cos A\\sin B$ 与 $\\sin(A-B)=\\sin A\\cos B-\\cos A\\sin B$，相加得 $\\sin A\\cos B=\\dfrac{1}{2}[\\sin(A+B)+\\sin(A-B)]$。")+
  p("<strong>万能公式推导：</strong>令 $t=\\tan\\dfrac{\\alpha}{2}$，由 $\\sin\\alpha=2\\sin\\dfrac{\\alpha}{2}\\cos\\dfrac{\\alpha}{2}=\\dfrac{2\\tan\\dfrac{\\alpha}{2}}{\\sec^2\\dfrac{\\alpha}{2}}=\\dfrac{2t}{1+t^2}$；$\\cos\\alpha=\\cos^2\\dfrac{\\alpha}{2}-\\sin^2\\dfrac{\\alpha}{2}=\\dfrac{1-t^2}{1+t^2}$；$\\tan\\alpha=\\dfrac{2t}{1-t^2}$。"))+
  exa(p("<strong>例：</strong>$\\sin 75^\\circ=\\sin(45^\\circ+30^\\circ)=\\dfrac{\\sqrt2}{2}\\cdot\\dfrac{\\sqrt3}{2}+\\dfrac{\\sqrt2}{2}\\cdot\\dfrac{1}{2}=\\dfrac{\\sqrt6+\\sqrt2}{4}$。")))
+}
+]},
+{"name":"3.4 反三角函数","color":"#15803d","desc":"反三角函数定义与关系",
+"items":[
+{"id":"e3s4-1","name":"反三角函数定义与关系","tags":["def","thm","der"],"brief":"反正弦、反余弦、反正切定义与互补关系。",
+"body":wrap(
+ defn("反三角函数",p("在主值区间上的反函数：<strong>反正弦</strong> $y=\\arcsin x$（$x\\in[-1,1],y\\in\\left[-\\dfrac{\\pi}{2},\\dfrac{\\pi}{2}\\right]$）；<strong>反余弦</strong> $y=\\arccos x$（$x\\in[-1,1],y\\in[0,\\pi]$）；<strong>反正切</strong> $y=\\arctan x$（$x\\in\\mathbb{R},y\\in\\left(-\\dfrac{\\pi}{2},\\dfrac{\\pi}{2}\\right)$）。"))+
+ thm("互补关系",p("")+
+ fml("\\arcsin x+\\arccos x=\\dfrac{\\pi}{2}\\ (|x|\\le1)")+
+ fml("\\arctan x+\\operatorname{arccot} x=\\dfrac{\\pi}{2}"))+
+ der(p("<strong>互补关系推导：</strong>设 $\\alpha=\\arcsin x$，则 $\\sin\\alpha=x,\\alpha\\in\\left[-\\dfrac{\\pi}{2},\\dfrac{\\pi}{2}\\right]$。由 $\\sin\\alpha=\\cos\\left(\\dfrac{\\pi}{2}-\\alpha\\right)$ 且 $\\dfrac{\\pi}{2}-\\alpha\\in[0,\\pi]$，故 $\\arccos x=\\dfrac{\\pi}{2}-\\alpha=\\dfrac{\\pi}{2}-\\arcsin x$，即 $\\arcsin x+\\arccos x=\\dfrac{\\pi}{2}$。")+
+ p("<strong>反三角恒等推导：</strong>$\\sin(\\arcsin x)=x$（定义）；$\\cos(\\arcsin x)=\\sqrt{1-\\sin^2(\\arcsin x)}=\\sqrt{1-x^2}$（由 $\\arcsin x\\in\\left[-\\dfrac{\\pi}{2},\\dfrac{\\pi}{2}\\right]$ 时 $\\cos\\ge0$）；$\\tan(\\arccos x)=\\dfrac{\\sin(\\arccos x)}{\\cos(\\arccos x)}=\\dfrac{\\sqrt{1-x^2}}{x}$。")))
 }
 ]}
 ]
@@ -805,7 +814,7 @@ ch4_sections = [
 "body":wrap(
  thm("无穷等比求和",p("当 $|q|<1$ 时，无穷等比数列各项和 $S=\\dfrac{a_1}{1-q}$。"))+
  thm("一阶递推",p("$a_{n+1}=p a_n+q\\ (p\\ne1)$ 型递推可通过待定系数化为等比数列。"))+
- der(p("<strong>无穷求和推导：</strong>由 $S_n=\\dfrac{a_1(1-q^n)}{1-q}$，当 $|q|<1$ 时 $q^n\\to0$（$n\\to\\infty$），故 $S=\\lim_{n\\to\\infty}S_n=\\dfrac{a_1}{1-q}$。")+
+ der(p("<strong>无穷求和推导：</strong>由 $S_n=\\dfrac{a_1(1-q^n)}{1-q}=\\dfrac{a_1}{1-q}-\\dfrac{a_1 q^n}{1-q}$。当 $|q|<1$ 时，随着项数 $n$ 无限增大，$q^n$ 无限接近于 0，从而 $\\dfrac{a_1 q^n}{1-q}$ 无限接近于 0，故无穷等比数列各项之和 $S=\\dfrac{a_1}{1-q}$。")+
  p("<strong>递推化简推导：</strong>设 $a_{n+1}=p a_n+q$，待定常数 $c$ 使 $a_{n+1}-c=p(a_n-c)$，展开 $a_{n+1}=p a_n+(1-p)c$，比较得 $q=(1-p)c$，$c=\\dfrac{q}{1-p}$。令 $b_n=a_n-c$，则 $b_{n+1}=p b_n$ 为等比，$b_n=(a_1-c)p^{n-1}$，故 $a_n=c+(a_1-c)p^{n-1}$。")+
  p("<strong>循环小数化分数推导：</strong>$0.\\dot{3}=0.333\\ldots=\\dfrac{3}{10}+\\dfrac{3}{100}+\\cdots$，首项 $\\dfrac{3}{10}$，公比 $\\dfrac{1}{10}$，$|q|<1$，和 $=\\dfrac{3/10}{1-1/10}=\\dfrac{1}{3}$。")))
 }
@@ -860,7 +869,21 @@ ch4_sections = [
 
 # ============ 第五章 平面几何 ============
 ch5_sections = [
-{"name":"5.1 三角形","color":"#be185d","desc":"三角形内角和、正余弦定理、面积公式",
+{"name":"5.1 平行线","color":"#be185d","desc":"平行公理、平行线的判定与性质、平行线间距离",
+"items":[
+{"id":"e5l-1","name":"平行线的判定与性质","tags":["def","thm","der","exa"],"brief":"平行公理、三线八角的判定与性质定理、平行线间距离。",
+"body":wrap(
+ defn("平行线",p("在同一平面内不相交的两条直线称<strong>平行线</strong>，记 $a\\parallel b$。两条直线被第三条直线所截，形成同位角、内错角、同旁内角。"))+
+ thm("平行公理",p("过直线外一点，有且只有一条直线与已知直线平行。"))+
+ thm("判定定理",p("两条直线被第三条直线所截：① 同位角相等；② 内错角相等；③ 同旁内角互补——满足其一，则两直线平行。"))+
+ thm("性质定理",p("若两直线平行，则同位角相等、内错角相等、同旁内角互补。"))+
+ der(p("<strong>判定推导（同位角）：</strong>设 $a,b$ 被 $c$ 所截，同位角 $\\angle1=\\angle2$。反设 $a,b$ 相交于 $P$，则 $\\angle1,\\angle2$ 与三角形外角关系矛盾（三角形外角等于不相邻两内角之和，必大于任一不相邻内角），故 $a\\parallel b$。")+
+ p("<strong>性质推导（内错角）：</strong>设 $a\\parallel b$，内错角 $\\angle1$ 与 $\\angle2$。由平行线同位角相等，$\\angle1$ 等于其同位角 $\\angle3$；而 $\\angle3$ 与 $\\angle2$ 是对顶角相等，故 $\\angle1=\\angle2$。")+
+ p("<strong>平行线间距离推导：</strong>两平行线间距离定义为一条直线上任一点到另一条直线的距离。取 $a$ 上两点 $A,B$ 向 $b$ 作垂线，垂足 $A',B'$，四边形 $AA'B'B$ 为矩形（$AA'\\parallel BB'$、$AB\\parallel A'B'$、$\\angle A'=90^\\circ$），故 $AA'=BB'$，即距离与取点无关，为定值。"))+
+ exa(p("<strong>例：</strong>若内错角 $\\angle1=\\angle2=60^\\circ$，则两被截直线平行；反之两直线平行时同旁内角之和为 $180^\\circ$。")))
+}
+]},
+{"name":"5.2 三角形","color":"#be185d","desc":"三角形内角和、正余弦定理、面积公式与四心",
 "items":[
 {"id":"e5s1-1","name":"三角形内角和与面积","tags":["def","thm","der"],"brief":"三角形内角和定理、面积公式的多种形式。",
 "fig":"triangle","figCap":"三角形 ABC，底边 a 与高 h",
@@ -893,9 +916,20 @@ ch5_sections = [
  der(p("<strong>海伦公式推导：</strong>由 $S=\\dfrac{1}{2}ab\\sin C$ 与余弦定理 $\\cos C=\\dfrac{a^2+b^2-c^2}{2ab}$，则 $\\sin^2 C=1-\\cos^2 C=1-\\dfrac{(a^2+b^2-c^2)^2}{4a^2b^2}=\\dfrac{4a^2b^2-(a^2+b^2-c^2)^2}{4a^2b^2}$。分子用平方差分解：$4a^2b^2-(a^2+b^2-c^2)^2=[2ab+(a^2+b^2-c^2)][2ab-(a^2+b^2-c^2)]=[(a+b)^2-c^2][c^2-(a-b)^2]=(a+b+c)(a+b-c)(c+a-b)(c-a+b)$。代入 $p$：$=2p\\cdot 2(p-c)\\cdot 2(p-b)\\cdot 2(p-a)=16p(p-a)(p-b)(p-c)$。故 $S=\\dfrac{1}{2}ab\\cdot\\dfrac{4\\sqrt{p(p-a)(p-b)(p-c)}}{2ab}=\\sqrt{p(p-a)(p-b)(p-c)}$。")+
  p("<strong>中位线推导：</strong>设 $D,E$ 分别为 $AB,AC$ 中点。由相似三角形，$\\triangle ADE\\sim\\triangle ABC$，相似比 $\\dfrac{AD}{AB}=\\dfrac{1}{2}$，故 $DE=\\dfrac{1}{2}BC$ 且 $DE\\parallel BC$。"))+
  exa(p("<strong>例：</strong>三边 $a=3,b=4,c=5$，$p=6$，$S=\\sqrt{6\\cdot3\\cdot2\\cdot1}=\\sqrt{36}=6$。")))
+},
+{"id":"e5s1-4","name":"三角形的四心","tags":["def","thm","der","exa"],"brief":"内心、外心、重心、垂心的定义、性质与推导。",
+"body":wrap(
+ defn("重心",p("三条中线的交点称<strong>重心</strong> $G$，重心到顶点的距离是到对边中点距离的 2 倍。"))+
+ defn("内心",p("三条角平分线的交点称<strong>内心</strong> $I$，是内切圆圆心，到三边距离相等（等于内切圆半径 $r$）。"))+
+ defn("外心",p("三边中垂线的交点称<strong>外心</strong> $O$，是外接圆圆心，到三顶点距离相等（等于外接圆半径 $R$）。"))+
+ defn("垂心",p("三条高所在直线的交点称<strong>垂心</strong> $H$。"))+
+ der(p("<strong>内心推导（角平分线共点）：</strong>设 $\\angle B,\\angle C$ 的平分线交于 $I$。因 $I$ 在 $\\angle B$ 平分线上，到 $BA,BC$ 距离相等；又在 $\\angle C$ 平分线上，到 $CB,CA$ 距离相等。于是 $I$ 到三边距离全相等，特别地到 $AB,AC$ 距离也相等，故 $I$ 也在 $\\angle A$ 平分线上——三平分线共点，且 $I$ 到三边等距，为内切圆圆心。")+
+ p("<strong>外心推导（中垂线共点）：</strong>$AB,BC$ 的中垂线交于 $O$。由中垂线性质 $OA=OB$（$O$ 在 $AB$ 中垂线上）、$OB=OC$，故 $OA=OC$，即 $O$ 也在 $AC$ 中垂线上——三中垂线共点，且到三顶点等距，为外接圆圆心。")+
+ p("<strong>重心推导（分中线为 2:1）：</strong>设中线 $AD$ 与 $BE$ 交于 $G$（$D,E$ 为边中点）。取 $AG$ 中点 $M$、$BG$ 中点 $N$。在 $\\triangle ABG$ 中 $MN\\parallel AB$ 且 $MN=\\dfrac12 AB$（中位线）；又在 $\\triangle ABC$ 中 $DE\\parallel AB$ 且 $DE=\\dfrac12 AB$。故 $DE\\parallel MN$ 且 $DE=MN$，四边形 $DGMN$ 为平行四边形，得 $DG=GM=MA$，即 $AG=2GD$，重心分中线为 $2:1$。"))+
+ exa(p("<strong>例：</strong>直角三角形的外心在斜边中点；等边三角形四心重合。内切圆半径 $r=\\dfrac{S}{p}$（$p$ 为半周长），外接圆半径 $R=\\dfrac{abc}{4S}$。")))
 }
 ]},
-{"name":"5.2 平行四边形","color":"#db2777","desc":"平行四边形的性质、判定与面积",
+{"name":"5.3 平行四边形","color":"#db2777","desc":"平行四边形的性质、判定与面积",
 "items":[
 {"id":"e5s2-1","name":"平行四边形","tags":["def","thm","der","exa"],"brief":"平行四边形性质、判定定理与面积公式。",
 "body":wrap(
@@ -906,7 +940,7 @@ ch5_sections = [
  fml("S=ah=ab\\sin\\theta"))+
  exa(p("例如菱形和矩形都是特殊的平行四边形，继承平行四边形的所有性质。")))
 }]},
-{"name":"5.3 矩形","color":"#be185d","desc":"矩形的性质、判定与面积",
+{"name":"5.4 矩形","color":"#be185d","desc":"矩形的性质、判定与面积",
 "items":[
 {"id":"e5s3-1","name":"矩形","tags":["def","thm","der","exa"],"brief":"矩形性质、判定定理与面积公式。",
 "body":wrap(
@@ -916,7 +950,7 @@ ch5_sections = [
  der(p("<strong>对角线相等推导：</strong>设矩形 $ABCD$，$\\angle B=90^\\circ$。在 $\\triangle ABC$ 和 $\\triangle DCB$ 中，$AB=DC$（对边），$BC$ 公共，$\\angle ABC=\\angle DCB=90^\\circ$，由 SAS 得 $\\triangle ABC\\cong\\triangle DCB$，故 $AC=DB$。")+
  fml("S=ab","长乘宽")))
 }]},
-{"name":"5.4 菱形","color":"#be185d","desc":"菱形的性质、判定与面积",
+{"name":"5.5 菱形","color":"#be185d","desc":"菱形的性质、判定与面积",
 "items":[
 {"id":"e5s4-1","name":"菱形","tags":["def","thm","der","exa"],"brief":"菱形性质、判定定理与面积公式。",
 "body":wrap(
@@ -926,7 +960,7 @@ ch5_sections = [
  der(p("<strong>面积推导：</strong>菱形对角线 $d_1,d_2$ 互相垂直，将菱形分为四个全等的直角三角形，每个三角形面积为 $\\frac{1}{2}\\cdot\\frac{d_1}{2}\\cdot\\frac{d_2}{2}=\\frac{d_1 d_2}{8}$，四个共 $\\frac{d_1 d_2}{2}$。")+
  fml("S=\\dfrac{1}{2}d_1 d_2","对角线乘积一半")))
 }]},
-{"name":"5.5 正方形","color":"#be185d","desc":"正方形的性质、判定与面积",
+{"name":"5.6 正方形","color":"#be185d","desc":"正方形的性质、判定与面积",
 "items":[
 {"id":"e5s5-1","name":"正方形","tags":["def","thm","der","exa"],"brief":"正方形性质、判定定理与面积公式。",
 "body":wrap(
@@ -936,7 +970,7 @@ ch5_sections = [
  der(p("<strong>面积推导：</strong>正方形边长 $a$，面积 $S=a^2$。也可用对角线 $d$：由勾股定理 $d=a\\sqrt{2}$，故 $a=\\frac{d}{\\sqrt{2}}$，$S=a^2=\\frac{d^2}{2}$。")+
  fml("S=a^2=\\dfrac{d^2}{2}")))
 }]},
-{"name":"5.6 梯形","color":"#be185d","desc":"梯形的性质、等腰梯形与面积",
+{"name":"5.7 梯形","color":"#be185d","desc":"梯形的性质、等腰梯形与面积",
 "items":[
 {"id":"e5s6-1","name":"梯形与中位线定理","tags":["def","thm","der","exa"],"brief":"梯形定义、等腰梯形性质、中位线定理与面积公式。",
 "body":wrap(
@@ -947,7 +981,7 @@ ch5_sections = [
  fml("m=\\dfrac{a+b}{2}","中位线"))+
  fml("S=\\dfrac{(a+b)h}{2}","梯形面积"))
 }]},
-{"name":"5.7 圆与垂径定理","color":"#9d174d","desc":"圆的定义、弧弦与垂径定理",
+{"name":"5.8 圆","color":"#9d174d","desc":"圆的定义、垂径定理、圆心角与圆周角、切线",
 "items":[
 {"id":"e5s7-1","name":"圆的定义与垂径定理","tags":["def","thm","der","exa"],"brief":"圆的定义、弧弦圆心概念、垂径定理及推论。",
 "body":wrap(
@@ -956,9 +990,7 @@ ch5_sections = [
  thm("垂径定理",p("垂直于弦的直径平分这条弦，并且平分弦所对的两条弧。"))+
  der(p("<strong>垂径定理推导：</strong>设圆 $O$ 半径 $r$，弦 $AB$，直径 $CD\\perp AB$ 于 $E$。连接 $OA,OB$，则 $OA=OB=r$（半径相等）。在 $\\triangle OAB$ 中 $OE\\perp AB$，即 $OE$ 是等腰三角形的高，也是中线和中线。故 $AE=EB$（平分弦），且 $\\angle AOC=\\angle BOC$（平分弧），同理平分劣弧。"))+
  note(p("推论：平分弦（非直径）的直径垂直于弦且平分弦所对弧；平分弧的直径垂直平分弦。")))
-}]},
-{"name":"5.8 圆心角与圆周角","color":"#9d174d","desc":"圆心角定理、圆周角定理及推论",
-"items":[
+},
 {"id":"e5s8-1","name":"圆心角定理与圆周角定理","tags":["def","thm","der","exa"],"brief":"圆心角等于同弧所对圆周角的两倍。",
 "body":wrap(
  defn("圆周角",p("顶点在圆上，两边都是圆的弦的角称为<strong>圆周角</strong>。"))+
@@ -967,9 +999,7 @@ ch5_sections = [
  der(p("<strong>圆周角定理推导：</strong>设圆 $O$，弧 $AB$ 所对圆心角 $\\angle AOB=\\alpha$，圆周角 $\\angle ACB$。分三种情况：①圆心 $O$ 在 $\\angle ACB$ 内部：连接 $CO$ 延长交圆于 $D$，则 $\\angle ACD=\\angle AOD/2$（等腰 $\\triangle AOD$），$\\angle BCD=\\angle BOD/2$，相加 $\\angle ACB=\\angle AOB/2$。②圆心在角边上：$\\angle ACB=\\angle AOB/2$（外角定理）。③圆心在角外：类似用差证明。三种情况均得 $\\angle ACB=\\frac{1}{2}\\angle AOB$。")+
  fml("\\angle ACB=\\dfrac{1}{2}\\angle AOB"))+
  note(p("推论：①同弧或等弧所对圆周角相等；②直径所对圆周角为直角；③圆内接四边形对角互补。")))
-}]},
-{"name":"5.9 切线与圆幂定理","color":"#9d174d","desc":"切线性质、切线长定理与圆幂定理",
-"items":[
+},
 {"id":"e5s9-1","name":"切线性质与圆幂定理","tags":["def","thm","der","exa"],"brief":"切线判定与性质、切线长定理、相交弦与切割线定理。",
 "body":wrap(
  defn("切线",p("与圆只有一个公共点的直线称为圆的<strong>切线</strong>，公共点称为切点。"))+
@@ -981,7 +1011,22 @@ ch5_sections = [
  der(p("<strong>切割线定理推导：</strong>连接 $TA,TB$。因 $\\angle PTA$ 为弦切角，由弦切角定理 $\\angle PTA=\\angle TBA$（所对弧 $TA$ 的圆周角）。又 $\\angle P$ 公共，故 $\\triangle PTA\\sim\\triangle PBT$（AA），得 $\\frac{PT}{PB}=\\frac{PA}{PT}$，即 $PT^2=PA\\cdot PB$。")+
  fml("PT^2=PA\\cdot PB","切割线定理"))+
  der(p("<strong>切线性质推导：</strong>设切线 $l$ 切圆 $O$ 于 $T$。若 $l$ 不垂直于 $OT$，则 $l$ 上存在点使到 $O$ 距离小于 $r$（垂线段最短），即 $l$ 与圆有两个交点，与切线定义矛盾。故 $l\\perp OT$。")))
-}]},
+}
+]},
+{"name":"5.9 对称、旋转与平移","color":"#9d174d","desc":"轴对称、中心对称、旋转与平移",
+"items":[
+{"id":"e5sym-1","name":"图形的对称、旋转与平移","tags":["def","thm","der","exa"],"brief":"轴对称、中心对称、平移与旋转的定义与性质。",
+"body":wrap(
+ defn("轴对称",p("把一个图形沿一条直线折叠，若它能与另一个图形重合，则两图形关于这条直线<strong>轴对称</strong>，这条直线称对称轴。"))+
+ defn("中心对称",p("把一个图形绕某一点旋转 $180^\\circ$，若能与另一个图形重合，则两图形关于该点<strong>中心对称</strong>，该点称对称中心。"))+
+ defn("平移",p("把图形上所有点沿同一方向移动相同距离，称<strong>平移</strong>。平移不改变图形的形状和大小。"))+
+ defn("旋转",p("把图形绕一个定点按一定方向转动一个角度，称<strong>旋转</strong>，定点称旋转中心，转动的角称旋转角。"))+
+ thm("性质",p("① 平移：对应线段平行且相等、对应角相等；② 旋转：对应点到旋转中心距离相等、对应点与中心连线夹角等于旋转角；③ 轴对称：对应点连线被对称轴垂直平分；④ 中心对称：对应点连线被对称中心平分。"))+
+ der(p("<strong>轴对称性质推导：</strong>设点 $A$ 与 $A'$ 关于直线 $l$ 对称，$AA'$ 交 $l$ 于 $O$。折叠后两点重合，$l$ 上任一点到 $A,A'$ 距离相等，特别地 $OA=OA'$；又 $AA'\\perp l$（否则折叠后 $A$ 落到 $A'$ 以外的点），故 $l$ 垂直平分 $AA'$。")+
+ p("<strong>旋转性质推导：</strong>点 $P$ 绕中心 $O$ 旋转角 $\\theta$ 到 $P'$。由定义 $OP=OP'$（到中心距离不变）、$\\angle POP'=\\theta$，故 $\\triangle OPP'$ 是以 $O$ 为顶点的等腰三角形，旋转保持图形形状与大小不变。"))+
+ exa(p("<strong>例：</strong>正方形既是轴对称图形（4 条对称轴）又是中心对称图形（对称中心为对角线交点）；正三角形是轴对称图形但不是中心对称图形。")))
+}
+]},
 {"name":"5.10 平面图形面积与周长","color":"#9d174d","desc":"常见平面图形面积周长公式汇总",
 "items":[
 {"id":"e5s10-1","name":"常见平面图形面积周长公式表","tags":["def","der","app","note"],"brief":"三角形、四边形、圆、扇形、弓形面积周长公式汇总。",
@@ -1045,7 +1090,7 @@ ch6_sections = [
  fml("V_{\\text{圆柱}}=\\pi r^2 h,\\quad S_{\\text{侧}}=2\\pi r h")+
  fml("V_{\\text{圆锥}}=\\dfrac{1}{3}\\pi r^2 h,\\quad S_{\\text{侧}}=\\pi r l\\ (l=\\sqrt{r^2+h^2})"))+
  der(p("<strong>圆柱体积推导：</strong>圆柱由圆盘沿高堆叠，体积 = 底面积 $\\pi r^2\\times$ 高 $h$。侧面积：展开为矩形，长 $2\\pi r$（底周长）、宽 $h$，故 $S_{侧}=2\\pi r h$。")+
- p("<strong>圆锥体积推导（极限思想）：</strong>将圆锥用 $n$ 等高薄片近似，每片近似圆柱。取极限得 $V=\\dfrac{1}{3}\\pi r^2 h$（也可由祖暅原理：同底等高的圆锥与棱锥体积相等，$\\dfrac{1}{3}Sh$）。")+
+ p("<strong>圆锥体积推导（祖暅原理）：</strong>同底等高的圆锥与三棱锥体积相等（用祖暅原理，二者在每一等高处截面积按同一比例对应），而棱锥体积为 $\\dfrac{1}{3}Sh$，故 $V_{\\text{圆锥}}=\\dfrac{1}{3}\\pi r^2 h$。")+
  p("<strong>圆锥侧面积推导：</strong>展开为扇形，半径 $l$（母线），弧长 $2\\pi r$（底周长）。扇形面积 $=\\dfrac{1}{2}\\cdot l\\cdot 2\\pi r=\\pi r l$。"))+
  exa(p("<strong>例：</strong>圆锥 $r=3,h=4$，$l=5$，$V=\\dfrac{1}{3}\\pi\\cdot9\\cdot4=12\\pi$，$S_{侧}=\\pi\\cdot3\\cdot5=15\\pi$。")))
 },
@@ -1056,10 +1101,10 @@ ch6_sections = [
  thm("球的公式",p("")+
  fml("S_{\\text{球}}=4\\pi R^2,\\quad V_{\\text{球}}=\\dfrac{4}{3}\\pi R^3"))+
  der(p("<strong>表面积推导（祖暅原理）：</strong>将半径 $R$ 的球置于底面半径 $R$、高 $2R$ 的圆柱内。任取水平截面：球截面为小圆，半径 $\\sqrt{R^2-x^2}$（$x$ 为到球心距离），面积 $\\pi(R^2-x^2)$；圆柱去圆锥（同底等高）截面为环形，面积 $\\pi R^2-\\pi x^2=\\pi(R^2-x^2)$。两者截面面积相等，由祖暅原理体积相等。圆柱体积 $\\pi R^2\\cdot 2R=2\\pi R^3$，圆锥体积 $\\dfrac{1}{3}\\pi R^2\\cdot 2R=\\dfrac{2}{3}\\pi R^3$，球体积 $=2\\pi R^3-\\dfrac{2}{3}\\pi R^3=\\dfrac{4}{3}\\pi R^3$。")+
- p("<strong>表面积推导：</strong>球体积 $V=\\dfrac{4}{3}\\pi R^3$，将球看作由无穷薄球壳组成，$dV=S\\,dR$，故 $S=\\dfrac{dV}{dR}=4\\pi R^2$。或由半径增量 $\\Delta R$ 对应体积增量 $\\Delta V\\approx S\\Delta R$，取极限即得。")))
+ p("<strong>表面积结论（阿基米德）：</strong>阿基米德证明：球面面积等于其<strong>大圆面积的 4 倍</strong>，即 $S_{\\text{球}}=4\\pi R^2$。直观上，球面可视为外切圆柱侧面（面积 $2\\pi R\\cdot 2R=4\\pi R^2$）的「投影」，两者面积相等。")))
 }
 ]},
-{"name":"6.3 空间位置关系","color":"#5b21b6","desc":"线面平行垂直、二面角、空间向量",
+{"name":"6.3 空间位置关系","color":"#5b21b6","desc":"线面平行垂直、二面角与空间距离",
 "items":[
 {"id":"e6s3-1","name":"线面平行与垂直","tags":["def","thm","der"],"brief":"线面平行垂直的判定与性质定理。",
 "body":wrap(
@@ -1079,16 +1124,6 @@ ch6_sections = [
  der(p("<strong>二面角推导：</strong>两平面 $\\alpha_1,\\alpha_2$ 法向量 $\\vec{n_1},\\vec{n_2}$，二面角的平面角与法向量夹角相等或互补。由 $\\vec{n_1}\\cdot\\vec{n_2}=|\\vec{n_1}||\\vec{n_2}|\\cos\\theta$，得 $\\cos\\varphi=\\pm\\dfrac{\\vec{n_1}\\cdot\\vec{n_2}}{|\\vec{n_1}||\\vec{n_2}|}$（符号由二面角为锐角或钝角确定）。")+
  p("<strong>点面距离推导：</strong>平面 $Ax+By+Cz+D=0$ 法向量 $\\vec{n}=(A,B,C)$。点 $P_0(x_0,y_0,z_0)$ 到平面距离 = $P_0$ 沿法向量方向到平面的有向距离绝对值。设 $P$ 为垂足，$\\vec{P_0P}=t\\vec{n}/|\\vec{n}|$ 代入平面方程 $A(x_0+tA/|n|)+\\cdots+D=0$ 解 $t$，得 $d=\\dfrac{|Ax_0+By_0+Cz_0+D|}{\\sqrt{A^2+B^2+C^2}}$。"))+
  exa(p("<strong>例：</strong>原点到平面 $2x+3y+6z-21=0$ 距离 $d=\\dfrac{21}{\\sqrt{4+9+36}}=\\dfrac{21}{7}=3$。")))
-},
-{"id":"e6s3-3","name":"空间向量基础","tags":["def","thm","der"],"brief":"空间向量坐标运算、数量积与夹角。",
-"body":wrap(
- defn("空间向量",p("空间向量的坐标表示 $\\vec{a}=(x,y,z)$。模 $|\\vec{a}|=\\sqrt{x^2+y^2+z^2}$。"))+
- thm("数量积",p("")+
- fml("\\vec{a}\\cdot\\vec{b}=x_1 x_2+y_1 y_2+z_1 z_2=|\\vec{a}||\\vec{b}|\\cos\\langle\\vec{a},\\vec{b}\\rangle"))+
- thm("距离与夹角",p("")+
- fml("|P_1P_2|=\\sqrt{(x_2-x_1)^2+(y_2-y_1)^2+(z_2-z_1)^2}"))+
- der(p("<strong>数量积推导：</strong>由 $\\vec{a}\\cdot\\vec{b}=|\\vec{a}||\\vec{b}|\\cos\\theta$ 及余弦定理 $|\\vec{a}-\\vec{b}|^2=|\\vec{a}|^2+|\\vec{b}|^2-2\\vec{a}\\cdot\\vec{b}$，得 $\\vec{a}\\cdot\\vec{b}=\\dfrac{|\\vec{a}|^2+|\\vec{b}|^2-|\\vec{a}-\\vec{b}|^2}{2}$。代入坐标计算 $|\\vec{a}-\\vec{b}|^2=(x_1-x_2)^2+(y_1-y_2)^2+(z_1-z_2)^2$ 展开，化简得 $\\vec{a}\\cdot\\vec{b}=x_1x_2+y_1y_2+z_1z_2$。")+
- p("<strong>夹角推导：</strong>由 $\\vec{a}\\cdot\\vec{b}=|\\vec{a}||\\vec{b}|\\cos\\theta$，得 $\\cos\\theta=\\dfrac{x_1x_2+y_1y_2+z_1z_2}{\\sqrt{x_1^2+y_1^2+z_1^2}\\sqrt{x_2^2+y_2^2+z_2^2}}$。两向量垂直 $\\Leftrightarrow\\vec{a}\\cdot\\vec{b}=0$。")))
 }
 ]},
 {"name":"6.4 立体几何公式汇总","color":"#4c1d95","desc":"柱、锥、台、球体积与表面积汇总表",
@@ -1150,7 +1185,34 @@ ch7_sections = [
  exa(p("<strong>例：</strong>直角坐标 $(0,0,1)$ 的球坐标为 $(1,0,0)$（$r=1,\\varphi=0$）。")))
 }
 ]},
-{"name":"7.2 直线与圆","color":"#0e7490","desc":"直线方程、圆的方程、距离公式",
+{"name":"7.2 向量","color":"#0e7490","desc":"平面向量与空间向量的运算、数量积与坐标表示",
+"items":[
+{"id":"e7v-1","name":"平面向量及其运算","tags":["def","thm","der","exa"],"brief":"向量概念、加减数乘、坐标运算、数量积与共线垂直判定。",
+"body":wrap(
+ defn("向量",p("既有大小又有方向的量称<strong>向量</strong>，记 $\\vec{a}$。大小称模 $|\\vec{a}|$；模为 1 的称单位向量，模为 0 的称零向量。坐标表示 $\\vec{a}=(x,y)$。"))+
+ thm("线性运算",p("")+
+ fml("\\vec{a}\\pm\\vec{b}=(x_1\\pm x_2,\\ y_1\\pm y_2),\\quad \\lambda\\vec{a}=(\\lambda x_1,\\lambda y_1)"))+
+ thm("数量积",p("")+
+ fml("\\vec{a}\\cdot\\vec{b}=x_1x_2+y_1y_2=|\\vec{a}||\\vec{b}|\\cos\\theta"))+
+ thm("共线与垂直",p("共线（平行）$\\vec{a}\\parallel\\vec{b}\\Leftrightarrow x_1y_2-x_2y_1=0$（即 $\\vec{a}=\\lambda\\vec{b}$）；垂直 $\\vec{a}\\perp\\vec{b}\\Leftrightarrow \\vec{a}\\cdot\\vec{b}=0$。"))+
+ der(p("<strong>坐标运算推导（加法）：</strong>按单位基底分解 $\\vec{a}=x_1\\vec{i}+y_1\\vec{j},\\ \\vec{b}=x_2\\vec{i}+y_2\\vec{j}$，相加合并同类项得 $\\vec{a}+\\vec{b}=(x_1+x_2)\\vec{i}+(y_1+y_2)\\vec{j}=(x_1+x_2,\\ y_1+y_2)$。")+
+ p("<strong>数量积坐标推导：</strong>由 $\\vec{i}\\cdot\\vec{i}=\\vec{j}\\cdot\\vec{j}=1$、$\\vec{i}\\cdot\\vec{j}=0$，展开 $(x_1\\vec{i}+y_1\\vec{j})\\cdot(x_2\\vec{i}+y_2\\vec{j})=x_1x_2+y_1y_2$，即坐标对应相乘再相加。")+
+ p("<strong>模与夹角：</strong>$|\\vec{a}|=\\sqrt{x_1^2+y_1^2}$，$\\cos\\theta=\\dfrac{\\vec{a}\\cdot\\vec{b}}{|\\vec{a}||\\vec{b}|}=\\dfrac{x_1x_2+y_1y_2}{\\sqrt{x_1^2+y_1^2}\\sqrt{x_2^2+y_2^2}}$。"))+
+ exa(p("<strong>例：</strong>$\\vec{a}=(1,2),\\vec{b}=(3,-1)$，$\\vec{a}\\cdot\\vec{b}=3-2=1$，$\\vec{a}+\\vec{b}=(4,1)$，$|\\vec{a}|=\\sqrt5$。")))
+},
+{"id":"e7v-2","name":"空间向量","tags":["def","thm","der","exa"],"brief":"空间向量坐标运算、数量积、夹角与空间距离。",
+"body":wrap(
+ defn("空间向量",p("空间向量坐标表示 $\\vec{a}=(x,y,z)$，模 $|\\vec{a}|=\\sqrt{x^2+y^2+z^2}$。空间任意向量可由三个不共面向量线性表示。"))+
+ thm("数量积",p("")+
+ fml("\\vec{a}\\cdot\\vec{b}=x_1x_2+y_1y_2+z_1z_2=|\\vec{a}||\\vec{b}|\\cos\\langle\\vec{a},\\vec{b}\\rangle"))+
+ thm("距离与夹角",p("")+
+ fml("|P_1P_2|=\\sqrt{(x_2-x_1)^2+(y_2-y_1)^2+(z_2-z_1)^2}"))+
+ der(p("<strong>数量积推导：</strong>由 $\\vec{a}\\cdot\\vec{b}=|\\vec{a}||\\vec{b}|\\cos\\theta$ 及余弦定理 $|\\vec{a}-\\vec{b}|^2=|\\vec{a}|^2+|\\vec{b}|^2-2\\vec{a}\\cdot\\vec{b}$，得 $\\vec{a}\\cdot\\vec{b}=\\dfrac{|\\vec{a}|^2+|\\vec{b}|^2-|\\vec{a}-\\vec{b}|^2}{2}$。代入坐标 $|\\vec{a}-\\vec{b}|^2=(x_1-x_2)^2+(y_1-y_2)^2+(z_1-z_2)^2$ 展开化简得 $\\vec{a}\\cdot\\vec{b}=x_1x_2+y_1y_2+z_1z_2$。")+
+ p("<strong>夹角推导：</strong>$\\cos\\theta=\\dfrac{x_1x_2+y_1y_2+z_1z_2}{\\sqrt{x_1^2+y_1^2+z_1^2}\\sqrt{x_2^2+y_2^2+z_2^2}}$；$\\vec{a}\\perp\\vec{b}\\Leftrightarrow\\vec{a}\\cdot\\vec{b}=0$，$\\vec{a}\\parallel\\vec{b}\\Leftrightarrow\\vec{a}=\\lambda\\vec{b}$。"))+
+ exa(p("<strong>例：</strong>$\\vec{a}=(1,0,1),\\vec{b}=(0,1,1)$，$\\vec{a}\\cdot\\vec{b}=1$，$|\\vec{a}|=|\\vec{b}|=\\sqrt2$，$\\cos\\theta=\\dfrac12$，$\\theta=60^\\circ$。")))
+}
+]},
+{"name":"7.3 直线与圆","color":"#0e7490","desc":"直线方程、圆的方程、距离公式",
 "items":[
 {"id":"e7s2-1","name":"直线方程与位置关系","tags":["def","thm","der","exa"],"brief":"点斜式、斜截式、一般式及两直线位置关系。",
 "body":wrap(
@@ -1186,7 +1248,41 @@ ch7_sections = [
  p("<strong>平行线距离推导：</strong>两平行线 $Ax+By+C_1=0$ 与 $Ax+By+C_2=0$（法向量相同故平行）。在第一条上任取一点 $P_0$（满足 $Ax_0+By_0+C_1=0$），到第二条距离 $=\\dfrac{|Ax_0+By_0+C_2|}{\\sqrt{A^2+B^2}}=\\dfrac{|C_2-C_1|}{\\sqrt{A^2+B^2}}$。")))
 }
 ]},
-{"name":"7.3 空间解析几何","color":"#155e75","desc":"空间直线方程、平面方程、线面关系",
+{"name":"7.4 圆锥曲线","color":"#0e7490","desc":"椭圆、双曲线、抛物线的定义与标准方程",
+"items":[
+{"id":"e7c-1","name":"椭圆","tags":["def","thm","der","exa"],"brief":"椭圆定义、标准方程推导、离心率与几何性质。",
+"fig":"ellipse","figCap":"椭圆 $\\dfrac{x^2}{a^2}+\\dfrac{y^2}{b^2}=1$，两焦点 $F_1,F_2$",
+"body":wrap(
+ defn("椭圆",p("平面内到两定点 $F_1,F_2$ 距离之和等于常数 $2a$（$2a>|F_1F_2|=2c$）的点的轨迹称<strong>椭圆</strong>。$F_1,F_2$ 为焦点，$a$ 为长半轴，$b=\\sqrt{a^2-c^2}$ 为短半轴。"))+
+ thm("标准方程",p("焦点在 $x$ 轴、中心在原点：")+
+ fml("\\dfrac{x^2}{a^2}+\\dfrac{y^2}{b^2}=1\\quad(a>b>0)"))+
+ thm("几何性质",p("范围 $|x|\\le a,|y|\\le b$；顶点 $(\\pm a,0),(0,\\pm b)$；离心率 $e=\\dfrac{c}{a}\\in(0,1)$；长轴 $2a$、短轴 $2b$、焦距 $2c$，满足 $a^2=b^2+c^2$。"))+
+ der(p("<strong>标准方程推导：</strong>设焦点 $F_1(-c,0),F_2(c,0)$。由定义 $\\sqrt{(x+c)^2+y^2}+\\sqrt{(x-c)^2+y^2}=2a$。移项平方化简得 $a^2-cx=a\\sqrt{(x-c)^2+y^2}$，再平方整理得 $(a^2-c^2)x^2+a^2y^2=a^2(a^2-c^2)$。令 $b^2=a^2-c^2$，两边除以 $a^2b^2$ 即得 $\\dfrac{x^2}{a^2}+\\dfrac{y^2}{b^2}=1$。")+
+ p("<strong>离心率意义：</strong>$e=\\dfrac{c}{a}=\\sqrt{1-\\dfrac{b^2}{a^2}}$。离心率越小，$b$ 越接近 $a$，椭圆越接近圆；离心率越大，椭圆越扁平。"))+
+ exa(p("<strong>例：</strong>椭圆 $\\dfrac{x^2}{25}+\\dfrac{y^2}{9}=1$，$a=5,b=3,c=\\sqrt{25-9}=4$，$e=\\dfrac{4}{5}$，焦点 $(\\pm4,0)$。")))
+},
+{"id":"e7c-2","name":"双曲线","tags":["def","thm","der","exa"],"brief":"双曲线定义、标准方程、渐近线与离心率。",
+"body":wrap(
+ defn("双曲线",p("平面内到两定点 $F_1,F_2$ 距离之差的绝对值等于常数 $2a$（$0<2a<|F_1F_2|=2c$）的点的轨迹称<strong>双曲线</strong>。"))+
+ thm("标准方程",p("焦点在 $x$ 轴、中心在原点：")+
+ fml("\\dfrac{x^2}{a^2}-\\dfrac{y^2}{b^2}=1\\quad(a,b>0)"))+
+ thm("几何性质",p("渐近线 $y=\\pm\\dfrac{b}{a}x$；离心率 $e=\\dfrac{c}{a}\\in(1,+\\infty)$；$c^2=a^2+b^2$；实轴 $2a$、虚轴 $2b$。"))+
+ der(p("<strong>标准方程推导：</strong>设焦点 $F_1(-c,0),F_2(c,0)$。由定义 $\\left|\\sqrt{(x+c)^2+y^2}-\\sqrt{(x-c)^2+y^2}\\right|=2a$。平方整理（同椭圆）得 $(c^2-a^2)x^2-a^2y^2=a^2(c^2-a^2)$。令 $b^2=c^2-a^2$，除以 $a^2b^2$ 得 $\\dfrac{x^2}{a^2}-\\dfrac{y^2}{b^2}=1$。")+
+ p("<strong>渐近线推导：</strong>当 $|x|$ 很大时，$\\dfrac{y^2}{b^2}=\\dfrac{x^2}{a^2}-1\\approx\\dfrac{x^2}{a^2}$，故 $y\\approx\\pm\\dfrac{b}{a}x$，即双曲线向两直线 $y=\\pm\\dfrac{b}{a}x$（渐近线）无限靠拢。"))+
+ exa(p("<strong>例：</strong>双曲线 $\\dfrac{x^2}{9}-\\dfrac{y^2}{16}=1$，$a=3,b=4,c=5$，渐近线 $y=\\pm\\dfrac{4}{3}x$，$e=\\dfrac{5}{3}$。")))
+},
+{"id":"e7c-3","name":"抛物线","tags":["def","thm","der","exa"],"brief":"抛物线定义、标准方程、焦点与准线。",
+"body":wrap(
+ defn("抛物线",p("平面内到定点 $F$（焦点）与定直线 $l$（准线）距离相等的点的轨迹称<strong>抛物线</strong>。"))+
+ thm("标准方程",p("开口向右、顶点在原点：")+
+ fml("y^2=2px\\quad(p>0)"))+
+ thm("几何性质",p("焦点 $F\\left(\\dfrac{p}{2},0\\right)$，准线 $x=-\\dfrac{p}{2}$，离心率 $e=1$。$p$ 为焦点到准线的距离；开口方向由一次项决定（$y^2=2px$ 向右，$y^2=-2px$ 向左，$x^2=2py$ 向上，$x^2=-2py$ 向下）。"))+
+ der(p("<strong>标准方程推导：</strong>设焦点 $F\\left(\\dfrac{p}{2},0\\right)$、准线 $x=-\\dfrac{p}{2}$。由定义 $\\sqrt{\\left(x-\\dfrac{p}{2}\\right)^2+y^2}=\\left|x+\\dfrac{p}{2}\\right|$，两边平方：$x^2-px+\\dfrac{p^2}{4}+y^2=x^2+px+\\dfrac{p^2}{4}$，整理得 $y^2=2px$。")+
+ p("<strong>通径：</strong>过焦点垂直于对称轴的弦称通径，长为 $2p$，是过焦点的最短弦。"))+
+ exa(p("<strong>例：</strong>抛物线 $y^2=8x$，$2p=8$，$p=4$，焦点 $(2,0)$，准线 $x=-2$。")))
+}
+]},
+{"name":"7.5 空间解析几何","color":"#155e75","desc":"空间直线方程、平面方程、线面关系",
 "items":[
 {"id":"e7s3-1","name":"空间直线方程","tags":["def","thm","der","exa"],"brief":"空间直线参数方程、对称式方程与一般式方程。",
 "body":wrap(
@@ -1219,7 +1315,7 @@ ch7_sections = [
  exa(p("<strong>例：</strong>原点到平面 $2x+3y+6z-21=0$ 距离 $d=\\dfrac{|-21|}{\\sqrt{4+9+36}}=\\dfrac{21}{7}=3$。")))
 }
 ]},
-{"name":"7.4 二次曲面","color":"#0f766e","desc":"椭球面、双曲面、抛物面、锥面",
+{"name":"7.6 二次曲面","color":"#0f766e","desc":"椭球面、双曲面、抛物面、锥面",
 "items":[
 {"id":"e7s4-1","name":"椭球面与单叶双曲面","tags":["def","thm","der","exa"],"brief":"椭球面与单叶双曲面的标准方程与截痕法。",
 "body":wrap(
@@ -1247,30 +1343,28 @@ ch7_sections = [
  thm("截痕特征",p("")+
  fml("\\text{锥面: }\\dfrac{x^2}{a^2}+\\dfrac{y^2}{b^2}=\\dfrac{z^2}{c^2}"))+
  der(p("<strong>马鞍面截痕推导：</strong>用 $z=h$ 截 $\\dfrac{x^2}{a^2}-\\dfrac{y^2}{b^2}=h$。$h>0$ 时为横轴在 $x$ 方向的双曲线；$h<0$ 时为横轴在 $y$ 方向的双曲线；$h=0$ 时为两相交直线 $\\dfrac{x}{a}=\\pm\\dfrac{y}{b}$。用 $y=h$ 截 $\\dfrac{x^2}{a^2}-z=\\dfrac{h^2}{b^2}$ 即 $z=\\dfrac{x^2}{a^2}-\\dfrac{h^2}{b^2}$，为开口朝上的抛物线。用 $x=h$ 截为开口朝下的抛物线，故呈马鞍形。")+
- p("<strong>二次锥面截痕推导：</strong>用 $z=h$（$h\\ne0$）截 $\\dfrac{x^2}{a^2}+\\dfrac{y^2}{b^2}=\\dfrac{h^2}{c^2}$，为椭圆（$a=b$ 时为圆）。$h=0$ 时退化为顶点（原点）。锥面可视为单叶双曲面与双叶双曲面的极限（$c\\to\\infty$）。"))+
- exa(p("<strong>例：</strong>马鞍面 $z=x^2-y^2$ 在原点附近呈马鞍形，原点为鞍点，是二元函数极值理论的典型例子。")))
+ p("<strong>二次锥面截痕推导：</strong>用 $z=h$（$h\\ne0$）截 $\\dfrac{x^2}{a^2}+\\dfrac{y^2}{b^2}=\\dfrac{h^2}{c^2}$，为椭圆（$a=b$ 时为圆）。$h=0$ 时退化为顶点（原点）。二次锥面是单叶双曲面与双叶双曲面之间的过渡曲面。"))+
+ exa(p("<strong>例：</strong>马鞍面 $z=x^2-y^2$ 在原点附近形似马鞍：沿 $x$ 方向向上弯、沿 $y$ 方向向下弯，故又称双曲抛物面。")))
 }
 ]},
-{"name":"7.5 空间曲线","color":"#115e59","desc":"空间曲线参数方程、螺旋线",
+{"name":"7.7 空间曲线","color":"#115e59","desc":"空间曲线参数方程、螺旋线与投影",
 "items":[
-{"id":"e7s5-1","name":"空间曲线参数方程与圆柱螺旋线","tags":["def","thm","der","exa"],"brief":"空间曲线参数方程、圆柱螺旋线及其弧长。",
+{"id":"e7s5-1","name":"空间曲线参数方程与圆柱螺旋线","tags":["def","thm","der","exa"],"brief":"空间曲线参数方程、圆柱螺旋线及其弧长（展开法）。",
 "body":wrap(
  defn("空间曲线",p("空间曲线用参数方程 $\\vec{r}(t)=(x(t),y(t),z(t))$ 表示，$t$ 为参数。"))+
- defn("圆柱螺旋线",p("参数方程 $\\begin{cases}x=a\\cos t\\\\y=a\\sin t\\\\z=bt\\end{cases}$（$a>0$）。在半径 $a$ 的圆柱面上，每转一圈上升 $2\\pi b$（螺距）。"))+
- thm("弧长公式",p("")+
- fml("s=\\int_{t_1}^{t_2}\\sqrt{(x')^2+(y')^2+(z')^2}\\,dt"))+
- der(p("<strong>螺旋线弧长推导：</strong>对 $x=a\\cos t,y=a\\sin t,z=bt$，求导 $x'=-a\\sin t,y'=a\\cos t,z'=b$。弧长微元 $ds=\\sqrt{x'^2+y'^2+z'^2}\\,dt=\\sqrt{a^2\\sin^2 t+a^2\\cos^2 t+b^2}\\,dt=\\sqrt{a^2+b^2}\\,dt$。故一圈（$t:0\\to2\\pi$）弧长 $s=\\sqrt{a^2+b^2}\\cdot 2\\pi$，一般 $s=\\sqrt{a^2+b^2}\\cdot t$。")+
- p("<strong>弧长公式推导：</strong>将曲线分为无穷小段，每段长度 $\\sqrt{dx^2+dy^2+dz^2}=\\sqrt{(x'dt)^2+(y'dt)^2+(z'dt)^2}=\\sqrt{x'^2+y'^2+z'^2}\\,dt$，积分得弧长公式。"))+
- exa(p("<strong>例：</strong>螺旋线 $a=1,b=1$，一圈弧长 $s=\\sqrt{1+1}\\cdot 2\\pi=2\\sqrt2\\pi$。")))
+ defn("圆柱螺旋线",p("参数方程 $\\begin{cases}x=a\\cos t\\\\y=a\\sin t\\\\z=bt\\end{cases}$（$a>0$）。点在半径 $a$ 的圆柱面上，每转一整圈上升 $2\\pi b$（螺距）。"))+
+ thm("螺旋线弧长（展开法）",p("把圆柱侧面沿母线剪开铺平，圆柱面展成一个矩形，螺旋线展开后恰是一条<strong>直线段</strong>，故可用勾股定理求其长。"))+
+ der(p("<strong>展开法推导：</strong>螺旋线转一整圈，沿高度方向上升 $2\\pi b$，沿圆周方向走过一周周长 $2\\pi a$。将圆柱面展开为平面矩形，这段曲线展开后是两直角边分别为 $2\\pi a$ 与 $2\\pi b$ 的直角三角形斜边，由勾股定理，一圈弧长 $s=\\sqrt{(2\\pi a)^2+(2\\pi b)^2}=2\\pi\\sqrt{a^2+b^2}$。")+
+ p("<strong>一般弧长：</strong>转过 $t$ 弧度（即 $\\dfrac{t}{2\\pi}$ 圈）时，弧长 $s=\\sqrt{a^2+b^2}\\,t$，与参数成正比。"))+
+ exa(p("<strong>例：</strong>螺旋线 $a=1,b=1$，一圈弧长 $s=2\\pi\\sqrt{1+1}=2\\sqrt2\\pi$。")))
 },
-{"id":"e7s5-2","name":"两曲面交线与切线法平面","tags":["def","thm","der","exa"],"brief":"两曲面交线、切向量与法平面方程。",
+{"id":"e7s5-2","name":"空间曲线在坐标面上的投影","tags":["def","thm","der","exa"],"brief":"空间曲线投影到坐标面的方法与消元法。",
 "body":wrap(
- defn("两曲面交线",p("曲面 $F_1(x,y,z)=0$ 与 $F_2(x,y,z)=0$ 的交线为空间曲线 $\\Gamma$。交线上一点 $P_0$ 处的切向量 $\\vec{T}=\\nabla F_1\\times\\nabla F_2$（两梯度叉积）。"))+
- thm("法平面方程",p("过 $P_0(x_0,y_0,z_0)$ 以 $\\vec{T}=(T_x,T_y,T_z)$ 为法向量的法平面方程：")+
- fml("T_x(x-x_0)+T_y(y-y_0)+T_z(z-z_0)=0"))+
- der(p("<strong>切向量推导：</strong>交线 $\\Gamma$ 既在 $F_1=0$ 上又在 $F_2=0$ 上。$\\Gamma$ 的切向量 $\\vec{T}$ 同时垂直于两曲面的法向量 $\\nabla F_1$ 和 $\\nabla F_2$（切线在两切平面交线上）。由向量叉积定义，$\\vec{T}\\parallel\\nabla F_1\\times\\nabla F_2$，故取 $\\vec{T}=\\nabla F_1\\times\\nabla F_2$。")+
- p("<strong>法平面推导：</strong>法平面是过切点且与切向量垂直的平面。以切向量 $\\vec{T}$ 为法向量，由点法式平面方程得 $T_x(x-x_0)+T_y(y-y_0)+T_z(z-z_0)=0$。"))+
- exa(p("<strong>例：</strong>圆柱 $x^2+y^2=1$ 与平面 $z=y$ 的交线为椭圆。点 $(1,0,0)$ 处 $\\nabla F_1=(2,0,0)$，$\\nabla F_2=(0,-1,1)$，$\\vec{T}=\\nabla F_1\\times\\nabla F_2=(0,-2,-2)$，法平面 $-2y-2z=0$ 即 $y+z=0$。")))
+ defn("投影曲线",p("空间曲线 $\\Gamma$ 在 $xOy$ 面上的<strong>投影</strong>，是把 $\\Gamma$ 上每一点 $P(x,y,z)$ 沿 $z$ 方向作垂线所得垂足 $P'(x,y,0)$ 的集合。"))+
+ thm("投影求法（消元法）",p("由两曲面 $F_1(x,y,z)=0$ 与 $F_2(x,y,z)=0$ 的交线，消去 $z$ 得投影柱面方程 $H(x,y)=0$，再与 $z=0$ 联立即得 $xOy$ 面上的投影曲线 $\\begin{cases}H(x,y)=0\\\\z=0\\end{cases}$。"))+
+ der(p("<strong>消元法推导：</strong>投影过程丢掉了 $z$ 坐标，要刻画投影就要建立只含 $x,y$ 的关系。把两曲面方程看作关于 $z$ 的方程组，消去 $z$ 得 $H(x,y)=0$，它恰是过 $\\Gamma$ 且平行于 $z$ 轴的投影柱面；该柱面与 $xOy$ 面的交线即投影曲线。")+
+ p("<strong>直观类比：</strong>投影如同阳光垂直照射下物体在地面的影子，$z$ 方向的光线把曲线压到 $xOy$ 面上。"))+
+ exa(p("<strong>例：</strong>圆柱 $x^2+y^2=1$ 与平面 $z=y$ 的交线，把 $z=y$ 视为消去 $z$ 的结果，得投影柱面 $x^2+y^2=1$，故在 $xOy$ 面上的投影为圆 $x^2+y^2=1$。")))
 }
 ]}
 ]
@@ -1368,9 +1462,10 @@ ch8_sections = [
  defn("样本统计量",p("样本 $x_1,\\ldots,x_n$：<strong>均值</strong> $\\bar{x}=\\dfrac{1}{n}\\sum x_i$；<strong>方差</strong> $s^2=\\dfrac{1}{n}\\sum(x_i-\\bar{x})^2$（或 $\\dfrac{1}{n-1}$ 无偏估计）。"))+
  thm("回归方程",p("最小二乘法回归直线 $\\hat y=a+bx$，斜率与截距：")+
  fml("b=\\dfrac{\\sum(x_i-\\bar{x})(y_i-\\bar{y})}{\\sum(x_i-\\bar{x})^2},\\quad a=\\bar{y}-b\\bar{x}"))+
- der(p("<strong>最小二乘推导：</strong>求 $a,b$ 使离差平方和 $Q=\\sum(y_i-a-bx_i)^2$ 最小。对 $a,b$ 求偏导并令为 0：$\\dfrac{\\partial Q}{\\partial a}=-2\\sum(y_i-a-bx_i)=0$，$\\dfrac{\\partial Q}{\\partial b}=-2\\sum x_i(y_i-a-bx_i)=0$。第一式得 $\\sum y_i=na+b\\sum x_i$，即 $\\bar y=a+b\\bar x$，故 $a=\\bar y-b\\bar x$。第二式代入 $a$ 并化简得 $b=\\dfrac{\\sum(x_i-\\bar x)(y_i-\\bar y)}{\\sum(x_i-\\bar x)^2}$。")+
+ der(p("<strong>最小二乘推导（代数法）：</strong>离差平方和 $Q=\\sum(y_i-a-bx_i)^2$ 是 $a$ 的开口向上二次函数，在对称轴处取最小值。把它按 $a$ 整理：$Q=na^2-2a\\sum(y_i-bx_i)+\\text{常数}$，对称轴 $a=\\dfrac{\\sum(y_i-bx_i)}{n}=\\bar y-b\\bar x$，故回归直线必过样本中心 $(\\bar x,\\bar y)$，得 $a=\\bar y-b\\bar x$。")+
+ p("<strong>斜率推导：</strong>将 $a=\\bar y-b\\bar x$ 代回，$Q=\\sum[(y_i-\\bar y)-b(x_i-\\bar x)]^2$ 也是 $b$ 的开口向上二次函数，由对称轴位置解得 $b=\\dfrac{\\sum(x_i-\\bar x)(y_i-\\bar y)}{\\sum(x_i-\\bar x)^2}$。")+
  p("<strong>样本方差推导：</strong>$\\sum(x_i-\\bar x)^2=\\sum x_i^2-2\\bar x\\sum x_i+n\\bar x^2=\\sum x_i^2-n\\bar x^2$，故 $s^2=\\dfrac{1}{n}\\left(\\sum x_i^2-n\\bar x^2\\right)=\\dfrac{\\sum x_i^2}{n}-\\bar x^2$（简化计算公式）。")+
- p("<strong>相关系数推导：</strong>$r=\\dfrac{\\sum(x_i-\\bar x)(y_i-\\bar y)}{\\sqrt{\\sum(x_i-\\bar x)^2}\\sqrt{\\sum(y_i-\\bar y)^2}}\\in[-1,1]$，衡量线性相关程度。$|r|\\to1$ 强相关，$r=0$ 无线性关系。"))+
+ p("<strong>相关系数推导：</strong>$r=\\dfrac{\\sum(x_i-\\bar x)(y_i-\\bar y)}{\\sqrt{\\sum(x_i-\\bar x)^2}\\sqrt{\\sum(y_i-\\bar y)^2}}\\in[-1,1]$，衡量线性相关程度。$|r|$ 越接近 $1$ 线性相关性越强，$r=0$ 表示无线性关系。"))+
  exa(p("<strong>例：</strong>三点 $(1,2),(2,4),(3,5)$，$\\bar x=2,\\bar y=\\dfrac{11}{3}$，$\\sum(x_i-\\bar x)(y_i-\\bar y)=(-1)(-\\dfrac{5}{3})+0+1\\cdot\\dfrac{4}{3}=3$，$\\sum(x_i-\\bar x)^2=2$，$b=1.5$，$a=\\dfrac{11}{3}-3=\\dfrac{2}{3}$，回归方程 $\\hat y=\\dfrac{2}{3}+1.5x$。")))
 }
 ]}
@@ -1384,19 +1479,19 @@ CHAPTERS = [
      "desc":"实数有理数整数与加减乘除运算律、绝对值与三角不等式、整式运算与平方差/完全平方/立方和差公式、因式分解、一元一次与二元一次方程组、一元二次方程与韦达定理、高次方程、一元二次与分式绝对值不等式、均值不等式链与常见放缩。",
      "sections": ch2_sections},
     {"id":"e-ch3","num":"第三章","title":"函数","en":"FUNCTIONS",
-     "desc":"函数定义与三要素、单调性奇偶性周期性、反函数与复合函数、指数对数幂函数、二次函数、分段与绝对值函数、六个三角函数定义、同角关系与诱导公式、和差倍半角、反三角函数与三角恒等变换。",
+     "desc":"函数定义与三要素、单调性奇偶性周期性、反函数与复合函数、指数对数幂函数、二次函数、分段与绝对值函数、六个三角函数定义、同角关系与诱导公式、和差倍半角、三角恒等变换（和差化积与万能公式）、反三角函数。",
      "sections": ch3_sections},
     {"id":"e-ch4","num":"第四章","title":"数列","en":"SEQUENCES",
      "desc":"等差数列通项求和与性质（等差中项、片段和）、等比数列通项求和与无穷递缩、裂项相消、错位相减、倒序相加、分组、并项、公式法、累加法与累乘法求通项。",
      "sections": ch4_sections},
     {"id":"e-ch5","num":"第五章","title":"平面几何","en":"PLANE GEOMETRY",
-     "desc":"三角形内角和与面积公式、正弦定理与余弦定理、海伦公式与中位线、平行四边形、矩形、菱形、正方形、梯形、圆与垂径定理、圆心角与圆周角、切线与圆幂定理、平面图形面积周长汇总。",
+     "desc":"平行线的判定与性质、三角形内角和与面积公式、正弦定理与余弦定理、海伦公式与中位线、三角形的四心、平行四边形、矩形、菱形、正方形、梯形、圆（垂径定理、圆心角与圆周角、切线与圆幂定理）、对称旋转与平移、平面图形面积周长汇总。",
      "sections": ch5_sections},
     {"id":"e-ch6","num":"第六章","title":"立体几何","en":"SOLID GEOMETRY",
-     "desc":"棱柱棱锥与体积、棱台与截面积比、欧拉公式与正多面体、圆柱圆锥圆台、球与球面、线面平行与垂直、二面角与点面距离、空间向量基础、体积与表面积汇总表。",
+     "desc":"棱柱棱锥与体积、棱台与截面积比、欧拉公式与正多面体、圆柱圆锥圆台、球与球面、线面平行与垂直、二面角与点面距离、体积与表面积汇总表。",
      "sections": ch6_sections},
     {"id":"e-ch7","num":"第七章","title":"解析几何","en":"ANALYTIC GEOMETRY",
-     "desc":"极坐标柱坐标球坐标与参数方程、直线方程与位置关系、圆的方程与切线、距离公式、空间直线与平面方程、椭球面与双曲面、抛物面与锥面、空间曲线与螺旋线、椭圆双曲线抛物线。",
+     "desc":"极坐标柱坐标球坐标与参数方程、平面向量与空间向量、直线与圆的方程、距离公式、椭圆双曲线抛物线、空间直线与平面方程、椭球面与双曲面、抛物面与锥面、空间曲线与螺旋线、投影。",
      "sections": ch7_sections},
     {"id":"e-ch8","num":"第八章","title":"概率统计","en":"PROBABILITY & STATISTICS",
      "desc":"排列与组合、二项式定理、古典概型与几何概型、条件概率与全概率公式、贝叶斯公式、离散型随机变量与期望方差、二项分布与正态分布、样本均值与线性回归。",
