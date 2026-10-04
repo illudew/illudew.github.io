@@ -1,0 +1,578 @@
+# -*- coding: utf-8 -*-
+"""Generate vector-analysis.html with 4 chapters: 向量代数/场论基础/散度与旋度/正交曲线坐标系."""
+import json
+
+FIG = {
+"vector_add": '''<svg viewBox="0 0 240 160" xmlns="http://www.w3.org/2000/svg">
+<line x1="30" y1="120" x2="180" y2="120" stroke="#2563eb" stroke-width="2"/>
+<polygon points="180,120 170,115 170,125" fill="#2563eb"/>
+<line x1="30" y1="120" x2="100" y2="50" stroke="#7c3aed" stroke-width="2"/>
+<polygon points="100,50 90,55 95,65" fill="#7c3aed"/>
+<line x1="30" y1="120" x2="200" y2="50" stroke="#16a34a" stroke-width="2" stroke-dasharray="5 3"/>
+<polygon points="200,50 190,54 194,63" fill="#16a34a"/>
+<line x1="100" y1="50" x2="200" y2="50" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3 3"/>
+<line x1="180" y1="120" x2="200" y2="50" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3 3"/>
+<text x="100" y="140" font-size="11" fill="#2563eb">a</text>
+<text x="48" y="78" font-size="11" fill="#7c3aed">b</text>
+<text x="156" y="74" font-size="11" fill="#16a34a">a+b</text>
+</svg>''',
+"dot_product": '''<svg viewBox="0 0 240 160" xmlns="http://www.w3.org/2000/svg">
+<line x1="40" y1="110" x2="200" y2="110" stroke="#2563eb" stroke-width="2"/>
+<polygon points="200,110 190,105 190,115" fill="#2563eb"/>
+<line x1="40" y1="110" x2="130" y2="50" stroke="#7c3aed" stroke-width="2"/>
+<polygon points="130,50 120,55 125,65" fill="#7c3aed"/>
+<line x1="130" y1="50" x2="130" y2="110" stroke="#ef4444" stroke-width="1.3" stroke-dasharray="4 3"/>
+<text x="48" y="100" font-size="11" fill="#2563eb">a</text>
+<text x="76" y="72" font-size="11" fill="#7c3aed">b</text>
+<text x="134" y="84" font-size="10" fill="#ef4444">|b|cosθ</text>
+<text x="66" y="124" font-size="10" fill="#475569">θ</text>
+</svg>''',
+"curl": '''<svg viewBox="0 0 240 160" xmlns="http://www.w3.org/2000/svg">
+<path d="M 120 40 A 50 50 0 1 1 119 40" fill="none" stroke="#2563eb" stroke-width="2"/>
+<polygon points="119,40 124,50 113,49" fill="#2563eb"/>
+<circle cx="120" cy="80" r="4" fill="#ef4444"/>
+<line x1="120" y1="80" x2="120" y2="30" stroke="#ef4444" stroke-width="1.8"/>
+<polygon points="120,30 115,40 125,40" fill="#ef4444"/>
+<text x="128" y="36" font-size="11" fill="#ef4444">curl F</text>
+<text x="60" y="80" font-size="10" fill="#2563eb">F 场</text>
+</svg>''',
+"gauss": '''<svg viewBox="0 0 240 160" xmlns="http://www.w3.org/2000/svg">
+<ellipse cx="120" cy="80" rx="70" ry="50" fill="#eef4fb" stroke="#2563eb" stroke-width="2"/>
+<line x1="120" y1="30" x2="120" y2="20" stroke="#16a34a" stroke-width="1.8"/>
+<polygon points="120,20 115,30 125,30" fill="#16a34a"/>
+<line x1="190" y1="80" x2="205" y2="80" stroke="#16a34a" stroke-width="1.8"/>
+<polygon points="205,80 195,75 195,85" fill="#16a34a"/>
+<line x1="50" y1="80" x2="35" y2="80" stroke="#16a34a" stroke-width="1.8"/>
+<polygon points="35,80 45,75 45,85" fill="#16a34a"/>
+<line x1="120" y1="130" x2="120" y2="140" stroke="#16a34a" stroke-width="1.8"/>
+<polygon points="120,140 115,130 125,130" fill="#16a34a"/>
+<text x="100" y="86" font-size="11" fill="#2563eb">V</text>
+<text x="126" y="24" font-size="9" fill="#16a34a">dS</text>
+</svg>'''
+}
+
+TAG_LABEL = {"def":"定 义","thm":"定 理","der":"推 导","exa":"例 子","app":"应 用","note":"备 注"}
+
+CORE_FORMULAS = [
+    ("向量加法", "\\vec{a}+\\vec{b} = (a_x+b_x,\\ a_y+b_y,\\ a_z+b_z)", "对应分量相加"),
+    ("向量数乘", "\\lambda\\vec{a} = (\\lambda a_x,\\ \\lambda a_y,\\ \\lambda a_z)", "数乘向量等于数乘各分量"),
+    ("点积", "\\vec{a}\\cdot\\vec{b} = |a||b|\\cos\\theta = a_xb_x+a_yb_y+a_zb_z", "点积结果为标量"),
+    ("叉积", "\\vec{a}\\times\\vec{b} = \\begin{vmatrix}\\vec{i}&\\vec{j}&\\vec{k}\\\\a_x&a_y&a_z\\\\b_x&b_y&b_z\\end{vmatrix}", "叉积结果为向量，方向垂直于 a,b"),
+    ("叉积模长", "|\\vec{a}\\times\\vec{b}| = |a||b|\\sin\\theta", "叉积模长等于以 a,b 为邻边的平行四边形面积"),
+    ("混合积", "[\\vec{a}\\ \\vec{b}\\ \\vec{c}] = (\\vec{a}\\times\\vec{b})\\cdot\\vec{c}", "混合积绝对值等于平行六面体体积"),
+    ("方向导数", "\\dfrac{\\partial f}{\\partial l} = \\nabla f\\cdot\\vec{l}^0", "沿方向 l 的方向导数"),
+    ("梯度", "\\nabla f = \\dfrac{\\partial f}{\\partial x}\\vec{i}+\\dfrac{\\partial f}{\\partial y}\\vec{j}+\\dfrac{\\partial f}{\\partial z}\\vec{k}", "标量场的梯度为矢量"),
+    ("散度", "\\nabla\\cdot\\vec{F} = \\dfrac{\\partial F_x}{\\partial x}+\\dfrac{\\partial F_y}{\\partial y}+\\dfrac{\\partial F_z}{\\partial z}", "矢量场的散度为标量"),
+    ("旋度", "\\nabla\\times\\vec{F} = \\begin{vmatrix}\\vec{i}&\\vec{j}&\\vec{k}\\\\ \\partial_x&\\partial_y&\\partial_z\\\\ F_x&F_y&F_z\\end{vmatrix}", "矢量场的旋度为矢量"),
+    ("高斯公式", "\\oiint_{\\partial V}\\vec{F}\\cdot d\\vec{S} = \\iiint_V (\\nabla\\cdot\\vec{F})\\,dV", "散度定理，通量等于体积分"),
+    ("斯托克斯公式", "\\oint_{\\partial S}\\vec{F}\\cdot d\\vec{l} = \\iint_S (\\nabla\\times\\vec{F})\\cdot d\\vec{S}", "环量等于旋度通量"),
+    ("梯度的散度（拉普拉斯）", "\\nabla^2 f = \\nabla\\cdot(\\nabla f) = \\dfrac{\\partial^2 f}{\\partial x^2}+\\dfrac{\\partial^2 f}{\\partial y^2}+\\dfrac{\\partial^2 f}{\\partial z^2}", "拉普拉斯算子"),
+    ("旋度的散度为零", "\\nabla\\cdot(\\nabla\\times\\vec{F}) = 0", "任意矢量场旋度的散度恒为零"),
+    ("梯度的旋度为零", "\\nabla\\times(\\nabla f) = 0", "任意标量场梯度的旋度恒为零"),
+    ("柱坐标单位矢量变换", "\\vec{e}_r=\\cos\\varphi\\vec{e}_x+\\sin\\varphi\\vec{e}_y", "柱坐标与直角坐标单位矢量关系"),
+    ("球坐标梯度", "\\nabla f = \\dfrac{\\partial f}{\\partial r}\\vec{e}_r+\\dfrac{1}{r}\\dfrac{\\partial f}{\\partial\\theta}\\vec{e}_\\theta+\\dfrac{1}{r\\sin\\theta}\\dfrac{\\partial f}{\\partial\\varphi}\\vec{e}_\\varphi", "球坐标系中的梯度"),
+    ("球坐标散度", "\\nabla\\cdot\\vec{F} = \\dfrac{1}{r^2}\\dfrac{\\partial(r^2F_r)}{\\partial r}+\\dfrac{1}{r\\sin\\theta}\\dfrac{\\partial(\\sin\\theta F_\\theta)}{\\partial\\theta}+\\dfrac{1}{r\\sin\\theta}\\dfrac{\\partial F_\\varphi}{\\partial\\varphi}", "球坐标系中的散度"),
+]
+
+def js_escape(s):
+    return s.replace("\\","\\\\").replace("`","\\`").replace("${","\\${")
+def fix_lt_math(s):
+    import re
+    return re.sub(r"\$\$[\s\S]*?\$\$|\$[^$\n]*?\$", lambda m: m.group(0).replace("<", "&lt;"), s)
+def defn(t, body): return f'<section class="la-kp-sec la-kp-def"><h5>定 义</h5><p><strong>{t}</strong></p>{body}</section>'
+def thm(t, body): return f'<section class="la-kp-sec la-kp-thm"><h5>定 理 · {t}</h5>{body}</section>'
+def der(body): return f'<section class="la-kp-sec la-kp-der"><h5>推 导</h5>{body}</section>'
+def exa(body): return f'<section class="la-kp-sec la-kp-exa"><h5>例 子</h5>{body}</section>'
+def app(body): return f'<section class="la-kp-sec la-kp-app"><h5>应 用</h5>{body}</section>'
+def note(body): return f'<section class="la-kp-sec la-kp-note"><h5>备 注</h5>{body}</section>'
+def fml(latex, caption=""):
+    cap = f'<span class="note">{caption}</span>' if caption else ""
+    return f'<div class="la-fml">$${latex}$$ {cap}</div>'
+def p(txt): return f'<p>{txt}</p>'
+def wrap(body): return f'<div class="la-kp">{body}</div>'
+
+# ============ 第一章 向量代数 ============
+ch1_sections = [
+{"name":"1.1 向量的基本运算","color":"#2563eb","desc":"向量的定义、加减、数乘与几何意义",
+"items":[
+{"id":"v1s1-1","name":"向量的概念与表示","tags":["def","exa"],"brief":"既有大小又有方向的量，用分量或几何有向线段表示。",
+"body":wrap(
+ defn("向量",p("既有大小又有方向的量称为<strong>向量</strong>（矢量）。在直角坐标系中，向量 $\\vec{a}$ 可表示为：")+
+ fml("\\vec{a} = a_x\\vec{i} + a_y\\vec{j} + a_z\\vec{k} = (a_x, a_y, a_z)")+
+ p("其模（大小）为 $|\\vec{a}|=\\sqrt{a_x^2+a_y^2+a_z^2}$。"))+
+ note(p("只有大小没有方向的量称为标量。向量与起点无关，可自由平移（自由向量）。单位向量 $\\vec{a}^0 = \\dfrac{\\vec{a}}{|\\vec{a}|}$。"))
+)},
+{"id":"v1s1-2","name":"向量的加法与数乘","tags":["def","thm","der"],"brief":"平行四边形法则、三角形法则与数乘运算律。",
+"fig":"vector_add","figCap":"向量加法的平行四边形法则：a+b 为平行四边形对角线",
+"body":wrap(
+ defn("向量加法",p("两向量 $\\vec{a},\\vec{b}$ 相加满足<strong>平行四边形法则</strong>（或三角形法则）：将 $\\vec{b}$ 平移使其起点与 $\\vec{a}$ 终点重合，则从 $\\vec{a}$ 起点到 $\\vec{b}$ 终点的向量为 $\\vec{a}+\\vec{b}$。分量形式：")+
+ fml("\\vec{a}+\\vec{b} = (a_x+b_x,\\ a_y+b_y,\\ a_z+b_z)"))+
+ defn("数乘向量",p("实数 $\\lambda$ 与向量 $\\vec{a}$ 的乘积 $\\lambda\\vec{a}$ 仍为向量：")+
+ fml("\\lambda\\vec{a} = (\\lambda a_x,\\ \\lambda a_y,\\ \\lambda a_z),\\quad |\\lambda\\vec{a}|=|\\lambda||\\vec{a}|")+
+ p("方向：$\\lambda>0$ 时与 $\\vec{a}$ 同向，$\\lambda<0$ 时反向。"))+
+ thm("运算律",p("加法满足交换律、结合律；数乘满足结合律与分配律：")+
+ fml("\\vec{a}+\\vec{b}=\\vec{b}+\\vec{a},\\quad (\\vec{a}+\\vec{b})+\\vec{c}=\\vec{a}+(\\vec{b}+\\vec{c})")+
+ fml("\\lambda(\\mu\\vec{a})=(\\lambda\\mu)\\vec{a},\\quad \\lambda(\\vec{a}+\\vec{b})=\\lambda\\vec{a}+\\lambda\\vec{b}"))
+)}
+]},
+{"name":"1.2 点积与叉积","color":"#0ea5e9","desc":"标量积与矢量积的定义、性质及几何意义",
+"items":[
+{"id":"v1s2-1","name":"向量的点积（标量积）","tags":["def","thm","der"],"brief":"a·b=|a||b|cosθ，结果为标量。",
+"fig":"dot_product","figCap":"点积 a·b = |a|(|b|cosθ)，即 |a| 乘以 b 在 a 上的投影",
+"body":wrap(
+ defn("点积",p("两向量 $\\vec{a},\\vec{b}$ 的<strong>点积</strong>（内积、标量积）定义为：")+
+ fml("\\vec{a}\\cdot\\vec{b} = |\\vec{a}||\\vec{b}|\\cos\\theta")+
+ p("其中 $\\theta$ 为 $\\vec{a}$ 与 $\\vec{b}$ 的夹角（$0\\le\\theta\\le\\pi$）。分量形式：")+
+ fml("\\vec{a}\\cdot\\vec{b} = a_xb_x + a_yb_y + a_zb_z"))+
+ thm("性质",p("① $\\vec{a}\\cdot\\vec{a}=|\\vec{a}|^2$；<br>② $\\vec{a}\\perp\\vec{b}\\iff\\vec{a}\\cdot\\vec{b}=0$；<br>③ 交换律 $\\vec{a}\\cdot\\vec{b}=\\vec{b}\\cdot\\vec{a}$；<br>④ 分配律 $\\vec{a}\\cdot(\\vec{b}+\\vec{c})=\\vec{a}\\cdot\\vec{b}+\\vec{a}\\cdot\\vec{c}$。"))+
+ der(p("<strong>点积几何意义：</strong>$\\vec{a}\\cdot\\vec{b}=|\\vec{a}|(\\vec{b}\\cdot\\vec{a}^0)$，即 $|\\vec{a}|$ 乘以 $\\vec{b}$ 在 $\\vec{a}$ 方向上的投影 $|\\vec{b}|\\cos\\theta$。当 $\\vec{a}$ 为单位向量时，点积即为投影长度。"))
+)},
+{"id":"v1s2-2","name":"向量的叉积（矢量积）","tags":["def","thm"],"brief":"a×b 为垂直于 a,b 的向量，模为 |a||b|sinθ。",
+"body":wrap(
+ defn("叉积",p("两向量 $\\vec{a},\\vec{b}$ 的<strong>叉积</strong>（外积、矢量积）定义为一个向量：")+
+ fml("\\vec{a}\\times\\vec{b} = |\\vec{a}||\\vec{b}|\\sin\\theta\\ \\vec{n}")+
+ p("其中 $\\vec{n}$ 为垂直于 $\\vec{a},\\vec{b}$ 所在平面的单位向量，方向由<strong>右手定则</strong>确定。分量形式：")+
+ fml("\\vec{a}\\times\\vec{b} = (a_yb_z-a_zb_y,\\ a_zb_x-a_xb_z,\\ a_xb_y-a_yb_x)"))+
+ thm("性质",p("① 反交换律：$\\vec{a}\\times\\vec{b}=-\\vec{b}\\times\\vec{a}$；<br>② $\\vec{a}\\parallel\\vec{b}\\iff\\vec{a}\\times\\vec{b}=0$；<br>③ $|\\vec{a}\\times\\vec{b}|$ 等于以 $\\vec{a},\\vec{b}$ 为邻边的平行四边形面积；<br>④ 分配律：$\\vec{a}\\times(\\vec{b}+\\vec{c})=\\vec{a}\\times\\vec{b}+\\vec{a}\\times\\vec{c}$。"))+
+ note(p("点积与叉积的本质区别：点积结果是标量，与坐标选取无关；叉积结果是矢量，在右手坐标系中定义。"))
+)},
+{"id":"v1s2-3","name":"混合积与多重积","tags":["def","thm"],"brief":"(a×b)·c 的几何意义为平行六面体体积。",
+"body":wrap(
+ defn("混合积",p("三向量 $\\vec{a},\\vec{b},\\vec{c}$ 的<strong>混合积</strong>定义为：")+
+ fml("[\\vec{a}\\ \\vec{b}\\ \\vec{c}] = (\\vec{a}\\times\\vec{b})\\cdot\\vec{c}")+
+ p("其绝对值等于以 $\\vec{a},\\vec{b},\\vec{c}$ 为棱的平行六面体体积。"))+
+ thm("轮换对称性",p("混合积具有轮换对称性：")+
+ fml("(\\vec{a}\\times\\vec{b})\\cdot\\vec{c} = (\\vec{b}\\times\\vec{c})\\cdot\\vec{a} = (\\vec{c}\\times\\vec{a})\\cdot\\vec{b}")+
+ p("且三向量共面 $\\iff (\\vec{a}\\times\\vec{b})\\cdot\\vec{c}=0$。"))+
+ note(p("分量计算：$[\\vec{a}\\ \\vec{b}\\ \\vec{c}]=\\begin{vmatrix}a_x&a_y&a_z\\\\b_x&b_y&b_z\\\\c_x&c_y&c_z\\end{vmatrix}$。"))
+)}
+]}
+]
+
+# ============ 第二章 场论基础 ============
+ch2_sections = [
+{"name":"2.1 标量场与方向导数","color":"#0d9488","desc":"场的概念、等值面、方向导数",
+"items":[
+{"id":"v2s1-1","name":"场的概念","tags":["def","exa"],"brief":"标量场与矢量场的定义与描述。",
+"body":wrap(
+ defn("标量场",p("若空间区域 $V$ 内每一点 $M$ 都对应一个标量 $u(M)$，则称在 $V$ 上定义了一个<strong>标量场</strong> $u=u(x,y,z)$。如温度场、密度场、电势场。"))+
+ defn("矢量场",p("若空间区域 $V$ 内每一点 $M$ 都对应一个矢量 $\\vec{F}(M)$，则称在 $V$ 上定义了一个<strong>矢量场</strong> $\\vec{F}=\\vec{F}(x,y,z)=(P,Q,R)$。如力场、速度场、电场。"))+
+ exa(p("<strong>例：</strong>静电场中电势 $\\phi(x,y,z)$ 是标量场，电场强度 $\\vec{E}=-\\nabla\\phi$ 是矢量场。"))
+)},
+{"id":"v2s1-2","name":"方向导数与梯度","tags":["def","thm","der"],"brief":"方向导数是梯度在该方向的投影。",
+"body":wrap(
+ defn("方向导数",p("标量场 $u(x,y,z)$ 在点 $M$ 沿方向 $\\vec{l}$ 的<strong>方向导数</strong>定义为：")+
+ fml("\\dfrac{\\partial u}{\\partial l} = \\lim_{\\rho\\to 0}\\dfrac{u(M')-u(M)}{\\rho}")+
+ p("其中 $M'$ 为沿 $\\vec{l}$ 方向距 $M$ 为 $\\rho$ 的点。计算公式：")+
+ fml("\\dfrac{\\partial u}{\\partial l} = \\dfrac{\\partial u}{\\partial x}\\cos\\alpha+\\dfrac{\\partial u}{\\partial y}\\cos\\beta+\\dfrac{\\partial u}{\\partial z}\\cos\\gamma"))+
+ defn("梯度",p("标量场 $u$ 的<strong>梯度</strong>定义为矢量：")+
+ fml("\\nabla u = \\left(\\dfrac{\\partial u}{\\partial x},\\dfrac{\\partial u}{\\partial y},\\dfrac{\\partial u}{\\partial z}\\right) = \\dfrac{\\partial u}{\\partial x}\\vec{i}+\\dfrac{\\partial u}{\\partial y}\\vec{j}+\\dfrac{\\partial u}{\\partial z}\\vec{k}"))+
+ thm("梯度与方向导数关系",p("")+
+ fml("\\dfrac{\\partial u}{\\partial l} = \\nabla u \\cdot \\vec{l}^0 = |\\nabla u|\\cos\\theta")+
+ p("其中 $\\theta$ 为 $\\nabla u$ 与 $\\vec{l}$ 的夹角。当 $\\vec{l}$ 与 $\\nabla u$ 同向时，方向导数取最大值 $|\\nabla u|$。故<strong>梯度方向是函数增长最快的方向，梯度的模是最大方向导数</strong>。"))+
+ der(p("<strong>推导：</strong>方向导数 $\\dfrac{\\partial u}{\\partial l}=u_x\\cos\\alpha+u_y\\cos\\beta+u_z\\cos\\gamma=(u_x,u_y,u_z)\\cdot(\\cos\\alpha,\\cos\\beta,\\cos\\gamma)=\\nabla u\\cdot\\vec{l}^0$。由柯西不等式，当 $\\vec{l}^0$ 与 $\\nabla u$ 同向时，点积最大为 $|\\nabla u|$。"))
+)}
+]},
+{"name":"2.2 梯度的性质","color":"#14b8a6","desc":"梯度的几何意义与基本运算",
+"items":[
+{"id":"v2s2-1","name":"梯度的几何意义与运算","tags":["thm","app"],"brief":"梯度垂直于等值面，指向函数增大方向。",
+"body":wrap(
+ thm("几何意义",p("标量场 $u$ 的梯度 $\\nabla u$ 在点 $M$ 处垂直于过该点的等值面 $u=C$，且指向 $u$ 增大的方向。"))+
+ der(p("<strong>证明：</strong>等值面 $u(x,y,z)=C$ 上任一曲线 $\\vec{r}(t)=(x(t),y(t),z(t))$ 满足 $u(x(t),y(t),z(t))=C$。对 $t$ 求导：$u_x\\dot{x}+u_y\\dot{y}+u_z\\dot{z}=0$，即 $\\nabla u\\cdot\\dot{\\vec{r}}=0$。因 $\\dot{\\vec{r}}$ 为等值面切向量，故 $\\nabla u$ 垂直于等值面。"))+
+ thm("梯度运算规则",p("设 $u,v$ 为标量场：<br>① $\\nabla(u\\pm v)=\\nabla u\\pm\\nabla v$；<br>② $\\nabla(uv)=v\\nabla u+u\\nabla v$；<br>③ $\\nabla\\left(\\dfrac{u}{v}\\right)=\\dfrac{v\\nabla u-u\\nabla v}{v^2}$；<br>④ $\\nabla f(u)=f'(u)\\nabla u$（复合函数）。"))+
+ app(p("<strong>应用：</strong>电场强度 $\\vec{E}=-\\nabla\\varphi$，电场方向沿电势降低最快的方向（负梯度方向）。"))
+)}
+]}
+]
+
+# ============ 第三章 散度与旋度 ============
+ch3_sections = [
+{"name":"3.1 散度","color":"#c2410c","desc":"通量、散度的定义与物理意义",
+"items":[
+{"id":"v3s1-1","name":"通量与散度","tags":["def","thm","der"],"brief":"散度是单位体积的通量，描述源汇强度。",
+"fig":"gauss","figCap":"闭合曲面 S 包围体积 V，矢量场 F 穿过 S 的通量",
+"body":wrap(
+ defn("通量",p("矢量场 $\\vec{F}$ 穿过曲面 $S$ 的<strong>通量</strong>为：")+
+ fml("\\Phi = \\iint_S \\vec{F}\\cdot d\\vec{S} = \\iint_S \\vec{F}\\cdot\\vec{n}\\,dS")+
+ p("其中 $\\vec{n}$ 为曲面法向量。对闭合曲面，$\\vec{n}$ 取外法向。"))+
+ defn("散度",p("矢量场 $\\vec{F}$ 在点 $M$ 的<strong>散度</strong>定义为单位体积的通量：")+
+ fml("\\nabla\\cdot\\vec{F} = \\lim_{\\Delta V\\to 0}\\dfrac{1}{\\Delta V}\\oiint_{\\Delta S}\\vec{F}\\cdot d\\vec{S}")+
+ p("直角坐标系中：")+
+ fml("\\nabla\\cdot\\vec{F} = \\dfrac{\\partial F_x}{\\partial x}+\\dfrac{\\partial F_y}{\\partial y}+\\dfrac{\\partial F_z}{\\partial z}"))+
+ thm("物理意义",p("散度 $\\nabla\\cdot\\vec{F}>0$ 表示该点有<strong>源</strong>（流出），$<0$ 表示有<strong>汇</strong>（流入），$=0$ 表示无源。若处处 $\\nabla\\cdot\\vec{F}=0$，则称 $\\vec{F}$ 为<strong>无源场</strong>（管形场）。"))+
+ der(p("<strong>直角坐标公式推导：</strong>取中心在 $(x,y,z)$、边长 $\\Delta x,\\Delta y,\\Delta z$ 的小长方体。通过左右两面的通量差约为 $\\dfrac{\\partial F_x}{\\partial x}\\Delta x\\Delta y\\Delta z$，三对面相加后除以体积 $\\Delta x\\Delta y\\Delta z$，得散度 $\\dfrac{\\partial F_x}{\\partial x}+\\dfrac{\\partial F_y}{\\partial y}+\\dfrac{\\partial F_z}{\\partial z}$。"))
+)},
+{"id":"v3s1-2","name":"高斯公式（散度定理）","tags":["thm","der","app"],"brief":"闭合曲面通量等于散度的体积分。",
+"body":wrap(
+ thm("高斯公式",p("设空间闭区域 $V$ 由分片光滑闭合曲面 $S$ 围成，$\\vec{F}$ 在 $V$ 上有连续偏导数，则：")+
+ fml("\\oiint_S \\vec{F}\\cdot d\\vec{S} = \\iiint_V (\\nabla\\cdot\\vec{F})\\,dV"))+
+ der(p("<strong>证明思路：</strong>将 $V$ 分割为无数小体积元。每个小体积元的通量等于其散度乘以体积。相邻小体积元的公共面通量相互抵消（法向相反），最终只剩下外表面 $S$ 的通量，即得高斯公式。"))+
+ app(p("<strong>电磁学应用：</strong>电场高斯定理 $\\oiint_S\\vec{E}\\cdot d\\vec{S}=\\dfrac{q}{\\varepsilon_0}$，写成微分形式为 $\\nabla\\cdot\\vec{E}=\\dfrac{\\rho}{\\varepsilon_0}$，其中 $\\rho$ 为电荷密度。"))
+)}
+]},
+{"name":"3.2 旋度","color":"#ea580c","desc":"环量、旋度的定义与斯托克斯公式",
+"items":[
+{"id":"v3s2-1","name":"环量与旋度","tags":["def","thm"],"brief":"旋度描述矢量场的旋转特性。",
+"fig":"curl","figCap":"旋度 curl F 的方向沿右手螺旋，垂直于矢量场旋转平面",
+"body":wrap(
+ defn("环量",p("矢量场 $\\vec{F}$ 沿闭合曲线 $L$ 的<strong>环量</strong>为：")+
+ fml("\\Gamma = \\oint_L \\vec{F}\\cdot d\\vec{l}"))+
+ defn("旋度",p("矢量场 $\\vec{F}$ 在点 $M$ 的<strong>旋度</strong>是一个矢量，其方向沿使环量面密度最大的法向，大小为该最大环量面密度。直角坐标系中：")+
+ fml("\\nabla\\times\\vec{F} = \\begin{vmatrix}\\vec{i}&\\vec{j}&\\vec{k}\\\\ \\dfrac{\\partial}{\\partial x}&\\dfrac{\\partial}{\\partial y}&\\dfrac{\\partial}{\\partial z}\\\\ F_x&F_y&F_z\\end{vmatrix}")+
+ p("分量：$\\nabla\\times\\vec{F}=\\left(\\dfrac{\\partial F_z}{\\partial y}-\\dfrac{\\partial F_y}{\\partial z},\\ \\dfrac{\\partial F_x}{\\partial z}-\\dfrac{\\partial F_z}{\\partial x},\\ \\dfrac{\\partial F_y}{\\partial x}-\\dfrac{\\partial F_x}{\\partial y}\\right)$"))+
+ thm("物理意义",p("旋度 $\\nabla\\times\\vec{F}\\neq 0$ 表示场有<strong>涡旋</strong>（旋转），若处处 $\\nabla\\times\\vec{F}=0$，则称 $\\vec{F}$ 为<strong>无旋场</strong>（保守场），可表示为某标量场的梯度 $\\vec{F}=\\nabla u$。"))
+)},
+{"id":"v3s2-2","name":"斯托克斯公式","tags":["thm","der","app"],"brief":"闭合曲线环量等于旋度穿过曲面的通量。",
+"body":wrap(
+ thm("斯托克斯公式",p("设光滑曲面 $S$ 的边界为分段光滑闭合曲线 $L$，$\\vec{F}$ 在 $S$ 上有连续偏导数，则：")+
+ fml("\\oint_L \\vec{F}\\cdot d\\vec{l} = \\iint_S (\\nabla\\times\\vec{F})\\cdot d\\vec{S}")+
+ p("其中 $L$ 的正向与 $S$ 的法向满足右手定则。"))+
+ der(p("<strong>证明思路：</strong>将曲面 $S$ 分割为无数小面元。每个小面元边界的环量等于旋度在该面元法向的投影乘以面积。相邻面元公共边界的环量相互抵消，最终只剩下外边界 $L$ 的环量。"))+
+ app(p("<strong>电磁学应用：</strong>法拉第电磁感应定律的微分形式 $\\nabla\\times\\vec{E}=-\\dfrac{\\partial\\vec{B}}{\\partial t}$，由斯托克斯公式可得积分形式 $\\oint_L\\vec{E}\\cdot d\\vec{l}=-\\dfrac{d}{dt}\\iint_S\\vec{B}\\cdot d\\vec{S}$。"))
+)}
+]},
+{"name":"3.3 矢量微分恒等式","color":"#f59e0b","desc":"梯度、散度、旋度的复合运算恒等式",
+"items":[
+{"id":"v3s3-1","name":"两个零恒等式与拉普拉斯算子","tags":["thm","der"],"brief":"旋度的散度为零，梯度的旋度为零。",
+"body":wrap(
+ thm("零恒等式",p("对任意有二阶连续偏导数的标量场 $u$ 和矢量场 $\\vec{F}$：")+
+ fml("\\nabla\\times(\\nabla u) = 0,\\quad \\nabla\\cdot(\\nabla\\times\\vec{F}) = 0")+
+ p("即：<strong>梯度场必无旋，旋度场必无源</strong>。"))+
+ der(p("<strong>证明第一式：</strong>$\\nabla\\times(\\nabla u)$ 的 $x$ 分量为 $\\dfrac{\\partial}{\\partial y}\\left(\\dfrac{\\partial u}{\\partial z}\\right)-\\dfrac{\\partial}{\\partial z}\\left(\\dfrac{\\partial u}{\\partial y}\\right)=u_{zy}-u_{yz}=0$（混合偏导连续时相等）。其余分量同理。"))+
+ defn("拉普拉斯算子",p("梯度的散度称为<strong>拉普拉斯算子</strong>：")+
+ fml("\\nabla^2 u = \\nabla\\cdot(\\nabla u) = \\dfrac{\\partial^2 u}{\\partial x^2}+\\dfrac{\\partial^2 u}{\\partial y^2}+\\dfrac{\\partial^2 u}{\\partial z^2}"))+
+ note(p("满足拉普拉斯方程 $\\nabla^2u=0$ 的函数称为调和函数。静电场中无电荷区域的电势 $\\varphi$ 满足 $\\nabla^2\\varphi=0$。"))
+)}
+]}
+]
+
+# ============ 第四章 正交曲线坐标系 ============
+ch4_sections = [
+{"name":"4.1 正交曲线坐标系概述","color":"#7c3aed","desc":"曲线坐标、拉梅系数与弧长元",
+"items":[
+{"id":"v4s1-1","name":"曲线坐标与拉梅系数","tags":["def","thm"],"brief":"正交曲线坐标中弧长元与拉梅系数。",
+"body":wrap(
+ defn("曲线坐标",p("设 $u_1,u_2,u_3$ 为空间点的曲线坐标，与直角坐标的变换关系为 $x=x(u_1,u_2,u_3),y=y(u_1,u_2,u_3),z=z(u_1,u_2,u_3)$。若三族坐标面处处正交，则称为<strong>正交曲线坐标系</strong>。"))+
+ defn("拉梅系数",p("沿坐标曲线 $u_i$ 方向的弧长元 $ds_i=h_i\\,du_i$，其中 $h_i$ 称为<strong>拉梅系数</strong>：")+
+ fml("h_i = \\sqrt{\\left(\\dfrac{\\partial x}{\\partial u_i}\\right)^2+\\left(\\dfrac{\\partial y}{\\partial u_i}\\right)^2+\\left(\\dfrac{\\partial z}{\\partial u_i}\\right)^2}")+
+ p("空间弧长元 $ds^2=h_1^2du_1^2+h_2^2du_2^2+h_3^2du_3^2$，体积元 $dV=h_1h_2h_3\\,du_1du_2du_3$。"))
+)},
+{"id":"v4s1-2","name":"柱坐标系","tags":["def","thm"],"brief":"(r,φ,z) 坐标下的梯度、散度、旋度。",
+"body":wrap(
+ defn("柱坐标",p("柱坐标 $(r,\\varphi,z)$ 与直角坐标的关系：$x=r\\cos\\varphi,\\ y=r\\sin\\varphi,\\ z=z$。拉梅系数：")+
+ fml("h_r=1,\\quad h_\\varphi=r,\\quad h_z=1"))+
+ thm("柱坐标中的梯度",p("")+
+ fml("\\nabla f = \\dfrac{\\partial f}{\\partial r}\\vec{e}_r+\\dfrac{1}{r}\\dfrac{\\partial f}{\\partial \\varphi}\\vec{e}_\\varphi+\\dfrac{\\partial f}{\\partial z}\\vec{e}_z"))+
+ thm("柱坐标中的散度",p("")+
+ fml("\\nabla\\cdot\\vec{F} = \\dfrac{1}{r}\\dfrac{\\partial(rF_r)}{\\partial r}+\\dfrac{1}{r}\\dfrac{\\partial F_\\varphi}{\\partial \\varphi}+\\dfrac{\\partial F_z}{\\partial z}"))+
+ note(p("柱坐标适用于具有轴对称性的问题，如无限长直导线的电场、圆柱波导中的电磁场。"))
+)}
+]},
+{"name":"4.2 球坐标系","color":"#8b5cf6","desc":"(r,θ,φ) 坐标下的矢量微分运算",
+"items":[
+{"id":"v4s2-1","name":"球坐标及其矢量微分","tags":["def","thm"],"brief":"球坐标下拉梅系数与梯度、散度、旋度公式。",
+"body":wrap(
+ defn("球坐标",p("球坐标 $(r,\\theta,\\varphi)$ 与直角坐标关系：$x=r\\sin\\theta\\cos\\varphi,\\ y=r\\sin\\theta\\sin\\varphi,\\ z=r\\cos\\theta$。拉梅系数：")+
+ fml("h_r=1,\\quad h_\\theta=r,\\quad h_\\varphi=r\\sin\\theta"))+
+ thm("球坐标中的梯度",p("")+
+ fml("\\nabla f = \\dfrac{\\partial f}{\\partial r}\\vec{e}_r+\\dfrac{1}{r}\\dfrac{\\partial f}{\\partial \\theta}\\vec{e}_\\theta+\\dfrac{1}{r\\sin\\theta}\\dfrac{\\partial f}{\\partial \\varphi}\\vec{e}_\\varphi"))+
+ thm("球坐标中的散度",p("")+
+ fml("\\nabla\\cdot\\vec{F} = \\dfrac{1}{r^2}\\dfrac{\\partial(r^2F_r)}{\\partial r}+\\dfrac{1}{r\\sin\\theta}\\dfrac{\\partial(\\sin\\theta F_\\theta)}{\\partial \\theta}+\\dfrac{1}{r\\sin\\theta}\\dfrac{\\partial F_\\varphi}{\\partial \\varphi}"))+
+ thm("球坐标中的拉普拉斯",p("")+
+ fml("\\nabla^2 f = \\dfrac{1}{r^2}\\dfrac{\\partial}{\\partial r}\\left(r^2\\dfrac{\\partial f}{\\partial r}\\right)+\\dfrac{1}{r^2\\sin\\theta}\\dfrac{\\partial}{\\partial \\theta}\\left(\\sin\\theta\\dfrac{\\partial f}{\\partial \\theta}\\right)+\\dfrac{1}{r^2\\sin^2\\theta}\\dfrac{\\partial^2 f}{\\partial \\varphi^2}"))+
+ note(p("球坐标适用于球对称问题，如点电荷电场、氢原子波函数。球坐标下拉普拉斯方程在分离变量后得到勒让德方程与球谐函数。"))
+)},
+{"id":"v4s2-2","name":"矢量微分运算的一般形式","tags":["thm"],"brief":"正交曲线坐标中梯度散度旋度的通式。",
+"body":wrap(
+ thm("正交曲线坐标中的梯度",p("")+
+ fml("\\nabla f = \\dfrac{1}{h_1}\\dfrac{\\partial f}{\\partial u_1}\\vec{e}_1+\\dfrac{1}{h_2}\\dfrac{\\partial f}{\\partial u_2}\\vec{e}_2+\\dfrac{1}{h_3}\\dfrac{\\partial f}{\\partial u_3}\\vec{e}_3"))+
+ thm("正交曲线坐标中的散度",p("")+
+ fml("\\nabla\\cdot\\vec{F} = \\dfrac{1}{h_1h_2h_3}\\left[\\dfrac{\\partial(h_2h_3F_1)}{\\partial u_1}+\\dfrac{\\partial(h_1h_3F_2)}{\\partial u_2}+\\dfrac{\\partial(h_1h_2F_3)}{\\partial u_3}\\right]"))+
+ thm("正交曲线坐标中的旋度",p("")+
+ fml("\\nabla\\times\\vec{F} = \\dfrac{1}{h_1h_2h_3}\\begin{vmatrix}h_1\\vec{e}_1&h_2\\vec{e}_2&h_3\\vec{e}_3\\\\ \\dfrac{\\partial}{\\partial u_1}&\\dfrac{\\partial}{\\partial u_2}&\\dfrac{\\partial}{\\partial u_3}\\\\ h_1F_1&h_2F_2&h_3F_3\\end{vmatrix}"))+
+ note(p("柱坐标、球坐标的公式均可由以上通式代入相应拉梅系数得到。记住通式比死记各坐标公式更高效。"))
+)}
+]}
+]
+
+CHAPTERS = [
+{"id":"ch1","num":"第一章","title":"向量代数","en":"VECTOR ALGEBRA","desc":"向量的加减、数乘、点积、叉积与混合积，是矢量分析的代数基础。","sections":ch1_sections},
+{"id":"ch2","num":"第二章","title":"场论基础","en":"FIELD THEORY","desc":"标量场与矢量场、方向导数与梯度，理解场的空间变化率。","sections":ch2_sections},
+{"id":"ch3","num":"第三章","title":"散度与旋度","en":"DIVERGENCE & CURL","desc":"通量、散度、环量、旋度，高斯公式与斯托克斯公式，矢量微分恒等式。","sections":ch3_sections},
+{"id":"ch4","num":"第四章","title":"正交曲线坐标系","en":"CURVILINEAR COORDINATES","desc":"柱坐标、球坐标系中的梯度、散度、旋度与拉普拉斯算子。","sections":ch4_sections},
+]
+
+def gen_html():
+    data_lines = []
+    for ch in CHAPTERS:
+        sec_strs = []
+        for sec in ch["sections"]:
+            item_strs = []
+            for it in sec["items"]:
+                tags_js = json.dumps(it["tags"], ensure_ascii=False)
+                body_esc = js_escape(fix_lt_math(it["body"]))
+                fig_field = f",fig:{json.dumps(it.get('fig',''),ensure_ascii=False)}" if it.get("fig") else ""
+                figcap_field = f",figCap:{json.dumps(it.get('figCap',''),ensure_ascii=False)}" if it.get("figCap") else ""
+                item_strs.append(
+                    f"{{id:'{it['id']}',name:{json.dumps(it['name'],ensure_ascii=False)},"
+                    f"tags:{tags_js},brief:{json.dumps(it['brief'],ensure_ascii=False)},"
+                    f"body:`{body_esc}`{fig_field}{figcap_field}}}"
+                )
+            sec_strs.append(
+                f"{{name:{json.dumps(sec['name'],ensure_ascii=False)},"
+                f"color:'{sec['color']}',desc:{json.dumps(sec['desc'],ensure_ascii=False)},"
+                f"items:[{','.join(item_strs)}]}}"
+            )
+        data_lines.append(
+            f"{{id:'{ch['id']}',num:{json.dumps(ch['num'],ensure_ascii=False)},"
+            f"title:{json.dumps(ch['title'],ensure_ascii=False)},en:'{ch['en']}',"
+            f"desc:{json.dumps(ch['desc'],ensure_ascii=False)},"
+            f"sections:[{','.join(sec_strs)}]}}"
+        )
+    la_data = "[" + ",".join(data_lines) + "]"
+
+    fig_entries = []
+    for k, v in FIG.items():
+        fig_entries.append(f"{json.dumps(k)}:`{js_escape(v)}`")
+    fig_js = "{" + ",".join(fig_entries) + "}"
+    tag_label_js = json.dumps(TAG_LABEL, ensure_ascii=False)
+
+    nav_tabs = "".join(
+        f'<a class="la-nav-tab c{i+1}" href="#{ch["id"]}">{ch["num"]} · {ch["title"]}</a>'
+        for i, ch in enumerate(CHAPTERS)
+    )
+
+    css = '''  :root{--la-bg:#f4f7fb;--la-card:#ffffff;--la-ink:#152033;--la-muted:#607089;--la-shadow:0 12px 32px rgba(20,36,60,.09);}
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;color:var(--la-ink);background:radial-gradient(circle at 10% 10%,rgba(37,99,235,.08),transparent 28%),radial-gradient(circle at 90% 10%,rgba(124,58,237,.08),transparent 28%),var(--la-bg);line-height:1.7}
+  a{color:inherit}
+  .la-wrap{width:min(1400px,94vw);margin:auto}
+  .la-header{padding:52px 0 20px;text-align:center}
+  .la-eyebrow{font-size:13px;letter-spacing:.22em;color:var(--la-muted);font-weight:700;text-transform:uppercase}
+  h1{margin:10px 0 8px;font-size:clamp(30px,5vw,54px);line-height:1.08;letter-spacing:-.03em}
+  .la-subtitle{margin:0 auto;color:var(--la-muted);font-size:16px;max-width:820px;line-height:1.8}
+  .back-bar{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:22px 0 6px}
+  .back-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 22px;border-radius:999px;text-decoration:none;font-size:14px;font-weight:800;background:#fff;color:#1e3a8a;border:1px solid #c7d7ee;box-shadow:0 8px 20px rgba(20,36,60,.08);transition:.25s;cursor:pointer}
+  .back-btn:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(20,36,60,.14);color:#4c1d95;border-color:#ddd6fe}
+  .la-nav-tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:22px 0 8px}
+  .la-nav-tab{padding:8px 16px;border-radius:999px;text-decoration:none;font-weight:700;font-size:13px;border:1px solid #d5deea;background:#fff;transition:.25s;color:#334155}
+  .la-nav-tab:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(20,36,60,.1)}
+  .la-nav-tab.c1{color:#2563eb;border-color:#bfdbfe}
+  .la-nav-tab.c2{color:#0d9488;border-color:#99f6e4}
+  .la-nav-tab.c3{color:#c2410c;border-color:#fed7aa}
+  .la-nav-tab.c4{color:#7c3aed;border-color:#ddd6fe}
+  .la-engagement-bar{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:26px 0 10px}
+  .la-stat-item{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border-radius:999px;background:#fff;border:1px solid #e2e8f0;font-size:13px;color:#334155;font-weight:600}
+  .la-stat-value{color:#6366f1;font-weight:800;font-size:15px}
+  .la-stat-link{cursor:pointer;text-decoration:none;transition:.2s}
+  .la-stat-link:hover{background:#eef2ff;border-color:#c7d2fe}
+  .la-legend{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:0 0 24px;font-size:12px;color:#64748b}
+  .la-legend-title{font-weight:700;margin-right:4px}
+  .la-arc-badge{font-size:11px;padding:3px 10px;border-radius:999px;font-weight:700;letter-spacing:.04em}
+  .la-arc-def{background:#dbeafe;color:#1e40af}
+  .la-arc-thm{background:#ede9fe;color:#6d28d9}
+  .la-arc-der{background:#e0f2fe;color:#0369a1}
+  .la-arc-exa{background:#dcfce7;color:#15803d}
+  .la-arc-app{background:#fef3c7;color:#b45309}
+  .la-arc-note{background:#fee2e2;color:#b91c1c}
+  .la-roadmap{padding:30px 0}
+  .la-phase-title{font-size:24px;color:#1e293b;margin:40px 0 6px 18px;display:flex;align-items:center;gap:12px}
+  .la-phase-title::before{content:"";width:6px;height:26px;border-radius:4px}
+  .la-phase-title.ch1::before{background:#2563eb}
+  .la-phase-title.ch2::before{background:#0d9488}
+  .la-phase-title.ch3::before{background:#c2410c}
+  .la-phase-title.ch4::before{background:#7c3aed}
+  .la-phase-en{font-size:11px;letter-spacing:.36em;color:#94a3b8;font-weight:700;text-transform:uppercase;margin:0 0 12px 18px;font-style:italic}
+  .la-phase-desc{color:var(--la-muted);font-size:14px;margin:0 0 24px 18px;line-height:1.8;max-width:960px}
+  .la-domain{margin-bottom:26px;padding:16px 18px 18px 22px;position:relative;background:rgba(255,255,255,.6);border-radius:18px;border:1px solid #e5ebf2}
+  .la-domain::before{content:"";position:absolute;left:6px;top:16px;bottom:16px;width:5px;border-radius:5px;background:var(--domain-color,#2563eb);box-shadow:0 0 12px rgba(37,99,235,.25)}
+  .la-domain-header{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+  .la-domain-header h3{margin:0;font-size:17px;color:#1e293b}
+  .la-domain-count{font-size:11px;padding:2px 10px;border-radius:999px;background:#eef2ff;color:#4f46e5;font-weight:700}
+  .la-domain-desc{font-size:12px;color:#94a3b8}
+  .la-domain-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+  .la-course-card{background:#fff;border:1px solid #e5ebf2;border-radius:14px;padding:14px 16px;cursor:pointer;transition:.22s;box-shadow:var(--la-shadow)}
+  .la-course-card:hover{transform:translateY(-3px);border-color:#c7d2fe;box-shadow:0 16px 40px rgba(37,99,235,.12)}
+  .la-course-card h4{margin:6px 0;font-size:15px;color:#1e293b}
+  .la-course-card p{margin:4px 0 0;font-size:12.5px;color:#64748b;line-height:1.6}
+  .la-arc-badges{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:2px}
+  .la-overlay{position:fixed;inset:0;background:rgba(15,23,42,.5);display:none;align-items:center;justify-content:center;padding:18px;z-index:60;backdrop-filter:blur(2px)}
+  .la-overlay.show{display:flex}
+  .la-modal{width:min(820px,96vw);background:white;border-radius:24px;padding:30px;box-shadow:0 24px 80px rgba(0,0,0,.28);animation:laPopIn .3s;max-height:90vh;overflow-y:auto}
+  @keyframes laPopIn{from{transform:scale(.94);opacity:0}to{transform:scale(1);opacity:1}}
+  .la-modal h2{margin:0 0 10px;font-size:23px;color:#1e293b;line-height:1.35}
+  .la-modal .la-crumbs{font-size:12px;color:#94a3b8;margin:0 0 14px;font-weight:600;letter-spacing:.02em}
+  .la-modal .la-arc-badges{margin:0 0 16px}
+  .la-modal-body{color:#334155;font-size:15px;line-height:1.9}
+  .la-modal-body p{margin:0 0 12px}
+  .la-modal-body strong{color:#0f172a}
+  .la-modal-body ul{margin:0 0 12px;padding-left:22px}
+  .la-modal-body li{margin-bottom:6px}
+  .la-fml{margin:16px 0;padding:14px 18px;background:linear-gradient(135deg,#f8fafc,#eef4fb);border-left:4px solid #93b4e8;border-radius:10px;overflow-x:auto;font-size:16px;color:#0f172a}
+  .la-fml .note{display:block;font-size:12.5px;color:#8496ad;margin-top:8px;line-height:1.6;font-family:system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+  .la-fml mjx-container[display="true"]{margin:0 !important}
+  mjx-container, mjx-container *{color:#0f172a !important;opacity:1 !important}
+  mjx-mi{font-style:italic !important}
+  mjx-mo{color:#0f172a !important}
+  .la-modal-body mjx-container, .la-modal-body mjx-container *{color:#0f172a !important;opacity:1 !important}
+  .la-fig{margin:18px auto;padding:14px 16px 10px;background:#fafcff;border:1px solid #e2ebf7;border-radius:14px;display:flex;flex-direction:column;align-items:center;max-width:600px}
+  .la-fig svg{display:block;width:100%;height:auto;max-width:560px}
+  .la-fig .la-fig-cap{font-size:12px;color:#8496ad;margin-top:8px;text-align:center;letter-spacing:.02em}
+  .la-callout{margin:14px 0;padding:12px 16px;background:#fffbeb;border-left:3px solid #fbbf24;border-radius:8px;font-size:13.5px;color:#78350f;line-height:1.8}
+  .la-kp-sec{margin:0 0 18px;padding:14px 16px;border-radius:12px;background:#f8fafc;border:1px solid #eef2f7}
+  .la-kp-sec h5{margin:0 0 10px;font-size:14px;color:#1e293b;letter-spacing:.04em;display:flex;align-items:center;gap:8px}
+  .la-kp-sec h5::before{content:"";width:4px;height:14px;border-radius:2px;background:var(--la-accent,#3b82f6)}
+  .la-kp-def{border-left:3px solid #3b82f6}
+  .la-kp-thm{border-left:3px solid #8b5cf6;background:#faf7ff}
+  .la-kp-der{border-left:3px solid #0ea5e9;background:#f0f9ff}
+  .la-kp-exa{border-left:3px solid #10b981;background:#f0fdf4}
+  .la-kp-app{border-left:3px solid #f59e0b;background:#fffbeb}
+  .la-kp-note{border-left:3px solid #ef4444;background:#fef2f2}
+  .la-kp-his{border-left:3px solid #64748b;background:#f8fafc}
+  .la-kp-sec p:last-child{margin-bottom:0}
+  .la-modal-close{margin-top:22px;background:#0f172a;color:white;border-color:#0f172a;padding:10px 20px;font-weight:bold}
+  .la-footer{padding:34px 0 50px;color:var(--la-muted);text-align:center;font-size:13px;line-height:1.9}
+  .la-core-fmls{margin:40px 0 20px;padding:28px 24px;background:linear-gradient(135deg,#f0f4ff,#faf7ff);border:1px solid #e0e7ff;border-radius:18px}
+  .la-core-fmls h3{font-size:18px;color:#1e293b;margin:0 0 20px;text-align:center;letter-spacing:.04em}
+  .la-core-fmls h3 .la-core-count{display:inline-block;background:#6366f1;color:#fff;font-size:13px;padding:2px 10px;border-radius:20px;margin-left:8px;vertical-align:middle}
+  .la-core-item{display:flex;gap:12px;margin:0 0 14px;padding:12px 16px;background:#fff;border-radius:12px;border-left:3px solid #6366f1;align-items:flex-start}
+  .la-core-num{flex-shrink:0;width:26px;height:26px;border-radius:50%;background:#6366f1;color:#fff;font-size:13px;display:flex;align-items:center;justify-content:center;font-weight:bold}
+  .la-core-body{flex:1;min-width:0}
+  .la-core-body .la-core-name{font-size:14px;font-weight:600;color:#1e293b;margin-bottom:4px}
+  .la-core-body .la-fml{margin:6px 0 0;padding:8px 14px;font-size:15px}
+  .la-back-top{display:inline-block;margin-top:20px;padding:10px 28px;background:#1e293b;color:#fff;border:none;border-radius:25px;font-size:14px;cursor:pointer;letter-spacing:.04em;transition:background .2s}
+  .la-back-top:hover{background:#334155}
+  @media(max-width:900px){.la-wrap{width:min(94vw,720px)}.la-roadmap{padding:20px}.la-phase-title{font-size:19px}.la-phase-en{font-size:10px;letter-spacing:.26em}.la-domain-desc{display:none}.la-domain-grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}.la-modal{padding:22px}}'''
+
+    js = f'''const LA_DATA = {la_data};
+const LA_TAG_LABEL = {tag_label_js};
+const LA_FIG = {fig_js};
+const LA_KP = {{}};
+function laBuildCard(item){{
+  const tags = item.tags.map(t => `<span class="la-arc-badge la-arc-${{t}}">${{LA_TAG_LABEL[t]}}</span>`).join('');
+  return `<div class="la-course-card" onclick="showLaItem('${{item.id}}')"><div class="la-arc-badges">${{tags}}</div><h4>${{item.name}}</h4><p>${{item.brief}}</p></div>`;
+}}
+function renderLa(){{
+  const root = document.getElementById('laRoadmap');
+  let html = '';
+  LA_DATA.forEach(ch => {{
+    html += `<h2 class="la-phase-title ${{ch.id}}" id="${{ch.id}}">${{ch.num}} · ${{ch.title}}</h2>`;
+    html += `<div class="la-phase-en">${{ch.en}}</div>`;
+    html += `<p class="la-phase-desc">${{ch.desc}}</p>`;
+    ch.sections.forEach(sec => {{
+      html += `<div class="la-domain" style="--domain-color:${{sec.color}};"><div class="la-domain-header"><h3>${{sec.name}}</h3><span class="la-domain-count">${{sec.items.length}} 个知识点</span><span class="la-domain-desc">${{sec.desc}}</span></div><div class="la-domain-grid">`;
+      sec.items.forEach(it => {{ html += laBuildCard(it); LA_KP[it.id] = {{item: it, section: sec.name, chapter: `${{ch.num}} · ${{ch.title}}`}}; }});
+      html += `</div></div>`;
+    }});
+  }});
+  root.innerHTML = html;
+  const kCount = Object.keys(LA_KP).length;
+  document.getElementById('laKCount').textContent = kCount;
+}}
+function showLaItem(id){{
+  const rec = LA_KP[id];
+  if(!rec) return;
+  const it = rec.item;
+  document.getElementById('laCrumbs').textContent = rec.chapter + ' ／ ' + rec.section;
+  document.getElementById('laTitle').textContent = it.name;
+  document.getElementById('laTags').innerHTML = it.tags.map(t => `<span class="la-arc-badge la-arc-${{t}}">${{LA_TAG_LABEL[t]}}</span>`).join('');
+  let bodyHtml = it.body;
+  if (it.fig && LA_FIG[it.fig]) {{
+    const figHtml = `<div class="la-fig">${{LA_FIG[it.fig]}}<div class="la-fig-cap">${{it.figCap || ''}}</div></div>`;
+    bodyHtml = figHtml + bodyHtml;
+  }}
+  document.getElementById('laBody').innerHTML = bodyHtml;
+  document.getElementById('laOverlay').classList.add('show');
+  document.querySelector('.la-modal').scrollTop = 0;
+  if (window.MathJax && window.MathJax.typesetPromise) {{ window.MathJax.typesetPromise([document.getElementById('laBody')]).catch(()=>{{}}); }}
+}}
+function hideLaInfo(){{ document.getElementById('laOverlay').classList.remove('show'); }}
+function closeLaInfo(e){{ if(e.target.id === 'laOverlay') hideLaInfo(); }}
+document.addEventListener('keydown', e => {{ if(e.key === 'Escape') hideLaInfo(); }});
+document.addEventListener('DOMContentLoaded', () => {{
+  renderLa();
+  if (window.MathJax && window.MathJax.typesetPromise) {{ window.MathJax.typesetPromise([document.getElementById('laRoadmap')]).catch(()=>{{}}); }}
+}});'''
+
+    html = f'''<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="矢量分析知识体系：向量代数、场论基础、散度与旋度、正交曲线坐标系">
+<title>矢量分析 · 知识体系</title>
+<script>
+window.MathJax = {{
+  tex: {{
+    inlineMath: [['$','$'], ['\\\\(','\\\\)']],
+    displayMath: [['$$','$$'], ['\\\\[','\\\\]']],
+    processEscapes: true,
+    packages: {{'[+]': ['ams','boldsymbol']}}
+  }},
+  options: {{
+    skipHtmlTags: ['script','noscript','style','textarea','pre','code'],
+    ignoreHtmlClass: 'tex2jax_ignore'
+  }},
+  svg: {{ fontCache: 'global' }}
+}};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" async></script>
+<style>
+{css}
+</style>
+</head>
+<body>
+<div class="la-wrap">
+  <header class="la-header">
+    <div class="la-eyebrow">VECTOR ANALYSIS · KNOWLEDGE MAP</div>
+    <h1>矢量分析 · 知识体系</h1>
+    <p class="la-subtitle">向量代数 · 场论基础 · 散度与旋度 · 正交曲线坐标系</p>
+    <div class="back-bar"><a class="back-btn" href="index.html">← 返回总览</a></div>
+    <div class="la-nav-tabs">{nav_tabs}</div>
+    <div class="la-engagement-bar">
+      <div class="la-stat-item"><span>📘</span><span class="la-stat-value" id="laKCount">--</span><span>个知识点</span></div>
+      <a class="la-stat-item la-stat-link" href="#laCoreFmls" onclick="event.preventDefault();document.getElementById('laCoreFmls').scrollIntoView({{behavior:'smooth',block:'start'}})"><span>🧮</span><span class="la-stat-value">{len(CORE_FORMULAS)}</span><span>条核心公式 · 点击速查</span></a>
+    </div>
+  </header>
+  <div class="la-legend">
+    <span class="la-legend-title">知识记号</span>
+    <span class="la-arc-badge la-arc-def">定 义</span>
+    <span class="la-arc-badge la-arc-thm">定 理</span>
+    <span class="la-arc-badge la-arc-der">推 导</span>
+    <span class="la-arc-badge la-arc-exa">例 子</span>
+    <span class="la-arc-badge la-arc-app">应 用</span>
+    <span class="la-arc-badge la-arc-note">备 注</span>
+  </div>
+  <main class="la-roadmap" id="laRoadmap"></main>
+  <section class="la-core-fmls" id="laCoreFmls">
+    <h3>核心公式速查 <span class="la-core-count">{len(CORE_FORMULAS)} 条</span></h3>
+{chr(10).join(f'    <div class="la-core-item"><div class="la-core-num">{i+1}</div><div class="la-core-body"><div class="la-core-name">{name}</div><div class="la-fml">$${latex}$$</div><div class="note" style="font-size:12px;color:#8496ad;margin-top:4px">{desc}</div></div></div>' for i,(name,latex,desc) in enumerate(CORE_FORMULAS))}
+  </section>
+  <footer class="la-footer">
+    <div>矢量分析 · 知识体系可视化 · MathJax + SVG</div>
+    <div style="margin-top:8px">基于矢量分析核心知识体系整理</div>
+    <button class="la-back-top" onclick="window.scrollTo({{top:0,behavior:'smooth'}})">↑ 回到顶部</button>
+  </footer>
+</div>
+<div class="la-overlay" id="laOverlay" onclick="closeLaInfo(event)">
+  <div class="la-modal" onclick="event.stopPropagation()">
+    <p class="la-crumbs" id="laCrumbs"></p>
+    <h2 id="laTitle">知识点</h2>
+    <div class="la-arc-badges" id="laTags"></div>
+    <div class="la-modal-body" id="laBody"></div>
+    <button class="la-modal-close" onclick="hideLaInfo()">关 闭</button>
+  </div>
+</div>
+<script>
+{js}
+</script>
+</body>
+</html>'''
+    return html
+
+if __name__ == "__main__":
+    html = gen_html()
+    with open("/workspace/vector-analysis.html", "w", encoding="utf-8") as f:
+        f.write(html)
+    print(f"Generated vector-analysis.html ({len(html)} chars)")
