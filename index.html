@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>illudew</title>
+<meta name="description" content="illudew 站点入口">
+<style>
+  :root{
+    --bg-0:#05060c;
+    --bg-1:#0b0f1e;
+    --fg:#eef1f8;
+    --fg-dim:#9aa3bd;
+    --card:rgba(255,255,255,.045);
+    --card-border:rgba(255,255,255,.10);
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+
+  html,body{height:100%}
+
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",Roboto,Helvetica,Arial,sans-serif;
+    color:var(--fg);
+    background:radial-gradient(1200px 800px at 50% -10%,#141a33 0%,var(--bg-1) 45%,var(--bg-0) 100%);
+    min-height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:48px 24px;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* 背景流动光斑 */
+  .bg{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none;filter:blur(60px);opacity:.55}
+  .bg span{position:absolute;border-radius:50%;display:block}
+  .bg span:nth-child(1){width:480px;height:480px;left:-10%;top:-12%;background:#2f6bff;animation:float1 18s ease-in-out infinite}
+  .bg span:nth-child(2){width:420px;height:420px;right:-8%;top:-6%;background:#8b3dff;animation:float2 22s ease-in-out infinite}
+  .bg span:nth-child(3){width:520px;height:520px;left:20%;bottom:-22%;background:#00c2a8;animation:float3 26s ease-in-out infinite}
+  @keyframes float1{50%{transform:translate(120px,80px) scale(1.15)}}
+  @keyframes float2{50%{transform:translate(-140px,60px) scale(1.1)}}
+  @keyframes float3{50%{transform:translate(80px,-90px) scale(1.08)}}
+
+  main{position:relative;z-index:1;width:100%;max-width:960px}
+
+  header{text-align:center;margin-bottom:44px}
+  .eyebrow{
+    display:inline-block;font-size:12px;letter-spacing:.28em;text-transform:uppercase;
+    color:var(--fg-dim);border:1px solid var(--card-border);border-radius:999px;
+    padding:6px 14px;margin-bottom:22px;
+    animation:rise .7s both;
+  }
+  h1{
+    font-size:clamp(44px,9vw,76px);
+    font-weight:800;
+    letter-spacing:-.03em;
+    line-height:1;
+    background:linear-gradient(92deg,#ffffff 0%,#a8c2ff 45%,#c9a8ff 100%);
+    -webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;
+    animation:rise .7s .06s both;
+  }
+  header p{margin-top:16px;color:var(--fg-dim);font-size:15px;animation:rise .7s .12s both}
+
+  .sites{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+
+  .card{
+    position:relative;
+    display:flex;align-items:center;gap:16px;
+    padding:22px;
+    border-radius:18px;
+    text-decoration:none;color:inherit;
+    background:var(--card);
+    border:1px solid var(--card-border);
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+    overflow:hidden;
+    transition:transform .28s cubic-bezier(.2,.7,.3,1),border-color .28s,background .28s;
+    animation:rise .6s both;
+  }
+  .card::before{
+    content:"";position:absolute;inset:0;
+    background:radial-gradient(420px 200px at var(--x,20%) var(--y,0%),var(--accent),transparent 70%);
+    opacity:0;transition:opacity .35s;
+  }
+  .card:hover{transform:translateY(-6px);border-color:color-mix(in srgb,var(--accent) 55%,transparent);background:rgba(255,255,255,.07)}
+  .card:hover::before{opacity:.16}
+  .card:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+  .icon{
+    position:relative;flex:none;
+    width:52px;height:52px;border-radius:14px;
+    display:grid;place-items:center;
+    background:color-mix(in srgb,var(--accent) 16%,transparent);
+    border:1px solid color-mix(in srgb,var(--accent) 40%,transparent);
+    color:var(--accent);
+    transition:transform .28s;
+  }
+  .card:hover .icon{transform:scale(1.08) rotate(-4deg)}
+  .icon svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+  .meta{position:relative;flex:1;min-width:0}
+  .meta h2{font-size:17px;font-weight:700;letter-spacing:.01em}
+  .meta p{margin-top:5px;font-size:13px;color:var(--fg-dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+  .arrow{
+    position:relative;flex:none;color:var(--fg-dim);
+    transition:transform .28s,color .28s;
+  }
+  .card:hover .arrow{transform:translateX(4px);color:var(--accent)}
+
+  .card:nth-child(1){animation-delay:.18s}
+  .card:nth-child(2){animation-delay:.24s}
+  .card:nth-child(3){animation-delay:.30s}
+  .card:nth-child(4){animation-delay:.36s}
+
+  footer{margin-top:40px;text-align:center;color:var(--fg-dim);font-size:12.5px;letter-spacing:.04em;animation:rise .7s .42s both}
+
+  @keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+  @media (max-width:640px){
+    body{padding:36px 18px}
+    .sites{grid-template-columns:1fr;gap:14px}
+    header{margin-bottom:32px}
+    .card{padding:18px}
+  }
+</style>
+</head>
+<body>
+  <div class="bg" aria-hidden="true"><span></span><span></span><span></span></div>
+
+  <main>
+    <header>
+      <span class="eyebrow">illudew</span>
+      <h1>illudew</h1>
+      <p>选择要进入的站点</p>
+    </header>
+
+    <nav class="sites" aria-label="站点导航">
+      <!-- 把 href 换成你的真实子域名即可 -->
+      <a class="card" href="https://physics.illudew.com" style="--accent:#4f8cff">
+        <span class="icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="2.4"/><ellipse cx="12" cy="12" rx="9.5" ry="4" transform="rotate(45 12 12)"/><ellipse cx="12" cy="12" rx="9.5" ry="4" transform="rotate(-45 12 12)"/></svg>
+        </span>
+        <span class="meta">
+          <h2>Physics</h2>
+          <p>物理 · illudew.physics</p>
+        </span>
+        <span class="arrow" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+
+      <a class="card" href="https://vocabulary.illudew.com" style="--accent:#a86bff">
+        <span class="icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M20 18v3H6.5A2.5 2.5 0 0 1 4 18.5"/><path d="M8 7h8M8 10.5h5"/></svg>
+        </span>
+        <span class="meta">
+          <h2>Vocabulary</h2>
+          <p>词汇 · illudew.vocabulary</p>
+        </span>
+        <span class="arrow" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+
+      <a class="card" href="https://illuphyhighexam.illudew.com" style="--accent:#ffa53d">
+        <span class="icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M4 19V5a1 1 0 0 1 1-1h11l4 4v11a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1z"/><path d="M15 4v5h5"/><path d="M8 15.5l2.5-3 2 2L16 11"/></svg>
+        </span>
+        <span class="meta">
+          <h2>IlluPhy High Exam</h2>
+          <p>图解物理高考 · illudew.illuphyhighexam</p>
+        </span>
+        <span class="arrow" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+
+      <a class="card" href="https://ultra.illudew.com" style="--accent:#2fe0c0">
+        <span class="icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M13 2 4 14h6l-1 8 9-12h-6z"/></svg>
+        </span>
+        <span class="meta">
+          <h2>Ultra</h2>
+          <p>Ultra · illudew.ultra</p>
+        </span>
+        <span class="arrow" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+    </nav>
+
+    <footer>illudew · same account · all sites</footer>
+  </main>
+</body>
+</html>
